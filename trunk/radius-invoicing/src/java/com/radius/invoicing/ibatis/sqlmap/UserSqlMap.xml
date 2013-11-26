@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="userSqlMap">
+
+  <typeAlias alias="user" type="com.radius.invoicing.ibatis.model.User" />
+  
+  <sql id="userFileds">
+  	 u_id id,u_name name u_real_name realName,u_pass_word passWord,u_phone phone,u_email email,u_address address,u_remark remark,u_post_code postCode,u_login_ip loginIp,u_last_login_time lastLoginTime,u_create_time createTime,u_creater creater
+  </sql>
+</sqlMap>
