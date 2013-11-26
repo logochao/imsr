@@ -27,6 +27,7 @@
 					<bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
 						<property name="contentType" value="text/html;charset=UTF-8"/>
 						<property name="cache" value="true"/>
+						<property name="prefix" value=""/>
 						<property name="suffix" value=".ftl"/>
 						<property name="exposeRequestAttributes" value="true"/>
 						<property name="exposeSessionAttributes" value="true"/>
@@ -41,6 +42,7 @@
 	                     <property name="exposeRequestAttributes" value="true"/>
 	                     <property name="exposeSessionAttributes" value="true"/>
 	                    <property name="suffix" value=".vm"/>
+	                    <property name="prefix" value=""/>
 	                    <property name="cache" value="true"/>  
 	                    
 	                </bean>   

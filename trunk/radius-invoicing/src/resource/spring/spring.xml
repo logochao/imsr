@@ -54,7 +54,7 @@
 			<value>classpath:ibatis/sql-map-config.xml</value>
 		</property>
 		<property name="mappingLocations">			
-				<value>classpath:/cn/radius/virtual/**/*SqlMap.xml</value>
+				<value>classpath:/com/radius/invoicing/ibatis/sqlmap/**/*SqlMap.xml</value>
 		</property>
 		<property name="dataSource" ref="dataSource" />
 	</bean>
