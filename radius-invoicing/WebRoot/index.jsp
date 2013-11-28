@@ -3,17 +3,18 @@
 <html>
   <head>
     <title>My JSP 'index.jsp' starting page</title>
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
+	<jsp:include flush="true" page="common/includ.jsp"></jsp:include>
+  	<script type="text/javascript">
+  	
+  	</script>
   </head>
-  
-  <body>
-    This is my JSP page. <br>
-  </body>
+<body class="easyui-layout">  
+    <div data-options="region:'north',title:'North Title',split:true" style="height:150px;"></div>  
+    <div data-options="region:'south',title:'落款',split:true" style="height:100px;"></div>  
+    <%--
+    <div data-options="region:'east',iconCls:'icon-reload',title:'East',split:true" style="width:100px;"></div>  
+    --%>
+    <div data-options="region:'west',title:'导航',split:true" style="width:200px;"></div>  
+    <div data-options="region:'center',title:'界面'" style="padding:5px;"></div>  
+</body>  
 </html>
