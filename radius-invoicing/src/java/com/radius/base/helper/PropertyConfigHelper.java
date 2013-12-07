@@ -11,18 +11,18 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 
+
 /**
  * 
- * @author ³Â²¨Äş
+ * @author é™ˆæ³¢å®
  *
  * @2011-12-19
  * 
- * @ÃèÊö ÊôĞÔÎÄ¼ş¶ÁÈ¡Æ÷
+ * @æè¿° å±æ€§æ–‡ä»¶è¯»å–å™¨
  *
  * @version 1.0
  *
  */
-@SuppressWarnings("unchecked")
 public class PropertyConfigHelper extends PropertyPlaceholderConfigurer {
 
 	private static Map map;
@@ -46,7 +46,7 @@ public class PropertyConfigHelper extends PropertyPlaceholderConfigurer {
 	}
 	
 	/**
-	 * Í¨¹ı±éÀúµÄ·½Ê½²éÕÒÖÆ¶¨µÄÄÚÈİÊÇ·ñ´æÔÚ
+	 * Í¨ï¿½ï¿½ï¿½ï¿½ï¿½Ä·ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
 	 * @param containValue
 	 * @return
 	 */
@@ -56,9 +56,9 @@ public class PropertyConfigHelper extends PropertyPlaceholderConfigurer {
 		while (iter.hasNext()) { 
 		    Map.Entry entry = (Map.Entry) iter.next(); 
 		    Object val = entry.getValue(); 
-		    if(val.toString().contains(",")){//ÅĞ¶ÏÄÚÈİÖĞÊÇ·ñ°üº¬","
+		    if(val.toString().contains(",")){//ï¿½Ğ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½","
 			    String values[]=val.toString().split(",");
-			    if(containValue.contains(getNewCharset(values[0]))){//ÊÇ·ñ°üº¬ÖÆ¶¨µÄÄÚÈİ
+			    if(containValue.contains(getNewCharset(values[0]))){//ï¿½Ç·ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			    	result=values[1];
 			    	break;
 			    }
