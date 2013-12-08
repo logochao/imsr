@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="resourceSqlMap">
+
+  <typeAlias alias="resource" type="com.radius.invoicing.ibatis.model.Resource" />
+  
+  <sql id="resourceFileds">
+  	 r_id id,r_resource_type resourceType,r_name name,r_label_name labelName,r_icon icon,r_parent_id pId,r_url url,r_level level,r_isleaf isleaf,r_remark remark
+  </sql>
+  <resultMap class="com.radius.invoicing.ibatis.model.Resource" id="resultResource">
+  	<result property="id" column="r_id" />  
+  	<result property="resourceType" column="r_resource_type" typeHandler="com.radius.invoicing.enums.ResourceTypeEnumHandler" nullValue="0"/>
+  	<result property="name" column="r_name" />  
+  	<result property="labelName" column="r_label_name" />  
+  	<result property="icon" column="r_icon" />  
+  	<result property="pId" column="r_parent_id" />  
+  	<result property="url" column="r_url" />  
+  	<result property="level" column="r_level" />  
+  	<result property="isleaf" column="r_isleaf" />  
+  	<result property="remark" column="r_remark" />  
+  </resultMap>
+  <parameterMap class="com.radius.invoicing.ibatis.model.Resource" id="paramsResource">
+ 	<parameter property="id" />
+  	<parameter property="resourceType"  typeHandler="com.radius.invoicing.enums.ResourceTypeEnumHandler" nullValue="0"/>
+  	<parameter property="name"/>  
+  	<parameter property="labelName"/>  
+  	<parameter property="icon"/>  
+  	<parameter property="pId"/>  
+  	<parameter property="url"/>  
+  	<parameter property="level"/>  
+  	<parameter property="isleaf"/>  
+  	<parameter property="remark"/> 
+  </parameterMap>
+  
+  
+</sqlMap>
