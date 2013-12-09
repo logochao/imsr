@@ -62,3 +62,45 @@
 .icon-mini-refresh{
 	background:url('icons/mini_refresh.png') no-repeat 3px 2px;
 }
+.icon-topicon{
+	background:url('icons/topicon.gif') no-repeat 3px 2px;
+}
+.icon-busy{
+	background:url('icons/busy.gif') no-repeat 3px 2px;
+}
+.icon-comment{
+	background:url('icons/comment.gif') no-repeat 3px 2px;
+}
+.icon-config{
+	background:url('icons/config.gif') no-repeat 3px 2px;
+}
+.icon-customers{
+	background:url('icons/customers.gif') no-repeat 3px 2px;
+}
+.icon-database{
+	background:url('icons/database.gif') no-repeat 3px 2px;
+}
+.icon-discuss{
+	background:url('icons/discuss.gif') no-repeat 3px 2px;
+}
+.icon-greenwarn{
+	background:url('icons/greenwarn.gif') no-repeat 3px 2px;
+}
+.icon-home{
+	background:url('icons/home.gif') no-repeat 3px 2px;
+}
+.icon-lock{
+	background:url('icons/lock.gif') no-repeat 3px 2px;
+}
+.icon-logout{
+	background:url('icons/logout.gif') no-repeat 3px 2px;
+}
+.icon-process{
+	background:url('icons/process.gif') no-repeat 3px 2px;
+}
+.icon-settings{
+	background:url('icons/topicon.gif') no-repeat 3px 2px;
+}
+.icon-true{
+	background:url('icons/true.gif') no-repeat 3px 2px;
+}
