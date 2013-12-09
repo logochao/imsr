@@ -6,8 +6,7 @@
 	<jsp:include flush="true" page="common/includ.jsp"></jsp:include>
   	<script type="text/javascript">
 	  	$('#aa').accordion({   
-		    animate:false,
-		    fit:true
+		    animate:false
 		}); 
   	</script>
   </head>
@@ -18,7 +17,7 @@
     <div data-options="region:'east',iconCls:'icon-reload',title:'East',split:true" style="width:100px;"></div>  
     --%>
     <div data-options="region:'west',title:'导航',split:true" style="width:200px;">
-    	<div id="aa" class="easyui-accordion" style="height:100%;">  
+    	<div id="aa" class="easyui-accordion" data-options="fit:true">  
 		    <div title="Title1" data-options="iconCls:'icon-save'" style="overflow:auto;padding:10px;">  
 		        <h3 style="color:#0099FF;">Accordion for jQuery</h3>  
 		        <p>Accordion is a part of easyui framework for jQuery.    
