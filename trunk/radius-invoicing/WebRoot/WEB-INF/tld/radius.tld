@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+	version="2.0">
+	<description>my jstl functions library</description>
+	<display-name>my jstl functions</display-name>
+	<tlib-version>1.0</tlib-version>
+	<short-name>radius-function</short-name>
+	<uri>http://www.radius.com/functions</uri>
+
+	<function>
+		<name>getPropertyValue</name>
+		<function-class>com.radius.base.utils.tld.RadiusFunctions</function-class>
+		<function-signature>
+		    java.lang.String getPropertyValue(java.lang.String)
+		</function-signature>
+	</function>
+</taglib>
