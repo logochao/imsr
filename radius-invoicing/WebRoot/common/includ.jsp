@@ -23,9 +23,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <%--<!-- 修复EasyUI1.3.3中layout组件的BUG -->
 <script type="text/javascript" src="<%=path%>/easyuiplugins/jquery.layout.js" charset="utf-8"></script>
 
---%><%--<!-- 引入EasyUI Portal插件 -->
+--%>
+
+
+<%--<!-- 引入EasyUI Portal插件 -->
 <link rel="stylesheet" href="<%=path%>/easyui/jquery-easyui-portal/portal.css" type="text/css">
 <script type="text/javascript" src="<%=path%>/easyui/jquery-easyui-portal/jquery.portal.js" charset="utf-8"></script>
 
 	
---%>
+-%>
+<%--自定义js--%>
+<script type="text/javascript" src="<%=path%>/jslib/syExtJquery.js" charset="utf-8"></script>
