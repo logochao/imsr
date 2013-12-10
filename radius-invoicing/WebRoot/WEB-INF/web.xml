@@ -15,14 +15,10 @@
       <param-value>true</param-value>
     </init-param>
   </filter>
-  <!--<filter-mapping>
-    <filter-name>encodingFilter</filter-name>
-    <url-pattern>*.html</url-pattern>
-  </filter-mapping>
-  --><filter-mapping>
-    <filter-name>encodingFilter</filter-name>
-    <url-pattern>*.do</url-pattern>
-  </filter-mapping>
+  	<filter-mapping>
+	    <filter-name>encodingFilter</filter-name>
+	    <url-pattern>*.html</url-pattern>
+   </filter-mapping>
   <listener>
     <listener-class>
 			org.springframework.web.context.ContextLoaderListener
