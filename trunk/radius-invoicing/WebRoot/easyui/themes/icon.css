@@ -110,3 +110,24 @@
 .ext-icon-heart{
 	background:url('icons/heart.png') no-repeat;
 }
+.icon-application_view_tile{
+	background:url('icons/application_view_tile.png') no-repeat;
+}
+.icon-arrow_left{
+	background:url('icons/arrow_left.png') no-repeat;
+}
+.icon-arrow_up{
+	background:url('icons/arrow_up.png') no-repeat;
+}
+.icon-arrow_right{
+	background:url('icons/arrow_right.png') no-repeat;
+}
+.icon-arrow_down{
+	background:url('icons/arrow_down.png') no-repeat;
+}
+.icon-arrow_refresh{
+	background:url('icons/arrow_refresh.png') no-repeat;
+}
+.icon-arrow_down{
+	background:url('icons/arrow_down.png') no-repeat;
+}
