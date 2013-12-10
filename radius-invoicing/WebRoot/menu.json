@@ -5,7 +5,7 @@
             "url": "/welcome.jsp"
         },
         "checked": false,
-        "iconCls": "ext-icon-application_view_tile",
+        "iconCls": "icon-application_view_tile",
         "id": "xtgl",
         "state": "open",
         "text": "系统管理",

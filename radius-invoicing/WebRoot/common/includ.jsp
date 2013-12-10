@@ -17,7 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <!-- 引入EasyUI -->
 <link id="easyuiTheme" rel="stylesheet" href="<%=path%>/easyui/themes/default/easyui.css" type="text/css">
-<!-- <link rel="stylesheet" href="<%=path%>/easyui/jquery-easyui-1.3.3/themes/icon.css" type="text/css"> -->
+<link rel="stylesheet" href="<%=path%>/easyui/themes/icon.css" type="text/css">
 <script type="text/javascript" src="<%=path%>/easyui/jquery.easyui.min.js" charset="utf-8"></script>
 <script type="text/javascript" src="<%=path%>/easyui/locale/easyui-lang-zh_CN.js" charset="utf-8"></script>
 <%--<!-- 修复EasyUI1.3.3中layout组件的BUG -->
@@ -27,5 +27,5 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link rel="stylesheet" href="<%=path%>/easyui/jquery-easyui-portal/portal.css" type="text/css">
 <script type="text/javascript" src="<%=path%>/easyui/jquery-easyui-portal/jquery.portal.js" charset="utf-8"></script>
 
-
+	
 --%>

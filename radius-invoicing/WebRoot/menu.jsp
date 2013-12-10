@@ -92,7 +92,7 @@
 	}
 </script>
 <div class="easyui-accordion" data-options="fit:true,border:false">
-	<div title="系统菜单" style="padding: 5px;" data-options="border:false,isonCls:'icon-computer',tools : [ {
+	<div title="系统菜单" style="padding: 5px;" data-options="border:false,iconCls:'icon-computer',tools : [ {
 				iconCls : 'database_refresh',
 				handler : function() {
 					$('#layout_west_tree').tree('reload');
