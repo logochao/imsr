@@ -1,0 +1,356 @@
+[
+    {
+        "attributes": {
+            "target": "",
+            "url": "/welcome.jsp"
+        },
+        "checked": false,
+        "iconCls": "icon-application_view_tile",
+        "id": "xtgl",
+        "state": "open",
+        "text": "系统管理",
+        "children": [{   
+	        "id": 11,   
+	        "text": "Node 11"  
+	    },{   
+	        "id": 12,   
+	        "text": "Node 12"  
+	    }]
+    },
+    {
+        "attributes": {
+            "target": "CXFDemo",
+            "url": "/ws"
+        },
+        "checked": false,
+        "iconCls": "ext-icon-world",
+        "id": "cxfDemo",
+        "pid": "demo",
+        "state": "open",
+        "text": "ApacheCXF示例"
+    },
+    {
+        "attributes": {
+            "target": "",
+            "url": "/securityJsp/base/Syresource.jsp"
+        },
+        "checked": false,
+        "iconCls": "icon-config",
+        "id": "zygl",
+        "pid": "xtgl",
+        "state": "open",
+        "text": "资源管理"
+    },
+    {
+        "attributes": {
+            "target": "",
+            "url": "/securityJsp/base/chart/userCreateDatetimeChart.jsp"
+        },
+        "checked": false,
+        "iconCls": "ext-icon-chart_bar",
+        "id": "userCreateDatetimeChart",
+        "pid": "xtbb",
+        "state": "open",
+        "text": "注册时间分布"
+    },
+    {
+        "attributes": {
+            "target": "",
+            "url": "/monitoring"
+        },
+        "checked": false,
+        "iconCls": "ext-icon-monitor_error",
+        "id": "monitoring",
+        "pid": "xtjk",
+        "state": "open",
+        "text": "项目监控"
+    },
+    {
+        "attributes": {
+            "target": "",
+            "url": "/welcome.jsp"
+        },
+        "checked": false,
+        "iconCls": "ext-icon-monitor",
+        "id": "xtjk",
+        "state": "open",
+        "text": "系统监控"
+    },
+    {
+        "attributes": {
+            "target": "_blank",
+            "url": "http://jqext.sinaapp.com"
+        },
+        "checked": false,
+        "iconCls": "ext-icon-award_star_bronze_1",
+        "id": "lyDemo",
+        "pid": "demo",
+        "state": "open",
+        "text": "流云的Demo"
+    },
+    {
+        "attributes": {
+            "target": "",
+            "url": "/druid"
+        },
+        "checked": false,
+        "iconCls": "ext-icon-monitor_link",
+        "id": "druid",
+        "pid": "xtjk",
+        "state": "open",
+        "text": "数据源监控"
+    },
+    {
+        "attributes": {
+            "target": "",
+            "url": "/securityJsp/base/Syrole.jsp"
+        },
+        "checked": false,
+        "iconCls": "ext-icon-tux",
+        "id": "jsgl",
+        "pid": "xtgl",
+        "state": "open",
+        "text": "角色管理"
+    },
+    {
+        "attributes": {
+            "target": "_blank",
+            "url": "http://sypro.jeasyuicn.com"
+        },
+        "checked": false,
+        "iconCls": "ext-icon-award_star_bronze_2",
+        "id": "syproDemo",
+        "pid": "demo",
+        "state": "open",
+        "text": "SyProDemo"
+    },
+    {
+        "attributes": {
+            "target": "",
+            "url": "/securityJsp/base/chart/userRoleChart.jsp"
+        },
+        "checked": false,
+        "iconCls": "ext-icon-chart_pie",
+        "id": "userRoleChart",
+        "pid": "xtbb",
+        "state": "open",
+        "text": "用户角色分布"
+    },
+    {
+        "attributes": {
+            "target": "",
+            "url": "/welcome.jsp"
+        },
+        "checked": false,
+        "iconCls": "ext-icon-chart_curve",
+        "id": "xtbb",
+        "state": "open",
+        "text": "系统报表"
+    },
+    {
+        "attributes": {
+            "target": "",
+            "url": "/welcome.jsp"
+        },
+        "checked": false,
+        "iconCls": "ext-icon-asterisk_orange",
+        "id": "demo",
+        "state": "open",
+        "text": "其他示例"
+    },
+    {
+        "attributes": {
+            "target": "_blank",
+            "url": "http://php-easyui-demo.jeasyuicn.com"
+        },
+        "checked": false,
+        "iconCls": "ext-icon-award_star_bronze_3",
+        "id": "phpDemo",
+        "pid": "demo",
+        "state": "open",
+        "text": "phpDemo"
+    },
+    {
+        "attributes": {
+            "target": "",
+            "url": "/securityJsp/base/Syorganization.jsp"
+        },
+        "checked": false,
+        "iconCls": "ext-icon-group_link",
+        "id": "jggl",
+        "pid": "xtgl",
+        "state": "open",
+        "text": "机构管理"
+    },
+    {
+        "attributes": {
+            "target": "",
+            "url": "/config-browser/showConstants.sy"
+        },
+        "checked": false,
+        "iconCls": "ext-icon-monitor_lightning",
+        "id": "actionConfigBrowser",
+        "pid": "xtjk",
+        "state": "open",
+        "text": "Action映射监控"
+    },
+    {
+        "attributes": {
+            "target": "_blank",
+            "url": "http://app.btboys.com"
+        },
+        "checked": false,
+        "iconCls": "ext-icon-award_star_gold_1",
+        "id": "appDemo",
+        "pid": "demo",
+        "state": "open",
+        "text": "桌面Demo"
+    },
+    {
+        "attributes": {
+            "target": "",
+            "url": "/securityJsp/base/Syonline.jsp"
+        },
+        "checked": false,
+        "iconCls": "ext-icon-chart_line",
+        "id": "online",
+        "pid": "xtjk",
+        "state": "open",
+        "text": "用户登录历史监控"
+    },
+    {
+        "attributes": {
+            "target": "",
+            "url": "/securityJsp/base/Syuser.jsp"
+        },
+        "checked": false,
+        "iconCls": "ext-icon-user_suit",
+        "id": "yhgl",
+        "pid": "xtgl",
+        "state": "open",
+        "text": "用户管理"
+    },
+    {
+        "attributes": {
+            "target": "",
+            "url": "http://jeasyui.com/demo/main/index.php"
+        },
+        "checked": false,
+        "iconCls": "ext-icon-medal_bronze_1",
+        "id": "easyuiDemo",
+        "pid": "demo",
+        "state": "open",
+        "text": "EasyUI官方Demo"
+    },
+    {
+        "attributes": {
+            "target": "",
+            "url": "http://jeasyui.com/documentation/index.php"
+        },
+        "checked": false,
+        "iconCls": "ext-icon-medal_bronze_2",
+        "id": "easyuiAPI",
+        "pid": "demo",
+        "state": "open",
+        "text": "EasyUI官方API"
+    },
+    {
+        "attributes": {
+            "target": "",
+            "url": "http://jeasyui.com/tutorial/index.php"
+        },
+        "checked": false,
+        "iconCls": "ext-icon-medal_bronze_3",
+        "id": "easyuiTutorial",
+        "pid": "demo",
+        "state": "open",
+        "text": "EasyUI进阶DEMO"
+    },
+    {
+        "attributes": {
+            "target": "",
+            "url": "http://jeasyui.com/download/index.php"
+        },
+        "checked": false,
+        "iconCls": "ext-icon-medal_gold_1",
+        "id": "easyuiDownload",
+        "pid": "demo",
+        "state": "open",
+        "text": "EasyUI官方下载"
+    },
+    {
+        "attributes": {
+            "target": "",
+            "url": "http://jeasyui.com/extension/index.php"
+        },
+        "checked": false,
+        "iconCls": "ext-icon-medal_gold_2",
+        "id": "easyuiExtension",
+        "pid": "demo",
+        "state": "open",
+        "text": "EasyUI其他扩展"
+    },
+    {
+        "attributes": {
+            "target": "",
+            "url": "http://www.jeasyui.com/forum/index.php"
+        },
+        "checked": false,
+        "iconCls": "ext-icon-medal_gold_3",
+        "id": "easyuiForum",
+        "pid": "demo",
+        "state": "open",
+        "text": "EasyUI官方论坛"
+    },
+    {
+        "attributes": {
+            "url": "/base"
+        },
+        "checked": false,
+        "iconCls": "ext-icon-box",
+        "id": "620a8a29-5006-4efa-a92a-326e18f08d61",
+        "pid": "xtgl",
+        "state": "open",
+        "text": "NBA"
+    },
+    {
+        "attributes": {
+            "url": "/"
+        },
+        "checked": false,
+        "iconCls": "ext-icon-box",
+        "id": "36884ff5-6191-4aba-8786-b670d1f391b3",
+        "pid": "xtgl",
+        "state": "open",
+        "text": "oo"
+    },
+    {
+        "attributes": {},
+        "checked": false,
+        "iconCls": "ext-icon-anchor",
+        "id": "ba691f17-7a59-4a94-93bf-5711cf0eed6c",
+        "state": "open",
+        "text": "root"
+    },
+    {
+        "attributes": {
+            "url": "/"
+        },
+        "checked": false,
+        "iconCls": "ext-icon-box",
+        "id": "b5b9f150-16f7-4e4e-bb60-1d74036822d9",
+        "state": "open",
+        "text": "oo"
+    },
+    {
+        "attributes": {
+            "url": "实打实的"
+        },
+        "checked": false,
+        "iconCls": "ext-icon-book_edit",
+        "id": "40114bc0-3441-4f7e-abc7-8debfd8c7c57",
+        "pid": "zygl",
+        "state": "open",
+        "text": "撒旦"
+    }
+]
