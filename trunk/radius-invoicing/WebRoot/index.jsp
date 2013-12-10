@@ -20,7 +20,7 @@
 						title : node.text,
 						closable : true,
 						iconCls : node.iconCls,
-						content :'',// sy.formatString('<iframe src="{0}" allowTransparency="true" style="border:0;width:100%;height:99%;" frameBorder="0"></iframe>', src),
+						content :sy.formatString('<iframe src="{0}" allowTransparency="true" style="border:0;width:100%;height:99%;" frameBorder="0"></iframe>', src),
 						border : false,
 						fit : true
 					};
@@ -107,33 +107,8 @@
     <div data-options="region:'north',title:'North Title',split:true,href:'north.jsp'" style="height:150px;"></div>  
     <%--<div data-options="region:'south',title:'落款',split:true" style="height:100px;"></div>  --%>
     <div data-options="region:'west',title:'导航',split:true" style="width:200px;">
-    	<div class="easyui-accordion" data-options="fit:true,border:false,iconCls:'icon-home',tools : [ {
-				iconCls : 'database_refresh',
-				handler : function() {
-					$('#mainMenu').tree('reload');
-				}
-			}, {
-				iconCls : 'resultset_next',
-				handler : function() {
-					var node = $('#mainMenu').tree('getSelected');
-					if (node) {
-						$('#mainMenu').tree('expandAll', node.target);
-					} else {
-						$('#mainMenu').tree('expandAll');
-					}
-				}
-			}, {
-				iconCls : 'resultset_previous',
-				handler : function() {
-					var node = $('#mainMenu').tree('getSelected');
-					if (node) {
-						$('#mainMenu').tree('collapseAll', node.target);
-					} else {
-						$('#mainMenu').tree('collapseAll');
-					}
-				}
-			} ]">
-    		<div title="系统菜单" style="padding: 5px;" >
+    	<div class="easyui-accordion" data-options="fit:true,border:false">
+    		<div title="系统菜单" style="padding: 5px;">
     			<div class="well well-small">
     				<ul id="mainMenu"></ul>
     			</div>
