@@ -13,7 +13,7 @@ public class MultiViewResover implements ViewResolver{
 	
 	public View resolveViewName(String viewName, Locale locale) throws Exception {
 		
-		 int n=viewName.indexOf("_");
+		 int n=viewName.indexOf(".");
 		 if(n==-1) return null;
 		 String suffix=viewName.substring(n+1);
 		 ViewResolver resolver = resolvers.get(suffix);   
