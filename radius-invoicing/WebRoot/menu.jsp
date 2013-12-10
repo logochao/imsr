@@ -9,6 +9,31 @@
 	}
 	$(function() {
 		layout_west_tree = $('#layout_west_tree').tree({
+			url:'menu.json',
+			parentField : 'pid',
+			onClick : function(node) {
+				if (node.attributes.url) {
+					var tabs = $('#mainTabs');
+					var src =  node.attributes.url;
+					if (!sy.startWith(node.attributes.url, '/')) {
+						src = node.attributes.url;
+					}
+					var opts = {
+						title : node.text,
+						closable : true,
+						iconCls : node.iconCls,
+						content : sy.formatString('<iframe src="{0}" allowTransparency="true" style="border:0;width:100%;height:99%;" frameBorder="0"></iframe>', src),
+						border : false,
+						fit : true
+					};
+					if (tabs.tabs('exists', opts.title)) {
+						tabs.tabs('select', opts.title);
+					} else {
+						tabs.tabs('add', opts);
+					}
+				}
+			}
+			<%--
 			url : layout_west_tree_url,
 			parentField : 'pid',
 			//lines : true,
@@ -43,7 +68,7 @@
 			},
 			onLoadSuccess : function(node, data) {
 				parent.$.messager.progress('close');
-			}
+			}--%>
 		});
 	});
 
@@ -67,7 +92,7 @@
 	}
 </script>
 <div class="easyui-accordion" data-options="fit:true,border:false">
-	<div title="系统菜单" style="padding: 5px;" data-options="border:false,isonCls:'anchor',tools : [ {
+	<div title="系统菜单" style="padding: 5px;" data-options="border:false,isonCls:'icon-computer',tools : [ {
 				iconCls : 'database_refresh',
 				handler : function() {
 					$('#layout_west_tree').tree('reload');
