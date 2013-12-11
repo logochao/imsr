@@ -24,7 +24,16 @@ public class BaseIbatisDaoImpl<E extends BaseEntity> extends SqlMapClientDaoSupp
 	public void setSqlMapClientBase(SqlMapClient sqlMapClient) {
 		super.setSqlMapClient(sqlMapClient);
 	}
-	
+	/**
+	 * 通过条件查询获取数据已map的形式返回 map中的键值columName这个对应的内容为正
+	 * @param params
+	 * @param statement
+	 * @param columName 查询语句中出现的主键或是能标志唯一行的一个内容
+	 * @return
+	 */
+	public Map getSelectObjectMap(Map params,String statement,String columName){
+		return this.getSqlMapClientTemplate().queryForMap(statement, params, columName);
+	}
 	
 	/**
 	 * 通过实体对象进行分页查询
@@ -114,9 +123,14 @@ public class BaseIbatisDaoImpl<E extends BaseEntity> extends SqlMapClientDaoSupp
 	public void batchInsertListObject(final List<E> list,final String statementName){
 		this.getSqlMapClientTemplate().execute(new SqlMapClientCallback(){
 			public Object doInSqlMapClient(SqlMapExecutor executor) throws SQLException {
+				int i=1;
 				executor.startBatch();
 				for(E e:list){
 					insertObject(e, statementName);
+					if(i%100==0){
+						executor.executeBatch();
+					}
+					i++;
 				}
 				executor.executeBatch();
 				return null;
@@ -143,8 +157,13 @@ public class BaseIbatisDaoImpl<E extends BaseEntity> extends SqlMapClientDaoSupp
 		this.getSqlMapClientTemplate().execute(new SqlMapClientCallback(){
 			public Object doInSqlMapClient(SqlMapExecutor executor) throws SQLException {
 				executor.startBatch();
+				int i=1;
 				for(E e:list){
 					updateObject(e, statementName);
+					if(i%100==0){
+						executor.executeBatch();
+					}
+					i++;
 				}
 				executor.executeBatch();
 				return null;
@@ -170,8 +189,13 @@ public class BaseIbatisDaoImpl<E extends BaseEntity> extends SqlMapClientDaoSupp
 		this.getSqlMapClientTemplate().execute(new SqlMapClientCallback(){
 			public Object doInSqlMapClient(SqlMapExecutor executor) throws SQLException {
 				executor.startBatch();
+				int i=1;
 				for(E e:list){
 					deleteObject(e, statementName);
+					if(i%100==0){
+						executor.executeBatch();
+					}
+					i++;
 				}
 				executor.executeBatch();
 				return null;

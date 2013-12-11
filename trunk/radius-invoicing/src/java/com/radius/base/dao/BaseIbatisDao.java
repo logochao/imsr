@@ -14,6 +14,16 @@ import com.radius.base.page.Pager;
  */
 public interface BaseIbatisDao<E extends BaseEntity> {
 
+	
+	
+	/**
+	 * 通过条件查询获取数据已map的形式返回 map中的键值columName这个对应的内容为正
+	 * @param params
+	 * @param statement
+	 * @param columName 查询语句中出现的主键或是能标志唯一行的一个内容
+	 * @return
+	 */
+	public Map getSelectObjectMap(Map params,String statement,String columName);
 	/**
 	 * 通过实体对象进行分页查询
 	 * @param e
