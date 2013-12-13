@@ -27,6 +27,7 @@ public class ResourceController {
 	private Logger logger=Logger.getLogger(this.getClass());
 	private String prefix="/jsp/resource/";
 	private String resouce_manage_view=null;
+	private String resource_add_view=null;
 	
 	/**
 	 * 调整到资源管理界面
@@ -37,19 +38,35 @@ public class ResourceController {
 	@RequestMapping("/resource/system/resouce_view.html")
 	public String getResouceView(HttpServletRequest request,HttpServletResponse response)throws Exception{
 		return resouce_manage_view;
-//		return new ModelAndView(resouce_manage_view);
 	}
 	
+	/**
+	 * 跳转到添加资源文件界面
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/resource/system/resouce_add.html")
+	public String addResourceInfo(HttpServletRequest request,HttpServletResponse response)throws Exception{
+		return resource_add_view;
+	}
 	
 	@PostConstruct
 	public void init(){
 		if(resouce_manage_view==null){
 			resouce_manage_view=prefix+"resoucemanage.jsp";
 		}
+		if(resource_add_view==null){
+			resource_add_view=prefix+"resourceform.jsp";
+		}
 	}
 	
 	@PreDestroy
 	public void destroy(){
+		if(resouce_manage_view!=null){
+			resouce_manage_view=null;
+		}
 		if(resouce_manage_view!=null){
 			resouce_manage_view=null;
 		}
