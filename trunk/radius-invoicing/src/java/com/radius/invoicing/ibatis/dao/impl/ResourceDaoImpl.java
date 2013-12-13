@@ -3,9 +3,13 @@
  */
 package com.radius.invoicing.ibatis.dao.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.radius.base.dao.ibatis.BaseIbatisDaoImpl;
+import com.radius.invoicing.ibatis.dao.ResourceDao;
+import com.radius.invoicing.ibatis.model.Resource;
 
 /**
  * @author <a href="mailto:goodluck.sunlight@gmail.com">陈波宁</a>
@@ -14,6 +18,12 @@ import com.radius.base.dao.ibatis.BaseIbatisDaoImpl;
  * 类说明
  */
 @Repository
-public class ResourceDaoImpl extends BaseIbatisDaoImpl {
-
+public class ResourceDaoImpl extends BaseIbatisDaoImpl<Resource> implements ResourceDao {
+	/**
+	 * 批量导入资源信息
+	 * @param list
+	 */
+	public void batchInsertResourceList(List<Resource> list){
+		 super.batchInsertListObject(list, "resourceSqlMap.insertResource");
+	}
 }
