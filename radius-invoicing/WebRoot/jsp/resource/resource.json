@@ -1,0 +1,2334 @@
+[
+    {
+        "createdatetime": "2013-12-05 11:35:27",
+        "description": "查询角色列表",
+        "iconCls": "ext-icon-bullet_wrench",
+        "id": "jslb",
+        "name": "角色列表",
+        "pid": "jsgl",
+        "seq": 0,
+        "syresource": {
+            "createdatetime": "2013-12-05 11:35:27",
+            "description": "管理系统中用户的角色",
+            "iconCls": "ext-icon-tux",
+            "id": "jsgl",
+            "name": "角色管理",
+            "pid": "xtgl",
+            "seq": 2,
+            "syresource": {
+                "createdatetime": "2013-12-05 11:35:27",
+                "description": "管理系统的资源、角色、机构、用户等信息",
+                "iconCls": "ext-icon-application_view_tile",
+                "id": "xtgl",
+                "name": "系统管理",
+                "seq": 0,
+                "syresourcetype": {
+                    "createdatetime": "2013-09-26 14:01:31",
+                    "description": "菜单类型会显示在系统首页左侧菜单中",
+                    "id": "0",
+                    "name": "菜单",
+                    "updatedatetime": "2013-09-26 14:01:31"
+                },
+                "target": "",
+                "updatedatetime": "2013-12-10 10:08:42",
+                "url": "/welcome.jsp"
+            },
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-12-09 11:13:10",
+            "url": "/securityJsp/base/Syrole.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "功能类型不会显示在系统首页左侧菜单中",
+            "id": "1",
+            "name": "功能",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "",
+        "updatedatetime": "2013-12-05 11:35:27",
+        "url": "/base/syrole!grid"
+    },
+    {
+        "createdatetime": "2013-12-01 01:30:22",
+        "description": "用户登录、注销历史记录列表",
+        "iconCls": "ext-icon-bullet_wrench",
+        "id": "onlineGrid",
+        "name": "用户登录历史列表",
+        "pid": "online",
+        "seq": 0,
+        "syresource": {
+            "createdatetime": "2013-12-01 01:30:22",
+            "description": "监控用户登录、注销",
+            "iconCls": "ext-icon-chart_line",
+            "id": "online",
+            "name": "用户登录历史监控",
+            "pid": "xtjk",
+            "seq": 4,
+            "syresource": {
+                "createdatetime": "2013-12-01 01:30:22",
+                "description": "监控系统运行情况等信息",
+                "iconCls": "ext-icon-monitor",
+                "id": "xtjk",
+                "name": "系统监控",
+                "seq": 1,
+                "syresourcetype": {
+                    "createdatetime": "2013-09-26 14:01:31",
+                    "description": "菜单类型会显示在系统首页左侧菜单中",
+                    "id": "0",
+                    "name": "菜单",
+                    "updatedatetime": "2013-09-26 14:01:31"
+                },
+                "target": "",
+                "updatedatetime": "2013-12-02 15:54:33",
+                "url": "/welcome.jsp"
+            },
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-12-01 01:30:22",
+            "url": "/securityJsp/base/Syonline.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "功能类型不会显示在系统首页左侧菜单中",
+            "id": "1",
+            "name": "功能",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "",
+        "updatedatetime": "2013-12-01 01:30:22",
+        "url": "/base/syonline!grid"
+    },
+    {
+        "createdatetime": "2013-12-05 11:35:27",
+        "description": "管理系统的资源、角色、机构、用户等信息",
+        "iconCls": "ext-icon-application_view_tile",
+        "id": "xtgl",
+        "name": "系统管理",
+        "seq": 0,
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "菜单类型会显示在系统首页左侧菜单中",
+            "id": "0",
+            "name": "菜单",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "",
+        "updatedatetime": "2013-12-10 10:08:42",
+        "url": "/welcome.jsp"
+    },
+    {
+        "createdatetime": "2013-12-10 14:17:58",
+        "description": "查询资源",
+        "iconCls": "ext-icon-bullet_wrench",
+        "id": "zylb",
+        "name": "资源列表",
+        "pid": "zygl",
+        "seq": 0,
+        "syresource": {
+            "createdatetime": "2013-12-05 11:35:27",
+            "description": "管理系统的资源",
+            "iconCls": "ext-icon-newspaper_link",
+            "id": "zygl",
+            "name": "资源管理",
+            "pid": "xtgl",
+            "seq": 1,
+            "syresource": {
+                "createdatetime": "2013-12-05 11:35:27",
+                "description": "管理系统的资源、角色、机构、用户等信息",
+                "iconCls": "ext-icon-application_view_tile",
+                "id": "xtgl",
+                "name": "系统管理",
+                "seq": 0,
+                "syresourcetype": {
+                    "createdatetime": "2013-09-26 14:01:31",
+                    "description": "菜单类型会显示在系统首页左侧菜单中",
+                    "id": "0",
+                    "name": "菜单",
+                    "updatedatetime": "2013-09-26 14:01:31"
+                },
+                "target": "",
+                "updatedatetime": "2013-12-10 10:08:42",
+                "url": "/welcome.jsp"
+            },
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-12-09 14:40:38",
+            "url": "/securityJsp/base/Syresource.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "功能类型不会显示在系统首页左侧菜单中",
+            "id": "1",
+            "name": "功能",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "",
+        "updatedatetime": "2013-12-10 14:17:58",
+        "url": "/base/syresource!treeGrid"
+    },
+    {
+        "createdatetime": "2013-12-05 11:35:27",
+        "description": "查询用户列表",
+        "iconCls": "ext-icon-bullet_wrench",
+        "id": "yhlb",
+        "name": "用户列表",
+        "pid": "yhgl",
+        "seq": 0,
+        "syresource": {
+            "createdatetime": "2013-12-05 11:35:27",
+            "description": "管理系统中用户的用户",
+            "iconCls": "ext-icon-user_suit",
+            "id": "yhgl",
+            "name": "用户管理",
+            "pid": "xtgl",
+            "seq": 4,
+            "syresource": {
+                "createdatetime": "2013-12-05 11:35:27",
+                "description": "管理系统的资源、角色、机构、用户等信息",
+                "iconCls": "ext-icon-application_view_tile",
+                "id": "xtgl",
+                "name": "系统管理",
+                "seq": 0,
+                "syresourcetype": {
+                    "createdatetime": "2013-09-26 14:01:31",
+                    "description": "菜单类型会显示在系统首页左侧菜单中",
+                    "id": "0",
+                    "name": "菜单",
+                    "updatedatetime": "2013-09-26 14:01:31"
+                },
+                "target": "",
+                "updatedatetime": "2013-12-10 10:08:42",
+                "url": "/welcome.jsp"
+            },
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-12-05 11:35:27",
+            "url": "/securityJsp/base/Syuser.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "功能类型不会显示在系统首页左侧菜单中",
+            "id": "1",
+            "name": "功能",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "",
+        "updatedatetime": "2013-12-05 11:35:27",
+        "url": "/base/syuser!grid"
+    },
+    {
+        "createdatetime": "2013-11-16 18:30:25",
+        "description": "Apache CXF DEMO",
+        "iconCls": "ext-icon-world",
+        "id": "cxfDemo",
+        "name": "ApacheCXF示例",
+        "pid": "demo",
+        "seq": 0,
+        "syresource": {
+            "createdatetime": "2013-10-19 14:15:08",
+            "description": "EasyUI还能做到更多，只有你想不到，没有做不到！",
+            "iconCls": "ext-icon-asterisk_orange",
+            "id": "demo",
+            "name": "其他示例",
+            "seq": 3,
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-10-19 14:15:08",
+            "url": "/welcome.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "菜单类型会显示在系统首页左侧菜单中",
+            "id": "0",
+            "name": "菜单",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "CXFDemo",
+        "updatedatetime": "2013-11-16 18:30:25",
+        "url": "/ws"
+    },
+    {
+        "createdatetime": "2013-12-08 21:32:30",
+        "description": "添加资源",
+        "iconCls": "ext-icon-bullet_wrench",
+        "id": "zytj",
+        "name": "添加资源",
+        "pid": "jsgl",
+        "seq": 0,
+        "syresource": {
+            "createdatetime": "2013-12-05 11:35:27",
+            "description": "管理系统中用户的角色",
+            "iconCls": "ext-icon-tux",
+            "id": "jsgl",
+            "name": "角色管理",
+            "pid": "xtgl",
+            "seq": 2,
+            "syresource": {
+                "createdatetime": "2013-12-05 11:35:27",
+                "description": "管理系统的资源、角色、机构、用户等信息",
+                "iconCls": "ext-icon-application_view_tile",
+                "id": "xtgl",
+                "name": "系统管理",
+                "seq": 0,
+                "syresourcetype": {
+                    "createdatetime": "2013-09-26 14:01:31",
+                    "description": "菜单类型会显示在系统首页左侧菜单中",
+                    "id": "0",
+                    "name": "菜单",
+                    "updatedatetime": "2013-09-26 14:01:31"
+                },
+                "target": "",
+                "updatedatetime": "2013-12-10 10:08:42",
+                "url": "/welcome.jsp"
+            },
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-12-09 11:13:10",
+            "url": "/securityJsp/base/Syrole.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "功能类型不会显示在系统首页左侧菜单中",
+            "id": "1",
+            "name": "功能",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "updatedatetime": "2013-12-12 21:52:43",
+        "url": "/base/syresource!save"
+    },
+    {
+        "createdatetime": "2013-12-05 11:35:27",
+        "description": "查询机构列表",
+        "iconCls": "ext-icon-bullet_wrench",
+        "id": "jglb",
+        "name": "机构列表",
+        "pid": "jggl",
+        "seq": 0,
+        "syresource": {
+            "createdatetime": "2013-12-05 11:35:27",
+            "description": "管理系统中用户的机构",
+            "iconCls": "ext-icon-group_link",
+            "id": "jggl",
+            "name": "机构管理",
+            "pid": "xtgl",
+            "seq": 3,
+            "syresource": {
+                "createdatetime": "2013-12-05 11:35:27",
+                "description": "管理系统的资源、角色、机构、用户等信息",
+                "iconCls": "ext-icon-application_view_tile",
+                "id": "xtgl",
+                "name": "系统管理",
+                "seq": 0,
+                "syresourcetype": {
+                    "createdatetime": "2013-09-26 14:01:31",
+                    "description": "菜单类型会显示在系统首页左侧菜单中",
+                    "id": "0",
+                    "name": "菜单",
+                    "updatedatetime": "2013-09-26 14:01:31"
+                },
+                "target": "",
+                "updatedatetime": "2013-12-10 10:08:42",
+                "url": "/welcome.jsp"
+            },
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-12-05 11:35:27",
+            "url": "/securityJsp/base/Syorganization.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "功能类型不会显示在系统首页左侧菜单中",
+            "id": "1",
+            "name": "功能",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "",
+        "updatedatetime": "2013-12-05 11:35:27",
+        "url": "/base/syorganization!treeGrid"
+    },
+    {
+        "createdatetime": "2013-11-09 14:58:11",
+        "description": "用户注册时间分布报表",
+        "iconCls": "ext-icon-chart_bar",
+        "id": "userCreateDatetimeChart",
+        "name": "注册时间分布",
+        "pid": "xtbb",
+        "seq": 1,
+        "syresource": {
+            "createdatetime": "2013-11-09 14:58:11",
+            "description": "查看系统相关报表图标",
+            "iconCls": "ext-icon-chart_curve",
+            "id": "xtbb",
+            "name": "系统报表",
+            "seq": 2,
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-11-09 14:58:11",
+            "url": "/welcome.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "菜单类型会显示在系统首页左侧菜单中",
+            "id": "0",
+            "name": "菜单",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "",
+        "updatedatetime": "2013-11-29 09:31:51",
+        "url": "/securityJsp/base/chart/userCreateDatetimeChart.jsp"
+    },
+    {
+        "createdatetime": "2013-12-05 11:35:27",
+        "description": "添加用户",
+        "iconCls": "ext-icon-bullet_wrench",
+        "id": "yhtj",
+        "name": "添加用户",
+        "pid": "yhgl",
+        "seq": 1,
+        "syresource": {
+            "createdatetime": "2013-12-05 11:35:27",
+            "description": "管理系统中用户的用户",
+            "iconCls": "ext-icon-user_suit",
+            "id": "yhgl",
+            "name": "用户管理",
+            "pid": "xtgl",
+            "seq": 4,
+            "syresource": {
+                "createdatetime": "2013-12-05 11:35:27",
+                "description": "管理系统的资源、角色、机构、用户等信息",
+                "iconCls": "ext-icon-application_view_tile",
+                "id": "xtgl",
+                "name": "系统管理",
+                "seq": 0,
+                "syresourcetype": {
+                    "createdatetime": "2013-09-26 14:01:31",
+                    "description": "菜单类型会显示在系统首页左侧菜单中",
+                    "id": "0",
+                    "name": "菜单",
+                    "updatedatetime": "2013-09-26 14:01:31"
+                },
+                "target": "",
+                "updatedatetime": "2013-12-10 10:08:42",
+                "url": "/welcome.jsp"
+            },
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-12-05 11:35:27",
+            "url": "/securityJsp/base/Syuser.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "功能类型不会显示在系统首页左侧菜单中",
+            "id": "1",
+            "name": "功能",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "",
+        "updatedatetime": "2013-12-05 11:35:27",
+        "url": "/base/syuser!save"
+    },
+    {
+        "createdatetime": "2013-12-01 01:30:22",
+        "description": "监控项目",
+        "iconCls": "ext-icon-monitor_error",
+        "id": "monitoring",
+        "name": "项目监控",
+        "pid": "xtjk",
+        "seq": 1,
+        "syresource": {
+            "createdatetime": "2013-12-01 01:30:22",
+            "description": "监控系统运行情况等信息",
+            "iconCls": "ext-icon-monitor",
+            "id": "xtjk",
+            "name": "系统监控",
+            "seq": 1,
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-12-02 15:54:33",
+            "url": "/welcome.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "菜单类型会显示在系统首页左侧菜单中",
+            "id": "0",
+            "name": "菜单",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "",
+        "updatedatetime": "2013-12-01 01:30:22",
+        "url": "/monitoring"
+    },
+    {
+        "createdatetime": "2013-10-19 14:15:08",
+        "description": "针对EasyUI二次开发的DEMO",
+        "iconCls": "ext-icon-award_star_bronze_1",
+        "id": "lyDemo",
+        "name": "流云的Demo",
+        "pid": "demo",
+        "seq": 1,
+        "syresource": {
+            "createdatetime": "2013-10-19 14:15:08",
+            "description": "EasyUI还能做到更多，只有你想不到，没有做不到！",
+            "iconCls": "ext-icon-asterisk_orange",
+            "id": "demo",
+            "name": "其他示例",
+            "seq": 3,
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-10-19 14:15:08",
+            "url": "/welcome.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "菜单类型会显示在系统首页左侧菜单中",
+            "id": "0",
+            "name": "菜单",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "_blank",
+        "updatedatetime": "2013-10-19 14:15:08",
+        "url": "http://jqext.sinaapp.com"
+    },
+    {
+        "createdatetime": "2013-12-05 11:35:27",
+        "description": "添加机构",
+        "iconCls": "ext-icon-bullet_wrench",
+        "id": "jgtj",
+        "name": "添加机构",
+        "pid": "jggl",
+        "seq": 1,
+        "syresource": {
+            "createdatetime": "2013-12-05 11:35:27",
+            "description": "管理系统中用户的机构",
+            "iconCls": "ext-icon-group_link",
+            "id": "jggl",
+            "name": "机构管理",
+            "pid": "xtgl",
+            "seq": 3,
+            "syresource": {
+                "createdatetime": "2013-12-05 11:35:27",
+                "description": "管理系统的资源、角色、机构、用户等信息",
+                "iconCls": "ext-icon-application_view_tile",
+                "id": "xtgl",
+                "name": "系统管理",
+                "seq": 0,
+                "syresourcetype": {
+                    "createdatetime": "2013-09-26 14:01:31",
+                    "description": "菜单类型会显示在系统首页左侧菜单中",
+                    "id": "0",
+                    "name": "菜单",
+                    "updatedatetime": "2013-09-26 14:01:31"
+                },
+                "target": "",
+                "updatedatetime": "2013-12-10 10:08:42",
+                "url": "/welcome.jsp"
+            },
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-12-05 11:35:27",
+            "url": "/securityJsp/base/Syorganization.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "功能类型不会显示在系统首页左侧菜单中",
+            "id": "1",
+            "name": "功能",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "",
+        "updatedatetime": "2013-12-05 11:35:27",
+        "url": "/base/syorganization!save"
+    },
+    {
+        "createdatetime": "2013-12-05 11:35:27",
+        "description": "添加角色",
+        "iconCls": "ext-icon-bullet_wrench",
+        "id": "jstj",
+        "name": "添加角色",
+        "pid": "jsgl",
+        "seq": 1,
+        "syresource": {
+            "createdatetime": "2013-12-05 11:35:27",
+            "description": "管理系统中用户的角色",
+            "iconCls": "ext-icon-tux",
+            "id": "jsgl",
+            "name": "角色管理",
+            "pid": "xtgl",
+            "seq": 2,
+            "syresource": {
+                "createdatetime": "2013-12-05 11:35:27",
+                "description": "管理系统的资源、角色、机构、用户等信息",
+                "iconCls": "ext-icon-application_view_tile",
+                "id": "xtgl",
+                "name": "系统管理",
+                "seq": 0,
+                "syresourcetype": {
+                    "createdatetime": "2013-09-26 14:01:31",
+                    "description": "菜单类型会显示在系统首页左侧菜单中",
+                    "id": "0",
+                    "name": "菜单",
+                    "updatedatetime": "2013-09-26 14:01:31"
+                },
+                "target": "",
+                "updatedatetime": "2013-12-10 10:08:42",
+                "url": "/welcome.jsp"
+            },
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-12-09 11:13:10",
+            "url": "/securityJsp/base/Syrole.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "功能类型不会显示在系统首页左侧菜单中",
+            "id": "1",
+            "name": "功能",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "",
+        "updatedatetime": "2013-12-05 11:35:27",
+        "url": "/base/syrole!save"
+    },
+    {
+        "createdatetime": "2013-12-05 11:35:27",
+        "description": "管理系统的资源",
+        "iconCls": "ext-icon-newspaper_link",
+        "id": "zygl",
+        "name": "资源管理",
+        "pid": "xtgl",
+        "seq": 1,
+        "syresource": {
+            "createdatetime": "2013-12-05 11:35:27",
+            "description": "管理系统的资源、角色、机构、用户等信息",
+            "iconCls": "ext-icon-application_view_tile",
+            "id": "xtgl",
+            "name": "系统管理",
+            "seq": 0,
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-12-10 10:08:42",
+            "url": "/welcome.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "菜单类型会显示在系统首页左侧菜单中",
+            "id": "0",
+            "name": "菜单",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "",
+        "updatedatetime": "2013-12-09 14:40:38",
+        "url": "/securityJsp/base/Syresource.jsp"
+    },
+    {
+        "createdatetime": "2013-12-01 01:30:22",
+        "description": "监控系统运行情况等信息",
+        "iconCls": "ext-icon-monitor",
+        "id": "xtjk",
+        "name": "系统监控",
+        "seq": 1,
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "菜单类型会显示在系统首页左侧菜单中",
+            "id": "0",
+            "name": "菜单",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "",
+        "updatedatetime": "2013-12-02 15:54:33",
+        "url": "/welcome.jsp"
+    },
+    {
+        "createdatetime": "2013-12-01 01:30:22",
+        "description": "监控数据源",
+        "iconCls": "ext-icon-monitor_link",
+        "id": "druid",
+        "name": "数据源监控",
+        "pid": "xtjk",
+        "seq": 2,
+        "syresource": {
+            "createdatetime": "2013-12-01 01:30:22",
+            "description": "监控系统运行情况等信息",
+            "iconCls": "ext-icon-monitor",
+            "id": "xtjk",
+            "name": "系统监控",
+            "seq": 1,
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-12-02 15:54:33",
+            "url": "/welcome.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "菜单类型会显示在系统首页左侧菜单中",
+            "id": "0",
+            "name": "菜单",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "",
+        "updatedatetime": "2013-12-01 01:30:22",
+        "url": "/druid"
+    },
+    {
+        "createdatetime": "2013-11-09 14:58:11",
+        "description": "用户角色分布",
+        "iconCls": "ext-icon-chart_pie",
+        "id": "userRoleChart",
+        "name": "用户角色分布",
+        "pid": "xtbb",
+        "seq": 2,
+        "syresource": {
+            "createdatetime": "2013-11-09 14:58:11",
+            "description": "查看系统相关报表图标",
+            "iconCls": "ext-icon-chart_curve",
+            "id": "xtbb",
+            "name": "系统报表",
+            "seq": 2,
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-11-09 14:58:11",
+            "url": "/welcome.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "菜单类型会显示在系统首页左侧菜单中",
+            "id": "0",
+            "name": "菜单",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "",
+        "updatedatetime": "2013-12-01 13:01:52",
+        "url": "/securityJsp/base/chart/userRoleChart.jsp"
+    },
+    {
+        "createdatetime": "2013-12-05 11:35:27",
+        "description": "编辑机构",
+        "iconCls": "ext-icon-bullet_wrench",
+        "id": "jgbj",
+        "name": "编辑机构",
+        "pid": "jggl",
+        "seq": 2,
+        "syresource": {
+            "createdatetime": "2013-12-05 11:35:27",
+            "description": "管理系统中用户的机构",
+            "iconCls": "ext-icon-group_link",
+            "id": "jggl",
+            "name": "机构管理",
+            "pid": "xtgl",
+            "seq": 3,
+            "syresource": {
+                "createdatetime": "2013-12-05 11:35:27",
+                "description": "管理系统的资源、角色、机构、用户等信息",
+                "iconCls": "ext-icon-application_view_tile",
+                "id": "xtgl",
+                "name": "系统管理",
+                "seq": 0,
+                "syresourcetype": {
+                    "createdatetime": "2013-09-26 14:01:31",
+                    "description": "菜单类型会显示在系统首页左侧菜单中",
+                    "id": "0",
+                    "name": "菜单",
+                    "updatedatetime": "2013-09-26 14:01:31"
+                },
+                "target": "",
+                "updatedatetime": "2013-12-10 10:08:42",
+                "url": "/welcome.jsp"
+            },
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-12-05 11:35:27",
+            "url": "/securityJsp/base/Syorganization.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "功能类型不会显示在系统首页左侧菜单中",
+            "id": "1",
+            "name": "功能",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "",
+        "updatedatetime": "2013-12-05 11:35:27",
+        "url": "/base/syorganization!update"
+    },
+    {
+        "createdatetime": "2013-12-05 11:35:27",
+        "description": "管理系统中用户的角色",
+        "iconCls": "ext-icon-tux",
+        "id": "jsgl",
+        "name": "角色管理",
+        "pid": "xtgl",
+        "seq": 2,
+        "syresource": {
+            "createdatetime": "2013-12-05 11:35:27",
+            "description": "管理系统的资源、角色、机构、用户等信息",
+            "iconCls": "ext-icon-application_view_tile",
+            "id": "xtgl",
+            "name": "系统管理",
+            "seq": 0,
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-12-10 10:08:42",
+            "url": "/welcome.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "菜单类型会显示在系统首页左侧菜单中",
+            "id": "0",
+            "name": "菜单",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "",
+        "updatedatetime": "2013-12-09 11:13:10",
+        "url": "/securityJsp/base/Syrole.jsp"
+    },
+    {
+        "createdatetime": "2013-11-09 14:58:11",
+        "description": "查看系统相关报表图标",
+        "iconCls": "ext-icon-chart_curve",
+        "id": "xtbb",
+        "name": "系统报表",
+        "seq": 2,
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "菜单类型会显示在系统首页左侧菜单中",
+            "id": "0",
+            "name": "菜单",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "",
+        "updatedatetime": "2013-11-09 14:58:11",
+        "url": "/welcome.jsp"
+    },
+    {
+        "createdatetime": "2013-11-02 10:06:12",
+        "description": "SpringMvc+Spring3+Hibernate4+Maven",
+        "iconCls": "ext-icon-award_star_bronze_2",
+        "id": "syproDemo",
+        "name": "SyProDemo",
+        "pid": "demo",
+        "seq": 2,
+        "syresource": {
+            "createdatetime": "2013-10-19 14:15:08",
+            "description": "EasyUI还能做到更多，只有你想不到，没有做不到！",
+            "iconCls": "ext-icon-asterisk_orange",
+            "id": "demo",
+            "name": "其他示例",
+            "seq": 3,
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-10-19 14:15:08",
+            "url": "/welcome.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "菜单类型会显示在系统首页左侧菜单中",
+            "id": "0",
+            "name": "菜单",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "_blank",
+        "updatedatetime": "2013-11-02 10:06:12",
+        "url": "http://sypro.jeasyuicn.com"
+    },
+    {
+        "createdatetime": "2013-12-05 11:35:27",
+        "description": "编辑用户",
+        "iconCls": "ext-icon-bullet_wrench",
+        "id": "yhbj",
+        "name": "编辑用户",
+        "pid": "yhgl",
+        "seq": 2,
+        "syresource": {
+            "createdatetime": "2013-12-05 11:35:27",
+            "description": "管理系统中用户的用户",
+            "iconCls": "ext-icon-user_suit",
+            "id": "yhgl",
+            "name": "用户管理",
+            "pid": "xtgl",
+            "seq": 4,
+            "syresource": {
+                "createdatetime": "2013-12-05 11:35:27",
+                "description": "管理系统的资源、角色、机构、用户等信息",
+                "iconCls": "ext-icon-application_view_tile",
+                "id": "xtgl",
+                "name": "系统管理",
+                "seq": 0,
+                "syresourcetype": {
+                    "createdatetime": "2013-09-26 14:01:31",
+                    "description": "菜单类型会显示在系统首页左侧菜单中",
+                    "id": "0",
+                    "name": "菜单",
+                    "updatedatetime": "2013-09-26 14:01:31"
+                },
+                "target": "",
+                "updatedatetime": "2013-12-10 10:08:42",
+                "url": "/welcome.jsp"
+            },
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-12-05 11:35:27",
+            "url": "/securityJsp/base/Syuser.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "功能类型不会显示在系统首页左侧菜单中",
+            "id": "1",
+            "name": "功能",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "",
+        "updatedatetime": "2013-12-05 11:35:27",
+        "url": "/base/syuser!update"
+    },
+    {
+        "createdatetime": "2013-12-05 11:35:27",
+        "description": "编辑角色",
+        "iconCls": "ext-icon-bullet_wrench",
+        "id": "jsbj",
+        "name": "编辑角色",
+        "pid": "jsgl",
+        "seq": 2,
+        "syresource": {
+            "createdatetime": "2013-12-05 11:35:27",
+            "description": "管理系统中用户的角色",
+            "iconCls": "ext-icon-tux",
+            "id": "jsgl",
+            "name": "角色管理",
+            "pid": "xtgl",
+            "seq": 2,
+            "syresource": {
+                "createdatetime": "2013-12-05 11:35:27",
+                "description": "管理系统的资源、角色、机构、用户等信息",
+                "iconCls": "ext-icon-application_view_tile",
+                "id": "xtgl",
+                "name": "系统管理",
+                "seq": 0,
+                "syresourcetype": {
+                    "createdatetime": "2013-09-26 14:01:31",
+                    "description": "菜单类型会显示在系统首页左侧菜单中",
+                    "id": "0",
+                    "name": "菜单",
+                    "updatedatetime": "2013-09-26 14:01:31"
+                },
+                "target": "",
+                "updatedatetime": "2013-12-10 10:08:42",
+                "url": "/welcome.jsp"
+            },
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-12-09 11:13:10",
+            "url": "/securityJsp/base/Syrole.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "功能类型不会显示在系统首页左侧菜单中",
+            "id": "1",
+            "name": "功能",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "",
+        "updatedatetime": "2013-12-05 11:35:27",
+        "url": "/base/syrole!update"
+    },
+    {
+        "createdatetime": "2013-12-05 11:35:27",
+        "description": "编辑资源",
+        "iconCls": "ext-icon-bullet_wrench",
+        "id": "zybj",
+        "name": "编辑资源",
+        "pid": "zygl",
+        "seq": 2,
+        "syresource": {
+            "createdatetime": "2013-12-05 11:35:27",
+            "description": "管理系统的资源",
+            "iconCls": "ext-icon-newspaper_link",
+            "id": "zygl",
+            "name": "资源管理",
+            "pid": "xtgl",
+            "seq": 1,
+            "syresource": {
+                "createdatetime": "2013-12-05 11:35:27",
+                "description": "管理系统的资源、角色、机构、用户等信息",
+                "iconCls": "ext-icon-application_view_tile",
+                "id": "xtgl",
+                "name": "系统管理",
+                "seq": 0,
+                "syresourcetype": {
+                    "createdatetime": "2013-09-26 14:01:31",
+                    "description": "菜单类型会显示在系统首页左侧菜单中",
+                    "id": "0",
+                    "name": "菜单",
+                    "updatedatetime": "2013-09-26 14:01:31"
+                },
+                "target": "",
+                "updatedatetime": "2013-12-10 10:08:42",
+                "url": "/welcome.jsp"
+            },
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-12-09 14:40:38",
+            "url": "/securityJsp/base/Syresource.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "功能类型不会显示在系统首页左侧菜单中",
+            "id": "1",
+            "name": "功能",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "",
+        "updatedatetime": "2013-12-05 11:35:27",
+        "url": "/base/syresource!update"
+    },
+    {
+        "createdatetime": "2013-12-05 11:35:27",
+        "description": "删除资源",
+        "iconCls": "ext-icon-bullet_wrench",
+        "id": "zysc",
+        "name": "删除资源",
+        "pid": "zygl",
+        "seq": 3,
+        "syresource": {
+            "createdatetime": "2013-12-05 11:35:27",
+            "description": "管理系统的资源",
+            "iconCls": "ext-icon-newspaper_link",
+            "id": "zygl",
+            "name": "资源管理",
+            "pid": "xtgl",
+            "seq": 1,
+            "syresource": {
+                "createdatetime": "2013-12-05 11:35:27",
+                "description": "管理系统的资源、角色、机构、用户等信息",
+                "iconCls": "ext-icon-application_view_tile",
+                "id": "xtgl",
+                "name": "系统管理",
+                "seq": 0,
+                "syresourcetype": {
+                    "createdatetime": "2013-09-26 14:01:31",
+                    "description": "菜单类型会显示在系统首页左侧菜单中",
+                    "id": "0",
+                    "name": "菜单",
+                    "updatedatetime": "2013-09-26 14:01:31"
+                },
+                "target": "",
+                "updatedatetime": "2013-12-10 10:08:42",
+                "url": "/welcome.jsp"
+            },
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-12-09 14:40:38",
+            "url": "/securityJsp/base/Syresource.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "功能类型不会显示在系统首页左侧菜单中",
+            "id": "1",
+            "name": "功能",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "updatedatetime": "2013-12-12 21:57:19",
+        "url": "/base/syresource!delete"
+    },
+    {
+        "createdatetime": "2013-12-05 11:35:27",
+        "description": "删除用户",
+        "iconCls": "ext-icon-bullet_wrench",
+        "id": "yhsc",
+        "name": "删除用户",
+        "pid": "yhgl",
+        "seq": 3,
+        "syresource": {
+            "createdatetime": "2013-12-05 11:35:27",
+            "description": "管理系统中用户的用户",
+            "iconCls": "ext-icon-user_suit",
+            "id": "yhgl",
+            "name": "用户管理",
+            "pid": "xtgl",
+            "seq": 4,
+            "syresource": {
+                "createdatetime": "2013-12-05 11:35:27",
+                "description": "管理系统的资源、角色、机构、用户等信息",
+                "iconCls": "ext-icon-application_view_tile",
+                "id": "xtgl",
+                "name": "系统管理",
+                "seq": 0,
+                "syresourcetype": {
+                    "createdatetime": "2013-09-26 14:01:31",
+                    "description": "菜单类型会显示在系统首页左侧菜单中",
+                    "id": "0",
+                    "name": "菜单",
+                    "updatedatetime": "2013-09-26 14:01:31"
+                },
+                "target": "",
+                "updatedatetime": "2013-12-10 10:08:42",
+                "url": "/welcome.jsp"
+            },
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-12-05 11:35:27",
+            "url": "/securityJsp/base/Syuser.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "功能类型不会显示在系统首页左侧菜单中",
+            "id": "1",
+            "name": "功能",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "",
+        "updatedatetime": "2013-12-05 11:35:27",
+        "url": "/base/syuser!delete"
+    },
+    {
+        "createdatetime": "2013-12-01 01:30:22",
+        "description": "Action映射情况监控",
+        "iconCls": "ext-icon-monitor_lightning",
+        "id": "actionConfigBrowser",
+        "name": "Action映射监控",
+        "pid": "xtjk",
+        "seq": 3,
+        "syresource": {
+            "createdatetime": "2013-12-01 01:30:22",
+            "description": "监控系统运行情况等信息",
+            "iconCls": "ext-icon-monitor",
+            "id": "xtjk",
+            "name": "系统监控",
+            "seq": 1,
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-12-02 15:54:33",
+            "url": "/welcome.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "菜单类型会显示在系统首页左侧菜单中",
+            "id": "0",
+            "name": "菜单",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "",
+        "updatedatetime": "2013-12-01 01:30:22",
+        "url": "/config-browser/showConstants.sy"
+    },
+    {
+        "createdatetime": "2013-12-05 11:35:27",
+        "description": "管理系统中用户的机构",
+        "iconCls": "ext-icon-group_link",
+        "id": "jggl",
+        "name": "机构管理",
+        "pid": "xtgl",
+        "seq": 3,
+        "syresource": {
+            "createdatetime": "2013-12-05 11:35:27",
+            "description": "管理系统的资源、角色、机构、用户等信息",
+            "iconCls": "ext-icon-application_view_tile",
+            "id": "xtgl",
+            "name": "系统管理",
+            "seq": 0,
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-12-10 10:08:42",
+            "url": "/welcome.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "菜单类型会显示在系统首页左侧菜单中",
+            "id": "0",
+            "name": "菜单",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "",
+        "updatedatetime": "2013-12-05 11:35:27",
+        "url": "/securityJsp/base/Syorganization.jsp"
+    },
+    {
+        "createdatetime": "2013-12-05 11:35:27",
+        "description": "删除机构",
+        "iconCls": "ext-icon-bullet_wrench",
+        "id": "jgsc",
+        "name": "删除机构",
+        "pid": "jggl",
+        "seq": 3,
+        "syresource": {
+            "createdatetime": "2013-12-05 11:35:27",
+            "description": "管理系统中用户的机构",
+            "iconCls": "ext-icon-group_link",
+            "id": "jggl",
+            "name": "机构管理",
+            "pid": "xtgl",
+            "seq": 3,
+            "syresource": {
+                "createdatetime": "2013-12-05 11:35:27",
+                "description": "管理系统的资源、角色、机构、用户等信息",
+                "iconCls": "ext-icon-application_view_tile",
+                "id": "xtgl",
+                "name": "系统管理",
+                "seq": 0,
+                "syresourcetype": {
+                    "createdatetime": "2013-09-26 14:01:31",
+                    "description": "菜单类型会显示在系统首页左侧菜单中",
+                    "id": "0",
+                    "name": "菜单",
+                    "updatedatetime": "2013-09-26 14:01:31"
+                },
+                "target": "",
+                "updatedatetime": "2013-12-10 10:08:42",
+                "url": "/welcome.jsp"
+            },
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-12-05 11:35:27",
+            "url": "/securityJsp/base/Syorganization.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "功能类型不会显示在系统首页左侧菜单中",
+            "id": "1",
+            "name": "功能",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "",
+        "updatedatetime": "2013-12-05 11:35:27",
+        "url": "/base/syorganization!delete"
+    },
+    {
+        "createdatetime": "2013-10-28 18:58:00",
+        "description": "夏悸的php demo",
+        "iconCls": "ext-icon-award_star_bronze_3",
+        "id": "phpDemo",
+        "name": "phpDemo",
+        "pid": "demo",
+        "seq": 3,
+        "syresource": {
+            "createdatetime": "2013-10-19 14:15:08",
+            "description": "EasyUI还能做到更多，只有你想不到，没有做不到！",
+            "iconCls": "ext-icon-asterisk_orange",
+            "id": "demo",
+            "name": "其他示例",
+            "seq": 3,
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-10-19 14:15:08",
+            "url": "/welcome.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "菜单类型会显示在系统首页左侧菜单中",
+            "id": "0",
+            "name": "菜单",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "_blank",
+        "updatedatetime": "2013-10-28 18:58:00",
+        "url": "http://php-easyui-demo.jeasyuicn.com"
+    },
+    {
+        "createdatetime": "2013-12-05 11:35:27",
+        "description": "删除角色",
+        "iconCls": "ext-icon-bullet_wrench",
+        "id": "jssc",
+        "name": "删除角色",
+        "pid": "jsgl",
+        "seq": 3,
+        "syresource": {
+            "createdatetime": "2013-12-05 11:35:27",
+            "description": "管理系统中用户的角色",
+            "iconCls": "ext-icon-tux",
+            "id": "jsgl",
+            "name": "角色管理",
+            "pid": "xtgl",
+            "seq": 2,
+            "syresource": {
+                "createdatetime": "2013-12-05 11:35:27",
+                "description": "管理系统的资源、角色、机构、用户等信息",
+                "iconCls": "ext-icon-application_view_tile",
+                "id": "xtgl",
+                "name": "系统管理",
+                "seq": 0,
+                "syresourcetype": {
+                    "createdatetime": "2013-09-26 14:01:31",
+                    "description": "菜单类型会显示在系统首页左侧菜单中",
+                    "id": "0",
+                    "name": "菜单",
+                    "updatedatetime": "2013-09-26 14:01:31"
+                },
+                "target": "",
+                "updatedatetime": "2013-12-10 10:08:42",
+                "url": "/welcome.jsp"
+            },
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-12-09 11:13:10",
+            "url": "/securityJsp/base/Syrole.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "功能类型不会显示在系统首页左侧菜单中",
+            "id": "1",
+            "name": "功能",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "",
+        "updatedatetime": "2013-12-05 11:35:27",
+        "url": "/base/syrole!delete"
+    },
+    {
+        "createdatetime": "2013-10-19 14:15:08",
+        "description": "EasyUI还能做到更多，只有你想不到，没有做不到！",
+        "iconCls": "ext-icon-asterisk_orange",
+        "id": "demo",
+        "name": "其他示例",
+        "seq": 3,
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "菜单类型会显示在系统首页左侧菜单中",
+            "id": "0",
+            "name": "菜单",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "",
+        "updatedatetime": "2013-10-19 14:15:08",
+        "url": "/welcome.jsp"
+    },
+    {
+        "createdatetime": "2013-12-05 11:35:27",
+        "description": "查看角色",
+        "iconCls": "ext-icon-bullet_wrench",
+        "id": "jsck",
+        "name": "查看角色",
+        "pid": "jsgl",
+        "seq": 4,
+        "syresource": {
+            "createdatetime": "2013-12-05 11:35:27",
+            "description": "管理系统中用户的角色",
+            "iconCls": "ext-icon-tux",
+            "id": "jsgl",
+            "name": "角色管理",
+            "pid": "xtgl",
+            "seq": 2,
+            "syresource": {
+                "createdatetime": "2013-12-05 11:35:27",
+                "description": "管理系统的资源、角色、机构、用户等信息",
+                "iconCls": "ext-icon-application_view_tile",
+                "id": "xtgl",
+                "name": "系统管理",
+                "seq": 0,
+                "syresourcetype": {
+                    "createdatetime": "2013-09-26 14:01:31",
+                    "description": "菜单类型会显示在系统首页左侧菜单中",
+                    "id": "0",
+                    "name": "菜单",
+                    "updatedatetime": "2013-09-26 14:01:31"
+                },
+                "target": "",
+                "updatedatetime": "2013-12-10 10:08:42",
+                "url": "/welcome.jsp"
+            },
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-12-09 11:13:10",
+            "url": "/securityJsp/base/Syrole.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "功能类型不会显示在系统首页左侧菜单中",
+            "id": "1",
+            "name": "功能",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "",
+        "updatedatetime": "2013-12-05 11:35:27",
+        "url": "/base/syrole!getById"
+    },
+    {
+        "createdatetime": "2013-12-05 11:35:27",
+        "description": "查看机构",
+        "iconCls": "ext-icon-bullet_wrench",
+        "id": "jgck",
+        "name": "查看机构",
+        "pid": "jggl",
+        "seq": 4,
+        "syresource": {
+            "createdatetime": "2013-12-05 11:35:27",
+            "description": "管理系统中用户的机构",
+            "iconCls": "ext-icon-group_link",
+            "id": "jggl",
+            "name": "机构管理",
+            "pid": "xtgl",
+            "seq": 3,
+            "syresource": {
+                "createdatetime": "2013-12-05 11:35:27",
+                "description": "管理系统的资源、角色、机构、用户等信息",
+                "iconCls": "ext-icon-application_view_tile",
+                "id": "xtgl",
+                "name": "系统管理",
+                "seq": 0,
+                "syresourcetype": {
+                    "createdatetime": "2013-09-26 14:01:31",
+                    "description": "菜单类型会显示在系统首页左侧菜单中",
+                    "id": "0",
+                    "name": "菜单",
+                    "updatedatetime": "2013-09-26 14:01:31"
+                },
+                "target": "",
+                "updatedatetime": "2013-12-10 10:08:42",
+                "url": "/welcome.jsp"
+            },
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-12-05 11:35:27",
+            "url": "/securityJsp/base/Syorganization.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "功能类型不会显示在系统首页左侧菜单中",
+            "id": "1",
+            "name": "功能",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "",
+        "updatedatetime": "2013-12-05 11:35:27",
+        "url": "/base/syorganization!getById"
+    },
+    {
+        "createdatetime": "2013-12-05 11:35:27",
+        "description": "管理系统中用户的用户",
+        "iconCls": "ext-icon-user_suit",
+        "id": "yhgl",
+        "name": "用户管理",
+        "pid": "xtgl",
+        "seq": 4,
+        "syresource": {
+            "createdatetime": "2013-12-05 11:35:27",
+            "description": "管理系统的资源、角色、机构、用户等信息",
+            "iconCls": "ext-icon-application_view_tile",
+            "id": "xtgl",
+            "name": "系统管理",
+            "seq": 0,
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-12-10 10:08:42",
+            "url": "/welcome.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "菜单类型会显示在系统首页左侧菜单中",
+            "id": "0",
+            "name": "菜单",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "",
+        "updatedatetime": "2013-12-05 11:35:27",
+        "url": "/securityJsp/base/Syuser.jsp"
+    },
+    {
+        "createdatetime": "2013-12-01 01:30:22",
+        "description": "监控用户登录、注销",
+        "iconCls": "ext-icon-chart_line",
+        "id": "online",
+        "name": "用户登录历史监控",
+        "pid": "xtjk",
+        "seq": 4,
+        "syresource": {
+            "createdatetime": "2013-12-01 01:30:22",
+            "description": "监控系统运行情况等信息",
+            "iconCls": "ext-icon-monitor",
+            "id": "xtjk",
+            "name": "系统监控",
+            "seq": 1,
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-12-02 15:54:33",
+            "url": "/welcome.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "菜单类型会显示在系统首页左侧菜单中",
+            "id": "0",
+            "name": "菜单",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "",
+        "updatedatetime": "2013-12-01 01:30:22",
+        "url": "/securityJsp/base/Syonline.jsp"
+    },
+    {
+        "createdatetime": "2013-12-05 11:35:27",
+        "description": "查看用户",
+        "iconCls": "ext-icon-bullet_wrench",
+        "id": "yhck",
+        "name": "查看用户",
+        "pid": "yhgl",
+        "seq": 4,
+        "syresource": {
+            "createdatetime": "2013-12-05 11:35:27",
+            "description": "管理系统中用户的用户",
+            "iconCls": "ext-icon-user_suit",
+            "id": "yhgl",
+            "name": "用户管理",
+            "pid": "xtgl",
+            "seq": 4,
+            "syresource": {
+                "createdatetime": "2013-12-05 11:35:27",
+                "description": "管理系统的资源、角色、机构、用户等信息",
+                "iconCls": "ext-icon-application_view_tile",
+                "id": "xtgl",
+                "name": "系统管理",
+                "seq": 0,
+                "syresourcetype": {
+                    "createdatetime": "2013-09-26 14:01:31",
+                    "description": "菜单类型会显示在系统首页左侧菜单中",
+                    "id": "0",
+                    "name": "菜单",
+                    "updatedatetime": "2013-09-26 14:01:31"
+                },
+                "target": "",
+                "updatedatetime": "2013-12-10 10:08:42",
+                "url": "/welcome.jsp"
+            },
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-12-05 11:35:27",
+            "url": "/securityJsp/base/Syuser.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "功能类型不会显示在系统首页左侧菜单中",
+            "id": "1",
+            "name": "功能",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "",
+        "updatedatetime": "2013-12-05 11:35:27",
+        "url": "/base/syuser!getById"
+    },
+    {
+        "createdatetime": "2013-11-11 15:00:16",
+        "description": "桌面演示demo",
+        "iconCls": "ext-icon-award_star_gold_1",
+        "id": "appDemo",
+        "name": "桌面Demo",
+        "pid": "demo",
+        "seq": 4,
+        "syresource": {
+            "createdatetime": "2013-10-19 14:15:08",
+            "description": "EasyUI还能做到更多，只有你想不到，没有做不到！",
+            "iconCls": "ext-icon-asterisk_orange",
+            "id": "demo",
+            "name": "其他示例",
+            "seq": 3,
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-10-19 14:15:08",
+            "url": "/welcome.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "菜单类型会显示在系统首页左侧菜单中",
+            "id": "0",
+            "name": "菜单",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "_blank",
+        "updatedatetime": "2013-11-14 15:25:22",
+        "url": "http://app.btboys.com"
+    },
+    {
+        "createdatetime": "2013-12-05 11:35:27",
+        "description": "查看资源",
+        "iconCls": "ext-icon-bullet_wrench",
+        "id": "zyck",
+        "name": "查看资源",
+        "pid": "zygl",
+        "seq": 4,
+        "syresource": {
+            "createdatetime": "2013-12-05 11:35:27",
+            "description": "管理系统的资源",
+            "iconCls": "ext-icon-newspaper_link",
+            "id": "zygl",
+            "name": "资源管理",
+            "pid": "xtgl",
+            "seq": 1,
+            "syresource": {
+                "createdatetime": "2013-12-05 11:35:27",
+                "description": "管理系统的资源、角色、机构、用户等信息",
+                "iconCls": "ext-icon-application_view_tile",
+                "id": "xtgl",
+                "name": "系统管理",
+                "seq": 0,
+                "syresourcetype": {
+                    "createdatetime": "2013-09-26 14:01:31",
+                    "description": "菜单类型会显示在系统首页左侧菜单中",
+                    "id": "0",
+                    "name": "菜单",
+                    "updatedatetime": "2013-09-26 14:01:31"
+                },
+                "target": "",
+                "updatedatetime": "2013-12-10 10:08:42",
+                "url": "/welcome.jsp"
+            },
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-12-09 14:40:38",
+            "url": "/securityJsp/base/Syresource.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "功能类型不会显示在系统首页左侧菜单中",
+            "id": "1",
+            "name": "功能",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "",
+        "updatedatetime": "2013-12-05 11:35:27",
+        "url": "/base/syresource!getById"
+    },
+    {
+        "createdatetime": "2013-10-19 14:15:08",
+        "description": "EasyUI官方Demo",
+        "iconCls": "ext-icon-medal_bronze_1",
+        "id": "easyuiDemo",
+        "name": "EasyUI官方Demo",
+        "pid": "demo",
+        "seq": 5,
+        "syresource": {
+            "createdatetime": "2013-10-19 14:15:08",
+            "description": "EasyUI还能做到更多，只有你想不到，没有做不到！",
+            "iconCls": "ext-icon-asterisk_orange",
+            "id": "demo",
+            "name": "其他示例",
+            "seq": 3,
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-10-19 14:15:08",
+            "url": "/welcome.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "菜单类型会显示在系统首页左侧菜单中",
+            "id": "0",
+            "name": "菜单",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "",
+        "updatedatetime": "2013-10-19 14:15:08",
+        "url": "http://jeasyui.com/demo/main/index.php"
+    },
+    {
+        "createdatetime": "2013-12-05 11:35:27",
+        "description": "角色授权",
+        "iconCls": "ext-icon-bullet_wrench",
+        "id": "jssq",
+        "name": "角色授权",
+        "pid": "jsgl",
+        "seq": 5,
+        "syresource": {
+            "createdatetime": "2013-12-05 11:35:27",
+            "description": "管理系统中用户的角色",
+            "iconCls": "ext-icon-tux",
+            "id": "jsgl",
+            "name": "角色管理",
+            "pid": "xtgl",
+            "seq": 2,
+            "syresource": {
+                "createdatetime": "2013-12-05 11:35:27",
+                "description": "管理系统的资源、角色、机构、用户等信息",
+                "iconCls": "ext-icon-application_view_tile",
+                "id": "xtgl",
+                "name": "系统管理",
+                "seq": 0,
+                "syresourcetype": {
+                    "createdatetime": "2013-09-26 14:01:31",
+                    "description": "菜单类型会显示在系统首页左侧菜单中",
+                    "id": "0",
+                    "name": "菜单",
+                    "updatedatetime": "2013-09-26 14:01:31"
+                },
+                "target": "",
+                "updatedatetime": "2013-12-10 10:08:42",
+                "url": "/welcome.jsp"
+            },
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-12-09 11:13:10",
+            "url": "/securityJsp/base/Syrole.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "功能类型不会显示在系统首页左侧菜单中",
+            "id": "1",
+            "name": "功能",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "",
+        "updatedatetime": "2013-12-05 11:35:27",
+        "url": "/base/syrole!grant"
+    },
+    {
+        "createdatetime": "2013-12-05 11:35:27",
+        "description": "编辑用户角色",
+        "iconCls": "ext-icon-bullet_wrench",
+        "id": "yhjs",
+        "name": "用户角色",
+        "pid": "yhgl",
+        "seq": 5,
+        "syresource": {
+            "createdatetime": "2013-12-05 11:35:27",
+            "description": "管理系统中用户的用户",
+            "iconCls": "ext-icon-user_suit",
+            "id": "yhgl",
+            "name": "用户管理",
+            "pid": "xtgl",
+            "seq": 4,
+            "syresource": {
+                "createdatetime": "2013-12-05 11:35:27",
+                "description": "管理系统的资源、角色、机构、用户等信息",
+                "iconCls": "ext-icon-application_view_tile",
+                "id": "xtgl",
+                "name": "系统管理",
+                "seq": 0,
+                "syresourcetype": {
+                    "createdatetime": "2013-09-26 14:01:31",
+                    "description": "菜单类型会显示在系统首页左侧菜单中",
+                    "id": "0",
+                    "name": "菜单",
+                    "updatedatetime": "2013-09-26 14:01:31"
+                },
+                "target": "",
+                "updatedatetime": "2013-12-10 10:08:42",
+                "url": "/welcome.jsp"
+            },
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-12-05 11:35:27",
+            "url": "/securityJsp/base/Syuser.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "功能类型不会显示在系统首页左侧菜单中",
+            "id": "1",
+            "name": "功能",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "",
+        "updatedatetime": "2013-12-05 11:35:27",
+        "url": "/base/syuser!grantRole"
+    },
+    {
+        "createdatetime": "2013-12-05 11:35:27",
+        "description": "机构授权",
+        "iconCls": "ext-icon-bullet_wrench",
+        "id": "jgsq",
+        "name": "机构授权",
+        "pid": "jggl",
+        "seq": 5,
+        "syresource": {
+            "createdatetime": "2013-12-05 11:35:27",
+            "description": "管理系统中用户的机构",
+            "iconCls": "ext-icon-group_link",
+            "id": "jggl",
+            "name": "机构管理",
+            "pid": "xtgl",
+            "seq": 3,
+            "syresource": {
+                "createdatetime": "2013-12-05 11:35:27",
+                "description": "管理系统的资源、角色、机构、用户等信息",
+                "iconCls": "ext-icon-application_view_tile",
+                "id": "xtgl",
+                "name": "系统管理",
+                "seq": 0,
+                "syresourcetype": {
+                    "createdatetime": "2013-09-26 14:01:31",
+                    "description": "菜单类型会显示在系统首页左侧菜单中",
+                    "id": "0",
+                    "name": "菜单",
+                    "updatedatetime": "2013-09-26 14:01:31"
+                },
+                "target": "",
+                "updatedatetime": "2013-12-10 10:08:42",
+                "url": "/welcome.jsp"
+            },
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-12-05 11:35:27",
+            "url": "/securityJsp/base/Syorganization.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "功能类型不会显示在系统首页左侧菜单中",
+            "id": "1",
+            "name": "功能",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "",
+        "updatedatetime": "2013-12-05 11:35:27",
+        "url": "/base/syorganization!grant"
+    },
+    {
+        "createdatetime": "2013-10-19 14:15:08",
+        "description": "EasyUI官方API",
+        "iconCls": "ext-icon-medal_bronze_2",
+        "id": "easyuiAPI",
+        "name": "EasyUI官方API",
+        "pid": "demo",
+        "seq": 6,
+        "syresource": {
+            "createdatetime": "2013-10-19 14:15:08",
+            "description": "EasyUI还能做到更多，只有你想不到，没有做不到！",
+            "iconCls": "ext-icon-asterisk_orange",
+            "id": "demo",
+            "name": "其他示例",
+            "seq": 3,
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-10-19 14:15:08",
+            "url": "/welcome.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "菜单类型会显示在系统首页左侧菜单中",
+            "id": "0",
+            "name": "菜单",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "",
+        "updatedatetime": "2013-10-19 14:15:08",
+        "url": "http://jeasyui.com/documentation/index.php"
+    },
+    {
+        "createdatetime": "2013-12-05 11:35:27",
+        "description": "编辑用户机构",
+        "iconCls": "ext-icon-bullet_wrench",
+        "id": "yhjg",
+        "name": "用户机构",
+        "pid": "yhgl",
+        "seq": 6,
+        "syresource": {
+            "createdatetime": "2013-12-05 11:35:27",
+            "description": "管理系统中用户的用户",
+            "iconCls": "ext-icon-user_suit",
+            "id": "yhgl",
+            "name": "用户管理",
+            "pid": "xtgl",
+            "seq": 4,
+            "syresource": {
+                "createdatetime": "2013-12-05 11:35:27",
+                "description": "管理系统的资源、角色、机构、用户等信息",
+                "iconCls": "ext-icon-application_view_tile",
+                "id": "xtgl",
+                "name": "系统管理",
+                "seq": 0,
+                "syresourcetype": {
+                    "createdatetime": "2013-09-26 14:01:31",
+                    "description": "菜单类型会显示在系统首页左侧菜单中",
+                    "id": "0",
+                    "name": "菜单",
+                    "updatedatetime": "2013-09-26 14:01:31"
+                },
+                "target": "",
+                "updatedatetime": "2013-12-10 10:08:42",
+                "url": "/welcome.jsp"
+            },
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-12-05 11:35:27",
+            "url": "/securityJsp/base/Syuser.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "功能类型不会显示在系统首页左侧菜单中",
+            "id": "1",
+            "name": "功能",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "",
+        "updatedatetime": "2013-12-05 11:35:27",
+        "url": "/base/syuser!grantOrganization"
+    },
+    {
+        "createdatetime": "2013-10-19 14:15:08",
+        "description": "EasyUI辅导",
+        "iconCls": "ext-icon-medal_bronze_3",
+        "id": "easyuiTutorial",
+        "name": "EasyUI进阶DEMO",
+        "pid": "demo",
+        "seq": 7,
+        "syresource": {
+            "createdatetime": "2013-10-19 14:15:08",
+            "description": "EasyUI还能做到更多，只有你想不到，没有做不到！",
+            "iconCls": "ext-icon-asterisk_orange",
+            "id": "demo",
+            "name": "其他示例",
+            "seq": 3,
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-10-19 14:15:08",
+            "url": "/welcome.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "菜单类型会显示在系统首页左侧菜单中",
+            "id": "0",
+            "name": "菜单",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "",
+        "updatedatetime": "2013-10-19 14:15:08",
+        "url": "http://jeasyui.com/tutorial/index.php"
+    },
+    {
+        "createdatetime": "2013-10-19 14:15:08",
+        "description": "EasyUI官方下载",
+        "iconCls": "ext-icon-medal_gold_1",
+        "id": "easyuiDownload",
+        "name": "EasyUI官方下载",
+        "pid": "demo",
+        "seq": 8,
+        "syresource": {
+            "createdatetime": "2013-10-19 14:15:08",
+            "description": "EasyUI还能做到更多，只有你想不到，没有做不到！",
+            "iconCls": "ext-icon-asterisk_orange",
+            "id": "demo",
+            "name": "其他示例",
+            "seq": 3,
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-10-19 14:15:08",
+            "url": "/welcome.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "菜单类型会显示在系统首页左侧菜单中",
+            "id": "0",
+            "name": "菜单",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "",
+        "updatedatetime": "2013-10-19 14:15:08",
+        "url": "http://jeasyui.com/download/index.php"
+    },
+    {
+        "createdatetime": "2013-10-19 14:15:08",
+        "description": "EasyUI其他扩展",
+        "iconCls": "ext-icon-medal_gold_2",
+        "id": "easyuiExtension",
+        "name": "EasyUI其他扩展",
+        "pid": "demo",
+        "seq": 9,
+        "syresource": {
+            "createdatetime": "2013-10-19 14:15:08",
+            "description": "EasyUI还能做到更多，只有你想不到，没有做不到！",
+            "iconCls": "ext-icon-asterisk_orange",
+            "id": "demo",
+            "name": "其他示例",
+            "seq": 3,
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-10-19 14:15:08",
+            "url": "/welcome.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "菜单类型会显示在系统首页左侧菜单中",
+            "id": "0",
+            "name": "菜单",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "",
+        "updatedatetime": "2013-10-19 14:15:08",
+        "url": "http://jeasyui.com/extension/index.php"
+    },
+    {
+        "createdatetime": "2013-11-19 15:55:36",
+        "description": "EasyUI官方论坛",
+        "iconCls": "ext-icon-medal_gold_3",
+        "id": "easyuiForum",
+        "name": "EasyUI官方论坛",
+        "pid": "demo",
+        "seq": 10,
+        "syresource": {
+            "createdatetime": "2013-10-19 14:15:08",
+            "description": "EasyUI还能做到更多，只有你想不到，没有做不到！",
+            "iconCls": "ext-icon-asterisk_orange",
+            "id": "demo",
+            "name": "其他示例",
+            "seq": 3,
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-10-19 14:15:08",
+            "url": "/welcome.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "菜单类型会显示在系统首页左侧菜单中",
+            "id": "0",
+            "name": "菜单",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "target": "",
+        "updatedatetime": "2013-11-19 15:55:36",
+        "url": "http://www.jeasyui.com/forum/index.php"
+    },
+    {
+        "createdatetime": "2013-12-12 19:44:44",
+        "iconCls": "ext-icon-book_go",
+        "id": "784d1166-7c24-4dd9-9a3a-5c52068eb289",
+        "name": "aa",
+        "pid": "jsgl",
+        "seq": 100,
+        "syresource": {
+            "createdatetime": "2013-12-05 11:35:27",
+            "description": "管理系统中用户的角色",
+            "iconCls": "ext-icon-tux",
+            "id": "jsgl",
+            "name": "角色管理",
+            "pid": "xtgl",
+            "seq": 2,
+            "syresource": {
+                "createdatetime": "2013-12-05 11:35:27",
+                "description": "管理系统的资源、角色、机构、用户等信息",
+                "iconCls": "ext-icon-application_view_tile",
+                "id": "xtgl",
+                "name": "系统管理",
+                "seq": 0,
+                "syresourcetype": {
+                    "createdatetime": "2013-09-26 14:01:31",
+                    "description": "菜单类型会显示在系统首页左侧菜单中",
+                    "id": "0",
+                    "name": "菜单",
+                    "updatedatetime": "2013-09-26 14:01:31"
+                },
+                "target": "",
+                "updatedatetime": "2013-12-10 10:08:42",
+                "url": "/welcome.jsp"
+            },
+            "syresourcetype": {
+                "createdatetime": "2013-09-26 14:01:31",
+                "description": "菜单类型会显示在系统首页左侧菜单中",
+                "id": "0",
+                "name": "菜单",
+                "updatedatetime": "2013-09-26 14:01:31"
+            },
+            "target": "",
+            "updatedatetime": "2013-12-09 11:13:10",
+            "url": "/securityJsp/base/Syrole.jsp"
+        },
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "菜单类型会显示在系统首页左侧菜单中",
+            "id": "0",
+            "name": "菜单",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "updatedatetime": "2013-12-12 19:44:44",
+        "url": "aa"
+    },
+    {
+        "createdatetime": "2013-12-08 13:08:36",
+        "iconCls": "ext-icon-anchor",
+        "id": "ba691f17-7a59-4a94-93bf-5711cf0eed6c",
+        "name": "root",
+        "seq": 100,
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "菜单类型会显示在系统首页左侧菜单中",
+            "id": "0",
+            "name": "菜单",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "updatedatetime": "2013-12-08 13:08:36"
+    },
+    {
+        "createdatetime": "2013-12-08 19:58:37",
+        "iconCls": "ext-icon-box",
+        "id": "b5b9f150-16f7-4e4e-bb60-1d74036822d9",
+        "name": "oo",
+        "seq": 100,
+        "syresourcetype": {
+            "createdatetime": "2013-09-26 14:01:31",
+            "description": "菜单类型会显示在系统首页左侧菜单中",
+            "id": "0",
+            "name": "菜单",
+            "updatedatetime": "2013-09-26 14:01:31"
+        },
+        "updatedatetime": "2013-12-08 19:58:37",
+        "url": "/"
+    }
+]
