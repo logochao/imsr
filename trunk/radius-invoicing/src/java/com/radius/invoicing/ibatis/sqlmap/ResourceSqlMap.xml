@@ -32,5 +32,8 @@
   	<parameter property="remark"/> 
   </parameterMap>
   
+  <insert id="insertResource" parameterClass="resource">
+  	INSERT INTO tb_resource (r_id,r_name,r_label_name,r_parent_id,r_url,r_level,r_isleaf)VALUES(#id#,#name#,#labelName#,#pId#,#url#,#level#,#isleaf#)
+  </insert>
   
 </sqlMap>
