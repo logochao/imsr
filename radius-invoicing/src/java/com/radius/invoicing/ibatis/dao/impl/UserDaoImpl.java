@@ -6,6 +6,7 @@ package com.radius.invoicing.ibatis.dao.impl;
 import org.springframework.stereotype.Repository;
 
 import com.radius.base.dao.ibatis.BaseIbatisDaoImpl;
+import com.radius.invoicing.ibatis.model.User;
 
 /**
  * @author <a href="mailto:goodluck.sunlight@gmail.com">³Â²¨Äþ</a>
@@ -14,6 +15,6 @@ import com.radius.base.dao.ibatis.BaseIbatisDaoImpl;
  * ÀàËµÃ÷
  */
 @Repository
-public class UserDaoImpl extends BaseIbatisDaoImpl {
+public class UserDaoImpl extends BaseIbatisDaoImpl<User> {
 
 }
