@@ -20,7 +20,7 @@ create table tb_user
    u_create_time        datetime                       null,
    u_remark             varbinary(200)                 null,
    constraint PK_TB_USER primary key clustered (u_id)
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 drop table tb_resource
@@ -40,4 +40,4 @@ create table tb_resource
    r_isleaf             bit                            null,
    r_remark             varchar(200)                   null,
    constraint PK_TB_RESOURCE primary key clustered (r_id)
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
