@@ -8,9 +8,9 @@ import com.ibatis.sqlmap.client.extensions.ResultGetter;
 import com.ibatis.sqlmap.client.extensions.TypeHandlerCallback;
 
 /**
- * @author ³Â²¨Äş E-mail:goodluck.sunlight@gmail.com
- * @version ´´½¨Ê±¼ä£º2013-12-8 ÉÏÎç11:56:15
- * ÀàËµÃ÷
+ * @author é™ˆæ³¢å® E-mail:goodluck.sunlight@gmail.com
+ * @version åˆ›å»ºæ—¶é—´ï¼š2013-12-8 ä¸Šåˆ11:56:15
+ * ç±»è¯´æ˜
  */
 public class ResourceTypeEnumHandler implements TypeHandlerCallback {
 
@@ -25,10 +25,10 @@ public class ResourceTypeEnumHandler implements TypeHandlerCallback {
 
 	public void setParameter(ParameterSetter setter, Object obj)throws SQLException {
 		/* 
-         * ÔÚsqlMapÖĞÅäparameterMapµÄÊôĞÔtypeHandlerºÍsqlMapConfigÖĞÅäÈ«¾ÖtypeHandlerÊ±²Å»á´¥·¢ 
+         * åœ¨sqlMapä¸­é…parameterMapçš„å±æ€§typeHandlerå’ŒsqlMapConfigä¸­é…å…¨å±€typeHandleræ—¶æ‰ä¼šè§¦å‘ 
          */
 		if(null==obj){
-			setter.setNull(Types.INTEGER);//ÈôÃ»ÓĞ´«ÖµÔònull,±í×Ö¶Î²»ÔÊĞíÔòÒì³£
+			setter.setNull(Types.INTEGER);//è‹¥æ²¡æœ‰ä¼ å€¼åˆ™null,è¡¨å­—æ®µä¸å…è®¸åˆ™å¼‚å¸¸
 			return ;
 		}
 		setter.setInt(((ResourceTypeEnum)obj).getTypeId());
@@ -36,7 +36,7 @@ public class ResourceTypeEnumHandler implements TypeHandlerCallback {
 	}
 
 	/**
-	 * »ñÈ¡Ã¶¾Ù¶ÔÏó
+	 * è·å–æšä¸¾å¯¹è±¡
 	 */
 	public Object valueOf(String string) {
 		Object result=null;

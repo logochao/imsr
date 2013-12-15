@@ -11,19 +11,24 @@ import com.radius.base.dao.ibatis.BaseIbatisDaoImpl;
 import com.radius.invoicing.ibatis.dao.ResourceDao;
 import com.radius.invoicing.ibatis.model.Resource;
 
+
 /**
- * @author <a href="mailto:goodluck.sunlight@gmail.com">³Â²¨Äş</a>
- * @version ´´½¨Ê±¼ä£º2013-12-8 ÏÂÎç12:53:04<br/>
- * Copyright (c) 2013 by ³Â²¨Äş.<br/>
- * ÀàËµÃ÷
+ * @author <a href="mailto:goodluck.sunlight@gmail.com">é™ˆæ³¢å®</a>
+ * @version åˆ›å»ºæ—¶é—´ï¼š2013-12-8 ä¸‹åˆ12:53:04<br/>
+ * Copyright (c) 2013 by é™ˆæ³¢å®.<br/>
+ * ç±»è¯´æ˜
  */
 @Repository
 public class ResourceDaoImpl extends BaseIbatisDaoImpl<Resource> implements ResourceDao {
 	/**
-	 * ÅúÁ¿µ¼Èë×ÊÔ´ĞÅÏ¢
+	 * æ‰¹é‡å¯¼å…¥èµ„æºä¿¡æ¯
 	 * @param list
 	 */
 	public void batchInsertResourceList(List<Resource> list){
 		 super.batchInsertListObject(list, "resourceSqlMap.insertResource");
+	}
+	
+	public List<Resource> getResourceListAll(){
+		return this.getSqlMapClientTemplate().queryForList("resourceSqlMap.getResourceListAll");
 	}
 }

@@ -3,9 +3,9 @@
  */
 package com.radius.base.utils;
 /**
- * @author ³Â²¨Äş E-mail:goodluck.sunlight@gmail.com
- * @version ´´½¨Ê±¼ä£º2013-12-7 ÏÂÎç10:59:13
- * ÀàËµÃ÷ ÏµÍ³ÖĞÊ¹ÓÃµ½µÄÒ»Ğ©³£Á¿
+ * @author é™ˆæ³¢å® E-mail:goodluck.sunlight@gmail.com
+ * @version åˆ›å»ºæ—¶é—´ï¼š2013-12-7 ä¸‹åˆ10:59:13
+ * ç±»è¯´æ˜ ç³»ç»Ÿä¸­ä½¿ç”¨åˆ°çš„ä¸€äº›å¸¸é‡
  */
 /**
  * @author boning.cheng
@@ -14,20 +14,20 @@ package com.radius.base.utils;
 public interface Constants {
 
 	/**
-	 * ÓÃ»§±àºÅµÄ¿ªÊ¼×ÖÄ¸
+	 * ç”¨æˆ·ç¼–å·çš„å¼€å§‹å­—æ¯
 	 */
 	public String USER_PREFIX="U";
 	/**
-	 * ÒÔ²É¹º¿ªÊ¼µÄÒ»Ğ©ĞÅÏ¢ Èç²É¹º¶©µ¥ CG-D
+	 * ä»¥é‡‡è´­å¼€å§‹çš„ä¸€äº›ä¿¡æ¯ å¦‚é‡‡è´­è®¢å• CG-D
 	 */
-	public String STOCK_PREFIX="CG";//²É¹º
+	public String STOCK_PREFIX="CG";//é‡‡è´­
 	/**
-	 * ¹©Ó¦ÉÌ±àºÅµÄ¿ªÊ¼×ÖÄ¸
+	 * ä¾›åº”å•†ç¼–å·çš„å¼€å§‹å­—æ¯
 	 */
-	public String SUPPLIER_PREFIX="G";//¹©ÔËÉÌ
+	public String SUPPLIER_PREFIX="G";//ä¾›è¿å•†
 	/**
-	 * Ê±¼ä¸ñÊ½yyyyMMdd
+	 * æ—¶é—´æ ¼å¼yyyyMMdd
 	 */
-	public String DATEFORMAT_YEAR_MONTH_DAY="yyyyMMdd";//yyyyMMddµÄÊ±¼ä¸ñÊ½
+	public String DATEFORMAT_YEAR_MONTH_DAY="yyyyMMdd";//yyyyMMddçš„æ—¶é—´æ ¼å¼
 	
 }

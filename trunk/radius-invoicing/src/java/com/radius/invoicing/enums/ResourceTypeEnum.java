@@ -3,13 +3,13 @@
  */
 package com.radius.invoicing.enums;
 /**
- * @author ³Â²¨Äş E-mail:goodluck.sunlight@gmail.com
- * @version ´´½¨Ê±¼ä£º2013-12-8 ÉÏÎç11:49:11
- * ÀàËµÃ÷ ×ÊÔ´ÀàĞÍÃ¶¾Ù
+ * @author é™ˆæ³¢å® E-mail:goodluck.sunlight@gmail.com
+ * @version åˆ›å»ºæ—¶é—´ï¼š2013-12-8 ä¸Šåˆ11:49:11
+ * ç±»è¯´æ˜ èµ„æºç±»å‹æšä¸¾
  */
 public enum ResourceTypeEnum {
 
-	MENU(1,"²Ëµ¥"),FUNCTION(2,"¹¦ÄÜ");
+	MENU(1,"èœå•"),FUNCTION(2,"åŠŸèƒ½");
 	
 	
 	ResourceTypeEnum(int typeId,String typeName) {

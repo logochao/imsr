@@ -17,18 +17,18 @@ import com.radius.base.page.Pager;
 public class BaseIbatisDaoImpl<E extends BaseEntity> extends SqlMapClientDaoSupport implements BaseIbatisDao<E>{
 
 	/**
-	 * ÈçÓĞÌØÊâµÄĞèÇóÈç¶Ô¶àÊı¾İ¿â½øĞĞ²Ù×÷ ÔòÃ¿Ò»¸öÊı¾İ¿â¶¼¶¨ÒåÒ»¸ödaoÀà  ²¢¶¼Ìí¼ÓÕâ¸ö·½·¨ ÔÚ·½·¨ÉÏÃæ
-	 * <code>@Resouce("sqlMapclient")¾ßÌåµÄ¾ßÌåÉèÖÃ</code>
+	 * å¦‚æœ‰ç‰¹æ®Šçš„éœ€æ±‚å¦‚å¯¹å¤šæ•°æ®åº“è¿›è¡Œæ“ä½œ åˆ™æ¯ä¸€ä¸ªæ•°æ®åº“éƒ½å®šä¹‰ä¸€ä¸ªdaoç±»  å¹¶éƒ½æ·»åŠ è¿™ä¸ªæ–¹æ³• åœ¨æ–¹æ³•ä¸Šé¢
+	 * <code>@Resouce("sqlMapclient")å…·ä½“çš„å…·ä½“è®¾ç½®</code>
 	 * @param sqlMapClient
 	 */
 	public void setSqlMapClientBase(SqlMapClient sqlMapClient) {
 		super.setSqlMapClient(sqlMapClient);
 	}
 	/**
-	 * Í¨¹ıÌõ¼ş²éÑ¯»ñÈ¡Êı¾İÒÑmapµÄĞÎÊ½·µ»Ø mapÖĞµÄ¼üÖµcolumNameÕâ¸ö¶ÔÓ¦µÄÄÚÈİÎªÕı
+	 * é€šè¿‡æ¡ä»¶æŸ¥è¯¢è·å–æ•°æ®å·²mapçš„å½¢å¼è¿”å› mapä¸­çš„é”®å€¼columNameè¿™ä¸ªå¯¹åº”çš„å†…å®¹ä¸ºæ­£
 	 * @param params
 	 * @param statement
-	 * @param columName ²éÑ¯Óï¾äÖĞ³öÏÖµÄÖ÷¼ü»òÊÇÄÜ±êÖ¾Î¨Ò»ĞĞµÄÒ»¸öÄÚÈİ
+	 * @param columName æŸ¥è¯¢è¯­å¥ä¸­å‡ºç°çš„ä¸»é”®æˆ–æ˜¯èƒ½æ ‡å¿—å”¯ä¸€è¡Œçš„ä¸€ä¸ªå†…å®¹
 	 * @return
 	 */
 	public Map getSelectObjectMap(Map params,String statement,String columName){
@@ -36,7 +36,7 @@ public class BaseIbatisDaoImpl<E extends BaseEntity> extends SqlMapClientDaoSupp
 	}
 	
 	/**
-	 * Í¨¹ıÊµÌå¶ÔÏó½øĞĞ·ÖÒ³²éÑ¯
+	 * é€šè¿‡å®ä½“å¯¹è±¡è¿›è¡Œåˆ†é¡µæŸ¥è¯¢
 	 * @param e
 	 * @param countKey
 	 * @param selectKey
@@ -44,15 +44,15 @@ public class BaseIbatisDaoImpl<E extends BaseEntity> extends SqlMapClientDaoSupp
 	 */
 	public Pager<E> getPagerListObject(E e,String countKey,String selectKey){
 		
-		//1.»ñÈ¡Õû¸öµÄ²éÑ¯×ÜÊı
+		//1.è·å–æ•´ä¸ªçš„æŸ¥è¯¢æ€»æ•°
 		Integer rowCount= getCountByCondition(e, countKey);
-		//2.»ñ=È¡²éÑ¯µÄÊı¾İ
+		//2.è·=å–æŸ¥è¯¢çš„æ•°æ®
 		List<E> list=getListObject(e, selectKey);
 		Pager<E> page=new Pager<E>(e.getPageNo(), rowCount, list);
 		return page;
 	}
 	/**
-	 * Í¨¹ıMap¶ÔÏó½øĞĞ·ÖÒ³²éÑ¯
+	 * é€šè¿‡Mapå¯¹è±¡è¿›è¡Œåˆ†é¡µæŸ¥è¯¢
 	 * @param map
 	 * @param countKey
 	 * @param selectKey
@@ -61,26 +61,26 @@ public class BaseIbatisDaoImpl<E extends BaseEntity> extends SqlMapClientDaoSupp
 	@SuppressWarnings("unchecked")
 	public Pager getPagerListObject(Map map,String countKey,String selectKey,int pageNo){
 		
-		//1.»ñÈ¡Õû¸öµÄ²éÑ¯×ÜÊı
+		//1.è·å–æ•´ä¸ªçš„æŸ¥è¯¢æ€»æ•°
 		Integer rowCount= getCountByCondition(map, countKey);
-		//2.»ñ=È¡²éÑ¯µÄÊı¾İ
+		//2.è·=å–æŸ¥è¯¢çš„æ•°æ®
 		List list=getListObject(map, selectKey);
 		Pager page=new Pager(pageNo, rowCount, list);
 		return page;
 	}
 	/**
-	 * Í¨¹ımap¶ÔÏóÌí¼Ó²éÑ¯Ìõ¼ş 
+	 * é€šè¿‡mapå¯¹è±¡æ·»åŠ æŸ¥è¯¢æ¡ä»¶ 
 	 * @param map
-	 * @param statementName ¶ÔÓ¦namespace.idÀ´ÅĞ¶ÏÎªÒ»¸ökeyÖµ
+	 * @param statementName å¯¹åº”namespace.idæ¥åˆ¤æ–­ä¸ºä¸€ä¸ªkeyå€¼
 	 * @return
 	 */
 	public List getListObject(Map map,String statementName){
 		return this.getSqlMapClientTemplate().queryForList(statementName, map);
 	}
 	/**
-	 * Í¨¹ıMapÌõ¼ş²éÑ¯·ûºÏÒªÇóµÄ¼ÇÂ¼¸öÊı
+	 * é€šè¿‡Mapæ¡ä»¶æŸ¥è¯¢ç¬¦åˆè¦æ±‚çš„è®°å½•ä¸ªæ•°
 	 * @param map
-	 * @param statementName ¶ÔÓ¦namespace.idÀ´ÅĞ¶ÏÎªÒ»¸ökeyÖµ
+	 * @param statementName å¯¹åº”namespace.idæ¥åˆ¤æ–­ä¸ºä¸€ä¸ªkeyå€¼
 	 * @return
 	 */
 	public Integer getCountByCondition(Map map,String statementName){
@@ -88,7 +88,7 @@ public class BaseIbatisDaoImpl<E extends BaseEntity> extends SqlMapClientDaoSupp
 	}
 	
 	/**
-	 * Í¨¹ıÊµÌå¶ÔÏó²éÑ¯·ûºÏÒªÇóµÄ¼ÇÂ¼ÁĞ±í
+	 * é€šè¿‡å®ä½“å¯¹è±¡æŸ¥è¯¢ç¬¦åˆè¦æ±‚çš„è®°å½•åˆ—è¡¨
 	 * @param e
 	 * @param statementName
 	 * @return
@@ -98,24 +98,24 @@ public class BaseIbatisDaoImpl<E extends BaseEntity> extends SqlMapClientDaoSupp
 		return this.getSqlMapClientTemplate().queryForList(statementName, e);
 	}
 	/**
-	 * Í¨¹ıÊµÌå¶ÔÏó²éÑ¯·ûºÏÒªÇóµÄ¼ÇÂ¼¸öÊı
+	 * é€šè¿‡å®ä½“å¯¹è±¡æŸ¥è¯¢ç¬¦åˆè¦æ±‚çš„è®°å½•ä¸ªæ•°
 	 * @param e
-	 * @param statementName ¶ÔÓ¦namespace.idÀ´ÅĞ¶ÏÎªÒ»¸ökeyÖµ
+	 * @param statementName å¯¹åº”namespace.idæ¥åˆ¤æ–­ä¸ºä¸€ä¸ªkeyå€¼
 	 * @return
 	 */
 	public Integer getCountByCondition(E e,String statementName){
 		return (Integer)this.getSqlMapClientTemplate().queryForObject(statementName,e);
 	}
 	/**
-	 * ±£´æ¶ÔÏó
+	 * ä¿å­˜å¯¹è±¡
 	 * @param e
-	 * @param statementName ¶ÔÓ¦namespace.idÀ´ÅĞ¶ÏÎªÒ»¸ökeyÖµ
+	 * @param statementName å¯¹åº”namespace.idæ¥åˆ¤æ–­ä¸ºä¸€ä¸ªkeyå€¼
 	 */
 	public void insertObject(E e,String statementName){
 		this.getSqlMapClientTemplate().insert(statementName, e);
 	}
 	/**
-	 * Í¨¹ıÅú´¦Àí½øĞĞ±£´æ¶ÔÏó
+	 * é€šè¿‡æ‰¹å¤„ç†è¿›è¡Œä¿å­˜å¯¹è±¡
 	 * @param list
 	 * @param statementName
 	 */
@@ -139,7 +139,7 @@ public class BaseIbatisDaoImpl<E extends BaseEntity> extends SqlMapClientDaoSupp
 	}
 	
 	/**
-	 * ¸üĞÂĞÅÏ¢
+	 * æ›´æ–°ä¿¡æ¯
 	 * @param e
 	 * @param statementName
 	 * @return 
@@ -148,7 +148,7 @@ public class BaseIbatisDaoImpl<E extends BaseEntity> extends SqlMapClientDaoSupp
 		return this.getSqlMapClientTemplate().update(statementName, e);
 	}
 	/**
-	 * ÅúÁ¿¸üĞÂĞÅÏ¢
+	 * æ‰¹é‡æ›´æ–°ä¿¡æ¯
 	 * @param list
 	 * @param statementName
 	 */
@@ -171,7 +171,7 @@ public class BaseIbatisDaoImpl<E extends BaseEntity> extends SqlMapClientDaoSupp
 		});
 	}
 	/**
-	 * É¾³ı¶ÔÏó
+	 * åˆ é™¤å¯¹è±¡
 	 * @param e
 	 * @param statementName
 	 * @return
@@ -180,7 +180,7 @@ public class BaseIbatisDaoImpl<E extends BaseEntity> extends SqlMapClientDaoSupp
 		return this.getSqlMapClientTemplate().delete(statementName, e);
 	}
 	/**
-	 * Í¨¹ıÅú´¦ÀíÉ¾³ı¶ÔÏó
+	 * é€šè¿‡æ‰¹å¤„ç†åˆ é™¤å¯¹è±¡
 	 * @param list
 	 * @param statementName
 	 */

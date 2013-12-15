@@ -12,9 +12,9 @@ import java.util.concurrent.locks.ReentrantLock;
 import org.apache.log4j.Logger;
 
 /**
- * @author ³Â²¨Äş E-mail:goodluck.sunlight@gmail.com
- * @version ´´½¨Ê±¼ä£º2013-12-7 ÏÂÎç11:16:35
- * ÀàËµÃ÷ ÏµÍ³Ö÷¼üµÄÉú³É¹¤¾ß
+ * @author é™ˆæ³¢å® E-mail:goodluck.sunlight@gmail.com
+ * @version åˆ›å»ºæ—¶é—´ï¼š2013-12-7 ä¸‹åˆ11:16:35
+ * ç±»è¯´æ˜ ç³»ç»Ÿä¸»é”®çš„ç”Ÿæˆå·¥å…·
  */
 public class SystemPrimaryKeyUtils  implements Constants{
 	private static Logger log=Logger.getLogger(SystemPrimaryKeyUtils.class);
@@ -23,8 +23,8 @@ public class SystemPrimaryKeyUtils  implements Constants{
 	private static int orderSerialNum=0;
 	
 	/**
-	 * Éú³É²É¹º¶©µ¥ºÅ
-	 * <p>²É¹º¶©µ¥ºÅµÄÉú³É¹æÔòCG-Dyyyymmdd(ab)</p>
+	 * ç”Ÿæˆé‡‡è´­è®¢å•å·
+	 * <p>é‡‡è´­è®¢å•å·çš„ç”Ÿæˆè§„åˆ™CG-Dyyyymmdd(ab)</p>
 	 * @return
 	 */
 	public static String getStockOrderUId(){
@@ -32,7 +32,7 @@ public class SystemPrimaryKeyUtils  implements Constants{
 		sb.append(STOCK_PREFIX).append("-");
 		sb.append("D");
 		
-		String time=DateConvertUtils.format(new Date(), DATEFORMAT_YEAR_MONTH_DAY);//Ê±¼ä¸ñÊ½
+		String time=DateConvertUtils.format(new Date(), DATEFORMAT_YEAR_MONTH_DAY);//æ—¶é—´æ ¼å¼
 		sb.append(time);
 		try{
 			orderIdLock.lock();
@@ -44,7 +44,7 @@ public class SystemPrimaryKeyUtils  implements Constants{
 			}
 		}catch(Exception e){
 			e.printStackTrace();
-			log.error("Éú³É²É¹º¶©µ¥ºÅ·¢ÉúÒì³£.....");
+			log.error("ç”Ÿæˆé‡‡è´­è®¢å•å·å‘ç”Ÿå¼‚å¸¸.....");
 		}finally{
 			orderIdLock.unlock();
 		}
@@ -63,10 +63,10 @@ public class SystemPrimaryKeyUtils  implements Constants{
 		@Override
 		public void run() {
 			Calendar c= Calendar.getInstance();
-			log.info("ÏµÍ³µ±Ç°Ê±¼ä:"+c.getTime());
-			if(c.get(Calendar.HOUR_OF_DAY)==0){//µ±ÍíÉÏÊ±¼ä12µãÊ±,ÏµÍ³Ö÷¼üµÄ×ÔÔöÏµÁĞ¹éÁã
+			log.info("ç³»ç»Ÿå½“å‰æ—¶é—´:"+c.getTime());
+			if(c.get(Calendar.HOUR_OF_DAY)==0){//å½“æ™šä¸Šæ—¶é—´12ç‚¹æ—¶,ç³»ç»Ÿä¸»é”®çš„è‡ªå¢ç³»åˆ—å½’é›¶
 				SystemPrimaryKeyUtils.orderSerialNum=0;
-				log.info("ÒÑ¾­½«ÏµÍ³µÄ×ÔÔöÏµÁĞ¹éÁã");
+				log.info("å·²ç»å°†ç³»ç»Ÿçš„è‡ªå¢ç³»åˆ—å½’é›¶");
 				return ;
 			}
 			

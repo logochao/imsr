@@ -9,10 +9,10 @@ import com.radius.base.dao.ibatis.BaseIbatisDaoImpl;
 import com.radius.invoicing.ibatis.model.User;
 
 /**
- * @author <a href="mailto:goodluck.sunlight@gmail.com">³Â²¨Äş</a>
- * @version ´´½¨Ê±¼ä£º2013-12-8 ÏÂÎç12:53:04<br/>
- * Copyright (c) 2013 by ³Â²¨Äş.<br/>
- * ÀàËµÃ÷
+ * @author <a href="mailto:goodluck.sunlight@gmail.com">é™ˆæ³¢å®</a>
+ * @version åˆ›å»ºæ—¶é—´ï¼š2013-12-8 ä¸‹åˆ12:53:04<br/>
+ * Copyright (c) 2013 by é™ˆæ³¢å®.<br/>
+ * ç±»è¯´æ˜
  */
 @Repository
 public class UserDaoImpl extends BaseIbatisDaoImpl<User> {

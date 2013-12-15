@@ -12,13 +12,12 @@ import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 /**
- * @author <a href="mailto:goodluck.sunlight@gmail.com">³Â²¨Äş</a>
- * @version ´´½¨Ê±¼ä£º2013-12-8 ÏÂÎç12:53:04<br/>
- * Copyright (c) 2013 by ³Â²¨Äş.<br/>
- * ÀàËµÃ÷ ÏµÍ³²Ëµ¥¹ÜÀí
+ * @author <a href="mailto:goodluck.sunlight@gmail.com">é™ˆæ³¢å®</a>
+ * @version åˆ›å»ºæ—¶é—´ï¼š2013-12-8 ä¸‹åˆ12:53:04<br/>
+ * Copyright (c) 2013 by é™ˆæ³¢å®.<br/>
+ * ç±»è¯´æ˜ ç³»ç»Ÿèœå•ç®¡ç†
  */
 @Controller
 @Scope("request")
@@ -30,18 +29,18 @@ public class ResourceController {
 	private String resource_add_view=null;
 	
 	/**
-	 * µ÷Õûµ½×ÊÔ´¹ÜÀí½çÃæ
+	 * è°ƒæ•´åˆ°èµ„æºç®¡ç†ç•Œé¢
 	 * @param request
 	 * @param response
 	 * @return
 	 */
-	@RequestMapping("/resource/system/resouce_view.html")
+	@RequestMapping(value={"/resource/system/resouce_view.html"})
 	public String getResouceView(HttpServletRequest request,HttpServletResponse response)throws Exception{
 		return resouce_manage_view;
 	}
 	
 	/**
-	 * Ìø×ªµ½Ìí¼Ó×ÊÔ´ÎÄ¼ş½çÃæ
+	 * è·³è½¬åˆ°æ·»åŠ èµ„æºæ–‡ä»¶ç•Œé¢
 	 * @param request
 	 * @param response
 	 * @return
