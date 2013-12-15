@@ -9,14 +9,13 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.radius.invoicing.enums.ResourceTypeEnum;
 import com.radius.invoicing.ibatis.model.Resource;
 
 /**
- * @author <a href="mailto:goodluck.sunlight@gmail.com">³Â²¨Äş</a>
- * @version ´´½¨Ê±¼ä£º2013-12-8 ÏÂÎç12:53:04<br/>
- * Copyright (c) 2013 by ³Â²¨Äş.<br/>
- * ÀàËµÃ÷
+ * @author <a href="mailto:goodluck.sunlight@gmail.com">é™ˆæ³¢å®</a>
+ * @version åˆ›å»ºæ—¶é—´ï¼š2013-12-8 ä¸‹åˆ12:53:04<br/>
+ * Copyright (c) 2013 by é™ˆæ³¢å®.<br/>
+ * ç±»è¯´æ˜
  */
 public class SystemInitServiceTest {
 	
@@ -25,7 +24,11 @@ public class SystemInitServiceTest {
 	@Before
 	public void setUp() throws Exception {
 		context=new ClassPathXmlApplicationContext("classpath:spring/spring*.xml");
+		try{
 		systemInitService=context.getBean("systemInitServiceImpl",SystemInitService.class);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 
 	@Test
@@ -33,8 +36,23 @@ public class SystemInitServiceTest {
 		List<Resource> list=new ArrayList<Resource>();
 		buildSysManage(list);
 		buildBuinessManage(list);
-		
+		try{
 		systemInitService.initSystemResource(list);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void getResourceListAll(){
+		try{
+			List<Resource> list=systemInitService.getResourceListAll();
+			for(Resource r:list){
+				System.out.println(r.getLabelName());
+			}
+			}catch(Exception e){
+				e.printStackTrace();
+			}
 	}
 	
 	
@@ -44,9 +62,9 @@ public class SystemInitServiceTest {
 		sysmanger.setId(1);
 //		sysmanger.setResourceType(ResourceTypeEnum.MENU);
 		sysmanger.setName("sysmange");
-		sysmanger.setLabelName("ÏµÍ³¹ÜÀí");
-		sysmanger.setIsleaf(0);//±íÊ¾·ÇÒ¶×Ó½Úµã
-		sysmanger.setPId(0);//ÉèÖÃ¸¸½Úµã
+		sysmanger.setLabelName("ç³»ç»Ÿç®¡ç†");
+		sysmanger.setIsleaf(0);
+		sysmanger.setPId(0);
 		sysmanger.setLevel(1);
 		list.add(sysmanger);
 		
@@ -54,9 +72,9 @@ public class SystemInitServiceTest {
 		usermanage.setId(11);
 //		usermanage.setResourceType(ResourceTypeEnum.FUNCTION);
 		usermanage.setName("usermanage");
-		usermanage.setLabelName("ÓÃ»§¹ÜÀí");
-		usermanage.setIsleaf(1);//±íÊ¾·ÇÒ¶×Ó½Úµã
-		usermanage.setPId(1);//ÉèÖÃ¸¸½Úµã
+		usermanage.setLabelName("ç”¨æˆ·ç®¡ç†");
+		usermanage.setIsleaf(1);
+		usermanage.setPId(1);
 		usermanage.setLevel(2);
 		usermanage.setUrl("/user/manager/user_view.html");
 		list.add(usermanage);
@@ -65,9 +83,9 @@ public class SystemInitServiceTest {
 		passwordmanage.setId(12);
 //		passwordmanage.setResourceType(ResourceTypeEnum.FUNCTION);
 		passwordmanage.setName("usermanage");
-		passwordmanage.setLabelName("ÓÃ»§¹ÜÀí");
-		passwordmanage.setIsleaf(1);//±íÊ¾·ÇÒ¶×Ó½Úµã
-		passwordmanage.setPId(1);//ÉèÖÃ¸¸½Úµã
+		passwordmanage.setLabelName("å¯†ç ç®¡ç†");
+		passwordmanage.setIsleaf(1);
+		passwordmanage.setPId(1);
 		passwordmanage.setLevel(2);
 		passwordmanage.setUrl("/password/manager/password_view.html");
 		list.add(passwordmanage);
@@ -80,9 +98,9 @@ public class SystemInitServiceTest {
 		buinessmanger.setId(2);
 //		buinessmanger.setResourceType(ResourceTypeEnum.MENU);
 		buinessmanger.setName("buinessmange");
-		buinessmanger.setLabelName("buinessmange");
-		buinessmanger.setIsleaf(0);//±íÊ¾·ÇÒ¶×Ó½Úµã
-		buinessmanger.setPId(0);//ÉèÖÃ¸¸½Úµã
+		buinessmanger.setLabelName("ä¸šåŠ¡ç®¡ç†");
+		buinessmanger.setIsleaf(0);
+		buinessmanger.setPId(0);
 		buinessmanger.setLevel(1);
 		list.add(buinessmanger);
 		
@@ -90,9 +108,9 @@ public class SystemInitServiceTest {
 		suppliermanage.setId(21);
 //		suppliermanage.setResourceType(ResourceTypeEnum.FUNCTION);
 		suppliermanage.setName("suppliermanage");
-		suppliermanage.setLabelName("suppliermanage");
-		suppliermanage.setIsleaf(1);//±íÊ¾·ÇÒ¶×Ó½Úµã
-		suppliermanage.setPId(1);//ÉèÖÃ¸¸½Úµã
+		suppliermanage.setLabelName("ä¾›è¿å•†ç®¡ç†");
+		suppliermanage.setIsleaf(1);
+		suppliermanage.setPId(1);
 		suppliermanage.setLevel(2);
 		suppliermanage.setUrl("/supplier/manager/supplier_view.html");
 		list.add(suppliermanage);
@@ -101,12 +119,13 @@ public class SystemInitServiceTest {
 		clientdmanage.setId(22);
 //		clientdmanage.setResourceType(ResourceTypeEnum.FUNCTION.getTypeId());
 		clientdmanage.setName("clientmanage");
-		clientdmanage.setLabelName("¿Í»§¹ÜÀí");
-		clientdmanage.setIsleaf(1);//±íÊ¾·ÇÒ¶×Ó½Úµã
-		clientdmanage.setPId(1);//ÉèÖÃ¸¸½Úµã
+		clientdmanage.setLabelName("å®¢æˆ·ç®¡ç†");
+		clientdmanage.setIsleaf(1);
+		clientdmanage.setPId(1);
 		clientdmanage.setLevel(2);
 		clientdmanage.setUrl("/client/manager/client_view.html");
 		list.add(clientdmanage);
 	}
+	
 	
 }
