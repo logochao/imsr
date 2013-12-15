@@ -3,64 +3,66 @@
  */
 package com.radius.invoicing.ibatis.model;
 
+import com.radius.base.BaseEntity;
+
 /**
- * ÏµÍ³ÓÃ»§±í
+ * ç³»ç»Ÿç”¨æˆ·è¡¨
  * @author Administrator
  * @table "rs_user"
  */
-public class User {
+public class User extends BaseEntity{
 
 	/**
-	 * ÓÃ»§±àºÅ
+	 * ç”¨æˆ·ç¼–å·
 	 */
 	private String id;
 	/**
-	 * ÓÃ»§Ãû
+	 * ç”¨æˆ·å
 	 */
 	private String name;
 	/**
-	 * ÕæÊµÃû
+	 * çœŸå®å
 	 */
 	private String realName;
 	/**
-	 * ÃÜÂë
+	 * å¯†ç 
 	 */
 	private String password;
 	/**
-	 * ÊÖ»úºÅ
+	 * æ‰‹æœºå·
 	 */
 	private String phone;
 	/**
-	 * ÓÊÏä
+	 * é‚®ç®±
 	 */
 	private String email;
 	/**
-	 * µØÖ·
+	 * åœ°å€
 	 */
 	private String address;
 	/**
-	 * ±¸×¢
+	 * å¤‡æ³¨
 	 */
 	private String remark;
 	/**
-	 * ÓÊ±à
+	 * é‚®ç¼–
 	 */
 	private String postCode;
 	/**
-	 * µÇÂ¼IP
+	 * ç™»å½•IP
 	 */
 	private String loginIp;
 	/**
-	 * µÇÂ¼Ê±¼ä
+	 * ç™»å½•æ—¶é—´
 	 */
 	private String lastLoginTime;
 	
 	/**
-	 * ´´½¨Ê±¼ä
+	 * åˆ›å»ºæ—¶é—´
 	 */
 	private String createTime;
 	/**
-	 * ´´½¨ÈË
+	 * åˆ›å»ºäºº
 	 */
 	private String creater;
 	

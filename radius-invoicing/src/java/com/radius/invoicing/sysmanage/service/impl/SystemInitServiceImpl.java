@@ -14,10 +14,10 @@ import com.radius.invoicing.ibatis.model.Resource;
 import com.radius.invoicing.sysmanage.service.SystemInitService;
 
 /**
- * @author <a href="mailto:goodluck.sunlight@gmail.com">³Â²¨Äş</a>
- * @version ´´½¨Ê±¼ä£º2013-12-8 ÏÂÎç12:53:04<br/>
- * Copyright (c) 2013 by ³Â²¨Äş.<br/>
- * ÀàËµÃ÷ ÏµÍ³³õÊ¼»¯
+ * @author <a href="mailto:goodluck.sunlight@gmail.com">é™ˆæ³¢å®</a>
+ * @version åˆ›å»ºæ—¶é—´ï¼š2013-12-8 ä¸‹åˆ12:53:04<br/>
+ * Copyright (c) 2013 by é™ˆæ³¢å®.<br/>
+ * ç±»è¯´æ˜
  */
 @Service
 public class SystemInitServiceImpl implements SystemInitService {
@@ -27,10 +27,14 @@ public class SystemInitServiceImpl implements SystemInitService {
 	private ResourceDao resourceDao;
 	
 	/**
-	 * ³õÊ¼»¯ÏµÍ³×ÊÔ´ĞÅÏ¢
+	 * åˆå§‹åŒ–ç³»ç»Ÿèµ„æºä¿¡æ¯
 	 * @param list
 	 */
 	public void initSystemResource(List<Resource> list){
 		resourceDao.batchInsertResourceList(list);
+	}
+	
+	public List<Resource> getResourceListAll(){
+		return resourceDao.getResourceListAll();
 	}
 }

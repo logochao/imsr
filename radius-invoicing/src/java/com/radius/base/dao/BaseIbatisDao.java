@@ -7,25 +7,25 @@ import com.radius.base.BaseEntity;
 import com.radius.base.page.Pager;
 
 /**
- * @author <a href="mailto:goodluck.sunlight@gmail.com">³Â²¨Äş</a>
- * @version ´´½¨Ê±¼ä£º2013-12-8 ÏÂÎç12:53:04<br/>
- * Copyright (c) 2013 by ³Â²¨Äş.<br/>
- * ÀàËµÃ÷
+ * @author <a href="mailto:goodluck.sunlight@gmail.com">é™ˆæ³¢å®</a>
+ * @version åˆ›å»ºæ—¶é—´ï¼š2013-12-8 ä¸‹åˆ12:53:04<br/>
+ * Copyright (c) 2013 by é™ˆæ³¢å®.<br/>
+ * ç±»è¯´æ˜
  */
 public interface BaseIbatisDao<E extends BaseEntity> {
 
 	
 	
 	/**
-	 * Í¨¹ıÌõ¼ş²éÑ¯»ñÈ¡Êı¾İÒÑmapµÄĞÎÊ½·µ»Ø mapÖĞµÄ¼üÖµcolumNameÕâ¸ö¶ÔÓ¦µÄÄÚÈİÎªÕı
+	 * é€šè¿‡æ¡ä»¶æŸ¥è¯¢è·å–æ•°æ®å·²mapçš„å½¢å¼è¿”å› mapä¸­çš„é”®å€¼columNameè¿™ä¸ªå¯¹åº”çš„å†…å®¹ä¸ºæ­£
 	 * @param params
 	 * @param statement
-	 * @param columName ²éÑ¯Óï¾äÖĞ³öÏÖµÄÖ÷¼ü»òÊÇÄÜ±êÖ¾Î¨Ò»ĞĞµÄÒ»¸öÄÚÈİ
+	 * @param columName æŸ¥è¯¢è¯­å¥ä¸­å‡ºç°çš„ä¸»é”®æˆ–æ˜¯èƒ½æ ‡å¿—å”¯ä¸€è¡Œçš„ä¸€ä¸ªå†…å®¹
 	 * @return
 	 */
 	public Map getSelectObjectMap(Map params,String statement,String columName);
 	/**
-	 * Í¨¹ıÊµÌå¶ÔÏó½øĞĞ·ÖÒ³²éÑ¯
+	 * é€šè¿‡å®ä½“å¯¹è±¡è¿›è¡Œåˆ†é¡µæŸ¥è¯¢
 	 * @param e
 	 * @param countKey
 	 * @param selectKey
@@ -34,7 +34,7 @@ public interface BaseIbatisDao<E extends BaseEntity> {
 	public Pager<E> getPagerListObject(E e, String countKey, String selectKey);
 
 	/**
-	 * Í¨¹ıMap¶ÔÏó½øĞĞ·ÖÒ³²éÑ¯
+	 * é€šè¿‡Mapå¯¹è±¡è¿›è¡Œåˆ†é¡µæŸ¥è¯¢
 	 * @param map
 	 * @param countKey
 	 * @param selectKey
@@ -45,23 +45,23 @@ public interface BaseIbatisDao<E extends BaseEntity> {
 			int pageNo);
 
 	/**
-	 * Í¨¹ımap¶ÔÏóÌí¼Ó²éÑ¯Ìõ¼ş 
+	 * é€šè¿‡mapå¯¹è±¡æ·»åŠ æŸ¥è¯¢æ¡ä»¶ 
 	 * @param map
-	 * @param statementName ¶ÔÓ¦namespace.idÀ´ÅĞ¶ÏÎªÒ»¸ökeyÖµ
+	 * @param statementName å¯¹åº”namespace.idæ¥åˆ¤æ–­ä¸ºä¸€ä¸ªkeyå€¼
 	 * @return
 	 */
 	public List getListObject(Map map, String statementName);
 
 	/**
-	 * Í¨¹ıMapÌõ¼ş²éÑ¯·ûºÏÒªÇóµÄ¼ÇÂ¼¸öÊı
+	 * é€šè¿‡Mapæ¡ä»¶æŸ¥è¯¢ç¬¦åˆè¦æ±‚çš„è®°å½•ä¸ªæ•°
 	 * @param map
-	 * @param statementName ¶ÔÓ¦namespace.idÀ´ÅĞ¶ÏÎªÒ»¸ökeyÖµ
+	 * @param statementName å¯¹åº”namespace.idæ¥åˆ¤æ–­ä¸ºä¸€ä¸ªkeyå€¼
 	 * @return
 	 */
 	public Integer getCountByCondition(Map map, String statementName);
 
 	/**
-	 * Í¨¹ıÊµÌå¶ÔÏó²éÑ¯·ûºÏÒªÇóµÄ¼ÇÂ¼ÁĞ±í
+	 * é€šè¿‡å®ä½“å¯¹è±¡æŸ¥è¯¢ç¬¦åˆè¦æ±‚çš„è®°å½•åˆ—è¡¨
 	 * @param e
 	 * @param statementName
 	 * @return
@@ -70,22 +70,22 @@ public interface BaseIbatisDao<E extends BaseEntity> {
 	public List<E> getListObject(E e, String statementName);
 
 	/**
-	 * Í¨¹ıÊµÌå¶ÔÏó²éÑ¯·ûºÏÒªÇóµÄ¼ÇÂ¼¸öÊı
+	 * é€šè¿‡å®ä½“å¯¹è±¡æŸ¥è¯¢ç¬¦åˆè¦æ±‚çš„è®°å½•ä¸ªæ•°
 	 * @param e
-	 * @param statementName ¶ÔÓ¦namespace.idÀ´ÅĞ¶ÏÎªÒ»¸ökeyÖµ
+	 * @param statementName å¯¹åº”namespace.idæ¥åˆ¤æ–­ä¸ºä¸€ä¸ªkeyå€¼
 	 * @return
 	 */
 	public Integer getCountByCondition(E e, String statementName);
 
 	/**
-	 * ±£´æ¶ÔÏó
+	 * ä¿å­˜å¯¹è±¡
 	 * @param e
-	 * @param statementName ¶ÔÓ¦namespace.idÀ´ÅĞ¶ÏÎªÒ»¸ökeyÖµ
+	 * @param statementName å¯¹åº”namespace.idæ¥åˆ¤æ–­ä¸ºä¸€ä¸ªkeyå€¼
 	 */
 	public void insertObject(E e, String statementName);
 
 	/**
-	 * Í¨¹ıÅú´¦Àí½øĞĞ±£´æ¶ÔÏó
+	 * é€šè¿‡æ‰¹å¤„ç†è¿›è¡Œä¿å­˜å¯¹è±¡
 	 * @param list
 	 * @param statementName
 	 */
@@ -94,7 +94,7 @@ public interface BaseIbatisDao<E extends BaseEntity> {
 			final String statementName);
 
 	/**
-	 * ¸üĞÂĞÅÏ¢
+	 * æ›´æ–°ä¿¡æ¯
 	 * @param e
 	 * @param statementName
 	 * @return 
@@ -102,7 +102,7 @@ public interface BaseIbatisDao<E extends BaseEntity> {
 	public int updateObject(E e, String statementName);
 
 	/**
-	 * ÅúÁ¿¸üĞÂĞÅÏ¢
+	 * æ‰¹é‡æ›´æ–°ä¿¡æ¯
 	 * @param list
 	 * @param statementName
 	 */
@@ -110,7 +110,7 @@ public interface BaseIbatisDao<E extends BaseEntity> {
 	public void updateListObject(final List<E> list, final String statementName);
 
 	/**
-	 * É¾³ı¶ÔÏó
+	 * åˆ é™¤å¯¹è±¡
 	 * @param e
 	 * @param statementName
 	 * @return
@@ -118,7 +118,7 @@ public interface BaseIbatisDao<E extends BaseEntity> {
 	public int deleteObject(E e, String statementName);
 
 	/**
-	 * Í¨¹ıÅú´¦ÀíÉ¾³ı¶ÔÏó
+	 * é€šè¿‡æ‰¹å¤„ç†åˆ é™¤å¯¹è±¡
 	 * @param list
 	 * @param statementName
 	 */

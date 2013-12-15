@@ -3,27 +3,27 @@ package com.radius.base.page;
 import java.util.List;
 
 public class Pager<E> {
-	// Ã¿Ò³ÏÔÊ¾µÄ¼ÇÂ¼Êı
+	// æ¯é¡µæ˜¾ç¤ºçš„è®°å½•æ•°
 	protected Integer pageSize = 10;
-	// µ±Ç°µÄÒ³Âë
+	// å½“å‰çš„é¡µç 
 	protected Integer pageNo;
-	// ¼ÇÂ¼×ÜÊı
+	// è®°å½•æ€»æ•°
 	protected Long rowCount;
-	// ×ÜÒ³Êı
+	// æ€»é¡µæ•°
 	protected Integer pageCount;
-	// ÆğÊ¼ĞĞ
+	// èµ·å§‹è¡Œ
 	protected Integer startIndex;
-	// ½áÊøĞĞ
+	// ç»“æŸè¡Œ
 	protected Integer endIndex;
-	// Ê×Ò³
+	// é¦–é¡µ
 	protected Integer firstPageNo = 1;
-	// Ä©Ò³
+	// æœ«é¡µ
 	protected Integer endPageNo;
-	// Ç°Ò»Ò³
+	// å‰ä¸€é¡µ
 	protected Integer prePageNo;
-	// ºóÒ»Ò³
+	// åä¸€é¡µ
 	protected Integer nextPagNo;
-	// ´æ·Å½á¹û¼¯
+	// å­˜æ”¾ç»“æœé›†
 	@SuppressWarnings("unchecked")
 	protected List<E> pagelist;
 	
@@ -155,28 +155,28 @@ public class Pager<E> {
 	}
 	
 	private void execute(){
-		//ÉèÖÃ×ÜÒ³Êı
+		//è®¾ç½®æ€»é¡µæ•°
 		if(this.rowCount%this.pageSize == 0){
 			this.pageCount = this.rowCount.intValue()/this.pageSize;
 		}else{
 			this.pageCount = (this.rowCount.intValue()/this.pageSize) + 1;
 		}
 		
-		//ÉèÖÃÆğÊ¼ĞĞ
+		//è®¾ç½®èµ·å§‹è¡Œ
 		this.startIndex = this.pageSize*(this.pageNo - 1);
 		
-		//ÉèÖÃ½áÊøĞĞ
+		//è®¾ç½®ç»“æŸè¡Œ
 		this.endIndex = this.startIndex + pagelist.size();
 		
-		//ÉèÖÃÄ©Ò³
+		//è®¾ç½®æœ«é¡µ
 		this.endPageNo = this.pageCount;
 		
-		//ÉèÖÃÇ°Ò»Ò³
+		//è®¾ç½®å‰ä¸€é¡µ
 		if(this.pageNo > 1){
 			this.prePageNo = this.pageNo - 1; 
 		}
 		
-		//ÉèÖÃºóÒ»Ò³
+		//è®¾ç½®åä¸€é¡µ
 		if(this.pageNo == this.pageCount ){
 			this.nextPagNo = this.pageCount;
 		}else{

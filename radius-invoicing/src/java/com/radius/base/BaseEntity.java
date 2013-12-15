@@ -4,11 +4,11 @@ public class BaseEntity {
 
 	protected int perPageSize=10;
 	protected int pageNo=1;
-	protected String contextPath="";//ÏîÄ¿Ãû³Æ
+	protected String contextPath="";//é¡¹ç›®åç§°
 	
-	protected int page=1;//jqueryÖĞµÄÒ³Âë
-	protected String order="";//ÅÅĞòÁĞÃû³Æ
-	protected String sort="";//ÅÅĞò¹Ø¼ü×Ö
+	protected int page=1;//jqueryä¸­çš„é¡µç 
+	protected String order="";//æ’åºåˆ—åç§°
+	protected String sort="";//æ’åºå…³é”®å­—
 	
 	public int getPageNo() {
 		return pageNo;

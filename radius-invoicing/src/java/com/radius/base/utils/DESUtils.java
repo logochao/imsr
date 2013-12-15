@@ -23,35 +23,35 @@ public class DESUtils {
 	public static final String	CIPHER_ALGORTHM="DES/ECB/PKCS5Padding";
 	
 	public static Key getKey(byte[] key)throws Exception{
-		//ÊµÀı»¯DESÃØÔ¿²ÄÁÏ
+		//å®ä¾‹åŒ–DESç§˜é’¥ææ–™
 		DESKeySpec dks=new DESKeySpec(key);
-		//ÊµÀı»¯ÃØÔ¿¹¤³§
+		//å®ä¾‹åŒ–ç§˜é’¥å·¥å‚
 		SecretKeyFactory keyFactory=SecretKeyFactory.getInstance(KEY_ALGORITHM);
-		//Éú³ÉÃØÔ¿
+		//ç”Ÿæˆç§˜é’¥
 		SecretKey secretKey=keyFactory.generateSecret(dks);
 		
 		return secretKey;
 	} 
 	
 	/**
-	 * ½âÃÜ
+	 * è§£å¯†
 	 * @param data
 	 * @param key
 	 * @return
 	 * @throws Exception
 	 */
 	public static byte[] decrypt(byte[] data,byte[] key)throws Exception{
-		//»ñÈ¡Ô¿³×¶ÔÏó
+		//è·å–é’¥åŒ™å¯¹è±¡
 		Key k=getKey(key);
-		//ÊµÀı»¯
+		//å®ä¾‹åŒ–
 		Cipher cipher=Cipher.getInstance(CIPHER_ALGORTHM);
-		//³õÊ¼»¯,ÉèÖÃÎª½âÃÜÄ£Ê½
+		//åˆå§‹åŒ–,è®¾ç½®ä¸ºè§£å¯†æ¨¡å¼
 		cipher.init(Cipher.DECRYPT_MODE, k);
 		return cipher.doFinal(data);
 	}
 	
 	/**
-	 * ¼ÓÃÜ
+	 * åŠ å¯†
 	 * @param data
 	 * @param key
 	 * @return
@@ -64,7 +64,7 @@ public class DESUtils {
 		return cipher.doFinal(data);
 	}
 	/**
-	 * Éú³ÉÃØÔ¿
+	 * ç”Ÿæˆç§˜é’¥
 	 * @return
 	 * @throws Exception
 	 */
