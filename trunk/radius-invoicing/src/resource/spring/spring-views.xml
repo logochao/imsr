@@ -63,7 +63,7 @@
 	</bean>
 	
 	
-	<!-- freemarker 视图解析器属性设置 -->
+	<!-- freemarker 视图解析器属性设置 
 	<bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
 		<property name="templateLoaderPath" value="/freemarker/"/>
 		<property name="defaultEncoding" value="UTF-8"/>
@@ -75,5 +75,5 @@
 			</props>
 		</property>
 	</bean>
-	
+	-->
 	</beans>
