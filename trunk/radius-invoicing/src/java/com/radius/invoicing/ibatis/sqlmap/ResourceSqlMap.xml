@@ -3,7 +3,6 @@
 <sqlMap namespace="resourceSqlMap">
 
   <typeAlias alias="resource" type="com.radius.invoicing.ibatis.model.Resource" />
-  
   <sql id="resourceFileds">
   	 r_id id,r_resource_type resourceType,r_name name,r_label_name labelName,r_icon icon,r_parent_id pId,r_url url,r_level level,r_isleaf isleaf,r_remark remark
   </sql>
@@ -33,7 +32,7 @@
   </parameterMap>
   
   <insert id="insertResource" parameterClass="resource">
-  	INSERT INTO tb_resource (r_id,r_name,r_label_name,r_parent_id,r_url,r_level,r_isleaf)VALUES(#id#,#name#,#labelName#,#pId#,#url#,#level#,#isleaf#)
+  	INSERT INTO tb_resource (r_id,r_resource_type,r_name,r_label_name,r_parent_id,r_url,r_level,r_isleaf)VALUES(#id#,#resourceType#,#name#,#labelName#,#pId#,#url#,#level#,#isleaf#)
   </insert>
   <select id="getResourceListAll" resultClass="resource">
   	SELECT <include refid="resourceFileds" /> FROM tb_resource
