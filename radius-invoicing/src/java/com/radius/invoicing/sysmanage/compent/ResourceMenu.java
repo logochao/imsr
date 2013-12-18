@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.radius.invoicing.enums.ResourceTypeEnum;
 import com.radius.invoicing.ibatis.model.Resource;
 
 /**
@@ -16,6 +17,31 @@ import com.radius.invoicing.ibatis.model.Resource;
 @Component
 public class ResourceMenu {
 
+	
+	public String getResouceMenuJsonManager(List<Resource> list,boolean icon){
+		StringBuffer bf=new StringBuffer("[");
+		for(Resource r:list){
+			ResouceJson(r, bf, icon);
+		}
+		bf.deleteCharAt(bf.length()-1);
+		bf.append("]");
+		return bf.toString();
+		
+	}
+	
+	private void ResouceJson(Resource r,StringBuffer bf,boolean icon){
+		StringBuffer b=new StringBuffer();
+		b.append("{\"attributes\":{\"target\":\"\",\"url\":\"").append(r.getUrl()==null?"":r.getUrl()).append("\"},");
+		b.append("\"state\":\"closed\",");
+		if(icon){
+			b.append("\"iconCls\":\"").append(r.getIcon()).append("\",");
+		}
+		b.append("\"id\":\"").append(r.getId()).append("\",");
+		b.append("\"pid\":\"").append(r.getPId()).append("\",");
+		b.append("\"text\":\"").append(r.getLabelName()).append("\"},");
+		bf.append(b);
+	}
+	
 	/**
 	 * 获取菜单资源
 	 * @param list
@@ -50,19 +76,15 @@ public class ResourceMenu {
 	
 	
 	private void getResourceMenu(Resource r,StringBuffer bf,boolean icon,boolean isChild){
-//		"id": "11",
-//		"state": "closed", 
-//        "iconCls": "icon-customers",   
-//        "attributes": {
-//            "target": "",
-//            "url": "welcome.jsp"
-//        },
-//        "text": "用户管理"  
 		bf.append("\"id\":").append(r.getId()).append(",");
 		if(icon){
 			bf.append("\"iconCls\":\"").append(r.getIcon()).append("\",");
 		}
+		bf.append("\"pid\":\"").append(r.getPId()).append("\",");
 		bf.append("\"attributes\":{\"target\":\"\",");
+		bf.append("\"resourcetype\":{");
+		bf.append("\"name\": \"").append(r.getResourceType().getTypeName()).append("\"");
+		bf.append("},");
 		bf.append("\"url\":\"").append(r.getUrl()==null?"":r.getUrl()).append("\"},");
 		bf.append("\"text\":\"").append(r.getLabelName()).append("\"");
 		

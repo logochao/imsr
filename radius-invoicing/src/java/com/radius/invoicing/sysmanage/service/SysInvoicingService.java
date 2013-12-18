@@ -18,7 +18,14 @@ public interface SysInvoicingService {
 	 * @return
 	 * @throws Exception
 	 */
-	public String saveUserLogin(User u, boolean icon)
-			throws Exception;
+	public String saveUserLogin(User u, boolean icon)throws Exception;
+	
+	/**
+	 * 资源管理界面
+	 * @param icon
+	 * @return
+	 * @throws Exception
+	 */
+	public String getResouceJson(boolean icon)throws Exception;
 
 }

@@ -45,4 +45,18 @@ public class SysInvoicingServiceImpl implements SysInvoicingService {
 		menuTreeJson=resourceMenu.getResoureMenuJson(treeResource, icon);
 		return menuTreeJson;
 	}
+	
+	/**
+	 * 资源管理界面
+	 * @param icon
+	 * @return
+	 * @throws Exception
+	 */
+	public String getResouceJson(boolean icon)throws Exception{
+		String menuTreeJson=null;
+		List<Resource> all=resourceDao.getResourceListAll();
+//		List<Resource> treeResource=resourceMenu.resourceTreeOrderBy(all);
+		menuTreeJson=resourceMenu.getResouceMenuJsonManager(all, icon);
+		return menuTreeJson;
+	}
 }

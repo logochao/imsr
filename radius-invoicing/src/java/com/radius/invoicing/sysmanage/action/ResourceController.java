@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.radius.base.controller.BaseController;
+import com.radius.base.jstl.RadiusFunctions;
 import com.radius.invoicing.sysmanage.service.SysInvoicingService;
 
 /**
@@ -71,6 +72,24 @@ public class ResourceController extends BaseController{
 	public void getResourceMenu(HttpServletRequest request,HttpServletResponse response)throws Exception{
 		String menuJson=invoicingService.saveUserLogin(null, false);
 		super.ajaxMethod(response, menuJson, "获取菜单信息发生异常");
+	}
+	
+	@RequestMapping("/resource/system/resouce_manage_json.html")
+	public void getResouceJson(HttpServletRequest request,HttpServletResponse response)throws Exception{
+		String menuJson=invoicingService.getResouceJson(false);
+		super.ajaxMethod(response, menuJson, "获取资源管理信息发生异常");
+	}
+	
+	/**
+	 * 获取资源类型
+	 * @param request
+	 * @param response
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/resource/system/resouce_type_json.html")
+	public void getResourceTypeJson(HttpServletRequest request,HttpServletResponse response)throws Exception{
+		String resourceTypeJson=RadiusFunctions.getResourceTypeJson();
+		super.ajaxMethod(response, resourceTypeJson, "获取资源类型");
 	}
 	@PostConstruct
 	public void init(){
