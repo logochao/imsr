@@ -1,5 +1,8 @@
 package com.radius.invoicing.ibatis.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.radius.base.BaseEntity;
 import com.radius.invoicing.enums.ResourceTypeEnum;
 
@@ -21,6 +24,11 @@ public class Resource extends BaseEntity{
 	private int level;
 	private int  isleaf;
 	private String remark;
+	
+	private boolean isExistChild=false;//是否存在子节点
+	
+	private List<Resource> child=new ArrayList<Resource>();
+	
 	
 	public String getIcon() {
 		return icon;
@@ -83,6 +91,24 @@ public class Resource extends BaseEntity{
 		this.url = url;
 	}
 	
+	public void addResource(Resource r){
+		child.add(r);
+	}
+	
+	public int getChildSize(){
+		return child.size();
+	}
+	
+	public List<Resource> getChildResource(){
+		return child;
+	}
 	
 	
+	public boolean isExistChild() {
+		return isExistChild;
+	}
+
+	public void setExistChild(boolean isExistChild) {
+		this.isExistChild = isExistChild;
+	}
 }
