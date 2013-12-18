@@ -9,9 +9,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.radius.base.controller.BaseController;
+import com.radius.invoicing.sysmanage.service.SysInvoicingService;
 
 /**
  * @author <a href="mailto:goodluck.sunlight@gmail.com">陈波宁</a>
@@ -21,12 +27,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @Scope("request")
-public class ResourceController {
+public class ResourceController extends BaseController{
 	
 	private Logger logger=Logger.getLogger(this.getClass());
 	private String prefix="/jsp/resource/";
 	private String resouce_manage_view=null;
 	private String resource_add_view=null;
+	
+	
+	@Autowired(required=false)
+	@Qualifier("sysInvoicingServiceImpl")
+	private SysInvoicingService invoicingService;
 	
 	/**
 	 * 调整到资源管理界面
@@ -51,6 +62,16 @@ public class ResourceController {
 		return resource_add_view;
 	}
 	
+	/**
+	 * 获取菜单资源
+	 * @param request
+	 * @throws Exception
+	 */
+	@RequestMapping(value={"/user/login.html","/resource/system/resouce_menu.html"})
+	public void getResourceMenu(HttpServletRequest request,HttpServletResponse response)throws Exception{
+		String menuJson=invoicingService.saveUserLogin(null, false);
+		super.ajaxMethod(response, menuJson, "获取菜单信息发生异常");
+	}
 	@PostConstruct
 	public void init(){
 		if(resouce_manage_view==null){
