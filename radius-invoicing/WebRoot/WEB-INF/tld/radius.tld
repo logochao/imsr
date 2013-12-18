@@ -11,9 +11,17 @@
 
 	<function>
 		<name>getPropertyValue</name>
-		<function-class>com.radius.base.utils.tld.RadiusFunctions</function-class>
+		<function-class>com.radius.base.utils.jstl.RadiusFunctions</function-class>
 		<function-signature>
 		    java.lang.String getPropertyValue(java.lang.String)
+		</function-signature>
+	</function>
+	<!-- 获取资源类型json -->
+	<function>
+		<name>getResourceTypeJson</name>
+		<function-class>com.radius.base.utils.jstl.RadiusFunctions</function-class>
+		<function-signature>
+		    java.lang.String getResourceTypeJson()
 		</function-signature>
 	</function>
 </taglib>
