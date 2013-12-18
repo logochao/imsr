@@ -1,0 +1,13 @@
+[{
+			"createdatetime" : "2013-09-26 14:01:31",
+			"description" : "菜单类型会显示在系统首页左侧菜单中",
+			"id" : "0",
+			"name" : "菜单",
+			"updatedatetime" : "2013-09-26 14:01:31"
+		}, {
+			"createdatetime" : "2013-09-26 14:01:31",
+			"description" : "功能类型不会显示在系统首页左侧菜单中",
+			"id" : "1",
+			"name" : "功能",
+			"updatedatetime" : "2013-09-26 14:01:31"
+		}]
