@@ -34,5 +34,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 -%>
 <%--自定义js--%>
 <script type="text/javascript" src="<%=path%>/jslib/syExtJquery.js" charset="utf-8"></script>
+<script type="text/javascript" src="<%=path%>/jslib/syExtEasyUI.js" charset="utf-8"></script>
 
 <link rel="stylesheet" href="<%=path%>/common/stock.css" type="text/css">
