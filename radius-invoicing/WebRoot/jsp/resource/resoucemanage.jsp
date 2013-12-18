@@ -12,7 +12,7 @@
 	var addFun = function() {
 		var dialog = parent.sy.modalDialog({
 			title : '添加资源信息',
-			url : '/resource/system/resouce_add.html',
+			url : '/stock/resource/system/resouce_add.html',
 			buttons : [ {
 				text : '添加',
 				handler : function() {
@@ -70,7 +70,7 @@
 	$(function() {
 		grid = $('#grid').treegrid({
 			title : '',
-			url : 'http://localhost:8087/stock/jsp/resource/resource.json',
+			url : 'http://localhost:8000/stock/jsp/resource/resource.json',
 			idField : 'id',
 			treeField : 'name',
 			parentField : 'pid',
