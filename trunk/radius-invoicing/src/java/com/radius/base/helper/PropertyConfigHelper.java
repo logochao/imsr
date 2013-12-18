@@ -41,7 +41,7 @@ public class PropertyConfigHelper extends PropertyPlaceholderConfigurer {
 		}
 	}
 	
-	public  Object getPropertyValue(String key){
+	public static  Object getPropertyValue(String key){
 		return map.get(key);
 	}
 	
