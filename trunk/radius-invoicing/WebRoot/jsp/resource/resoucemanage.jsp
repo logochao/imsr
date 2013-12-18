@@ -70,7 +70,7 @@
 	$(function() {
 		grid = $('#grid').treegrid({
 			title : '',
-			url : 'http://localhost:8000/stock/jsp/resource/resource.json',
+			url : '/stock/jsp/resource/resource.json',
 			idField : 'id',
 			treeField : 'name',
 			parentField : 'pid',
