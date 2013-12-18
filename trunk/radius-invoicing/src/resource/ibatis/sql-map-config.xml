@@ -11,5 +11,8 @@
 	    maxTransactions="20"
 	    maxRequests="128"
 	    useStatementNamespaces="true"/>
-    <sqlMap resource="ibatis/emptySqlMap.xml"/>  
+	    <!--配置相关枚举处理类 -->
+      <typeAlias alias="resourceType" type="com.radius.invoicing.enums.ResourceTypeEnum" />
+      <typeHandler javaType="resourceType" callback="com.radius.invoicing.enums.ResourceTypeEnumHandler" />
+      <sqlMap resource="ibatis/emptySqlMap.xml"/>
 </sqlMapConfig>
