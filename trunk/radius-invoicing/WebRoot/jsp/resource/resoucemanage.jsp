@@ -16,6 +16,8 @@
 			buttons : [ {
 				text : '添加',
 				handler : function() {
+				//console.info(dialog.find('iframe').get(0).contentWindow);
+				console.log(dialog.find('iframe').get(0).contentWindow.submitForm);
 					dialog.find('iframe').get(0).contentWindow.submitForm(dialog, grid, parent.$, parent.mainMenu);
 				}
 			} ]
@@ -69,39 +71,36 @@
 	};
 	$(function() {
 		grid = $('#grid').treegrid({
-			title : '',
-			url : '/stock/jsp/resource/resource.json',
+			title : '资源管理',
+			url : '/stock/resource/system/resouce_menu.html',
+			//url : '/stock/jsp/resource/resource.json',
 			idField : 'id',
-			treeField : 'name',
+			treeField : 'text',
 			parentField : 'pid',
 			rownumbers : true,
 			pagination : false,
-			sortName : 'seq',
 			sortOrder : 'asc',
 			frozenColumns : [ [ {
 				width : '200',
 				title : '资源名称',
-				field : 'name'
+				field : 'text'
 			} ] ],
 			columns : [ [ {
 				width : '200',
-				title : '图标名称',
-				field : 'iconCls'
-			}, {
-				width : '200',
 				title : '资源路径',
-				field : 'url',
+				field : 'attributes',
 				formatter : function(value, row) {
 					if(value){
-						return sy.formatString('<span title="{0}">{1}</span>', value, value);
+						return sy.formatString('<span title="{0}">{1}</span>', value.url, value.url);
 					}
 				}
 			}, {
 				width : '60',
 				title : '资源类型',
-				field : 'syresourcetype',
+				field : 'resourcetype',
 				formatter : function(value, row) {
-					return value.name;
+					//return value.name;
+					return value;
 				}
 			}, {
 				width : '150',
@@ -124,13 +123,8 @@
 				}
 			}, {
 				width : '80',
-				title : '排序',
-				field : 'seq',
-				hidden : true
-			}, {
-				width : '80',
 				title : '目标',
-				field : 'target'
+				field : 'attributes.target'
 			}, {
 				title : '操作',
 				field : 'action',
