@@ -62,7 +62,18 @@ public class ResourceController extends BaseController{
 	public String addResourceInfo(HttpServletRequest request,HttpServletResponse response)throws Exception{
 		return resource_add_view;
 	}
-	
+	/**
+	 * 添加resource资源
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/resource/system/resouce_save.html")
+	public String saveResourceInfo(HttpServletRequest request,HttpServletResponse response)throws Exception{
+		System.out.println("----");
+		return "{}";
+	}
 	/**
 	 * 获取菜单资源
 	 * @param request

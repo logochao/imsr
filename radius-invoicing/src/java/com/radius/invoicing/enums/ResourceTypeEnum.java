@@ -27,5 +27,13 @@ public enum ResourceTypeEnum {
 		return typeName;
 	}
 	
-	
+	public static String getResourceTypeName(int typeId){
+		for(ResourceTypeEnum enums:ResourceTypeEnum.values()){
+			if(enums.getTypeId()==typeId){
+				return enums.getTypeName();
+			}
+		}
+		
+		return null;
+	}
 }
