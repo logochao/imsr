@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.radius.invoicing.enums.ResourceTypeEnum;
 import com.radius.invoicing.ibatis.model.Resource;
 
 /**
@@ -37,7 +36,8 @@ public class ResourceMenu {
 			b.append("\"iconCls\":\"").append(r.getIcon()).append("\",");
 		}
 		b.append("\"id\":\"").append(r.getId()).append("\",");
-		b.append("\"pid\":\"").append(r.getPId()).append("\",");
+		if(r.getPId()!=0)
+			b.append("\"pid\":\"").append(r.getPId()).append("\",");
 		b.append("\"text\":\"").append(r.getLabelName()).append("\"},");
 		bf.append(b);
 	}
@@ -81,10 +81,9 @@ public class ResourceMenu {
 			bf.append("\"iconCls\":\"").append(r.getIcon()).append("\",");
 		}
 		bf.append("\"pid\":\"").append(r.getPId()).append("\",");
+		bf.append("\"resourcetype\":\"").append(r.getResourceType().getTypeName()).append("\",");
+		bf.append("\"description\":\"").append(r.getRemark()).append("\",");
 		bf.append("\"attributes\":{\"target\":\"\",");
-		bf.append("\"resourcetype\":{");
-		bf.append("\"name\": \"").append(r.getResourceType().getTypeName()).append("\"");
-		bf.append("},");
 		bf.append("\"url\":\"").append(r.getUrl()==null?"":r.getUrl()).append("\"},");
 		bf.append("\"text\":\"").append(r.getLabelName()).append("\"");
 		

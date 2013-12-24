@@ -57,6 +57,7 @@ public class SysInvoicingServiceImpl implements SysInvoicingService {
 		List<Resource> all=resourceDao.getResourceListAll();
 //		List<Resource> treeResource=resourceMenu.resourceTreeOrderBy(all);
 		menuTreeJson=resourceMenu.getResouceMenuJsonManager(all, icon);
+		System.out.println(menuTreeJson);
 		return menuTreeJson;
 	}
 }

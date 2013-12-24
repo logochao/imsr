@@ -56,8 +56,10 @@ public class ResourceTypeEnumHandler implements TypeHandlerCallback {
 	private Object getEnums(int value){
 		Object result=null;
 		for(ResourceTypeEnum enums:ResourceTypeEnum.values()){
-			result=enums;
-			break;
+			if(enums.getTypeId()==value){
+				result=enums;
+				break;
+			}
 		}
 		
 		return result;
