@@ -25,6 +25,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 --%>
 
+<%-- 引入ueditor控件 --%>
+<script type="text/javascript" charset="utf-8">window.UEDITOR_HOME_URL ='<%=path%>/jslib/ueditor1_2_6_1-utf8-jsp/';</script>
+<script src="<%=path%>/jslib/ueditor1_2_6_1-utf8-jsp/ueditor.config.js" type="text/javascript" charset="utf-8"></script>
+<script src="<%=path%>/jslib/ueditor1_2_6_1-utf8-jsp/ueditor.all.min.js" type="text/javascript" charset="utf-8"></script>
 
 <%--<!-- 引入EasyUI Portal插件 -->
 <link rel="stylesheet" href="<%=path%>/easyui/jquery-easyui-portal/portal.css" type="text/css">
