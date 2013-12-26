@@ -15,4 +15,10 @@ public interface ResourceDao {
 	public void batchInsertResourceList(List<Resource> list);
 
 	public List<Resource> getResourceListAll();
+	
+	/**
+	 * 添加资源
+	 * @param r
+	 */
+	public void insertResource(Resource r);
 }

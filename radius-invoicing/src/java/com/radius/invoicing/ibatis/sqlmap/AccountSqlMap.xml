@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="accountSqlMap">
+
+  <typeAlias alias="account" type="com.radius.invoicing.ibatis.model.Account" />
+  
+  <sql id="accountFileds">
+  	 ledger_id id,ledger_name name,belong_institution institution,father_ledger father,creater creater,createdate createdate,reviser reviser,revisedate revisedate,verifier verifydate
+  </sql>
+  
+  <resultMap id="account" class="account">
+    <result column="ledger_id" jdbcType="char" javaType="java.lang.String" property="id" />
+    <result column="ledger_name" jdbcType="varchar" javaType="java.lang.String" property="name" />
+    <result column="belong_institution" jdbcType="char" javaType="java.lang.String" property="institution" />
+    <result column="father_ledger" jdbcType="char" javaType="java.lang.String" property="father"/>
+    <result column="creater" jdbcType="char" javaType="java.lang.String" property="creater" />
+    <result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createdate" />
+    <result column="reviser" jdbcType="char" javaType="java.lang.String" property="reviser" />
+    <result column="revisedate" jdbcType="datetime" javaType="java.util.Date" property="revisedate" />
+    <result column="verifier" jdbcType="char" javaType="java.lang.String" property="verifier" />    
+    <result column="verifydate" jdbcType="datetime" javaType="java.util.Date" property="verifydate"/>
+  </resultMap>
+  
+  <!-- 根据帐套编号获取账套信息 -->
+  <select id="getLedgerById" parameterClass="string" resultMap="account">
+  	SELECT <include refid="accountFileds"/>
+  	FROM RS_ACCOUNT
+  	WHERE ledger_id =#id#
+  </select>
+  <!-- end -->
+  
+  <!-- 获取所有帐套信息 -->
+  <select id="getAccountAllList" resultMap="account">
+  	SELECT <include refid="accountFileds"/>
+  	FROM RS_ACCOUNT
+  </select>
+  
+  <!-- 添加帐套信息 -->
+  <insert id="insert" parameterClass="account">
+  	INSERT INTO RS_ACCOUNT 
+  	(ledger_id,ledger_name,belong_institution,father_ledger,creater,createdate) 
+  	VALUES
+  	(#id#,#name#,#institution#,#father#,#creater#,CURDATE())
+  </insert>
+  <!-- end -->
+  
+  
+  <!-- 根据帐套编号更新账套信息 -->
+  <update id="updateAccountById" parameterClass="account">
+  	UPDATE RS_ACCOUNT
+  	SET ledger_name=#name# , belong_institution=#institution# , father_ledger=#father#
+  	<isNotNull property="reviser" prepend=",">reviser = #reviser#,revisedate = CURDATE() </isNotNull>
+  	<isNotNull property="verifier" prepend=",">verifier = #verifier#,verifydate = CURDATE() </isNotNull>
+  	WHERE ledger_id =#id#
+  </update>
+  <!-- end -->
+  
+  <!-- 根据机构编号删除帐套信息 -->
+  <delete id="deleteAccountByInstitution" parameterClass="string">
+  	DELETE FROM RS_ACCOUNT
+  	WHERE belong_institution =#institution#
+  </delete>
+  <!-- end  -->
+  
+  <!-- 根据帐套信息删除帐套 -->
+  <delete id="deleteAccountById" parameterClass="string">
+  	DELETE FROM RS_ACCOUNT
+  	WHERE ledger_id = #id#
+  </delete>
+   <!-- end  -->
+   
+</sqlMap>
