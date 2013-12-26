@@ -31,4 +31,11 @@ public class ResourceDaoImpl extends BaseIbatisDaoImpl<Resource> implements Reso
 	public List<Resource> getResourceListAll(){
 		return this.getSqlMapClientTemplate().queryForList("resourceSqlMap.getResourceListAll");
 	}
+	/**
+	 * 添加资源
+	 * @param r
+	 */
+	public void insertResource(Resource r){
+		this.insertObject(r, "resourceSqlMap.insertResource");
+	}
 }

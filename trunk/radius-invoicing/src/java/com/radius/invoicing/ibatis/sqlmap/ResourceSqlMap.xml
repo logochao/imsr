@@ -32,7 +32,7 @@
   </parameterMap>
   
   <insert id="insertResource" parameterClass="resource">
-  	INSERT INTO tb_resource (r_id,r_resource_type,r_name,r_label_name,r_parent_id,r_url,r_level,r_isleaf
+  	INSERT INTO rs_resource (r_id,r_resource_type,r_name,r_label_name,r_parent_id,r_url,r_level,r_isleaf
   		 <isNotNull property="remark" prepend=",">r_remark</isNotNull>
   		 <isNotNull property="icon" prepend=",">r_icon</isNotNull>
   	)
@@ -42,6 +42,6 @@
   	)
   </insert>
   <select id="getResourceListAll" resultClass="resource">
-  	SELECT <include refid="resourceFileds" /> FROM tb_resource
+  	SELECT <include refid="resourceFileds" /> FROM rs_resource
   </select>
 </sqlMap>
