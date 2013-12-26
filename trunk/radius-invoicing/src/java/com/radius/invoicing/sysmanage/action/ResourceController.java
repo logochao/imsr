@@ -13,11 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.radius.base.controller.BaseController;
 import com.radius.base.jstl.RadiusFunctions;
+import com.radius.invoicing.enums.ResourceTypeEnum;
+import com.radius.invoicing.ibatis.model.Resource;
 import com.radius.invoicing.sysmanage.service.SysInvoicingService;
 
 /**
@@ -70,9 +73,12 @@ public class ResourceController extends BaseController{
 	 * @throws Exception
 	 */
 	@RequestMapping("/resource/system/resouce_save.html")
-	public String saveResourceInfo(HttpServletRequest request,HttpServletResponse response)throws Exception{
-		System.out.println("----");
-		return "{}";
+	public void saveResourceInfo(HttpServletRequest request,HttpServletResponse response,Resource resource)throws Exception{
+		int resourceType=ServletRequestUtils.getIntParameter(request, "typeId");
+		resource.setResourceType(ResourceTypeEnum.getResourceTypeEnumByTypeId(resourceType));//设置枚举类
+		String json=invoicingService.saveResouce(resource);
+		
+		super.ajaxMethod(response, json, "添加资源发生异常");
 	}
 	/**
 	 * 获取菜单资源
