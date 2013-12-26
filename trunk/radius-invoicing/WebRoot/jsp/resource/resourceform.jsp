@@ -25,11 +25,17 @@ String contextPath = request.getContextPath();
 			}
 			$.post(url, sy.serializeObject($('form')), function(result) {
 				if (result.success) {
+					$pjq.messager.show({
+							title:'提示',
+							msg:result.message,
+							timeout:5000,
+							showType:'slide'
+						});
 					$grid.treegrid('reload');
 					$dialog.dialog('destroy');
 					$mainMenu.tree('reload');
 				} else {
-					$pjq.messager.alert('提示', result.msg, 'error');
+					$pjq.messager.alert('提示', result.message, 'error');
 				}
 			}, 'json');
 		}
@@ -77,7 +83,7 @@ String contextPath = request.getContextPath();
 							资源类型
 						</th>
 						<td>
-							<select name="resourceType.typeId" class="easyui-combobox"
+							<select name="typeId" class="easyui-combobox"
 								data-options="required:true,editable:false,valueField:'id',textField:'name',url:'/stock/resource/system/resouce_type_json.html',panelHeight:'auto'"
 								style="width: 155px;"></select>
 						</td>
