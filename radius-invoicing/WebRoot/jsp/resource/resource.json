@@ -2299,36 +2299,5 @@
         },
         "updatedatetime": "2013-12-12 19:44:44",
         "url": "aa"
-    },
-    {
-        "createdatetime": "2013-12-08 13:08:36",
-        "iconCls": "ext-icon-anchor",
-        "id": "ba691f17-7a59-4a94-93bf-5711cf0eed6c",
-        "name": "root",
-        "seq": 100,
-        "syresourcetype": {
-            "createdatetime": "2013-09-26 14:01:31",
-            "description": "菜单类型会显示在系统首页左侧菜单中",
-            "id": "0",
-            "name": "菜单",
-            "updatedatetime": "2013-09-26 14:01:31"
-        },
-        "updatedatetime": "2013-12-08 13:08:36"
-    },
-    {
-        "createdatetime": "2013-12-08 19:58:37",
-        "iconCls": "ext-icon-box",
-        "id": "b5b9f150-16f7-4e4e-bb60-1d74036822d9",
-        "name": "oo",
-        "seq": 100,
-        "syresourcetype": {
-            "createdatetime": "2013-09-26 14:01:31",
-            "description": "菜单类型会显示在系统首页左侧菜单中",
-            "id": "0",
-            "name": "菜单",
-            "updatedatetime": "2013-09-26 14:01:31"
-        },
-        "updatedatetime": "2013-12-08 19:58:37",
-        "url": "/"
     }
 ]
