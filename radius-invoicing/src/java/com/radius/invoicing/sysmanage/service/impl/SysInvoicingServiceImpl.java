@@ -2,10 +2,14 @@ package com.radius.invoicing.sysmanage.service.impl;
 
 import java.util.List;
 
+import net.sf.json.JSONObject;
+
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.radius.base.utils.ResponseUtils;
 import com.radius.invoicing.ibatis.dao.ResourceDao;
 import com.radius.invoicing.ibatis.model.Resource;
 import com.radius.invoicing.ibatis.model.User;
@@ -21,6 +25,10 @@ import com.radius.invoicing.sysmanage.service.SysInvoicingService;
 @Service
 public class SysInvoicingServiceImpl implements SysInvoicingService {
 
+	private Logger logger=Logger.getLogger(this.getClass());
+	
+	private String message="";
+	private ResponseUtils response=new ResponseUtils();
 	@Autowired(required=false)
 	@Qualifier("resourceDaoImpl")
 	private ResourceDao resourceDao;
@@ -59,5 +67,22 @@ public class SysInvoicingServiceImpl implements SysInvoicingService {
 		menuTreeJson=resourceMenu.getResouceMenuJsonManager(all, icon);
 		System.out.println(menuTreeJson);
 		return menuTreeJson;
+	}
+	
+
+	public String saveResouce(Resource resource)throws Exception{
+		message="保存资源操作失败....";
+		try{
+			resourceDao.insertResource(resource);
+			logger.info("保存资源操作成功.....");
+			response.setSuccess(true);
+			message="保存资源操作成功.....";
+		}catch(Exception e){
+			e.printStackTrace();
+			logger.error(e);
+			throw new RuntimeException(e);
+		}
+		response.setMessage(message);
+		return JSONObject.fromObject(response).toString();
 	}
 }

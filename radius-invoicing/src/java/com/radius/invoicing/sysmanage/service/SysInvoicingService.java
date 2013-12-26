@@ -1,5 +1,6 @@
 package com.radius.invoicing.sysmanage.service;
 
+import com.radius.invoicing.ibatis.model.Resource;
 import com.radius.invoicing.ibatis.model.User;
 
 /**
@@ -27,5 +28,9 @@ public interface SysInvoicingService {
 	 * @throws Exception
 	 */
 	public String getResouceJson(boolean icon)throws Exception;
+	
+	
+	
+	public String saveResouce(Resource resource)throws Exception;
 
 }
