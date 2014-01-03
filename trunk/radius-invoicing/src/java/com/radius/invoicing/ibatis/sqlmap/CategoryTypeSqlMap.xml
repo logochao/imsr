@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="categoryTypeSqlMap">
+
+  <typeAlias alias="categoryType" type="com.radius.invoicing.ibatis.model.CategoryType" />
+  
+  <sql id="categoryTypeFileds">
+  	 category_type id category_type_name name,creater creater,createdate createdate,reviser reviser,revisedate revisedate,verifier verifydate
+  </sql>
+  
+  <resultMap id="categoryType" class="categoryType">
+    <result column="category_type" jdbcType="int" javaType="java.lang.Integer" property="id" />
+    <result column="category_type_name" jdbcType="varchar" javaType="java.lang.String" property="name" />
+    <result column="creater" jdbcType="char" javaType="java.lang.String" property="creater" />
+    <result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createdate" />
+    <result column="reviser" jdbcType="char" javaType="java.lang.String" property="reviser" />
+    <result column="revisedate" jdbcType="datetime" javaType="java.util.Date" property="revisedate" />
+    <result column="verifier" jdbcType="char" javaType="java.lang.String" property="verifier" />    
+    <result column="verifydate" jdbcType="datetime" javaType="java.util.Date" property="verifydate"/>
+  </resultMap>
+  
+  <select id="getCategoryTypeById" parameterClass="int" resultMap="categoryType">
+  	SELECT <include refid="categoryTypeFileds"/>
+  	FROM RS_CATEGORY_TYPE
+  	WHERE category_type =#id#
+  </select>
+  
+  <select id="getCategoryTypeAllList" resultMap="categoryType">
+  	SELECT <include refid="categoryTypeFileds"/>
+  	FROM RS_CATEGORY_TYPE
+  </select>
+  
+  <insert id="insert" parameterClass="categoryType">
+  	INSERT INTO RS_CATEGORY_TYPE 
+  	(category_type,category_type_name,creater,createdate) 
+  	VALUES
+  	(#id#,#name#,#creater#,CURDATE())
+  </insert>
+  
+  
+  <update id="updateCategoryTypeById" parameterClass="categoryType">
+  	UPDATE RS_CATEGORY_TYPE
+  	SET category_type_name=#name# ,
+  	<isNotNull property="reviser" prepend=",">reviser = #reviser#,revisedate = CURDATE() </isNotNull>
+  	<isNotNull property="verifier" prepend=",">verifier = #verifier#,verifydate = CURDATE() </isNotNull>
+  	WHERE category_type =#id#
+  </update>
+  
+  
+  <delete id="deleteCategoryTypeById" parameterClass="int">
+  	DELETE FROM RS_CATEGORY_TYPE
+  	WHERE category_type = #id#
+  </delete>
+   
+</sqlMap>
