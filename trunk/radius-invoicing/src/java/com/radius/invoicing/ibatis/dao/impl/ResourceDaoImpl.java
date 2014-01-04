@@ -19,6 +19,7 @@ import com.radius.invoicing.ibatis.model.Resource;
  * 类说明
  */
 @Repository
+@SuppressWarnings("unchecked")
 public class ResourceDaoImpl extends BaseIbatisDaoImpl<Resource> implements ResourceDao {
 	/**
 	 * 批量导入资源信息
