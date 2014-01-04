@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="categoryCodeSqlMap">
+
+  <typeAlias alias="categoryCode" type="com.radius.invoicing.ibatis.model.CategoryCode" />
+  
+  <sql id="categoryCodeFileds">
+  	 category_id id, category_name name category_type parentId,creater creater,createdate createdate,reviser reviser,revisedate revisedate,verifier verifydate
+  </sql>
+  
+  <resultMap id="categoryCode" class="categoryCode">
+    <result column="category_id" jdbcType="int" javaType="java.lang.Integer" property="id" />
+    <result column="category_name" jdbcType="varchar" javaType="java.lang.String" property="name" />
+    <result column="category_type" jdbcType="int" javaType="java.lang.Integer" property="parentId" />
+    <result column="creater" jdbcType="char" javaType="java.lang.String" property="creater" />
+    <result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createdate" />
+    <result column="reviser" jdbcType="char" javaType="java.lang.String" property="reviser" />
+    <result column="revisedate" jdbcType="datetime" javaType="java.util.Date" property="revisedate" />
+    <result column="verifier" jdbcType="char" javaType="java.lang.String" property="verifier" />    
+    <result column="verifydate" jdbcType="datetime" javaType="java.util.Date" property="verifydate"/>
+  </resultMap>
+  
+  <select id="getCategoryCodeById" parameterClass="int" resultMap="categoryCode">
+  	SELECT <include refid="categoryCodeFileds"/>
+  	FROM RS_CATEGORY_CODE
+  	WHERE category_id =#id#
+  </select>
+  
+  <!-- 通过分类类型编号获取分类编码中对应的最大的值 -->
+  <select id="getCategoryIdByParentId" parameterClass="int" resultClass="long">
+  	SELECT IFNULL(MAX(category_id),0) id
+  	FROM RS_CATEGORY_CODE
+  	WHERE category_type=#parentId#
+  </select>
+  <!-- end -->
+  
+  <!-- 通过分类编号,获取分类编码信息 -->
+  <select id="getCategoryCodeByParentId" parameterClass="int" resultMap="categoryCode">
+  	SELECT <include refid="categoryCodeFileds"/>
+  	FROM RS_CATEGORY_CODE
+  	WHERE category_type=#parentId#
+  </select>
+  <!-- end -->
+  
+  <select id="getCategoryCodeAllList" resultMap="categoryCode">
+  	SELECT <include refid="categoryTypeFileds"/>
+  	FROM RS_CATEGORY_CODE
+  </select>
+  
+  <insert id="insert" parameterClass="categoryCode">
+  	INSERT INTO RS_CATEGORY_CODE 
+  	(category_id,category_name,category_type,creater,createdate) 
+  	VALUES
+  	(#id#,#name#,#parentId#,#creater#,CURDATE())
+  </insert>
+  
+  
+  <update id="updateCategoryCodeById" parameterClass="categoryCode">
+  	UPDATE RS_CATEGORY_CODE
+  	SET category_name=#name# ,
+  	<isNotNull property="reviser" prepend=",">reviser = #reviser#,revisedate = CURDATE() </isNotNull>
+  	<isNotNull property="verifier" prepend=",">verifier = #verifier#,verifydate = CURDATE() </isNotNull>
+  	WHERE category_id =#id#
+  </update>
+  
+  
+  <delete id="deleteCategoryCodeById" parameterClass="int">
+  	DELETE FROM RS_CATEGORY_CODE
+  	WHERE category_id = #id#
+  </delete>
+  
+  <!-- 通过分类类型编号删除分类编码 -->
+  <delete id="deleteCategoryCodeByParentId" parameterClass="int">
+  	DELETE  FROM RS_CATEGORY_CODE
+  	WHERE category_type=#parentId# 
+  </delete>
+   
+</sqlMap>
