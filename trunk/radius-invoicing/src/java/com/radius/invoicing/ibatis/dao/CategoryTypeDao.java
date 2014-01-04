@@ -51,5 +51,13 @@ public interface CategoryTypeDao {
 	 * @return
 	 */
 	public boolean deleteCategoryTypeById(int id);
+	
+	
+	/**
+	 * 获取分类编码的最大id
+	 * @param stemp 表示每个分类存在多少个子分类
+	 * @return
+	 */
+	public Long getCategoryTypeMaxId(Long stemp);
 
 }

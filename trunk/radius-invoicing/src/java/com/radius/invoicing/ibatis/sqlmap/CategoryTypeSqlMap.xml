@@ -46,6 +46,11 @@
   	WHERE category_type =#id#
   </update>
   
+  <!-- 获取分类编码最大id -->
+  <select id="getCategoryTypeMaxId" parameterClass="long">
+  	SELECT IFNull(MAX(category_type),0) as id
+  	FROM RS_CATEGORY_TYPE
+  </select>
   
   <delete id="deleteCategoryTypeById" parameterClass="int">
   	DELETE FROM RS_CATEGORY_TYPE

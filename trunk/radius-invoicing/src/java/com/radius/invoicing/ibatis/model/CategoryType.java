@@ -15,6 +15,9 @@ public class CategoryType extends ExtInfo{
 	private Integer  id ;//主键 分类项目类型编号
 	private String name;//分类项目名称
 	
+	public CategoryType() {
+	}
+	
 	
 	public CategoryType(Integer id, String name) {
 		this.id = id;
