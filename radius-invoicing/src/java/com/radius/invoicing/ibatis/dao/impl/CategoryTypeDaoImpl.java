@@ -78,5 +78,13 @@ public class CategoryTypeDaoImpl extends BaseIbatisDaoImpl<CategoryType> impleme
 	public boolean deleteCategoryTypeById(int id){
 		return this.deleteObject(id, "categoryTypeSqlMap.deleteCategoryTypeById")==1;
 	}
-	
+	/**
+	 * 获取分类编码的最大id
+	 * @param stemp 表示每个分类存在多少个子分类
+	 * @return
+	 */
+	public Long getCategoryTypeMaxId(Long stemp){
+		if(stemp==null)stemp=200l;
+		return ((Long)this.getSqlMapClientTemplate().queryForObject("categoryTypeSqlMap.getCategoryTypeMaxId")+stemp);
+	}
 }

@@ -15,7 +15,8 @@ public class CategoryCode extends ExtInfo{
 	
 	private String parentId;//分类编号
 	
-	
+	public CategoryCode() {
+	}
 	
 
 	public CategoryCode(int id, String name, String parentId) {
