@@ -43,7 +43,7 @@
   <!-- end -->
   
   <select id="getCategoryCodeAllList" resultMap="categoryCode">
-  	SELECT <include refid="categoryTypeFileds"/>
+  	SELECT <include refid="categoryCodeFileds"/>
   	FROM RS_CATEGORY_CODE
   </select>
   

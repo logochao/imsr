@@ -85,6 +85,7 @@ public class CategoryTypeDaoImpl extends BaseIbatisDaoImpl<CategoryType> impleme
 	 */
 	public Long getCategoryTypeMaxId(Long stemp){
 		if(stemp==null)stemp=200l;
-		return ((Long)this.getSqlMapClientTemplate().queryForObject("categoryTypeSqlMap.getCategoryTypeMaxId")+stemp);
+		Object obj=this.getSqlMapClientTemplate().queryForObject("categoryTypeSqlMap.getCategoryTypeMaxId");
+		return stemp;
 	}
 }
