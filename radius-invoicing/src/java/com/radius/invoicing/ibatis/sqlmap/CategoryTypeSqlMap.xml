@@ -34,22 +34,22 @@
   	INSERT INTO RS_CATEGORY_TYPE 
   	(category_type,category_type_name,creater,createdate) 
   	VALUES
-  	(#id#,#name#,#creater#,CURDATE())
+  	(#id#,#name#,#creater#,now())
   </insert>
   
   
   <update id="updateCategoryTypeById" parameterClass="categoryType">
   	UPDATE RS_CATEGORY_TYPE
   	SET category_type_name=#name# ,
-  	<isNotNull property="reviser" prepend=",">reviser = #reviser#,revisedate = CURDATE() </isNotNull>
-  	<isNotNull property="verifier" prepend=",">verifier = #verifier#,verifydate = CURDATE() </isNotNull>
+  	<isNotNull property="reviser" prepend=",">reviser = #reviser#,revisedate = now() </isNotNull>
+  	<isNotNull property="verifier" prepend=",">verifier = #verifier#,verifydate = now() </isNotNull>
   	WHERE category_type =#id#
   </update>
   
   <!-- 获取分类编码最大id -->
-  <select id="getCategoryTypeMaxId" parameterClass="long">
-  	SELECT IFNull(MAX(category_type),0) as id
-  	FROM RS_CATEGORY_TYPE
+  <select id="getCategoryTypeMaxId" parameterClass="java.lang.Integer">
+  	select max(category_type)
+  	from rs_category_type
   </select>
   
   <delete id="deleteCategoryTypeById" parameterClass="int">
