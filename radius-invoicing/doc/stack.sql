@@ -20,3 +20,24 @@ CREATE TABLE rs_user
    u_creater            VARCHAR(4),
    PRIMARY KEY (u_id)
 );
+
+
+
+DROP TABLE IF EXISTS rs_supplier_goods;
+
+/*==============================================================*/
+/* Table: rs_supplier_goods      供应商-商品信息                */
+/*==============================================================*/
+CREATE TABLE rs_supplier_goods
+(
+   supplier_id          CHAR(5) NOT NULL,
+   goods_id             CHAR(5) NOT NULL,
+   ledger_id            CHAR(8),
+   creater              CHAR(4),
+   createdate           DATETIME,
+   reviser              CHAR(4),
+   revisedate           DATETIME,
+   verifier             CHAR(4),
+   verifydate           DATETIME,
+   PRIMARY KEY (supplier_id, goods_id)
+)ENGINE=INNODB DEFAULT CHARSET=utf8;
