@@ -4,7 +4,7 @@
 
   <typeAlias alias="supplierGoods" type="com.radius.invoicing.ibatis.model.SupplierGoods" />
   
-  <sql id="linkManFileds">
+  <sql id="supplierGoodsFileds">
     supplier_id supplierId,goods_id goodsId,ledger_id ledgerId,
     creater creater,createdate createdate,reviser reviser,revisedate revisedate,verifier verifydate
   </sql>
@@ -55,7 +55,7 @@
    		<include refid="whereLike"/>
    	</update>
    	<select id="getSupplierGoodsByCondition" parameterClass="supplierGoods" resultMap="supplierGoods">
-   		SELECT <include refid="supplierFileds"/>
+   		SELECT <include refid="supplierGoodsFileds"/>
    		FROM RS_SUPPLIER_GOODS
    		<include refid="whereLike"/>
    	</select>

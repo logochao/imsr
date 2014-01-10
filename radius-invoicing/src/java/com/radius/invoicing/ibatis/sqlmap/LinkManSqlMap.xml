@@ -51,7 +51,7 @@
   </sql>
  
 	 <select id="getLinkManById" parameterClass="java.lang.Integer" resultMap="linkMan">
-	 	SELECT <include refid="supplierFileds"/>
+	 	SELECT <include refid="linkManFileds"/>
 	 	FROM RS_LINK_MAN
 	 	WHERE link_man_id =#id#
 	 </select>
@@ -110,7 +110,7 @@
    		WHERE link_man_id =#id#
    	</update>
    	<select id="getLinkManByCondition" parameterClass="linkMan" resultMap="linkMan">
-   		SELECT <include refid="supplierFileds"/>
+   		SELECT <include refid="linkManFileds"/>
    		FROM RS_LINK_MAN
    		<include refid="whereLike"/>
    	</select>
