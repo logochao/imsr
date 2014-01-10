@@ -5,6 +5,8 @@ package com.radius.invoicing.ibatis.dao.impl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.radius.base.dao.ibatis.BaseIbatisDaoImpl;
 import com.radius.base.page.Pager;
 import com.radius.invoicing.ibatis.dao.CustomerDao;
@@ -16,6 +18,8 @@ import com.radius.invoicing.ibatis.model.Customer;
  * Copyright (c) 2013 by 陈波宁.<br/>
  * 类说明
  */
+@Repository
+@SuppressWarnings("unchecked")
 public class CustomerDaoImpl extends BaseIbatisDaoImpl<Customer> implements CustomerDao{
 
 	/**
@@ -25,7 +29,6 @@ public class CustomerDaoImpl extends BaseIbatisDaoImpl<Customer> implements Cust
 	 * @param splitPageSQL
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	public Pager<Customer> getCustomerSplitPageBySQL(int pageNo,String countSQL,String splitPageSQL){
 		List<Customer> list=this.getSqlMapClientTemplate().queryForList("customerSqlMap.getCustomerSplitPageBySQL",splitPageSQL);
 		Integer rowCount=(Integer)this.getSqlMapClientTemplate().queryForObject("customerSqlMap.getCustomerSplitPageCountSQL", countSQL);
@@ -45,8 +48,8 @@ public class CustomerDaoImpl extends BaseIbatisDaoImpl<Customer> implements Cust
 	 * @param c
 	 * @return
 	 */
-	public Customer getCustomerByCondition(Customer c){
-		return this.getObjectByCondition(c, "customerSqlMap.getCustomerByCondition");
+	public List<Customer> getCustomerByCondition(Customer c){
+		return this.getSqlMapClientTemplate().queryForList("customerSqlMap.getCustomerByCondition",c);
 	}
 	
 	/**

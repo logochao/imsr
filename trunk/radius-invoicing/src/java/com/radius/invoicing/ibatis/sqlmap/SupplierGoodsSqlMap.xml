@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="supplierGoodsSqlMap">
+
+  <typeAlias alias="supplierGoods" type="com.radius.invoicing.ibatis.model.SupplierGoods" />
+  
+  <sql id="linkManFileds">
+    supplier_id supplierId,goods_id goodsId,ledger_id ledgerId,
+    creater creater,createdate createdate,reviser reviser,revisedate revisedate,verifier verifydate
+  </sql>
+  
+  <resultMap id="supplierGoods" class="supplierGoods">
+    <result column="supplier_id" jdbcType="char" javaType="java.lang.String" property="supplierId" />
+    <result column="goods_id" jdbcType="char" javaType="java.lang.String" property="goodsId" />
+    <result column="ledger_id" jdbcType="char" javaType="java.lang.String" property="ledgerId" />
+    <result column="creater" jdbcType="char" javaType="java.lang.String" property="creater" />
+    <result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createdate" />
+    <result column="reviser" jdbcType="char" javaType="java.lang.String" property="reviser" />
+    <result column="revisedate" jdbcType="datetime" javaType="java.util.Date" property="revisedate" />
+    <result column="verifier" jdbcType="char" javaType="java.lang.String" property="verifier" />    
+    <result column="verifydate" jdbcType="datetime" javaType="java.util.Date" property="verifydate"/>
+  </resultMap>
+  
+  <sql id="whereLike">
+  	<dynamic prepend="where">
+  		1=1  
+  		<isNotEmpty prepend="and" property="supplierId">supplier_id=#supplierId#</isNotEmpty>
+		<isNotEmpty prepend="and" property="linkType">goods_id=#goodsId#</isNotEmpty>
+		<isNotEmpty prepend="and" property="ledgerId">ledger_id=#ledgerId#</isNotEmpty>
+  	</dynamic>
+  </sql>
+   
+   	<insert id="insert" parameterClass="supplierGoods">
+   		INSERT INTO RS_SUPPLIER_GOODS (
+   			supplier_id,
+   			goods_id,
+   			<isNotEmpty  property="ledgerId">#ledger_id#,</isNotEmpty>
+	  	    creater,
+	  	    createdate
+   		)VALUES(
+   			#supplierId#,
+   			#goodsId#,
+			<isNotEmpty  property="ledgerId">#ledgerId#,</isNotEmpty>
+   			 creater,now()
+   		)
+   	</insert>
+   
+   	<update id="updateSupplierGoods" parameterClass="supplierGoods">
+   		UPDATE RS_SUPPLIER_GOODS
+   		<dynamic prepend="SET">
+	 		<isNotEmpty prepend="," property="ledgerId">ledger_id=#ledgerId#</isNotEmpty> 
+  	 		<isNotEmpty  prepend="," property="reviser">reviser = #reviser#,revisedate = now() </isNotEmpty>
+  			<isNotEmpty  prepend="," property="verifier">verifier = #verifier#,verifydate = now() </isNotEmpty>
+   		</dynamic>
+   		<include refid="whereLike"/>
+   	</update>
+   	<select id="getSupplierGoodsByCondition" parameterClass="supplierGoods" resultMap="supplierGoods">
+   		SELECT <include refid="supplierFileds"/>
+   		FROM RS_SUPPLIER_GOODS
+   		<include refid="whereLike"/>
+   	</select>
+   	<!-- 分页查询语句 -->
+   	<select id="getSupplierGoodsSplitPageBySQL" remapResults="true" parameterClass="java.lang.String" resultMap="supplierGoods">
+   		$splitPageSQL$
+   	</select>
+   	<!-- end -->
+   	
+   	<select id="getSupplierGoodsSplitPageCountSQL" remapResults="true" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+   		$countSQL$
+   	</select>
+   	
+   	
+   	<delete id="deleteSupplierGoods" parameterClass="supplierGoods">
+   		DELETE FROM RS_SUPPLIER_GOODS
+   		<include refid="whereLike"/>
+   	</delete>
+   	
+</sqlMap>

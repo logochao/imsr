@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="linkManSqlMap">
+
+  <typeAlias alias="linkMan" type="com.radius.invoicing.ibatis.model.LinkMan" />
+  
+  <sql id="linkManFileds">
+    link_man_id id,link_type linkType,other_id other,link_man_name name,sex sex,card_no cardNo,link_mobile mobile,link_tel tel,email email,qq qq,address address,pinyin pinyin,
+  	memo memo,creater creater,createdate createdate,reviser reviser,revisedate revisedate,verifier verifydate
+  </sql>
+  
+  <resultMap id="linkMan" class="linkMan">
+    <result column="link_man_id" jdbcType="int" javaType="java.lang.Integer" property="id" />
+    <result column="link_type" jdbcType="int" javaType="java.lang.Integer" property="linkType" />
+    <result column="other_id" jdbcType="char" javaType="java.lang.String" property="other" />
+    <result column="link_man_name" jdbcType="varchar" javaType="java.lang.String" property="name" />
+    <result column="sex"   property="yesOrNo" typeHandler="com.radius.invoicing.enums.SexEnumsHandler" nullValue="2"/>
+	<result column="card_no" jdbcType="char" javaType="java.lang.String" property="cardNo"/> 
+	<result column="link_mobile" jdbcType="char" javaType="java.lang.String" property="mobile"/> 
+	<result column="link_tel" jdbcType="char" javaType="java.lang.String" property="tel"/>
+	<result column="email" jdbcType="varchar" javaType="java.lang.String" property="email"/>
+	<result column="qq" jdbcType="varchar" javaType="java.lang.String" property="qq"/>
+	<result column="address" jdbcType="varchar" javaType="java.lang.String" property="address"/>
+	<result column="pinyin" jdbcType="varchar" javaType="java.lang.String" property="pinyin"/>
+  	<result column="memo" jdbcType="text" javaType="java.lang.String" property="memo" />
+    <result column="creater" jdbcType="char" javaType="java.lang.String" property="creater" />
+    <result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createdate" />
+    <result column="reviser" jdbcType="char" javaType="java.lang.String" property="reviser" />
+    <result column="revisedate" jdbcType="datetime" javaType="java.util.Date" property="revisedate" />
+    <result column="verifier" jdbcType="char" javaType="java.lang.String" property="verifier" />    
+    <result column="verifydate" jdbcType="datetime" javaType="java.util.Date" property="verifydate"/>
+  </resultMap>
+  
+  <sql id="whereLike">
+  	<dynamic prepend="where">
+  		1=1  
+  		<isNotNull prepend="and" property="id">link_man_id=#id#</isNotNull>
+		<isNotNull prepend="and" property="linkType">link_type=#linkType#</isNotNull>
+		<isNotEmpty prepend="and" property="other">other_id=#other#</isNotEmpty>
+		<isNotEmpty prepend="and" property="name">link_man_name=#name#</isNotEmpty>
+		<isNotNull prepend="and" property="sex">sex=#sex#</isNotNull>
+		<isNotEmpty prepend="and" property="cardNo">card_no=#cardNo#</isNotEmpty>
+		<isNotEmpty prepend="and" property="mobile">link_mobile=#mobile#</isNotEmpty>
+		<isNotEmpty prepend="and" property="tel">link_tel=#tel#</isNotEmpty>
+		<isNotEmpty prepend="and" property="email">email=#email#</isNotEmpty>
+		<isNotEmpty prepend="and" property="qq">qq=#qq#</isNotEmpty>
+		<isNotEmpty prepend="and" property="address">address=#address#</isNotEmpty>
+		<isNotEmpty prepend="and" property="pinyin">pinyin=#pinyin#</isNotEmpty>
+ 		<isNotEmpty prepend="and" property="memo">memo=#memo#</isNotEmpty> 
+  	</dynamic>
+  </sql>
+ 
+	 <select id="getLinkManById" parameterClass="java.lang.Integer" resultMap="linkMan">
+	 	SELECT <include refid="supplierFileds"/>
+	 	FROM RS_LINK_MAN
+	 	WHERE link_man_id =#id#
+	 </select>
+   
+   	<insert id="insert" parameterClass="linkMan">
+   		INSERT INTO RS_LINK_MAN (
+			<isNotNull  property="linkType">link_type,</isNotNull>
+			<isNotEmpty  property="other">other_id,</isNotEmpty>
+			<isNotEmpty  property="name">link_man_name,</isNotEmpty>
+			<isNotNull  property="sex">sex,</isNotNull>
+			<isNotEmpty  property="cardNo">card_no,</isNotEmpty>
+			<isNotEmpty  property="mobile">link_mobile,</isNotEmpty>
+			<isNotEmpty  property="tel">link_tel,</isNotEmpty>
+			<isNotEmpty  property="email">email,</isNotEmpty>
+			<isNotEmpty  property="qq">qq,</isNotEmpty>
+			<isNotEmpty  property="address">address,</isNotEmpty>
+			<isNotEmpty  property="pinyin">pinyin,</isNotEmpty>
+	 		<isNotEmpty  property="memo">memo,</isNotEmpty>
+	  	    creater,
+	  	    createdate
+   		)VALUES(
+			<isNotNull  property="linkType">#linkType#,</isNotNull>
+			<isNotEmpty  property="other">#other#,</isNotEmpty>
+			<isNotEmpty  property="name">#name#,</isNotEmpty>
+			<isNotNull  property="sex">#sex#,</isNotNull>
+			<isNotEmpty  property="cardNo">#cardNo#,</isNotEmpty>
+			<isNotEmpty  property="mobile">#mobile#,</isNotEmpty>
+			<isNotEmpty  property="tel">#tel#,</isNotEmpty>
+			<isNotEmpty  property="email">#email#,</isNotEmpty>
+			<isNotEmpty  property="qq">#qq#,</isNotEmpty>
+			<isNotEmpty  property="address">#address#,</isNotEmpty>
+			<isNotEmpty  property="pinyin">#pinyin#,</isNotEmpty>
+	 		<isNotEmpty  property="memo">#memo#,</isNotEmpty>
+   			 creater,now()
+   		)
+   	</insert>
+   
+   	<update id="updateLinkManById" parameterClass="linkMan">
+   		UPDATE RS_LINK_MAN
+   		<dynamic prepend="SET">
+			<isNotNull prepend="," property="linkType">link_type=#linkType#</isNotNull>
+			<isNotEmpty prepend="," property="other">other_id=#other#</isNotEmpty>
+			<isNotEmpty prepend="," property="name">link_man_name=#name#</isNotEmpty>
+			<isNotNull prepend="," property="sex">sex=#sex#</isNotNull>
+			<isNotEmpty prepend="," property="cardNo">card_no=#cardNo#</isNotEmpty>
+			<isNotEmpty prepend="," property="mobile">link_mobile=#mobile#</isNotEmpty>
+			<isNotEmpty prepend="," property="tel">link_tel=#tel#</isNotEmpty>
+			<isNotEmpty prepend="," property="email">email=#email#</isNotEmpty>
+			<isNotEmpty prepend="," property="qq">qq=#qq#</isNotEmpty>
+			<isNotEmpty prepend="," property="address">address=#address#</isNotEmpty>
+			<isNotEmpty prepend="," property="pinyin">pinyin=#pinyin#</isNotEmpty>
+	 		<isNotEmpty prepend="," property="memo">memo=#memo#</isNotEmpty> 
+  	 		<isNotEmpty  prepend="," property="reviser">reviser = #reviser#,revisedate = now() </isNotEmpty>
+  			<isNotEmpty  prepend="," property="verifier">verifier = #verifier#,verifydate = now() </isNotEmpty>
+   		</dynamic>
+   		WHERE link_man_id =#id#
+   	</update>
+   	<select id="getLinkManByCondition" parameterClass="linkMan" resultMap="linkMan">
+   		SELECT <include refid="supplierFileds"/>
+   		FROM RS_LINK_MAN
+   		<include refid="whereLike"/>
+   	</select>
+   	<!-- 分页查询语句 -->
+   	<select id="getLinkManSplitPageBySQL" remapResults="true" parameterClass="java.lang.String" resultMap="linkMan">
+   		$splitPageSQL$
+   	</select>
+   	<!-- end -->
+   	
+   	<select id="getLinkManSplitPageCountSQL" remapResults="true" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+   		$countSQL$
+   	</select>
+   	
+   	
+   	<delete id="deleteLinkManById" parameterClass="java.lang.Integer">
+   		DELETE FROM RS_LINK_MAN
+   		WHERE link_man_id =#id#
+   	</delete>
+   	
+</sqlMap>
