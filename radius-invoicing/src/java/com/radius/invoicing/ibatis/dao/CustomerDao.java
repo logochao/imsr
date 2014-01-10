@@ -1,5 +1,7 @@
 package com.radius.invoicing.ibatis.dao;
 
+import java.util.List;
+
 import com.radius.base.page.Pager;
 import com.radius.invoicing.ibatis.model.Customer;
 
@@ -34,7 +36,7 @@ public interface CustomerDao {
 	 * @param c
 	 * @return
 	 */
-	public Customer getCustomerByCondition(Customer c);
+	public List<Customer> getCustomerByCondition(Customer c);
 
 	/**
 	 * 保存客户信息

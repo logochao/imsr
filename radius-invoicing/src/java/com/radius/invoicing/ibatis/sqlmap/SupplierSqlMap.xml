@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="supplierSqlMap">
+
+  <typeAlias alias="supplier" type="com.radius.invoicing.ibatis.model.Supplier" />
+  
+  <sql id="supplierFileds">
+  	 supplier_id id,supplier_name name,supplier_short_name shortName,nature nature,delivery_type deliveryType,pay_type payType,market_zone marketZone,delivery_address deliveryAddress,link_man linkMan,contact_info contactInfo,
+	 tel1 tel1,tel2 tel2,tel3 tel3,fax1 fax1,fax2 fax2,fax3 fax3,paymented_type paymentedType,supplier_notes supplierNotes,purchaser purchaser,office_address officeAddress,
+	 delivery_or_not yesOrNo,post_code postCode,bank_acc_no bankAccNo,tax_no taxNo,url url,email email,
+  	 ledger_id ledgerId,memo memo,creater creater,createdate createdate,reviser reviser,revisedate revisedate,verifier verifydate
+  </sql>
+  
+  <resultMap id="supplier" class="supplier">
+    <result column="supplier_id" jdbcType="char" javaType="java.lang.String" property="id" />
+    <result column="supplier_name" jdbcType="varchar" javaType="java.lang.String" property="name" />
+    <result column="supplier_short_name" jdbcType="varchar" javaType="java.lang.String" property="shortName" />
+    <result column="nature" jdbcType="varchar" javaType="java.lang.String" property="nature" />
+    <result column="delivery_type" jdbcType="char" javaType="java.lang.String" property="deliveryType"/>
+	<result column="pay_type" jdbcType="char" javaType="java.lang.String" property="payType"/> 
+	<result column="market_zone" jdbcType="varchar" javaType="java.lang.String" property="marketZone"/> 
+	<result column="delivery_address" jdbcType="varchar" javaType="java.lang.String" property="deliveryAddress"/>
+	<result column="link_man" jdbcType="varchar" javaType="java.lang.String" property="linkMan"/>
+	<result column="contact_info" jdbcType="varchar" javaType="java.lang.String" property="contactInfo"/>
+	<result column="tel1" jdbcType="char" javaType="java.lang.String" property="tel1"/>
+	<result column="tel2" jdbcType="char" javaType="java.lang.String" property="tel2"/>
+	<result column="tel3" jdbcType="char" javaType="java.lang.String" property="tel3"/>
+	<result column="fax1" jdbcType="char" javaType="java.lang.String" property="fax1"/>
+	<result column="fax2" jdbcType="char" javaType="java.lang.String" property="fax2"/>
+	<result column="fax3" jdbcType="char" javaType="java.lang.String" property="fax3"/>
+	<result column="paymented_type" jdbcType="int" javaType="java.lang.Integer" property="paymentedType"/>
+	<result column="supplier_notes" jdbcType="text" javaType="java.lang.String" property="supplierNotes"/>
+	<result column="purchaser" jdbcType="char" javaType="java.lang.String" property="purchaser"/>
+	<result column="office_address" jdbcType="char" javaType="java.lang.String" property="officeAddress"/>
+	<result column="delivery_or_not"  property="yesOrNo" typeHandler="com.radius.invoicing.enums.YesOrNoEnumsHandler" nullValue="0"/>
+	<result column="post_code" jdbcType="char" javaType="java.lang.String" property="postCode"/>
+	<result column="bank_acc_no" jdbcType="varchar" javaType="java.lang.String" property="bankAccNo"/>
+	<result column="tax_no" jdbcType="varchar" javaType="java.lang.String" property="taxNo"/>
+	<result column="url" jdbcType="varchar" javaType="java.lang.String" property="url"/>
+	<result column="email" jdbcType="varchar" javaType="java.lang.String" property="email"/>
+  	 <result column="ledger_id" jdbcType="char" javaType="java.lang.String" property="ledgerId" />
+  	 <result column="memo" jdbcType="text" javaType="java.lang.String" property="memo" />
+     <result column="creater" jdbcType="char" javaType="java.lang.String" property="creater" />
+    <result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createdate" />
+    <result column="reviser" jdbcType="char" javaType="java.lang.String" property="reviser" />
+    <result column="revisedate" jdbcType="datetime" javaType="java.util.Date" property="revisedate" />
+    <result column="verifier" jdbcType="char" javaType="java.lang.String" property="verifier" />    
+    <result column="verifydate" jdbcType="datetime" javaType="java.util.Date" property="verifydate"/>
+  </resultMap>
+  
+  <sql id="whereLike">
+  	<dynamic prepend="where">
+  		1=1  
+  		<isNotEmpty prepend="and" property="id">supplier_id=#id#</isNotEmpty>
+		<isNotEmpty prepend="and" property="name">supplier_name=#name#</isNotEmpty>
+		<isNotEmpty prepend="and" property="shortName">supplier_short_name=#shortName#</isNotEmpty>
+		<isNotEmpty prepend="and" property="nature">nature=#nature#</isNotEmpty>
+		<isNotEmpty prepend="and" property="deliveryType">delivery_type=#deliveryType#</isNotEmpty>
+		<isNotNull prepend="and" property="payType">pay_type=#payType#</isNotNull>
+		<isNotEmpty prepend="and" property="marketZone">market_zone=#marketZone#</isNotEmpty>
+		<isNotEmpty prepend="and" property="deliveryAddress">delivery_address=#deliveryAddress#</isNotEmpty>
+		<isNotEmpty prepend="and" property="linkMan">link_man=#linkMan#</isNotEmpty>
+		<isNotEmpty prepend="and" property="contactInfo">contact_info=#contactInfo#</isNotEmpty>
+		<isNotEmpty prepend="and" property="tel1">tel1=#tel1#</isNotEmpty>
+		<isNotEmpty prepend="and" property="tel2">tel2=#tel2#</isNotEmpty>
+		<isNotEmpty prepend="and" property="tel3">tel3=#tel3#</isNotEmpty>
+		<isNotEmpty prepend="and" property="fax1">fax1=#fax1#</isNotEmpty>
+		<isNotEmpty prepend="and" property="fax2">fax2=#fax2#</isNotEmpty>
+		<isNotEmpty prepend="and" property="fax3">fax3=#fax3#</isNotEmpty>
+		<isNotNull prepend="and" property="paymentedType">paymented_type=#paymentedType#</isNotNull>
+		<isNotEmpty prepend="and" property="supplierNotes">supplier_notes=#supplierNotes#</isNotEmpty>
+		<isNotEmpty prepend="and" property="purchaser">purchaser=#purchaser#</isNotEmpty>
+		<isNotEmpty prepend="and" property="officeAddress">office_address=#officeAddress#</isNotEmpty>
+		<isNotNull prepend="and"  property="yesOrNo">delivery_or_not=#yesOrNo#</isNotNull>
+		<isNotEmpty prepend="and" property="postCode">post_code=#postCode#</isNotEmpty>
+	    <isNotEmpty prepend="and" property="bankAccNo">bank_acc_no=#bankAccNo#</isNotEmpty>
+	    <isNotEmpty prepend="and" property="taxNo">tax_no=#taxNo#</isNotEmpty>
+ 		<isNotEmpty prepend="and" property="url">url=#url#</isNotEmpty>
+ 		<isNotEmpty prepend="and" property="email">email=#email#</isNotEmpty>
+ 		<isNotEmpty prepend="and" property="ledgerId">ledger_id=#ledgerId#</isNotEmpty> 
+ 		<isNotEmpty prepend="and" property="memo">memo=#memo#</isNotEmpty> 
+  	</dynamic>
+  </sql>
+ 
+	 <select id="getSupplierById" parameterClass="string" resultMap="supplier">
+	 	SELECT <include refid="supplierFileds"/>
+	 	FROM RS_SUPPLIER
+	 	WHERE supplier_id =#id#
+	 </select>
+   
+   	<insert id="insert" parameterClass="supplier">
+   		INSERT INTO RS_SUPPLIER (
+   			customer_id,
+			<isNotEmpty  property="name">supplier_name,</isNotEmpty>
+			<isNotEmpty  property="shortName">supplier_short_name,</isNotEmpty>
+			<isNotEmpty  property="nature">nature,</isNotEmpty>
+			<isNotEmpty  property="deliveryType">delivery_type,</isNotEmpty>
+			<isNotNull  property="payType">pay_type,</isNotNull>
+			<isNotEmpty  property="marketZone">market_zone,</isNotEmpty>
+			<isNotEmpty  property="deliveryAddress">delivery_address,</isNotEmpty>
+			<isNotEmpty  property="linkMan">link_man,</isNotEmpty>
+			<isNotEmpty  property="contactInfo">contact_info,</isNotEmpty>
+			<isNotEmpty  property="tel1">tel1,</isNotEmpty>
+			<isNotEmpty  property="tel2">tel2,</isNotEmpty>
+			<isNotEmpty  property="tel3">tel3,</isNotEmpty>
+			<isNotEmpty  property="fax1">fax1,</isNotEmpty>
+			<isNotEmpty  property="fax2">fax2,</isNotEmpty>
+			<isNotEmpty  property="fax3">fax3,</isNotEmpty>
+			<isNotNull  property="paymentedType">paymented_type,</isNotNull>
+			<isNotEmpty  property="supplierNotes">supplier_notes,</isNotEmpty>
+			<isNotEmpty  property="purchaser">purchaser,</isNotEmpty>
+			<isNotEmpty  property="officeAddress">office_address,</isNotEmpty>
+			<isNotNull   property="yesOrNo">delivery_or_not,</isNotNull>
+			<isNotEmpty  property="postCode">post_code,</isNotEmpty>
+		    <isNotEmpty  property="bankAccNo">bank_acc_no,</isNotEmpty>
+		    <isNotEmpty  property="taxNo">tax_no,</isNotEmpty>
+	 		<isNotEmpty  property="url">url,</isNotEmpty>
+	 		<isNotEmpty  property="email">email,</isNotEmpty>
+	 		<isNotEmpty  property="ledgerId">ledger_id,</isNotEmpty> 
+	 		<isNotEmpty  property="memo">memo,</isNotEmpty>
+	  	    creater,
+	  	    createdate
+   		)VALUES(
+   			#id#,
+   			<isNotEmpty  property="name">#name#,</isNotEmpty>
+			<isNotEmpty  property="shortName">#shortName#,</isNotEmpty>
+   			<isNotEmpty  property="nature">#nature#,</isNotEmpty>
+			<isNotEmpty  property="deliveryType">#deliveryType#,</isNotEmpty>
+			<isNotNull  property="payType">#payType#,</isNotNull>
+			<isNotEmpty  property="marketZone">#marketZone#,</isNotEmpty>
+			<isNotEmpty  property="deliveryAddress">#deliveryAddress#,</isNotEmpty>
+			<isNotEmpty  property="linkMan">#linkMan#,</isNotEmpty>
+			<isNotEmpty  property="contactInfo">#contactInfo#,</isNotEmpty>
+			<isNotEmpty  property="tel1">#tel1#,</isNotEmpty>
+			<isNotEmpty  property="tel2">#tel2#,</isNotEmpty>
+			<isNotEmpty  property="tel3">#tel3#,</isNotEmpty>
+			<isNotEmpty  property="fax1">#fax1#,</isNotEmpty>
+			<isNotEmpty  property="fax2">#fax2#,</isNotEmpty>
+			<isNotEmpty  property="fax3">#fax3#,</isNotEmpty>
+			<isNotNull  property="paymentedType">#paymentedType#,</isNotNull>
+			<isNotEmpty  property="supplierNotes">#supplierNotes#,</isNotEmpty>
+			<isNotEmpty  property="purchaser">#purchaser#,</isNotEmpty>
+			<isNotEmpty  property="officeAddress">#officeAddress#,</isNotEmpty>
+			<isNotNull   property="yesOrNo">#yesOrNo#,</isNotNull>
+			<isNotEmpty  property="postCode">#postCode#,</isNotEmpty>
+		    <isNotEmpty  property="bankAccNo">#bankAccNo#,</isNotEmpty>
+		    <isNotEmpty  property="taxNo">#taxNo#,</isNotEmpty>
+	 		<isNotEmpty  property="url">#url#,</isNotEmpty>
+	 		<isNotEmpty  property="email">#email#,</isNotEmpty>
+	 		<isNotEmpty  property="ledgerId">#ledgerId#,</isNotEmpty> 
+	 		<isNotEmpty  property="memo">#memo#,</isNotEmpty>
+   			 creater,now()
+   		)
+   	</insert>
+   
+   	<update id="updateSupplierById" parameterClass="supplier">
+   		UPDATE RS_SUPPLIER
+   		<dynamic prepend="SET">
+			<isNotEmpty prepend="," property="name">supplier_name=#name#</isNotEmpty>
+			<isNotEmpty prepend="," property="shortName">supplier_short_name=#shortName#</isNotEmpty>
+			<isNotEmpty prepend="," property="nature">nature=#nature#</isNotEmpty>
+			<isNotEmpty prepend="," property="deliveryType">delivery_type=#deliveryType#</isNotEmpty>
+			<isNotNull prepend="," property="payType">pay_type=#payType#</isNotNull>
+			<isNotEmpty prepend="," property="marketZone">market_zone=#marketZone#</isNotEmpty>
+			<isNotEmpty prepend="," property="deliveryAddress">delivery_address=#deliveryAddress#</isNotEmpty>
+			<isNotEmpty prepend="," property="linkMan">link_man=#linkMan#</isNotEmpty>
+			<isNotEmpty prepend="," property="contactInfo">contact_info=#contactInfo#</isNotEmpty>
+			<isNotEmpty prepend="," property="tel1">tel1=#tel1#</isNotEmpty>
+			<isNotEmpty prepend="," property="tel2">tel2=#tel2#</isNotEmpty>
+			<isNotEmpty prepend="," property="tel3">tel3=#tel3#</isNotEmpty>
+			<isNotEmpty prepend="," property="fax1">fax1=#fax1#</isNotEmpty>
+			<isNotEmpty prepend="," property="fax2">fax2=#fax2#</isNotEmpty>
+			<isNotEmpty prepend="," property="fax3">fax3=#fax3#</isNotEmpty>
+			<isNotNull prepend="," property="paymentedType">paymented_type=#paymentedType#</isNotNull>
+			<isNotEmpty prepend="," property="supplierNotes">supplier_notes=#supplierNotes#</isNotEmpty>
+			<isNotEmpty prepend="," property="purchaser">purchaser=#purchaser#</isNotEmpty>
+			<isNotEmpty prepend="," property="officeAddress">office_address=#officeAddress#</isNotEmpty>
+			<isNotNull prepend=","  property="yesOrNo">delivery_or_not=#yesOrNo#</isNotNull>
+			<isNotEmpty prepend="," property="postCode">post_code=#postCode#</isNotEmpty>
+		    <isNotEmpty prepend="," property="bankAccNo">bank_acc_no=#bankAccNo#</isNotEmpty>
+		    <isNotEmpty prepend="," property="taxNo">tax_no=#taxNo#</isNotEmpty>
+	 		<isNotEmpty prepend="," property="url">url=#url#</isNotEmpty>
+	 		<isNotEmpty prepend="," property="email">email=#email#</isNotEmpty>
+	 		<isNotEmpty prepend="," property="ledgerId">ledger_id=#ledgerId#</isNotEmpty> 
+	 		<isNotEmpty prepend="," property="memo">memo=#memo#</isNotEmpty> 
+  	 		<isNotEmpty  prepend="," property="reviser">reviser = #reviser#,revisedate = now() </isNotEmpty>
+  			<isNotEmpty  prepend="," property="verifier">verifier = #verifier#,verifydate = now() </isNotEmpty>
+   		</dynamic>
+   		WHERE supplier_id =#id#
+   	</update>
+   	<select id="getSupplierByCondition" parameterClass="supplier" resultMap="supplier">
+   		SELECT <include refid="supplierFileds"/>
+   		FROM RS_SUPPLIER
+   		<include refid="whereLike"/>
+   	</select>
+   	<!-- 分页查询语句 -->
+   	<select id="getSupplierSplitPageBySQL" remapResults="true" parameterClass="java.lang.String" resultMap="supplier">
+   		$splitPageSQL$
+   	</select>
+   	<!-- end -->
+   	
+   	<select id="getSupplierSplitPageCountSQL" remapResults="true" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+   		$countSQL$
+   	</select>
+   	
+   	
+   	<delete id="deleteSupplierById" parameterClass="java.lang.String">
+   		DELETE FROM RS_SUPPLIER
+   		WHERE supplier_id =#id#
+   	</delete>
+   	
+</sqlMap>
