@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+import org.hibernate.dialect.Dialect;
 import org.springframework.orm.ibatis.SqlMapClientCallback;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
@@ -16,6 +18,8 @@ import com.radius.base.page.Pager;
 
 public class BaseIbatisDaoImpl<E extends BaseEntity> extends SqlMapClientDaoSupport implements BaseIbatisDao<E>{
 
+	
+	private Logger logger=Logger.getLogger(this.getClass());
 	/**
 	 * 如有特殊的需求如对多数据库进行操作 则每一个数据库都定义一个dao类  并都添加这个方法 在方法上面
 	 * <code>@Resouce("sqlMapclient")具体的具体设置</code>
@@ -201,5 +205,62 @@ public class BaseIbatisDaoImpl<E extends BaseEntity> extends SqlMapClientDaoSupp
 				return null;
 			}
 		});
+	}
+	
+	/**
+	 * 
+	 * @param id
+	 * @param statementName
+	 */
+	public int deleteObject(Object id,String statementName){
+		return  this.getSqlMapClientTemplate().delete(statementName, id);
+	}
+	
+	/**
+	 * 通过查询条件,获取对应的对象
+	 * @param obj
+	 * @param statementName
+	 * @return
+	 */
+	public E getObjectByCondition(Object obj,String statementName){
+		return (E)this.getSqlMapClientTemplate().queryForObject(statementName, obj);
+	}
+	
+	/**
+	 * 通过方法获取对应的数据库分页SQL
+	 * @param dialect
+	 * @param sql
+	 * @param pageNo
+	 * @param pageSize
+	 * @return
+	 */
+	public String getDialectSplitPageSQL(String dialect, String sql,int pageNo,int pageSize) {
+		Dialect myDialect=getDialect(dialect);
+		int start=0;
+		int end=0;
+		if(pageNo==0){
+			pageNo=1;
+		}
+		start=pageSize*(pageNo-1);
+		end=pageSize*pageNo;
+		return myDialect.getLimitString(sql, start, end);
+	}
+
+	private Dialect getDialect(String dialect){
+		Dialect myDialect=null;
+		try {
+			Class clazz=Class.forName(dialect);
+			myDialect=(Dialect)clazz.newInstance();
+		} catch (ClassNotFoundException e) {
+			logger.error("提供的"+dialect+"方言不存在...." +e);
+			throw new RuntimeException(e.toString());
+		} catch (InstantiationException e) {
+			logger.error("实例化方言发生异常....." +e);
+			throw new RuntimeException(e.toString());
+		} catch (IllegalAccessException e) {
+			logger.error("提供的"+dialect+"方言是无效的...." +e);
+			throw new RuntimeException(e.toString());
+		}
+		return myDialect;
 	}
 }
