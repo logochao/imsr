@@ -116,6 +116,13 @@ public interface BaseIbatisDao<E extends BaseEntity> {
 	 * @return
 	 */
 	public int deleteObject(E e, String statementName);
+	
+	/**删除对象通过id
+	 * 
+	 * @param id
+	 * @param statementName
+	 */
+	public int deleteObject(Object id,String statementName);
 
 	/**
 	 * 通过批处理删除对象
@@ -126,4 +133,13 @@ public interface BaseIbatisDao<E extends BaseEntity> {
 	public void batchDeleteListObject(final List<E> list,
 			final String statementName);
 
+	/**
+	 * 通过方法获取对应的数据库分页SQL
+	 * @param dialect
+	 * @param sql
+	 * @param pageNo
+	 * @param pageSize
+	 * @return
+	 */
+	public String getDialectSplitPageSQL(String dialect, String sql,int pageNo,int pageSize);
 }

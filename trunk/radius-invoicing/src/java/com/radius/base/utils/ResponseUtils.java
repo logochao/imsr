@@ -8,20 +8,22 @@ package com.radius.base.utils;
  * Copyright (c) 2013 by 陈波宁.<br/>
  * 类说明
  */
-public class ResponseUtils {
+public class ResponseUtils<E> {
 
 	private boolean success=false;//是否成功
 	
 	private String message="";//提示信息
 	
-	private Object obj;
+	private E e;
 
-	public Object getObj() {
-		return obj;
+	
+
+	public E getE() {
+		return e;
 	}
 
-	public void setObj(Object obj) {
-		this.obj = obj;
+	public void setE(E e) {
+		this.e = e;
 	}
 
 	public boolean isSuccess() {

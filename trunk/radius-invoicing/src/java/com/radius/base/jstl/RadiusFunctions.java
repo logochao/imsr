@@ -30,7 +30,7 @@ public class RadiusFunctions {
 	}
 	
 	
-	public String getResourceTypeJson(){
+	public static String getResourceTypeJson(){
 		if(menuTypeJson.length()==0){
 			StringBuilder b=new StringBuilder("[");
 			for(ResourceTypeEnum enums:ResourceTypeEnum.values()){
@@ -40,7 +40,7 @@ public class RadiusFunctions {
 			}
 			b.delete(b.length()-1, b.length());
 			b.append("]");
-			System.out.println("--------------------");
+			menuTypeJson=b.toString();
 		}
 		return menuTypeJson;
 	}
