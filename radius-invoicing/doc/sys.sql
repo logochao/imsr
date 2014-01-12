@@ -285,3 +285,69 @@ CREATE TABLE rs_goods
    verifydate           DATETIME,
    PRIMARY KEY (goods_id)
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS rs_sale_quotation;
+
+/*==============================================================*/
+/* Table: rs_list_quotation        销售报价        */
+/*==============================================================*/
+
+CREATE TABLE rs_sale_quotation
+(
+   quotation_id         CHAR(14) NOT NULL,
+   quotation_date       DATETIME,
+   customer_id          CHAR(5),
+   customer_name        VARCHAR(100),
+   address              VARCHAR(100),
+   link_man             VARCHAR(4),
+   link_mobile          CHAR(11),
+   link_tel             CHAR(20),
+   link_fax             CHAR(20),
+   STATUS               CHAR(4),
+   salesman_id          CHAR(4),
+   print_times          SMALLINT,
+   newest_print_time    DATETIME,
+   newest_print_acc     CHAR(4),
+   newest_print_record  VARCHAR(100),
+   ledger_id            CHAR(8),
+   memo                 TEXT,
+   creater              CHAR(4),
+   createdate           DATETIME,
+   reviser              CHAR(4),
+   revisedate           DATETIME,
+   verifier             CHAR(4),
+   verifydate           DATETIME,
+   PRIMARY KEY (quotation_id)
+)ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS rs_sale_quotation_grd;
+
+/*==============================================================*/
+/* Table: rs_sale_quotation_grd    销售报价商品明细             */
+/*==============================================================*/
+CREATE TABLE rs_sale_quotation_grd
+(
+   quotation_id         CHAR(14) NOT NULL,
+   goods_id             CHAR(5) NOT NULL,
+   goods_name           VARCHAR(50),
+   unit                 CHAR(2),
+   price_of_unit        INTEGER,
+   equivalent_unit      CHAR(2),
+   price_of_eu          INTEGER,
+   quantity_of_eu_per_unit INTEGER,
+   quantity_of_unit     INTEGER,
+   quantity_of_eu       INTEGER,
+   made_date            DATETIME,
+   validity_date        DATETIME,
+   ledger_id            CHAR(8),
+   memo                 TEXT,
+   creater              CHAR(4),
+   createdate           DATETIME,
+   reviser              CHAR(4),
+   revisedate           DATETIME,
+   verifier             CHAR(4),
+   verifydate           DATETIME,
+   PRIMARY KEY (quotation_id, goods_id)
+)ENGINE=INNODB DEFAULT CHARSET=utf8;
