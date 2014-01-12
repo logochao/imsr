@@ -17,13 +17,13 @@ import com.radius.invoicing.ibatis.model.CategoryType;
  *
  */
 @Repository
+@SuppressWarnings("unchecked")
 public class CategoryTypeDaoImpl extends BaseIbatisDaoImpl<CategoryType> implements CategoryTypeDao {
 
 	/**
 	 * 获取所有项信息
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	public List<CategoryType> getCategoryTypeAllList(){
 		return this.getSqlMapClientTemplate().queryForList("categoryTypeSqlMap.getCategoryTypeAllList");
 	}
