@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="salesContractPaymentGrdSqlMap">
+
+  <typeAlias alias="salesContractPaymentGrd" type="com.radius.invoicing.ibatis.model.SalesContractPaymentGrd" />
+  
+  <sql id="salesContractPaymentGrdFileds">
+  	 money_list_id id,money_list_name name,contract_id contractId,money_list_batch batch,amount amount,amount_in_word upperAmount,pay_receive_type receiveType,validity_date validityDate,STATUS stats,memo memo,
+  	 ledger_id ledgerId,creater creater,createdate createdate,reviser reviser,revisedate revisedate,verifier verifydate
+  </sql>
+  
+  <resultMap id="salesContractPaymentGrd" class="salesContractPaymentGrd">
+    <result column="money_list_id" jdbcType="int" javaType="java.lang.Integer" property="id" />
+    <result column="money_list_name" jdbcType="varchar" javaType="java.lang.String" property="name" />
+    <result column="contract_id" jdbcType="var" javaType="java.lang.Integer" property="contractId" />
+    <result column="money_list_batch" jdbcType="char" javaType="java.lang.String" property="batch" />
+    <result column="amount" jdbcType="int" javaType="java.lang.Integer" property="amount" />
+    <result column="amount_in_word" jdbcType="text" javaType="java.lang.String" property="upperAmount" />
+    <result column="pay_receive_type" jdbcType="char" javaType="java.lang.String" property="receiveType" />
+    <result column="validity_date" jdbcType="datetime" javaType="java.util.Date" property="validityDate" />
+    <result column="STATUS" jdbcType="char" javaType="java.lang.String" property="stats" />
+    <result column="memo" jdbcType="char" javaType="java.lang.String" property="memo" />
+  	<result column="ledger_id" jdbcType="char" javaType="java.lang.String" property="ledgerId" />
+    <result column="creater" jdbcType="char" javaType="java.lang.String" property="creater" />
+    <result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createdate" />
+    <result column="reviser" jdbcType="char" javaType="java.lang.String" property="reviser" />
+    <result column="revisedate" jdbcType="datetime" javaType="java.util.Date" property="revisedate" />
+    <result column="verifier" jdbcType="char" javaType="java.lang.String" property="verifier" />    
+    <result column="verifydate" jdbcType="datetime" javaType="java.util.Date" property="verifydate"/>
+  </resultMap>
+  
+  <sql id="whereLike">
+  	<dynamic prepend="where">
+  		1=1  
+  		<isNotNull prepend="and" property="id">money_list_id=#id#</isNotNull>
+  		<isNotEmpty prepend="and" property="name">money_list_name=#name#</isNotEmpty>
+  		<isNotEmpty prepend="and" property="contractId">contract_id=#contractId#</isNotEmpty>
+  		<isNotEmpty prepend="and" property="batch">money_list_batch=#batch#</isNotEmpty>
+  		<isNotNull prepend="and" property="amount">amount=#amount#</isNotNull>
+		<isNotEmpty prepend="and" property="upperAmount">amount_in_word=#upperAmount#</isNotEmpty>
+		<isNotEmpty prepend="and" property="receiveType">pay_receive_type=#receiveType#</isNotEmpty>
+		<isNotNull prepend="and" property="validityDate">validity_date=#validityDate#</isNotNull>
+ 		<isNotEmpty prepend="and" property="ledgerId">ledger_id=#ledgerId#</isNotEmpty> 
+ 		<isNotEmpty prepend="and" property="stats">STATUS=#stats#</isNotEmpty> 
+ 		<isNotEmpty prepend="and" property="memo">memo=#memo#</isNotEmpty> 
+  	</dynamic>
+  </sql>
+ 
+	 <select id="getSalesContractPaymentGrdByPk" parameterClass="java.lang.Integer" resultMap="salesContractPaymentGrd">
+	 	SELECT <include refid="salesContractPaymentGrdFileds"/>
+	 	FROM RS_SALES_CONTRACT_PAYMENT_GRD
+	 	WHERE money_list_id =#id# 
+	 </select>
+	 
+	 <select id="getSalesContractPaymentGrd" parameterClass="salesContractPaymentGrd" resultMap="salesContractPaymentGrd">
+	 	SELECT <include refid="salesContractPaymentGrdFileds"/>
+	 	FROM RS_SALES_CONTRACT_PAYMENT_GRD
+	 	<include refid="whereLike"/>
+	 </select>
+   
+   	<insert id="insert" parameterClass="salesContractPaymentGrd">
+   		INSERT INTO RS_SALES_CONTRACT_PAYMENT_GRD (
+	  		<isNotEmpty  property="name">money_list_nam,</isNotEmpty>
+	  		<isNotEmpty  property="contractId">contract_id,</isNotEmpty>
+	  		<isNotEmpty  property="batch">money_list_batch,</isNotEmpty>
+	  		<isNotNull  property="amount">amount,</isNotNull>
+			<isNotEmpty  property="upperAmount">amount_in_word,</isNotEmpty>
+			<isNotEmpty  property="receiveType">pay_receive_type,</isNotEmpty>
+			<isNotNull  property="validityDate">validity_date,</isNotNull>
+	 		<isNotEmpty  property="ledgerId">ledger_id,</isNotEmpty> 
+	 		<isNotEmpty  property="stats">STATUS,</isNotEmpty> 
+	 		<isNotEmpty  property="memo">memo,</isNotEmpty>
+	  	    creater,
+	  	    createdate
+   		)VALUES(
+	  		<isNotEmpty  property="name">#name#,</isNotEmpty>
+	  		<isNotEmpty  property="contractId">#contractId#,</isNotEmpty>
+	  		<isNotEmpty  property="batch">#batch#,</isNotEmpty>
+	  		<isNotNull  property="amount">#amount#,</isNotNull>
+			<isNotEmpty  property="upperAmount">#upperAmount#,</isNotEmpty>
+			<isNotEmpty  property="receiveType">#receiveType#,</isNotEmpty>
+			<isNotNull  property="validityDate">#validityDate#,</isNotNull>
+	 		<isNotEmpty  property="ledgerId">#ledgerId#,</isNotEmpty> 
+	 		<isNotEmpty  property="stats">#stats#,</isNotEmpty> 
+	 		<isNotEmpty  property="memo">#memo#,</isNotEmpty>
+   			 creater,now()
+   		)
+   	</insert>
+   
+   	<update id="updateSalesContractPaymentGrdByPK" parameterClass="salesContractPaymentGrd">
+   		UPDATE RS_SALES_CONTRACT_PAYMENT_GRD
+   		<dynamic prepend="SET">
+	  		<isNotEmpty prepend="," property="name">money_list_name=#name#</isNotEmpty>
+	  		<isNotEmpty prepend="," property="contractId">contract_id=#contractId#</isNotEmpty>
+	  		<isNotEmpty prepend="," property="batch">money_list_batch=#batch#</isNotEmpty>
+	  		<isNotNull prepend="," property="amount">amount=#amount#</isNotNull>
+			<isNotEmpty prepend="," property="upperAmount">amount_in_word=#upperAmount#</isNotEmpty>
+			<isNotEmpty prepend="," property="receiveType">pay_receive_type=#receiveType#</isNotEmpty>
+			<isNotNull prepend="," property="validityDate">validity_date=#validityDate#</isNotNull>
+	 		<isNotEmpty prepend="," property="ledgerId">ledger_id=#ledgerId#</isNotEmpty> 
+	 		<isNotEmpty prepend="," property="stats">STATUS=#stats#</isNotEmpty> 
+	 		<isNotEmpty prepend="," property="memo">memo=#memo#</isNotEmpty> 
+  	 		<isNotEmpty  prepend="," property="reviser">reviser = #reviser#,revisedate = now() </isNotEmpty>
+  			<isNotEmpty  prepend="," property="verifier">verifier = #verifier#,verifydate = now() </isNotEmpty>
+   		</dynamic>
+   		WHERE money_list_id =#id#
+   	</update>
+   	<!-- 分页查询语句 -->
+   	<select id="getSalesContractPaymentGrdSplitPageBySQL" remapResults="true" parameterClass="java.lang.String" resultMap="salesContractPaymentGrd">
+   		$splitPageSQL$
+   	</select>
+   	<!-- end -->
+   	
+   	<select id="getSalesContractPaymentGrdSplitPageCountSQL" remapResults="true" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+   		$countSQL$
+   	</select>
+   	
+   	<delete id="deleteSalesContractPaymentGrd" parameterClass="salesContractPaymentGrd">
+   		DELETE FROM RS_SALES_CONTRACT_PAYMENT_GRD
+   		<include refid="whereLike"/>
+   	</delete>
+   	<delete id="deleteSalesContractPaymentGrdByPK" parameterClass="java.lang.Integer">
+   		DELETE FROM RS_SALES_CONTRACT_PAYMENT_GRD
+   		WHERE money_list_id =#id# 
+   	</delete>
+</sqlMap>
