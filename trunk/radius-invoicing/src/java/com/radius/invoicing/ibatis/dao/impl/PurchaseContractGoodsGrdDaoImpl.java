@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Repository;
+
 import com.radius.base.dao.ibatis.BaseIbatisDaoImpl;
 import com.radius.invoicing.ibatis.dao.PurchaseContractGoodsGrdDao;
 import com.radius.invoicing.ibatis.model.PurchaseContractGoodsGrd;
@@ -17,6 +19,7 @@ import com.radius.invoicing.ibatis.model.PurchaseContractGoodsGrd;
  * Copyright (c) 2013 by 陈波宁.<br/>
  * 类说明 采购合同_商品明细Dao
  */
+@Repository
 public class PurchaseContractGoodsGrdDaoImpl extends BaseIbatisDaoImpl<PurchaseContractGoodsGrd> implements PurchaseContractGoodsGrdDao{
 
 	private final String SQLMAPNAMESPACE="purchaseContractGoodsGrdSqlMap.";

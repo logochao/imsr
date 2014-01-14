@@ -1,27 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
-<sqlMap namespace="purchaseContractSqlMap">
+<sqlMap namespace="salesContractSqlMap">
 
-  <typeAlias alias="purchaseContract" type="com.radius.invoicing.ibatis.model.PurchaseContract" />
+  <typeAlias alias="salesContract" type="com.radius.invoicing.ibatis.model.SalesContract" />
   
-  <sql id="purchaseContractFileds">
-  	 contract_id id,purchase_order_id orderId,supplier_id supplierId,supplier_name supplierName,contract_file_id contractFile,
-  	 effect_date effectDate,sign_time signTime,trade_assistant tradeAssistant,purchaser purchaser,link_man man,link_mobile mobile,link_tel tel,link_fax fax,
+  <sql id="salesContractFileds">
+  	 contract_id id,customer_id customerId,customer_name customerName,contract_file_id contractFile,effect_date effectDate,sign_time signTime,
+  	 trade_assistant tradeAssistant,salesman_id salesMan,link_man man,link_mobile mobile,link_tel tel,link_fax fax,
   	 ordered_date orderedDate,delivery_date deliveryDate,delivery_point deliveryPoint,contract_terms contractTerms,newest_print_time printTime,newest_print_acc printAcc,
-  	 newest_print_record printRecord,print_times printTimes,paymented_status paymentedStatus,validity_date validityDate,STATUS stats,
+  	 newest_print_record printreCord,paymented_status paymentedStatus,validity_date validityDate,STATUS stats,print_times printTimes,
   	 ledger_id ledgerId,memo memo,creater creater,createdate createdate,reviser reviser,revisedate revisedate,verifier verifydate
   </sql>
   
-  <resultMap id="purchaseContract" class="purchaseContract">
+  <resultMap id="salesContract" class="salesContract">
     <result column="contract_id" jdbcType="char" javaType="java.lang.String" property="id" />
-    <result column="purchase_order_id" jdbcType="char" javaType="java.lang.String" property="orderId" />
-    <result column="supplier_id" jdbcType="char" javaType="java.lang.String" property="supplierId" />
-    <result column="supplier_name" jdbcType="varchar" javaType="java.lang.String" property="supplierName" />
+    <result column="customer_id" jdbcType="char" javaType="java.lang.String" property="customerId" />
+    <result column="customer_name" jdbcType="varchar" javaType="java.lang.String" property="customerName" />
     <result column="contract_file_id" jdbcType="int" javaType="java.lang.Integer" property="contractFile" />
     <result column="effect_date" jdbcType="datetime" javaType="java.util.Date" property="effectDate" />
     <result column="sign_time" jdbcType="datetime" javaType="java.util.Date" property="signTime" />
     <result column="trade_assistant" jdbcType="char" javaType="java.lang.String" property="tradeAssistant" />
-    <result column="purchaser" jdbcType="char" javaType="java.lang.String" property="purchaser" />
+    <result column="salesman_id" jdbcType="char" javaType="java.lang.String" property="salesMan" />
     <result column="link_man" jdbcType="varchar" javaType="java.lang.String" property="man" />
     <result column="link_mobile" jdbcType="char" javaType="java.lang.String" property="mobile" />
     <result column="link_tel" jdbcType="char" javaType="java.lang.String" property="tel" />
@@ -51,14 +50,16 @@
   	<dynamic prepend="where">
   		1=1  
   		<isNotEmpty prepend="and" property="id">contract_id=#id#</isNotEmpty>
-  		<isNotEmpty prepend="and" property="orderId">purchase_order_id=#orderId#</isNotEmpty>
-  		<isNotEmpty prepend="and" property="supplierId">supplier_id=#supplierId#</isNotEmpty>
-		<isNotEmpty prepend="and" property="supplierName">supplier_name=#supplierName#</isNotEmpty>
+  		<isNotEmpty prepend="and" property="customerId">customer_id=#customerId#</isNotEmpty>
+  		<isNotEmpty prepend="and" property="customerName">customer_name=#customerName#</isNotEmpty>
+		<isNotEmpty prepend="and" property="contractFile">contract_file_id=#contractFile#</isNotEmpty>
+		<isNotNull prepend="and" property="effectDate">effect_date=#effectDate#</isNotNull>
+		<isNotNull prepend="and" property="signTime">sign_time=#signTime#</isNotNull>
 		<isNotEmpty prepend="and" property="contractFile">contract_file_id=#contractFile#</isNotEmpty>
 		<isNotNull prepend="and" property="effectDate">effect_date=#effectDate#</isNotNull>
 		<isNotNull prepend="and" property="signTime">sign_time=#signTime#</isNotNull>
 		<isNotEmpty prepend="and" property="tradeAssistant">trade_assistant=#tradeAssistant#</isNotEmpty>
-		<isNotEmpty prepend="and" property="purchaser">purchaser=#purchaser#</isNotEmpty>
+		<isNotEmpty prepend="and" property="salesMan">salesman_id=#salesMan#</isNotEmpty>
 		<isNotEmpty prepend="and" property="man">link_man=#man#</isNotEmpty>
 		<isNotEmpty prepend="and" property="mobile">link_mobile=#mobile#</isNotEmpty>
 		<isNotEmpty prepend="and" property="tel">link_tel=#tel#</isNotEmpty>
@@ -73,29 +74,28 @@
 		<isNotNull prepend="and" property="printTimes">print_times=#printTimes#</isNotNull>
 		<isNotEmpty prepend="and" property="paymentedStatus">paymented_status=#paymentedStatus#</isNotEmpty>
 		<isNotNull prepend="and" property="validityDate">validity_date=#validityDate#</isNotNull>
- 		<isNotEmpty prepend="and" property="stats">STATUS=#stats#</isNotEmpty> 
+ 		<isNotEmpty prepend="and" property="stats">STATUS=#stats#</isNotEmpty>
  		<isNotEmpty prepend="and" property="ledgerId">ledger_id=#ledgerId#</isNotEmpty> 
  		<isNotEmpty prepend="and" property="memo">memo=#memo#</isNotEmpty> 
   	</dynamic>
   </sql>
  
-	 <select id="getPurchaseContractById" parameterClass="purchaseContract" resultMap="purchaseContract">
-	 	SELECT <include refid="purchaseContractFileds"/>
-	 	FROM RS_PURCHASE_CONTRACT
+	 <select id="getSalesContractById" parameterClass="java.lang.String" resultMap="salesContract">
+	 	SELECT <include refid="salesContractFileds"/>
+	 	FROM RS_SALES_CONTRACT
 	 	WHERE contract_id =#id#
 	 </select>
    
-   	<insert id="insert" parameterClass="purchaseContract">
-   		INSERT INTO RS_PURCHASE_CONTRACT (
+   	<insert id="insert" parameterClass="salesContract">
+   		INSERT INTO RS_SALES_CONTRACT (
    			contract_id,
-	  		<isNotEmpty  property="orderId">purchase_order_id,</isNotEmpty>
-	  		<isNotEmpty  property="supplierId">supplier_id,</isNotEmpty>
-			<isNotEmpty  property="supplierName">supplier_name,</isNotEmpty>
+	  		<isNotEmpty  property="customerId">customer_id,</isNotEmpty>
+			<isNotEmpty  property="customerName">customer_name,</isNotEmpty>
 			<isNotEmpty  property="contractFile">contract_file_id,</isNotEmpty>
 			<isNotNull  property="effectDate">effect_date,</isNotNull>
 			<isNotNull  property="signTime">sign_time,</isNotNull>
 			<isNotEmpty  property="tradeAssistant">trade_assistant,</isNotEmpty>
-			<isNotEmpty  property="purchaser">purchaser,</isNotEmpty>
+			<isNotEmpty  property="salesMan">salesman_id,</isNotEmpty>
 			<isNotEmpty  property="man">link_man,</isNotEmpty>
 			<isNotEmpty  property="mobile">link_mobile,</isNotEmpty>
 			<isNotEmpty  property="tel">link_tel,</isNotEmpty>
@@ -117,14 +117,13 @@
 	  	    createdate
    		)VALUES(
    			#id#,
-	  		<isNotEmpty  property="orderId">#orderId#,</isNotEmpty>
-	  		<isNotEmpty  property="supplierId">#supplierId#,</isNotEmpty>
-			<isNotEmpty  property="supplierName">#supplierName#,</isNotEmpty>
+	  		<isNotEmpty  property="customerId">#customerId#,</isNotEmpty>
+			<isNotEmpty  property="customerName">#customerName#,</isNotEmpty>
 			<isNotEmpty  property="contractFile">#contractFile#,</isNotEmpty>
 			<isNotNull  property="effectDate">#effectDate#,</isNotNull>
 			<isNotNull  property="signTime">#signTime#,</isNotNull>
 			<isNotEmpty  property="tradeAssistant">#tradeAssistant#,</isNotEmpty>
-			<isNotEmpty  property="purchaser">#purchaser#,</isNotEmpty>
+			<isNotEmpty  property="salesMan">#salesMan#,</isNotEmpty>
 			<isNotEmpty  property="man">#man#,</isNotEmpty>
 			<isNotEmpty  property="mobile">#mobile#,</isNotEmpty>
 			<isNotEmpty  property="tel">#tel#,</isNotEmpty>
@@ -146,17 +145,16 @@
    		)
    	</insert>
    
-   	<update id="updatePurchaseContractById" parameterClass="purchaseContract">
-   		UPDATE RS_PURCHASE_CONTRACT
+   	<update id="updateSalesContractById" parameterClass="salesContract">
+   		UPDATE RS_SALES_CONTRACT
    		<dynamic prepend="SET">
-	  		<isNotEmpty prepend="," property="orderId">purchase_order_id=#orderId#</isNotEmpty>
-	  		<isNotEmpty prepend="," property="supplierId">supplier_id=#supplierId#</isNotEmpty>
-			<isNotEmpty prepend="," property="supplierName">supplier_name=#supplierName#</isNotEmpty>
-			<isNotEmpty prepend="," property="contractFile">contract_file_id=#contractFile#</isNotEmpty>
-			<isNotNull prepend="," property="effectDate">effect_date=#effectDate#</isNotNull>
-			<isNotNull prepend="," property="signTime">sign_time=#signTime#</isNotNull>
-			<isNotEmpty prepend="," property="tradeAssistant">trade_assistant=#tradeAssistant#</isNotEmpty>
-			<isNotEmpty prepend="," property="purchaser">purchaser=#purchaser#</isNotEmpty>
+	  		<isNotEmpty prepend="," property="customerId">customer_id=#customerId#</isNotEmpty>
+			<isNotEmpty prepend=","  property="customerName">customer_name=#customerName#</isNotEmpty>
+			<isNotEmpty prepend=","  property="contractFile">contract_file_id=#contractFile#</isNotEmpty>
+			<isNotNull  prepend="," property="effectDate">effect_date=#effectDate#</isNotNull>
+			<isNotNull  prepend=","  property="signTime">sign_time=#signTime#</isNotNull>
+			<isNotEmpty prepend=","  property="tradeAssistant">trade_assistant=#tradeAssistant#</isNotEmpty>
+			<isNotEmpty prepend="," property="salesMan">salesman_id=#salesMan#</isNotEmpty>
 			<isNotEmpty prepend="," property="man">link_man=#man#</isNotEmpty>
 			<isNotEmpty prepend="," property="mobile">link_mobile=#mobile#</isNotEmpty>
 			<isNotEmpty prepend="," property="tel">link_tel=#tel#</isNotEmpty>
@@ -179,27 +177,27 @@
    		</dynamic>
    		WHERE contract_id =#id# 
    	</update>
-   	<select id="getPurchaseContractByCondition" parameterClass="purchaseContract" resultMap="purchaseContract">
-   		SELECT <include refid="purchaseContractFileds"/>
-   		FROM RS_PURCHASE_CONTRACT
+   	<select id="getSalesContractByCondition" parameterClass="salesContract" resultMap="salesContract">
+   		SELECT <include refid="salesContractFileds"/>
+   		FROM RS_SALES_CONTRACT
    		<include refid="whereLike"/>
    	</select>
    	<!-- 分页查询语句 -->
-   	<select id="getPurchaseContractSplitPageBySQL" remapResults="true" parameterClass="java.lang.String" resultMap="purchaseContract">
+   	<select id="getSalesContractSplitPageBySQL" remapResults="true" parameterClass="java.lang.String" resultMap="salesContract">
    		$splitPageSQL$
    	</select>
    	<!-- end -->
    	
-   	<select id="getPurchaseContractSplitPageCountSQL" remapResults="true" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+   	<select id="getSalesContractSplitPageCountSQL" remapResults="true" parameterClass="java.lang.String" resultClass="java.lang.Integer">
    		$countSQL$
    	</select>
    	
-   	<delete id="deletePurchaseContract" parameterClass="purchaseContract">
-   		DELETE FROM RS_PURCHASE_CONTRACT
+   	<delete id="deleteSalesContract" parameterClass="salesContract">
+   		DELETE FROM RS_SALES_CONTRACT
    		<include refid="whereLike"/>
    	</delete>
-   	<delete id="deletePurchaseContractById" parameterClass="java.lang.String">
-   		DELETE FROM RS_PURCHASE_CONTRACT
+   	<delete id="deleteSalesContractById" parameterClass="java.lang.String">
+   		DELETE FROM RS_SALES_CONTRACT
    		WHERE contract_id =#id# 
    	</delete>
 </sqlMap>

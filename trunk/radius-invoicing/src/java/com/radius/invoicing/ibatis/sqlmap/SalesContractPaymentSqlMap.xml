@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="salesContractPaymentSqlMap">
+
+  <typeAlias alias="salesContractPayment" type="com.radius.invoicing.ibatis.model.SalesContractPayment" />
+  
+  <sql id="salesContractPaymentFileds">
+  	 contract_id contractId,cash_type cashType,total_amount totalAmount,amount_in_words upperAmount,payment_type paymentType,
+  	 ledger_id ledgerId,creater creater,createdate createdate,reviser reviser,revisedate revisedate,verifier verifydate
+  </sql>
+  
+  <resultMap id="salesContractPayment" class="salesContractPayment">
+    <result column="contract_id" jdbcType="char" javaType="java.lang.String" property="contractId" />
+    <result column="cash_type" jdbcType="char" javaType="java.lang.String" property="cashType" />
+    <result column="total_amount" jdbcType="int" javaType="java.lang.Integer" property="totalAmount" />
+    <result column="amount_in_words" jdbcType="char" javaType="java.lang.String" property="upperAmount" />
+    <result column="payment_type" jdbcType="char" javaType="java.lang.String" property="paymentType" />
+  	<result column="ledger_id" jdbcType="char" javaType="java.lang.String" property="ledgerId" />
+    <result column="creater" jdbcType="char" javaType="java.lang.String" property="creater" />
+    <result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createdate" />
+    <result column="reviser" jdbcType="char" javaType="java.lang.String" property="reviser" />
+    <result column="revisedate" jdbcType="datetime" javaType="java.util.Date" property="revisedate" />
+    <result column="verifier" jdbcType="char" javaType="java.lang.String" property="verifier" />    
+    <result column="verifydate" jdbcType="datetime" javaType="java.util.Date" property="verifydate"/>
+  </resultMap>
+  
+  <sql id="whereLike">
+  	<dynamic prepend="where">
+  		1=1  
+  		<isNotEmpty prepend="and" property="contractId">contract_id=#contractId#</isNotEmpty>
+  		<isNotEmpty prepend="and" property="cashType">cash_type=#cashType#</isNotEmpty>
+  		<isNotNull prepend="and" property="totalAmount">total_amount=#totalAmount#</isNotNull>
+		<isNotEmpty prepend="and" property="upperAmount">amount_in_words=#upperAmount#</isNotEmpty>
+		<isNotEmpty prepend="and" property="paymentType">payment_type=#paymentType#</isNotEmpty>
+ 		<isNotEmpty prepend="and" property="ledgerId">ledger_id=#ledgerId#</isNotEmpty> 
+  	</dynamic>
+  </sql>
+ 
+	 <select id="getSalesContractPaymentByPk" parameterClass="java.lang.String" resultMap="salesContractPayment">
+	 	SELECT <include refid="salesContractPaymentFileds"/>
+	 	FROM RS_SALES_CONTRACT_PAYMENT
+	 	WHERE contract_id =#contractId# 
+	 </select>
+	 
+	 <select id="getSalesContractPayment" parameterClass="salesContractPayment" resultMap="salesContractPayment">
+	 	SELECT <include refid="salesContractPaymentFileds"/>
+	 	FROM RS_SALES_CONTRACT_PAYMENT
+	 	<include refid="whereLike"/>
+	 </select>
+   
+   	<insert id="insert" parameterClass="salesContractPayment">
+   		INSERT INTO RS_SALES_CONTRACT_PAYMENT (
+   			contract_id,
+	  		<isNotEmpty  property="cashType">cash_type,</isNotEmpty>
+	  		<isNotNull  property="totalAmount">total_amount,</isNotNull>
+			<isNotEmpty  property="upperAmount">amount_in_words,</isNotEmpty>
+			<isNotEmpty  property="paymentType">payment_type,</isNotEmpty>
+			<isNotEmpty  property="ledgerId">ledger_id,</isNotEmpty> 
+	  	    creater,
+	  	    createdate
+   		)VALUES(
+   			#contractId#,
+	  		<isNotEmpty  property="cashType">#cashType#,</isNotEmpty>
+	  		<isNotNull  property="totalAmount">#totalAmount#,</isNotNull>
+			<isNotEmpty  property="upperAmount">#upperAmount#,</isNotEmpty>
+			<isNotEmpty  property="paymentType">#paymentType#,</isNotEmpty>
+	 		<isNotEmpty  property="ledgerId">#ledgerId#,</isNotEmpty> 
+   			 creater,now()
+   		)
+   	</insert>
+   
+   	<update id="updateSalesContractPaymentByPK" parameterClass="salesContractPayment">
+   		UPDATE RS_SALES_CONTRACT_PAYMENT
+   		<dynamic prepend="SET">
+	  		<isNotEmpty prepend="," property="cashType">cash_type=#cashType#</isNotEmpty>
+	  		<isNotNull prepend="," property="totalAmount">total_amount=#totalAmount#</isNotNull>
+			<isNotEmpty prepend="," property="upperAmount">amount_in_words=#upperAmount#</isNotEmpty>
+			<isNotEmpty prepend="," property="paymentType">payment_type=#paymentType#</isNotEmpty>
+	 		<isNotEmpty prepend="," property="ledgerId">ledger_id=#ledgerId#</isNotEmpty> 
+  	 		<isNotEmpty  prepend="," property="reviser">reviser = #reviser#,revisedate = now() </isNotEmpty>
+  			<isNotEmpty  prepend="," property="verifier">verifier = #verifier#,verifydate = now() </isNotEmpty>
+   		</dynamic>
+   		WHERE contract_id =#contractId#
+   	</update>
+   	<!-- 分页查询语句 -->
+   	<select id="getSalesContractPaymentSplitPageBySQL" remapResults="true" parameterClass="java.lang.String" resultMap="salesContractPayment">
+   		$splitPageSQL$
+   	</select>
+   	<!-- end -->
+   	
+   	<select id="getSalesContractPaymentSplitPageCountSQL" remapResults="true" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+   		$countSQL$
+   	</select>
+   	
+   	<delete id="deleteSalesContractPayment" parameterClass="salesContractPayment">
+   		DELETE FROM RS_SALES_CONTRACT_PAYMENT
+   		<include refid="whereLike"/>
+   	</delete>
+   	<delete id="deleteSalesContractPaymentByPK" parameterClass="java.lang.String">
+   		DELETE FROM RS_SALES_CONTRACT_PAYMENT
+   		WHERE contract_id =#contractId# 
+   	</delete>
+</sqlMap>
