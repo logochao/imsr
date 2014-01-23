@@ -134,7 +134,7 @@
    		WHERE quotation_id =#id#
    	</update>
    	<select id="getSaleQuotationByCondition" parameterClass="saleQuotation" resultMap="saleQuotation">
-   		SELECT <include refid="SaleQuotationFileds"/>
+   		SELECT <include refid="saleQuotationFileds"/>
    		FROM RS_SALE_QUOTATION
    		<include refid="whereLike"/>
    	</select>
