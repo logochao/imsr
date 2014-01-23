@@ -13,6 +13,15 @@
 	    useStatementNamespaces="true"/>
 	    <!--配置相关枚举处理类 -->
       <typeAlias alias="resourceType" type="com.radius.invoicing.enums.ResourceTypeEnum" />
+      <typeAlias alias="yesOrNo" type="com.radius.invoicing.enums.YesOrNoEnums" />
+      <typeAlias alias="sex" type="com.radius.invoicing.enums.SexEnums" />
+      
+      
+      
       <typeHandler javaType="resourceType" callback="com.radius.invoicing.enums.ResourceTypeEnumHandler" />
+      <typeHandler javaType="yesOrNo" callback="com.radius.invoicing.enums.YesOrNoEnumsHandler" />
+      <typeHandler javaType="sex" callback="com.radius.invoicing.enums.SexEnumsHandler" />
+      
+      
       <sqlMap resource="ibatis/emptySqlMap.xml"/>
 </sqlMapConfig>
