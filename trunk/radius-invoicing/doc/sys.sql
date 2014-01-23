@@ -456,7 +456,7 @@ DROP TABLE IF EXISTS rs_purchase_contract_payment_grd;
 /*==============================================================*/
 CREATE TABLE rs_purchase_contract_payment_grd
 (
-   money_list_id        INT NOT NULL,
+   money_list_id        INT NOT NULL AUTO_INCREMENT,
    money_list_name      VARCHAR(100),
    contract_id          CHAR(14) NOT NULL,
    money_list_batch     CHAR(50),
