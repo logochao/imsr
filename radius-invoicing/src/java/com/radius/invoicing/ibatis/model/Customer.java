@@ -19,7 +19,7 @@ public class Customer extends ExtInfo{
 	private String name="";//客户名称
 	private String address="";//地址
 	private String linkMan="";//联系人
-	private String contactInfo="";//联系方式
+	private String contactInfo="";//联系方式（存放手机号）
 	private String tel1="";//电话1
 	private String tel2="";//电话2
 	private String tel3="";//电话3
