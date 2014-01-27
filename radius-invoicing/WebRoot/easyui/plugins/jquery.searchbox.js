@@ -1,15 +1,17 @@
 ﻿/**
- * jQuery EasyUI 1.3.1
+ * jQuery EasyUI 1.3.5
  * 
- * Licensed under the GPL terms
- * To use it on other terms please contact us
+ * Copyright (c) 2009-2013 www.jeasyui.com. All rights reserved.
  *
- * Copyright(c) 2009-2012 stworthy [ stworthy@gmail.com ] 
- * 
+ * Licensed under the GPL or commercial licenses
+ * To use it on other terms please contact us: info@jeasyui.com
+ * http://www.gnu.org/licenses/gpl.txt
+ * http://www.jeasyui.com/license_commercial.php
+ *
  */
 (function($){
 function _1(_2){
-$(_2).hide();
+$(_2).addClass("searchbox-f").hide();
 var _3=$("<span class=\"searchbox\"></span>").insertAfter(_2);
 var _4=$("<input type=\"text\" class=\"searchbox-text\">").appendTo(_3);
 $("<span><span class=\"searchbox-button\"></span></span>").appendTo(_3);
@@ -28,103 +30,110 @@ _9.width=_8;
 }
 sb.appendTo("body");
 if(isNaN(_9.width)){
-_9.width=sb.outerWidth();
+_9.width=sb._outerWidth();
 }
-sb._outerWidth(_9.width);
-sb.find("input.searchbox-text")._outerWidth(sb.width()-sb.find("a.searchbox-menu").outerWidth()-sb.find("span.searchbox-button").outerWidth());
+var _a=sb.find("span.searchbox-button");
+var _b=sb.find("a.searchbox-menu");
+var _c=sb.find("input.searchbox-text");
+sb._outerWidth(_9.width)._outerHeight(_9.height);
+_c._outerWidth(sb.width()-_b._outerWidth()-_a._outerWidth());
+_c.css({height:sb.height()+"px",lineHeight:sb.height()+"px"});
+_b._outerHeight(sb.height());
+_a._outerHeight(sb.height());
+var _d=_b.find("span.l-btn-left");
+_d._outerHeight(sb.height());
+_d.find("span.l-btn-text,span.m-btn-downarrow").css({height:_d.height()+"px",lineHeight:_d.height()+"px"});
 sb.insertAfter(_7);
 };
-function _a(_b){
-var _c=$.data(_b,"searchbox");
-var _d=_c.options;
-if(_d.menu){
-_c.menu=$(_d.menu).menu({onClick:function(_e){
-_f(_e);
+function _e(_f){
+var _10=$.data(_f,"searchbox");
+var _11=_10.options;
+if(_11.menu){
+_10.menu=$(_11.menu).menu({onClick:function(_12){
+_13(_12);
 }});
-var _10=_c.menu.children("div.menu-item:first");
-_c.menu.children("div.menu-item").each(function(){
-var _11=$.extend({},$.parser.parseOptions(this),{selected:($(this).attr("selected")?true:undefined)});
-if(_11.selected){
-_10=$(this);
+var _14=_10.menu.children("div.menu-item:first");
+_10.menu.children("div.menu-item").each(function(){
+var _15=$.extend({},$.parser.parseOptions(this),{selected:($(this).attr("selected")?true:undefined)});
+if(_15.selected){
+_14=$(this);
 return false;
 }
 });
-_10.triggerHandler("click");
+_14.triggerHandler("click");
 }else{
-_c.searchbox.find("a.searchbox-menu").remove();
-_c.menu=null;
+_10.searchbox.find("a.searchbox-menu").remove();
+_10.menu=null;
 }
-function _f(_12){
-_c.searchbox.find("a.searchbox-menu").remove();
-var mb=$("<a class=\"searchbox-menu\" href=\"javascript:void(0)\"></a>").html(_12.text);
-mb.prependTo(_c.searchbox).menubutton({menu:_c.menu,iconCls:_12.iconCls});
-_c.searchbox.find("input.searchbox-text").attr("name",$(_12.target).attr("name")||_12.text);
-_6(_b);
+function _13(_16){
+_10.searchbox.find("a.searchbox-menu").remove();
+var mb=$("<a class=\"searchbox-menu\" href=\"javascript:void(0)\"></a>").html(_16.text);
+mb.prependTo(_10.searchbox).menubutton({menu:_10.menu,iconCls:_16.iconCls});
+_10.searchbox.find("input.searchbox-text").attr("name",_16.name||_16.text);
+_6(_f);
 };
 };
-function _13(_14){
-var _15=$.data(_14,"searchbox");
-var _16=_15.options;
-var _17=_15.searchbox.find("input.searchbox-text");
-var _18=_15.searchbox.find(".searchbox-button");
-_17.unbind(".searchbox").bind("blur.searchbox",function(e){
-_16.value=$(this).val();
-if(_16.value==""){
-$(this).val(_16.prompt);
+function _17(_18){
+var _19=$.data(_18,"searchbox");
+var _1a=_19.options;
+var _1b=_19.searchbox.find("input.searchbox-text");
+var _1c=_19.searchbox.find(".searchbox-button");
+_1b.unbind(".searchbox").bind("blur.searchbox",function(e){
+_1a.value=$(this).val();
+if(_1a.value==""){
+$(this).val(_1a.prompt);
 $(this).addClass("searchbox-prompt");
 }else{
 $(this).removeClass("searchbox-prompt");
 }
 }).bind("focus.searchbox",function(e){
-if($(this).val()!=_16.value){
-$(this).val(_16.value);
+if($(this).val()!=_1a.value){
+$(this).val(_1a.value);
 }
 $(this).removeClass("searchbox-prompt");
 }).bind("keydown.searchbox",function(e){
 if(e.keyCode==13){
 e.preventDefault();
-var _19=$.fn.prop?_17.prop("name"):_17.attr("name");
-_16.value=$(this).val();
-_16.searcher.call(_14,_16.value,_19);
+_1a.value=$(this).val();
+_1a.searcher.call(_18,_1a.value,_1b._propAttr("name"));
 return false;
 }
 });
-_18.unbind(".searchbox").bind("click.searchbox",function(){
-var _1a=$.fn.prop?_17.prop("name"):_17.attr("name");
-_16.searcher.call(_14,_16.value,_1a);
+_1c.unbind(".searchbox").bind("click.searchbox",function(){
+_1a.searcher.call(_18,_1a.value,_1b._propAttr("name"));
 }).bind("mouseenter.searchbox",function(){
 $(this).addClass("searchbox-button-hover");
 }).bind("mouseleave.searchbox",function(){
 $(this).removeClass("searchbox-button-hover");
 });
 };
-function _1b(_1c){
-var _1d=$.data(_1c,"searchbox");
-var _1e=_1d.options;
-var _1f=_1d.searchbox.find("input.searchbox-text");
-if(_1e.value==""){
-_1f.val(_1e.prompt);
-_1f.addClass("searchbox-prompt");
+function _1d(_1e){
+var _1f=$.data(_1e,"searchbox");
+var _20=_1f.options;
+var _21=_1f.searchbox.find("input.searchbox-text");
+if(_20.value==""){
+_21.val(_20.prompt);
+_21.addClass("searchbox-prompt");
 }else{
-_1f.val(_1e.value);
-_1f.removeClass("searchbox-prompt");
+_21.val(_20.value);
+_21.removeClass("searchbox-prompt");
 }
 };
-$.fn.searchbox=function(_20,_21){
-if(typeof _20=="string"){
-return $.fn.searchbox.methods[_20](this,_21);
+$.fn.searchbox=function(_22,_23){
+if(typeof _22=="string"){
+return $.fn.searchbox.methods[_22](this,_23);
 }
-_20=_20||{};
+_22=_22||{};
 return this.each(function(){
-var _22=$.data(this,"searchbox");
-if(_22){
-$.extend(_22.options,_20);
+var _24=$.data(this,"searchbox");
+if(_24){
+$.extend(_24.options,_22);
 }else{
-_22=$.data(this,"searchbox",{options:$.extend({},$.fn.searchbox.defaults,$.fn.searchbox.parseOptions(this),_20),searchbox:_1(this)});
+_24=$.data(this,"searchbox",{options:$.extend({},$.fn.searchbox.defaults,$.fn.searchbox.parseOptions(this),_22),searchbox:_1(this)});
 }
-_a(this);
-_1b(this);
-_13(this);
+_e(this);
+_1d(this);
+_17(this);
 _6(this);
 });
 };
@@ -136,40 +145,40 @@ return $.data(jq[0],"searchbox").menu;
 return $.data(jq[0],"searchbox").searchbox.find("input.searchbox-text");
 },getValue:function(jq){
 return $.data(jq[0],"searchbox").options.value;
-},setValue:function(jq,_23){
+},setValue:function(jq,_25){
 return jq.each(function(){
-$(this).searchbox("options").value=_23;
-$(this).searchbox("textbox").val(_23);
+$(this).searchbox("options").value=_25;
+$(this).searchbox("textbox").val(_25);
 $(this).searchbox("textbox").blur();
 });
 },getName:function(jq){
 return $.data(jq[0],"searchbox").searchbox.find("input.searchbox-text").attr("name");
-},selectName:function(jq,_24){
+},selectName:function(jq,_26){
 return jq.each(function(){
-var _25=$.data(this,"searchbox").menu;
-if(_25){
-_25.children("div.menu-item[name=\""+_24+"\"]").triggerHandler("click");
+var _27=$.data(this,"searchbox").menu;
+if(_27){
+_27.children("div.menu-item[name=\""+_26+"\"]").triggerHandler("click");
 }
 });
 },destroy:function(jq){
 return jq.each(function(){
-var _26=$(this).searchbox("menu");
-if(_26){
-_26.menu("destroy");
+var _28=$(this).searchbox("menu");
+if(_28){
+_28.menu("destroy");
 }
 $.data(this,"searchbox").searchbox.remove();
 $(this).remove();
 });
-},resize:function(jq,_27){
+},resize:function(jq,_29){
 return jq.each(function(){
-_6(this,_27);
+_6(this,_29);
 });
 }};
-$.fn.searchbox.parseOptions=function(_28){
-var t=$(_28);
-return $.extend({},$.parser.parseOptions(_28,["width","prompt","menu"]),{value:t.val(),searcher:(t.attr("searcher")?eval(t.attr("searcher")):undefined)});
+$.fn.searchbox.parseOptions=function(_2a){
+var t=$(_2a);
+return $.extend({},$.parser.parseOptions(_2a,["width","height","prompt","menu"]),{value:t.val(),searcher:(t.attr("searcher")?eval(t.attr("searcher")):undefined)});
 };
-$.fn.searchbox.defaults={width:"auto",prompt:"",value:"",menu:null,searcher:function(_29,_2a){
+$.fn.searchbox.defaults={width:"auto",height:22,prompt:"",value:"",menu:null,searcher:function(_2b,_2c){
 }};
 })(jQuery);
 
