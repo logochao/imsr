@@ -2,6 +2,7 @@ package com.radius.invoicing.customermange.service;
 
 import com.radius.base.page.EasyuiSplitPager;
 import com.radius.invoicing.ibatis.model.Customer;
+import com.radius.invoicing.ibatis.model.LinkMan;
 
 /**
  * @author <a href="mailto:goodluck.sunlight@gmail.com">陈波宁</a>
@@ -17,5 +18,12 @@ public interface CustomerService {
 	 * @return
 	 */
 	public EasyuiSplitPager<Customer> getCustomerInfoSplitPage(Customer customer);
+	
+	/**
+	 * 根据条件查询联系人信息
+	 * @param linkman
+	 * @return
+	 */
+	public EasyuiSplitPager<LinkMan> getLinkManInfoSplitPage(LinkMan linkman);
 
 }
