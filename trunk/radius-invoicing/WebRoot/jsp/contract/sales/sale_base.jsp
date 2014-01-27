@@ -126,8 +126,8 @@
  			$('#contract_sales_base_link_mobile').attr('value',row.contactInfo);
  			$('#contract_sales_base_link_fax').attr('value',row.fax1);
  			//2将显示界面关闭
- 			//$('#contract_sales_base_custmer_link_man').dialog('close');
- 			$('#contract_sales_base_custmer_link_man').dialog('options').closed=true;
+ 			$('#sales_base_custmer_dialog').dialog('close');
+ 			$('#sales_base_custmer_dialog').dialog('options').closed=true;
  		}
  	});
  	
@@ -154,8 +154,8 @@
  			$('#contract_sales_base_link_mobile').attr('value',row.mobile);
  			$('#contract_sales_base_link_fax').attr('value',row.fax);
  			//2将显示界面关闭
- 			//$('#contract_sales_base_custmer_link_man').dialog('close');
- 			$('#contract_sales_base_custmer_link_man').dialog('options').closed=true;
+ 			contract_sales_base_custmer_link_man.dialog('close');
+ 			contract_sales_base_custmer_link_man.dialog('options').closed=true;
  		}
  	});
  });
