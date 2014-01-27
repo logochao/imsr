@@ -1,10 +1,12 @@
 /**
  * menu - jQuery EasyUI
  * 
- * Licensed under the GPL terms
- * To use it on other terms please contact us
+ * Copyright (c) 2009-2013 www.jeasyui.com. All rights reserved.
  *
- * Copyright(c) 2009-2012 stworthy [ stworthy@gmail.com ] 
+ * Licensed under the GPL or commercial licenses
+ * To use it on other terms please contact us: info@jeasyui.com
+ * http://www.gnu.org/licenses/gpl.txt
+ * http://www.jeasyui.com/license_commercial.php
  */
 (function($){
 	
@@ -15,88 +17,132 @@
 		$(target).appendTo('body');
 		$(target).addClass('menu-top');	// the top menu
 		
-		var menus = [];
-		adjust($(target));
-
-		var time = null;
+		$(document).unbind('.menu').bind('mousedown.menu', function(e){
+			var allMenu = $('body>div.menu:visible');
+			var m = $(e.target).closest('div.menu', allMenu);
+			if (m.length){return}
+			$('body>div.menu-top:visible').menu('hide');
+		});
+		
+		var menus = splitMenu($(target));
 		for(var i=0; i<menus.length; i++){
-			var menu = menus[i];
-			wrapMenu(menu);
-			menu.children('div.menu-item').each(function(){
-				bindMenuItemEvent(target, $(this));
-			});
-			
-			menu.bind('mouseenter', function(){
-				if (time){
-					clearTimeout(time);
-					time = null;
-				}
-			}).bind('mouseleave', function(){
-				time = setTimeout(function(){
-					hideAll(target);
-				}, 100);
-			});
+			createMenu(menus[i]);
 		}
 		
-		
-		function adjust(menu){
+		function splitMenu(menu){
+			var menus = [];
+			menu.addClass('menu');
 			menus.push(menu);
-			menu.find('>div').each(function(){
-				var item = $(this);
-				var submenu = item.find('>div');
-				if (submenu.length){
-					submenu.insertAfter(target);
-					item[0].submenu = submenu;
-					adjust(submenu);
-				}
-			});
+			if (!menu.hasClass('menu-content')){
+				menu.children('div').each(function(){
+					var submenu = $(this).children('div');
+					if (submenu.length){
+						submenu.insertAfter(target);
+						this.submenu = submenu;		// point to the sub menu
+						var mm = splitMenu(submenu);
+						menus = menus.concat(mm);
+					}
+				});
+			}
+			return menus;
 		}
 		
-		
-		/**
-		 * wrap a menu and set it's status to hidden
-		 * the menu not include sub menus
-		 */
-		function wrapMenu(menu){
-			menu.addClass('menu').find('>div').each(function(){
-				var item = $(this);
-				if (item.hasClass('menu-sep')){
-					item.html('&nbsp;');
-				} else {
-					// the menu item options
-					var itemOpts = $.extend({}, $.parser.parseOptions(this,['name','iconCls','href']), {
+		function createMenu(menu){
+			var width = $.parser.parseOptions(menu[0], ['width']).width;
+			if (menu.hasClass('menu-content')){
+				menu[0].originalWidth = width || menu._outerWidth();
+			} else {
+				menu[0].originalWidth = width || 0;
+				menu.children('div').each(function(){
+					var item = $(this);
+					var itemOpts = $.extend({}, $.parser.parseOptions(this,['name','iconCls','href',{separator:'boolean'}]), {
 						disabled: (item.attr('disabled') ? true : undefined)
 					});
-					item.attr('name',itemOpts.name || '').attr('href',itemOpts.href || '');
-					
-					var text = item.addClass('menu-item').html();
-					item.empty().append($('<div class="menu-text"></div>').html(text));
-					
-					if (itemOpts.iconCls){
-						$('<div class="menu-icon"></div>').addClass(itemOpts.iconCls).appendTo(item);
+					if (itemOpts.separator){
+						item.addClass('menu-sep');
 					}
-					if (itemOpts.disabled){
-						setDisabled(target, item[0], true);
+					if (!item.hasClass('menu-sep')){
+						item[0].itemName = itemOpts.name || '';
+						item[0].itemHref = itemOpts.href || '';
+						
+						var text = item.addClass('menu-item').html();
+						item.empty().append($('<div class="menu-text"></div>').html(text));
+						if (itemOpts.iconCls){
+							$('<div class="menu-icon"></div>').addClass(itemOpts.iconCls).appendTo(item);
+						}
+						if (itemOpts.disabled){
+							setDisabled(target, item[0], true);
+						}
+						if (item[0].submenu){
+							$('<div class="menu-rightarrow"></div>').appendTo(item);	// has sub menu
+						}
+						
+						bindMenuItemEvent(target, item);
 					}
-					if (item[0].submenu){
-						$('<div class="menu-rightarrow"></div>').appendTo(item);	// has sub menu
-					}
-					
-					item._outerHeight(22);
-				}
-			});
+				});
+				$('<div class="menu-line"></div>').prependTo(menu);
+			}
+			setMenuWidth(target, menu);
 			menu.hide();
+			
+			bindMenuEvent(target, menu);
 		}
+	}
+	
+	function setMenuWidth(target, menu){
+		var opts = $.data(target, 'menu').options;
+//		var d = menu.css('display');
+		var style = menu.attr('style');
+		menu.css({
+			display: 'block',
+			left:-10000,
+			height: 'auto',
+			overflow: 'hidden'
+		});
+		
+//		menu.find('div.menu-item')._outerHeight(22);
+		var width = 0;
+		menu.find('div.menu-text').each(function(){
+			if (width < $(this)._outerWidth()){
+				width = $(this)._outerWidth();
+			}
+			$(this).closest('div.menu-item')._outerHeight($(this)._outerHeight()+2);
+		});
+		width += 65;
+		menu._outerWidth(Math.max((menu[0].originalWidth || 0), width, opts.minWidth));
+		
+		menu.children('div.menu-line')._outerHeight(menu.outerHeight());
+		
+//		menu.css('display', d);
+		menu.attr('style', style);
+	}
+	
+	/**
+	 * bind menu event
+	 */
+	function bindMenuEvent(target, menu){
+		var state = $.data(target, 'menu');
+		menu.unbind('.menu').bind('mouseenter.menu', function(){
+			if (state.timer){
+				clearTimeout(state.timer);
+				state.timer = null;
+			}
+		}).bind('mouseleave.menu', function(){
+			if (state.options.hideOnUnhover){
+				state.timer = setTimeout(function(){
+					hideAll(target);
+				}, 100);
+			}
+		});
 	}
 	
 	/**
 	 * bind menu item event
 	 */
 	function bindMenuItemEvent(target, item){
+		if (!item.hasClass('menu-item')){return}
 		item.unbind('.menu');
-		item.bind('mousedown.menu', function(){
-			return false;	// skip the mousedown event that has been used for document to hide the menu
-		}).bind('click.menu', function(){
+		item.bind('click.menu', function(){
 			if ($(this).hasClass('menu-item-disabled')){
 				return;
 			}
@@ -128,17 +174,9 @@
 			
 			var submenu = item[0].submenu;
 			if (submenu){
-				var left = item.offset().left + item.outerWidth() - 2;
-				if (left + submenu.outerWidth() + 5 > $(window)._outerWidth() + $(document).scrollLeft()){
-					left = item.offset().left - submenu.outerWidth() + 2;
-				}
-				var top = item.offset().top - 3;
-				if (top + submenu.outerHeight() > $(window)._outerHeight() + $(document).scrollTop()){
-					top = $(window)._outerHeight() + $(document).scrollTop() - submenu.outerHeight() - 5;
-				}
-				showMenu(submenu, {
-					left: left,
-					top: top
+				$(target).menu('show', {
+					menu: submenu,
+					parent: item
 				});
 			}
 		}).bind('mouseleave.menu', function(e){
@@ -161,44 +199,59 @@
 	 * hide top menu and it's all sub menus
 	 */
 	function hideAll(target){
-		var opts = $.data(target, 'menu').options;
-		hideMenu($(target));
-		$(document).unbind('.menu');
-		opts.onHide.call(target);
+		var state = $.data(target, 'menu');
+		if (state){
+			if ($(target).is(':visible')){
+				hideMenu($(target));
+				state.options.onHide.call(target);
+			}
+		}
 		return false;
 	}
 	
 	/**
-	 * show the top menu
+	 * show the menu, the 'param' object has one or more properties:
+	 * left: the left position to display
+	 * top: the top position to display
+	 * menu: the menu to display, if not defined, the 'target menu' is used
+	 * parent: the parent menu item to align to
+	 * alignTo: the element object to align to
 	 */
-	function showTopMenu(target, pos){
-		var opts = $.data(target, 'menu').options;
-		if (pos){
-			opts.left = pos.left;
-			opts.top = pos.top;
-			if (opts.left + $(target).outerWidth() > $(window)._outerWidth() + $(document).scrollLeft()){
-				opts.left = $(window)._outerWidth() + $(document).scrollLeft() - $(target).outerWidth() - 5;
+	function showMenu(target, param){
+		var left,top;
+		param = param || {};
+		var menu = $(param.menu || target);
+		if (menu.hasClass('menu-top')){
+			var opts = $.data(target, 'menu').options;
+			$.extend(opts, param);
+			left = opts.left;
+			top = opts.top;
+			if (opts.alignTo){
+				var at = $(opts.alignTo);
+				left = at.offset().left;
+				top = at.offset().top + at._outerHeight();
 			}
-			if (opts.top + $(target).outerHeight() > $(window)._outerHeight() + $(document).scrollTop()){
-				opts.top -= $(target).outerHeight();
+//			if (param.left != undefined){left = param.left}
+//			if (param.top != undefined){top = param.top}
+			if (left + menu.outerWidth() > $(window)._outerWidth() + $(document)._scrollLeft()){
+				left = $(window)._outerWidth() + $(document).scrollLeft() - menu.outerWidth() - 5;
+			}
+			if (top + menu.outerHeight() > $(window)._outerHeight() + $(document).scrollTop()){
+//				top -= menu.outerHeight();
+				top = $(window)._outerHeight() + $(document).scrollTop() - menu.outerHeight() - 5;
+			}
+		} else {
+			var parent = param.parent;	// the parent menu item
+			left = parent.offset().left + parent.outerWidth() - 2;
+			if (left + menu.outerWidth() + 5 > $(window)._outerWidth() + $(document).scrollLeft()){
+				left = parent.offset().left - menu.outerWidth() + 2;
+			}
+			var top = parent.offset().top - 3;
+			if (top + menu.outerHeight() > $(window)._outerHeight() + $(document).scrollTop()){
+				top = $(window)._outerHeight() + $(document).scrollTop() - menu.outerHeight() - 5;
 			}
 		}
-		showMenu($(target), {left:opts.left,top:opts.top}, function(){
-			$(document).unbind('.menu').bind('mousedown.menu', function(){
-				hideAll(target);
-				$(document).unbind('.menu');
-				return false;
-			});
-			opts.onShow.call(target);
-		});
-	}
-	
-	function showMenu(menu, pos, callback){
-		if (!menu) return;
-		
-		if (pos){
-			menu.css(pos);
-		}
+		menu.css({left:left,top:top});
 		menu.show(0, function(){
 			if (!menu[0].shadow){
 				menu[0].shadow = $('<div class="menu-shadow"></div>').insertAfter(menu);
@@ -212,9 +265,8 @@
 				height:menu.outerHeight()
 			});
 			menu.css('z-index', $.fn.menu.defaults.zIndex++);
-			
-			if (callback){
-				callback();
+			if (menu.hasClass('menu-top')){
+				$.data(menu[0], 'menu').options.onShow.call(menu[0]);
 			}
 		});
 	}
@@ -260,6 +312,7 @@
 	
 	function setDisabled(target, itemEl, disabled){
 		var t = $(itemEl);
+		if (!t.hasClass('menu-item')){return}
 		
 		if (disabled){
 			t.addClass('menu-item-disabled');
@@ -279,14 +332,24 @@
 	function appendItem(target, param){
 		var menu = $(target);
 		if (param.parent){
+			if (!param.parent.submenu){
+				var submenu = $('<div class="menu"><div class="menu-line"></div></div>').appendTo('body');
+				submenu.hide();
+				param.parent.submenu = submenu;
+				$('<div class="menu-rightarrow"></div>').appendTo(param.parent);
+			}
 			menu = param.parent.submenu;
 		}
-		var item = $('<div class="menu-item"></div>').appendTo(menu);
-		$('<div class="menu-text"></div>').html(param.text).appendTo(item);
+		if (param.separator){
+			var item = $('<div class="menu-sep"></div>').appendTo(menu);
+		} else {
+			var item = $('<div class="menu-item"></div>').appendTo(menu);
+			$('<div class="menu-text"></div>').html(param.text).appendTo(item);
+		}
 		if (param.iconCls) $('<div class="menu-icon"></div>').addClass(param.iconCls).appendTo(item);
 		if (param.id) item.attr('id', param.id);
-		if (param.href) item.attr('href', param.href);
-		if (param.name) item.attr('name', param.name);
+		if (param.name){item[0].itemName = param.name}
+		if (param.href){item[0].itemHref = param.href}
 		if (param.onclick){
 			if (typeof param.onclick == 'string'){
 				item.attr('onclick', param.onclick);
@@ -294,13 +357,12 @@
 				item[0].onclick = eval(param.onclick);
 			}
 		}
-		if (param.handler) item[0].onclick = eval(param.handler);
+		if (param.handler){item[0].onclick = eval(param.handler)}
+		if (param.disabled){setDisabled(target, item[0], true)}
 		
 		bindMenuItemEvent(target, item);
-		
-		if (param.disabled){
-			setDisabled(target, item[0], true);
-		}
+		bindMenuEvent(target, menu);
+		setMenuWidth(target, menu);
 	}
 	
 	function removeItem(target, itemEl){
@@ -350,9 +412,12 @@
 	};
 	
 	$.fn.menu.methods = {
+		options: function(jq){
+			return $.data(jq[0], 'menu').options;
+		},
 		show: function(jq, pos){
 			return jq.each(function(){
-				showTopMenu(this, pos);
+				showMenu(this, pos);
 			});
 		},
 		hide: function(jq){
@@ -412,8 +477,10 @@
 				id: t.attr('id'),
 				text: $.trim(t.children('div.menu-text').html()),
 				disabled: t.hasClass('menu-item-disabled'),
-				href: t.attr('href'),
-				name: t.attr('name'),
+//				href: t.attr('href'),
+//				name: t.attr('name'),
+				name: itemEl.itemName,
+				href: itemEl.itemHref,
 				onclick: itemEl.onclick
 			}
 			var icon = t.children('div.menu-icon');
@@ -460,13 +527,15 @@
 	};
 	
 	$.fn.menu.parseOptions = function(target){
-		return $.extend({}, $.parser.parseOptions(target, ['left','top']));
+		return $.extend({}, $.parser.parseOptions(target, ['left','top',{minWidth:'number',hideOnUnhover:'boolean'}]));
 	};
 	
 	$.fn.menu.defaults = {
 		zIndex:110000,
 		left: 0,
 		top: 0,
+		minWidth: 120,
+		hideOnUnhover: true,	// Automatically hides the menu when mouse exits it
 		onShow: function(){},
 		onHide: function(){},
 		onClick: function(item){}
