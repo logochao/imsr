@@ -68,4 +68,13 @@ public class GoodsDaoImpl extends BaseIbatisDaoImpl<Goods> implements GoodsDao{
 		Pager<Goods> page=new Pager<Goods>(pageNo, rowCount, list);
 		return page;
 	}
+	
+	/**
+	 * 通过条件查询
+	 * @param goods
+	 * @return
+	 */
+	public List<Goods> getGoodsByCondition(Goods goods){
+		return this.getSqlMapClientTemplate().queryForList("goodsSqlMap.getGoodsByCondition",goods);
+	}
 }

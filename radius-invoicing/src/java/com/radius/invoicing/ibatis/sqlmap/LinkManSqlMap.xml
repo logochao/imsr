@@ -6,10 +6,11 @@
   
   <sql id="linkManFileds">
     link_man_id id,link_type linkType,other_id other,link_man_name name,sex sex,card_no cardNo,link_mobile mobile,link_tel tel,email email,qq qq,address address,pinyin pinyin,
-  	memo memo,creater creater,createdate createdate,reviser reviser,revisedate revisedate,verifier verifydate
+  	memo memo, 
+  	creater creater,createdate createdate,reviser reviser,revisedate revisedate,verifier verifydate
   </sql>
   
-  <resultMap id="linkMan" class="linkMan">
+  <resultMap id="linkManMap" class="linkMan">
     <result column="link_man_id" jdbcType="int" javaType="java.lang.Integer" property="id" />
     <result column="link_type" jdbcType="int" javaType="java.lang.Integer" property="linkType" />
     <result column="other_id" jdbcType="char" javaType="java.lang.String" property="other" />
@@ -22,7 +23,8 @@
 	<result column="qq" jdbcType="varchar" javaType="java.lang.String" property="qq"/>
 	<result column="address" jdbcType="varchar" javaType="java.lang.String" property="address"/>
 	<result column="pinyin" jdbcType="varchar" javaType="java.lang.String" property="pinyin"/>
-  	<result column="memo" jdbcType="text" javaType="java.lang.String" property="memo" />
+  	
+  	<result column="memo" jdbcType="text" javaType="java.lang.String" property="memo" /> 
     <result column="creater" jdbcType="char" javaType="java.lang.String" property="creater" />
     <result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createdate" />
     <result column="reviser" jdbcType="char" javaType="java.lang.String" property="reviser" />
@@ -33,24 +35,47 @@
   
   <sql id="whereLike">
   	<dynamic prepend="where">
-  		1=1  
-  		<isNotNull prepend="and" property="id">link_man_id=#id#</isNotNull>
-		<isNotNull prepend="and" property="linkType">link_type=#linkType#</isNotNull>
-		<isNotEmpty prepend="and" property="other">other_id=#other#</isNotEmpty>
-		<isNotEmpty prepend="and" property="name">link_man_name=#name#</isNotEmpty>
-		<isNotNull prepend="and" property="sex">sex=#sex#</isNotNull>
-		<isNotEmpty prepend="and" property="cardNo">card_no=#cardNo#</isNotEmpty>
-		<isNotEmpty prepend="and" property="mobile">link_mobile=#mobile#</isNotEmpty>
-		<isNotEmpty prepend="and" property="tel">link_tel=#tel#</isNotEmpty>
-		<isNotEmpty prepend="and" property="email">email=#email#</isNotEmpty>
-		<isNotEmpty prepend="and" property="qq">qq=#qq#</isNotEmpty>
-		<isNotEmpty prepend="and" property="address">address=#address#</isNotEmpty>
-		<isNotEmpty prepend="and" property="pinyin">pinyin=#pinyin#</isNotEmpty>
- 		<isNotEmpty prepend="and" property="memo">memo=#memo#</isNotEmpty> 
+  		1=1  AND
+  		<isNotNull prepend="and" property="id">
+  			link_man_id=#id#
+  		</isNotNull>
+		<isNotNull prepend="and" property="linkType">
+			link_type=#linkType#
+		</isNotNull>
+		<isNotEmpty prepend="and" property="other">
+			other_id=#other#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="name">
+			link_man_name LIKE '%$name$%'
+		</isNotEmpty>
+		<isNotNull prepend="and" property="sex">
+			sex=#sex#
+		</isNotNull>
+		<isNotEmpty prepend="and" property="cardNo">
+			card_no=#cardNo#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="mobile">
+			link_mobile=#mobile#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="tel">
+			link_tel=#tel#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="email">
+			email=#email#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="qq">
+			qq=#qq#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="address">
+			address=#address#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="pinyin">
+			pinyin=#pinyin#
+		</isNotEmpty>
   	</dynamic>
   </sql>
  
-	 <select id="getLinkManById" parameterClass="java.lang.Integer" resultMap="linkMan">
+	 <select id="getLinkManById" parameterClass="java.lang.Integer" resultMap="linkManMap">
 	 	SELECT <include refid="linkManFileds"/>
 	 	FROM RS_LINK_MAN
 	 	WHERE link_man_id =#id#
@@ -109,13 +134,13 @@
    		</dynamic>
    		WHERE link_man_id =#id#
    	</update>
-   	<select id="getLinkManByCondition" parameterClass="linkMan" resultMap="linkMan">
+   	<select id="getLinkManByCondition" parameterClass="linkMan" resultClass="linkMan">
    		SELECT <include refid="linkManFileds"/>
    		FROM RS_LINK_MAN
    		<include refid="whereLike"/>
    	</select>
    	<!-- 分页查询语句 -->
-   	<select id="getLinkManSplitPageBySQL" remapResults="true" parameterClass="java.lang.String" resultMap="linkMan">
+   	<select id="getLinkManSplitPageBySQL" remapResults="true" parameterClass="java.lang.String" resultMap="linkManMap">
    		$splitPageSQL$
    	</select>
    	<!-- end -->

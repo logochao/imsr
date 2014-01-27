@@ -48,5 +48,14 @@ public interface GoodsDao {
 	 */
 	public Pager<Goods> getGoodsSplitPageBySQL(int pageNo, String countSQL,
 			String splitPageSQL);
+	
+	
+	
+	/**
+	 * 通过条件查询
+	 * @param goods
+	 * @return
+	 */
+	public List<Goods> getGoodsByCondition(Goods goods);
 
 }

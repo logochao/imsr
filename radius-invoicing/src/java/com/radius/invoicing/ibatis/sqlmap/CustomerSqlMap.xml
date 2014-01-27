@@ -10,8 +10,8 @@
   	 account_name accountName,account_no accountNo,paymented_man paymentedMan,voucher voucher,goods_bills_date goodsBillsDate,min_order_amount orderAmount,ledger_id ledgerId,memo memo,creater creater,createdate createdate,reviser reviser,revisedate revisedate,verifier verifydate
   </sql>
   
-  <resultMap id="customer" class="customer">
-    <result column="customer_id" jdbcType="char" javaType="java.lang.String" property="id" />
+  <resultMap id="customerMap" class="customer">
+    <result column="customer_id" jdbcType="char" javaType="java.lang.String" property="id"/>
     <result column="customer_ab" jdbcType="varchar" javaType="java.lang.String" property="ab" />
     <result column="customer_name" jdbcType="varchar" javaType="java.lang.String" property="name" />
     <result column="address" jdbcType="varchar" javaType="java.lang.String" property="address" />
@@ -56,45 +56,109 @@
   </resultMap>
   
   <sql id="whereLike">
-  	<dynamic prepend="where">
   		1=1  
-  		<isNotEmpty prepend="and" property="id">customer_id=#id#</isNotEmpty>
-  		<isNotEmpty prepend="and" property="ab">customer_ab=#ab#</isNotEmpty>
-		<isNotEmpty prepend="and" property="name">customer_name=#name#</isNotEmpty>
-		<isNotEmpty prepend="and" property="address">address=#address#</isNotEmpty>
-		<isNotEmpty prepend="and" property="linkMan">link_man=#linkMan#</isNotEmpty>
-		<isNotEmpty prepend="and" property="contactInfo">contact_info=#contactInfo#</isNotEmpty>
-		<isNotEmpty prepend="and" property="tel1">tel1=#tel1#</isNotEmpty>
-		<isNotEmpty prepend="and" property="tel2">tel2=#tel2#</isNotEmpty>
-		<isNotEmpty prepend="and" property="tel3">tel3=#tel3#</isNotEmpty>
-		<isNotEmpty prepend="and" property="fax1">fax1=#fax1#</isNotEmpty>
-		<isNotEmpty prepend="and" property="fax2">fax2=#fax2#</isNotEmpty>
-		<isNotEmpty prepend="and" property="fax3">fax3=#fax3#</isNotEmpty>
-		<isNotEmpty prepend="and" property="paymentedType">paymented_type=#paymentedType#</isNotEmpty>
-		<isNotEmpty prepend="and" property="customerIllustrate">customer_illustrate=#customerIllustrate#</isNotEmpty>
-		<isNotEmpty prepend="and" property="customerProperty">customer_property=#customerProperty#</isNotEmpty>
-		<isNotEmpty prepend="and" property="officeAddress">office_address=#officeAddress#</isNotEmpty>
- 		<isNotEmpty prepend="and" property="postCode">post_code=#postCode#</isNotEmpty>
- 		<isNotEmpty prepend="and" property="salesMan">salesman_id=#salesMan#</isNotEmpty>
- 		<isNotEmpty prepend="and" property="payType">pay_type=#payType#</isNotEmpty>
- 		<isNotEmpty prepend="and" property="deliveryType">delivery_type=#deliveryType#</isNotEmpty>
- 		<isNotEmpty prepend="and" property="bankAccNo">bank_acc_no=#bankAccNo#</isNotEmpty>
- 		<isNotEmpty prepend="and" property="taxNo">tax_no=#taxNo#</isNotEmpty>
- 		<isNotEmpty prepend="and" property="url">url=#url#</isNotEmpty>
- 		<isNotEmpty prepend="and" property="email">email=#email#</isNotEmpty>
- 		<isNotEmpty prepend="and" property="accountBank">account_bank=#accountBank#</isNotEmpty> 
- 		<isNotEmpty prepend="and" property="accountName">account_name=#accountName#</isNotEmpty> 
- 		<isNotEmpty prepend="and" property="accountNo">account_no=#accountNo#</isNotEmpty> 
- 		<isNotEmpty prepend="and" property="paymentedMan">paymented_man=#paymentedMan#</isNotEmpty> 
- 		<isNotEmpty prepend="and" property="voucher">voucher=#voucher#</isNotEmpty> 
- 		<isNotNull prepend="and" property="goodsBillsDate">goods_bills_date,</isNotNull> 
- 		<isNotNull prepend="and" property="orderAmount">min_order_amount=#orderAmount#</isNotNull> 
- 		<isNotEmpty prepend="and" property="ledgerId">ledger_id=#ledgerId#</isNotEmpty> 
- 		<isNotEmpty prepend="and" property="memo">memo=#memo#</isNotEmpty> 
-  	</dynamic>
+  		<isNotEmpty prepend="AND" property="id">
+  			customer_id=#id#
+  		</isNotEmpty>
+  		<isNotEmpty prepend="AND" property="ab">
+  			customer_ab=#ab#
+  		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="name">
+			customer_name LIKE '%$name$%'
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="address">
+			address=#address#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="linkMan">
+			link_man=#linkMan#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="contactInfo">
+			contact_info=#contactInfo#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="tel1">
+			tel1=#tel1#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="tel2">
+			tel2=#tel2#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="tel3">
+			tel3=#tel3#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="fax1">
+			fax1=#fax1#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="fax2">
+			fax2=#fax2#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="fax3">
+			fax3=#fax3#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="paymentedType">
+			paymented_type=#paymentedType#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="customerIllustrate">
+			customer_illustrate=#customerIllustrate#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="customerProperty">
+			customer_property=#customerProperty#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="officeAddress">
+			office_address=#officeAddress#
+		</isNotEmpty>
+ 		<isNotEmpty prepend="AND" property="postCode">
+ 			post_code=#postCode#
+ 		</isNotEmpty>
+ 		<isNotEmpty prepend="AND" property="salesMan">
+ 			salesman_id=#salesMan#
+ 		</isNotEmpty>
+ 		<isNotEmpty prepend="AND" property="payType">
+ 			pay_type=#payType#
+ 		</isNotEmpty>
+ 		<isNotEmpty prepend="AND" property="deliveryType">
+ 			delivery_type=#deliveryType#
+ 		</isNotEmpty>
+ 		<isNotEmpty prepend="AND" property="bankAccNo">
+ 			bank_acc_no=#bankAccNo#
+ 		</isNotEmpty>
+ 		<isNotEmpty prepend="AND" property="taxNo">
+ 			tax_no=#taxNo#
+ 		</isNotEmpty>
+ 		<isNotEmpty prepend="AND" property="url">
+ 			url=#url#
+ 		</isNotEmpty>
+ 		<isNotEmpty prepend="AND" property="email">
+ 			email=#email#
+ 		</isNotEmpty>
+ 		<isNotEmpty prepend="AND" property="accountBank">
+ 			account_bank=#accountBank#
+ 		</isNotEmpty> 
+ 		<isNotEmpty prepend="AND" property="accountName">
+ 			account_name=#accountName#
+ 		</isNotEmpty> 
+ 		<isNotEmpty prepend="AND" property="accountNo">
+ 			account_no=#accountNo#
+ 		</isNotEmpty> 
+ 		<isNotEmpty prepend="AND" property="paymentedMan">
+ 			paymented_man=#paymentedMan#
+ 		</isNotEmpty> 
+ 		<isNotEmpty prepend="AND" property="voucher">
+ 			voucher=#voucher#
+ 		</isNotEmpty> 
+ 		<isNotNull prepend="AND" property="goodsBillsDate">
+ 			goods_bills_date=#goodsBillsDate#
+ 		</isNotNull> 
+ 		<isNotNull prepend="AND" property="orderAmount">
+ 			min_order_amount=#orderAmount#
+ 		</isNotNull> 
+ 		<isNotEmpty prepend="AND" property="ledgerId">
+ 			ledger_id=#ledgerId#
+ 		</isNotEmpty> 
+ 		<isNotEmpty prepend="AND" property="memo">
+ 			memo=#memo#
+ 		</isNotEmpty>
   </sql>
  
-	 <select id="getCustomerById" parameterClass="string" resultMap="customer">
+	 <select id="getCustomerById" parameterClass="string" resultMap="customerMap">
 	 	SELECT <include refid="customerFileds"/>
 	 	FROM RS_CUSTOMER
 	 	WHERE customer_id =#id#
@@ -218,13 +282,13 @@
    		</dynamic>
    		WHERE customer_id =#id#
    	</update>
-   	<select id="getCustomerByCondition" parameterClass="customer" resultMap="customer">
+   	<select id="getCustomerByCondition" parameterClass="customer" resultClass="customer">
    		SELECT <include refid="customerFileds"/>
    		FROM RS_CUSTOMER
-   		<include refid="whereLike"/>
+   		WHERE <include refid="whereLike"/>
    	</select>
    	<!-- 分页查询语句 -->
-   	<select id="getCustomerSplitPageBySQL" remapResults="true" parameterClass="java.lang.String" resultMap="customer">
+   	<select id="getCustomerSplitPageBySQL" remapResults="true" parameterClass="java.lang.String" resultMap="customerMap">
    		$splitPageSQL$
    	</select>
    	<!-- end -->

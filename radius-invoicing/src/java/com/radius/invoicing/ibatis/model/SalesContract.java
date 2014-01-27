@@ -13,31 +13,31 @@ import java.util.Date;
  */
 public class SalesContract extends ExtInfo{
 
-	private String   id;
-	private String   customerId;
-	private String   customerName;
-	private String   contractFile;
-	private Date     effectDate;
-	private Date     signTime;
-	private String   tradeAssistant;
-	private String   salesMan;
-	private String   man;
-	private String   mobile;
-	private String   tel;
-	private String   fax;
-	private Date	 orderedDate;
-	private Date     deliveryDate;
-	private String   deliveryPoint;
-	private String   contractTerms;
-	private Date     printTime;
-	private String   printAcc;
-	private String   printreCord;
-	private String   paymentedStatus;
-	private Date     validityDate;
-	private String   stats;
-	private Integer  printTimes;
-	private String   memo;
-	private String   ledgerId;
+	private String   id="";//合同编号
+	private String   customerId="";//客户编号
+	private String   customerName="";//客户名称
+	private String   contractFile="";//合同文件编号
+	private Date     effectDate=null;//生效日期
+	private Date     signTime=null;//签署日期
+	private String   tradeAssistant="";//营业员
+	private String   salesMan="";//业务员
+	private String   man="";//联系人
+	private String   mobile="";//联系人手机
+	private String   tel="";//联系电话
+	private String   fax="";//联系fax
+	private Date	 orderedDate=null;//订货日期
+	private Date     deliveryDate=null;//送货日期
+	private String   deliveryPoint="";//送货地点
+	private String   contractTerms="";//合同条款
+	private Date     printTime=null;//最新打印时间
+	private String   printAcc="";//最新打印帐号
+	private String   printreCord="";//最新打印记录
+	private String   paymentedStatus="";//结帐状态
+	private Date     validityDate=null;//有效期至
+	private String   stats="";//状态
+	private Integer  printTimes=null;//打印次数
+	private String   memo="";//合同备注
+	private String   ledgerId="";//账套编号
 	
 	
 	public String getContractFile() {

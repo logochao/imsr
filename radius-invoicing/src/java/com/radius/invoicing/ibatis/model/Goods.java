@@ -5,6 +5,8 @@ package com.radius.invoicing.ibatis.model;
 
 import java.util.Date;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 /**
  * @author <a href="mailto:goodluck.sunlight@gmail.com">陈波宁</a>
  * @version 创建时间：2013-12-8 下午12:53:04<br/>
@@ -117,6 +119,7 @@ public class Goods extends ExtInfo{
 	public void setDepositDeadline(Integer depositDeadline) {
 		this.depositDeadline = depositDeadline;
 	}
+	@JsonIgnore //转为json时,将其剔除
 	public String getDescription() {
 		return description;
 	}

@@ -67,48 +67,131 @@
   <sql id="whereLike">
   	<dynamic prepend="where">
   		1=1  
-  		<isNotEmpty prepend="and" property="id">goods_id=#id#</isNotEmpty>
-  		<isNotEmpty prepend="and" property="name">goods_name=#name#</isNotEmpty>
-  		<isNotEmpty prepend="and" property="property">goods_property=#property#</isNotEmpty>
-  		<isNotEmpty prepend="and" property="categoryId">category_id=#categoryId#</isNotEmpty>
-  		<isNotEmpty prepend="and" property="categoryName">category_name=#categoryName#</isNotEmpty>
-  		<isNotEmpty prepend="and" property="goods_series">goods_series=#series#</isNotEmpty>
-  		<isNotEmpty prepend="and" property="unit">unit=#unit#</isNotEmpty>
-  		<isNotEmpty prepend="and" property="place">origin_place=#place#</isNotEmpty>
-  		<isNotEmpty prepend="and" property="uses">uses=#uses#</isNotEmpty>
-  		<isNotNull prepend="and" property="weightProp">weight_prop=#weightProp#</isNotNull>
-  		<isNotEmpty prepend="and" property="status">goods_status=#status#</isNotEmpty>
-  		<isNotEmpty prepend="and" property="vulnerability">vulnerability=#vulnerability#</isNotEmpty>
-  		<isNotNull prepend="and" property="depositDeadline">deposit_deadline=#depositDeadline#</isNotNull>
-  		<isNotEmpty prepend="and" property="description">goods_description=#description#</isNotEmpty>
-  		<isNotNull prepend="and" property="minStore">min_limit_of_store=#minStore#</isNotNull>
-  		<isNotNull prepend="and" property="maxStore">max_limit_of_store=#maxStore#</isNotNull>
-  		<isNotNull prepend="and" property="cost">cost=#cost#</isNotNull>
-  		<isNotEmpty prepend="and" property="illustrate">purchase_illustrate=#illustrate#</isNotEmpty>
-  		<isNotNull prepend="and" property="price">price=#price#</isNotNull>
-  		<isNotEmpty prepend="and" property="realName">true_goods_name=#realName#</isNotEmpty>
-  		<isNotEmpty prepend="and" property="cashType">cash_type=#cashType#</isNotEmpty>
-  		<isNotNull prepend="and" property="batch">batch=#batch#</isNotNull>
-  		<isNotEmpty prepend="and" property="batchNo">batch_no=#batchNo#</isNotEmpty>
-  		<isNotEmpty prepend="and" property="useStatus">use_status=#useStatus#</isNotEmpty>
-  		<isNotNull prepend="and" property="monthBatch">month_batch=#monthBatch#</isNotNull>
-  		<isNotNull prepend="and" property="modifyBatchDate">modify_batch_date=#modifyBatchDate#</isNotNull>
-  		<isNotEmpty prepend="and" property="modifyBatchMonth">modify_batch_month=#modifyBatchMonth#</isNotEmpty>
-  		<isNotEmpty prepend="and" property="format">format_no=#format#</isNotEmpty>
-  		<isNotNull prepend="and" property="netQuantity">net_quantity=#netQuantity#</isNotNull>
-  		<isNotNull prepend="and" property="littleUnitQuantity">little_unit_quantity=#littleUnitQuantity#</isNotNull>
-  		<isNotEmpty prepend="and" property="littleUnit">little_unit=#littleUnit#</isNotEmpty>
-  		<isNotEmpty prepend="and" property="salesType">sales_type=#salesType#</isNotEmpty>
-  		<isNotEmpty prepend="and" property="defultSalesInstitution">defult_sales_institution=#defultSalesInstitution#</isNotEmpty>
-  		<isNotEmpty prepend="and" property="taxNo">tax_no=#taxNo#</isNotEmpty>
-  		<isNotNull prepend="and" property="offSales">off_sales=#offSales#</isNotNull>
-  		<isNotEmpty prepend="and" property="memo">memo=#memo#</isNotEmpty>
-  		<isNotNull prepend="and" property="costConvertUnit">cost_of_convert_unit=#costConvertUnit#</isNotNull>
-  		<isNotNull prepend="and" property="priceConvertUnit">price_of_convert_unit=#priceConvertUnit#</isNotNull>
-  		<isNotEmpty prepend="and" property="barCode">goods_bar_code=#barCode#</isNotEmpty>
-  		<isNotEmpty prepend="and" property="weigthPerUnit">weigth_per_unit=#weigthPerUnit#</isNotEmpty>
-  		<isNotEmpty prepend="and" property="priceWeigthPerUnit">price_of_weigth_per_unit=#priceWeigthPerUnit#</isNotEmpty>
-  		<isNotEmpty prepend="and" property="ledgerId">ledger_id=#ledgerId#</isNotEmpty>
+  		<isNotEmpty prepend="AND" property="id">
+  			goods_id=#id#
+  		</isNotEmpty>
+  		<isNotEmpty prepend="AND" property="name">
+  			goods_name LIKE CONCAT('%',TRIM(#name#),'%')
+  		</isNotEmpty>
+  		<isNotEmpty prepend="AND" property="property">
+  			goods_property=#property#
+  		</isNotEmpty>
+  		<isNotEmpty prepend="AND" property="categoryId">
+  			category_id=#categoryId#
+  		</isNotEmpty>
+  		<isNotEmpty prepend="AND" property="categoryName">
+  			category_name=#categoryName#
+  		</isNotEmpty>
+  		<!--<isNotEmpty prepend="AND" property="goods_series">
+  			goods_series=#series#
+  		</isNotEmpty>-->
+  		<isNotEmpty prepend="AND" property="unit">
+  			unit=#unit#
+  		</isNotEmpty>
+  		<isNotEmpty prepend="AND" property="place">
+  			origin_place=#place#
+  		</isNotEmpty>
+  		<isNotEmpty prepend="AND" property="uses">
+  			uses=#uses#
+  		</isNotEmpty>
+  		<isNotNull prepend="AND" property="weightProp">
+  			weight_prop=#weightProp#
+  		</isNotNull>
+  		<isNotEmpty prepend="AND" property="status">
+  			goods_status=#status#
+  		</isNotEmpty>
+  		<isNotEmpty prepend="AND" property="vulnerability">
+  			vulnerability=#vulnerability#
+  		</isNotEmpty>
+  		<isNotNull prepend="AND" property="depositDeadline">
+  			deposit_deadline=#depositDeadline#
+  		</isNotNull>
+  		<!--<isNotEmpty prepend="AND" property="description">
+  			goods_description=#description#
+  		</isNotEmpty>
+  		--><isNotNull prepend="AND" property="minStore">
+  			min_limit_of_store=#minStore#
+  		</isNotNull>
+  		<isNotNull prepend="AND" property="maxStore">
+  			max_limit_of_store=#maxStore#
+  		</isNotNull>
+  		<isNotNull prepend="AND" property="cost">
+  			cost=#cost#
+  		</isNotNull>
+  		<!--<isNotEmpty prepend="AND" property="illustrate">
+  			purchase_illustrate=#illustrate#
+  		</isNotEmpty>
+  		--><isNotNull prepend="AND" property="price">
+  			price=#price#
+  		</isNotNull>
+  		<isNotEmpty prepend="AND" property="realName">
+  			true_goods_name=#realName#
+  		</isNotEmpty>
+  		<isNotEmpty prepend="AND" property="cashType">
+  			cash_type=#cashType#
+  		</isNotEmpty>
+  		<isNotNull prepend="AND" property="batch">
+  			batch=#batch#
+  		</isNotNull>
+  		<isNotEmpty prepend="AND" property="batchNo">
+  			batch_no=#batchNo#
+  		</isNotEmpty>
+  		<isNotEmpty prepend="AND" property="useStatus">
+  			use_status=#useStatus#
+  		</isNotEmpty>
+  		<isNotNull prepend="AND" property="monthBatch">
+  			month_batch=#monthBatch#
+  		</isNotNull>
+  		<isNotNull prepend="AND" property="modifyBatchDate">
+  			modify_batch_date=#modifyBatchDate#
+  		</isNotNull>
+  		<isNotEmpty prepend="AND" property="modifyBatchMonth">
+  			modify_batch_month=#modifyBatchMonth#
+  		</isNotEmpty>
+  		<isNotEmpty prepend="AND" property="format">
+  			format_no=#format#
+  		</isNotEmpty>
+  		<isNotNull prepend="AND" property="netQuantity">
+  			net_quantity=#netQuantity#
+  		</isNotNull>
+  		<isNotNull prepend="AND" property="littleUnitQuantity">
+  			little_unit_quantity=#littleUnitQuantity#</isNotNull>
+  		<isNotEmpty prepend="AND" property="littleUnit">
+  			little_unit=#littleUnit#
+  		</isNotEmpty>
+  		<isNotEmpty prepend="AND" property="salesType">
+  			sales_type=#salesType#
+  		</isNotEmpty>
+  		<isNotEmpty prepend="AND" property="defultSalesInstitution">
+  			defult_sales_institution=#defultSalesInstitution#
+  		</isNotEmpty>
+  		<isNotEmpty prepend="AND" property="taxNo">
+  			tax_no=#taxNo#
+  		</isNotEmpty>
+  		<isNotNull prepend="AND" property="offSales">
+  			off_sales=#offSales#
+  		</isNotNull>
+  		<isNotEmpty prepend="AND" property="memo">
+  			memo=#memo#
+  		</isNotEmpty>
+  		<isNotNull prepend="AND" property="costConvertUnit">
+  			cost_of_convert_unit=#costConvertUnit#
+  		</isNotNull>
+  		<isNotNull prepend="AND" property="priceConvertUnit">
+  			price_of_convert_unit=#priceConvertUnit#
+  		</isNotNull>
+  		<isNotEmpty prepend="AND" property="barCode">
+  			goods_bar_code=#barCode#
+  		</isNotEmpty>
+  		<isNotEmpty prepend="AND" property="weigthPerUnit">
+  			weigth_per_unit=#weigthPerUnit#
+  		</isNotEmpty>
+  		<isNotEmpty prepend="AND" property="priceWeigthPerUnit">
+  			price_of_weigth_per_unit=#priceWeigthPerUnit#
+  		</isNotEmpty>
+  		<isNotEmpty prepend="AND" property="ledgerId">
+  			ledger_id=#ledgerId#
+  		</isNotEmpty>
   	</dynamic>
   </sql>
  
@@ -260,7 +343,7 @@
    		</dynamic>
    		<include refid="whereLike"/>
    	</update>
-   	<select id="getGoodsByCondition" parameterClass="goods" resultMap="goods">
+   	<select id="getGoodsByCondition" parameterClass="goods" resultClass="goods">
    		SELECT <include refid="goodsFileds"/>
    		FROM RS_GOODS
    		<include refid="whereLike"/>
