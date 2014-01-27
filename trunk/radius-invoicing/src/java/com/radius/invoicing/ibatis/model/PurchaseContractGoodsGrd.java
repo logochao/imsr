@@ -13,7 +13,8 @@ public class PurchaseContractGoodsGrd extends ExtInfo{
 	private String  contractId="";//合同编号
 	private String  goodsId="";//商品编号
 	private String  goodsName="";//商品名称
-	private String  unit="";//包装单位(规格)
+	private String  unit="";//单位(规格)
+	private Integer price=null;//单价
 	private Integer  priceUnit=null;//包装单位单价
 	private String  equivalentUnit="";//折合单位
 	private Integer  priceEu=null;//折合单位单价
