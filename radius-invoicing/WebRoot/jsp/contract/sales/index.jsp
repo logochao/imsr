@@ -19,25 +19,26 @@
 			href:'/stock/jsp/contract/sales/toolbar.jsp'
 		});
 		contract_sales_goods_grd=$('#contract_sales_goods_grd').datagrid({
-				url:'/stock/jsp/contract/sales/datagrid_data2.json',
+				//url:'/stock/jsp/contract/sales/datagrid_data2.json',
         		fitColumns:true,
         		autoRowHeight:false,
         		border:false,
         		striped:true,
         		rownumbers:true,
         		collapsible:true,
+        		frozenColumns:[[
+        			{field:'goodsId',title:'商品编号',width:100},
+        			{field:'goodsName',title:'商品名称',width:120}
+        		]],
         		columns:[[
-        			{field:'productid',title:'商品编号',width:100},
-        			{field:'productname',title:'商品名称',width:120},
-					{field:'amount',title:'数量',width:60},
-					{field:'unit',title:'单位',width:60},
-					{field:'zmount',title:'折合数量',width:60},
-					{field:'aunit',title:'折合单位',width:60},
-					{field:'format',title:'包装规格',width:120},
-					{field:'price',title:'单价',width:60},
-					{field:'zprice',title:'折合单价',width:60},
-					{field:'sum',title:'金额',width:120},
-					{field:'marker',title:'备注',width:250,align:'center'}
+        			
+					{field:'quantityUnit',title:'数量',width:60},
+					{field:'equivalentUnit',title:'折合单位',width:60},
+					{field:'quantityEu',title:'折合数量',width:60},
+					{field:'priceEu',title:'折合单价',width:60},
+					{field:'unit',title:'规格',width:120},
+					{field:'amount',title:'金额',width:120},
+					{field:'mome',title:'备注',width:250,align:'center'}
 				]]
 		});
 		contract_sales_pay_grd=$('#contract_sales_pay_grd').datagrid({
