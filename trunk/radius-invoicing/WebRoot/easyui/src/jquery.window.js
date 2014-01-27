@@ -1,10 +1,12 @@
 /**
  * window - jQuery EasyUI
  * 
- * Licensed under the GPL terms
- * To use it on other terms please contact us
+ * Copyright (c) 2009-2013 www.jeasyui.com. All rights reserved.
  *
- * Copyright(c) 2009-2012 stworthy [ stworthy@gmail.com ] 
+ * Licensed under the GPL or commercial licenses
+ * To use it on other terms please contact us: info@jeasyui.com
+ * http://www.gnu.org/licenses/gpl.txt
+ * http://www.jeasyui.com/license_commercial.php
  * 
  * Dependencies:
  * 	 panel
@@ -16,10 +18,11 @@
 	function setSize(target, param){
 		var opts = $.data(target, 'window').options;
 		if (param){
-			if (param.width) opts.width = param.width;
-			if (param.height) opts.height = param.height;
-			if (param.left != null) opts.left = param.left;
-			if (param.top != null) opts.top = param.top;
+			$.extend(opts, param);
+//			if (param.width) opts.width = param.width;
+//			if (param.height) opts.height = param.height;
+//			if (param.left != null) opts.left = param.left;
+//			if (param.top != null) opts.top = param.top;
 		}
 		$(target).panel('resize', opts);
 	}

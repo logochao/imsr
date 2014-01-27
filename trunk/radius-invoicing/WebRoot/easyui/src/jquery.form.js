@@ -1,10 +1,12 @@
 /**
  * form - jQuery EasyUI
  * 
- * Licensed under the GPL terms
- * To use it on other terms please contact us
+ * Copyright (c) 2009-2013 www.jeasyui.com. All rights reserved.
  *
- * Copyright(c) 2009-2012 stworthy [ stworthy@gmail.com ] 
+ * Licensed under the GPL or commercial licenses
+ * To use it on other terms please contact us: info@jeasyui.com
+ * http://www.gnu.org/licenses/gpl.txt
+ * http://www.jeasyui.com/license_commercial.php
  */
 (function($){
 	/**
@@ -13,8 +15,9 @@
 	function ajaxSubmit(target, options){
 		options = options || {};
 		
+		var param = {};
 		if (options.onSubmit){
-			if (options.onSubmit.call(target) == false) {
+			if (options.onSubmit.call(target, param) == false) {
 				return;
 			}
 		}
@@ -33,49 +36,67 @@
 				});
 		var t = form.attr('target'), a = form.attr('action');
 		form.attr('target', frameId);
+		
+		var paramFields = $();
 		try {
 			frame.appendTo('body');
 			frame.bind('load', cb);
+			for(var n in param){
+				var f = $('<input type="hidden" name="' + n + '">').val(param[n]).appendTo(form);
+				paramFields = paramFields.add(f);
+			}
+			checkState();
 			form[0].submit();
 		} finally {
 			form.attr('action', a);
 			t ? form.attr('target', t) : form.removeAttr('target');
+			paramFields.remove();
+		}
+		
+		function checkState(){
+			var f = $('#'+frameId);
+			if (!f.length){return}
+			try{
+				var s = f.contents()[0].readyState;
+				if (s && s.toLowerCase() == 'uninitialized'){
+					setTimeout(checkState, 100);
+				}
+			} catch(e){
+				cb();
+			}
 		}
 		
 		var checkCount = 10;
 		function cb(){
+			var frame = $('#'+frameId);
+			if (!frame.length){return}
 			frame.unbind();
-			var body = $('#'+frameId).contents().find('body');
-			var data = body.html();
-			if (data == ''){
-				if (--checkCount){
-					setTimeout(cb, 100);
-					return;
+			var data = '';
+			try{
+				var body = frame.contents().find('body');
+				data = body.html();
+				if (data == ''){
+					if (--checkCount){
+						setTimeout(cb, 100);
+						return;
+					}
+//					return;
 				}
-				return;
-			}
-			var ta = body.find('>textarea');
-			if (ta.length){
-				data = ta.val();
-			} else {
-				var pre = body.find('>pre');
-				if (pre.length){
-					data = pre.html();
+				var ta = body.find('>textarea');
+				if (ta.length){
+					data = ta.val();
+				} else {
+					var pre = body.find('>pre');
+					if (pre.length){
+						data = pre.html();
+					}
 				}
+			} catch(e){
+				
 			}
 			if (options.success){
 				options.success(data);
 			}
-//			try{
-//				eval('data='+data);
-//				if (options.success){
-//					options.success(data);
-//				}
-//			} catch(e) {
-//				if (options.failure){
-//					options.failure(data);
-//				}
-//			}
 			setTimeout(function(){
 				frame.unbind();
 				frame.remove();
@@ -121,10 +142,16 @@
 				var val = data[name];
 				var rr = _checkField(name, val);
 				if (!rr.length){
-					var f = form.find('input[numberboxName="'+name+'"]');
-					if (f.length){
-						f.numberbox('setValue', val);	// set numberbox value
-					} else {
+//					var f = form.find('input[numberboxName="'+name+'"]');
+//					if (f.length){
+//						f.numberbox('setValue', val);	// set numberbox value
+//					} else {
+//						$('input[name="'+name+'"]', form).val(val);
+//						$('textarea[name="'+name+'"]', form).val(val);
+//						$('select[name="'+name+'"]', form).val(val);
+//					}
+					var count = _loadOther(name, val);
+					if (!count){
 						$('input[name="'+name+'"]', form).val(val);
 						$('textarea[name="'+name+'"]', form).val(val);
 						$('select[name="'+name+'"]', form).val(val);
@@ -140,16 +167,29 @@
 		 * check the checkbox and radio fields
 		 */
 		function _checkField(name, val){
-			var form = $(target);
-			var rr = $('input[name="'+name+'"][type=radio], input[name="'+name+'"][type=checkbox]', form);
-			$.fn.prop ? rr.prop('checked',false) : rr.attr('checked',false);
+			var rr = $(target).find('input[name="'+name+'"][type=radio], input[name="'+name+'"][type=checkbox]');
+			rr._propAttr('checked', false);
 			rr.each(function(){
 				var f = $(this);
-				if (f.val() == String(val)){
-					$.fn.prop ? f.prop('checked',true) : f.attr('checked',true);
+				if (f.val() == String(val) || $.inArray(f.val(), $.isArray(val)?val:[val]) >= 0){
+					f._propAttr('checked', true);
 				}
 			});
 			return rr;
+		}
+		
+		function _loadOther(name, val){
+			var count = 0;
+			var pp = ['numberbox','slider'];
+			for(var i=0; i<pp.length; i++){
+				var p = pp[i];
+				var f = $(target).find('input['+p+'Name="'+name+'"]');
+				if (f.length){
+					f[p]('setValue', val);
+					count += f.length;
+				}
+			}
+			return count;
 		}
 		
 		function _loadCombo(name, val){
@@ -191,10 +231,45 @@
 			}
 			
 		});
-		if ($.fn.combo) $('.combo-f', target).combo('clear');
-		if ($.fn.combobox) $('.combobox-f', target).combobox('clear');
-		if ($.fn.combotree) $('.combotree-f', target).combotree('clear');
-		if ($.fn.combogrid) $('.combogrid-f', target).combogrid('clear');
+//		if ($.fn.combo) $('.combo-f', target).combo('clear');
+//		if ($.fn.combobox) $('.combobox-f', target).combobox('clear');
+//		if ($.fn.combotree) $('.combotree-f', target).combotree('clear');
+//		if ($.fn.combogrid) $('.combogrid-f', target).combogrid('clear');
+		
+		var t = $(target);
+		var plugins = ['combo','combobox','combotree','combogrid','slider'];
+		for(var i=0; i<plugins.length; i++){
+			var plugin = plugins[i];
+			var r = t.find('.'+plugin+'-f');
+			if (r.length && r[plugin]){
+				r[plugin]('clear');
+			}
+		}
+		validate(target);
+	}
+	
+	function reset(target){
+		target.reset();
+		var t = $(target);
+//		if ($.fn.combo){t.find('.combo-f').combo('reset');}
+//		if ($.fn.combobox){t.find('.combobox-f').combobox('reset');}
+//		if ($.fn.combotree){t.find('.combotree-f').combotree('reset');}
+//		if ($.fn.combogrid){t.find('.combogrid-f').combogrid('reset');}
+//		if ($.fn.datebox){t.find('.datebox-f').datebox('reset');}
+//		if ($.fn.datetimebox){t.find('.datetimebox-f').datetimebox('reset');}
+//		if ($.fn.spinner){t.find('.spinner-f').spinner('reset');}
+//		if ($.fn.timespinner){t.find('.timespinner-f').timespinner('reset');}
+//		if ($.fn.numberbox){t.find('.numberbox-f').numberbox('reset');}
+//		if ($.fn.numberspinner){t.find('.numberspinner-f').numberspinner('reset');}
+		
+		var plugins = ['combo','combobox','combotree','combogrid','datebox','datetimebox','spinner','timespinner','numberbox','numberspinner','slider'];
+		for(var i=0; i<plugins.length; i++){
+			var plugin = plugins[i];
+			var r = t.find('.'+plugin+'-f');
+			if (r.length && r[plugin]){
+				r[plugin]('reset');
+			}
+		}
 		validate(target);
 	}
 	
@@ -236,6 +311,10 @@
 		return true;
 	}
 	
+	function setValidation(target, novalidate){
+		$(target).find('.validatebox-text:not(:disabled)').validatebox(novalidate ? 'disableValidation' : 'enableValidation');
+	}
+	
 	$.fn.form = function(options, param){
 		if (typeof options == 'string'){
 			return $.fn.form.methods[options](this, param);
@@ -268,14 +347,29 @@
 				clear(this);
 			});
 		},
+		reset: function(jq){
+			return jq.each(function(){
+				reset(this);
+			});
+		},
 		validate: function(jq){
 			return validate(jq[0]);
+		},
+		disableValidation: function(jq){
+			return jq.each(function(){
+				setValidation(this, true);
+			});
+		},
+		enableValidation: function(jq){
+			return jq.each(function(){
+				setValidation(this, false);
+			});
 		}
 	};
 	
 	$.fn.form.defaults = {
 		url: null,
-		onSubmit: function(){return $(this).form('validate');},
+		onSubmit: function(param){return $(this).form('validate');},
 		success: function(data){},
 		onBeforeLoad: function(param){},
 		onLoadSuccess: function(data){},

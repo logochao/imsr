@@ -1,68 +1,92 @@
 /**
  * linkbutton - jQuery EasyUI
  * 
- * Licensed under the GPL terms
- * To use it on other terms please contact us
+ * Copyright (c) 2009-2013 www.jeasyui.com. All rights reserved.
  *
- * Copyright(c) 2009-2012 stworthy [ stworthy@gmail.com ] 
+ * Licensed under the GPL or commercial licenses
+ * To use it on other terms please contact us: info@jeasyui.com
+ * http://www.gnu.org/licenses/gpl.txt
+ * http://www.jeasyui.com/license_commercial.php
  */
 (function($){
 	
 	function createButton(target) {
 		var opts = $.data(target, 'linkbutton').options;
+		var t = $(target);
 		
-		$(target).empty();
-		$(target).addClass('l-btn');
-		if (opts.id){
-			$(target).attr('id', opts.id);
-		} else {
-//			$.fn.removeProp ? $(target).removeProp('id') : $(target).removeAttr('id'); 
-//			$(target).removeAttr('id');
-			$(target).attr('id', '');
+		t.addClass('l-btn').removeClass('l-btn-plain l-btn-selected l-btn-plain-selected');
+		if (opts.plain){t.addClass('l-btn-plain')}
+		if (opts.selected){
+			t.addClass(opts.plain ? 'l-btn-selected l-btn-plain-selected' : 'l-btn-selected');
 		}
-		if (opts.plain){
-			$(target).addClass('l-btn-plain');
-		} else {
-			$(target).removeClass('l-btn-plain');
-		}
-		
+		t.attr('group', opts.group || '');
+		t.attr('id', opts.id || '');
+		t.html(
+			'<span class="l-btn-left">' +
+				'<span class="l-btn-text"></span>' +
+			'</span>'
+		);
 		if (opts.text){
-			$(target).html(opts.text).wrapInner(
-					'<span class="l-btn-left">' +
-					'<span class="l-btn-text">' +
-					'</span>' +
-					'</span>'
-			);
+			t.find('.l-btn-text').html(opts.text);
 			if (opts.iconCls){
-				$(target).find('.l-btn-text').addClass(opts.iconCls).css('padding-left', '20px');
+				t.find('.l-btn-text').addClass(opts.iconCls).addClass(opts.iconAlign=='left' ? 'l-btn-icon-left' : 'l-btn-icon-right');
 			}
 		} else {
-			$(target).html('&nbsp;').wrapInner(
-					'<span class="l-btn-left">' +
-					'<span class="l-btn-text">' +
-					'<span class="l-btn-empty"></span>' +
-					'</span>' +
-					'</span>'
-			);
+			t.find('.l-btn-text').html('<span class="l-btn-empty">&nbsp;</span>');
 			if (opts.iconCls){
-				$(target).find('.l-btn-empty').addClass(opts.iconCls);
+				t.find('.l-btn-empty').addClass(opts.iconCls);
 			}
 		}
-		$(target).unbind('.linkbutton').bind('focus.linkbutton',function(){
+		
+		t.unbind('.linkbutton').bind('focus.linkbutton',function(){
 			if (!opts.disabled){
-				$(this).find('span.l-btn-text').addClass('l-btn-focus');
+				$(this).find('.l-btn-text').addClass('l-btn-focus');
 			}
 		}).bind('blur.linkbutton',function(){
-			$(this).find('span.l-btn-text').removeClass('l-btn-focus');
+			$(this).find('.l-btn-text').removeClass('l-btn-focus');
 		});
+		if (opts.toggle && !opts.disabled){
+			t.bind('click.linkbutton', function(){
+				if (opts.selected){
+					$(this).linkbutton('unselect');
+				} else {
+					$(this).linkbutton('select');
+				}
+			});
+		}
 		
+		setSelected(target, opts.selected)
 		setDisabled(target, opts.disabled);
+	}
+	
+	function setSelected(target, selected){
+		var opts = $.data(target, 'linkbutton').options;
+		if (selected){
+			if (opts.group){
+				$('a.l-btn[group="'+opts.group+'"]').each(function(){
+					var o = $(this).linkbutton('options');
+					if (o.toggle){
+						$(this).removeClass('l-btn-selected l-btn-plain-selected');
+						o.selected = false;
+					}
+				});
+			}
+			$(target).addClass(opts.plain ? 'l-btn-selected l-btn-plain-selected' : 'l-btn-selected');
+			opts.selected = true;
+		} else {
+			if (!opts.group){
+				$(target).removeClass('l-btn-selected l-btn-plain-selected');
+				opts.selected = false;
+			}
+		}
 	}
 	
 	function setDisabled(target, disabled){
 		var state = $.data(target, 'linkbutton');
+		var opts = state.options;
+		$(target).removeClass('l-btn-disabled l-btn-plain-disabled');
 		if (disabled){
-			state.options.disabled = true;
+			opts.disabled = true;
 			var href = $(target).attr('href');
 			if (href){
 				state.href = href;
@@ -72,21 +96,15 @@
 				state.onclick = target.onclick;
 				target.onclick = null;
 			}
-//			var onclick = $(target).attr('onclick');
-//			if (onclick) {
-//				state.onclick = onclick;
-//				$(target).attr('onclick', '');
-//			}
-			$(target).addClass('l-btn-disabled');
+			opts.plain ? $(target).addClass('l-btn-disabled l-btn-plain-disabled') : $(target).addClass('l-btn-disabled');
 		} else {
-			state.options.disabled = false;
+			opts.disabled = false;
 			if (state.href) {
 				$(target).attr('href', state.href);
 			}
 			if (state.onclick) {
 				target.onclick = state.onclick;
 			}
-			$(target).removeClass('l-btn-disabled');
 		}
 	}
 	
@@ -124,12 +142,24 @@
 			return jq.each(function(){
 				setDisabled(this, true);
 			});
+		},
+		select: function(jq){
+			return jq.each(function(){
+				setSelected(this, true);
+			});
+		},
+		unselect: function(jq){
+			return jq.each(function(){
+				setSelected(this, false);
+			});
 		}
 	};
 	
 	$.fn.linkbutton.parseOptions = function(target){
 		var t = $(target);
-		return $.extend({}, $.parser.parseOptions(target, ['id','iconCls',{plain:'boolean'}]), {
+		return $.extend({}, $.parser.parseOptions(target, 
+			['id','iconCls','iconAlign','group',{plain:'boolean',toggle:'boolean',selected:'boolean'}]
+		), {
 			disabled: (t.attr('disabled') ? true : undefined),
 			text: $.trim(t.html()),
 			iconCls: (t.attr('icon') || t.attr('iconCls'))
@@ -139,9 +169,13 @@
 	$.fn.linkbutton.defaults = {
 		id: null,
 		disabled: false,
+		toggle: false,
+		selected: false,
+		group: null,
 		plain: false,
 		text: '',
-		iconCls: null
+		iconCls: null,
+		iconAlign: 'left'
 	};
 	
 })(jQuery);
