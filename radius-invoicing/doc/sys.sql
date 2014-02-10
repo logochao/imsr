@@ -200,7 +200,7 @@ CREATE TABLE rs_link_man
    qq                   VARCHAR(100),
    address              VARCHAR(100),
    pinyin               VARCHAR(100),
-   mome                 TEXT,
+   memo                 TEXT,
    creater              CHAR(4),
    createdate           DATETIME,
    reviser              CHAR(4),
@@ -579,7 +579,7 @@ DROP TABLE IF EXISTS rs_sales_contract_payment_grd;
 /*==============================================================*/
 CREATE TABLE rs_sales_contract_payment_grd
 (
-   money_list_id        CHAR(20) NOT NULL,
+   money_list_id        INT NOT NULL AUTO_INCREMENT,
    money_list_name      VARCHAR(100),
    contract_id          CHAR(14),
    money_list_batch     INT,
@@ -597,4 +597,31 @@ CREATE TABLE rs_sales_contract_payment_grd
    verifier             CHAR(4),
    verifydate           DATETIME,
    PRIMARY KEY (money_list_id)
+)ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+
+
+DROP TABLE IF EXISTS rs_contract_scan_grd;
+
+/*==============================================================*/
+/* Table: rs_contract_scan_grd  销售合同扫描件列表          */
+/*==============================================================*/
+CREATE TABLE rs_contract_scan_grd
+(
+   contract_id          CHAR(14) NOT NULL,
+   contract_type        INTEGER,
+   scan_code            CHAR(10) NOT NULL,
+   file_name            VARCHAR(50),
+   file_path            CHAR(20),
+   file_order           CHAR(10),
+   scan_quantity        INTEGER,
+   memo                 TEXT,
+   ledger_id            CHAR(8),
+   creater              CHAR(4),
+   createdate           DATETIME,
+   reviser              CHAR(4),
+   revisedate           DATETIME,
+   verifier             CHAR(4),
+   verifydate           DATETIME,
+   PRIMARY KEY (contract_id, scan_code)
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
