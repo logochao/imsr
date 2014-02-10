@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Repository;
+
 import com.radius.base.dao.ibatis.BaseIbatisDaoImpl;
 import com.radius.invoicing.ibatis.dao.SalesContractGoodsGrdDao;
 import com.radius.invoicing.ibatis.model.SalesContractGoodsGrd;
@@ -17,6 +19,7 @@ import com.radius.invoicing.ibatis.model.SalesContractGoodsGrd;
  * Copyright (c) 2013 by 陈波宁.<br/>
  * 类说明
  */
+@Repository
 public class SalesContractGoodsGrdDaoImpl extends BaseIbatisDaoImpl<SalesContractGoodsGrd> implements SalesContractGoodsGrdDao{
 
 	private final String SQLMAPNAMESPACE="salesContractGoodsGrdSqlMap.";
@@ -65,6 +68,13 @@ public class SalesContractGoodsGrdDaoImpl extends BaseIbatisDaoImpl<SalesContrac
 	 */
 	public boolean updateSalesContractGoodsGrdByPK(SalesContractGoodsGrd g){
 		return this.updateObject(g, SQLMAPNAMESPACE+"updateSalesContractGoodsGrdByPK")==1;
+	}
+	/**
+	 * 批量更新
+	 * @param list
+	 */
+	public void batchUpdateSalesContractGoodsGrdByPK(List<SalesContractGoodsGrd> list){
+		this.updateListObject(list, SQLMAPNAMESPACE+"updateSalesContractGoodsGrdByPK");
 	}
 	/**
 	 * 删除销售商品

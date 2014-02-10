@@ -5,7 +5,7 @@
   <typeAlias alias="categoryType" type="com.radius.invoicing.ibatis.model.CategoryType" />
   
   <sql id="categoryTypeFileds">
-  	 category_type id category_type_name name,creater creater,createdate createdate,reviser reviser,revisedate revisedate,verifier verifydate
+  	 category_type id, category_type_name name,creater creater,createdate createdate,reviser reviser,revisedate revisedate,verifier verifydate
   </sql>
   
   <resultMap id="categoryType" class="categoryType">
@@ -19,13 +19,13 @@
     <result column="verifydate" jdbcType="datetime" javaType="java.util.Date" property="verifydate"/>
   </resultMap>
   
-  <select id="getCategoryTypeById" parameterClass="int" resultMap="categoryType">
+  <select id="getCategoryTypeById" parameterClass="int" resultClass="categoryType">
   	SELECT <include refid="categoryTypeFileds"/>
   	FROM RS_CATEGORY_TYPE
   	WHERE category_type =#id#
   </select>
   
-  <select id="getCategoryTypeAllList" resultMap="categoryType">
+  <select id="getCategoryTypeAllList" resultClass="categoryType">
   	SELECT <include refid="categoryTypeFileds"/>
   	FROM RS_CATEGORY_TYPE
   </select>

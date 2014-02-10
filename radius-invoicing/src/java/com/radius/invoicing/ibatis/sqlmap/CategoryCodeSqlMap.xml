@@ -5,7 +5,7 @@
   <typeAlias alias="categoryCode" type="com.radius.invoicing.ibatis.model.CategoryCode" />
   
   <sql id="categoryCodeFileds">
-  	 category_id id, category_name name category_type parentId,creater creater,createdate createdate,reviser reviser,revisedate revisedate,verifier verifydate
+  	 category_id id, category_name name,category_type parentId,creater creater,createdate createdate,reviser reviser,revisedate revisedate,verifier verifydate
   </sql>
   
   <resultMap id="categoryCode" class="categoryCode">
@@ -20,7 +20,7 @@
     <result column="verifydate" jdbcType="datetime" javaType="java.util.Date" property="verifydate"/>
   </resultMap>
   
-  <select id="getCategoryCodeById" parameterClass="int" resultMap="categoryCode">
+  <select id="getCategoryCodeById" parameterClass="int" resultClass="categoryCode">
   	SELECT <include refid="categoryCodeFileds"/>
   	FROM RS_CATEGORY_CODE
   	WHERE category_id =#id#
@@ -35,14 +35,14 @@
   <!-- end -->
   
   <!-- 通过分类编号,获取分类编码信息 -->
-  <select id="getCategoryCodeByParentId" parameterClass="int" resultMap="categoryCode">
+  <select id="getCategoryCodeByParentId" parameterClass="int" resultClass="categoryCode">
   	SELECT <include refid="categoryCodeFileds"/>
   	FROM RS_CATEGORY_CODE
   	WHERE category_type=#parentId#
   </select>
   <!-- end -->
   
-  <select id="getCategoryCodeAllList" resultMap="categoryCode">
+  <select id="getCategoryCodeAllList" resultClass="categoryCode">
   	SELECT <include refid="categoryCodeFileds"/>
   	FROM RS_CATEGORY_CODE
   </select>

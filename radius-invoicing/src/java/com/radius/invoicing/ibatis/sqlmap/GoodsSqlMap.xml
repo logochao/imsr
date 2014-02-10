@@ -71,7 +71,10 @@
   			goods_id=#id#
   		</isNotEmpty>
   		<isNotEmpty prepend="AND" property="name">
-  			goods_name LIKE CONCAT('%',TRIM(#name#),'%')
+  			goods_name =#name#
+  		<!--
+             goods_name LIKE '%$name$%'
+  		-->
   		</isNotEmpty>
   		<isNotEmpty prepend="AND" property="property">
   			goods_property=#property#
