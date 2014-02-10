@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
 <sqlMap namespace="goodsSqlMap">
 
   <typeAlias alias="goods" type="com.radius.invoicing.ibatis.model.Goods" />
@@ -70,11 +70,8 @@
   		<isNotEmpty prepend="AND" property="id">
   			goods_id=#id#
   		</isNotEmpty>
-  		<isNotEmpty prepend="AND" property="name">
-  			goods_name =#name#
-  		<!--
-             goods_name LIKE '%$name$%'
-  		-->
+  		 <isNotEmpty prepend="and" property="name"> 
+           goods_name = #name# 
   		</isNotEmpty>
   		<isNotEmpty prepend="AND" property="property">
   			goods_property=#property#
@@ -201,7 +198,7 @@
 	 <select id="getGoods" parameterClass="goods" resultMap="goods">
 	 	SELECT <include refid="goodsFileds"/>
 	 	FROM RS_GOODS
-	 	<include refid="whereLike"/>
+	 	$condition$
 	 </select>
    
    	<insert id="insert" parameterClass="goods">
@@ -344,12 +341,12 @@
   	 		<isNotEmpty  prepend="," property="reviser">reviser = #reviser#,revisedate = now() </isNotEmpty>
   			<isNotEmpty  prepend="," property="verifier">verifier = #verifier#,verifydate = now() </isNotEmpty>
    		</dynamic>
-   		<include refid="whereLike"/>
+   	  WHERE goods_id=#id#
    	</update>
    	<select id="getGoodsByCondition" parameterClass="goods" resultClass="goods">
    		SELECT <include refid="goodsFileds"/>
    		FROM RS_GOODS
-   		<include refid="whereLike"/>
+   		$condition$
    	</select>
    	<!-- 分页查询语句 -->
    	<select id="getGoodsSplitPageBySQL" remapResults="true" parameterClass="java.lang.String" resultMap="goods">
@@ -364,7 +361,7 @@
    	
    	<delete id="deleteGoods" parameterClass="goods">
    		DELETE FROM RS_GOODS
-   		<include refid="whereLike"/>
+   		$condition$
    	</delete>
    	
 </sqlMap>
