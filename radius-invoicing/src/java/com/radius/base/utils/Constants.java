@@ -25,9 +25,16 @@ public interface Constants {
 	 * 供应商编号的开始字母
 	 */
 	public String SUPPLIER_PREFIX="G";//供运商
+	
 	/**
 	 * 时间格式yyyyMMdd
 	 */
-	public String DATEFORMAT_YEAR_MONTH_DAY="yyyyMMdd";//yyyyMMdd的时间格式
+	public String DATE_FORMAT_YEAR_MONTH_DAY="yyyyMMdd";//yyyyMMdd的时间格式
+	
+	final int CACHE_ONE_HOURE_TIME=60*60;//1小时
+	
+	final int CACHE_ONE_DAY_TIME=60*60*24;//缓存一天的时间
+	
+	String SALES_CONTRACT_PREFIX="H_X";//销售合同前缀
 	
 }
