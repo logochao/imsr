@@ -46,6 +46,14 @@ public interface SalesContractPaymentGrdDao {
 	 * @return
 	 */
 	public boolean updateSalesContractPaymentGrdByPK(SalesContractPaymentGrd g);
+	
+	
+	/**
+	 * 批量更新明细
+	 * @param g
+	 * @return
+	 */
+	public void batchUpdateSalesContractPaymentGrdByPK(List<SalesContractPaymentGrd> list);
 
 	/**
 	 * 通过主键删除明细

@@ -49,6 +49,13 @@ public interface SalesContractGoodsGrdDao {
 	 */
 	public boolean updateSalesContractGoodsGrdByPK(SalesContractGoodsGrd g);
 
+	
+	/**
+	 * 批量更新
+	 * @param list
+	 */
+	public void batchUpdateSalesContractGoodsGrdByPK(List<SalesContractGoodsGrd> list);
+	
 	/**
 	 * 删除销售商品
 	 * @param g

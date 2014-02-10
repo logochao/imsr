@@ -63,6 +63,15 @@ public class SalesContractPaymentGrdDaoImpl extends BaseIbatisDaoImpl<SalesContr
 	public boolean updateSalesContractPaymentGrdByPK(SalesContractPaymentGrd g){
 		return this.updateObject(g, SQLMAPNAMESPACE+"SalesContractPaymentGrd")==1;
 	}
+	
+	/**
+	 * 批量更新明细
+	 * @param g
+	 * @return
+	 */
+	public void batchUpdateSalesContractPaymentGrdByPK(List<SalesContractPaymentGrd> list){
+		 this.updateListObject(list, SQLMAPNAMESPACE+"SalesContractPaymentGrd");
+	}
 	/**
 	 * 通过主键删除明细
 	 * @param id

@@ -5,6 +5,8 @@ package com.radius.invoicing.ibatis.model;
 
 import java.util.Date;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import com.radius.base.BaseEntity;
 
 /**
@@ -15,6 +17,7 @@ import com.radius.base.BaseEntity;
  */
 public class ExtInfo extends BaseEntity{
 
+	
 	protected String creater;//创建人
 	protected Date createDate;//创建时间
 	protected String reviser;//审核人
@@ -22,37 +25,43 @@ public class ExtInfo extends BaseEntity{
 	protected String verifier;//复核人
 	protected Date verifyDate;//复核时间
 	
-	
+	@JsonIgnore
 	public Date getCreateDate() {
 		return createDate;
 	}
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
+	@JsonIgnore
 	public String getCreater() {
 		return creater;
 	}
 	public void setCreater(String creater) {
 		this.creater = creater;
 	}
+	@JsonIgnore
 	public Date getReviseDate() {
 		return reviseDate;
 	}
 	public void setReviseDate(Date reviseDate) {
 		this.reviseDate = reviseDate;
 	}
+	@JsonIgnore
 	public String getReviser() {
 		return reviser;
 	}
+	
 	public void setReviser(String reviser) {
 		this.reviser = reviser;
 	}
+	@JsonIgnore
 	public String getVerifier() {
 		return verifier;
 	}
 	public void setVerifier(String verifier) {
 		this.verifier = verifier;
 	}
+	@JsonIgnore
 	public Date getVerifyDate() {
 		return verifyDate;
 	}

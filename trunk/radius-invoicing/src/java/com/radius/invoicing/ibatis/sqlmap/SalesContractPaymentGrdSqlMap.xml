@@ -17,7 +17,7 @@
     <result column="amount" jdbcType="int" javaType="java.lang.Integer" property="amount" />
     <result column="amount_in_word" jdbcType="text" javaType="java.lang.String" property="upperAmount" />
     <result column="pay_receive_type" jdbcType="char" javaType="java.lang.String" property="receiveType" />
-    <result column="validity_date" jdbcType="datetime" javaType="java.util.Date" property="validityDate" />
+    <result column="validity_date" jdbcType="date" javaType="java.util.Date" property="validityDate" />
     <result column="STATUS" jdbcType="char" javaType="java.lang.String" property="stats" />
     <result column="memo" jdbcType="char" javaType="java.lang.String" property="memo" />
   	<result column="ledger_id" jdbcType="char" javaType="java.lang.String" property="ledgerId" />
@@ -60,7 +60,7 @@
    
    	<insert id="insert" parameterClass="salesContractPaymentGrd">
    		INSERT INTO RS_SALES_CONTRACT_PAYMENT_GRD (
-	  		<isNotEmpty  property="name">money_list_nam,</isNotEmpty>
+	  		<isNotEmpty  property="name">money_list_name,</isNotEmpty>
 	  		<isNotEmpty  property="contractId">contract_id,</isNotEmpty>
 	  		<isNotEmpty  property="batch">money_list_batch,</isNotEmpty>
 	  		<isNotNull  property="amount">amount,</isNotNull>

@@ -25,6 +25,8 @@ public class SalesContractPaymentGrd extends ExtInfo{
 	private String  memo="";//备注
 	private String  ledgerId="";//账套编号
 	
+	private String currency="";//货币单位
+	
 	
 	public Integer getAmount() {
 		return amount;
@@ -91,6 +93,12 @@ public class SalesContractPaymentGrd extends ExtInfo{
 	}
 	public void setValidityDate(Date validityDate) {
 		this.validityDate = validityDate;
+	}
+	public String getCurrency() {
+		return currency;
+	}
+	public void setCurrency(String currency) {
+		this.currency = currency;
 	}
 	
 	

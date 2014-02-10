@@ -5,6 +5,8 @@ package com.radius.invoicing.ibatis.dao.impl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.radius.base.dao.ibatis.BaseIbatisDaoImpl;
 import com.radius.invoicing.ibatis.dao.SalesContractDao;
 import com.radius.invoicing.ibatis.model.SalesContract;
@@ -15,6 +17,7 @@ import com.radius.invoicing.ibatis.model.SalesContract;
  * Copyright (c) 2013 by 陈波宁.<br/>
  * 类说明
  */
+@Repository
 public class SalesContractDaoImpl extends BaseIbatisDaoImpl<SalesContract> implements SalesContractDao{
 
 	private final String SQLMAPNAMESPACE="salesContractSqlMap.";

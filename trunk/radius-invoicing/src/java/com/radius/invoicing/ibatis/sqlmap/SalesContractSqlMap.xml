@@ -104,10 +104,12 @@
 			<isNotNull  property="deliveryDate">delivery_date,</isNotNull>
 			<isNotEmpty  property="deliveryPoint">delivery_point,</isNotEmpty>
 			<isNotEmpty  property="contractTerms">contract_terms,</isNotEmpty>
+			<!-- 
 			<isNotNull  property="printTime">newest_print_time,</isNotNull>
 			<isNotEmpty  property="printAcc">newest_print_acc,</isNotEmpty>
 			<isNotEmpty  property="printRecord">newest_print_record,</isNotEmpty>
 			<isNotNull  property="printTimes">print_times,</isNotNull>
+			 -->
 			<isNotEmpty  property="paymentedStatus">paymented_status,</isNotEmpty>
 			<isNotNull  property="validityDate">validity_date,</isNotNull>
 	 		<isNotEmpty  property="stats">STATUS,</isNotEmpty> 
@@ -132,10 +134,12 @@
 			<isNotNull  property="deliveryDate">#deliveryDate#,</isNotNull>
 			<isNotEmpty  property="deliveryPoint">#deliveryPoint#,</isNotEmpty>
 			<isNotEmpty  property="contractTerms">#contractTerms#,</isNotEmpty>
+			<!-- 
 			<isNotNull  property="printTime">#printTime#,</isNotNull>
 			<isNotEmpty  property="printAcc">#printAcc#,</isNotEmpty>
 			<isNotEmpty  property="printRecord">#printRecord#,</isNotEmpty>
 			<isNotNull  property="printTimes">#printTimes#,</isNotNull>
+			 -->
 			<isNotEmpty  property="paymentedStatus">#paymentedStatus#,</isNotEmpty>
 			<isNotNull  property="validityDate">#validityDate#,</isNotNull>
 	 		<isNotEmpty  property="stats">#stats#,</isNotEmpty> 
