@@ -32,7 +32,7 @@ public class SystemPrimaryKeyUtils  implements Constants{
 		sb.append(STOCK_PREFIX).append("-");
 		sb.append("D");
 		
-		String time=DateConvertUtils.format(new Date(), DATEFORMAT_YEAR_MONTH_DAY);//时间格式
+		String time=DateConvertUtils.format(new Date(), DATE_FORMAT_YEAR_MONTH_DAY);//时间格式
 		sb.append(time);
 		try{
 			orderIdLock.lock();
