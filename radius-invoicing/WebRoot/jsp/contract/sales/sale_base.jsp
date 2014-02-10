@@ -9,6 +9,7 @@
  var contract_sales_base_custmer_grd=null;
  var contract_sales_base_custmer_link_man_grd=null;
  var contract_sales_base_custmer_link_man=null;
+ var sales_base_custmer_dialog=null;
  $(function (){
  	contract_sales_base_status=$('#contract_sales_base_status').combobox({
  		url:'${path}/contract/manager/sales_status_json.html',
@@ -46,16 +47,17 @@
  		required:true
  	});
  	$('#contract_sales_base_custmer_btn').on('click',function(){
- 		$('#sales_base_custmer_dialog').show().dialog({
+ 		sales_base_custmer_dialog.dialog('open');
+ 	});
+ 	sales_base_custmer_dialog=$('#sales_base_custmer_dialog').show().dialog({
  			 title:'选择客户',
  			 width:600,
  			 height:400,
  			 collapsible:true,//向上缩小按钮
  			 maximizable:true,
- 			 modal:true
+ 			 modal:true,
+ 			 closed:true
  		});
- 	});
- 	
  	contract_sales_base_custmer_link_man=$('#contract_sales_base_custmer_link_man').show().dialog({
  			 title:'选择客户联系人',
  			 width:600,
