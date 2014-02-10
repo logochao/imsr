@@ -1,6 +1,10 @@
 package com.radius.base;
 
-public class BaseEntity {
+import java.io.Serializable;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
+
+public class BaseEntity implements Serializable {
 
 	protected int perPageSize=10;
 	protected int pageNo=1;
@@ -28,7 +32,7 @@ public class BaseEntity {
 	public void setContextPath(String contextPath) {
 		this.contextPath = contextPath;
 	}
-	
+	@JsonIgnore
 	public String getOrder() {
 		return order;
 	}
@@ -41,6 +45,7 @@ public class BaseEntity {
 	public void setPage(int page) {
 		this.pageNo = page;
 	}
+	@JsonIgnore
 	public String getSort() {
 		return sort;
 	}
