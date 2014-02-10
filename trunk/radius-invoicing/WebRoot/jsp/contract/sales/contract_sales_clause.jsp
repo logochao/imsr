@@ -17,7 +17,7 @@
 <table class="table" style="width: 100%;">
    	<tr>
    		<th>合同编号</th>
-   		<td><input /> </td>
+   		<td><input id="contract_sales_clause_contract_id" style="background:#eee;" readonly="readonly" value="${salesContract.id }"/> </td>
    		<th>签署日期</th>
    		<td><input id="contract_sales_clause_sign_time"/></td>
    		<th>生效日期</th>
@@ -28,7 +28,7 @@
    	<tr>
    		<th>合同条款</th>
    		<td colspan="7">
-   			<textarea rows="1" cols="170"></textarea>
+   			<textarea rows="1" cols="170" id="contract_sales_clause_contract_terms"></textarea>
    		</td>
    	</tr>
    	<tr>
