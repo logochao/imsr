@@ -4,3 +4,7 @@
 	3./resouce/manager/xxx.html-->表示需要使用权限验证
 	4./resouce/common/xxx.html -->表示的是不需要权限就能访问的地址
 	以上地址进行说明 resouce-->表示的当前controller的简称
+	
+	/包名/包名/当前的action/子方法
+	/contract/manager/salescontract/XXXXXX.html
+	
