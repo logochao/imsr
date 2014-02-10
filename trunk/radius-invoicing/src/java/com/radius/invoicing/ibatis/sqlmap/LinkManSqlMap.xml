@@ -137,7 +137,7 @@
    	<select id="getLinkManByCondition" parameterClass="linkMan" resultClass="linkMan">
    		SELECT <include refid="linkManFileds"/>
    		FROM RS_LINK_MAN
-   		<include refid="whereLike"/>
+   		$condition$
    	</select>
    	<!-- 分页查询语句 -->
    	<select id="getLinkManSplitPageBySQL" remapResults="true" parameterClass="java.lang.String" resultMap="linkManMap">
