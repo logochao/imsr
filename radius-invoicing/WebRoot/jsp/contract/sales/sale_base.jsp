@@ -11,7 +11,7 @@
  var contract_sales_base_custmer_link_man=null;
  $(function (){
  	contract_sales_base_status=$('#contract_sales_base_status').combobox({
- 		url:'/stock/contract/manager/sales_status_json.html',
+ 		url:'${path}/contract/manager/sales_status_json.html',
  		valueField: 'id',
 		textField: 'name',
 		onLoadSuccess:function(){
@@ -20,14 +20,23 @@
 			target.combobox('disable');
 		}
  	});
- 	$('#contract_sales_base_contract_type').combobox({
- 		url:'/stock/contract/manager/sales_contract_type_json.html',
+ 	contract_sales_base_contract_type=$('#contract_sales_base_contract_type').combobox({
+ 		url:'${path}/common/system/category_code_list.html?parentId=1',
  		valueField: 'id',
 		textField: 'name',
 		onLoadSuccess:function(){
 			var target = $(this);
-			target.combobox("setValue",target.val());
-			target.combobox('disable');
+			var data = target.combobox("getData");
+			var options = target.combobox("options");
+			if(data && data.length>0){
+				for(var i=0;i<data.length;i++){
+					var fs = data[i];
+					if(fs[options.valueField]==target.val()){//如果设置的值等于默认值，将将对应的显示内容显示
+						target.combobox("setValue",fs[options.textField]);
+					}
+				}
+			}
+			target.combobox('disable');//设置当前下拉列表不可用
 		}
  	});
  	$('#contract_sales_base_order_time').datebox({
@@ -103,7 +112,7 @@
  	
  	
  	$('#sales_base_customer_search_btn').on('click',function(){
- 		contract_sales_base_custmer_grd.datagrid('options').url='/stock/customer/split_page.html';
+ 		contract_sales_base_custmer_grd.datagrid('options').url='${path}/customer/split_page.html';
  		contract_sales_base_custmer_grd.datagrid('load',{
 				name:$('#sales_base_customer_name').val(),
 				linkMan:$('#sales_base_customer_link').val(),
@@ -133,7 +142,7 @@
  	
  	//联系人信息查询按钮
  	$('#contract_sales_base_custmer_link_man_search_btn').on('click',function(){
- 		contract_sales_base_custmer_link_man_grd.datagrid('options').url='/stock//customer/sales/link_man_split_page.html';
+ 		contract_sales_base_custmer_link_man_grd.datagrid('options').url='${path}/customer/sales/link_man_split_page.html';
  		contract_sales_base_custmer_link_man_grd.datagrid('load',{
 				other:$('#contract_sales_base_customer_id').val(),
 				name:$('#contract_sales_base_custmer_link_man_').val(),
@@ -148,7 +157,6 @@
  		}else if(rows&&rows.length==1){
  			//1将数据加载到指定的界面
  			var row=rows[0];
- 			console.info(row);
  			$('#contract_sales_base_link_man').attr('value',row.name);
  			$('#contract_sales_base_link_tel').attr('value',row.tel);
  			$('#contract_sales_base_link_mobile').attr('value',row.mobile);
@@ -159,16 +167,28 @@
  		}
  	});
  });
+ 
+ function contractSalesBaseCheckboxClick(obj){
+	if(!obj.checked){
+		//1.将保函条款进行禁用
+		$('#contract_sales_index_tabs').tabs('disableTab',2);//将其禁用第三个tabs
+		obj.value='0';//表示不启用保函
+		//2.将tabs的内容进行清空(暂时不处理)
+	}else{
+		$('#contract_sales_index_tabs').tabs('enableTab',2);//将其启用第三个tabs
+		obj.value='1';//表示启用保函
+	}
+ }
 //-->
 </script>
 <table class="table" style="width: 100%;">
 	<tr>
 		<th>合同编号</th>
-		<td><input class="easyui-validatebox" style="background:#eee;width: 150px;" type="text" readonly="readonly" name="name" data-options="required:true" value="H_X2014012401"/></td>
+		<td><input class="easyui-validatebox" style="background:#eee;width: 150px;" id="constract_sales_sale_base_id" type="text" readonly="readonly" name="name" data-options="required:true" value="${salesContract.id}"/></td>
 		<th>状态</th>
 		<td colspan="3"><input id="contract_sales_base_status"  class="easyui-validatebox" class="easyui-combobox" name="name" data-options="required:true" value="0"/></td>
 		<th>订货日期</th>
-		<td><input class="easyui-validatebox" type="text" id="contract_sales_base_order_time" name="orderedDate" data-options="required:true"/></td>
+		<td><input class="easyui-validatebox" type="text" id="contract_sales_base_order_time" data-options="required:true"/></td>
 	</tr>
 	<tr>
 		<th>客户</th>
@@ -178,7 +198,7 @@
 			<a id="contract_sales_base_custmer_btn" href="#" class="easyui-linkbutton" plain="true"><font style="font-size:3ex">...</font></a>
 		</td>
 		<th>交货日期</th>
-		<td><input class="easyui-validatebox" type="text" id="contract_sales_base_order_end_time" name="deliveryDate" data-options="required:true"/></td>
+		<td><input class="easyui-validatebox" type="text" id="contract_sales_base_order_end_time" data-options="required:true"/></td>
 	</tr>
 	<tr>
 		<th>联系人</th>
@@ -195,17 +215,22 @@
 	</tr>
 	<tr>
 		<th>送货地址</th>
-		<td colspan="3"><input class="easyui-validatebox" type="text" style="width: 350px;" name="deliveryPoint" data-options="required:true"/></td>
+		<td colspan="3"><input class="easyui-validatebox" type="text" style="width: 350px;" id="contract_sales_base_delivery_point" data-options="required:true"/></td>
 		<th>业务员</th>
-		<td colspan="3">
+		<td>
 			<input class="easyui-validatebox" type="text" name="salesMan" data-options="required:true"/>
 			<a id="btn" href="#" class="easyui-linkbutton" plain="true"><font style="font-size:3ex">...</font></a>
 		</td>
+		<th colspan="2" style="text-align: center;"><input type="checkbox" id="contract_sales_base_checkbox" onclick="javascript:contractSalesBaseCheckboxClick(this);" value="0" />转保函付款申请</th>
 	</tr>
 	<tr>
 		<th>合同类型</th>
-		<td colspan="5"><input class="easyui-validatebox" id="contract_sales_base_contract_type" type="text" name="name" data-options="required:true" value="1"/></td>
-		<th colspan="2" style="text-align: center;"><input type="checkbox"/>转保函付款申请</th>
+		<td><input class="easyui-validatebox" id="contract_sales_base_contract_type" type="text" name="name" data-options="required:true" value="2"/></td>
+		<th>合同总金额</th>
+		<td><input id="contract_sales_base_total_amount" style="background:#eee;" readonly="readonly"/></td>
+		<th>人民币大写</th>
+		<td colspan="3"><input id="contract_sales_base_upper_rmb" style="background:#eee;width: 400px;" readonly="readonly"/></td>
+		
 	</tr>
 </table>
 
