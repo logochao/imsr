@@ -11,8 +11,6 @@
 	default-autowire="byName" default-lazy-init="false">
 	<context:annotation-config />
 	<context:component-scan base-package="com.radius.invoicing"></context:component-scan>
-	
-	
 	<bean id="propertyConfigHelper" class="com.radius.base.helper.PropertyConfigHelper">
 		<property name="locations">
 			<list>
@@ -66,16 +64,16 @@
 	<!-- 配置事务切面 -->
 	<tx:advice id="transactionAdvice" transaction-manager="txManager">
 		<tx:attributes>
-			<tx:method name="find*" read-only="true" />
-			<tx:method name="get*" read-only="true" />
-			<tx:method name="query*" read-only="true" />
-			<tx:method name="select*" read-only="true" />
-			<tx:method name="*" read-only="false"/>
+			<tx:method name="find*" propagation="SUPPORTS" read-only="true" />
+			<tx:method name="get*" propagation="SUPPORTS" read-only="true" />
+			<tx:method name="query*" propagation="SUPPORTS" read-only="true" />
+			<tx:method name="select*" propagation="SUPPORTS" read-only="true" />
+			<tx:method name="*" propagation="REQUIRED" read-only="false" rollback-for="Throwable"/>
 		</tx:attributes>
 	</tx:advice>
 
 	<aop:config>
-		<aop:pointcut expression="execution(* com.radius.invoicing.**.service.impl.*Service*.*(..))" id="txPoint" />
+		<aop:pointcut expression="execution(* com.radius.invoicing.**.service.impl.*ServiceImpl.*(..))" id="txPoint" />
 		<aop:advisor advice-ref="transactionAdvice" pointcut-ref="txPoint" />
 	</aop:config>
 	
