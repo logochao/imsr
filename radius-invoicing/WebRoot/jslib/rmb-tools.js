@@ -5,7 +5,7 @@
  * @param upperInputId 大写人民币Input Id号
  */
 function toUpper(lowerInputId,upperInputId){
-	var num = $("#"+lowerInputId).val();
+	var num = lowerInputId.val();
 	if(isNull(num)){
 		return ;
 	}
@@ -21,13 +21,13 @@ function toUpper(lowerInputId,upperInputId){
 		}
 		if(isNull(num)) return;
 	}
-	$("#"+lowerInputId).val(num);
-	$("#"+upperInputId).val(ToTrans(num));
+	lowerInputId.val(num);
+	upperInputId.val(ToTrans(num));//不生效
 	
 	function isNull(num){
 		if(num == null || num == ""){
-			$("#"+lowerInputId).val("");
-			$("#"+upperInputId).val("");
+			lowerInputId.val("");
+			upperInputId.val("");
 			return true;
 		}
 		return false;
