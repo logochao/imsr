@@ -11,6 +11,63 @@ $(function(){
 	
 	//挂单按钮
 	$('#contract_sales_toolbar_pend_btn').on('click',function(){
+		contract_sales_tool_bar_save=$('#contract_sales_tool_bar_save');
+		var value=contract_sales_tool_bar_save.val();
+		if(!parseInt(value)<1){//
+			$.ajax({
+				url:'${path}/contract/manager/salescontract/sale_contract_infos_add.html',//保存销售合同请求地址
+				method:'POST',
+				data:{
+					//销售合同
+					id:$('#constract_sales_sale_base_id').val(),//合同编号
+					customerId:$('#contract_sales_base_customer_id').val(),//客户编号
+					customerName:$('#contract_sales_base_customer_name').val(),//客户名称
+					contractFile:'',//合同文件编号
+					effectDate:parseDate($('#contract_sales_clause_effivit_time').datebox('getValue')),//生效日期
+					signTime:parseDate($('#contract_sales_clause_sign_time').datebox('getValue')),//签署日期
+					man:$('#contract_sales_base_link_man').val(),//联系人
+					mobile:$('#contract_sales_base_link_mobile').val(),//手机号
+					tel:$('#contract_sales_base_link_tel').val(),//电话
+					fax:$('#contract_sales_base_link_fax').val(),//传真
+					orderedDate:parseDate($('#contract_sales_base_order_time').datebox('getValue')),//订货日期
+					deliveryDate:parseDate($('#contract_sales_base_order_end_time').datebox('getValue')),//送货日期
+					deliveryPoint:$('#contract_sales_base_delivery_point').val(),//送货地点
+					contractTerms:$('#contract_sales_clause_contract_terms').val(),//合同条款
+					validityDate:parseDate($('#contract_sales_clause_fail_time').datebox('getValue')),//有效期至
+					stats:0,//状态
+					memo:$('#contract_sale_index_mome').val(),
+					totalAmount:$('#contract_sales_base_total_amount').val(),//合同总金额 (货币默认为人民币)
+					upperAmount:$('#contract_sales_base_upper_rmb').val(),//大写金额
+					cashType:'801',//人民币
+					contractType:contract_sales_base_contract_type.val(),//合同类型
+					//保函条款
+					guaranteeStatus:$('#contract_sales_base_checkbox').val(),//是否启用保函条款
+					payamount:$('#contract_sales_index_pay_amount').val(),//保函条款
+					payTime:parseDate($('#contract_sales_index_pay_time').datebox('getValue')),//付款日期
+					receivablesTime:parseDate($('#contract_sales_index_receivables_time').datebox('getValue')),//收款日期
+				},
+				success:function(r){//通讯成功
+					if(r&&r.success){
+						$.messager.show({
+							title:'提示',
+							msg:r.message,
+							timeout:5000
+						});
+						//1.修改保存标志
+						contract_sales_tool_bar_save.val(r.child);
+						//2.将合同的状态进行修改
+						
+					}
+				},
+				error:function(r){//操作失败
+					$.messager.alert('提示','访问服务发生异常....','error');
+				}
+			});
+		}
+		//1.检查相关属性是否都存在
+		
+		//2.设置状态为确定
+		//3.根据返回信息,提示相关内容
 		
 	});
 	
@@ -39,7 +96,7 @@ $(function(){
 					deliveryPoint:$('#contract_sales_base_delivery_point').val(),//送货地点
 					contractTerms:$('#contract_sales_clause_contract_terms').val(),//合同条款
 					validityDate:parseDate($('#contract_sales_clause_fail_time').datebox('getValue')),//有效期至
-					stats:contract_sales_tool_bar_save.val(),//状态
+					stats:1,//状态
 					memo:$('#contract_sale_index_mome').val(),
 					totalAmount:$('#contract_sales_base_total_amount').val(),//合同总金额 (货币默认为人民币)
 					upperAmount:$('#contract_sales_base_upper_rmb').val(),//大写金额
