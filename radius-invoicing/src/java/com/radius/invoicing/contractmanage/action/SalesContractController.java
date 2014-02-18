@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.radius.base.controller.BaseController;
+import com.radius.base.page.EasyuiSplitPager;
 import com.radius.base.utils.JsonUtils;
 import com.radius.base.utils.StockUtils;
 import com.radius.invoicing.contractmanage.compent.SalesContractCom;
@@ -208,5 +209,34 @@ public class SalesContractController extends BaseController{
 			e.printStackTrace();
 		}
 		return result==null? new JsonUtils(false,"操作失败"):result;
+	}
+	
+	/**
+	 * 通过客户信息获取销售合同信息
+	 * @param request
+	 * @param response
+	 * @param salesContract
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/contract/manager/salescontract/sales_contract_info_by_customer.html")
+	@ResponseBody
+	public EasyuiSplitPager<SalesContract>  getSalesContract(HttpServletRequest request,HttpServletResponse response,SalesContract salesContract)throws Exception{
+//		String customerId=ServletRequestUtils.getStringParameter(request, "customerId", "0");//获取客户编号 默认为0
+		return contractService.getSalesContractByCustomerId(salesContract);
+	}
+	
+	/**
+	 * 通过合同编号获取销售商品信息列表
+	 * @param request
+	 * @param response
+	 * @param salesContractGoodsGrd
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/contract/manager/salescontract/sales_contract_goods_grd_by_contract_id.html")
+	@ResponseBody
+	public EasyuiSplitPager<SalesContractGoodsGrd> getSalesContractGoodsGrd(HttpServletRequest request,HttpServletResponse response,SalesContractGoodsGrd salesContractGoodsGrd)throws Exception{
+		return contractService.getSalesContractGoodsGrd(salesContractGoodsGrd);
 	}
 }
