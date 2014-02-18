@@ -28,6 +28,7 @@ public class BaseEntity implements Serializable {
 	public void setPerPageSize(int perPageSize) {
 		this.perPageSize = perPageSize;
 	}
+	@JsonIgnore
 	public String getContextPath() {
 		return contextPath;
 	}
