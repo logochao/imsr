@@ -4,12 +4,11 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-
+<c:set var="path" scope="application" value="<%=path%>"></c:set>
 <!-- 引入jQuery -->
-<script src="<%=path%>/easyui/jquery-1.8.0.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="<%=path%>/easyui/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 
 
 <!-- 引入bootstrap样式 -->
@@ -41,5 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="<%=path%>/jslib/syExtEasyUI.js" charset="utf-8"></script>
 <%-- 人民币转换工具--%>
 <script type="text/javascript" src="<%=path%>/jslib/rmb-tools.js" charset="utf-8"></script>
+<!-- 图片预览插件 -->
+<script type="text/javascript" src="<%=path%>/jslib/imagepreview/jquery.imgpreview.js"></script>
 
 <link rel="stylesheet" href="<%=path%>/common/stock.css" type="text/css">
