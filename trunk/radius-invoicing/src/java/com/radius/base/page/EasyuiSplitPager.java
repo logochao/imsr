@@ -3,6 +3,7 @@
  */
 package com.radius.base.page;
 
+import java.io.Serializable;
 import java.util.List;
 
 
@@ -12,7 +13,7 @@ import java.util.List;
  * Copyright (c) 2013 by 陈波宁.<br/>
  * 类说明
  */
-public class EasyuiSplitPager<E> {
+public class EasyuiSplitPager<E> implements Serializable {
 
 	private Integer total=0;
 	private List<E> rows;
