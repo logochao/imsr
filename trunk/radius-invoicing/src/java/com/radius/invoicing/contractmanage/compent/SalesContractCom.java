@@ -38,7 +38,7 @@ public class SalesContractCom {
 		Map<String,SalesContractGoodsGrd> cacheMap = (Map<String,SalesContractGoodsGrd>)MemcacheClient.get(cacheKey);
 		String key = null;
 		SalesContractGoodsGrd goods=null;
-		if(!cacheMap.isEmpty()&&cacheMap.size()>0){//表示缓存内容不为空
+		if(cacheMap!=null&&!cacheMap.isEmpty()&&cacheMap.size()>0){//表示缓存内容不为空
 			Iterator iter = cacheMap.entrySet().iterator();
 			while (iter.hasNext()) { 
 				Map.Entry entry = (Map.Entry) iter.next();
@@ -87,7 +87,7 @@ public class SalesContractCom {
 		Map<String,SalesContractPaymentGrd> memcache =(Map<String,SalesContractPaymentGrd>)MemcacheClient.get(cacheKey);
 		String key = null;
 		SalesContractPaymentGrd payment=null;
-		if(!memcache.isEmpty()&&memcache.size()>0){//表示缓存内容不为空
+		if(memcache!=null&&!memcache.isEmpty()&&memcache.size()>0){//表示缓存内容不为空
 			Iterator iter = memcache.entrySet().iterator();
 			while (iter.hasNext()) { 
 				Map.Entry entry = (Map.Entry) iter.next();
@@ -116,7 +116,7 @@ public class SalesContractCom {
 		Map<String,ContractScanGrd> memcache=(Map<String,ContractScanGrd>)MemcacheClient.get(cacheKey);
 		String key = null;
 		ContractScanGrd scan=null;
-		if(!memcache.isEmpty()&&memcache.size()>0){//表示缓存内容不为空
+		if(memcache!=null&&!memcache.isEmpty()&&memcache.size()>0){//表示缓存内容不为空
 			Iterator iter = memcache.entrySet().iterator();
 			while (iter.hasNext()) { 
 				Map.Entry entry = (Map.Entry) iter.next();
