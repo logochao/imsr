@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="salesOrderGoodsGrdSqlMap">
+
+  <typeAlias alias="salesOrderGoodsGrd" type="com.radius.invoicing.ibatis.model.SalesOrderGoodsGrd" />
+  
+  <sql id="salesOrderGoodsGrdFileds">
+  	 sseries_no seriesNo,sales_order_id orderId,goods_id goodsId,goods_name goodsName,quantity quantity,unit unit,bar_code barCode,model model,
+	 property property,price price,amount amount,`status` stats,other other,`format` formate,price_per_kg priceKg,total_weight totalWeight,
+	 tax tax,tax_amount taxAmount,weigth_per_unit weigthUnit,price_of_weigth_per_unit priceWeigthUnit,operator operator,
+	 weight_per_unit weightUnit,batch_no batchNo,made_date madeDate,validity_date validityDate,
+  	 ledger_id ledgerId,memo memo,creater creater,createdate createdate,reviser reviser,revisedate revisedate,verifier verifydate
+  </sql>
+  
+  <resultMap id="salesOrderGoodsGrd" class="salesOrderGoodsGrd">
+	 <result column="series_no" jdbcType="char" javaType="java.lang.String" property="seriesNo" />
+	 <result column="sales_order_id" jdbcType="char" javaType="java.lang.String" property="orderId" />
+	 <result column="goods_id" jdbcType="char" javaType="java.lang.String" property="goodsId" />
+	 <result column="goods_name" jdbcType="char" javaType="java.lang.String" property="goodsName" />
+	 <result column="quantity" jdbcType="int" javaType="java.lang.Integer" property="quantity" />
+	 <result column="unit" jdbcType="char" javaType="java.lang.String" property="unit" />
+	 <result column="bar_code" jdbcType="char" javaType="java.lang.String" property="barCode" />
+	 <result column="model" jdbcType="varchar" javaType="java.lang.String" property="model" />
+	 <result column="property" jdbcType="varchar" javaType="java.lang.String" property="property" />
+	 <result column="price" jdbcType="int" javaType="java.lang.Integer" property="price" />
+	 <result column="amount" jdbcType="int" javaType="java.lang.Integer" property="amount" />
+	 <result column="`status`" jdbcType="char" javaType="java.lang.String" property="stats" />
+	 <result column="other" jdbcType="varchar" javaType="java.lang.String" property="other" />
+	 <result column="`format`" jdbcType="char" javaType="java.lang.String" property="formate" />
+	 <result column="price_per_kg" jdbcType="int" javaType="java.lang.Integer" property="priceKg" />
+	 <result column="total_weight" jdbcType="int" javaType="java.lang.Integer" property="totalWeight" />
+	 <result column="tax" jdbcType="int" javaType="java.lang.Integer" property="tax" />
+	 <result column="tax_amount" jdbcType="int" javaType="java.lang.Integer" property="taxAmount" />
+	 <result column="weigth_per_unit" jdbcType="int" javaType="java.lang.Integer" property="weigthUnit" />
+	 <result column="price_of_weigth_per_unit" jdbcType="int" javaType="java.lang.Integer" property="priceWeigthUnit" />
+	 <result column="operator" jdbcType="char" javaType="java.lang.String" property="operator" />
+	 <result column="weight_per_unit" jdbcType="int" javaType="java.lang.Integer" property="weightUnit" />
+	 <result column="batch_no" jdbcType="int" javaType="java.lang.Integer" property="batchNo" />
+	 <result column="made_date" jdbcType="datetime" javaType="java.util.Date" property="madeDate" />
+	 <result column="validity_date" jdbcType="datetime" javaType="java.util.Date" property="validityDate" />
+	 
+  	<result column="ledger_id" jdbcType="char" javaType="java.lang.String" property="ledgerId" />
+  	<result column="memo" jdbcType="text" javaType="java.lang.String" property="memo" />
+    <result column="creater" jdbcType="char" javaType="java.lang.String" property="creater" />
+    <result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createdate" />
+    <result column="reviser" jdbcType="char" javaType="java.lang.String" property="reviser" />
+    <result column="revisedate" jdbcType="datetime" javaType="java.util.Date" property="revisedate" />
+    <result column="verifier" jdbcType="char" javaType="java.lang.String" property="verifier" />    
+    <result column="verifydate" jdbcType="datetime" javaType="java.util.Date" property="verifydate"/>
+  </resultMap>
+  
+  <sql id="whereLike">
+  	<dynamic prepend="where">
+  		1=1  AND 
+  		<isNotNull prepend="and" property="seriesNo">series_no=#seriesNo#</isNotNull>
+		<isNotEmpty prepend="and" property="orderId">sales_order_id=#orderId#</isNotEmpty>
+		<isNotEmpty prepend="and" property="goodsId">goods_id=#goodsId#</isNotEmpty>
+		<isNotEmpty prepend="and" property="goodsName">goods_name=#goodsName#</isNotEmpty>
+		<isNotNull prepend="and" property="quantity">quantity=#quantity#</isNotNull>
+		<isNotEmpty prepend="and" property="unit">unit=#unit#</isNotEmpty>
+		<isNotEmpty prepend="and" property="barCode">bar_code=#barCode#</isNotEmpty>
+		<isNotEmpty prepend="and" property="model">model=#model#</isNotEmpty>
+		<isNotEmpty prepend="and" property="property">property=#property#</isNotEmpty>
+		<isNotNull prepend="and" property="price">price=#price#</isNotNull>
+		<isNotNull prepend="and" property="amount">amount=#amount#</isNotNull>
+		<isNotEmpty prepend="and" property="stats">`status`=#stats#</isNotEmpty>
+		<isNotEmpty prepend="and" property="other">other=#other#</isNotEmpty>
+		<isNotEmpty prepend="and" property="formate">`format`=#formate#</isNotEmpty>
+		<isNotNull prepend="and" property="priceKg">price_per_kg=#priceKg#</isNotNull>
+		<isNotNull prepend="and" property="totalWeight">total_weight=#totalWeight#</isNotNull>
+		<isNotNull prepend="and" property="tax">tax=#tax#</isNotNull>
+		<isNotNull prepend="and" property="taxAmount">tax_amount=#taxAmount#</isNotNull>
+		<isNotNull prepend="and" property="weigthUnit">weigth_per_unit=#weigthUnit#</isNotNull>
+		<isNotNull prepend="and" property="priceWeigthUnit">price_of_weigth_per_unit=#priceWeigthUnit#</isNotNull>
+		<isNotEmpty prepend="and" property="operator">operator=#operator#</isNotEmpty>
+		<isNotNull prepend="and" property="weightUnit">weight_per_unit=#weightUnit#</isNotNull>
+		<isNotNull prepend="and" property="batchNo">batch_no=#batchNo#</isNotNull>
+		<isNotNull prepend="and" property="madeDate">made_date=#madeDate#</isNotNull>
+  		<isNotNull prepend="and" property="validityDate">validity_date=#validityDate#</isNotNull>
+ 		<isNotEmpty prepend="and" property="ledgerId">ledger_id=#ledgerId#</isNotEmpty> 
+ 		<isNotEmpty prepend="and" property="memo">memo=#memo#</isNotEmpty> 
+  	</dynamic>
+  </sql>
+ 
+	 <select id="getSalesOrderGoodsGrdByPk" parameterClass="java.util.Map" resultClass="salesOrderGoodsGrd">
+	 	SELECT <include refid="salesOrderGoodsGrdFileds"/>
+	 	FROM RS_SALES_ORDER_GOODS_GRD
+	 	WHERE sales_order_id=#orderId# AND goods_id=#goodsId#
+	 </select>
+	 
+	 <select id="getSalesOrderGoodsGrd" parameterClass="salesOrderGoodsGrd" resultClass="salesOrderGoodsGrd">
+	 	SELECT <include refid="salesOrderGoodsGrdFileds"/>
+	 	FROM RS_SALES_ORDER_GOODS_GRD
+	 	<include refid="whereLike"/>
+	 </select>
+   
+   	<insert id="insert" parameterClass="salesOrderGoodsGrd">
+   		INSERT INTO RS_SALES_ORDER_GOODS_GRD (
+   			sales_order_id,
+   			goods_id,
+	  		<isNotNull  property="seriesNo">series_no,</isNotNull>
+			<isNotEmpty  property="goodsName">goods_name,</isNotEmpty>
+			<isNotNull  property="quantity">quantity,</isNotNull>
+			<isNotEmpty  property="unit">unit,</isNotEmpty>
+			<isNotEmpty  property="barCode">bar_code,</isNotEmpty>
+			<isNotEmpty  property="model">model,</isNotEmpty>
+			<isNotEmpty  property="property">property,</isNotEmpty>
+			<isNotNull  property="price">price,</isNotNull>
+			<isNotNull  property="amount">amount,</isNotNull>
+			<isNotEmpty  property="stats">`status`,</isNotEmpty>
+			<isNotEmpty  property="other">other,</isNotEmpty>
+			<isNotEmpty  property="formate">`format`,</isNotEmpty>
+			<isNotNull  property="priceKg">price_per_kg,</isNotNull>
+			<isNotNull  property="totalWeight">total_weight,</isNotNull>
+			<isNotNull  property="tax">tax,</isNotNull>
+			<isNotNull  property="taxAmount">tax_amount,</isNotNull>
+			<isNotNull  property="weigthUnit">weigth_per_unit,</isNotNull>
+			<isNotNull  property="priceWeigthUnit">price_of_weigth_per_unit,</isNotNull>
+			<isNotEmpty  property="operator">operator,</isNotEmpty>
+			<isNotNull  property="weightUnit">weight_per_unit,</isNotNull>
+			<isNotNull  property="batchNo">batch_no,</isNotNull>
+			<isNotNull  property="madeDate">made_date,</isNotNull>
+	  		<isNotNull  property="validityDate">validity_date,</isNotNull>
+	 		<isNotEmpty  property="ledgerId">ledger_id,</isNotEmpty> 
+	 		<isNotEmpty  property="memo">memo,</isNotEmpty> 
+	  	    creater,
+	  	    createdate
+   		)VALUES(
+   			#orderId#,
+   			#goodsId#,
+	  		<isNotNull  property="seriesNo">#seriesNo#,</isNotNull>
+			<isNotEmpty  property="goodsName">#goodsName#,</isNotEmpty>
+			<isNotNull  property="quantity">#quantity#,</isNotNull>
+			<isNotEmpty  property="unit">#unit#,</isNotEmpty>
+			<isNotEmpty  property="barCode">#barCode#,</isNotEmpty>
+			<isNotEmpty  property="model">#model#,</isNotEmpty>
+			<isNotEmpty  property="property">#property#,</isNotEmpty>
+			<isNotNull  property="price">#price#,</isNotNull>
+			<isNotNull  property="amount">#amount#,</isNotNull>
+			<isNotEmpty  property="stats">#stats#,</isNotEmpty>
+			<isNotEmpty  property="other">#other#,</isNotEmpty>
+			<isNotEmpty  property="formate">#formate#,</isNotEmpty>
+			<isNotNull  property="priceKg">#priceKg#,</isNotNull>
+			<isNotNull  property="totalWeight">#totalWeight#,</isNotNull>
+			<isNotNull  property="tax">#tax#,</isNotNull>
+			<isNotNull  property="taxAmount">#taxAmount#,</isNotNull>
+			<isNotNull  property="weigthUnit">#weigthUnit#,</isNotNull>
+			<isNotNull  property="priceWeigthUnit">#priceWeigthUnit#,</isNotNull>
+			<isNotEmpty  property="operator">#operator#,</isNotEmpty>
+			<isNotNull  property="weightUnit">#weightUnit#,</isNotNull>
+			<isNotNull  property="batchNo">#batchNo#,</isNotNull>
+			<isNotNull  property="madeDate">#madeDate#,</isNotNull>
+	  		<isNotNull  property="validityDate">#validityDate#,</isNotNull>
+	 		<isNotEmpty  property="ledgerId">#ledgerId#,</isNotEmpty> 
+	 		<isNotEmpty  property="memo">#memo#,</isNotEmpty> 
+   			 creater,now()
+   		)
+   	</insert>
+   
+   	<update id="updateSalesOrderGoodsGrdByPK" parameterClass="salesOrderGoodsGrd">
+   		UPDATE RS_SALES_ORDER_GOODS_GRD
+   		<dynamic prepend="SET">
+	  		<isNotNull prepend="," property="seriesNo">series_no=#seriesNo#</isNotNull>
+			<isNotEmpty prepend="," property="goodsName">goods_name=#goodsName#</isNotEmpty>
+			<isNotNull prepend="," property="quantity">quantity=#quantity#</isNotNull>
+			<isNotEmpty prepend="," property="unit">unit=#unit#</isNotEmpty>
+			<isNotEmpty prepend="," property="barCode">bar_code=#barCode#</isNotEmpty>
+			<isNotEmpty prepend="," property="model">model=#model#</isNotEmpty>
+			<isNotEmpty prepend="," property="property">property=#property#</isNotEmpty>
+			<isNotNull prepend="," property="price">price=#price#</isNotNull>
+			<isNotNull prepend="," property="amount">amount=#amount#</isNotNull>
+			<isNotEmpty prepend="," property="stats">`status`=#stats#</isNotEmpty>
+			<isNotEmpty prepend="," property="other">other=#other#</isNotEmpty>
+			<isNotEmpty prepend="," property="formate">`format`=#formate#</isNotEmpty>
+			<isNotNull prepend="," property="priceKg">price_per_kg=#priceKg#</isNotNull>
+			<isNotNull prepend="," property="totalWeight">total_weight=#totalWeight#</isNotNull>
+			<isNotNull prepend="," property="tax">tax=#tax#</isNotNull>
+			<isNotNull prepend="," property="taxAmount">tax_amount=#taxAmount#</isNotNull>
+			<isNotNull prepend="," property="weigthUnit">weigth_per_unit=#weigthUnit#</isNotNull>
+			<isNotNull prepend="," property="priceWeigthUnit">price_of_weigth_per_unit=#priceWeigthUnit#</isNotNull>
+			<isNotEmpty prepend="," property="operator">operator=#operator#</isNotEmpty>
+			<isNotNull prepend="," property="weightUnit">weight_per_unit=#weightUnit#</isNotNull>
+			<isNotNull prepend="," property="batchNo">batch_no=#batchNo#</isNotNull>
+			<isNotNull prepend="," property="madeDate">made_date=#madeDate#</isNotNull>
+	  		<isNotNull prepend="," property="validityDate">validity_date=#validityDate#</isNotNull>
+	 		<isNotEmpty prepend="," property="ledgerId">ledger_id=#ledgerId#</isNotEmpty> 
+	 		<isNotEmpty prepend="," property="memo">memo=#memo#</isNotEmpty> 
+  	 		<isNotEmpty  prepend="," property="reviser">reviser = #reviser#,revisedate = now() </isNotEmpty>
+  			<isNotEmpty  prepend="," property="verifier">verifier = #verifier#,verifydate = now() </isNotEmpty>
+   		</dynamic>
+   		WHERE sales_order_id=#orderId# AND goods_id=#goodsId#
+   	</update>
+   	<!-- 分页查询语句 -->
+   	<select id="getSalesOrderGoodsGrdSplitPageBySQL" remapResults="true" parameterClass="java.lang.String" resultMap="salesOrderGoodsGrd">
+   		$splitPageSQL$
+   	</select>
+   	<!-- end -->
+   	
+   	<select id="getSalesOrderGoodsGrdSplitPageCountSQL" remapResults="true" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+   		$countSQL$
+   	</select>
+   	
+   	<delete id="deleteSalesOrderGoodsGrd" parameterClass="salesOrderGoodsGrd">
+   		DELETE FROM RS_SALES_ORDER_GOODS_GRD
+   		<include refid="whereLike"/>
+   	</delete>
+   	<delete id="deleteSalesOrderGoodsGrdByPK" parameterClass="java.util.Map">
+   		DELETE FROM RS_SALES_ORDER_GOODS_GRD
+   		WHERE sales_order_id=#orderId# AND goods_id=#goodsId#
+   	</delete>
+   	
+   	<update id="updateSalesOrderGoodsGrdStatusByPK" parameterClass="salesOrderGoodsGrd">
+   		UPDATE RS_SALES_ORDER_GOODS_GRD
+   		SET `status`=#stats#
+   		WHERE sales_order_id=#orderId# AND goods_id=#goodsId#
+   	</update>
+</sqlMap>

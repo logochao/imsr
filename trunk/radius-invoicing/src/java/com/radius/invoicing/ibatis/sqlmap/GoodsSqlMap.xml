@@ -65,13 +65,13 @@
   </resultMap>
   
   <sql id="whereLike">
-  	<dynamic prepend="where">
-  		1=1  
+  	<dynamic prepend="where" >
+  		1=1  AND
   		<isNotEmpty prepend="AND" property="id">
   			goods_id=#id#
   		</isNotEmpty>
   		 <isNotEmpty prepend="and" property="name"> 
-           goods_name = #name# 
+           goods_name LIKE CONCAT('%',#name#,'%')
   		</isNotEmpty>
   		<isNotEmpty prepend="AND" property="property">
   			goods_property=#property#
@@ -82,9 +82,9 @@
   		<isNotEmpty prepend="AND" property="categoryName">
   			category_name=#categoryName#
   		</isNotEmpty>
-  		<!--<isNotEmpty prepend="AND" property="goods_series">
+  		<isNotEmpty prepend="AND" property="goods_series">
   			goods_series=#series#
-  		</isNotEmpty>-->
+  		</isNotEmpty>
   		<isNotEmpty prepend="AND" property="unit">
   			unit=#unit#
   		</isNotEmpty>
@@ -106,10 +106,10 @@
   		<isNotNull prepend="AND" property="depositDeadline">
   			deposit_deadline=#depositDeadline#
   		</isNotNull>
-  		<!--<isNotEmpty prepend="AND" property="description">
+  		<isNotEmpty prepend="AND" property="description">
   			goods_description=#description#
   		</isNotEmpty>
-  		--><isNotNull prepend="AND" property="minStore">
+  		<isNotNull prepend="AND" property="minStore">
   			min_limit_of_store=#minStore#
   		</isNotNull>
   		<isNotNull prepend="AND" property="maxStore">
@@ -118,10 +118,10 @@
   		<isNotNull prepend="AND" property="cost">
   			cost=#cost#
   		</isNotNull>
-  		<!--<isNotEmpty prepend="AND" property="illustrate">
+  		<isNotEmpty prepend="AND" property="illustrate">
   			purchase_illustrate=#illustrate#
   		</isNotEmpty>
-  		--><isNotNull prepend="AND" property="price">
+  		<isNotNull prepend="AND" property="price">
   			price=#price#
   		</isNotNull>
   		<isNotEmpty prepend="AND" property="realName">
@@ -346,7 +346,8 @@
    	<select id="getGoodsByCondition" parameterClass="goods" resultClass="goods">
    		SELECT <include refid="goodsFileds"/>
    		FROM RS_GOODS
-   		$condition$
+   		<include refid="whereLike"/>
+   		<!-- $condition$  -->
    	</select>
    	<!-- 分页查询语句 -->
    	<select id="getGoodsSplitPageBySQL" remapResults="true" parameterClass="java.lang.String" resultMap="goods">

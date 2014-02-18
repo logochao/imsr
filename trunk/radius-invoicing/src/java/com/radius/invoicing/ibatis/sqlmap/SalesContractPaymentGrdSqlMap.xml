@@ -123,4 +123,9 @@
    		DELETE FROM RS_SALES_CONTRACT_PAYMENT_GRD
    		WHERE money_list_id =#id# 
    	</delete>
+   	<update id="updateSalesContractPaymentGrdStatusBycontractId" parameterClass="salesContractPaymentGrd">
+   		UPDATE RS_SALES_CONTRACT_PAYMENT_GRD
+   		SET STATUS=#stats#
+   		WHERE contract_id=#contractId#
+   	</update>
 </sqlMap>

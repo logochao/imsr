@@ -35,31 +35,31 @@
   
   <sql id="whereLike">
   	<dynamic prepend="where">
-  		1=1  
-  		<isNotEmpty prepend="and" property="contractId">contract_id=#contractId#</isNotEmpty>
-  		<isNotEmpty prepend="and" property="goodsId">goods_id=#goodsId#</isNotEmpty>
-  		<isNotEmpty prepend="and" property="goodsName">goods_name=#goodsName#</isNotEmpty>
-		<isNotEmpty prepend="and" property="unit">unit=#unit#</isNotEmpty>
-		<isNotNull prepend="and" property="priceUnit">price_of_unit=#priceUnit#</isNotNull>
-		<isNotNull prepend="and" property="equivalentUnit">equivalent_unit=#equivalentUnit#</isNotNull>
-		<isNotNull prepend="and" property="priceEu">price_of_eu=#priceEu#</isNotNull>
-		<isNotNull prepend="and" property="quantityEuPerUnit">quantity_of_eu_per_unit=#quantityEuPerUnit#</isNotNull>
-		<isNotNull prepend="and" property="quantityUnit">quantity_of_unit=#quantityUnit#</isNotNull>
-		<isNotNull prepend="and" property="quantityEu">quantity_of_eu=#quantityEu#</isNotNull>
-		<isNotNull prepend="and" property="amount">amount=#amount#</isNotNull>
-		<isNotEmpty prepend="and" property="stats">STATUS=#stats#</isNotEmpty>
- 		<isNotEmpty prepend="and" property="ledgerId">ledger_id=#ledgerId#</isNotEmpty> 
- 		<isNotEmpty prepend="and" property="memo">memo=#memo#</isNotEmpty> 
+  		1=1  AND 
+  		<isNotEmpty prepend="and" property="contractId"> contract_id=#contractId#</isNotEmpty>
+  		<isNotEmpty prepend="and" property="goodsId"> goods_id=#goodsId#</isNotEmpty>
+  		<isNotEmpty prepend="and" property="goodsName">  goods_name=#goodsName#</isNotEmpty>
+		<isNotEmpty prepend="and" property="unit">  unit=#unit#</isNotEmpty>
+		<isNotNull prepend="and" property="priceUnit">  price_of_unit=#priceUnit#</isNotNull>
+		<isNotEmpty prepend="and" property="equivalentUnit">  equivalent_unit=#equivalentUnit#</isNotEmpty>
+		<isNotNull prepend="and" property="priceEu">  price_of_eu=#priceEu#</isNotNull>
+		<isNotNull prepend="and" property="quantityEuPerUnit">  quantity_of_eu_per_unit=#quantityEuPerUnit#</isNotNull>
+		<isNotNull prepend="and" property="quantityUnit">  quantity_of_unit=#quantityUnit#</isNotNull>
+		<isNotNull prepend="and" property="quantityEu">  quantity_of_eu=#quantityEu#</isNotNull>
+		<isNotNull prepend="and" property="amount">  amount=#amount#</isNotNull>
+		<isNotEmpty prepend="and" property="stats">  STATUS=#stats#</isNotEmpty>
+ 		<isNotEmpty prepend="and" property="ledgerId">  ledger_id=#ledgerId#</isNotEmpty> 
+ 		<isNotEmpty prepend="and" property="memo">  memo=#memo#</isNotEmpty> 
   	</dynamic>
   </sql>
  
-	 <select id="getSalesContractGoodsGrdByPk" parameterClass="java.util.Map" resultMap="salesContractGoodsGrd">
+	 <select id="getSalesContractGoodsGrdByPk" parameterClass="java.util.Map" resultClass="salesContractGoodsGrd">
 	 	SELECT <include refid="salesContractGoodsGrdFileds"/>
 	 	FROM RS_SALES_CONTRACT_GOODS_GRD
 	 	WHERE contract_id =#contractId# AND goods_id=#goodsId#
 	 </select>
 	 
-	 <select id="getSalesContractGoodsGrd" parameterClass="salesContractGoodsGrd" resultMap="salesContractGoodsGrd">
+	 <select id="getSalesContractGoodsGrd" parameterClass="salesContractGoodsGrd" resultClass="salesContractGoodsGrd">
 	 	SELECT <include refid="salesContractGoodsGrdFileds"/>
 	 	FROM RS_SALES_CONTRACT_GOODS_GRD
 	 	<include refid="whereLike"/>
@@ -140,4 +140,10 @@
    		DELETE FROM RS_SALES_CONTRACT_GOODS_GRD
    		WHERE contract_id =#contractId# AND goods_id=#goodsId#
    	</delete>
+   	
+   	<update id="updateSalesContractGoodsGrdStatusByContractId" parameterClass="salesContractGoodsGrd">
+   		UPDATE RS_SALES_CONTRACT_GOODS_GRD
+   		SET STATUS=#stats#
+   		WHERE contract_id =#contractId#
+   	</update>
 </sqlMap>

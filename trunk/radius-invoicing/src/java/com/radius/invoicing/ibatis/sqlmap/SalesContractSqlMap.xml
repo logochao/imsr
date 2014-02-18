@@ -80,7 +80,7 @@
   	</dynamic>
   </sql>
  
-	 <select id="getSalesContractById" parameterClass="java.lang.String" resultMap="salesContract">
+	 <select id="getSalesContractById" parameterClass="java.lang.String" resultClass="salesContract">
 	 	SELECT <include refid="salesContractFileds"/>
 	 	FROM RS_SALES_CONTRACT
 	 	WHERE contract_id =#id#
@@ -181,13 +181,13 @@
    		</dynamic>
    		WHERE contract_id =#id# 
    	</update>
-   	<select id="getSalesContractByCondition" parameterClass="salesContract" resultMap="salesContract">
+   	<select id="getSalesContractByCondition" parameterClass="salesContract" resultClass="salesContract">
    		SELECT <include refid="salesContractFileds"/>
    		FROM RS_SALES_CONTRACT
    		<include refid="whereLike"/>
    	</select>
    	<!-- 分页查询语句 -->
-   	<select id="getSalesContractSplitPageBySQL" remapResults="true" parameterClass="java.lang.String" resultMap="salesContract">
+   	<select id="getSalesContractSplitPageBySQL" remapResults="true" parameterClass="java.lang.String" resultClass="salesContract">
    		$splitPageSQL$
    	</select>
    	<!-- end -->
@@ -204,4 +204,17 @@
    		DELETE FROM RS_SALES_CONTRACT
    		WHERE contract_id =#id# 
    	</delete>
+   	<update id="updateSalesContractStatusById" parameterClass="salesContract">
+   		UPDATE RS_SALES_CONTRACT
+   		SET STATUS=#stats#
+   		WHERE contract_id =#id# 
+   	</update>
+   	
+   	<select id="getSalesContractByCustomerId" resultClass="salesContract" parameterClass="salesContract">
+   		SELECT  sc.contract_id id,sc.customer_name customerName,sc.effect_date effectDate,sc.sign_time signTime,scp.total_amount totalAmount,scp.amount_in_words upperAmount 
+		FROM RS_SALES_CONTRACT sc
+		LEFT JOIN RS_SALES_CONTRACT_PAYMENT scp
+		ON sc.contract_id = scp.contract_id
+		WHERE sc.customer_id=#customerId#
+   	</select>
 </sqlMap>
