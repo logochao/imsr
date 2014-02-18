@@ -47,6 +47,13 @@ public interface SalesContractPaymentGrdDao {
 	 */
 	public boolean updateSalesContractPaymentGrdByPK(SalesContractPaymentGrd g);
 	
+	/**
+	 * 更新明细
+	 * @param g
+	 * @return
+	 */
+	public void updateSalesContractPaymentGrdStatusBycontractId(SalesContractPaymentGrd g);
+	
 	
 	/**
 	 * 批量更新明细

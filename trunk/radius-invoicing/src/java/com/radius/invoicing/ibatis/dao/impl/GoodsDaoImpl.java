@@ -11,6 +11,7 @@ import com.radius.base.dao.ibatis.BaseIbatisDaoImpl;
 import com.radius.base.page.Pager;
 import com.radius.invoicing.ibatis.dao.GoodsDao;
 import com.radius.invoicing.ibatis.model.Goods;
+import com.radius.invoicing.ibatis.model.GoodsConditionAppend;
 
 /**
  * @author <a href="mailto:goodluck.sunlight@gmail.com">陈波宁</a>
@@ -28,6 +29,7 @@ public class GoodsDaoImpl extends BaseIbatisDaoImpl<Goods> implements GoodsDao{
 	 * @return
 	 */
 	public List<Goods> getGoods(Goods goods){
+		GoodsConditionAppend.appendCondition(goods);
 		return this.getListObject(goods, "goodsSqlMap.getGoods");
 	}
 	/**
@@ -51,6 +53,7 @@ public class GoodsDaoImpl extends BaseIbatisDaoImpl<Goods> implements GoodsDao{
 	 * @param goods
 	 */
 	public void deleteGoods(Goods goods){
+		GoodsConditionAppend.appendCondition(goods);
 		this.deleteObject(goods, "goodsSqlMap.deleteGoods");
 	}
 	
@@ -75,6 +78,7 @@ public class GoodsDaoImpl extends BaseIbatisDaoImpl<Goods> implements GoodsDao{
 	 * @return
 	 */
 	public List<Goods> getGoodsByCondition(Goods goods){
+		GoodsConditionAppend.appendCondition(goods);
 		return this.getSqlMapClientTemplate().queryForList("goodsSqlMap.getGoodsByCondition",goods);
 	}
 }

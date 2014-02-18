@@ -11,6 +11,7 @@ import com.radius.base.dao.ibatis.BaseIbatisDaoImpl;
 import com.radius.base.page.Pager;
 import com.radius.invoicing.ibatis.dao.LinkManDao;
 import com.radius.invoicing.ibatis.model.LinkMan;
+import com.radius.invoicing.ibatis.model.LinkManConditionAppend;
 
 /**
  * @author <a href="mailto:goodluck.sunlight@gmail.com">陈波宁</a>
@@ -49,6 +50,7 @@ public class LinkManDaoImpl extends BaseIbatisDaoImpl<LinkMan> implements LinkMa
 	 * @return
 	 */
 	public List<LinkMan> getLinkManByCondition(LinkMan l){
+		LinkManConditionAppend.setCondition(l);
 		return this.getSqlMapClientTemplate().queryForList("linkManSqlMap.getLinkManByCondition",l);
 	}
 	

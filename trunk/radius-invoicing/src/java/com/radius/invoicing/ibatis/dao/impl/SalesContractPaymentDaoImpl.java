@@ -64,6 +64,14 @@ public class SalesContractPaymentDaoImpl extends BaseIbatisDaoImpl<SalesContract
 	public boolean updateSalesContractPaymentByPK(SalesContractPayment p){
 		return this.updateObject(p, SQLMAPNAMESPACE+"updateSalesContractPaymentByPK")==1;
 	}
+	/**
+	 * 更新销售合同信息
+	 * @param p
+	 * @return
+	 */
+	public void updateSalesContractPaymentStatusByContractId(SalesContractPayment p){
+		 this.updateObject(p, SQLMAPNAMESPACE+"updateSalesContractPaymentStatusByContractId");
+	}
 	
 	/**
 	 * 通过条件删除销售合同

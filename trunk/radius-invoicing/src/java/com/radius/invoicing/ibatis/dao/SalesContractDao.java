@@ -50,5 +50,15 @@ public interface SalesContractDao {
 	 * @param id
 	 */
 	public void deleteSalesContractById(String id);
+	
+	
+	public void updateSalesContractStatusById(SalesContract s);
+	
+	/**
+	 * 通过客户编号获取销售合同信息
+	 * @param s
+	 * @return
+	 */
+	public List<SalesContract> getSalesContractByCustomerId(SalesContract s);
 
 }

@@ -70,6 +70,14 @@ public class SalesContractGoodsGrdDaoImpl extends BaseIbatisDaoImpl<SalesContrac
 		return this.updateObject(g, SQLMAPNAMESPACE+"updateSalesContractGoodsGrdByPK")==1;
 	}
 	/**
+	 * 更新
+	 * @param g
+	 * @return
+	 */
+	public void updateSalesContractGoodsGrdStatusByContractId(SalesContractGoodsGrd g){
+		this.updateObject(g, SQLMAPNAMESPACE+"updateSalesContractGoodsGrdStatusByContractId");
+	}
+	/**
 	 * 批量更新
 	 * @param list
 	 */
