@@ -16,6 +16,7 @@ public class SalesContractPayment extends ExtInfo{
 	private String   upperAmount="";//大写金额
 	private String   paymentType="";//付款方式
 	private String   ledgerId="";//账套编号
+	private String   stats="";//状态
 	
 	
 	public String getCashType() {
@@ -54,4 +55,12 @@ public class SalesContractPayment extends ExtInfo{
 	public void setUpperAmount(String upperAmount) {
 		this.upperAmount = upperAmount;
 	}
+	public String getStats() {
+		return stats;
+	}
+	public void setStats(String stats) {
+		this.stats = stats;
+	}
+	
+	
 }
