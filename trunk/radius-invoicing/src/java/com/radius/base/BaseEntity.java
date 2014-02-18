@@ -14,6 +14,8 @@ public class BaseEntity implements Serializable {
 	protected String order="";//排序列名称
 	protected String sort="";//排序关键字
 	
+	protected String condition="";//where条件
+	
 	public int getPageNo() {
 		return pageNo;
 	}
@@ -51,6 +53,13 @@ public class BaseEntity implements Serializable {
 	}
 	public void setSort(String sort) {
 		this.sort = sort;
+	}
+	@JsonIgnore
+	public String getCondition() {
+		return condition;
+	}
+	public void setCondition(String condition) {
+		this.condition = condition;
 	}
 	
 }
