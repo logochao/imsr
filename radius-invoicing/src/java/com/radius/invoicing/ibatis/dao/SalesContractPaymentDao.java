@@ -57,5 +57,12 @@ public interface SalesContractPaymentDao {
 	 * @param contractId
 	 */
 	public void deleteSalesContractPaymentByPK(String contractId);
+	
+	/**
+	 * 更新销售合同信息
+	 * @param p
+	 * @return
+	 */
+	public void updateSalesContractPaymentStatusByContractId(SalesContractPayment p);
 
 }

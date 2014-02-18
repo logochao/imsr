@@ -69,4 +69,17 @@ public class SalesContractDaoImpl extends BaseIbatisDaoImpl<SalesContract> imple
 	public void deleteSalesContractById(String id){
 		this.deleteObject(id, SQLMAPNAMESPACE+"deleteSalesContractById");
 	}
+	
+	public void updateSalesContractStatusById(SalesContract s){
+		this.updateObject(s, SQLMAPNAMESPACE+"updateSalesContractStatusById");
+	}
+	
+	/**
+	 * 通过客户编号获取销售合同信息
+	 * @param s
+	 * @return
+	 */
+	public List<SalesContract> getSalesContractByCustomerId(SalesContract s){
+		return this.getListObject(s, SQLMAPNAMESPACE+"getSalesContractByCustomerId");
+	}
 }

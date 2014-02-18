@@ -69,5 +69,12 @@ public interface SalesContractGoodsGrdDao {
 	 */
 	public void deleteSalesContractGoodsGrdByPK(String contractId,
 			String goodsId);
+	
+	/**
+	 * 更新
+	 * @param g
+	 * @return
+	 */
+	public void updateSalesContractGoodsGrdStatusByContractId(SalesContractGoodsGrd g);
 
 }
