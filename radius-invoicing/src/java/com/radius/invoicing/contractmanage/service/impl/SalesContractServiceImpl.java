@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.radius.base.cache.memcache.MemcacheClient;
 import com.radius.base.helper.PropertyConfigHelper;
+import com.radius.base.page.EasyuiSplitPager;
 import com.radius.base.utils.Constants;
 import com.radius.base.utils.JsonUtils;
 import com.radius.invoicing.contractmanage.compent.SalesContractCom;
@@ -315,6 +316,7 @@ public class SalesContractServiceImpl implements SalesContractService,Constants 
 	public JsonUtils saveSalesContractInfos(String ledgerId,SalesContract salesContract,String goodsMemcacheKey,String paymentMemcacheKey,String scansMemecacheKey,SalesContractPayment payment)throws Exception{
 		boolean success=false;
 		String message="操作失败";
+		String code="-1";
 //		try{
 				//1.通过memcache获取所有带保存的对象
 				//2.构建相关的待保存对象
@@ -345,22 +347,37 @@ public class SalesContractServiceImpl implements SalesContractService,Constants 
 					contractScanGrdDao.batchInsertContractScanGrd(scansList);
 					success=true;
 					message="添加销售合同相关信息成功!!!";
+					code="1";
 					logger.info(message);
-				}else if(temp!=null){////3.1 存在则调用更新对象
+				}else if(temp!=null){////3.1 存在则调用更新对象 只更新对应的状态值和修改时间
+					String status=salesContract.getStats();
+					String contractId=salesContract.getId();
 					//保存销售合同
-					salesContractDao.updateSalesContractById(salesContract);
+					//salesContractDao.updateSalesContractById(salesContract);
+					salesContractDao.updateSalesContractStatusById(salesContract);
 					//销售合同商品列表
-					salesContractGoodsGrdDao.batchUpdateSalesContractGoodsGrdByPK(goodsList);
+					SalesContractGoodsGrd goodsGrd=new SalesContractGoodsGrd();
+					goodsGrd.setStats(status);
+					goodsGrd.setContractId(contractId);
+					salesContractGoodsGrdDao.updateSalesContractGoodsGrdStatusByContractId(goodsGrd);
 					
 					//保存支付		
-					contractPaymentDao.updateSalesContractPaymentByPK(payment);
+					SalesContractPayment salesContractPayment=new SalesContractPayment();
+					salesContractPayment.setContractId(contractId);
+					salesContractPayment.setStats(status);
+					contractPaymentDao.updateSalesContractPaymentStatusByContractId(salesContractPayment);
 					//保存支付列表
-					contractPaymentGrdDao.batchUpdateSalesContractPaymentGrdByPK(paymentsList);
+					SalesContractPaymentGrd paymentGrd=new SalesContractPaymentGrd();
+					paymentGrd.setContractId(contractId);
+					paymentGrd.setStats(status);
+					
+					contractPaymentGrdDao.updateSalesContractPaymentGrdStatusBycontractId(paymentGrd);
 					//保存合同扫描件列表
 					contractScanGrdDao.batchUpdateContractScanGrdByPrimaryKey(scansList);
 					success=true;
 					message="更新销售合同相关信息成功!!!";
 					logger.info(message);
+					code="0";
 				}
 				
 				if(success){
@@ -380,7 +397,37 @@ public class SalesContractServiceImpl implements SalesContractService,Constants 
 //		}
 		//5.返回json对象
 				JsonUtils result = new  JsonUtils(success,message);
-				result.setChild("1");
+				result.setChild(code);
 		return result;
+	}
+	
+	/**
+	 * 通过客户编号获取销售合同信息
+	 * @param salesContract
+	 * @return
+	 */
+	public EasyuiSplitPager<SalesContract> getSalesContractByCustomerId(SalesContract salesContract){
+		EasyuiSplitPager<SalesContract> pager=new EasyuiSplitPager<SalesContract>();
+		List<SalesContract> list= salesContractDao.getSalesContractByCustomerId(salesContract);
+		pager.setRows(list);
+		if(list!=null&&!list.isEmpty()){
+			pager.setTotal(list.size());
+		}
+		return pager;
+	}
+	
+	/**
+	 * 通过SalesContractGoodsGrd 条件进行查询 获取销售商品列表
+	 * @param salesContractGoodsGrd
+	 * @return
+	 */
+	public EasyuiSplitPager<SalesContractGoodsGrd> getSalesContractGoodsGrd(SalesContractGoodsGrd salesContractGoodsGrd){
+		EasyuiSplitPager<SalesContractGoodsGrd> pager=new EasyuiSplitPager<SalesContractGoodsGrd>();
+		List<SalesContractGoodsGrd> list=salesContractGoodsGrdDao.getSalesContractGoodsGrd(salesContractGoodsGrd);
+		pager.setRows(list);
+		if(list!=null&&!list.isEmpty()){
+			pager.setTotal(list.size());
+		}
+		return pager;
 	}
 }

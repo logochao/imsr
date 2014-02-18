@@ -1,5 +1,6 @@
 package com.radius.invoicing.contractmanage.service;
 
+import com.radius.base.page.EasyuiSplitPager;
 import com.radius.base.utils.JsonUtils;
 import com.radius.invoicing.ibatis.model.ContractScanGrd;
 import com.radius.invoicing.ibatis.model.SalesContract;
@@ -89,4 +90,18 @@ public interface SalesContractService {
 	 */
 	public JsonUtils saveSalesContractInfos(String ledgerId,SalesContract salesContract,String goodsMemcacheKey,String paymentMemcacheKey,String scansMemecacheKey,SalesContractPayment payment)throws Exception;
 
+	
+	/**
+	 * 通过客户编号获取销售合同信息
+	 * @param salesContract
+	 * @return
+	 */
+	public EasyuiSplitPager<SalesContract> getSalesContractByCustomerId(SalesContract salesContract);
+	
+	/**
+	 * 通过SalesContractGoodsGrd 条件进行查询 获取销售商品列表
+	 * @param salesContractGoodsGrd
+	 * @return
+	 */
+	public EasyuiSplitPager<SalesContractGoodsGrd> getSalesContractGoodsGrd(SalesContractGoodsGrd salesContractGoodsGrd);
 }
