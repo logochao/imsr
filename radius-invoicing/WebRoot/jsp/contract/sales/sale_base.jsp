@@ -41,10 +41,10 @@
 		}
  	});
  	$('#contract_sales_base_order_time').datebox({
- 		required:true
+ 		//required:true
  	});
  	$('#contract_sales_base_order_end_time').datebox({
- 		required:true
+ 		//required:true
  	});
  	$('#contract_sales_base_custmer_btn').on('click',function(){
  		sales_base_custmer_dialog.dialog('open');
@@ -186,48 +186,48 @@
 <table class="table" style="width: 100%;">
 	<tr>
 		<th>合同编号</th>
-		<td><input class="easyui-validatebox" style="background:#eee;width: 150px;" id="constract_sales_sale_base_id" type="text" readonly="readonly" name="name" data-options="required:true" value="${salesContract.id}"/></td>
+		<td><input class="easyui-validatebox" style="background:#eee;width: 150px;" id="constract_sales_sale_base_id" type="text" readonly="readonly" name="name" data-options="" value="${salesContract.id}"/></td>
 		<th>状态</th>
-		<td colspan="3"><input id="contract_sales_base_status"  class="easyui-validatebox" class="easyui-combobox" name="name" data-options="required:true" value="0"/></td>
+		<td colspan="3"><input id="contract_sales_base_status"  class="easyui-validatebox" class="easyui-combobox" name="name" data-options="" value="0"/></td>
 		<th>订货日期</th>
 		<td><input class="easyui-validatebox" type="text" id="contract_sales_base_order_time" data-options="required:true"/></td>
 	</tr>
 	<tr>
 		<th>客户</th>
 		<td colspan="5">
-			<input  type="text" name="customerName" id="contract_sales_base_customer_name" style="width: 300px;" name="name" readonly="readonly" data-options="required:true"/> 
-			<input  type="hidden"  name="customerId" id="contract_sales_base_customer_id" readonly="readonly" data-options="required:true"/> 
+			<input  type="text" name="customerName" id="contract_sales_base_customer_name" style="width: 300px;" name="name" readonly="readonly" data-options=""/> 
+			<input  type="hidden"  name="customerId" id="contract_sales_base_customer_id" readonly="readonly" data-options=""/> 
 			<a id="contract_sales_base_custmer_btn" href="#" class="easyui-linkbutton" plain="true"><font style="font-size:3ex">...</font></a>
 		</td>
 		<th>交货日期</th>
-		<td><input class="easyui-validatebox" type="text" id="contract_sales_base_order_end_time" data-options="required:true"/></td>
+		<td><input class="easyui-validatebox" type="text" id="contract_sales_base_order_end_time" data-options=""/></td>
 	</tr>
 	<tr>
 		<th>联系人</th>
 		<td>
-			<input id="contract_sales_base_link_man" class="easyui-validatebox" type="text" name="man" data-options="required:true"/>
+			<input id="contract_sales_base_link_man" class="easyui-validatebox" type="text" name="man" data-options=""/>
 			<a id="contract_sales_base_custmer_link_man_btn"  href="#" class="easyui-linkbutton" plain="true" data-options="disabled:true"><font style="font-size:3ex">...</font></a>
 		</td>
 		<th>办公电话</th>
-		<td><input class="easyui-validatebox" type="text" name="tel" id="contract_sales_base_link_tel" data-options="required:true"/></td>
+		<td><input class="easyui-validatebox" type="text" name="tel" id="contract_sales_base_link_tel" data-options=""/></td>
 		<th>手机号码</th>
-		<td><input class="easyui-validatebox" type="text" name="mobile" id="contract_sales_base_link_mobile" data-options="required:true"/></td>
+		<td><input class="easyui-validatebox" type="text" name="mobile" id="contract_sales_base_link_mobile" data-options=""/></td>
 		<th>传真</th>
-		<td><input class="easyui-validatebox" type="text" name="fax" id="contract_sales_base_link_fax" data-options="required:true"/></td>
+		<td><input class="easyui-validatebox" type="text" name="fax" id="contract_sales_base_link_fax" data-options=""/></td>
 	</tr>
 	<tr>
 		<th>送货地址</th>
-		<td colspan="3"><input class="easyui-validatebox" type="text" style="width: 350px;" id="contract_sales_base_delivery_point" data-options="required:true"/></td>
+		<td colspan="3"><input class="easyui-validatebox" type="text" style="width: 350px;" id="contract_sales_base_delivery_point" data-options=""/></td>
 		<th>业务员</th>
 		<td>
-			<input class="easyui-validatebox" type="text" name="salesMan" data-options="required:true"/>
+			<input class="easyui-validatebox" type="text" name="salesMan" data-options=""/>
 			<a id="btn" href="#" class="easyui-linkbutton" plain="true"><font style="font-size:3ex">...</font></a>
 		</td>
 		<th colspan="2" style="text-align: center;"><input type="checkbox" id="contract_sales_base_checkbox" onclick="javascript:contractSalesBaseCheckboxClick(this);" value="0" />转保函付款申请</th>
 	</tr>
 	<tr>
 		<th>合同类型</th>
-		<td><input class="easyui-validatebox" id="contract_sales_base_contract_type" type="text" name="name" data-options="required:true" value="2"/></td>
+		<td><input class="easyui-validatebox" id="contract_sales_base_contract_type" type="text" name="name" data-options="" value="2"/></td>
 		<th>合同总金额</th>
 		<td><input id="contract_sales_base_total_amount" style="background:#eee;" readonly="readonly"/></td>
 		<th>人民币大写</th>
