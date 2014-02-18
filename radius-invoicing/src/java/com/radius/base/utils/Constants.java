@@ -37,4 +37,8 @@ public interface Constants {
 	
 	String SALES_CONTRACT_PREFIX="H_X";//销售合同前缀
 	
+	String PURCHASE_CONTRACT_PREFIX="H_C";//采购合同前缀
+	
+	String SALES_ORDER_PREFIX="XH_D";//销售订单前缀
+	
 }
