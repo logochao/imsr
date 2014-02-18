@@ -5,6 +5,10 @@ package com.radius.invoicing.ibatis.model;
 
 import java.util.Date;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+import com.radius.base.utils.JsonDateSerializer;
+
 /**
  * @author <a href="mailto:goodluck.sunlight@gmail.com">陈波宁</a>
  * @version 创建时间：2013-12-8 下午12:53:04<br/>
@@ -39,6 +43,10 @@ public class SalesContract extends ExtInfo{
 	private String   memo="";//合同备注
 	private String   ledgerId="";//账套编号
 	
+	//合同金额
+	private Integer totalAmount=0;//合同总金额 
+	//合同大写金额
+	private String upperAmount="";//大小金额
 	
 	public String getContractFile() {
 		return contractFile;
@@ -76,6 +84,7 @@ public class SalesContract extends ExtInfo{
 	public void setDeliveryPoint(String deliveryPoint) {
 		this.deliveryPoint = deliveryPoint;
 	}
+	@JsonSerialize(using=JsonDateSerializer.class) 
 	public Date getEffectDate() {
 		return effectDate;
 	}
@@ -160,6 +169,7 @@ public class SalesContract extends ExtInfo{
 	public void setSalesMan(String salesMan) {
 		this.salesMan = salesMan;
 	}
+	@JsonSerialize(using=JsonDateSerializer.class) 
 	public Date getSignTime() {
 		return signTime;
 	}
@@ -189,6 +199,18 @@ public class SalesContract extends ExtInfo{
 	}
 	public void setValidityDate(Date validityDate) {
 		this.validityDate = validityDate;
+	}
+	public Integer getTotalAmount() {
+		return totalAmount;
+	}
+	public void setTotalAmount(Integer totalAmount) {
+		this.totalAmount = totalAmount;
+	}
+	public String getUpperAmount() {
+		return upperAmount;
+	}
+	public void setUpperAmount(String upperAmount) {
+		this.upperAmount = upperAmount;
 	}
 	
 	
