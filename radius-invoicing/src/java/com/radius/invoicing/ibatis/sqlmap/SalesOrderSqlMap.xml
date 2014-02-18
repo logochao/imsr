@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="salesOrderSqlMap">
+
+  <typeAlias alias="salesOrder" type="com.radius.invoicing.ibatis.model.SalesOrder" />
+  
+  <sql id="salesOrderFileds">
+  	 sales_order_id salesOrderId,customer_id customerId,customer_name customerName,ordered_date orderedDate,
+  	 delivery_date deliveryDate,`status` stats,trade_assistant tradeAssistant,salesman_id salesManId,fax fax,delivery_address deliveryAddress,
+  	 link_man linkMan,tel tel,customer_bill_id customerBillId,delivery_point deliveryPoint,delivery_status deliveryStatus,outstore_status outstoreStatus,
+  	 paymented_status paymentedStatus,deliver_order_id deliverOrderId,outstore_order_id outstoreOrderId,goods_qt_id goodsQtId,terms terms,budget_cost budgetCost,
+  	 total_amount totalAmount,gross_margin grossMargin,total_goods_amount totalGoodsAmount,profit_aduit profitAduit,gross_margin_prop grossMarginProp,budget_gross_margin budgetGrossMargin,
+  	 delivery_amount deliveryAmount,print_times printTimes,newest_print_time newestPrintTime,newest_print_acc newestPrintAcc,newest_print_record newestPrintRecord,audit_status auditStatus,
+  	 ledger_id ledgerId,memo memo,creater creater,createdate createdate,reviser reviser,revisedate revisedate,verifier verifydate
+  </sql>
+  
+  <resultMap id="salesOrder" class="salesOrder">
+	 <result column="sales_order_id" jdbcType="char" javaType="java.lang.String" property="salesOrderId" />
+	 <result column="customer_id" jdbcType="char" javaType="java.lang.String" property="customerId" />
+	 <result column="customer_name" jdbcType="char" javaType="java.lang.String" property="customerName" />
+	 <result column="ordered_date" jdbcType="date" javaType="java.util.Date" property="orderedDate" />
+  	 <result column="delivery_date" jdbcType="date" javaType="java.util.Date" property="deliveryDate" />
+  	 <result column="`status`" jdbcType="char" javaType="java.lang.String" property="stats" />
+  	 <result column="trade_assistant" jdbcType="char" javaType="java.lang.String" property="tradeAssistant" />
+  	 <result column="salesman_id" jdbcType="char" javaType="java.lang.String" property="salesManId" />
+  	 <result column="fax" jdbcType="char" javaType="java.lang.String" property="fax" />
+  	 <result column="delivery_address" jdbcType="char" javaType="java.lang.String" property="deliveryAddress" />
+  	 <result column="link_man" jdbcType="char" javaType="java.lang.String" property="linkMan" />
+  	 <result column="tel" jdbcType="char" javaType="java.lang.String" property="tel" />
+  	 <result column="customer_bill_id" jdbcType="char" javaType="java.lang.String" property="customerBillId" />
+  	 <result column="delivery_point" jdbcType="char" javaType="java.lang.String" property="deliveryPoint" />
+  	 <result column="delivery_status" jdbcType="char" javaType="java.lang.String" property="deliveryStatus" />
+  	 <result column="outstore_status" jdbcType="char" javaType="java.lang.String" property="outstoreStatus" />
+  	 <result column="paymented_status" jdbcType="char" javaType="java.lang.String" property="paymentedStatus" />
+  	 <result column="deliver_order_id" jdbcType="char" javaType="java.lang.String" property="deliverOrderId" />
+  	 <result column="outstore_order_id" jdbcType="char" javaType="java.lang.String" property="outstoreOrderId" />
+  	 <result column="goods_qt_id" jdbcType="char" javaType="java.lang.String" property="goodsQtId" />
+  	 <result column="terms" jdbcType="char" javaType="java.lang.String" property="terms" />
+  	 <result column="budget_cost" jdbcType="int" javaType="java.lang.Integer" property="budgetCost" />
+  	 <result column="total_amount" jdbcType="int" javaType="java.lang.Integer" property="totalAmount" />
+  	 <result column="gross_margin" jdbcType="int" javaType="java.lang.Integer" property="grossMargin" />
+  	 <result column="total_goods_amount" jdbcType="int" javaType="java.lang.Integer" property="totalGoodsAmount" />
+  	 <result column="profit_aduit" jdbcType="char" javaType="java.lang.String" property="profitAduit" />
+  	 <result column="gross_margin_prop" jdbcType="int" javaType="java.lang.Integer" property="grossMarginProp" />
+  	 <result column="budget_gross_margin" jdbcType="int" javaType="java.lang.Integer" property="budgetGrossMargin" />
+  	 <result column="delivery_amount" jdbcType="int" javaType="java.lang.Integer" property="deliveryAmount" />
+  	 <result column="print_times" jdbcType="int" javaType="java.lang.Integer" property="printTimes" />
+  	 <result column="newest_print_time" jdbcType="datetime" javaType="java.util.Date" property="newestPrintTime" />
+  	 <result column="newest_print_acc" jdbcType="char" javaType="java.lang.String" property="newestPrintAcc" />
+  	 <result column="newest_print_record" jdbcType="char" javaType="java.lang.String" property="newestPrintRecord" />
+    <result column="audit_status" jdbcType="char" javaType="java.lang.String" property="auditStatus" />
+    
+  	<result column="ledger_id" jdbcType="char" javaType="java.lang.String" property="ledgerId" />
+  	<result column="memo" jdbcType="text" javaType="java.lang.String" property="memo" />
+    <result column="creater" jdbcType="char" javaType="java.lang.String" property="creater" />
+    <result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createdate" />
+    <result column="reviser" jdbcType="char" javaType="java.lang.String" property="reviser" />
+    <result column="revisedate" jdbcType="datetime" javaType="java.util.Date" property="revisedate" />
+    <result column="verifier" jdbcType="char" javaType="java.lang.String" property="verifier" />    
+    <result column="verifydate" jdbcType="datetime" javaType="java.util.Date" property="verifydate"/>
+  </resultMap>
+  
+  <sql id="whereLike">
+  	<dynamic prepend="where">
+  		1=1  AND 
+  		<isNotEmpty prepend="and" property="salesOrderId">sales_order_id=#salesOrderId#</isNotEmpty>
+  		<isNotEmpty prepend="and" property="customerId">customer_id=#customerId#</isNotEmpty>
+  		<isNotEmpty prepend="and" property="customerName">customer_name=#customerName#</isNotEmpty>
+  		<isNotNull prepend="and" property="orderedDate">ordered_date=#orderedDate#</isNotNull>
+  		<isNotNull prepend="and" property="deliveryDate">delivery_date=#deliveryDate#</isNotNull>
+  		<isNotEmpty prepend="and" property="stats">`status`=#stats#</isNotEmpty>
+  		<isNotEmpty prepend="and" property="tradeAssistant">trade_assistant=#tradeAssistant#</isNotEmpty>
+  		<isNotEmpty prepend="and" property="salesManId">salesman_id=#salesManId#</isNotEmpty>
+  		<isNotEmpty prepend="and" property="fax">fax=#fax#</isNotEmpty>
+  		<isNotEmpty prepend="and" property="deliveryAddress">delivery_address=#deliveryAddress#</isNotEmpty>
+  		<isNotEmpty prepend="and" property="linkMan">link_man=#linkMan#</isNotEmpty>
+  		<isNotEmpty prepend="and" property="tel">tel=#tel#</isNotEmpty>
+  		<isNotEmpty prepend="and" property="customerBillId">customer_bill_id=#customerBillId#</isNotEmpty>
+  		<isNotEmpty prepend="and" property="deliveryPoint">delivery_point=#deliveryPoint#</isNotEmpty>
+  		<isNotEmpty prepend="and" property="deliveryStatus">delivery_status=#deliveryStatus#</isNotEmpty>
+  		<isNotEmpty prepend="and" property="outstoreStatus">outstore_status=#outstoreStatus#</isNotEmpty>
+  		<isNotEmpty prepend="and" property="paymentedStatus">paymented_status=#paymentedStatus#</isNotEmpty>
+  		<isNotEmpty prepend="and" property="deliverOrderId">deliver_order_id=#deliverOrderId#</isNotEmpty>
+  		<isNotEmpty prepend="and" property="outstoreOrderId">outstore_order_id=#outstoreOrderId#</isNotEmpty>
+  		<isNotEmpty prepend="and" property="terms">terms=#terms#</isNotEmpty>
+  		<isNotNull prepend="and" property="budgetCost">budget_cost=#budgetCost#</isNotNull>
+  		<isNotNull prepend="and" property="totalAmount">total_amount=#totalAmount#</isNotNull>
+  		<isNotNull prepend="and" property="grossMargin">gross_margin=#grossMargin#</isNotNull>
+  		<isNotNull prepend="and" property="totalGoodsAmount">total_goods_amount=#totalGoodsAmount#</isNotNull>
+  		<isNotEmpty prepend="and" property="profitAduit">profit_aduit=#profitAduit#</isNotEmpty>
+  		<isNotNull prepend="and" property="grossMarginProp">gross_margin_prop=#grossMarginProp#</isNotNull>
+  		<isNotNull prepend="and" property="budgetGrossMargin">budget_gross_margin=#budgetGrossMargin#</isNotNull>
+  		<isNotNull prepend="and" property="deliveryAmount">delivery_amount=#deliveryAmount#</isNotNull>
+  		<isNotNull prepend="and" property="printTimes">print_times=#printTimes#</isNotNull>
+  		<isNotEmpty prepend="and" property="newestPrintTime">newest_print_time=#newestPrintTime#</isNotEmpty>
+  		<isNotEmpty prepend="and" property="newestPrintAcc">newest_print_acc=#newestPrintAcc#</isNotEmpty>
+  		<isNotEmpty prepend="and" property="newestPrintRecord">newest_print_record=#newestPrintRecord#</isNotEmpty>
+  		<isNotEmpty prepend="and" property="auditStatus">audit_status=#auditStatus#</isNotEmpty>
+ 		<isNotEmpty prepend="and" property="ledgerId">ledger_id=#ledgerId#</isNotEmpty> 
+ 		<isNotEmpty prepend="and" property="memo">memo=#memo#</isNotEmpty> 
+  	</dynamic>
+  </sql>
+ 
+	 <select id="getSalesOrderByPk" parameterClass="java.lang.String" resultMap="salesOrder">
+	 	SELECT *
+	 	FROM RS_SALES_ORDER
+	 	WHERE sales_order_id=#salesOrderId#
+	 </select>
+	 
+	 <select id="getSalesOrder" parameterClass="salesOrder" resultMap="salesOrder">
+	 	SELECT *
+	 	FROM RS_SALES_ORDER
+	 	<include refid="whereLike"/>
+	 </select>
+   
+   	<insert id="insert" parameterClass="salesOrder">
+   		INSERT INTO RS_SALES_ORDER (
+   			sales_order_id,
+	  		<isNotEmpty  property="customerId">customer_id,</isNotEmpty>
+	  		<isNotEmpty  property="customerName">customer_name,</isNotEmpty>
+	  		<isNotNull  property="orderedDate">ordered_date,</isNotNull>
+	  		<isNotNull  property="deliveryDate">delivery_date,</isNotNull>
+	  		<isNotEmpty  property="stats">`status`,</isNotEmpty>
+	  		<isNotEmpty  property="tradeAssistant">trade_assistant,</isNotEmpty>
+	  		<isNotEmpty  property="salesManId">salesman_id,</isNotEmpty>
+	  		<isNotEmpty  property="fax">fax,</isNotEmpty>
+	  		<isNotEmpty  property="deliveryAddress">delivery_address,</isNotEmpty>
+	  		<isNotEmpty  property="linkMan">link_man,</isNotEmpty>
+	  		<isNotEmpty  property="tel">tel,</isNotEmpty>
+	  		<isNotEmpty  property="customerBillId">customer_bill_id,</isNotEmpty>
+	  		<isNotEmpty  property="deliveryPoint">delivery_point,</isNotEmpty>
+	  		<isNotEmpty  property="deliveryStatus">delivery_status,</isNotEmpty>
+	  		<isNotEmpty  property="outstoreStatus">outstore_status,</isNotEmpty>
+	  		<isNotEmpty  property="paymentedStatus">paymented_status,</isNotEmpty>
+	  		<isNotEmpty  property="deliverOrderId">deliver_order_id,</isNotEmpty>
+	  		<isNotEmpty  property="outstoreOrderId">outstore_order_id,</isNotEmpty>
+	  		<isNotEmpty  property="terms">terms,</isNotEmpty>
+	  		<isNotNull  property="budgetCost">budget_cost,</isNotNull>
+	  		<isNotNull  property="totalAmount">total_amount,</isNotNull>
+	  		<isNotNull  property="grossMargin">gross_margin,</isNotNull>
+	  		<isNotNull  property="totalGoodsAmount">total_goods_amount,</isNotNull>
+	  		<isNotEmpty  property="profitAduit">profit_aduit,</isNotEmpty>
+	  		<isNotNull  property="grossMarginProp">gross_margin_prop,</isNotNull>
+	  		<isNotNull  property="budgetGrossMargin">budget_gross_margin,</isNotNull>
+	  		<isNotNull  property="deliveryAmount">delivery_amount,</isNotNull>
+	  		<isNotNull  property="printTimes">print_times,</isNotNull>
+	  		<isNotEmpty  property="newestPrintTime">newest_print_time,</isNotEmpty>
+	  		<isNotEmpty  property="newestPrintAcc">newest_print_acc,</isNotEmpty>
+	  		<isNotEmpty  property="newestPrintRecord">newest_print_record,</isNotEmpty>
+	  		<isNotEmpty  property="auditStatus">audit_status,</isNotEmpty>
+	 		<isNotEmpty  property="ledgerId">ledger_id,</isNotEmpty> 
+	 		<isNotEmpty  property="memo">memo,</isNotEmpty> 
+	  	    creater,
+	  	    createdate
+   		)VALUES(
+   			#salesOrderId#,
+	  		<isNotEmpty  property="customerId">#customerId#,</isNotEmpty>
+	  		<isNotEmpty  property="customerName">#customerName#,</isNotEmpty>
+	  		<isNotNull  property="orderedDate">#orderedDate#,</isNotNull>
+	  		<isNotNull  property="deliveryDate">#deliveryDate#,</isNotNull>
+	  		<isNotEmpty  property="stats">#stats#,</isNotEmpty>
+	  		<isNotEmpty  property="tradeAssistant">#tradeAssistant#,</isNotEmpty>
+	  		<isNotEmpty  property="salesManId">#salesManId#,</isNotEmpty>
+	  		<isNotEmpty  property="fax">#fax#,</isNotEmpty>
+	  		<isNotEmpty  property="deliveryAddress">#deliveryAddress#,</isNotEmpty>
+	  		<isNotEmpty  property="linkMan">#linkMan#,</isNotEmpty>
+	  		<isNotEmpty  property="tel">#tel#,</isNotEmpty>
+	  		<isNotEmpty  property="customerBillId">#customerBillId#,</isNotEmpty>
+	  		<isNotEmpty  property="deliveryPoint">#deliveryPoint#,</isNotEmpty>
+	  		<isNotEmpty  property="deliveryStatus">#deliveryStatus#,</isNotEmpty>
+	  		<isNotEmpty  property="outstoreStatus">#outstoreStatus#,</isNotEmpty>
+	  		<isNotEmpty  property="paymentedStatus">#paymentedStatus#,</isNotEmpty>
+	  		<isNotEmpty  property="deliverOrderId">#deliverOrderId#,</isNotEmpty>
+	  		<isNotEmpty  property="outstoreOrderId">#outstoreOrderId#,</isNotEmpty>
+	  		<isNotEmpty  property="terms">#terms#,</isNotEmpty>
+	  		<isNotNull  property="budgetCost">#budgetCost#,</isNotNull>
+	  		<isNotNull  property="totalAmount">#totalAmount#,</isNotNull>
+	  		<isNotNull  property="grossMargin">#grossMargin#,</isNotNull>
+	  		<isNotNull  property="totalGoodsAmount">#totalGoodsAmount#,</isNotNull>
+	  		<isNotEmpty  property="profitAduit">#profitAduit#,</isNotEmpty>
+	  		<isNotNull  property="grossMarginProp">#grossMarginProp#,</isNotNull>
+	  		<isNotNull  property="budgetGrossMargin">#budgetGrossMargin#,</isNotNull>
+	  		<isNotNull  property="deliveryAmount">#deliveryAmount#,</isNotNull>
+	  		<isNotNull  property="printTimes">#printTimes#,</isNotNull>
+	  		<isNotEmpty  property="newestPrintTime">#newestPrintTime#,</isNotEmpty>
+	  		<isNotEmpty  property="newestPrintAcc">#newestPrintAcc#,</isNotEmpty>
+	  		<isNotEmpty  property="newestPrintRecord">#newestPrintRecord#,</isNotEmpty>
+	  		<isNotEmpty  property="auditStatus">#auditStatus#,</isNotEmpty>
+	 		<isNotEmpty  property="ledgerId">#ledgerId#,</isNotEmpty> 
+	 		<isNotEmpty  property="memo">#memo#,</isNotEmpty> 
+   			 creater,now()
+   		)
+   	</insert>
+   
+   	<update id="updateSalesOrderByPK" parameterClass="salesOrder">
+   		UPDATE RS_SALES_ORDER
+   		<dynamic prepend="SET">
+	  		<isNotEmpty prepend="," property="customerId">customer_id=#customerId#</isNotEmpty>
+	  		<isNotEmpty prepend="," property="customerName">customer_name=#customerName#</isNotEmpty>
+	  		<isNotNull prepend="," property="orderedDate">ordered_date=#orderedDate#</isNotNull>
+	  		<isNotNull prepend="," property="deliveryDate">delivery_date=#deliveryDate#</isNotNull>
+	  		<isNotEmpty prepend="," property="stats">`status`=#stats#</isNotEmpty>
+	  		<isNotEmpty prepend="," property="tradeAssistant">trade_assistant=#tradeAssistant#</isNotEmpty>
+	  		<isNotEmpty prepend="," property="salesManId">salesman_id=#salesManId#</isNotEmpty>
+	  		<isNotEmpty prepend="," property="fax">fax=#fax#</isNotEmpty>
+	  		<isNotEmpty prepend="," property="deliveryAddress">delivery_address=#deliveryAddress#</isNotEmpty>
+	  		<isNotEmpty prepend="," property="linkMan">link_man=#linkMan#</isNotEmpty>
+	  		<isNotEmpty prepend="," property="tel">tel=#tel#</isNotEmpty>
+	  		<isNotEmpty prepend="," property="customerBillId">customer_bill_id=#customerBillId#</isNotEmpty>
+	  		<isNotEmpty prepend="," property="deliveryPoint">delivery_point=#deliveryPoint#</isNotEmpty>
+	  		<isNotEmpty prepend="," property="deliveryStatus">delivery_status=#deliveryStatus#</isNotEmpty>
+	  		<isNotEmpty prepend="," property="outstoreStatus">outstore_status=#outstoreStatus#</isNotEmpty>
+	  		<isNotEmpty prepend="," property="paymentedStatus">paymented_status=#paymentedStatus#</isNotEmpty>
+	  		<isNotEmpty prepend="," property="deliverOrderId">deliver_order_id=#deliverOrderId#</isNotEmpty>
+	  		<isNotEmpty prepend="," property="outstoreOrderId">outstore_order_id=#outstoreOrderId#</isNotEmpty>
+	  		<isNotEmpty prepend="," property="terms">terms=#terms#</isNotEmpty>
+	  		<isNotNull prepend="," property="budgetCost">budget_cost=#budgetCost#</isNotNull>
+	  		<isNotNull prepend="," property="totalAmount">total_amount=#totalAmount#</isNotNull>
+	  		<isNotNull prepend="," property="grossMargin">gross_margin=#grossMargin#</isNotNull>
+	  		<isNotNull prepend="," property="totalGoodsAmount">total_goods_amount=#totalGoodsAmount#</isNotNull>
+	  		<isNotEmpty prepend="," property="profitAduit">profit_aduit=#profitAduit#</isNotEmpty>
+	  		<isNotNull prepend="," property="grossMarginProp">gross_margin_prop=#grossMarginProp#</isNotNull>
+	  		<isNotNull prepend="," property="budgetGrossMargin">budget_gross_margin=#budgetGrossMargin#</isNotNull>
+	  		<isNotNull prepend="," property="deliveryAmount">delivery_amount=#deliveryAmount#</isNotNull>
+	  		<isNotNull prepend="," property="printTimes">print_times=#printTimes#</isNotNull>
+	  		<isNotEmpty prepend="," property="newestPrintTime">newest_print_time=#newestPrintTime#</isNotEmpty>
+	  		<isNotEmpty prepend="," property="newestPrintAcc">newest_print_acc=#newestPrintAcc#</isNotEmpty>
+	  		<isNotEmpty prepend="," property="newestPrintRecord">newest_print_record=#newestPrintRecord#</isNotEmpty>
+	  		<isNotEmpty prepend="," property="auditStatus">audit_status=#auditStatus#</isNotEmpty>
+	 		<isNotEmpty prepend="," property="ledgerId">ledger_id=#ledgerId#</isNotEmpty> 
+	 		<isNotEmpty prepend="," property="memo">memo=#memo#</isNotEmpty> 
+  	 		<isNotEmpty  prepend="," property="reviser">reviser = #reviser#,revisedate = now() </isNotEmpty>
+  			<isNotEmpty  prepend="," property="verifier">verifier = #verifier#,verifydate = now() </isNotEmpty>
+   		</dynamic>
+   		WHERE sales_order_id=#salesOrderId#
+   	</update>
+   	<!-- 分页查询语句 -->
+   	<select id="getSalesOrderSplitPageBySQL" remapResults="true" parameterClass="java.lang.String" resultMap="salesOrder">
+   		$splitPageSQL$
+   	</select>
+   	<!-- end -->
+   	
+   	<select id="getSalesOrderSplitPageCountSQL" remapResults="true" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+   		$countSQL$
+   	</select>
+   	
+   	<delete id="deleteSalesOrder" parameterClass="salesOrder">
+   		DELETE FROM RS_SALES_ORDER
+   		<include refid="whereLike"/>
+   	</delete>
+   	<delete id="deleteSalesOrderByPK" parameterClass="java.lang.String">
+   		DELETE FROM RS_SALES_ORDER
+   		WHERE sales_order_id=#salesOrderId#
+   	</delete>
+   	
+   	<update id="updateSalesOrderStatusBySalesOrderId" parameterClass="salesOrder">
+   		UPDATE RS_SALES_ORDER
+   		SET `status`=#stats#
+   		WHERE sales_order_id=#salesOrderId#
+   	</update>
+</sqlMap>

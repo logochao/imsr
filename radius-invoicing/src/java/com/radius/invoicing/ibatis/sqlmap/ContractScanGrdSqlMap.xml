@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="contractScanGrdSqlMap">
+
+  <typeAlias alias="contractScanGrd" type="com.radius.invoicing.ibatis.model.ContractScanGrd" />
+  
+  <sql id="contractScanGrdFileds">
+  	 contract_id contractId,contract_type contractType,scan_code scanCode,file_name fileName,file_path filePath,file_order fileOrder,scan_quantity quantity,
+  	 ledger_id ledgerId,memo memo,creater creater,createdate createdate,reviser reviser,revisedate revisedate,verifier verifydate
+  </sql>
+  
+  <resultMap id="contractScanGrd" class="contractScanGrd">
+    <result column="contract_id" jdbcType="char" javaType="java.lang.String" property="contractId" />
+    <result column="contract_type" jdbcType="int" javaType="java.lang.Integer" property="contractType" />
+    <result column="scan_code" jdbcType="char" javaType="java.lang.String" property="scanCode" />
+    <result column="file_name" jdbcType="varchar" javaType="java.lang.String" property="fileName" />
+    <result column="file_path" jdbcType="char" javaType="java.lang.String" property="filePath" />
+    <result column="file_order" jdbcType="char" javaType="java.lang.Integer" property="fileOrder" />
+    <result column="scan_quantity" jdbcType="int" javaType="java.lang.Integer" property="quantity" />
+  	<result column="ledger_id" jdbcType="char" javaType="java.lang.String" property="ledgerId" />
+  	<result column="memo" jdbcType="text" javaType="java.lang.String" property="memo" />
+    <result column="creater" jdbcType="char" javaType="java.lang.String" property="creater" />
+    <result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createdate" />
+    <result column="reviser" jdbcType="char" javaType="java.lang.String" property="reviser" />
+    <result column="revisedate" jdbcType="datetime" javaType="java.util.Date" property="revisedate" />
+    <result column="verifier" jdbcType="char" javaType="java.lang.String" property="verifier" />    
+    <result column="verifydate" jdbcType="datetime" javaType="java.util.Date" property="verifydate"/>
+  </resultMap>
+  
+  <sql id="whereLike">
+  	<dynamic prepend="where">
+  		1=1  
+  		<isNotEmpty prepend="and" property="contractId">contract_id=#contractId#</isNotEmpty>
+  		<isNotNull prepend="and" property="contractType">contract_type=#contractType#</isNotNull>
+  		<isNotEmpty prepend="and" property="scanCode">scan_code=#scanCode#</isNotEmpty>
+		<isNotEmpty prepend="and" property="fileName">file_name=#fileName#</isNotEmpty>
+		<isNotEmpty prepend="and" property="filePath">file_path=#filePath#</isNotEmpty>
+		<isNotEmpty prepend="and" property="fileOrder">file_order=#fileOrder#</isNotEmpty>
+		<isNotNull prepend="and" property="quantity">scan_quantity=#quantity#</isNotNull>
+ 		<isNotEmpty prepend="and" property="ledgerId">ledger_id=#ledgerId#</isNotEmpty> 
+  	</dynamic>
+  </sql>
+ 
+	 <select id="getContractScanGrdByPk" parameterClass="java.util.Map" resultClass="contractScanGrd">
+	 	SELECT <include refid="contractScanGrdFileds"/>
+	 	FROM RS_CONTRACT_SCAN_GRD
+	 	WHERE contract_id =#contractId# AND scan_code=#scanCode#
+	 </select>
+	 
+	 <select id="getContractScanGrd" parameterClass="contractScanGrd" resultClass="contractScanGrd">
+	 	SELECT <include refid="contractScanGrdFileds"/>
+	 	FROM RS_CONTRACT_SCAN_GRD
+	 	<include refid="whereLike"/>
+	 </select>
+   
+   	<insert id="insert" parameterClass="contractScanGrd">
+   		INSERT INTO RS_CONTRACT_SCAN_GRD (
+   			contract_id,
+   			scan_code,
+   			<isNotEmpty  property="contractType">contract_type,</isNotEmpty>
+			<isNotEmpty  property="fileName">file_name,</isNotEmpty>
+			<isNotEmpty  property="filePath">file_path,</isNotEmpty>
+			<isNotEmpty  property="fileOrder">file_order,</isNotEmpty>
+			<isNotNull  property="quantity">scan_quantity,</isNotNull>
+			<isNotEmpty  property="ledgerId">ledger_id,</isNotEmpty> 
+ 		    <isNotEmpty  property="memo">memo,</isNotEmpty> 
+	  	    creater,
+	  	    createdate
+   		)VALUES(
+   			#contractId#,
+   			#scanCode#,
+	  		<isNotEmpty  property="contractType">#contractType#,</isNotEmpty>
+			<isNotEmpty  property="fileName">#fileName#,</isNotEmpty>
+			<isNotEmpty  property="filePath">#filePath#,</isNotEmpty>
+			<isNotEmpty  property="fileOrder">#fileOrder#,</isNotEmpty>
+			<isNotNull  property="quantity">#quantity#,</isNotNull>
+	 		<isNotEmpty  property="ledgerId">#ledgerId#,</isNotEmpty> 
+	 		<isNotEmpty  property="memo">#memo#,</isNotEmpty> 
+   			 creater,now()
+   		)
+   	</insert>
+   
+   	<update id="updateContractScanGrdByPK" parameterClass="contractScanGrd">
+   		UPDATE RS_CONTRACT_SCAN_GRD
+   		<dynamic prepend="SET">
+  			<isNotNull prepend="," property="contractType">contract_type=#contractType#</isNotNull>
+			<isNotEmpty prepend="," property="fileName">file_name=#fileName#</isNotEmpty>
+			<isNotEmpty prepend="," property="filePath">file_path=#filePath#</isNotEmpty>
+			<isNotEmpty prepend="," property="fileOrder">file_order=#fileOrder#</isNotEmpty>
+			<isNotNull prepend="," property="quantity">scan_quantity=#quantity#</isNotNull>
+	 		<isNotEmpty prepend="," property="ledgerId">ledger_id=#ledgerId#</isNotEmpty> 
+	 		<isNotEmpty prepend="," property="memo">memo=#memo#</isNotEmpty> 
+  	 		<isNotEmpty  prepend="," property="reviser">reviser = #reviser#,revisedate = now() </isNotEmpty>
+  			<isNotEmpty  prepend="," property="verifier">verifier = #verifier#,verifydate = now() </isNotEmpty>
+   		</dynamic>
+   		WHERE contract_id =#contractId# AND scan_code=#scanCode#
+   	</update>
+   	<!-- 分页查询语句 -->
+   	<select id="getContractScanGrdSplitPageBySQL" remapResults="true" parameterClass="java.lang.String" resultMap="contractScanGrd">
+   		$splitPageSQL$
+   	</select>
+   	<!-- end -->
+   	
+   	<select id="getContractScanGrdSplitPageCountSQL" remapResults="true" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+   		$countSQL$
+   	</select>
+   	
+   	<delete id="deleteContractScanGrd" parameterClass="contractScanGrd">
+   		DELETE FROM RS_CONTRACT_SCAN_GRD
+   		<include refid="whereLike"/>
+   	</delete>
+   	<delete id="deleteContractScanGrdByPK" parameterClass="java.util.Map">
+   		DELETE FROM RS_CONTRACT_SCAN_GRD
+   		WHERE contract_id =#contractId# AND scan_code=#scanCode#
+   	</delete>
+</sqlMap>

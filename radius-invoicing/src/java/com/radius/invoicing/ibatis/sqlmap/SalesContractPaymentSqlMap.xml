@@ -5,7 +5,7 @@
   <typeAlias alias="salesContractPayment" type="com.radius.invoicing.ibatis.model.SalesContractPayment" />
   
   <sql id="salesContractPaymentFileds">
-  	 contract_id contractId,cash_type cashType,total_amount totalAmount,amount_in_words upperAmount,payment_type paymentType,
+  	 contract_id contractId,cash_type cashType,total_amount totalAmount,amount_in_words upperAmount,payment_type paymentType,status stats,
   	 ledger_id ledgerId,creater creater,createdate createdate,reviser reviser,revisedate revisedate,verifier verifydate
   </sql>
   
@@ -55,6 +55,7 @@
 	  		<isNotNull  property="totalAmount">total_amount,</isNotNull>
 			<isNotEmpty  property="upperAmount">amount_in_words,</isNotEmpty>
 			<isNotEmpty  property="paymentType">payment_type,</isNotEmpty>
+			<isNotEmpty  property="stats">STATUS,</isNotEmpty> 
 			<isNotEmpty  property="ledgerId">ledger_id,</isNotEmpty> 
 	  	    creater,
 	  	    createdate
@@ -64,6 +65,7 @@
 	  		<isNotNull  property="totalAmount">#totalAmount#,</isNotNull>
 			<isNotEmpty  property="upperAmount">#upperAmount#,</isNotEmpty>
 			<isNotEmpty  property="paymentType">#paymentType#,</isNotEmpty>
+			<isNotEmpty  property="stats">#stats#,</isNotEmpty>
 	 		<isNotEmpty  property="ledgerId">#ledgerId#,</isNotEmpty> 
    			 creater,now()
    		)
@@ -76,6 +78,7 @@
 	  		<isNotNull prepend="," property="totalAmount">total_amount=#totalAmount#</isNotNull>
 			<isNotEmpty prepend="," property="upperAmount">amount_in_words=#upperAmount#</isNotEmpty>
 			<isNotEmpty prepend="," property="paymentType">payment_type=#paymentType#</isNotEmpty>
+			<isNotEmpty prepend="," property="stats">STATUS=#stats#</isNotEmpty> 
 	 		<isNotEmpty prepend="," property="ledgerId">ledger_id=#ledgerId#</isNotEmpty> 
   	 		<isNotEmpty  prepend="," property="reviser">reviser = #reviser#,revisedate = now() </isNotEmpty>
   			<isNotEmpty  prepend="," property="verifier">verifier = #verifier#,verifydate = now() </isNotEmpty>
@@ -100,4 +103,9 @@
    		DELETE FROM RS_SALES_CONTRACT_PAYMENT
    		WHERE contract_id =#contractId# 
    	</delete>
+   	<update id="updateSalesContractPaymentStatusByContractId" parameterClass="salesContractPayment">
+   		UPDATE RS_SALES_CONTRACT_PAYMENT
+   		SET STATUS=#stats#
+   		WHERE contract_id =#contractId#
+   	</update>
 </sqlMap>
