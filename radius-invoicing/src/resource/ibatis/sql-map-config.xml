@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE sqlMapConfig PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN" 
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN"
     "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
-
 <sqlMapConfig>
-  	<settings
-	    cacheModelsEnabled="true"
-	    lazyLoadingEnabled="true"
-	    enhancementEnabled="true"
-	    maxSessions="100"
-	    maxTransactions="20"
-	    maxRequests="128"
-	    useStatementNamespaces="true"/>
+  <settings useStatementNamespaces="true" />
 	    <!--配置相关枚举处理类 -->
       <typeAlias alias="resourceType" type="com.radius.invoicing.enums.ResourceTypeEnum" />
       <typeAlias alias="yesOrNo" type="com.radius.invoicing.enums.YesOrNoEnums" />
