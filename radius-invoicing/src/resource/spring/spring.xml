@@ -14,7 +14,7 @@
 	<bean id="propertyConfigHelper" class="com.radius.base.helper.PropertyConfigHelper">
 		<property name="locations">
 			<list>
-				<value>classpath:property/test-*.properties</value>
+				<value>classpath:stock*.properties</value>
 			</list>
 		</property>
 	</bean>
