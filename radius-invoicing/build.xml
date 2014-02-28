@@ -69,7 +69,7 @@
 		    <pathelement location="${spring3.home}/dist/org.springframework.context.support-3.0.5.RELEASE.jar"/>
 		    <pathelement location="${spring3.home}/dist/org.springframework.context-3.0.5.RELEASE.jar"/>
 		    <pathelement location="${spring3.home}/dist/org.springframework.core-3.0.5.RELEASE.jar"/>
-		    <!--<pathelement location="${spring3.home}/dist/org.springframework.expression-3.0.5.RELEASE.jar"/>-->
+		    <pathelement location="${spring3.home}/dist/org.springframework.expression-3.0.5.RELEASE.jar"/>
 		    <pathelement location="${spring3.home}/dist/org.springframework.jdbc-3.0.5.RELEASE.jar"/>
 		    <pathelement location="${spring3.home}/dist/org.springframework.jms-3.0.5.RELEASE.jar"/>
 		    <pathelement location="${spring3.home}/dist/org.springframework.orm-3.0.5.RELEASE.jar"/>
@@ -175,6 +175,9 @@
 			<lib dir="${common.home}/commons-email-1.1/">
 				<include name="commons-email-1.1.jar"/>
 			</lib>
+			<lib dir="${common.home}/commons-digester-1.8/">
+				<include name="commons-digester-1.8.jar"/>
+			</lib>
 			<lib dir="${common.home}/commons-logging-1.1.1/">
 				 <include name="commons-logging-1.1.1.jar"/>
 			</lib>
@@ -190,6 +193,9 @@
 			
 			<lib dir="${common.home}/dom4j-1.6.1/">
 				 <include name="dom4j-1.6.1.jar"/>
+			</lib>
+			<lib dir="${common.home}/aspectj-1.6.12/">
+				 <include name="aspectjweaver.jar"/>
 			</lib>
 			<lib dir="${common.home}/json_lib/">
 				<include name="json-lib-2.4-jdk15.jar"/>
@@ -231,6 +237,7 @@
 			 	<include name="org.springframework.jdbc-3.0.5.RELEASE.jar"/>
 			 	<include name="dist/org.springframework.jms-3.0.5.RELEASE.jar"/>
 			 	<include name="org.springframework.orm-3.0.5.RELEASE.jar"/>
+			 	<include name="org.springframework.expression-3.0.5.RELEASE.jar"/>
 			 	<include name="org.springframework.oxm-3.0.5.RELEASE.ja"/>
 			 	<include name="org.springframework.transaction-3.0.5.RELEASE.jar"/>
 			 	<include name="org.springframework.web.servlet-3.0.5.RELEASE.jar"/>
