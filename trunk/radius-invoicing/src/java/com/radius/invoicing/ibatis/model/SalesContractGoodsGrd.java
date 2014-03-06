@@ -13,13 +13,14 @@ public class SalesContractGoodsGrd extends ExtInfo{
 	private String  contractId="";//合同编号
 	private String  goodsId="";//商品编号
 	private String  goodsName="";//商品名称
+	private Integer price;//单价
 	private String  unit="";//包装单位(规格)
 	private Integer  priceUnit;//包装单位单价
 	private String  equivalentUnit="";//折合单位
 	private Integer  priceEu;//折合单位单价
 	private Integer  quantityEuPerUnit;//包装单位折合数量
-	private Integer  quantityEu;//数量
-	private Integer  quantityUnit;//折合数量
+	private Integer  quantityEu;//折合数量
+	private Integer  quantityUnit;//数量
 	private Integer  amount;//金额
 	private String  memo="";//商品备注
 	private String  stats="";//状态
@@ -143,6 +144,14 @@ public class SalesContractGoodsGrd extends ExtInfo{
 
 	public void setUnit(String unit) {
 		this.unit = unit;
+	}
+
+	public Integer getPrice() {
+		return price;
+	}
+
+	public void setPrice(Integer price) {
+		this.price = price;
 	}
 
 	
