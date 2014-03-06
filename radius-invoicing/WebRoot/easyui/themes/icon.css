@@ -152,3 +152,12 @@
 .icon-page_excel{
 	background:url('icons/page_excel.png') no-repeat;
 }
+.icon-excel_import{
+	background:url('icons/excel_import.png') no-repeat;
+}
+.icon-excel_export{
+	background:url('icons/excel_export.png') no-repeat;
+}
+.icon-page_edit{
+	background:url('icons/page_edit.png') no-repeat;
+}
