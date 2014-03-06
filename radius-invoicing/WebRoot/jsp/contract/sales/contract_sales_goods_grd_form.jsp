@@ -75,46 +75,42 @@ $(function(){
 		//1.当前金额小于0则不将其加入到datagrid中
 		//insertRow 	
 		var rows=contract_sales_goods_grd.datagrid('getRows');
-		if($('#contract_sales_goods_grd_form_id').val().length>0){
-			if(rows==null||rows.length==0){
-				addDataGridRow();
-				contract_sales_goods_grd.datagrid('acceptChanges');
-				calculateTotalAmount();
-			}else if(rows.length>0){
-				var isExist=false;
-				var row=null;
-				var row_index=0;
-				for(var i=0;i<rows.length;i++){
-					row=rows[i];
-					if(row.goodsId==$('#contract_sales_goods_grd_form_id').val()){//说明商品相关
-						isExist=true;
-						row_index=i;
-						break;
-					}
+		if(rows==null||rows.length==0){
+			addDataGridRow();
+			contract_sales_goods_grd.datagrid('acceptChanges');
+			calculateTotalAmount();
+		}else if(rows.length>0){
+			var isExist=false;
+			var row=null;
+			var row_index=0;
+			for(var i=0;i<rows.length;i++){
+				row=rows[i];
+				if(row.goodsId==$('#contract_sales_goods_grd_form_id').val()){//说明商品相关
+					isExist=true;
+					row_index=i;
+					break;
 				}
-				if(isExist){//更新datagrid列
-					//1.修改datagrid中的数据
-					var quantityUnit=parseInt(row.quantityUnit)+parseInt($('#contract_sales_goods_grd_form_quantity_unit').val());
-					var amount=(parseFloat($('#contract_sales_goods_grd_form_amount').val())*100+parseFloat(row.amount)*100)/100;
-					var goodsId=contract_sales_goods_grd.datagrid('selectRow',row_index).goodsId;//商品编号
-					contract_sales_goods_grd.datagrid('updateRow',{
-						index:row_index,
-						row:{
-							quantityUnit:quantityUnit,//数量
-							amount:amount//金额
-						}
-					});
-					//2.更新内存中的数据 
-					updateProuctInfoMemcache(amount,quantityUnit,goodsId);
-					
-				}else{//添加一列
-					addDataGridRow();
-				}
-				
-				calculateTotalAmount();
 			}
-		}else{
-			$.messager.alert('提示','请选择商品...','info');
+			if(isExist){//更新datagrid列
+				//1.修改datagrid中的数据
+				var quantityUnit=parseInt(row.quantityUnit)+parseInt($('#contract_sales_goods_grd_form_quantity_unit').val());
+				var amount=(parseFloat($('#contract_sales_goods_grd_form_amount').val())*100+parseFloat(row.amount)*100)/100;
+				var goodsId=contract_sales_goods_grd.datagrid('selectRow',row_index).goodsId;//商品编号
+				contract_sales_goods_grd.datagrid('updateRow',{
+					index:row_index,
+					row:{
+						quantityUnit:quantityUnit,//数量
+						amount:amount//金额
+					}
+				});
+				//2.更新内存中的数据 
+				updateProuctInfoMemcache(amount*100,quantityUnit,goodsId);
+				
+			}else{//添加一列
+				addDataGridRow();
+			}
+			
+			calculateTotalAmount();
 		}
  	});
  	$('#contract_sales_goods_grd_delete_btn').on('click',function(){//datagrid delete
@@ -140,12 +136,6 @@ $(function(){
  		}else{
  			$.messager.alert('提示','请选择待删除的行...','info');
  		}
- 		
- 	});
- 	
- 	
- 	//excel导入按钮处理事件
- 	$('#contract_sales_goods_grd_excel_btn').on('click',function(){
  		
  	});
 });
@@ -183,14 +173,15 @@ function addProuctInfoMemcache(){
 				contractId:$('#constract_sales_sale_base_id').val(),//合同编号
 				goodsId:$('#contract_sales_goods_grd_form_id').val(),//商品编号
 				goodsName:$('#contract_sales_goods_grd_form_name').val(),//商品名称
-				unit:$('#contract_sales_goods_grd_form_format').val(),//包装单位(规格)
+				price:$('#contract_sales_goods_grd_form_price').val(),
+				unit:parseFloat($('#contract_sales_goods_grd_form_format').val())*100,//包装单位(规格)
 				//priceUnit:,//包装单位单价
 				equivalentUnit:$('#contract_sales_goods_grd_form_equivalent_unit').val(),//折合单位
-				priceEu:2,//折合单位单价
+				priceEu:200,//折合单位单价
 				//quantityEuPerUnit:,//包装单位折合数量
 				quantityEu:$('#contract_sales_goods_grd_form_quantity_unit').val(),//数量
 				quantityUnit:$('#contract_sales_goods_grd_form_quantity_eu').val(),//折合数量
-				amount:$('#contract_sales_goods_grd_form_amount').val(),//金额
+				amount:parseFloat($('#contract_sales_goods_grd_form_amount').val())*100,//金额
 				memo:$('#contract_sales_goods_grd_form_mome').val(),//商品备注
 				stats:"0"//状态
 			},//参数
@@ -311,8 +302,7 @@ function calculateTotalAmount(){
 		<th colspan="2" style="text-align: center;"><input type="checkbox"/> 加入后不置空</th>
 		<td>
 			<a id="contract_sales_goods_grd_add_btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" plain="true">加入(A)</a>
-			<a id="contract_sales_goods_grd_excel_btn" href="#" class="easyui-linkbutton" style="margin-left:5px;" data-options="iconCls:'icon-page_excel'" plain="true">导入(A)</a>
-			<a id="contract_sales_goods_grd_delete_btn" href="#" class="easyui-linkbutton" style="margin-left:5px;" data-options="iconCls:'icon-remove'" plain="true">删除(D)</a>
+			<a id="contract_sales_goods_grd_delete_btn" href="#" class="easyui-linkbutton" style="margin-left:20px;" data-options="iconCls:'icon-remove'" plain="true">删除(D)</a>
 		</td>
 	</tr>
 </table>
