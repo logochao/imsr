@@ -199,7 +199,7 @@ public class SalesContractServiceImpl implements SalesContractService,Constants 
 			jsonUtils.setSuccess(false);
 			jsonUtils.setMessage("不存在对应的缓存对象");
 		}
-		
+		MemcacheClient.set(key, memcache, CACHE_ONE_HOURE_TIME);//将带缓存的对象进行写入
 		return jsonUtils;
 	}
 	/**
@@ -231,7 +231,7 @@ public class SalesContractServiceImpl implements SalesContractService,Constants 
 			jsonUtils.setSuccess(false);
 			jsonUtils.setMessage("销售合同商品不存在对应的缓存对象");
 		}
-		
+		MemcacheClient.set(key, memcache, CACHE_ONE_HOURE_TIME);//将带缓存的对象进行写入
 		return jsonUtils;
 	}
 	
@@ -300,7 +300,7 @@ public class SalesContractServiceImpl implements SalesContractService,Constants 
 			jsonUtils.setSuccess(false);
 			jsonUtils.setMessage("合同扫描件不存在对应的缓存对象");
 		}
-		
+		MemcacheClient.set(key, memcache, CACHE_ONE_HOURE_TIME);//将带缓存的对象进行写入
 		return jsonUtils;
 	}
 	
