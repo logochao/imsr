@@ -128,7 +128,7 @@ $(function(){
 		 			console.info(array);
 		 			//3.将内存中的缓存数据删除
 		 			if(array.length>0){
-		 				removeProudctInfoMemcache();
+		 				removeProudctInfoMemcache(array);
 		 				calculateTotalAmount();
 		 			}
  				}
@@ -220,7 +220,7 @@ function updateProuctInfoMemcache(amount,quantityUnit,goodsId){
 /**
 * 将销售合同中的商品信息从memcache中进行删除
 **/
-function removeProudctInfoMemcache(){
+function removeProudctInfoMemcache(array){
 	$.ajax({
 		url:'${path}/contract/manager/sales_contract_product_info_remove_memcache.html',
 		method:'POST',
