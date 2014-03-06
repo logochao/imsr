@@ -82,7 +82,7 @@
   		<isNotEmpty prepend="AND" property="categoryName">
   			category_name=#categoryName#
   		</isNotEmpty>
-  		<isNotEmpty prepend="AND" property="goods_series">
+  		<isNotEmpty prepend="AND" property="series">
   			goods_series=#series#
   		</isNotEmpty>
   		<isNotEmpty prepend="AND" property="unit">
@@ -346,8 +346,8 @@
    	<select id="getGoodsByCondition" parameterClass="goods" resultClass="goods">
    		SELECT <include refid="goodsFileds"/>
    		FROM RS_GOODS
-   		<include refid="whereLike"/>
-   		<!-- $condition$  -->
+   		<!--<include refid="whereLike"/>-->
+   	    $condition$
    	</select>
    	<!-- 分页查询语句 -->
    	<select id="getGoodsSplitPageBySQL" remapResults="true" parameterClass="java.lang.String" resultMap="goods">
