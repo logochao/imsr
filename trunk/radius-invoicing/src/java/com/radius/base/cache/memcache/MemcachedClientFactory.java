@@ -51,7 +51,7 @@ public abstract class MemcachedClientFactory {
 
     public static String[] getAddress() throws Exception {
 //        String address="115.182.10.143:11211";
-        String address="127.0.0.1:11211";
+        String address="127.0.01:11211";
         if(null == address) {
             throw new Exception("no memcache.client.address property");
         }
