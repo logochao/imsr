@@ -5,7 +5,7 @@
   <typeAlias alias="salesContractGoodsGrd" type="com.radius.invoicing.ibatis.model.SalesContractGoodsGrd" />
   
   <sql id="salesContractGoodsGrdFileds">
-  	 contract_id contractId,goods_id goodsId,goods_name goodsName,unit unit,price_of_unit priceUnit,equivalent_unit equivalentUnit,price_of_eu priceEu,
+  	 contract_id contractId,goods_id goodsId,goods_name goodsName,price,unit unit,price_of_unit priceUnit,equivalent_unit equivalentUnit,price_of_eu priceEu,
   	 quantity_of_eu_per_unit quantityEuPerUnit,quantity_of_unit quantityUnit,quantity_of_eu quantityEu,amount amount,STATUS stats,
   	 ledger_id ledgerId,memo memo,creater creater,createdate createdate,reviser reviser,revisedate revisedate,verifier verifydate
   </sql>
@@ -14,6 +14,7 @@
     <result column="contract_id" jdbcType="char" javaType="java.lang.String" property="contractId" />
     <result column="goods_id" jdbcType="char" javaType="java.lang.String" property="goodsId" />
     <result column="goods_name" jdbcType="varchar" javaType="java.lang.String" property="goodsName" />
+    <result column="price" jdbcType="int" javaType="java.lang.Integer" property="price" />
     <result column="unit" jdbcType="char" javaType="java.lang.String" property="unit" />
     <result column="price_of_unit" jdbcType="int" javaType="java.lang.Integer" property="priceUnit" />
     <result column="equivalent_unit" jdbcType="int" javaType="java.lang.Integer" property="equivalentUnit" />
@@ -39,6 +40,7 @@
   		<isNotEmpty prepend="and" property="contractId"> contract_id=#contractId#</isNotEmpty>
   		<isNotEmpty prepend="and" property="goodsId"> goods_id=#goodsId#</isNotEmpty>
   		<isNotEmpty prepend="and" property="goodsName">  goods_name=#goodsName#</isNotEmpty>
+  		<isNotNull prepend="and" property="price">  price=#price#</isNotNull>
 		<isNotEmpty prepend="and" property="unit">  unit=#unit#</isNotEmpty>
 		<isNotNull prepend="and" property="priceUnit">  price_of_unit=#priceUnit#</isNotNull>
 		<isNotEmpty prepend="and" property="equivalentUnit">  equivalent_unit=#equivalentUnit#</isNotEmpty>
@@ -70,6 +72,7 @@
    			contract_id,
    			goods_id,
 	  		<isNotEmpty  property="goodsName">goods_name,</isNotEmpty>
+	  		<isNotNull  property="price">price,</isNotNull>
 			<isNotEmpty  property="unit">unit,</isNotEmpty>
 			<isNotNull  property="priceUnit">price_of_unit,</isNotNull>
 			<isNotNull  property="equivalentUnit">equivalent_unit,</isNotNull>
@@ -87,6 +90,7 @@
    			#contractId#,
    			#goodsId#,
 	  		<isNotEmpty  property="goodsName">#goodsName#,</isNotEmpty>
+	  		<isNotNull  property="price">#price#,</isNotNull>
 			<isNotEmpty  property="unit">#unit#,</isNotEmpty>
 			<isNotNull  property="priceUnit">#priceUnit#,</isNotNull>
 			<isNotNull  property="equivalentUnit">#equivalentUnit#,</isNotNull>
@@ -106,6 +110,7 @@
    		UPDATE RS_SALES_CONTRACT_GOODS_GRD
    		<dynamic prepend="SET">
 	  		<isNotEmpty prepend="," property="goodsName">goods_name=#goodsName#</isNotEmpty>
+	  		<isNotNull prepend="," property="price">price=#price#</isNotNull>
 			<isNotEmpty prepend="," property="unit">unit=#unit#</isNotEmpty>
 			<isNotNull prepend="," property="priceUnit">price_of_unit=#priceUnit#</isNotNull>
 			<isNotNull prepend="," property="equivalentUnit">equivalent_unit=#equivalentUnit#</isNotNull>
