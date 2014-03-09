@@ -239,4 +239,5 @@ public class SalesContractController extends BaseController{
 	public EasyuiSplitPager<SalesContractGoodsGrd> getSalesContractGoodsGrd(HttpServletRequest request,HttpServletResponse response,SalesContractGoodsGrd salesContractGoodsGrd)throws Exception{
 		return contractService.getSalesContractGoodsGrd(salesContractGoodsGrd);
 	}
+	
 }
