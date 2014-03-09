@@ -24,6 +24,7 @@ $(document).ready(function(){
     	</div>
     </div>
     <div data-options="region:'center',split:true" fit="true" border="false">
+    	<%-- 新建(编辑)商品对话框--%>
     	<jsp:include flush="true" page="business_goods_grd.jsp"></jsp:include>
     </div>
 </div>
