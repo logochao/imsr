@@ -213,13 +213,13 @@ function contractSalesScanGrdAddRow(filepath){
 <table class="table" style="width: 100%;">
 	<tr>
 		<th>扫描件数量</th>
-		<td colspan="5" style="text-align: left;">
+		<td colspan="5" style="text-align: left;border:1px solid #95B8E7;">
 			<input id="contract_sales_scan_quantity"/>
 		</td>
 	</tr>
 	<tr>
 		<th>扫描件编码</th>
-		<td><input id="contract_sales_scan_code"/></td>
+		<td><input id="contract_sales_scan_code" style="border:1px solid #95B8E7;"/></td>
 		<th>选择文件</th>
 		<td colspan="2">
 			<a class="easyui-linkbutton" plain="true" href="javascript:makerUpload(false)">上传文件</a> 

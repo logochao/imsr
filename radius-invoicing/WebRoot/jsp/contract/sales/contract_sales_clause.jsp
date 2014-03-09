@@ -28,25 +28,25 @@
    	<tr>
    		<th>合同条款</th>
    		<td colspan="7">
-   			<textarea rows="4" cols="150" id="contract_sales_clause_contract_terms"></textarea>
+   			<textarea rows="4" cols="150" style="border:1px solid #95B8E7;" id="contract_sales_clause_contract_terms"></textarea>
    		</td>
    	</tr>
    	<tr>
    		<th>责任与权利</th>
    		<td colspan="7">
-   			<textarea rows="4" cols="150"></textarea>
+   			<textarea rows="4" cols="150" style="border:1px solid #95B8E7;"></textarea>
    		</td>
    	</tr>
    	<tr>
    		<th>违约条款</th>
    		<td colspan="7">
-   			<textarea rows="4" cols="150"></textarea>
+   			<textarea rows="4" cols="150" style="border:1px solid #95B8E7;"></textarea>
    		</td>
    	</tr>
    	<tr>
    		<th>争议处理</th>
    		<td colspan="7">
-   			<textarea rows="4" cols="150"></textarea>
+   			<textarea rows="4" cols="150" style="border:1px solid #95B8E7;"></textarea>
    		</td>
    	</tr>
    </table>
