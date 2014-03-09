@@ -98,8 +98,23 @@ public class SalesOrderController extends BaseController {
 		return salesOrderService.removeSalesOrderGoodsGrd2Memcached(key,delete,goodsGrd);
 	}
 	
-	
-	
+	/**
+	 * 添加销售订单信息
+	 * @param request
+	 * @param response
+	 * @param salesOrder
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/order/manager/salesorder/sales_order_infos_add.html")
+	@ResponseBody
+	public JsonUtils addSalesOrderInfos(HttpServletRequest request,HttpServletResponse response,SalesOrder salesOrder)throws Exception{
+		//1.构建销售订单
+		//SalesOrder salesOrder = 
+		//2.构建销售订单商品信息列表
+		
+		return null;
+	}
 	
 	
 	
