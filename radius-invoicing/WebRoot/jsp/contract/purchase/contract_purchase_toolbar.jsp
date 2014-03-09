@@ -157,7 +157,7 @@ $(function(){
 	<a id="contract_purchase_toolbar_pend_btn" href="#" class="easyui-linkbutton" style="margin-left:20px;" data-options="iconCls:'icon-attach'">挂单</a>
 </div>
 <div style="display:inline;width: 30%;margin-left:80px;">
-	<a id="contract_purchase_toolbar_ok_btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-true'">合同提交</a>
+	<a id="contract_purchase_toolbar_ok_btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-save'">合同处理</a>
 	<input id="contract_purchase_tool_bar_save" type="hidden" value="-1"><!-- 销售合同保存按钮 -->
 	<a id="contract_purchase_toolbar_report_btn" href="#" class="easyui-linkbutton" style="margin-left:20px;" data-options="iconCls:'icon-chart_bar'">报表</a>
 	<a id="contract_purchase_toolbar_print_btn" href="#" class="easyui-linkbutton" style="margin-left:20px;" data-options="iconCls:'icon-print'">打印</a>
