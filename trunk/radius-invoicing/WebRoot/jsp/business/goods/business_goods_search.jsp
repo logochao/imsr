@@ -9,7 +9,7 @@
 <div id="business_goods_search_search_goods_info">
 	<fieldset>
 		<legend>筛选条件</legend>
-		<table class="table" style="width: 100%;">
+		<table  style="width: 100%;">
 			<tr>
 				<td>商品名称:</td>
 				<td><input id="business_goods_search_goods_name"/></td>

@@ -9,7 +9,7 @@ $(function(){
 	$('#business_goods_toolbar_add_btn').on('click',function(){
 	});
 	//删除
-	$('#business_goods_toolbar_delete_btn').on('click',function(){
+	$('#business_goods_toolbar_pend_btn').on('click',function(){
 	});
 	//导入
 	$('#business_goods_toolbar_import_btn').on('click',function(){
@@ -26,10 +26,10 @@ $(function(){
 <div style="height: 28px;width: 30%;display:inline;padding-left:20px;">
 	<a id="business_goods_toolbar_new_btn" href="#" class="easyui-linkbutton"  data-options="iconCls:'icon-add'">新建</a>
 	<a id="business_goods_toolbar_add_btn" href="#" class="easyui-linkbutton" style="margin-left:20px;" data-options="iconCls:'icon-book_open'">编辑</a>
-	<a id="business_goods_toolbar_delete_btn" href="#" class="easyui-linkbutton" style="margin-left:20px;" data-options="iconCls:'icon-attach'">删除</a>
+	<a id="business_goods_toolbar_pend_btn" href="#" class="easyui-linkbutton" style="margin-left:20px;" data-options="iconCls:'icon-attach'">挂单</a>
 </div>
 <div style="display:inline;width: 30%;margin-left:80px;">
-	<a id="business_goods_toolbar_ok_btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-save'">导入</a>
+	<a id="business_goods_toolbar_ok_btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-save'">商品处理</a>
 	<a id="business_goods_toolbar_import_btn" href="#" class="easyui-linkbutton" style="margin-left:20px;" data-options="iconCls:'icon-excel_import'">导入</a>
 	<a id="business_goods_toolbar_export_btn" href="#" class="easyui-linkbutton" style="margin-left:20px;" data-options="iconCls:'icon-excel_export'">导出</a>
 </div>
