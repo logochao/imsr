@@ -198,7 +198,7 @@ function contractSalesScanGrdOpenFormatter(value,row,index){
 	        	<table class="table" align="center" style="width: 100%;">
 	        		<tr>
 	        			<th>保函金额*</th>
-	        			<td><input id="contract_sales_index_pay_amount"/></td>
+	        			<td><input id="contract_sales_index_pay_amount" style="border:1px solid #95B8E7;"/></td>
 	        			<th>付款日期*</th>
 	        			<td><input id="contract_sales_index_pay_time"/></td>
 	        			<th>收款日期*</th>
@@ -214,7 +214,7 @@ function contractSalesScanGrdOpenFormatter(value,row,index){
 	            	<tr>
 	            		<th>合同备注</th>
 	            		<td>
-	            		 <textarea rows="5" cols="170" id="contract_sale_index_mome"></textarea>
+	            		 <textarea rows="5" cols="170" id="contract_sale_index_mome" style="border:1px solid #95B8E7;"></textarea>
 	            		</td>
 	            	</tr>
 	            </table>

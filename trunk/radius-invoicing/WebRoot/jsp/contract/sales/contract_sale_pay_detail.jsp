@@ -180,7 +180,7 @@ function comboboxLoadSuccess(obj){
 	<tr>
 		<th>合同总额</th>
 		<td>
-			<input  id="contract_sales_pay_detail_total_amount" style="background:#eee;" readonly="readonly"/>
+			<input  id="contract_sales_pay_detail_total_amount" style="background:#eee;border:1px solid #95B8E7;" readonly="readonly"/>
 			<!-- 剩余金额 -->
 			<input type="hidden"  id="contract_sales_pay_detail_surplus_amount"/>
 		</td>
@@ -194,17 +194,17 @@ function comboboxLoadSuccess(obj){
 	<tr>
 		<th>金额</th>
 		<td>
-		<input style="width: 100px;" id="contract_sales_pay_detail_amount" type="text" class="easyui-validatebox"  name="name" data-options="validType:'numberic(\'#contract_sales_pay_detail_total_amount\')',missingMessage:'请输入金额',invalidMessage:'请输入正确的格式'"/>
+		<input style="width: 100px;border:1px solid #95B8E7;" id="contract_sales_pay_detail_amount" type="text"  class="easyui-validatebox"  name="name" data-options="validType:'numberic(\'#contract_sales_pay_detail_total_amount\')',missingMessage:'请输入金额',invalidMessage:'请输入正确的格式'"/>
 		<input type="text" name="name" style="width: 20px;background:#eee;" readonly="readonly" value="元"/>
 		</td>
 		<th>人民币大写</th>
-		<td colspan="3"><input  style="width: 400px;background:#eee;" type="text"  id="contract_sales_pay_detail_upper_rmb" /></td>
+		<td colspan="3"><input  style="width: 400px;background:#eee;border:1px solid #95B8E7;" type="text"  id="contract_sales_pay_detail_upper_rmb" /></td>
 		<th>款项期限</th>
 		<td><input id="contract_sales_pay_detail_deadline_time"/></td>
 	</tr>
 	<tr>
 		<th>备注</th>
-		<td colspan="4"><input style="width: 400px;" id="contract_sale_pay_detail_memo"/></td>
+		<td colspan="4"><input style="width: 400px;border:1px solid #95B8E7;" id="contract_sale_pay_detail_memo" /></td>
 		<th colspan="2" style="text-align: center;"><input type="checkbox"/> 加入后不置空</th>
 		<td>
 			<a id="contract_sales_pay_detail_add_btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" plain="true">加入(A)</a>
