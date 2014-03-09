@@ -4,7 +4,7 @@
 	<tr>
 		<th>合同条款</th>
 		<td>
-		  <textarea rows="5" cols="170" id="sales_order_terms_terms"></textarea>
+		  <textarea rows="5" cols="170" id="sales_order_terms_terms" style="border:1px solid #95B8E7"></textarea>
 		</td>
 	</tr>
 </table>

@@ -455,18 +455,18 @@ function removeDataGrid2Memcached(){
 </script>
 <table class="table" style="width: 100%;">
 	<tr>
-		<th>销售订单号<font color="red">*</font></th>
-		<td><input class="easyui-validatebox" style="background:#eee;width: 150px;" id="sales_order_base_id" type="text" readonly="readonly"  data-options="" value="${salesOrder.salesOrderId}"/></td>
+		<th>销售订单号<font color="red">*</font></th> 
+		<td><input class="easyui-validatebox" style="background:#eee;width: 150px;border:1px solid #95B8E7" id="sales_order_base_id" type="text" readonly="readonly"  data-options="" value="${salesOrder.salesOrderId}"/></td>
 		<th>状态</th>
 		<td colspan="3"><input id="sales_order_base_status"  class="easyui-validatebox" class="easyui-combobox"  data-options="" value="0"/></td>
 		<th>订货日期</th>
-		<td><input class="easyui-validatebox" type="text" id="sales_order_base_order_time" /></td>
+		<td><input class="easyui-validatebox" type="text" id="sales_order_base_order_time" style="border:1px solid #95B8E7"/></td>
 	</tr>
 	<tr>
 		<th>客户<font color="red">*</font></th>
 		<td colspan="5">
-			<input  type="text" id="sales_order_base_customer_name" style="width: 300px;" readonly="readonly" data-options=""/> 
-			<input  type="hidden" id="sales_order_base_customer_id" readonly="readonly" data-options=""/> 
+			<input  type="text" id="sales_order_base_customer_name" style="width: 300px;border:1px solid #95B8E7" readonly="readonly" data-options="" style="border:1px solid #95B8E7"/> 
+			<input  type="hidden" id="sales_order_base_customer_id" readonly="readonly" data-options="" style="border:1px solid #95B8E7"/> 
 			<a id="sales_order_base_custmer_btn" href="#" class="easyui-linkbutton" plain="true"><font style="font-size:3ex">...</font></a>
 		</td>
 		<th>交货日期</th>
@@ -475,22 +475,22 @@ function removeDataGrid2Memcached(){
 	<tr>
 		<th>联系人</th>
 		<td>
-			<input id="sales_order_base_link_man" class="easyui-validatebox" type="text" name="man" />
+			<input id="sales_order_base_link_man" class="easyui-validatebox" type="text" name="man"style="border:1px solid #95B8E7" />
 			<a id="sales_order_base_custmer_link_man_btn"  href="#" class="easyui-linkbutton" plain="true" data-options="disabled:true"><font style="font-size:3ex">...</font></a>
 		</td>
 		<th>办公电话</th>
-		<td><input class="easyui-validatebox" type="text" id="sales_order_base_link_tel" /></td>
+		<td><input class="easyui-validatebox" type="text" id="sales_order_base_link_tel" style="border:1px solid #95B8E7"/></td>
 		<th>手机号码</th>
-		<td><input class="easyui-validatebox" type="text" id="sales_order_base_link_mobile" /></td>
+		<td><input class="easyui-validatebox" type="text" id="sales_order_base_link_mobile" style="border:1px solid #95B8E7"/></td>
 		<th>传真</th>
-		<td><input class="easyui-validatebox" type="text" id="sales_order_base_link_fax" /></td>
+		<td><input class="easyui-validatebox" type="text" id="sales_order_base_link_fax" style="border:1px solid #95B8E7"/></td>
 	</tr>
 	<tr>
 		<th>送货地址</th>
-		<td colspan="3"><input class="easyui-validatebox" type="text" style="width: 350px;" id="sales_order_base_delivery_point" /></td>
+		<td colspan="3"><input class="easyui-validatebox" type="text" style="width: 350px;border:1px solid #95B8E7;" id="sales_order_base_delivery_point"/></td>
 		<th>业务员</th>
 		<td>
-			<input class="easyui-validatebox" type="text" />
+			<input class="easyui-validatebox" type="text" style="border:1px solid #95B8E7"/>
 			<a id="btn" href="#" class="easyui-linkbutton" plain="true"><font style="font-size:3ex">...</font></a>
 		</td>
 		<th colspan="2" style="text-align: center;"></th>
@@ -498,11 +498,11 @@ function removeDataGrid2Memcached(){
 	<tr>
 		<th>合同编号<font color="red">*</font></th>
 		<td>
-			<input class="easyui-validatebox" id="sales_order_base_sales_contract_id" type="text" readonly="readonly" />
+			<input class="easyui-validatebox" id="sales_order_base_sales_contract_id" type="text" readonly="readonly" style="border:1px solid #95B8E7"/>
 			<a id="sales_order_base_sales_contract_btn" href="#" class="easyui-linkbutton" plain="true"><font style="font-size:3ex">...</font></a>
 		</td>
 		<th>合同总金额</th>
-		<td><input id="sales_order_base_total_amount" style="background:#eee;" readonly="readonly"/></td>
+		<td><input id="sales_order_base_total_amount"  readonly="readonly" style="background:#eee;width: 150px;border:1px solid #95B8E7;"/></td>
 		<th colspan="4"></th>
 	</tr>
 </table>
@@ -514,13 +514,13 @@ function removeDataGrid2Memcached(){
 			<table class="table" style="width: 100%;">
 				<tr>
 					<th>客户名称(关键字)</th>
-					<td><input  id="sales_order_base_customer_name"/></td>
+					<td><input  id="sales_order_base_customer_name" style="border:1px solid #95B8E7"/></td>
 					<th>联系人</th>
-					<td><input id="sales_order_base_customer_link"/></td>
+					<td><input id="sales_order_base_customer_link" style="border:1px solid #95B8E7"/></td>
 				</tr>
 				<tr>
 					<th>联系电话</th>
-					<td><input id="sales_order_base_customer_link_tel"/></td>
+					<td><input id="sales_order_base_customer_link_tel" style="border:1px solid #95B8E7"/></td>
 					<td colspan="2">
 						<div style="float: left;">
 						<a id="sales_order_base_customer_search_btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" plain="true">查询</a>
@@ -543,9 +543,9 @@ function removeDataGrid2Memcached(){
 			<table class="table" style="width: 100%;">
 				<tr>
 					<th>联系人</th>
-					<td><input id="sales_order_base_custmer_link_man_"/></td>
+					<td><input id="sales_order_base_custmer_link_man_" style="border:1px solid #95B8E7"/></td>
 					<th>联系电话</th>
-					<td><input id="sales_order_base_custmer_link_tel_"/></td>
+					<td><input id="sales_order_base_custmer_link_tel_" style="border:1px solid #95B8E7"/></td>
 					<td>
 						<div style="float: left;">
 						<a id="sales_order_base_custmer_link_man_search_btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" plain="true">查询</a>
@@ -568,7 +568,7 @@ function removeDataGrid2Memcached(){
 		<table class="table" style="width: 100%;"><%--商家信息 --%>
 			<tr>
 				<th>合同编号</th>
-				<td><input id="sales_order_base_sales_contract_id"/></td>
+				<td><input id="sales_order_base_sales_contract_id" style="border:1px solid #95B8E7"/></td>
 				<td>
 					<div style="float: left;">
 					<a id="sales_order_base_sales_contract_search_btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" plain="true">查询</a>

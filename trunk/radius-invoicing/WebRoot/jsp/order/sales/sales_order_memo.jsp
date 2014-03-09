@@ -3,7 +3,7 @@
    	<tr>
    		<th>合同条款</th>
    		<td colspan="7">
-   			<textarea rows="4" cols="140" id="sales_order_memo_memo"></textarea>
+   			<textarea rows="4" cols="140" id="sales_order_memo_memo" style="border:1px solid #95B8E7"></textarea>
    		</td>
    	</tr>
 </table>
