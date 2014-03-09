@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <script type="text/javascript">
 <!--
  var sales_order_base_custmer_grd=null; 
@@ -195,9 +196,19 @@
 	$('#sales_order_base_sales_contract_ok_btn').on('click',function(){//销售合同确定按钮
 		var rows=sales_order_base_sales_contract_grd.datagrid('getSelections');
 		if (rows.length==1) {
+			var contractId=$('#sales_order_base_sales_contract_id').val();
+			if(contractId.length>0&&contractId!=rows[0].id){//如果合同编号发生变化则将数据数据表格的数据情况、sales_order_total_amount设置为 0 
+				removeDataGrid2Memcached();
+				//情况销售合同页签下的datagrid数据
+				$('#sales_order_sales_contract_goods_detail_grd').datagrid('loadData', {total: 0,rows:[]});
+			}
 			$('#sales_order_base_sales_contract_id').val(rows[0].id);
 			$('#sales_order_base_total_amount').val((rows[0].totalAmount/100).toFixed(2));
 			$('#sales_order_base_sales_contract_dialog').dialog('close');
+			//表示存在-->将商品列表中的相关按钮禁用
+			$('#sales_order_goods_grd_form_add_btn').linkbutton('disable');
+			$('#sales_order_goods_grd_form_import_btn').linkbutton('disable');
+			$('#sales_order_goods_grd_form_delete_btn').linkbutton('disable');
 			//2.异步请求获取销售合同的详细信息
 			getSalesContractDetailInfo();
 		}else if(rows.length>1){
@@ -236,7 +247,17 @@ function getSalesContractDetailInfo(){
 			contractId:$('#sales_order_base_sales_contract_id').val()
 		},
 		success:function(r){//将获取的详细信息添加到tabs中
-			sales_order_contract_detail_sales_contract_grd.datagrid('loadData',r.rows);
+			console.info(r.rows);
+			//1.通过遍历,将销售订单商品列表组个添加到销售订单商品列表中
+			$.each(r.rows,function(index,d){
+				//1.1 将数据格式化
+				var row_data=getSalesOrderGoodsGrdRowFormatter(d);//将数据格式化
+				//1.2 在数据列表中添加、在缓存中添加
+				setSalesOrderGoodsGrd(row_data);
+				$('#sales_order_goods_grd_form_sales_order_goods_grd').datagrid('acceptChanges');//接受改变
+				//1.3 将数据添加到销售合同页签中
+				setSalesOrderSalesContractGoodsDetailGrd(d);
+			});
 		},
 		error:function (r){
 			console.info(r);
@@ -245,12 +266,197 @@ function getSalesContractDetailInfo(){
 		}
 	});
 }
+/**
+ *得到格式化后的销售订单行数据
+ * @param _data 来自后台的数据json格式
+ * @return json 符合 销售订单商品信息列表规则的json
+ **/
+function getSalesOrderGoodsGrdRowFormatter(_data){
+	var json={
+		goodsId:_data.goodsId,//商品编号
+		goodsName:_data.goodsName,//商品名称
+		price:_data.price/100,//单价
+		quantityUnit:_data.quantityUnit,//数量
+		equivalentUnit:_data.equivalentUnit,//折合单位
+		quantityEu:_data.quantityEu,//折合数量
+		priceEu:_data.priceEu/100,//折合单价
+		unit:_data.unit,//规格
+		amount:_data.amount/100,//金额
+		stats:_data.stats,
+		mome:_data.memo//备注
+	};
+	return json;
+}
+
+
+/**
+ * 设置销售订单商品列表
+ * @param row_data 已设置好的datagrid row数据
+ * 
+ **/
+function setSalesOrderGoodsGrd(row_data){
+	var rows = sales_order_goods_grd_form_sales_order_goods_grd.datagrid('getRows');//获取当前页所有数据行
+	var url='${path}/order/manager/salesorder/order_product_info_memcached.html';//缓存地址
+	if(rows.length>0){//
+		//1.存在对应的数据则将其更新
+		var goodsId=row_data.goodsId;
+		var row=null,isExist=false,row_index=0;//初始化
+
+		for(var i=0;i<rows.length;i++){
+			row=rows[i];
+			if(row.goodsId==goodsId){
+				isExist=true;
+				row_index=i;
+				break;
+			}
+		}
+		if(isExist){
+			var total_amount=parseFloat($('#sales_order_base_total_amount').val())*100;//获取总金额
+			 total_amount+=parseFloat(row_data.amount)*100;//获取当前商品的金额
+			var quantity_unit=parseInt(row_data.quantityUnit)+parseInt(row.quantityUnit);
+			//更新datagrid row 更新缓存
+			var row_data_update={
+				quantityUnit:quantity_unit,//数量
+				amount:total_amount/100//金额
+			};
+			updateSalesOrderGoodsGrdRow(url,row_data_update,goodsId,row_index);
+			$('#sales_order_base_total_amount').val(total_amount/100);//将显示总金额进行修改
+			return ;
+		}
+	}
+	addSalesOrderGoodsGrdRow(url,row_data);
+}
+/**
+ * 更新销售订单商品列表
+ * @param  memcached_url 请求缓存的地址
+ * @param  row_data      
+ * @param  goodsId
+ * @param  row_index     
+ **/
+function updateSalesOrderGoodsGrdRow(memcached_url,row_data,goodsId,row_index){
+	//1.更新datagrid
+	sales_order_goods_grd_form_sales_order_goods_grd.datagrid('updateRow',{
+		index:row_index,
+		row:row_data
+	});
+	//2.更新memcached
+	var memcached_data={
+		contractId:$('#sales_order_base_id').val(),//销售订单编号
+		goodsId:goodsId,//商品编号
+		quantityUnit:quantityUnit,
+		amount:amount
+	};
+	//salesOrderGoodsMemcached(memcached_url,memcached_data);
+}
+
+
+
+
+/**
+ * 销售订单列表添加数据行
+ * @param memcached_url 缓存地址
+ * @param row_data 已经组装好的行数据
+ **/
+function addSalesOrderGoodsGrdRow(memcached_url,row_data){
+	//1.添加行数据
+	sales_order_goods_grd_form_sales_order_goods_grd.datagrid('insertRow',{
+		index:0,
+		row:row_data
+	});
+	//2.添加缓存数据
+	var data=getAddSalesOrderGoodsDataMemcachedFormatter(row_data);//将数据格式化为memcached中需要的数据
+	salesOrderGoodsMemcached(memcached_url,data);
+}
+/**
+ * 将数据格式化为memcached中需要的
+ * @param row_data  待处理的数据
+ * @return json     格式化之后的数据
+ **/
+function getAddSalesOrderGoodsDataMemcachedFormatter(row_data){
+	var json={
+	    orderId:$('#sales_order_base_id').val(),//销售订货单编号
+	    goodsId:row_data.goodsId,//商品编号
+	    goodsName:row_data.goodsName,//商品名称
+	    quantity:row_data.quantity,//数量
+	    unit:row_data.unit,//单位
+	    //barCode:row_data.barCode,//条形码
+	    model:row_data.model,//型号
+	    property:row_data.property,//属性
+	    price :row_data.price,//单价
+	    amount:row_data.amount,//金额
+	    stats:row_data.stats,//状态
+	    other:row_data.other,//其他
+	    formate:row_data.formate,//规格编号
+	    priceKg :row_data.priceKg,//单价/kg
+	    totalWeight :row_data.totalWeight,//总重量
+	    tax :row_data.tax,//税率
+	    taxAmount:row_data.taxAmount,//税额
+	    weigthUnit:row_data.weigthUnit,//单位重量
+	    priceWeigthUnit :row_data.priceWeigthUnit,//单位重量单价
+	   //operator:,//
+	    weightUnit:row_data.weightUnit,//每单位重量
+	    batchNo:row_data.batchNo,//batch_no
+	    madeDate:row_data.madeDate,//生产日期
+	    validityDate:row_data.validityDate,//有效期至
+	    //ledgerId:,//
+	    memo :row_data.mome//
+	};
+	return json;
+}
+
+/**
+ * 异常处理缓存数据
+ * @param memcached_url 缓存的请求地址
+ * @param memcahed_data 缓存的数据
+ **/
+function salesOrderGoodsMemcached(memcached_url,memcahed_data){
+	$.ajax({
+		url:memcached_url,//销售订单商品列表缓存地址
+		method:'POST',//请求方式
+		data:memcahed_data,
+		success:function (data){
+			
+			console.info(data);
+		},
+		error:function(data){
+			console.info("与后台通讯失败.. ");
+		}
+	});
+} 
+/**
+ * 将datagrid中对应的缓存数据进行清空并将datagrid对象进行清空
+ *
+ */
+function removeDataGrid2Memcached(){
+	var url='${path}/order/manager/salesorder/order_product_info_remove_memcached.html';
+	//1.将缓存中的数据进行删除
+	$.ajax({
+		url:url,
+		method:'POST',
+		data:{
+			orderId:$('#sales_order_base_id').val(),
+			delete:true
+		},
+		success:function(data){
+			console.info(data.message);
+			if(data.success){
+				//2.将datagrid的数据进行删除
+				//3.将合同总金额归 0
+				$('#sales_order_goods_grd_form_sales_order_goods_grd').datagrid('loadData', {total: 0,rows:[]});
+				sales_order_total_amount=0;
+			}
+		},
+		error:function(data){
+			console.info('与后台访问通讯失败');
+		}
+	});
+}
 //-->
 </script>
 <table class="table" style="width: 100%;">
 	<tr>
 		<th>销售订单号<font color="red">*</font></th>
-		<td><input class="easyui-validatebox" style="background:#eee;width: 150px;" id="sales_order_purchase_base_id" type="text" readonly="readonly"  data-options="" value="${salesOrder.salesOrderId}"/></td>
+		<td><input class="easyui-validatebox" style="background:#eee;width: 150px;" id="sales_order_base_id" type="text" readonly="readonly"  data-options="" value="${salesOrder.salesOrderId}"/></td>
 		<th>状态</th>
 		<td colspan="3"><input id="sales_order_base_status"  class="easyui-validatebox" class="easyui-combobox"  data-options="" value="0"/></td>
 		<th>订货日期</th>
@@ -292,12 +498,12 @@ function getSalesContractDetailInfo(){
 	<tr>
 		<th>合同编号<font color="red">*</font></th>
 		<td>
-			<input class="easyui-validatebox" id="sales_order_base_sales_contract_id" type="text" readonly="readonly"/>
+			<input class="easyui-validatebox" id="sales_order_base_sales_contract_id" type="text" readonly="readonly" />
 			<a id="sales_order_base_sales_contract_btn" href="#" class="easyui-linkbutton" plain="true"><font style="font-size:3ex">...</font></a>
 		</td>
 		<th>合同总金额</th>
 		<td><input id="sales_order_base_total_amount" style="background:#eee;" readonly="readonly"/></td>
-		<td colspan="4"></td>
+		<th colspan="4"></th>
 	</tr>
 </table>
 
