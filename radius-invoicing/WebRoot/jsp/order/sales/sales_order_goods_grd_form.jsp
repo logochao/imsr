@@ -246,25 +246,25 @@ function numbericCurrentyFormatter(numberic){
 	<table class="table" style="width: 100%;">
 		<tr>
 			<th>商品</th>
-			<td colspan="3">
-				<input class="easyui-validatebox" type="text" style="width: 300px;" id="sales_order_goods_grd_form_name" name="sales_order_goods_grd_name" readonly="readonly"/>
+			<td colspan="3"> 
+				<input class="easyui-validatebox" type="text" style="width: 300px;border:1px solid #95B8E7;" id="sales_order_goods_grd_form_name" name="sales_order_goods_grd_name" readonly="readonly"/>
 				<input type="hidden" id="sales_order_goods_grd_form_id"/>
-				<a id="sales_order_goods_grd_form_btn" href="#" class="easyui-linkbutton" plain="true"><font style="font-size:3ex">...</font></a>
+				<a id="sales_order_goods_grd_form_btn"  href="#" class="easyui-linkbutton" plain="true"><font style="font-size:3ex">...</font></a>
 			</td>
 			<th>规格</th>
 			<td colspan="3">
-				<input class="easyui-validatebox" type="text" style="width: 200px;" id="sales_order_goods_grd_form_format" validType="length[0,2]"missingMessage="请输入规格" invalidMessage="不能超过2个字符!" />
+				<input class="easyui-validatebox" type="text" style="width: 200px;border:1px solid #95B8E7" id="sales_order_goods_grd_form_format" validType="length[0,2]"missingMessage="请输入规格" invalidMessage="不能超过2个字符!" />
 			</td>
 			<th>单价</th>
 			<td>
-				<input class="easyui-validatebox" type="text" id="sales_order_goods_grd_form_price" />
+				<input class="easyui-validatebox" type="text" id="sales_order_goods_grd_form_price" style="border:1px solid #95B8E7"/>
 				<a id="btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-font'"  plain="true"></a>
 			</td>
 		</tr>
 		<tr>
 			<th>折合单价</th>
 			<td>
-				<input class="easyui-validatebox" type="text" id="sales_order_goods_grd_form_price_convert_unit" data-options="validType:'numberic',missingMessage:'请输入折合单价',invalidMessage:'请输入正确的格式'"/>
+				<input class="easyui-validatebox" type="text" id="sales_order_goods_grd_form_price_convert_unit" style="border:1px solid #95B8E7" data-options="validType:'numberic',missingMessage:'请输入折合单价',invalidMessage:'请输入正确的格式'"/>
 			</td>
 			<th>数量</th>
 			<td>
@@ -278,13 +278,13 @@ function numbericCurrentyFormatter(numberic){
 			</td>
 			<th>金额</th>
 			<td>
-				<input class="easyui-validatebox" type="text" id="sales_order_goods_grd_form_amount"  value="0.00" readonly="readonly"/>
+				<input class="easyui-validatebox" type="text" id="sales_order_goods_grd_form_amount"  value="0.00" readonly="readonly" style="border:1px solid #95B8E7"/>
 			</td>
 		</tr>
 		<tr>
 			<th>备注</th>
 			<td colspan="6">
-				<input class="easyui-validatebox" style="width: 500px;" type="text" id="sales_order_goods_grd_form_mome" />
+				<input class="easyui-validatebox" style="width: 500px;border:1px solid #95B8E7" type="text" id="sales_order_goods_grd_form_mome" />
 			</td>
 			<th colspan="2" style="text-align: center;"><input type="checkbox"/> 加入后不置空</th>
 			<td>
