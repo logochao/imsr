@@ -17,13 +17,14 @@ $(document).ready(function(){
 </head>
 <body>
 <div id="business_goods_index_layout" class="easyui-layout" style="width:100%;height:100%;" fit="true">
-    <div data-options="region:'north',split:true,title:'  '" style="width:100%;height:250%;" border="false">
+    <div data-options="region:'north',split:true,title:'  '" style="width:100%;height:180%;" border="false">
     	<div id="business_goods_index_panel_tools" style="margin-top:5px;"></div>
     	<div style="width:100%;height:100%;padding:15px;" fit="true" id="business_goods_index_panel" class="easyui-panel" border="false">
     		<jsp:include flush="true" page="business_goods_search.jsp"></jsp:include>
     	</div>
     </div>
     <div data-options="region:'center',split:true" fit="true" border="false">
+    	<jsp:include flush="true" page="business_goods_grd.jsp"></jsp:include>
     </div>
 </div>
 </body>
