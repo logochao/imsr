@@ -57,14 +57,16 @@
     <div data-options="region:'center',split:true" fit="true" border="false">
     	<div id="sales_order_index_tabs"  data-options="split:true" fit="true" border="false">
     		<div title="订单明细" fit="true">
-                <jsp:include flush="true" page="sales_order_goods_grd_form_copy.jsp"></jsp:include>
+                <jsp:include flush="true" page="sales_order_goods_grd_form.jsp"></jsp:include>
 	        </div>
     		<div title="订单条款" fit="true">
+    			<jsp:include flush="true" page="sales_order_terms.jsp"></jsp:include>
 	        </div>
     		<div title="订单备注" fit="true">
+    			<jsp:include flush="true" page="sales_order_memo.jsp"></jsp:include>
 	        </div>
     		<div title="销售合同" fit="true">
-    			<jsp:include flush="true" page="sales_order_contract_detail.jsp"></jsp:include>
+    			<jsp:include flush="true" page="sales_order_sales_contract_goods_detail.jsp"></jsp:include>
 	        </div>
     		<div title="报价记录" fit="true">
 	        </div>
