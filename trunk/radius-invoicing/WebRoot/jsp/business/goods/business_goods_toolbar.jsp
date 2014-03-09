@@ -29,8 +29,9 @@ $(function(){
 	<a id="business_goods_toolbar_delete_btn" href="#" class="easyui-linkbutton" style="margin-left:20px;" data-options="iconCls:'icon-attach'">删除</a>
 </div>
 <div style="display:inline;width: 30%;margin-left:80px;">
-	<a id="business_goods_toolbar_import_btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-true'">导入</a>
-	<a id="business_goods_toolbar_export_btn" href="#" class="easyui-linkbutton" style="margin-left:20px;" data-options="iconCls:'icon-chart_bar'">导出</a>
+	<a id="business_goods_toolbar_ok_btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-save'">导入</a>
+	<a id="business_goods_toolbar_import_btn" href="#" class="easyui-linkbutton" style="margin-left:20px;" data-options="iconCls:'icon-excel_import'">导入</a>
+	<a id="business_goods_toolbar_export_btn" href="#" class="easyui-linkbutton" style="margin-left:20px;" data-options="iconCls:'icon-excel_export'">导出</a>
 </div>
 <div style="display:inline;margin-left:200px;">
 	<a id="business_goods_toolbar_close_btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'">关闭</a>
