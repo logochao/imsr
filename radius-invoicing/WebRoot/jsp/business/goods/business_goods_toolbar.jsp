@@ -5,10 +5,10 @@ $(function(){
 	//新建
 	$('#business_goods_toolbar_new_btn').on('click',function(){
 	});
-	//编辑
-	$('#business_goods_toolbar_add_btn').on('click',function(){
-	});
 	//删除
+	$('#business_goods_toolbar_delete_btn').on('click',function(){
+	});
+	//挂单
 	$('#business_goods_toolbar_pend_btn').on('click',function(){
 	});
 	//导入
@@ -25,7 +25,7 @@ $(function(){
 </script>
 <div style="height: 28px;width: 30%;display:inline;padding-left:20px;">
 	<a id="business_goods_toolbar_new_btn" href="#" class="easyui-linkbutton"  data-options="iconCls:'icon-add'">新建</a>
-	<a id="business_goods_toolbar_add_btn" href="#" class="easyui-linkbutton" style="margin-left:20px;" data-options="iconCls:'icon-book_open'">编辑</a>
+	<a id="business_goods_toolbar_delete_btn" href="#" class="easyui-linkbutton" style="margin-left:20px;" data-options="iconCls:'icon-remove'">编辑</a>
 	<a id="business_goods_toolbar_pend_btn" href="#" class="easyui-linkbutton" style="margin-left:20px;" data-options="iconCls:'icon-attach'">挂单</a>
 </div>
 <div style="display:inline;width: 30%;margin-left:80px;">
