@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="purchaseContractGoodsGrdSqlMap">
+
+  <typeAlias alias="purchaseContractGoodsGrd" type="com.radius.invoicing.ibatis.model.PurchaseContractGoodsGrd" />
+  
+  <sql id="purchaseContractGoodsGrdFileds">
+  	 contract_id contractId,goods_id goodsId,goods_name goodsName,unit unit,price_of_unit priceUnit,equivalent_unit equivalentUnit,price_of_eu priceEu,
+  	 quantity_of_eu_per_unit quantityEuPerUnit,quantity_of_unit quantityUnit,quantity_of_eu quantityEu,amount amount,STATUS stats,
+  	 ledger_id ledgerId,memo memo,creater creater,createdate createdate,reviser reviser,revisedate revisedate,verifier verifydate
+  </sql>
+  
+  <resultMap id="purchaseContractGoodsGrd" class="purchaseContractGoodsGrd">
+    <result column="contract_id" jdbcType="char" javaType="java.lang.String" property="contractId" />
+    <result column="goods_id" jdbcType="char" javaType="java.lang.String" property="goodsId" />
+    <result column="goods_name" jdbcType="varchar" javaType="java.lang.String" property="goodsName" />
+    <result column="unit" jdbcType="char" javaType="java.lang.String" property="unit" />
+    <result column="price_of_unit" jdbcType="int" javaType="java.lang.Integer" property="priceUnit" />
+    <result column="equivalent_unit" jdbcType="int" javaType="java.lang.Integer" property="equivalentUnit" />
+    <result column="price_of_eu" jdbcType="int" javaType="java.lang.Integer" property="priceEu" />
+    <result column="quantity_of_eu_per_unit" jdbcType="int" javaType="java.lang.Integer" property="quantityEuPerUnit" />
+    <result column="quantity_of_unit" jdbcType="int" javaType="java.lang.Integer" property="quantityUnit" />
+    <result column="quantity_of_eu" jdbcType="int" javaType="java.lang.Integer" property="quantityEu" />
+    <result column="amount" jdbcType="int" javaType="java.lang.Integer" property="amount" />
+    <result column="STATUS" jdbcType="char" javaType="java.lang.String" property="stats" />
+  	<result column="ledger_id" jdbcType="char" javaType="java.lang.String" property="ledgerId" />
+  	<result column="memo" jdbcType="text" javaType="java.lang.String" property="memo" />
+    <result column="creater" jdbcType="char" javaType="java.lang.String" property="creater" />
+    <result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createdate" />
+    <result column="reviser" jdbcType="char" javaType="java.lang.String" property="reviser" />
+    <result column="revisedate" jdbcType="datetime" javaType="java.util.Date" property="revisedate" />
+    <result column="verifier" jdbcType="char" javaType="java.lang.String" property="verifier" />    
+    <result column="verifydate" jdbcType="datetime" javaType="java.util.Date" property="verifydate"/>
+  </resultMap>
+  
+  <sql id="whereLike">
+  	<dynamic prepend="where">
+  		1=1  
+  		<isNotEmpty prepend="and" property="contractId">contract_id=#contractId#</isNotEmpty>
+  		<isNotEmpty prepend="and" property="goodsId">goods_id=#goodsId#</isNotEmpty>
+  		<isNotEmpty prepend="and" property="goodsName">goods_name=#goodsName#</isNotEmpty>
+		<isNotEmpty prepend="and" property="unit">unit=#unit#</isNotEmpty>
+		<isNotNull prepend="and" property="priceUnit">price_of_unit=#priceUnit#</isNotNull>
+		<isNotNull prepend="and" property="equivalentUnit">equivalent_unit=#equivalentUnit#</isNotNull>
+		<isNotNull prepend="and" property="priceEu">price_of_eu=#priceEu#</isNotNull>
+		<isNotNull prepend="and" property="quantityEuPerUnit">quantity_of_eu_per_unit=#quantityEuPerUnit#</isNotNull>
+		<isNotNull prepend="and" property="quantityUnit">quantity_of_unit=#quantityUnit#</isNotNull>
+		<isNotNull prepend="and" property="quantityEu">quantity_of_eu=#quantityEu#</isNotNull>
+		<isNotNull prepend="and" property="amount">amount=#amount#</isNotNull>
+		<isNotEmpty prepend="and" property="stats">STATUS=#stats#</isNotEmpty>
+ 		<isNotEmpty prepend="and" property="ledgerId">ledger_id=#ledgerId#</isNotEmpty> 
+ 		<isNotEmpty prepend="and" property="memo">memo=#memo#</isNotEmpty> 
+  	</dynamic>
+  </sql>
+ 
+	 <select id="getPurchaseContractGoodsGrdByPk" parameterClass="java.util.Map" resultMap="purchaseContractGoodsGrd">
+	 	SELECT <include refid="purchaseContractGoodsGrdFileds"/>
+	 	FROM RS_PURCHASE_CONTRACT_GOODS_GRD
+	 	WHERE contract_id =#contractId# AND goods_id=#goodsId#
+	 </select>
+	 
+	 <select id="getPurchaseContractGoodsGrd" parameterClass="purchaseContractGoodsGrd" resultMap="purchaseContractGoodsGrd">
+	 	SELECT <include refid="purchaseContractGoodsGrdFileds"/>
+	 	FROM RS_PURCHASE_CONTRACT_GOODS_GRD
+	 	<include refid="whereLike"/>
+	 </select>
+   
+   	<insert id="insert" parameterClass="purchaseContractGoodsGrd">
+   		INSERT INTO RS_PURCHASE_CONTRACT_GOODS_GRD (
+   			contract_id,
+   			goods_id,
+	  		<isNotEmpty  property="goodsName">goods_name,</isNotEmpty>
+			<isNotEmpty  property="unit">unit,</isNotEmpty>
+			<isNotNull  property="priceUnit">price_of_unit,</isNotNull>
+			<isNotNull  property="equivalentUnit">equivalent_unit,</isNotNull>
+			<isNotNull  property="priceEu">price_of_eu,</isNotNull>
+			<isNotNull  property="quantityEuPerUnit">quantity_of_eu_per_unit,</isNotNull>
+			<isNotNull  property="quantityUnit">quantity_of_unit,</isNotNull>
+			<isNotNull  property="quantityEu">quantity_of_eu,</isNotNull>
+			<isNotNull  property="amount">amount,</isNotNull>
+			<isNotEmpty  property="stats">STATUS,</isNotEmpty>
+			<isNotEmpty  property="ledgerId">ledger_id,</isNotEmpty> 
+ 		    <isNotEmpty  property="memo">memo,</isNotEmpty> 
+	  	    creater,
+	  	    createdate
+   		)VALUES(
+   			#contractId#,
+   			#goodsId#,
+	  		<isNotEmpty  property="goodsName">#goodsName#,</isNotEmpty>
+			<isNotEmpty  property="unit">#unit#,</isNotEmpty>
+			<isNotNull  property="priceUnit">#priceUnit#,</isNotNull>
+			<isNotNull  property="equivalentUnit">#equivalentUnit#,</isNotNull>
+			<isNotNull  property="priceEu">#priceEu#,</isNotNull>
+			<isNotNull  property="quantityEuPerUnit">#quantityEuPerUnit#,</isNotNull>
+			<isNotNull  property="quantityUnit">#quantityUnit#,</isNotNull>
+			<isNotNull  property="quantityEu">#quantityEu#,</isNotNull>
+			<isNotNull  property="amount">#amount#,</isNotNull>
+			<isNotEmpty  property="stats">#stats#,</isNotEmpty>
+	 		<isNotEmpty  property="ledgerId">#ledgerId#,</isNotEmpty> 
+	 		<isNotEmpty  property="memo">#memo#,</isNotEmpty> 
+   			 creater,now()
+   		)
+   	</insert>
+   
+   	<update id="updatePurchaseContractGoodsGrdByPK" parameterClass="purchaseContractGoodsGrd">
+   		UPDATE RS_PURCHASE_CONTRACT_GOODS_GRD
+   		<dynamic prepend="SET">
+	  		<isNotEmpty prepend="," property="goodsName">goods_name=#goodsName#</isNotEmpty>
+			<isNotEmpty prepend="," property="unit">unit=#unit#</isNotEmpty>
+			<isNotNull prepend="," property="priceUnit">price_of_unit=#priceUnit#</isNotNull>
+			<isNotNull prepend="," property="equivalentUnit">equivalent_unit=#equivalentUnit#</isNotNull>
+			<isNotNull prepend="," property="priceEu">price_of_eu=#priceEu#</isNotNull>
+			<isNotNull prepend="," property="quantityEuPerUnit">quantity_of_eu_per_unit=#quantityEuPerUnit#</isNotNull>
+			<isNotNull prepend="," property="quantityUnit">quantity_of_unit=#quantityUnit#</isNotNull>
+			<isNotNull prepend="," property="quantityEu">quantity_of_eu=#quantityEu#</isNotNull>
+			<isNotNull prepend="," property="amount">amount=#amount#</isNotNull>
+			<isNotEmpty prepend="," property="stats">STATUS=#stats#</isNotEmpty>
+	 		<isNotEmpty prepend="," property="ledgerId">ledger_id=#ledgerId#</isNotEmpty> 
+	 		<isNotEmpty prepend="," property="memo">memo=#memo#</isNotEmpty> 
+  	 		<isNotEmpty  prepend="," property="reviser">reviser = #reviser#,revisedate = now() </isNotEmpty>
+  			<isNotEmpty  prepend="," property="verifier">verifier = #verifier#,verifydate = now() </isNotEmpty>
+   		</dynamic>
+   		WHERE contract_id =#contractId# AND goods_id=#goodsId#
+   	</update>
+   	<!-- 分页查询语句 -->
+   	<select id="getpurchaseContractGoodsGrdSplitPageBySQL" remapResults="true" parameterClass="java.lang.String" resultMap="purchaseContractGoodsGrd">
+   		$splitPageSQL$
+   	</select>
+   	<!-- end -->
+   	
+   	<select id="getPurchaseContractGoodsGrdSplitPageCountSQL" remapResults="true" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+   		$countSQL$
+   	</select>
+   	
+   	<delete id="deletePurchaseContractGoodsGrd" parameterClass="purchaseContractGoodsGrd">
+   		DELETE FROM RS_PURCHASE_CONTRACT_GOODS_GRD
+   		<include refid="whereLike"/>
+   	</delete>
+   	<delete id="deletePurchaseContractGoodsGrdByPK" parameterClass="java.util.Map">
+   		DELETE FROM RS_PURCHASE_CONTRACT_GOODS_GRD
+   		WHERE contract_id =#contractId# AND goods_id=#goodsId#
+   	</delete>
+</sqlMap>
