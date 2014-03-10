@@ -5,7 +5,7 @@
   <typeAlias alias="salesOrder" type="com.radius.invoicing.ibatis.model.SalesOrder" />
   
   <sql id="salesOrderFileds">
-  	 sales_order_id salesOrderId,customer_id customerId,customer_name customerName,ordered_date orderedDate,
+  	 sales_order_id salesOrderId,from_sales_order_id fromSalesOrderId,customer_id customerId,customer_name customerName,ordered_date orderedDate,
   	 delivery_date deliveryDate,`status` stats,trade_assistant tradeAssistant,salesman_id salesManId,fax fax,delivery_address deliveryAddress,
   	 link_man linkMan,tel tel,customer_bill_id customerBillId,delivery_point deliveryPoint,delivery_status deliveryStatus,outstore_status outstoreStatus,
   	 paymented_status paymentedStatus,deliver_order_id deliverOrderId,outstore_order_id outstoreOrderId,goods_qt_id goodsQtId,terms terms,budget_cost budgetCost,
@@ -16,6 +16,7 @@
   
   <resultMap id="salesOrder" class="salesOrder">
 	 <result column="sales_order_id" jdbcType="char" javaType="java.lang.String" property="salesOrderId" />
+	 <result column="from_sales_order_id" jdbcType="char" javaType="java.lang.String" property="fromSalesOrderId" />
 	 <result column="customer_id" jdbcType="char" javaType="java.lang.String" property="customerId" />
 	 <result column="customer_name" jdbcType="char" javaType="java.lang.String" property="customerName" />
 	 <result column="ordered_date" jdbcType="date" javaType="java.util.Date" property="orderedDate" />
@@ -64,6 +65,7 @@
   	<dynamic prepend="where">
   		1=1  AND 
   		<isNotEmpty prepend="and" property="salesOrderId">sales_order_id=#salesOrderId#</isNotEmpty>
+  		<isNotEmpty prepend="and" property="fromSalesOrderId">from_sales_order_id=#fromSalesOrderId#</isNotEmpty>
   		<isNotEmpty prepend="and" property="customerId">customer_id=#customerId#</isNotEmpty>
   		<isNotEmpty prepend="and" property="customerName">customer_name=#customerName#</isNotEmpty>
   		<isNotNull prepend="and" property="orderedDate">ordered_date=#orderedDate#</isNotNull>
@@ -116,6 +118,7 @@
    	<insert id="insert" parameterClass="salesOrder">
    		INSERT INTO RS_SALES_ORDER (
    			sales_order_id,
+	  		<isNotEmpty  property="fromSalesOrderId">from_sales_order_id,</isNotEmpty>
 	  		<isNotEmpty  property="customerId">customer_id,</isNotEmpty>
 	  		<isNotEmpty  property="customerName">customer_name,</isNotEmpty>
 	  		<isNotNull  property="orderedDate">ordered_date,</isNotNull>
@@ -154,6 +157,7 @@
 	  	    createdate
    		)VALUES(
    			#salesOrderId#,
+	  		<isNotEmpty  property="fromSalesOrderId">#fromSalesOrderId#,</isNotEmpty>
 	  		<isNotEmpty  property="customerId">#customerId#,</isNotEmpty>
 	  		<isNotEmpty  property="customerName">#customerName#,</isNotEmpty>
 	  		<isNotNull  property="orderedDate">#orderedDate#,</isNotNull>
@@ -195,6 +199,7 @@
    	<update id="updateSalesOrderByPK" parameterClass="salesOrder">
    		UPDATE RS_SALES_ORDER
    		<dynamic prepend="SET">
+	  		<isNotEmpty prepend="," property="fromSalesOrderId">from_sales_order_id=#fromSalesOrderId#</isNotEmpty>
 	  		<isNotEmpty prepend="," property="customerId">customer_id=#customerId#</isNotEmpty>
 	  		<isNotEmpty prepend="," property="customerName">customer_name=#customerName#</isNotEmpty>
 	  		<isNotNull prepend="," property="orderedDate">ordered_date=#orderedDate#</isNotNull>
