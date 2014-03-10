@@ -12,6 +12,7 @@ public class SalesOrder extends ExtInfo{
 	
 	
 	   private String  salesOrderId="";//销售订货单编号
+	   private String  fromSalesOrderId="";//拆分钱的订单号
 	   private String  customerId="";//客户编号
 	   private String  customerName="";//客户名称
 	   private Date  orderedDate=null;//订货日期
@@ -262,6 +263,12 @@ public class SalesOrder extends ExtInfo{
 	}
 	public void setTradeAssistant(String tradeAssistant) {
 		this.tradeAssistant = tradeAssistant;
+	}
+	public String getFromSalesOrderId() {
+		return fromSalesOrderId;
+	}
+	public void setFromSalesOrderId(String fromSalesOrderId) {
+		this.fromSalesOrderId = fromSalesOrderId;
 	}
 	   
 }
