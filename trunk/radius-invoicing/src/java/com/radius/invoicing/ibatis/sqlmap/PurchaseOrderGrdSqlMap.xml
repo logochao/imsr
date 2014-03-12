@@ -5,7 +5,7 @@
   <typeAlias alias="purchaseOrderGrd" type="com.radius.invoicing.ibatis.model.PurchaseOrderGrd" />
   
   <sql id="purchaseOrderGrdFileds">
-  	 `purchase_order_id` purchaseOrderId`bar_code` barCode,`goods_id` goodsId,`goods_name` goodsName,`quantity` quantity,
+  	 `purchase_order_id` purchaseOrderId,`bar_code` barCode,`goods_id` goodsId,`goods_name` goodsName,`quantity` quantity,
 	`unit` unit,`price` price,`amount` amount,`true_goods_name` trueGoodsName,`origin_place` originPlace,`appearance` appearance,
 	`format_type` formatType,`tax` tax,`tax_amount` taxAmount,`series_no` seriesNo,`model` model,`property` property,`weigth_per_unit` weigthPerUnit,
 	`price_of_weigth_per_unit` priceWeigthPerUnit,`operator` operator,`batch_no` batchNo,`made_date` madeDate,`validity_date` validityDate,
@@ -79,10 +79,10 @@
   	</dynamic>
   </sql>
  
-	 <select id="getPurchaseOrderGrdByPk" parameterClass="java.lang.String" resultClass="purchaseOrderGrd">
+	 <select id="getPurchaseOrderGrdByPk" parameterClass="java.util.Map" resultClass="purchaseOrderGrd">
 	 	SELECT <include refid="purchaseOrderGrdFileds"/>
 	 	FROM RS_PURCHASE_ORDER_GRD
-	 	WHERE purchase_order_id=#purchaseOrderId#
+	 	WHERE purchase_order_id=#purchaseOrderId# AND goods_id =#goodsId#
 	 </select>
 	 
 	 <select id="getPurchaseOrderGrd" parameterClass="purchaseOrderGrd" resultClass="purchaseOrderGrd">
@@ -93,9 +93,8 @@
    
    	<insert id="insert" parameterClass="purchaseOrderGrd">
    		INSERT INTO RS_PURCHASE_ORDER_GRD (
-   			purchase_order_id,
+   			purchase_order_id,goods_id,
 	  		<isNotEmpty  property="barCode">bar_code,</isNotEmpty>
-			<isNotEmpty  property="goodsId">goods_id,</isNotEmpty>
 			<isNotEmpty  property="goodsName">goods_name,</isNotEmpty>
 			<isNotNull  property="quantity">quantity,</isNotNull>
 			<isNotEmpty  property="unit">unit,</isNotEmpty>
@@ -121,9 +120,8 @@
 	  	    creater,
 	  	    createdate
    		)VALUES(
-   			#purchaseOrderId#,
+   			#purchaseOrderId#,#goodsId#,
 	  		<isNotEmpty  property="barCode">#barCode#,</isNotEmpty>
-			<isNotEmpty  property="goodsId">#goodsId#,</isNotEmpty>
 			<isNotEmpty  property="goodsName">#goodsName#,</isNotEmpty>
 			<isNotNull  property="quantity">#quantity#,</isNotNull>
 			<isNotEmpty  property="unit">#unit#,</isNotEmpty>
@@ -154,7 +152,6 @@
    		UPDATE RS_PURCHASE_ORDER_GRD
    		<dynamic prepend="SET">
 	  		<isNotEmpty  prepend=","   property="barCode">bar_code=#barCode#</isNotEmpty>
-			<isNotEmpty  prepend=","   property="goodsId">goods_id=#goodsId#</isNotEmpty>
 			<isNotEmpty  prepend=","   property="goodsName">goods_name=#goodsName#</isNotEmpty>
 			<isNotNull  prepend=","   property="quantity">quantity=#quantity#</isNotNull>
 			<isNotEmpty  prepend=","   property="unit">unit=#unit#</isNotEmpty>
@@ -175,12 +172,12 @@
 			<isNotNull  prepend=","   property="weightPerUnit">weight_per_unit=#weightPerUnit#</isNotNull>
 			<isNotNull  prepend=","   property="madeDate">made_date=#madeDate#</isNotNull>
 			<isNotNull  prepend=","   property="validityDate">validity_date=#validityDate#</isNotNull>
-	 		<isNotEmpty prepend="," property="ledgerId">ledger_id=#ledgerId#</isNotEmpty> 
-	 		<isNotEmpty prepend="," property="memo">memo=#memo#</isNotEmpty> 
-  	 		<isNotEmpty  prepend="," property="reviser">reviser = #reviser#,revisedate = now() </isNotEmpty>
-  			<isNotEmpty  prepend="," property="verifier">verifier = #verifier#,verifydate = now() </isNotEmpty>
+	 		<isNotEmpty prepend=","   property="ledgerId">ledger_id=#ledgerId#</isNotEmpty> 
+	 		<isNotEmpty prepend=","   property="memo">memo=#memo#</isNotEmpty> 
+  	 		<isNotEmpty  prepend=","  property="reviser">reviser = #reviser#,revisedate = now() </isNotEmpty>
+  			<isNotEmpty  prepend=","  property="verifier">verifier = #verifier#,verifydate = now() </isNotEmpty>
    		</dynamic>
-   		WHERE purchase_order_id=#purchaseOrderId#
+   		WHERE purchase_order_id=#purchaseOrderId# AND goods_id =#goodsId#
    	</update>
    	<!-- 分页查询语句 -->
    	<select id="getPurchaseOrderGrdSplitPageBySQL" remapResults="true" parameterClass="java.lang.String" resultMap="purchaseOrderGrd">
@@ -196,8 +193,8 @@
    		DELETE FROM RS_PURCHASE_ORDER_GRD
    		<include refid="whereLike"/>
    	</delete>
-   	<delete id="deletePurchaseOrderGrdByPK" parameterClass="java.lang.String">
+   	<delete id="deletePurchaseOrderGrdByPK" parameterClass="java.util.Map">
    		DELETE FROM RS_PURCHASE_ORDER_GRD
-   		WHERE purchase_order_id=#purchaseOrderId#
+   		WHERE purchase_order_id=#purchaseOrderId# AND goods_id =#goodsId#
    	</delete>
 </sqlMap>
