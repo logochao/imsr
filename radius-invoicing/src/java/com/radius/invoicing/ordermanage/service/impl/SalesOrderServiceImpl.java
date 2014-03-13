@@ -1,18 +1,25 @@
 package com.radius.invoicing.ordermanage.service.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.radius.base.cache.memcache.MemcacheClient;
 import com.radius.base.utils.Constants;
 import com.radius.base.utils.JsonUtils;
+import com.radius.invoicing.ibatis.dao.SalesOrderDao;
+import com.radius.invoicing.ibatis.dao.SalesOrderGoodsGrdDao;
+import com.radius.invoicing.ibatis.model.SalesOrder;
 import com.radius.invoicing.ibatis.model.SalesOrderGoodsGrd;
+import com.radius.invoicing.ordermanage.compent.SalesOrderCompent;
 import com.radius.invoicing.ordermanage.service.SalesOrderService;
 
 /**
@@ -28,6 +35,14 @@ public class SalesOrderServiceImpl implements Constants, SalesOrderService{
 	private Logger logger=Logger.getLogger(this.getClass());
 	
 	private JsonUtils jsonUtils=null;
+	
+	@Autowired(required=false)
+	@Qualifier("salesOrderDaoImpl")
+	private SalesOrderDao salesOrderDao;
+	
+	@Autowired(required=false)
+	@Qualifier("salesOrderGoodsGrdDaoImpl")
+	private SalesOrderGoodsGrdDao salesOrderGoodsGrdDao;
 	
 	@PostConstruct
 	public void init(){
@@ -108,10 +123,47 @@ public class SalesOrderServiceImpl implements Constants, SalesOrderService{
 	 * @return
 	 * @throws Exception
 	 */
-	public JsonUtils saveSalesOrderInfos(Object...objects)throws Exception{
-		//1
+	public JsonUtils saveSalesOrderInfos(String ledgerId,SalesOrder salesOrder,String salesOrderGoodsGrdMemcachedkey,String salesContractId)throws Exception{
+		boolean success=false;
+		String message="操作失败";
+		String resultCode="0";
+		//1.销售订单信息
+	    //2.销售订单商品
+		List<SalesOrderGoodsGrd> salesOrderGoodsGrdList=SalesOrderCompent.getSalesOrderGoodsGrdByMemcached(ledgerId, salesOrderGoodsGrdMemcachedkey, salesContractId, salesOrder.getStats(),salesOrder.getCreater());
 		
-		return null;
+		SalesOrder temp=salesOrderDao.getSalesOrderByPk(salesOrder.getSalesOrderId());//
+		if(temp==null){
+			//保存销售订单
+			salesOrderDao.insertSalesOrder(salesOrder);
+			//保存销售订单商品列表
+			salesOrderGoodsGrdDao.batchInsertSalesOrderGoodsGrd(salesOrderGoodsGrdList);
+			
+			success=true;
+			message="添加销售订单相关信息成功!!!";
+			resultCode="1";
+			logger.info(message);
+		}else{
+			salesOrderDao.updateSalesOrderStatusBySalesOrderId(salesOrder);
+			
+			SalesOrderGoodsGrd salesOrderGoodsGrd = new SalesOrderGoodsGrd();
+			salesOrderGoodsGrd.setStats(salesOrder.getStats());
+			salesOrderGoodsGrd.setOrderId(salesOrder.getSalesOrderId());
+			
+			salesOrderGoodsGrdDao.updateSalesOrderGoodsGrdStatusByPK(salesOrderGoodsGrd);
+			
+			success=true;
+			message="更新销售订单相关信息成功!!!";
+			logger.info(message);
+			resultCode="0";
+		}
+		if(success){
+			MemcacheClient.delete(salesOrderGoodsGrdMemcachedkey);
+		}
+		//返回操作信息
+		JsonUtils result = new  JsonUtils(success,message);
+		result.setChild(resultCode);
+		
+		return result;
 	}
 	
 	@PreDestroy
