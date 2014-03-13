@@ -1,6 +1,7 @@
 package com.radius.invoicing.ordermanage.service;
 
 import com.radius.base.utils.JsonUtils;
+import com.radius.invoicing.ibatis.model.SalesOrder;
 import com.radius.invoicing.ibatis.model.SalesOrderGoodsGrd;
 
 /**
@@ -36,6 +37,6 @@ public interface SalesOrderService {
 	 * @return
 	 * @throws Exception
 	 */
-	public JsonUtils saveSalesOrderInfos(Object... objects) throws Exception;
+	public JsonUtils saveSalesOrderInfos(String ledgerId,SalesOrder salesOrder,String salesOrderGoodsGrdMemcachedkey,String salesContractId)throws Exception;
 
 }

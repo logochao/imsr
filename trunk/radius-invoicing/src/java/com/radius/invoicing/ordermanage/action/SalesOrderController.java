@@ -109,11 +109,14 @@ public class SalesOrderController extends BaseController {
 	@RequestMapping("/order/manager/salesorder/sales_order_infos_add.html")
 	@ResponseBody
 	public JsonUtils addSalesOrderInfos(HttpServletRequest request,HttpServletResponse response,SalesOrder salesOrder)throws Exception{
+		String ledgerId = "000101";//帐套
+		String operator="0001";//当前操作员
 		//1.构建销售订单
-		//SalesOrder salesOrder = 
+		salesOrder.setLedgerId(ledgerId);
+		salesOrder.setCreater(operator);
 		//2.构建销售订单商品信息列表
-		
-		return null;
+		String salesOrderGoodsGrdMemcachedkey=salesOrder.getSalesOrderId()+"_sales_order_add_order_product_info";//合同编号_sales_order_add_order_product_info
+		return salesOrderService.saveSalesOrderInfos(ledgerId, salesOrder, salesOrderGoodsGrdMemcachedkey, ServletRequestUtils.getStringParameter(request,"salesContractId"));
 	}
 	
 	
