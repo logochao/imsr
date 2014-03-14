@@ -89,4 +89,14 @@ public class SalesOrderDaoImpl extends BaseIbatisDaoImpl<SalesOrder> implements 
 	public void updateSalesOrderStatusBySalesOrderId(SalesOrder salesOrder){
 		this.updateObject(salesOrder, SQLMAPNAMESPACE+"salesOrder");
 	}
+	
+	/**
+	 * 根据供应商编号获取销售订单信息
+	 * @param supplierId
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<SalesOrder> getSalesOrderBySupplierId(String supplierId){
+		return this.getSqlMapClientTemplate().queryForList(SQLMAPNAMESPACE+"getSalesOrderBySupplierId", supplierId);
+	}
 }

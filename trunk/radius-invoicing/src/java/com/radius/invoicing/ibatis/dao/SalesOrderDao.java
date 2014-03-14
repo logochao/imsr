@@ -68,5 +68,14 @@ public interface SalesOrderDao {
 	 * @param salesOrder
 	 */
 	public void updateSalesOrderStatusBySalesOrderId(SalesOrder salesOrder);
+	
+	
+	/**
+	 * 根据供应商编号获取销售订单信息
+	 * @param supplierId
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<SalesOrder> getSalesOrderBySupplierId(String supplierId);
 
 }

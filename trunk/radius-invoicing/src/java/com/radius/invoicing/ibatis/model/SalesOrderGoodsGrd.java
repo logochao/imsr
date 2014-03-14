@@ -10,37 +10,40 @@ import java.util.Date;
  */
 public class SalesOrderGoodsGrd extends ExtInfo {
 
-	   private Integer seriesNo ;//序号
-	   private String orderId;//销售订货单编号
-	   private String goodsId;//商品编号
-	   private String goodsName;//商品名称
-	   private Integer quantity;//数量
-	   private String unit;//单位
-	   private String barCode;//条形码
-	   private String model;//型号
-	   private String property;//属性
-	   private String price ;//单价
-	   private String amount;//金额
-	   private String stats;//状态
-	   private String other;//其他
-	   private String formate;//规格编号
-	   private Integer priceKg ;//单价/kg
-	   private Integer totalWeight ;//总重量
-	   private Integer tax ;//税率
-	   private Integer taxAmount;//税额
-	   private Integer weigthUnit;//单位重量
-	   private Integer priceWeigthUnit ;//单位重量单价
-	   private String operator;//
-	   private Integer weightUnit;//每单位重量
-	   private Integer batchNo;//batch_no
-	   private Date madeDate;//生产日期
-	   private Date validityDate;//有效期至
-	   private String ledgerId;//
-	   private String memo ;//
-	public String getAmount() {
+	   private Integer seriesNo = null ;//序号
+	   private String orderId = "";//销售订货单编号
+	   private String goodsId = "";//商品编号
+	   private String goodsName = "";//商品名称
+	   private Integer quantity = null ;//数量
+	   private String unit = "";//单位
+	   private String barCode = "";//条形码
+	   private String model = "";//型号
+	   private String property = "";//属性
+	   private Integer price  = null;//单价
+	   private Integer amount = null ;//金额
+	   private String stats = "";//状态
+	   private String other = "";//其他
+	   private String formate = "";//规格编号
+	   private Integer priceKg = null  ;//单价/kg
+	   private Integer totalWeight = null  ;//总重量
+	   private Integer tax  = null ;//税率
+	   private Integer taxAmount = null ;//税额
+	   private Integer weigthUnit = null ;//单位重量
+	   private Integer priceWeigthUnit = null  ;//单位重量单价
+	   private String operator = "";//
+	   private Integer weightUnit = null ;//每单位重量
+	   private Integer batchNo = null ;//batch_no
+	   private Date madeDate = null ;//生产日期
+	   private Date validityDate = null ;//有效期至
+	   private String  memo="";//商品备注
+	   private String  ledgerId="";//账套编号
+
+	
+	   
+	public Integer getAmount() {
 		return amount;
 	}
-	public void setAmount(String amount) {
+	public void setAmount(Integer amount) {
 		this.amount = amount;
 	}
 	public String getBarCode() {
@@ -115,10 +118,11 @@ public class SalesOrderGoodsGrd extends ExtInfo {
 	public void setOther(String other) {
 		this.other = other;
 	}
-	public String getPrice() {
+	
+	public Integer getPrice() {
 		return price;
 	}
-	public void setPrice(String price) {
+	public void setPrice(Integer price) {
 		this.price = price;
 	}
 	public Integer getPriceKg() {

@@ -152,8 +152,8 @@
 			<isNotNull  property="madeDate">#madeDate#,</isNotNull>
 	  		<isNotNull  property="validityDate">#validityDate#,</isNotNull>
 	 		<isNotEmpty  property="ledgerId">#ledgerId#,</isNotEmpty> 
-	 		<isNotEmpty  property="memo">#memo#,</isNotEmpty> 
-   			 creater,now()
+	 		<isNotEmpty  property="memo">#memo#,</isNotEmpty>  
+   			 #creater#,now()
    		)
    	</insert>
    
