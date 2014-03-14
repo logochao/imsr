@@ -53,6 +53,15 @@ public class SalesOrderGoodsGrdDaoImpl extends BaseIbatisDaoImpl<SalesOrderGoods
 	public void insertSalesOrderGoodsGrd (SalesOrderGoodsGrd salesOrderGoodsGrd){
 		this.insertObject(salesOrderGoodsGrd, SQLMAPNAMESPACE+"insert");
 	}
+	
+	/**
+	 * 批量添加销售订单商品信息列表
+	 * @param list
+	 */
+	public void batchInsertSalesOrderGoodsGrd(List<SalesOrderGoodsGrd> list){
+		this.batchInsertListObject(list,SQLMAPNAMESPACE+"insert");
+	}
+	
 	/**
 	 * 更新销售订单商品列表通过主键
 	 * @param salesOrderGoodsGrd

@@ -263,4 +263,16 @@
    		SET `status`=#stats#
    		WHERE sales_order_id=#salesOrderId#
    	</update>
+   	
+   	<select id="getSalesOrderBySupplierId" parameterClass="java.lang.String" resultMap="salesOrder">
+   		SELECT so.* 
+		FROM `rs_sales_order` AS  so ,(
+			SELECT sogg.`sales_order_id` sales_order_id 
+			FROM `rs_supplier_goods`  sg
+			INNER JOIN `rs_sales_order_goods_grd` sogg  
+			ON sg.`goods_id`= sogg.`goods_id`
+			AND sg.`supplier_id` =#supplierId# 
+		)  AS temp 
+		WHERE temp.sales_order_id = so.`sales_order_id`
+   	</select>
 </sqlMap>

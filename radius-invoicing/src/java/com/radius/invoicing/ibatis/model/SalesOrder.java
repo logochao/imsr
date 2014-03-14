@@ -18,8 +18,8 @@ public class SalesOrder extends ExtInfo{
 	   private Date  orderedDate=null;//订货日期
 	   private Date  deliveryDate=null;//送货日期
 	   private String  stats="";//状态
-	   private String  tradeAssistant="";//营业员
-	   private String  salesManId="";//销售人员
+	   private String  tradeAssistant="";//营业员?
+	   private String  salesManId="";//销售人员?
 	   private String  fax  ="";//fax
 	   private String  deliveryAddress="";//送货地址
 	   private String  linkMan="" ;//联系人
