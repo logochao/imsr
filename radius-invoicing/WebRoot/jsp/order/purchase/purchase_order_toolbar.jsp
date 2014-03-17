@@ -9,11 +9,20 @@ $(function(){
 	
 	//挂单按钮
 	$('#purchase_order_toolbar_pend_btn').on('click',function(){
-		
+		var ajax_url = '${path}/order/manager/purchaseOrder/purchase_order_infos_add.html';
+		//1.验证必须内容
+		var ajax_data=getPurchaseOrderFormAjaxDataFormatter('0');
+		//2.提交表单数据通过ajax
+		commitForm2Ajax(ajax_url,ajax_data);
 	});
 	
 	//提交合同按钮
 	$('#purchase_order_toolbar_ok_btn').on('click',function(){
+		var ajax_url = '${path}/order/manager/purchaseOrder/purchase_order_infos_add.html';
+		//1.验证必须内容
+		var ajax_data=getPurchaseOrderFormAjaxDataFormatter('1');
+		//2.提交表单数据通过ajax
+		commitForm2Ajax(ajax_url,ajax_data);
 	});
 	
 	//打印按钮
@@ -30,6 +39,16 @@ $(function(){
 	$('#purchase_order_toolbar_close_btn').on('click',function(){
 	});
 });
+/**
+ *格式化采购订单表格数据
+ *@param{} _status 当前提交的状态
+ **/
+function getPurchaseOrderFormAjaxDataFormatter(_status){
+	var json={
+		
+	};
+	return json;
+}
 //-->
 </script>
 <div style="height: 28px;width: 30%;display:inline;padding-left:20px;">
