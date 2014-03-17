@@ -28,6 +28,13 @@ public interface PurchaseOrderGrdDao {
 	 * @param purchaseOrderGrd
 	 */
 	public void insertPurchaseOrderGrd(PurchaseOrderGrd purchaseOrderGrd);
+	
+	
+	/**
+	 * 批量保存采购订单商品信息
+	 * @param list
+	 */
+	public void batchInsertPurchaseOrderGrd(List<PurchaseOrderGrd> list);
 
 	/**
 	 * 通过主键更新采购订单信息

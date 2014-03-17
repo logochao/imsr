@@ -91,4 +91,13 @@ public class PurchaseOrderDaoImpl extends BaseIbatisDaoImpl<PurchaseOrder> imple
 	public boolean deletePurchaseOrderById(String purchaseOrderId){
 		return this.deleteObject(purchaseOrderId, SQLMAPNAMESPACE+"deletePurchaseOrderByPK")==1;
 	}
+	
+	/**
+	 * 更新采购订单状态
+	 * @param purchaseOrder
+	 * @return
+	 */
+	public boolean updatePurchaseOrderStatusByPurchaseOrderId(PurchaseOrder purchaseOrder){
+		return this.updateObject(purchaseOrder, SQLMAPNAMESPACE+"updateStatusByPurchaseOrderId")==1;
+	}
 }

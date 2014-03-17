@@ -23,7 +23,7 @@
   
   <sql id="whereLike">
   	<dynamic prepend="where">
-  		1=1  
+  		1=1  AND
   		<isNotEmpty prepend="and" property="supplierId">supplier_id=#supplierId#</isNotEmpty>
 		<isNotEmpty prepend="and" property="linkType">goods_id=#goodsId#</isNotEmpty>
 		<isNotEmpty prepend="and" property="ledgerId">ledger_id=#ledgerId#</isNotEmpty>
@@ -34,14 +34,15 @@
    		INSERT INTO RS_SUPPLIER_GOODS (
    			supplier_id,
    			goods_id,
-   			<isNotEmpty  property="ledgerId">#ledger_id#,</isNotEmpty>
+   			<isNotEmpty  property="ledgerId">ledger_id,</isNotEmpty>
 	  	    creater,
 	  	    createdate
    		)VALUES(
    			#supplierId#,
    			#goodsId#,
-			<isNotEmpty  property="ledgerId">#ledgerId#,</isNotEmpty>
-   			 creater,now()
+   			<isNotEmpty  property="ledgerId">#ledgerId#,</isNotEmpty>
+   			#creater#,
+   			now()
    		)
    	</insert>
    
