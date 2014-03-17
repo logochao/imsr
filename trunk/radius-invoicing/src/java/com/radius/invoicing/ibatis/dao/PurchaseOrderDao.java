@@ -70,5 +70,13 @@ public interface PurchaseOrderDao {
 	 * @return
 	 */
 	public boolean deletePurchaseOrderById(String purchaseOrderId);
+	
+	
+	/**
+	 * 更新采购订单状态
+	 * @param purchaseOrder
+	 * @return
+	 */
+	public boolean updatePurchaseOrderStatusByPurchaseOrderId(PurchaseOrder purchaseOrder);
 
 }

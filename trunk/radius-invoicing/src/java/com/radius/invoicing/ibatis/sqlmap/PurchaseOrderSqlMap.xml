@@ -221,4 +221,10 @@
    		DELETE FROM RS_PURCHASE_ORDER
    		WHERE purchase_order_id =#purchaseOrderId# 
    	</delete>
+   	
+   	<update id="updateStatusByPurchaseOrderId" parameterClass="purchaseOrder">
+   		UPDATE RS_PURCHASE_ORDER 
+		SET `status`=#stats#
+		WHERE purchase_order_id = #purchaseOrderId#
+   	</update>
 </sqlMap>

@@ -50,7 +50,7 @@
   
   <sql id="whereLike">
   	<dynamic prepend="where">
-  		1=1  
+  		1=1  AND
   		<isNotEmpty prepend="and" property="id">supplier_id=#id#</isNotEmpty>
 		<isNotEmpty prepend="and" property="name">supplier_name=#name#</isNotEmpty>
 		<isNotEmpty prepend="and" property="shortName">supplier_short_name=#shortName#</isNotEmpty>
@@ -90,7 +90,7 @@
    
    	<insert id="insert" parameterClass="supplier">
    		INSERT INTO RS_SUPPLIER (
-   			customer_id,
+   			supplier_id,
 			<isNotEmpty  property="name">supplier_name,</isNotEmpty>
 			<isNotEmpty  property="shortName">supplier_short_name,</isNotEmpty>
 			<isNotEmpty  property="nature">nature,</isNotEmpty>
@@ -149,7 +149,7 @@
 	 		<isNotEmpty  property="email">#email#,</isNotEmpty>
 	 		<isNotEmpty  property="ledgerId">#ledgerId#,</isNotEmpty> 
 	 		<isNotEmpty  property="memo">#memo#,</isNotEmpty>
-   			 creater,now()
+   			 #creater#,now()
    		)
    	</insert>
    
@@ -188,7 +188,7 @@
    		</dynamic>
    		WHERE supplier_id =#id#
    	</update>
-   	<select id="getSupplierByCondition" parameterClass="supplier" resultMap="supplier">
+   	<select id="getSupplierByCondition" parameterClass="supplier" resultClass="supplier">
    		SELECT <include refid="supplierFileds"/>
    		FROM RS_SUPPLIER
    		<include refid="whereLike"/>
