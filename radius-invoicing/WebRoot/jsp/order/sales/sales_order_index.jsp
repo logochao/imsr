@@ -47,30 +47,32 @@
 	
 </script>
 </head>
-<div id="sales_order_layout" class="easyui-layout" style="width:100%;height:100%;" fit="true">
-    <div data-options="region:'north',split:true,title:' '" style="width:100%;height:250%;" border="false">
-    	<div id="sales_order_panel_tools" style="margin-top: 5px;"></div>
-    	<div style="width:100%;height:100%;padding:15px;" fit="true" id="sales_order_panel" class="easyui-panel" border="false">
-    		<jsp:include flush="true" page="sales_order_base.jsp"></jsp:include>
-    	</div>
-    </div>
-    <div data-options="region:'center',split:true" fit="true" border="false">
-    	<div id="sales_order_index_tabs"  data-options="split:true" fit="true" border="false">
-    		<div title="订单明细" fit="true">
-                <jsp:include flush="true" page="sales_order_goods_grd_form.jsp"></jsp:include>
-	        </div>
-    		<div title="订单条款" fit="true">
-    			<jsp:include flush="true" page="sales_order_terms.jsp"></jsp:include>
-	        </div>
-    		<div title="订单备注" fit="true">
-    			<jsp:include flush="true" page="sales_order_memo.jsp"></jsp:include>
-	        </div>
-    		<div title="销售合同" fit="true">
-    			<jsp:include flush="true" page="sales_order_sales_contract_goods_detail.jsp"></jsp:include>
-	        </div>
-    		<div title="报价记录" fit="true">
-	        </div>
-    	</div>
-    </div>
-</div>
+<body>
+	<div id="sales_order_layout" class="easyui-layout" style="width:100%;height:100%;" fit="true">
+	    <div data-options="region:'north',split:true,title:' '" style="width:100%;height:250%;" border="false">
+	    	<div id="sales_order_panel_tools" style="margin-top: 5px;"></div>
+	    	<div style="width:100%;height:100%;padding:15px;" fit="true" id="sales_order_panel" class="easyui-panel" border="false">
+	    		<jsp:include flush="true" page="sales_order_base.jsp"></jsp:include>
+	    	</div>
+	    </div>
+	    <div data-options="region:'center',split:true" fit="true" border="false">
+	    	<div id="sales_order_index_tabs"  data-options="split:true" fit="true" border="false">
+	    		<div title="订单明细" fit="true">
+	                <jsp:include flush="true" page="sales_order_goods_grd_form.jsp"></jsp:include>
+		        </div>
+	    		<div title="订单条款" fit="true">
+	    			<jsp:include flush="true" page="sales_order_terms.jsp"></jsp:include>
+		        </div>
+	    		<div title="订单备注" fit="true">
+	    			<jsp:include flush="true" page="sales_order_memo.jsp"></jsp:include>
+		        </div>
+	    		<div title="销售合同" fit="true">
+	    			<jsp:include flush="true" page="sales_order_sales_contract_goods_detail.jsp"></jsp:include>
+		        </div>
+	    		<div title="报价记录" fit="true">
+		        </div>
+	    	</div>
+	    </div>
+	</div>
+</body>
 </html>

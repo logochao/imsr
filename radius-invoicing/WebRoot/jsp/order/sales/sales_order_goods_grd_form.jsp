@@ -310,13 +310,13 @@ function numbericCurrentyFormatter(numberic){
 				<table class="table" style="width: 100%;">
 					<tr>
 						<th>商品名称<br></th>
-						<td><input name="sales_order_goods_grd_form_goods_name" id="sales_order_goods_grd_form_goods_name"/><br></td>
+						<td><input name="sales_order_goods_grd_form_goods_name" id="sales_order_goods_grd_form_goods_name" style="border:1px solid #95B8E7;"/><br></td>
 						<th>商品类型</th>
-						<td><input name="sales_order_goods_grd_form_goods_type" id="sales_order_goods_grd_form_goods_type"/><br></td>
+						<td><input name="sales_order_goods_grd_form_goods_type" id="sales_order_goods_grd_form_goods_type" style="border:1px solid #95B8E7;"/><br></td>
 					</tr>
 					<tr>
 						<th>真实品名<br></th>
-						<td><input name="sales_order_goods_grd_form_goods_real_name" id="sales_order_goods_grd_form_goods_real_name"/><br></td>
+						<td><input name="sales_order_goods_grd_form_goods_real_name" id="sales_order_goods_grd_form_goods_real_name" style="border:1px solid #95B8E7;"/><br></td>
 						<td colspan="2">
 							<div style="float: left;">
 							<a id="sales_order_goods_grd_form_search_btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" plain="true">查询</a>

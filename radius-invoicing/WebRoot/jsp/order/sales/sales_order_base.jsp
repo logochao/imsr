@@ -344,9 +344,9 @@ function updateSalesOrderGoodsGrdRow(memcached_url,row_data,goodsId,row_index){
 		contractId:$('#sales_order_base_id').val(),//销售订单编号
 		goodsId:goodsId,//商品编号
 		quantityUnit:quantityUnit,
-		amount:amount
+		amount:parseFloat(amount)*100  //*100-->转化为整数
 	};
-	//salesOrderGoodsMemcached(memcached_url,memcached_data);
+	salesOrderGoodsMemcached(memcached_url,memcached_data);
 }
 
 
@@ -373,6 +373,12 @@ function addSalesOrderGoodsGrdRow(memcached_url,row_data){
  * @return json     格式化之后的数据
  **/
 function getAddSalesOrderGoodsDataMemcachedFormatter(row_data){
+	if(row_data.tax==null||row_data.tax==undefined){
+		row_data.tax=0;
+	}
+	if(row_data.taxAmount==null||row_data.taxAmount==undefined){
+		row_data.taxAmount=0;
+	}
 	var json={
 	    orderId:$('#sales_order_base_id').val(),//销售订货单编号
 	    goodsId:row_data.goodsId,//商品编号
@@ -382,15 +388,15 @@ function getAddSalesOrderGoodsDataMemcachedFormatter(row_data){
 	    //barCode:row_data.barCode,//条形码
 	    model:row_data.model,//型号
 	    property:row_data.property,//属性
-	    price :row_data.price,//单价
-	    amount:row_data.amount,//金额
+	    price :parseFloat(row_data.price)*100,//单价*100-->转化为整数
+	    amount:parseFloat(row_data.amount)*100,//金额*100-->转化为整数
 	    stats:row_data.stats,//状态
 	    other:row_data.other,//其他
 	    formate:row_data.formate,//规格编号
 	    priceKg :row_data.priceKg,//单价/kg
 	    totalWeight :row_data.totalWeight,//总重量
-	    tax :row_data.tax,//税率
-	    taxAmount:row_data.taxAmount,//税额
+	    tax :parseFloat(row_data.tax)*100,//税率*100-->转化为整数
+	    taxAmount:parseFloat(row_data.taxAmount)*100,//税额*100-->转化为整数
 	    weigthUnit:row_data.weigthUnit,//单位重量
 	    priceWeigthUnit :row_data.priceWeigthUnit,//单位重量单价
 	   //operator:,//
@@ -490,7 +496,7 @@ function removeDataGrid2Memcached(){
 		<td colspan="3"><input class="easyui-validatebox" type="text" style="width: 350px;border:1px solid #95B8E7;" id="sales_order_base_delivery_point"/></td>
 		<th>业务员</th>
 		<td>
-			<input class="easyui-validatebox" type="text" style="border:1px solid #95B8E7"/>
+			<input class="easyui-validatebox" id="sales_order_base_trade_assistant" style="border:1px solid #95B8E7"/>
 			<a id="btn" href="#" class="easyui-linkbutton" plain="true"><font style="font-size:3ex">...</font></a>
 		</td>
 		<th colspan="2" style="text-align: center;"></th>

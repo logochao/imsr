@@ -16,9 +16,13 @@ $(function(){
 	
 	//提交合同按钮
 	$('#sales_order_toolbar_ok_btn').on('click',function(){
+		var ajax_url = '${path}/order/manager/salesorder/sales_order_infos_add.html';
 		//1.验证必须内容
+		var ajax_data=getAjaxDataFormatter('1');
+		console.info(ajax_data);
+		console.info(ajax_url);
 		//2.提交数据
-		
+		commitSalesOrder(ajax_url,ajax_data);
 	});
 	
 	//打印按钮
@@ -38,16 +42,52 @@ $(function(){
 	
 	});
 });
+
+/**
+ * 获取异步提交提交数据
+ * @_status status表示挂单、订单处理
+ */
+function getAjaxDataFormatter(_status){
+	 var json={
+	 	salesOrderId   :$('#sales_order_base_id').val(),//销售订货单编号
+	 	customerId     :$('#sales_order_base_customer_id').val(),//客户编号
+	 	customerName   :$('#sales_order_base_customer_name').val(),//客户名称
+	 	orderedDate    :parseDate($('#sales_order_base_order_time').datebox('getValue')),//订货日期
+	 	deliveryDate   :parseDate($('#sales_order_base_order_end_time').datebox('getValue')),//送货日期
+	 	stats		   :_status,//状态
+	 	tradeAssistant :$('#sales_order_base_trade_assistant').val(),//营业员
+	 	linkMan        :$('#sales_order_base_link_man').val(),//联系人
+	 	fax			   :$('#sales_order_base_link_fax').val(),//fax
+	 	deliveryAddress:$('#sales_order_base_delivery_point').val(),//送货地址
+	 	tel			   :$('#sales_order_base_link_tel').val(),//电话
+	 	terms		   :$('#sales_order_terms_terms').val(),//条款
+	 	memo		   :$('#sales_order_memo_memo').val(),//备注
+	 	totalAmount    :parseFloat($('#sales_order_base_total_amount').val())*100,//总金额
+	 	salesContractId:$('#sales_order_base_sales_contract_id').val()//销售合同编号
+	 };
+ 	return json;
+}
+/**
+ * 验证销售订单表格数据
+ *
+ */
+function validataSalesOrder(){
+ 	return true;
+}
+
+
 /**
  * 提交销售订单系信息
  * @param ajax_url 异步请求地址
  * @param ajax_data 提交的数据
  **/
 function commitSalesOrder(ajax_url,ajax_data){
+	/*
 	$.ajax({
 		url:ajax_url,
 		data:ajax_data,
 		success:function(data){
+			console.info(data);
 			if(data&&data.success){
 				$.messager.show({
 					title:'提示',
@@ -60,6 +100,27 @@ function commitSalesOrder(ajax_url,ajax_data){
 		error:function(data){
 			console.info(data);
 			console.info('与服务端通信失败...');
+		}
+	});**/
+	
+	
+	$.ajax({
+		url:ajax_url,//保存销售合同请求地址
+		method:'POST',
+		data:ajax_data,
+		success:function(data){//通讯成功
+			console.info(data);
+			if(data&&data.success){
+				$.messager.show({
+					title:'提示',
+					msg:data.message,
+					timeout:5000,
+					showType:'slide'
+				});
+			}
+		},
+		error:function(r){//操作失败
+			$.messager.alert('提示','访问服务发生异常....','error');
 		}
 	});
 }
