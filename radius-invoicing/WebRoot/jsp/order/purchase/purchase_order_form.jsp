@@ -43,6 +43,55 @@ $(function(){
 
 
 
+/**
+ *将数据添加到销售订单列表中
+ *@param row_data
+ *@param memcached_url 缓存地址
+ **/
+function addSalesOrderGoodsGrd(row_data,memcached_url){
+	//1.添加行数据
+	purchase_order_form_sales_order_goods_grd.datagrid('insertRow',{
+		index:0,
+		row:row_data
+	});
+	//2.将数据添加到缓存中
+	 //2.1 将数据格式化
+	var memeched_data = getPurchaseOrderGoodsInfoFormatter(row_data);
+	 //2.2 将数据添加到内存中
+	 purchaseOrderGoodsMemcached(memcached_url,memeched_data);
+}
+
+/**
+ * 获取采购订单商品信息（格式化后的）
+ * @param
+ *
+ **/
+function getPurchaseOrderGoodsInfoFormatter(row_data){
+	var json={
+	
+	};
+	return json;
+}
+
+/**
+ * 异常处理缓存数据
+ * @param memcached_url 缓存的请求地址
+ * @param memcahed_data 缓存的数据
+ **/
+function purchaseOrderGoodsMemcached(memcached_url,memcahed_data){
+	$.ajax({
+		url:memcached_url,//缓存地址
+		method:'POST',//请求方式
+		data:memcahed_data,
+		success:function (data){
+			console.info(data);
+		},
+		error:function(data){
+			console.info("与后台通讯失败.. ");
+		}
+	});
+} 
+
 function calculateTotalAmount(){
 	//计算总金额
 	var rows=purchase_order_form_sales_order_goods_grd.datagrid('getRows');
@@ -52,24 +101,6 @@ function calculateTotalAmount(){
 		$('#sales_order_base_total_amount').val(numbericCurrentyFormatter(sales_order_total_amount/100));
 		//转换为大写
 		//toUpper($('#sales_order_base_total_amount'),$('#sales_order_base_upper_rmb'));
-	}
-}
-/**
- * 数据数字格式化
- * @param numberic 带格式化得数字或是字符
- * @return 
- **/
-function numbericCurrentyFormatter(numberic){
-	//1.利用js交易是否为数字
-	if(numberic==null||numberic==undefined){
-		return '0.00';
-	}else{
-		numberic=numberic+"";
-		if(numberic.indexOf('.')>0){
-			return numberic;
-		}else{
-			return parseInt(numberic).toFixed(2);
-		}
 	}
 }
 //-->
