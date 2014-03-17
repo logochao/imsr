@@ -82,47 +82,7 @@ function validataSalesOrder(){
  * @param ajax_data 提交的数据
  **/
 function commitSalesOrder(ajax_url,ajax_data){
-	/*
-	$.ajax({
-		url:ajax_url,
-		data:ajax_data,
-		success:function(data){
-			console.info(data);
-			if(data&&data.success){
-				$.messager.show({
-					title:'提示',
-					msg:data.message,
-					timeout:5000,
-					showType:'slide'
-				});
-			}
-		},
-		error:function(data){
-			console.info(data);
-			console.info('与服务端通信失败...');
-		}
-	});**/
-	
-	
-	$.ajax({
-		url:ajax_url,//保存销售合同请求地址
-		method:'POST',
-		data:ajax_data,
-		success:function(data){//通讯成功
-			console.info(data);
-			if(data&&data.success){
-				$.messager.show({
-					title:'提示',
-					msg:data.message,
-					timeout:5000,
-					showType:'slide'
-				});
-			}
-		},
-		error:function(r){//操作失败
-			$.messager.alert('提示','访问服务发生异常....','error');
-		}
-	});
+	commitForm2Ajax(ajax_url,ajax_data);
 }
 //-->
 </script>
