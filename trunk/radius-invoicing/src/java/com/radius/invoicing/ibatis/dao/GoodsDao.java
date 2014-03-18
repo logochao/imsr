@@ -57,5 +57,13 @@ public interface GoodsDao {
 	 * @return
 	 */
 	public List<Goods> getGoodsByCondition(Goods goods);
+	
+	
+	/**
+	 * 通过供应商编号与商品信息进行查询
+	 * @param goods
+	 * @return
+	 */
+	public List<String> getGoodsInfoBySupplierAndGoods(Goods goods);
 
 }
