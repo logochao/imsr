@@ -21,7 +21,7 @@
 	 <result column="customer_name" jdbcType="char" javaType="java.lang.String" property="customerName" />
 	 <result column="ordered_date" jdbcType="date" javaType="java.util.Date" property="orderedDate" />
   	 <result column="delivery_date" jdbcType="date" javaType="java.util.Date" property="deliveryDate" />
-  	 <result column="`status`" jdbcType="char" javaType="java.lang.String" property="stats" />
+  	 <result column="status" jdbcType="char" javaType="java.lang.String" property="stats" />
   	 <result column="trade_assistant" jdbcType="char" javaType="java.lang.String" property="tradeAssistant" />
   	 <result column="salesman_id" jdbcType="char" javaType="java.lang.String" property="salesManId" />
   	 <result column="fax" jdbcType="char" javaType="java.lang.String" property="fax" />
@@ -53,12 +53,14 @@
     
   	<result column="ledger_id" jdbcType="char" javaType="java.lang.String" property="ledgerId" />
   	<result column="memo" jdbcType="text" javaType="java.lang.String" property="memo" />
+   <!-- 
     <result column="creater" jdbcType="char" javaType="java.lang.String" property="creater" />
     <result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createdate" />
     <result column="reviser" jdbcType="char" javaType="java.lang.String" property="reviser" />
     <result column="revisedate" jdbcType="datetime" javaType="java.util.Date" property="revisedate" />
     <result column="verifier" jdbcType="char" javaType="java.lang.String" property="verifier" />    
     <result column="verifydate" jdbcType="datetime" javaType="java.util.Date" property="verifydate"/>
+   -->
   </resultMap>
   
   <sql id="whereLike">
@@ -276,14 +278,14 @@
 		WHERE temp.sales_order_id = so.`sales_order_id`
    	</select>
    	<select id="getSalesOrderByGoodsIds" parameterClass="java.util.Map" resultMap="salesOrder">
-   		SELECT * 
-		FROM `rs_sales_order`  so
-		LEFT JOIN `rs_sales_order_goods_grd` sogg 
-		ON so.`sales_order_id` =sogg.`sales_order_id`
-		WHERE sogg.`goods_id` in $goodsIds$
+   		SELECT so.* 
+		FROM RS_SALES_ORDER  so
+		LEFT JOIN RS_SALES_ORDER_GOODS_GRD sogg 
+		ON so.sales_order_id =sogg.sales_order_id
+		WHERE sogg.goods_id in($goodsIds$)
 		<dynamic>
 			<isNotEmpty property="salesOrderId">
-				so.sales_order_id =#salesOrderId#
+				AND so.sales_order_id =#salesOrderId#
 			</isNotEmpty>
 		</dynamic>
    	</select>
