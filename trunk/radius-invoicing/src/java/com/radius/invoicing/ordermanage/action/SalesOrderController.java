@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.radius.base.controller.BaseController;
+import com.radius.base.page.EasyuiSplitPager;
 import com.radius.base.utils.JsonUtils;
 import com.radius.base.utils.StockUtils;
+import com.radius.invoicing.ibatis.model.Goods;
 import com.radius.invoicing.ibatis.model.SalesOrder;
 import com.radius.invoicing.ibatis.model.SalesOrderGoodsGrd;
 import com.radius.invoicing.ordermanage.service.SalesOrderService;
@@ -119,8 +121,33 @@ public class SalesOrderController extends BaseController {
 		return salesOrderService.saveSalesOrderInfos(ledgerId, salesOrder, salesOrderGoodsGrdMemcachedkey, ServletRequestUtils.getStringParameter(request,"salesContractId"));
 	}
 	
+	/**
+	 * 
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
 	
+	public EasyuiSplitPager<SalesOrder> getSalesOrderInfoList(HttpServletRequest request,HttpServletResponse response)throws Exception{
+		String supplierId=ServletRequestUtils.getStringParameter(request,"supplierId");//获取供应商编号
+		String customerName=ServletRequestUtils.getStringParameter(request,"customerName");//获取客户名称
+		return salesOrderService.getSalesOrder(new Object[]{supplierId,customerName});
+	}
+	 */
 	
+	/**
+	 * 通过供应商编号+商品信息获取销售订单列表
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/order/manager/salesorder/sales_order_2_goods.html")
+	@ResponseBody
+	public EasyuiSplitPager<SalesOrder> getSalesOrderInfoList(HttpServletRequest request,HttpServletResponse response,Goods goods)throws Exception{
+		String salesOrderId=ServletRequestUtils.getStringParameter(request,"salesOrderId","");
+		return salesOrderService.getSalesOrder(goods,salesOrderId);
+	}
 	
 	
 	
