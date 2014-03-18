@@ -1,6 +1,8 @@
 package com.radius.invoicing.ibatis.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -15,6 +17,7 @@ import com.radius.invoicing.ibatis.model.SalesOrder;
  * 类说明 
  */
 @Repository
+@SuppressWarnings("unchecked")
 public class SalesOrderDaoImpl extends BaseIbatisDaoImpl<SalesOrder> implements SalesOrderDao {
 
 	private final String SQLMAPNAMESPACE="salesOrderSqlMap.";
@@ -95,8 +98,21 @@ public class SalesOrderDaoImpl extends BaseIbatisDaoImpl<SalesOrder> implements 
 	 * @param supplierId
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
+	
 	public List<SalesOrder> getSalesOrderBySupplierId(String supplierId){
 		return this.getSqlMapClientTemplate().queryForList(SQLMAPNAMESPACE+"getSalesOrderBySupplierId", supplierId);
 	}
+	
+	/**
+	 * 通过商品编号获取销售订单信息列表
+	 * @param goodsIds
+	 * @return
+	 */
+	public List<SalesOrder> getSalesOrderByGoodsIds(String goodsIds,String salesOrderId){
+		Map<String, String> params =new HashMap<String, String>();
+		params.put("goodsIds", goodsIds);
+		params.put("salesOrderId", salesOrderId);
+		return this.getSqlMapClientTemplate().queryForList(SQLMAPNAMESPACE+"getSalesOrderByGoodsIds", params);
+	}
+	
 }
