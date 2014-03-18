@@ -263,7 +263,7 @@
    		SET `status`=#stats#
    		WHERE sales_order_id=#salesOrderId#
    	</update>
-   	
+   	<!-- 未验证方法 -->
    	<select id="getSalesOrderBySupplierId" parameterClass="java.lang.String" resultMap="salesOrder">
    		SELECT so.* 
 		FROM `rs_sales_order` AS  so ,(
@@ -274,5 +274,17 @@
 			AND sg.`supplier_id` =#supplierId# 
 		)  AS temp 
 		WHERE temp.sales_order_id = so.`sales_order_id`
+   	</select>
+   	<select id="getSalesOrderByGoodsIds" parameterClass="java.util.Map" resultMap="salesOrder">
+   		SELECT * 
+		FROM `rs_sales_order`  so
+		LEFT JOIN `rs_sales_order_goods_grd` sogg 
+		ON so.`sales_order_id` =sogg.`sales_order_id`
+		WHERE sogg.`goods_id` in $goodsIds$
+		<dynamic>
+			<isNotEmpty property="salesOrderId">
+				so.sales_order_id =#salesOrderId#
+			</isNotEmpty>
+		</dynamic>
    	</select>
 </sqlMap>
