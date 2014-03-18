@@ -13,10 +13,15 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.radius.base.cache.memcache.MemcacheClient;
+import com.radius.base.page.EasyuiSplitPager;
 import com.radius.base.utils.Constants;
 import com.radius.base.utils.JsonUtils;
+import com.radius.base.utils.StringUtils;
+import com.radius.invoicing.ibatis.dao.GoodsDao;
 import com.radius.invoicing.ibatis.dao.SalesOrderDao;
 import com.radius.invoicing.ibatis.dao.SalesOrderGoodsGrdDao;
+import com.radius.invoicing.ibatis.dao.SupplierDao;
+import com.radius.invoicing.ibatis.model.Goods;
 import com.radius.invoicing.ibatis.model.SalesOrder;
 import com.radius.invoicing.ibatis.model.SalesOrderGoodsGrd;
 import com.radius.invoicing.ordermanage.compent.SalesOrderCompent;
@@ -43,6 +48,14 @@ public class SalesOrderServiceImpl implements Constants, SalesOrderService{
 	@Autowired(required=false)
 	@Qualifier("salesOrderGoodsGrdDaoImpl")
 	private SalesOrderGoodsGrdDao salesOrderGoodsGrdDao;
+	
+	@Autowired(required=false)
+	@Qualifier("supplierDaoImpl")
+	private SupplierDao supplierDao;
+	
+	@Autowired(required=false)
+	@Qualifier("goodsDaoImpl")
+	private GoodsDao goodsDao;
 	
 	@PostConstruct
 	public void init(){
@@ -165,6 +178,27 @@ public class SalesOrderServiceImpl implements Constants, SalesOrderService{
 		
 		return result;
 	}
+	
+	/**
+	 * 根据条件查询销售订单信息
+	 * @param 
+	 * @return
+	 * @throws Exception
+	 */
+	public EasyuiSplitPager<SalesOrder> getSalesOrder(Goods goods,String salesOrderId)throws Exception{
+		//1.根据供应商信息获取供应商商品信息
+			//1.1根据供应商编号+商品名称 获取供应商商品信息
+		List<String> goodsIdList=goodsDao.getGoodsInfoBySupplierAndGoods(goods);
+		String goodsIds=StringUtils.ArrayList2String(goodsIdList, ",");
+		//2.通过供应商商品与销售订单商品信息对比获取销售订单编号
+		//3.根据销售订单编号获取销售订单信息
+		EasyuiSplitPager<SalesOrder> page=new EasyuiSplitPager<SalesOrder>();
+		List<SalesOrder>  list = salesOrderDao.getSalesOrderByGoodsIds(goodsIds,salesOrderId);
+		page.setRows(list);
+		page.setTotal(list.size());
+		return page;
+	}
+	
 	
 	@PreDestroy
 	public void destroy(){

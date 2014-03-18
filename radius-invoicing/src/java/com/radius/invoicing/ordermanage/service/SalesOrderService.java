@@ -1,6 +1,8 @@
 package com.radius.invoicing.ordermanage.service;
 
+import com.radius.base.page.EasyuiSplitPager;
 import com.radius.base.utils.JsonUtils;
+import com.radius.invoicing.ibatis.model.Goods;
 import com.radius.invoicing.ibatis.model.SalesOrder;
 import com.radius.invoicing.ibatis.model.SalesOrderGoodsGrd;
 
@@ -38,5 +40,15 @@ public interface SalesOrderService {
 	 * @throws Exception
 	 */
 	public JsonUtils saveSalesOrderInfos(String ledgerId,SalesOrder salesOrder,String salesOrderGoodsGrdMemcachedkey,String salesContractId)throws Exception;
+	
+	
+	/**
+	 * 根据条件查询销售订单信息
+	 * @param goods
+	 * @param salesOrderId
+	 * @return
+	 * @throws Exception
+	 */
+	public EasyuiSplitPager<SalesOrder> getSalesOrder(Goods goods,String salesOrderId)throws Exception;
 
 }

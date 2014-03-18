@@ -26,10 +26,11 @@ public class PurchaseOrderCompent {
 	 * @param ledgerId
 	 * @param cacheKey
 	 * @param purchaseOrderId
+	 * @param operatorId
 	 * @param status
 	 * @return
 	 */
-	public static List<PurchaseOrderGrd> getPurchaseOrderGoodsByMemcached(String ledgerId,String cacheKey,String purchaseOrderId,String status){
+	public static List<PurchaseOrderGrd> getPurchaseOrderGoodsByMemcached(String ledgerId,String cacheKey,String purchaseOrderId,String operatorId,String status){
 		List<PurchaseOrderGrd> goodsList=new ArrayList<PurchaseOrderGrd>();
 		
 		Map<String,PurchaseOrderGrd> memcache=(Map<String,PurchaseOrderGrd>)MemcacheClient.get(cacheKey); 
@@ -41,6 +42,8 @@ public class PurchaseOrderCompent {
 				Map.Entry entry = (Map.Entry) iter.next();
 				key = (String) entry.getKey(); 
 				goods=memcache.get(key);
+				goods.setLedgerId(ledgerId);
+				goods.setCreater(operatorId);
 				logger.info("采购订单商品列表 "+key +" ---> "+goods);
 				goodsList.add(goods);
 			}
