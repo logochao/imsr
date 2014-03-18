@@ -370,129 +370,129 @@
    		FROM RS_SUPPLIER_GOODS sgs
    		LEFT JOIN RS_GOODS  gs
    		ON sgs.goods_id = gs.goods_id 
-   		WHERE sgs.supplier_id =#supplierId# AND
-   		<dynamic>
-	   		<isNotEmpty prepend="AND" property="name"> 
-	           gs.goods_name LIKE CONCAT('%',#name#,'%')
+   		<dynamic prepend="WHERE">
+   			sgs.supplier_id =#supplierId# 
+	   		<isNotEmpty  property="name"> 
+	          AND  gs.goods_name LIKE CONCAT('%',#name#,'%')
 	  		</isNotEmpty>
-	  		<isNotEmpty prepend="AND" property="property">
-	  			gs.goods_property=#property#
+	  		<isNotEmpty  property="property">
+	  			AND	gs.goods_property=#property#
 	  		</isNotEmpty>
-	  		<isNotEmpty prepend="AND" property="categoryId">
-	  			gs.category_id=#categoryId#
+	  		<isNotEmpty  property="categoryId">
+	  			AND	gs.category_id=#categoryId#
 	  		</isNotEmpty>
-	  		<isNotEmpty prepend="AND" property="categoryName">
-	  			gs.category_name=#categoryName#
+	  		<isNotEmpty  property="categoryName">
+	  			AND	gs.category_name=#categoryName#
 	  		</isNotEmpty>
-	  		<isNotEmpty prepend="AND" property="series">
-	  			gs.goods_series=#series#
+	  		<isNotEmpty  property="series">
+	  			AND	gs.goods_series=#series#
 	  		</isNotEmpty>
-	  		<isNotEmpty prepend="AND" property="unit">
-	  			gs.unit=#unit#
+	  		<isNotEmpty  property="unit">
+	  			AND	gs.unit=#unit#
 	  		</isNotEmpty>
-	  		<isNotEmpty prepend="AND" property="place">
-	  			gs.origin_place=#place#
+	  		<isNotEmpty  property="place">
+	  			AND	gs.origin_place=#place#
 	  		</isNotEmpty>
-	  		<isNotEmpty prepend="AND" property="uses">
-	  			gs.uses=#uses#
+	  		<isNotEmpty  property="uses">
+	  			AND	gs.uses=#uses#
 	  		</isNotEmpty>
-	  		<isNotNull prepend="AND" property="weightProp">
-	  			gs.weight_prop=#weightProp#
+	  		<isNotNull  property="weightProp">
+	  			AND	gs.weight_prop=#weightProp#
 	  		</isNotNull>
-	  		<isNotEmpty prepend="AND" property="status">
-	  			gs.goods_status=#status#
+	  		<isNotEmpty  property="status">
+	  			AND	gs.goods_status=#status#
 	  		</isNotEmpty>
-	  		<isNotEmpty prepend="AND" property="vulnerability">
-	  			gs.vulnerability=#vulnerability#
+	  		<isNotEmpty  property="vulnerability">
+	  			AND	gs.vulnerability=#vulnerability#
 	  		</isNotEmpty>
-	  		<isNotNull prepend="AND" property="depositDeadline">
-	  			gs.deposit_deadline=#depositDeadline#
+	  		<isNotNull  property="depositDeadline">
+	  			AND	gs.deposit_deadline=#depositDeadline#
 	  		</isNotNull>
-	  		<isNotEmpty prepend="AND" property="description">
-	  			gs.goods_description=#description#
+	  		<isNotEmpty  property="description">
+	  			AND	gs.goods_description=#description#
 	  		</isNotEmpty>
-	  		<isNotNull prepend="AND" property="minStore">
-	  			gs.min_limit_of_store=#minStore#
+	  		<isNotNull  property="minStore">
+	  			AND	gs.min_limit_of_store=#minStore#
 	  		</isNotNull>
-	  		<isNotNull prepend="AND" property="maxStore">
-	  			gs.max_limit_of_store=#maxStore#
+	  		<isNotNull  property="maxStore">
+	  			AND	gs.max_limit_of_store=#maxStore#
 	  		</isNotNull>
-	  		<isNotNull prepend="AND" property="cost">
-	  			gs.cost=#cost#
+	  		<isNotNull  property="cost">
+	  			AND	gs.cost=#cost#
 	  		</isNotNull>
-	  		<isNotEmpty prepend="AND" property="illustrate">
-	  			gs.purchase_illustrate=#illustrate#
+	  		<isNotEmpty  property="illustrate">
+	  			AND	gs.purchase_illustrate=#illustrate#
 	  		</isNotEmpty>
-	  		<isNotNull prepend="AND" property="price">
-	  			gs.price=#price#
+	  		<isNotNull  property="price">
+	  			AND	gs.price=#price#
 	  		</isNotNull>
-	  		<isNotEmpty prepend="AND" property="realName">
-	  			gs.true_goods_name=#realName#
+	  		<isNotEmpty  property="realName">
+	  			AND	gs.true_goods_name=#realName#
 	  		</isNotEmpty>
-	  		<isNotEmpty prepend="AND" property="cashType">
-	  			gs.cash_type=#cashType#
+	  		<isNotEmpty  property="cashType">
+	  			AND	gs.cash_type=#cashType#
 	  		</isNotEmpty>
-	  		<isNotNull prepend="AND" property="batch">
-	  			gs.batch=#batch#
+	  		<isNotNull  property="batch">
+	  			AND	gs.batch=#batch#
 	  		</isNotNull>
-	  		<isNotEmpty prepend="AND" property="batchNo">
-	  			gs.batch_no=#batchNo#
+	  		<isNotEmpty  property="batchNo">
+	  			AND	gs.batch_no=#batchNo#
 	  		</isNotEmpty>
-	  		<isNotEmpty prepend="AND" property="useStatus">
-	  			gs.use_status=#useStatus#
+	  		<isNotEmpty  property="useStatus">
+	  			AND	gs.use_status=#useStatus#
 	  		</isNotEmpty>
-	  		<isNotNull prepend="AND" property="monthBatch">
-	  			gs.month_batch=#monthBatch#
+	  		<isNotNull  property="monthBatch">
+	  			AND	gs.month_batch=#monthBatch#
 	  		</isNotNull>
-	  		<isNotNull prepend="AND" property="modifyBatchDate">
-	  			gs.modify_batch_date=#modifyBatchDate#
+	  		<isNotNull  property="modifyBatchDate">
+	  			AND	gs.modify_batch_date=#modifyBatchDate#
 	  		</isNotNull>
-	  		<isNotEmpty prepend="AND" property="modifyBatchMonth">
-	  			gs.modify_batch_month=#modifyBatchMonth#
+	  		<isNotEmpty  property="modifyBatchMonth">
+	  			AND	gs.modify_batch_month=#modifyBatchMonth#
 	  		</isNotEmpty>
-	  		<isNotEmpty prepend="AND" property="format">
-	  			gs.format_no=#format#
+	  		<isNotEmpty  property="format">
+	  			AND	gs.format_no=#format#
 	  		</isNotEmpty>
-	  		<isNotNull prepend="AND" property="netQuantity">
-	  			gs.net_quantity=#netQuantity#
+	  		<isNotNull  property="netQuantity">
+	  			AND	gs.net_quantity=#netQuantity#
 	  		</isNotNull>
-	  		<isNotNull prepend="AND" property="littleUnitQuantity">
-	  			gs.little_unit_quantity=#littleUnitQuantity#</isNotNull>
-	  		<isNotEmpty prepend="AND" property="littleUnit">
-	  			gs.little_unit=#littleUnit#
+	  		<isNotNull  property="littleUnitQuantity">
+	  			AND	gs.little_unit_quantity=#littleUnitQuantity#</isNotNull>
+	  		<isNotEmpty  property="littleUnit">
+	  			AND	gs.little_unit=#littleUnit#
 	  		</isNotEmpty>
-	  		<isNotEmpty prepend="AND" property="salesType">
-	  			gs.sales_type=#salesType#
+	  		<isNotEmpty  property="salesType">
+	  			AND	gs.sales_type=#salesType#
 	  		</isNotEmpty>
-	  		<isNotEmpty prepend="AND" property="defultSalesInstitution">
-	  			gs.defult_sales_institution=#defultSalesInstitution#
+	  		<isNotEmpty  property="defultSalesInstitution">
+	  			AND	gs.defult_sales_institution=#defultSalesInstitution#
 	  		</isNotEmpty>
-	  		<isNotEmpty prepend="AND" property="taxNo">
-	  			gs.tax_no=#taxNo#
+	  		<isNotEmpty  property="taxNo">
+	  			AND	gs.tax_no=#taxNo#
 	  		</isNotEmpty>
-	  		<isNotNull prepend="AND" property="offSales">
-	  			gs.off_sales=#offSales#
+	  		<isNotNull  property="offSales">
+	  			AND	gs.off_sales=#offSales#
 	  		</isNotNull>
-	  		<isNotEmpty prepend="AND" property="memo">
-	  			gs.memo=#memo#
+	  		<isNotEmpty  property="memo">
+	  			AND	gs.memo=#memo#
 	  		</isNotEmpty>
-	  		<isNotNull prepend="AND" property="costConvertUnit">
-	  			gs.cost_of_convert_unit=#costConvertUnit#
+	  		<isNotNull  property="costConvertUnit">
+	  			AND	gs.cost_of_convert_unit=#costConvertUnit#
 	  		</isNotNull>
-	  		<isNotNull prepend="AND" property="priceConvertUnit">
-	  			gs.price_of_convert_unit=#priceConvertUnit#
+	  		<isNotNull  property="priceConvertUnit">
+	  			AND	gs.price_of_convert_unit=#priceConvertUnit#
 	  		</isNotNull>
-	  		<isNotEmpty prepend="AND" property="barCode">
-	  			gs.goods_bar_code=#barCode#
+	  		<isNotEmpty  property="barCode">
+	  			AND	gs.goods_bar_code=#barCode#
 	  		</isNotEmpty>
-	  		<isNotEmpty prepend="AND" property="weigthPerUnit">
-	  			gs.weigth_per_unit=#weigthPerUnit#
+	  		<isNotEmpty  property="weigthPerUnit">
+	  			AND	gs.weigth_per_unit=#weigthPerUnit#
 	  		</isNotEmpty>
-	  		<isNotEmpty prepend="AND" property="priceWeigthPerUnit">
-	  			gs.price_of_weigth_per_unit=#priceWeigthPerUnit#
+	  		<isNotEmpty  property="priceWeigthPerUnit">
+	  			AND	gs.price_of_weigth_per_unit=#priceWeigthPerUnit#
 	  		</isNotEmpty>
-	  		<isNotEmpty prepend="AND" property="ledgerId">
-	  			gs.ledger_id=#ledgerId#
+	  		<isNotEmpty  property="ledgerId">
+	  		   AND	gs.ledger_id=#ledgerId#
 	  		</isNotEmpty>
    		</dynamic>
    </select>
