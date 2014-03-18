@@ -81,4 +81,12 @@ public class GoodsDaoImpl extends BaseIbatisDaoImpl<Goods> implements GoodsDao{
 		GoodsConditionAppend.appendCondition(goods);
 		return this.getSqlMapClientTemplate().queryForList("goodsSqlMap.getGoodsByCondition",goods);
 	}
+	/**
+	 * 通过供应商编号与商品信息进行查询
+	 * @param goods
+	 * @return
+	 */
+	public List<String> getGoodsInfoBySupplierAndGoods(Goods goods){
+		return this.getSqlMapClientTemplate().queryForList("goodsSqlMap.getGoodsInfoBySupplierAndGoods", goods);
+	}
 }
