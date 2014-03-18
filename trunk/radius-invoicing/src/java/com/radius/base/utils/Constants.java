@@ -54,6 +54,8 @@ public interface Constants {
 	
 	final int CACHE_ONE_DAY_TIME=60*60*24;//缓存一天的时间
 	
+	final int CACHE_ONE_MONTH_TIME=CACHE_ONE_DAY_TIME*30;//缓存一个月的时间
+	
 	/**
 	 * 销售合同前缀
 	 */
