@@ -77,5 +77,14 @@ public interface SalesOrderDao {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<SalesOrder> getSalesOrderBySupplierId(String supplierId);
+	
+	
+	/**
+	 * 通过商品编号获取销售订单信息列表
+	 * @param goodsIds
+	 * @param salesOrderId
+	 * @return
+	 */
+	public List<SalesOrder> getSalesOrderByGoodsIds(String goodsIds,String salesOrderId);
 
 }
