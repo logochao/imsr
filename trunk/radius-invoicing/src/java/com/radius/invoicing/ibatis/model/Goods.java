@@ -58,7 +58,17 @@ public class Goods extends ExtInfo{
 	private String  priceWeigthPerUnit="";//商品单位重量单价
 	private String  ledgerId="";//账套编号
 	
+	private String supplierId="";//供应商编号 -->为查询方便而提供的属性
 	
+	
+	
+	
+	public String getSupplierId() {
+		return supplierId;
+	}
+	public void setSupplierId(String supplierId) {
+		this.supplierId = supplierId;
+	}
 	public String getBarCode() {
 		return barCode;
 	}
