@@ -8,6 +8,7 @@ var purchase_order_base_sales_order_dialog =null;//销售订单对话框
 var purchase_order_base_supplier_grd = null ;//供应商信息列表
 var purchase_order_base_sales_order_grd =null;//销售订单列表
 var purchase_order_base_supplier_nature = null;//供应商(公司)性质
+var purchase_order_base_sales_order_goods_category_code=null;//销售订单分类编码
 $(document).ready(function(){
 	purchase_order_base_status=$('#purchase_order_base_status').combobox({
  		url:'${path}/contract/manager/sales_status_json.html',
@@ -122,7 +123,7 @@ $(document).ready(function(){
  	purchase_order_base_sales_order_goods_property=$('#purchase_order_base_sales_order_goods_property').combobox({    
 	}); 
  	//商品分类
- 	purchase_order_base_sales_order_goods_category_name=$('#purchase_order_base_sales_order_goods_category_name').combobox({    
+ 	purchase_order_base_sales_order_goods_category_code=$('#purchase_order_base_sales_order_goods_category_code').combobox({    
 	}); 
 	
 	//销售订单列表
@@ -133,17 +134,24 @@ $(document).ready(function(){
    		rownumbers:true,
    		collapsible:true,
    		frozenColumns:[[
-   			{field:'id',title:'销售订单号',width:100},
-   			{field:'shortName',title:'客户名称',width:120},
-   			{field:'name',title:'订单状态',width:200}
+   			{field:'salesOrderId',title:'销售订单号',width:200},
+   			{field:'customerName',title:'客户名称',width:120},
+   			{field:'totalAmount',title:'总金额',width:120,formatter: function(value,row,index){
+				 if(value!=undefined&&value!=null&&(value+"").indexOf(".")<=0){
+					value=(parseInt(value)/100).toFixed(2);
+				 }
+				 return value;
+			  }	
+   			},
+   			{field:'stats',title:'订单状态',width:100}
    		]],
    		columns:[[
-			{field:'linkMan1',title:'订货日期',width:120},
-			{field:'linkMan2',title:'交货日期',width:120},
+			{field:'orderedDate',title:'订货日期',width:120},
+			{field:'deliveryDate',title:'交货日期',width:120},
 			{field:'linkMan',title:'联系人',width:120},
-			{field:'tel1',title:'办公电话',width:120},
+			{field:'tel',title:'办公电话',width:120},
 			{field:'contactInfo',title:'联系电话',width:120},
-			{field:'fax1',title:'传真',width:120},
+			{field:'fax',title:'传真',width:120},
 			{field:'deliveryAddress',title:'送货地址',width:200}
 		]]
 	});
@@ -170,17 +178,53 @@ $(document).ready(function(){
 	
 	//查询销售订单按钮
 	$('#purchase_order_base_sales_order_search_btn').on('click',function(){
-		purchase_order_base_sales_order_grd.datagrid('options').url='${path}/supplier/manager/supplier/supplier_info_list.html';
+		purchase_order_base_sales_order_grd.datagrid('options').url='${path}/order/manager/salesorder/sales_order_2_goods.html';
  		purchase_order_base_sales_order_grd.datagrid('load',{
- 			supplierId  :$('#purchase_order_base_supplier_id').va(),//供应商编号
- 			name		:$('#purchase_order_base_supplier_name').val(),//供应商名称
- 			shortName	:$('#purchase_order_base_supplier_short_name').val(),//供应商简称
- 			nature		:purchase_order_base_supplier_nature.combobox('getValue'),//供运商性质
- 			linkMan		:$('#purchase_order_base_supplier_link').val(),//联系人
- 			contactInfo :$('#purchase_order_base_supplier_link_tel').val()//联系电话
+ 			supplierId  :$('#purchase_order_base_supplier_id').val(),//供应商编号
+ 			salesOrderId:$('#purchase_order_base_sales_order_id').val(),//销售订单号
+ 			name		:$('#purchase_order_base_sales_order_goods_name').val(),//商品名称
+ 			property	:purchase_order_base_sales_order_goods_property.combobox('getValue'),//商品属性
+ 			categoryCode:purchase_order_base_sales_order_goods_category_code.combobox('getValue'),//商品分类
+ 			realName    :$('#purchase_order_base_sales_order_goods_real_name').val()//商品真实名称
  		});
 	});
+	
+	//选择销售订单信息
+	$('#purchase_order_base_sales_order_ok_btn').on('click',function(){
+		//将供应商列表信息添加到供应商表单中
+ 		var	rows = purchase_order_base_sales_order_grd.datagrid('getSelections');//获取所有选择的行记录
+ 		if(rows.length>1){
+ 			$.messager.alert('提示','请选择单行销售订单信息...','warning');
+ 		}else if(rows.length==1){
+ 			var row = rows[0];//带处理的销售订单行信息
+ 			//1.根据选择的销售订单行信息拼装查询条件
+ 			var salesOrderId=row.salesOrderId;//获取销售订单号
+ 			//2.如果选择的合同号跟之前的操作相同则不进行请求,如果不相同则将datagrid中对应的数据进行情况
+ 			var sales_order_id = $('#purchase_order_base_sales_order_id').val();
+ 			if(sales_order_id.length>0&&sales_order_id==salesOrderId){//选择跟上次相同的销售订单号,则不进行任何操作
+ 				purchase_order_base_sales_order_dialog.dialog('close');
+ 				purchase_order_base_sales_order_dialog.dialog('options').closed=true;
+ 				return ;
+ 			}
+ 			if(sales_order_id.length>0&&sales_order_id!=salesOrderId){
+ 				//3.异步信息将返回的结果添加到datagrid中
+ 				removeFullSalesOrderGoodsGrd($('#purchase_order_base_id').val());
+ 			}
+ 			$('#purchase_order_base_old_sales_order_id').val(salesOrderId);
+ 			$('#purchase_order_base_sales_order_id').val(salesOrderId);
+ 			$('#purchase_order_base_total_amount').val(numbericCurrentyFormatter(parseInt(row.totalAmount)/100));
+ 			purchase_order_base_sales_order_dialog.dialog('close');
+ 			purchase_order_base_sales_order_dialog.dialog('options').closed=true;
+ 			//4.将返回的数据行信息添加到缓存内存中
+	 		getSalesOrderGoodsInfoByAjax(salesOrderId);
+ 		}else{
+ 			$.messager.alert('提示','请选择销售订单信息...','warning');
+ 		}
+	});
 });
+
+
+
 /**
  * 格式化公司性质
  *@param value
@@ -246,6 +290,7 @@ function formatterSupplierNature(value,row,index){
 		<th>销售订单号<font color="red">*</font></th>
 		<td>
 			<input class="easyui-validatebox" id="purchase_order_base_sales_order_id" type="text" readonly="readonly" style="border:1px solid #95B8E7"/>
+			<input id="purchase_order_base_old_sales_order_id" type="hidden"/>
 			<a id="purchase_order_base_sales_order_btn" href="#" class="easyui-linkbutton" plain="true"><font style="font-size:3ex">...</font></a>
 		</td>
 		<th>合同总金额</th>
@@ -296,13 +341,13 @@ function formatterSupplierNature(value,row,index){
 					<th>销售订单号</th>
 					<td><input  id="purchase_order_base_sales_order_id" style="border:1px solid #95B8E7"/></td>
 					<th>商品名称</th>
-					<td><input  id="purchase_order_base_sales_order_id" style="border:1px solid #95B8E7"/></td>
+					<td><input  id="purchase_order_base_sales_order_goods_name" style="border:1px solid #95B8E7"/></td>
 					<th>商品性质</th>
 					<td><input  id="purchase_order_base_sales_order_goods_property" style="border:1px solid #95B8E7"/></td>
 				</tr>
 				<tr>
 					<th>商品分类</th>
-					<td><input  id="purchase_order_base_sales_order_goods_category_name" style="border:1px solid #95B8E7"/></td>
+					<td><input  id="purchase_order_base_sales_order_goods_category_code" style="border:1px solid #95B8E7"/></td>
 					<th>真实品名</th>
 					<td><input  id="purchase_order_base_sales_order_goods_real_name" style="border:1px solid #95B8E7"/></td>
 					<td colspan="2">
