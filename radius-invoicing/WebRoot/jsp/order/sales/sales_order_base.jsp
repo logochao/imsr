@@ -197,6 +197,12 @@
 		var rows=sales_order_base_sales_contract_grd.datagrid('getSelections');
 		if (rows.length==1) {
 			var contractId=$('#sales_order_base_sales_contract_id').val();
+			//处理合同相同的情况下,即合同没有变化所有的操作都不进行
+			if(contractId.length>0&&contractId==rows[0].id){
+				$('#sales_order_base_sales_contract_dialog').dialog('close');
+				return;
+			}
+			
 			if(contractId.length>0&&contractId!=rows[0].id){//如果合同编号发生变化则将数据数据表格的数据情况、sales_order_total_amount设置为 0 
 				removeDataGrid2Memcached();
 				//情况销售合同页签下的datagrid数据
