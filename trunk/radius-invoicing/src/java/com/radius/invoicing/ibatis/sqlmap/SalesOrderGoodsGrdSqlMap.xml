@@ -5,7 +5,7 @@
   <typeAlias alias="salesOrderGoodsGrd" type="com.radius.invoicing.ibatis.model.SalesOrderGoodsGrd" />
   
   <sql id="salesOrderGoodsGrdFileds">
-  	 sseries_no seriesNo,sales_order_id orderId,goods_id goodsId,goods_name goodsName,quantity quantity,unit unit,bar_code barCode,model model,
+  	 series_no seriesNo,sales_order_id orderId,goods_id goodsId,goods_name goodsName,quantity quantity,unit unit,bar_code barCode,model model,
 	 property property,price price,amount amount,`status` stats,other other,`format` formate,price_per_kg priceKg,total_weight totalWeight,
 	 tax tax,tax_amount taxAmount,weigth_per_unit weigthUnit,price_of_weigth_per_unit priceWeigthUnit,operator operator,
 	 weight_per_unit weightUnit,batch_no batchNo,made_date madeDate,validity_date validityDate,
