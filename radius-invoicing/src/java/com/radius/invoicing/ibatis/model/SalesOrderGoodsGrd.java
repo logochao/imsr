@@ -2,6 +2,10 @@ package com.radius.invoicing.ibatis.model;
 
 import java.util.Date;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+import com.radius.base.utils.JsonDateSerializer;
+
 /**
  * @author <a href="mailto:goodluck.sunlight@gmail.com">陈波宁</a>
  * @version 创建时间：2013-12-8 下午12:53:04<br/>
@@ -82,6 +86,7 @@ public class SalesOrderGoodsGrd extends ExtInfo {
 	public void setLedgerId(String ledgerId) {
 		this.ledgerId = ledgerId;
 	}
+	@JsonSerialize(using=JsonDateSerializer.class) 
 	public Date getMadeDate() {
 		return madeDate;
 	}
@@ -185,6 +190,7 @@ public class SalesOrderGoodsGrd extends ExtInfo {
 	public void setUnit(String unit) {
 		this.unit = unit;
 	}
+	@JsonSerialize(using=JsonDateSerializer.class) 
 	public Date getValidityDate() {
 		return validityDate;
 	}
