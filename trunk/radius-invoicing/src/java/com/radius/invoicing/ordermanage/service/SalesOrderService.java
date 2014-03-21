@@ -50,5 +50,12 @@ public interface SalesOrderService {
 	 * @throws Exception
 	 */
 	public EasyuiSplitPager<SalesOrder> getSalesOrder(Goods goods,String salesOrderId)throws Exception;
+	
+	/**
+	 * 通过订单商品信息查询订单商品信息详情
+	 * @param salesOrderGoodsGrd
+	 * @return
+	 */
+	public EasyuiSplitPager<SalesOrderGoodsGrd> getSalesOrderGoodsGrdByGoodsGrd(SalesOrderGoodsGrd salesOrderGoodsGrd);
 
 }

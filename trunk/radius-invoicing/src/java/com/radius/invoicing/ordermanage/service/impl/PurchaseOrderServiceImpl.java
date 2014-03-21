@@ -75,6 +75,46 @@ public class PurchaseOrderServiceImpl implements Constants, PurchaseOrderService
 		MemcacheClient.set(key, memcache, CACHE_ONE_HOURE_TIME);//将带缓存的对象进行写入
 		return new JsonUtils (true,"将采购订单商品缓存到内存中成功....");
 	}
+	/**
+	 * 移除采购订单商品信息
+	 * @param key
+	 * @param purchaseOrderGrd
+	 * @param delete
+	 * @return
+	 */
+	public JsonUtils removePurchaseOrderGoodsGrd2Memcached(String key,PurchaseOrderGrd purchaseOrderGrd,boolean delete){
+		//默认
+		jsonUtils.setSuccess(false);
+		jsonUtils.setMessage("不存在对应的缓存对象");
+		
+		if(delete){//全部删除
+			MemcacheClient.delete(key);
+			jsonUtils.setSuccess(true);
+			jsonUtils.setMessage("删除缓存对象成功...");
+			return jsonUtils;
+		}
+		String memo=purchaseOrderGrd.getMemo();//该字段存放带删除的主键信息
+		Map<String, PurchaseOrderGrd> memcache=null;
+		Object cache=MemcacheClient.get(key);
+		
+		if(cache!=null){
+			String mapKey=null;
+			if(memo.contains(",")){
+				for(String goodsId:memo.split(",")){
+					mapKey=purchaseOrderGrd.getPurchaseOrderId()+"_"+goodsId;//采购订单号_商品编号
+					memcache.remove(mapKey);//将key对应的对象进行删除
+				}
+			}else{
+				mapKey=purchaseOrderGrd.getPurchaseOrderId()+"_"+memo;//采购订单号_商品编号
+				memcache.remove(mapKey);//将key对应的对象进行删除
+			}
+			jsonUtils.setSuccess(true);
+			jsonUtils.setMessage("删除缓存对象成功...");
+		}
+		MemcacheClient.set(key, memcache, CACHE_ONE_HOURE_TIME);//将带缓存的对象进行写入
+		return jsonUtils;
+	}
+	
 	
 	/**
 	 * 保存采购订单及采购订单商品信息

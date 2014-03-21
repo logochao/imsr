@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -101,6 +102,23 @@ public class PurchaseOrderController extends BaseController {
 		String purchaseOrderGrdMemcachedKey=purchaseOrder.getPurchaseOrderId()+"_purchase_order_add_purchase_product_info";
 		return purchaseOrderService.savePurchaseOrderInfo(purchaseOrderGrdMemcachedKey, purchaseOrder);
 	}
+	
+	/**
+	 * 将缓存中的采购订单商品信息进行删除
+	 * @param request
+	 * @param response
+	 * @param purchaseOrder
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/order/manager/purchaseOrder/purchase_order_info_remove_memcached.html")
+	@ResponseBody
+	public JsonUtils removePurchaseOrderInfo(HttpServletRequest request,HttpServletResponse response,PurchaseOrderGrd purchaseOrderGrd)throws Exception{
+		String key=purchaseOrderGrd.getPurchaseOrderId()+"_purchase_order_add_purchase_product_info";//合同编号_purchase_order_add_purchase_product_info
+		boolean delete = ServletRequestUtils.getBooleanParameter(request, "delete", false);//表示是否全部删除 默认为 false
+		return purchaseOrderService.removePurchaseOrderGoodsGrd2Memcached(key, purchaseOrderGrd, delete);
+	}
+	
 	
 	@PreDestroy
 	public void destroy(){

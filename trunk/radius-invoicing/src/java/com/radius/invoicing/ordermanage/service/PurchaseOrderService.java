@@ -30,5 +30,15 @@ public interface PurchaseOrderService {
 	 */
 	public JsonUtils savePurchaseOrderInfo(String purchaseOrderGrdMemcachedKey,
 			PurchaseOrder purchaseOrder) throws Exception;
+	
+	
+	/**
+	 * 移除采购订单商品信息
+	 * @param key
+	 * @param purchaseOrderGrd
+	 * @param delete
+	 * @return
+	 */
+	public JsonUtils removePurchaseOrderGoodsGrd2Memcached(String key,PurchaseOrderGrd purchaseOrderGrd,boolean delete);
 
 }
