@@ -199,6 +199,18 @@ public class SalesOrderServiceImpl implements Constants, SalesOrderService{
 		return page;
 	}
 	
+	/**
+	 * 通过订单商品信息查询订单商品信息详情
+	 * @param salesOrderGoodsGrd
+	 * @return
+	 */
+	public EasyuiSplitPager<SalesOrderGoodsGrd> getSalesOrderGoodsGrdByGoodsGrd(SalesOrderGoodsGrd salesOrderGoodsGrd){
+		EasyuiSplitPager<SalesOrderGoodsGrd> pager=new EasyuiSplitPager<SalesOrderGoodsGrd>();
+		List<SalesOrderGoodsGrd> list=salesOrderGoodsGrdDao.getSalesOrderGoodsGrd(salesOrderGoodsGrd);
+		pager.setRows(list);
+		pager.setTotal(list.size());
+		return pager;
+	}
 	
 	@PreDestroy
 	public void destroy(){

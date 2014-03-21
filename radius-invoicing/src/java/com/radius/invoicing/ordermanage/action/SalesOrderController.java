@@ -149,9 +149,19 @@ public class SalesOrderController extends BaseController {
 		return salesOrderService.getSalesOrder(goods,salesOrderId);
 	}
 	
-	
-	
-	
+	/**
+	 * 通过销售订单号获取销售订单商品列表
+	 * @param request
+	 * @param response
+	 * @param goodsGrd
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/order/manager/salesorder/sales_order_goods_2_salesorderid.html")
+	@ResponseBody
+	public EasyuiSplitPager<SalesOrderGoodsGrd> getSalesOrderGoodsInfoList(HttpServletRequest request,HttpServletResponse response,SalesOrderGoodsGrd goodsGrd)throws Exception{
+		return salesOrderService.getSalesOrderGoodsGrdByGoodsGrd(goodsGrd);
+	}
 	
 	
 	
