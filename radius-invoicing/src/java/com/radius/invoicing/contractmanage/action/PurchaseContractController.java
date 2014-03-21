@@ -35,7 +35,7 @@ public class PurchaseContractController extends BaseController{
 	@PostConstruct
 	public void init(){
 		if(purchase_view==null){
-			purchase_view=prefix+"index.jsp";
+			purchase_view=prefix+"purchase_contract_index.jsp";
 		}
 	}
 	
