@@ -208,7 +208,7 @@ $(function(){
 <table class="table" style="width: 100%;">
 	<tr>
 		<th>采购合同号<font color="red">*</font></th> 
-		<td><input class="easyui-validatebox" style="background:#eee;width: 150px;border:1px solid #95B8E7" id="purchase_contract_base_id" type="text" readonly="readonly"  data-options="" value="${purchaseOrder.purchaseOrderId}"/></td>
+		<td><input class="easyui-validatebox" style="background:#eee;width: 150px;border:1px solid #95B8E7" id="purchase_contract_base_id" type="text" readonly="readonly"  data-options="" value="${purchaseContract.id}"/></td>
 		<th>状态</th>
 		<td colspan="3"><input id="purchase_contract_base_status"  class="easyui-validatebox" class="easyui-combobox"  data-options="" value="0"/></td>
 		<th>订货日期</th>
