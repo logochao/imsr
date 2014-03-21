@@ -9,7 +9,7 @@
 	supplier_id supplierId,supplier_name supplierName,tel tel,link_man linkMan,purchaser purchaser,terms terms,fax fax,customer_bill_id customerBillId,
 	delivery_point deliveryPoint,quality_status qualityStatus,audit_status auditStatus,instore_status instoreStatus,payment_status paymentStatus,
 	paymented_status paymentedStatus,purchase_receive_order_id purchaseReceiveOrderId,instore_id instoreId,goods_qt_id goodsQtId,
-	ordered_amount orderedAmount,print_times printTimes,newest_print_time printTime,newest_print_acc printAcc,newest_print_record printRecord,operator operator
+	ordered_amount orderedAmount,print_times printTimes,newest_print_time printTime,newest_print_acc printAcc,newest_print_record printRecord,operator operator,
   	 ledger_id ledgerId,memo memo,creater creater,createdate createdate,reviser reviser,revisedate revisedate,verifier verifydate
   </sql>
   
@@ -123,11 +123,11 @@
 			<isNotEmpty  property="purchaseReceiveOrderId">purchase_receive_order_id,</isNotEmpty>
 			<isNotEmpty  property="instoreId">instore_id,</isNotEmpty>
 			<isNotEmpty  property="goodsQtId">goods_qt_id,</isNotEmpty>
-			<isNotNull  property="ordered_amount">orderedAmount,</isNotNull>
-			<isNotNull  property="print_times">printTimes,</isNotNull>
+			<isNotNull  property="orderedAmount">ordered_amount,</isNotNull>
+			<isNotNull  property="printTimes">print_times,</isNotNull>
 			<isNotEmpty  property="printAcc">newest_print_acc,</isNotEmpty>
 			<isNotEmpty  property="printRecord">newest_print_record,</isNotEmpty>
-			<isNotNull  property="print_times">printTimes,</isNotNull>
+			<isNotNull  property="printTimes">print_times,</isNotNull>
 			<isNotEmpty  property="operator">operator,</isNotEmpty>
 			<isNotEmpty  property="ledgerId">ledger_id,</isNotEmpty> 
  		    <isNotEmpty  property="memo">memo,</isNotEmpty> 
@@ -156,14 +156,14 @@
 			<isNotEmpty  property="purchaseReceiveOrderId">#purchaseReceiveOrderId#,</isNotEmpty>
 			<isNotEmpty  property="instoreId">#instoreId#,</isNotEmpty>
 			<isNotEmpty  property="goodsQtId">#goodsQtId#,</isNotEmpty>
-			<isNotNull  property="ordered_amount">#ordered_amount#,</isNotNull>
-			<isNotNull  property="print_times">#print_times#,</isNotNull>
+			<isNotNull  property="orderedAmount">#orderedAmount#,</isNotNull>
+			<isNotNull  property="printTimes">#printTimes#,</isNotNull>
 			<isNotEmpty  property="printAcc">#printAcc#,</isNotEmpty>
 			<isNotEmpty  property="printRecord">#printRecord#,</isNotEmpty>
-			<isNotNull  property="print_times">#print_times#,</isNotNull>
+			<isNotNull  property="printTimes">#printTimes#,</isNotNull>
 			<isNotEmpty  property="operator">#operator#,</isNotEmpty>
-	 		<isNotEmpty  property="ledgerId">#ledgerId#,</isNotEmpty> 
-	 		<isNotEmpty  property="memo">#memo#,</isNotEmpty> 
+			<isNotEmpty  property="ledgerId">#ledgerId#,</isNotEmpty> 
+ 		    <isNotEmpty  property="memo">#memo#,</isNotEmpty> 
    			 creater,now()
    		)
    	</insert>
