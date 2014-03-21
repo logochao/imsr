@@ -137,7 +137,7 @@ public class PurchaseOrderServiceImpl implements Constants, PurchaseOrderService
 			purchaseOrderGrdDao.batchInsertPurchaseOrderGrd(purchaseOrderGrdList);
 			success=true;
 			message="添加采购订单相关信息成功!!!";
-			resultCode="1";
+			resultCode=""+purchaseOrder.getStats();
 			logger.info(message);
 		}else{
 			//更新采购订单状态
@@ -146,7 +146,7 @@ public class PurchaseOrderServiceImpl implements Constants, PurchaseOrderService
 			success=true;
 			message="更新销售订单相关信息成功!!!";
 			logger.info(message);
-			resultCode="0";
+			resultCode=""+purchaseOrder.getStats();
 		}
 		if(success){
 			MemcacheClient.delete(purchaseOrderGrdMemcachedKey);
