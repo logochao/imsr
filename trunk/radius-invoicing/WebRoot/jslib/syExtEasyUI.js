@@ -1,5 +1,7 @@
 var sy = sy || {};
 
+
+
 /**
  * 更改easyui加载panel时的提示文字
  * 
@@ -185,6 +187,12 @@ $.extend($.fn.validatebox.defaults.rules, {
 			return value == $(param[0]).val();
 		},
 		message : '密码不一致！'
+	},
+	numberic : {/* 数字类型校验 */
+		validator : function(value, param) {
+		 return /^([+]?)\d*\.?\d+$/.test(value);
+		},
+		message : '请输入正确的格式'
 	}
 });
 
@@ -452,3 +460,19 @@ sy.progressBar = function(options) {
 		}
 	}
 };
+
+
+/**
+ * 解析输入的dateStr，返回Date类型。
+ * dateStr: XXXX-XX-XX
+ */
+function parseDate(dateStr){
+	var strArray = dateStr.split("-");
+	if(strArray.length == 3){
+		return new Date(strArray[0], strArray[1], strArray[2]);
+	}else if(dateStr.indexOf(":")>0){
+		return new Date(dateStr);
+	} else{
+		return new Date();
+	}
+}
