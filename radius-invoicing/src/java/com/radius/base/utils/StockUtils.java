@@ -19,7 +19,7 @@ public class StockUtils implements Constants {
 	private static int SUPPLIER_SERI_NUM=1;//供应商编号初始化
 	
 	/**
-	 * 获取销售合同编号 H_X+yyyymmdd+01  
+	 * 获取销售合同编号 H_S+yyyymmdd+01  
 	 * @return
 	 */
 	public static String  getSalesContractId(){
@@ -101,7 +101,7 @@ public class StockUtils implements Constants {
 		MemcacheClient.set(bf.toString(), new Integer(PURCHASE_ORDER_SERI_NUM), CACHE_ONE_DAY_TIME);//将其缓存一天
 		//生成对象的销售合同编号
 		
-		bf.append(StringUtils.getSpecifyStringByLengthBefore(SALES_ORDER_SERI_NUM+"", 2, "0"));//将其转换为2位字符 不够长度将其前面补0
+		bf.append(StringUtils.getSpecifyStringByLengthBefore(PURCHASE_ORDER_SERI_NUM+"", 2, "0"));//将其转换为2位字符 不够长度将其前面补0
 		
 		return bf.toString();
 	}
@@ -135,7 +135,7 @@ public class StockUtils implements Constants {
     /**
      * 获取当天到第二天凌晨的时间间隔
      * @return
-     */
+     
     public static Long getOneDayTimes(){
         Date currentDay=new Date(System.currentTimeMillis());
         int year=currentDay.getYear();
@@ -144,4 +144,5 @@ public class StockUtils implements Constants {
         Date nextDay=new Date(year,month,day);
         return nextDay.getTime()-currentDay.getTime();
     }
+    */
 }
