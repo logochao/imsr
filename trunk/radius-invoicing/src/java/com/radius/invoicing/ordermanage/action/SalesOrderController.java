@@ -34,7 +34,7 @@ import com.radius.invoicing.ordermanage.service.SalesOrderService;
 @Scope("request")
 public class SalesOrderController extends BaseController {
 
-	private Logger  logger=Logger.getLogger(this.getClass());
+//	private Logger  logger=Logger.getLogger(this.getClass());
 	
 	private final String prefix="/jsp/order/sales/";
 	
