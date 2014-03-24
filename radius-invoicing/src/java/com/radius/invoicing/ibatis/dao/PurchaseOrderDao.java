@@ -78,5 +78,14 @@ public interface PurchaseOrderDao {
 	 * @return
 	 */
 	public boolean updatePurchaseOrderStatusByPurchaseOrderId(PurchaseOrder purchaseOrder);
+	
+	
+	/**
+	 * 通过商品编号、采购订单号获取采购订单信息
+	 * @param purchaseOrderId
+	 * @param goodsIds
+	 * @return
+	 */
+	public List<PurchaseOrder> getPurchaseOrderByGoodsIds(String purchaseOrderId,String goodsIds);
 
 }
