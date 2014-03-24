@@ -16,7 +16,7 @@
   <resultMap id="purchaseOrder" class="purchaseOrder">
     <result column="purchase_order_id" jdbcType="char" javaType="java.lang.String" property="purchaseOrderId" />
     <result column="purchase_order_merger_id" jdbcType="char" javaType="java.lang.String" property="purchaseOrderMergerId" />
-    <result column="`status`" jdbcType="char" javaType="java.lang.String" property="stats" />
+    <result column="status" jdbcType="char" javaType="java.lang.String" property="stats" />
     <result column="ordered_date" jdbcType="datetime" javaType="java.util.Date" property="orderedDate"/>
     <result column="delivery_date" jdbcType="datetime" javaType="java.util.Date" property="deliveryDate"/>
     <result column="supplier_id" jdbcType="varchar" javaType="java.lang.String" property="supplierId" />
@@ -43,14 +43,14 @@
     <result column="newest_print_record" jdbcType="char" javaType="java.lang.String" property="printRecord" />
     <result column="operator" jdbcType="char" javaType="java.lang.String" property="operator" />
   	<result column="ledger_id" jdbcType="char" javaType="java.lang.String" property="ledgerId" />
-  	<result column="memo" jdbcType="text" javaType="java.lang.String" property="memo" />
+  	<result column="memo" jdbcType="text" javaType="java.lang.String" property="memo" /><!--
     <result column="creater" jdbcType="char" javaType="java.lang.String" property="creater" />
     <result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createdate" />
     <result column="reviser" jdbcType="char" javaType="java.lang.String" property="reviser" />
     <result column="revisedate" jdbcType="datetime" javaType="java.util.Date" property="revisedate" />
     <result column="verifier" jdbcType="char" javaType="java.lang.String" property="verifier" />    
     <result column="verifydate" jdbcType="datetime" javaType="java.util.Date" property="verifydate"/>
-  </resultMap>
+  --></resultMap>
   
   <sql id="whereLike">
   	<dynamic prepend="where">
@@ -227,4 +227,17 @@
 		SET `status`=#stats#
 		WHERE purchase_order_id = #purchaseOrderId#
    	</update>
+   	
+   	<select id="getPurchaseOrderByGoodsIds"  parameterClass="java.util.Map" resultMap="purchaseOrder">
+	   	SELECT po.*
+		FROM rs_purchase_order  po
+		LEFT JOIN rs_purchase_order_grd pog
+		ON po.purchase_order_id = pog.purchase_order_id
+		WHERE pog.goods_id IN ($goodsIds$)
+		<dynamic>
+			<isNotEmpty property="salesOrderId">
+				AND po.purchase_order_id =#purchaseOrderId#
+			</isNotEmpty>
+		</dynamic>
+   	</select>
 </sqlMap>
