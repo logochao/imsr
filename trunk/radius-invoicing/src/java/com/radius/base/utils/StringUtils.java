@@ -79,4 +79,27 @@ public class StringUtils {
 	     }
 	     return bf.toString();
 	}
+	
+	/**
+	 * 将列表中的内容使用指定的拼接字符连接
+	 * @param list
+	 * @param appendStr
+	 * @return '1','2','3'
+	 */
+	public static String ArrayList2SQLString(List<String> list,String appendStr){
+	     if(list==null||list.isEmpty()||list.size()==0){
+	    	 return "";
+	     }
+	     
+	     StringBuffer bf=new StringBuffer();
+	     for(int i=0,size=list.size();i<size;i++){
+	    	 bf.append("'");
+	    	 bf.append(list.get(i));
+	    	 bf.append("'");
+	    	if(i+1!=size){
+	    		 bf.append(appendStr);
+	    	 }
+	     }
+	     return bf.toString();
+	}
 }
