@@ -59,7 +59,7 @@ public interface Constants {
 	/**
 	 * 销售合同前缀
 	 */
-	String SALES_CONTRACT_PREFIX="H_X";//销售合同前缀
+	String SALES_CONTRACT_PREFIX="H_S";//销售合同前缀
 	/**
 	 * 采购合同前缀
 	 */
