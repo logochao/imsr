@@ -117,4 +117,14 @@ public class PurchaseContractGoodsGrd extends ExtInfo{
 	public void setUnit(String unit) {
 		this.unit = unit;
 	}
+
+	public Integer getPrice() {
+		return price;
+	}
+
+	public void setPrice(Integer price) {
+		this.price = price;
+	}
+	
+	
 }
