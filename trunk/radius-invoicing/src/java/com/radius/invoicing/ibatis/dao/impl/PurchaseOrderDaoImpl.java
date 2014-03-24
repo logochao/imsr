@@ -1,6 +1,8 @@
 package com.radius.invoicing.ibatis.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -15,6 +17,7 @@ import com.radius.invoicing.ibatis.model.PurchaseOrder;
  * 类说明 采购订单DAO
  */
 @Repository
+@SuppressWarnings("unchecked")
 public class PurchaseOrderDaoImpl extends BaseIbatisDaoImpl<PurchaseOrder> implements PurchaseOrderDao {
 
 	private final String SQLMAPNAMESPACE="purchaseOrderSqlMap."; 
@@ -99,5 +102,18 @@ public class PurchaseOrderDaoImpl extends BaseIbatisDaoImpl<PurchaseOrder> imple
 	 */
 	public boolean updatePurchaseOrderStatusByPurchaseOrderId(PurchaseOrder purchaseOrder){
 		return this.updateObject(purchaseOrder, SQLMAPNAMESPACE+"updateStatusByPurchaseOrderId")==1;
+	}
+	
+	/**
+	 * 通过商品编号、采购订单号获取采购订单信息
+	 * @param purchaseOrderId
+	 * @param goodsIds
+	 * @return
+	 */
+	public List<PurchaseOrder> getPurchaseOrderByGoodsIds(String purchaseOrderId,String goodsIds){
+		Map<String, String> params =new HashMap<String, String>();
+		params.put("goodsIds", goodsIds);
+		params.put("purchaseOrderId", purchaseOrderId);
+		return this.getSqlMapClientTemplate().queryForList(SQLMAPNAMESPACE+"getPurchaseOrderByGoodsIds", params);
 	}
 }
