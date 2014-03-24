@@ -5,7 +5,6 @@ import javax.annotation.PreDestroy;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
@@ -17,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.radius.base.controller.BaseController;
 import com.radius.base.utils.JsonUtils;
-import com.radius.base.page.EasyuiSplitPager;
 import com.radius.base.utils.StockUtils;
 import com.radius.invoicing.ibatis.model.PurchaseOrder;
 import com.radius.invoicing.ibatis.model.PurchaseOrderGrd;
@@ -33,7 +31,7 @@ import com.radius.invoicing.ordermanage.service.PurchaseOrderService;
 @Scope("request")
 public class PurchaseOrderController extends BaseController {
 
-	private Logger  logger=Logger.getLogger(this.getClass());
+//	private Logger  logger=Logger.getLogger(this.getClass());
 	
 	private final String prefix="/jsp/order/purchase/";
 	
