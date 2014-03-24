@@ -189,7 +189,7 @@ public class SalesOrderServiceImpl implements Constants, SalesOrderService{
 		//1.根据供应商信息获取供应商商品信息
 			//1.1根据供应商编号+商品名称 获取供应商商品信息
 		List<String> goodsIdList=goodsDao.getGoodsInfoBySupplierAndGoods(goods);
-		String goodsIds=StringUtils.ArrayList2String(goodsIdList, ",");
+		String goodsIds=StringUtils.ArrayList2SQLString(goodsIdList, ",");
 		//2.通过供应商商品与销售订单商品信息对比获取销售订单编号
 		//3.根据销售订单编号获取销售订单信息
 		EasyuiSplitPager<SalesOrder> page=new EasyuiSplitPager<SalesOrder>();
