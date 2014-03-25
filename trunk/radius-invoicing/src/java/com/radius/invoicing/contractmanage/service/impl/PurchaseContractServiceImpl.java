@@ -18,11 +18,13 @@ import com.radius.base.utils.StringUtils;
 import com.radius.invoicing.contractmanage.service.PurchaseContractService;
 import com.radius.invoicing.ibatis.dao.GoodsDao;
 import com.radius.invoicing.ibatis.dao.PurchaseOrderDao;
+import com.radius.invoicing.ibatis.dao.PurchaseOrderGrdDao;
 import com.radius.invoicing.ibatis.model.ContractScanGrd;
 import com.radius.invoicing.ibatis.model.Goods;
 import com.radius.invoicing.ibatis.model.PurchaseContractGoodsGrd;
 import com.radius.invoicing.ibatis.model.PurchaseContractPaymentGrd;
 import com.radius.invoicing.ibatis.model.PurchaseOrder;
+import com.radius.invoicing.ibatis.model.PurchaseOrderGrd;
 import com.radius.invoicing.ibatis.model.SalesOrderGoodsGrd;
 
 /**
@@ -44,6 +46,10 @@ public class PurchaseContractServiceImpl implements Constants, PurchaseContractS
 	@Autowired(required=false)
 	@Qualifier("purchaseOrderDaoImpl")
 	private PurchaseOrderDao purchaseOrderDao;
+	
+	@Autowired(required=false)
+	@Qualifier("purchaseOrderGrdDaoImpl")
+	private PurchaseOrderGrdDao purchaseOrderGrdDao;
 	
 	@Autowired(required=false)
 	@Qualifier("propertyConfigHelper")
@@ -273,4 +279,26 @@ public class PurchaseContractServiceImpl implements Constants, PurchaseContractS
 		return jsonUtils;
 	}
 	
+	/**
+	 * 获取采购订单商品信息
+	 * @param purchaseOrderId
+	 * @return
+	 */
+	public EasyuiSplitPager<PurchaseOrderGrd> getPurchaseOrderProductInfo(String purchaseOrderId){
+		EasyuiSplitPager<PurchaseOrderGrd> pager = new EasyuiSplitPager<PurchaseOrderGrd>();
+		PurchaseOrderGrd purchaseOrderGrd =null;
+		if(org.apache.commons.lang.StringUtils.isNotBlank(purchaseOrderId)){
+			purchaseOrderGrd = new PurchaseOrderGrd();
+			purchaseOrderGrd.setPurchaseOrderId(purchaseOrderId);
+		}
+		if(purchaseOrderGrd!=null){
+			List<PurchaseOrderGrd> list =  purchaseOrderGrdDao.getPurchaseOrderGrd(purchaseOrderGrd);
+			if(list!=null&&!list.isEmpty()&&list.size()>0){
+				pager.setRows(list);
+				pager.setTotal(list.size());
+			}
+		}
+		
+		return pager;
+	}
 }
