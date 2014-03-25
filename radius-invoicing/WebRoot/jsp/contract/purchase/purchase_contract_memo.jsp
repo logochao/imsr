@@ -5,7 +5,7 @@
    	<tr>
    		<th>合同条款</th>
    		<td colspan="7">
-   			<textarea rows="4" cols="140" id="purchase_contract_memo" style="border:1px solid #95B8E7"></textarea>
+   			<textarea rows="5" cols="170" id="purchase_contract_memo" style="border:1px solid #95B8E7"></textarea>
    		</td>
    	</tr>
 </table>
