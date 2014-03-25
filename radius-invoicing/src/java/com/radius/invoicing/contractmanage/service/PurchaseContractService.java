@@ -7,6 +7,7 @@ import com.radius.invoicing.ibatis.model.Goods;
 import com.radius.invoicing.ibatis.model.PurchaseContractGoodsGrd;
 import com.radius.invoicing.ibatis.model.PurchaseContractPaymentGrd;
 import com.radius.invoicing.ibatis.model.PurchaseOrder;
+import com.radius.invoicing.ibatis.model.PurchaseOrderGrd;
 
 /**
  * @author <a href="mailto:goodluck.sunlight@gmail.com">陈波宁</a>
@@ -87,5 +88,14 @@ public interface PurchaseContractService {
 	 */
 	public JsonUtils removePurchaseContractPaymentGrd2Memcache(String key,
 			PurchaseContractPaymentGrd contractPaymentGrd);
+	
+	
+	
+	/**
+	 * 获取采购订单商品信息
+	 * @param purchaseOrderId
+	 * @return
+	 */
+	public EasyuiSplitPager<PurchaseOrderGrd> getPurchaseOrderProductInfo(String purchaseOrderId);
 
 }
