@@ -18,12 +18,12 @@ import com.radius.base.BaseEntity;
 public class ExtInfo extends BaseEntity{
 
 	
-	protected String creater;//创建人
-	protected Date createDate;//创建时间
-	protected String reviser;//审核人
-	protected Date reviseDate;//审核时间
-	protected String verifier;//复核人
-	protected Date verifyDate;//复核时间
+	public String creater;//创建人
+	public Date createDate;//创建时间
+	public String reviser;//审核人
+	public Date reviseDate;//审核时间
+	public String verifier;//复核人
+	public Date verifyDate;//复核时间
 	
 	@JsonIgnore
 	public Date getCreateDate() {
