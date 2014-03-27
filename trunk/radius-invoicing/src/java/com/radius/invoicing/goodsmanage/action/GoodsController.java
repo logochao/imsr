@@ -8,7 +8,6 @@ import javax.annotation.PreDestroy;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
@@ -31,7 +30,7 @@ import com.radius.invoicing.ibatis.model.Goods;
 @Scope("request")
 public class GoodsController {
 
-	private Logger logger=Logger.getLogger(this.getClass());
+//	private Logger logger=Logger.getLogger(this.getClass());
 	
 	private final String prefix="/jsp/business/goods/";
 	
