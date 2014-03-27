@@ -19,10 +19,13 @@ import com.radius.base.controller.BaseController;
 import com.radius.base.page.EasyuiSplitPager;
 import com.radius.base.utils.JsonUtils;
 import com.radius.base.utils.StockUtils;
+import com.radius.invoicing.contractmanage.compent.PurchaseContractCompent;
 import com.radius.invoicing.contractmanage.service.PurchaseContractService;
+import com.radius.invoicing.ibatis.model.ContractScanGrd;
 import com.radius.invoicing.ibatis.model.Goods;
 import com.radius.invoicing.ibatis.model.PurchaseContract;
 import com.radius.invoicing.ibatis.model.PurchaseContractGoodsGrd;
+import com.radius.invoicing.ibatis.model.PurchaseContractPayment;
 import com.radius.invoicing.ibatis.model.PurchaseContractPaymentGrd;
 import com.radius.invoicing.ibatis.model.PurchaseOrder;
 import com.radius.invoicing.ibatis.model.PurchaseOrderGrd;
@@ -169,7 +172,65 @@ public class PurchaseContractController extends BaseController{
 	@RequestMapping("/contract/manager/purchaseContract/contract_pay_info_remove_memcached.html")
 	@ResponseBody
 	public JsonUtils removePurchaseContractPayInfo(HttpServletRequest request,HttpServletResponse response,PurchaseContractPaymentGrd contractPaymentGrd)throws Exception{
-		String key = "";
-		return purchaseContractService.removePurchaseContractPaymentGrd2Memcache(key, contractPaymentGrd);
+		String key = contractPaymentGrd.getContractId()+"_add_purchase_contract_pay_detail";
+		boolean delete = ServletRequestUtils.getBooleanParameter(request, "delete", false);//表示是否全部删除 默认为 false
+		return purchaseContractService.removePurchaseContractPaymentGrd2Memcache(key, contractPaymentGrd,delete);
+	}
+	
+	/**
+	 * 添加采购合同扫描件缓存
+	 * @param request
+	 * @param response
+	 * @param contractScanGrd
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/contract/manager/purchaseContract/contract_scan_info_memcached.html")
+	@ResponseBody
+	public JsonUtils addPurchaseContractScanInfo(HttpServletRequest request,HttpServletResponse response,ContractScanGrd contractScanGrd)throws Exception{
+		String key =contractScanGrd.getContractId()+"_"+contractScanGrd.getContractType().intValue()+"_add_contract_scan_info";//合同编号_合同类型_xxxxxxxx
+		return purchaseContractService.addPurchaseContractScanGrd2Memcached(key, contractScanGrd);
+	}
+	
+	/**
+	 * 移除缓存中的合同扫描件
+	 * @param request
+	 * @param response
+	 * @param contractScanGrd
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/contract/manager/purchaseContract/contract_scan_info_remove_memcached.html")
+	public JsonUtils removePurchaseContractScanInfo(HttpServletRequest request,HttpServletResponse response,ContractScanGrd contractScanGrd)throws Exception{
+		String key =contractScanGrd.getContractId()+"_"+contractScanGrd.getContractType().intValue()+"_add_contract_scan_info";//合同编号_合同类型_xxxxxxxx
+		boolean delete = ServletRequestUtils.getBooleanParameter(request, "delete", false);//表示是否全部删除 默认为 false
+		return purchaseContractService.removeContractScanInfo2Memcache(key, contractScanGrd, delete);
+	}
+	
+	
+	/**
+	 * 保存采购合同信息
+	 * @param request
+	 * @param response
+	 * @param purchaseContract
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/contract/manager/purchaseContract/purchase_contract_infos_add.html")
+	@ResponseBody
+	public JsonUtils savePurchaseContractInfo(HttpServletRequest request,HttpServletResponse response,PurchaseContract purchaseContract)throws Exception{
+		String ledgerId ="0001";//帐套
+		String operator ="0001";//当前操作人员编号
+		//1.采购商品信息缓存key
+		String productKey=purchaseContract.getId()+"_purchase_contract_add_contract_product_info";
+		//2.采购支付详情缓存key
+		String payDetailKey=purchaseContract.getId()+"_add_purchase_contract_pay_detail";
+		//3.采购合同扫描缓存key
+		String scanKey=purchaseContract.getId()+ServletRequestUtils.getStringParameter(request, "contractType","")+"_add_contract_scan_info";
+		//4.构建支付对象
+		PurchaseContractPayment payment =PurchaseContractCompent.getPurchaseContractPaymentByRequest(request, ledgerId, operator, purchaseContract.getId()) ;
+		//5.获取当前操作的合同目标状态 如未确认-->确认 statusCode 为确认状态代码
+		String statusCode = ServletRequestUtils.getStringParameter(request, "statusCode", "");
+		return purchaseContractService.savePurchaseContractInfo(statusCode, purchaseContract, payment, productKey, payDetailKey, scanKey);
 	}
 }

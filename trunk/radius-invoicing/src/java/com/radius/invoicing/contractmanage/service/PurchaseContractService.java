@@ -4,7 +4,9 @@ import com.radius.base.page.EasyuiSplitPager;
 import com.radius.base.utils.JsonUtils;
 import com.radius.invoicing.ibatis.model.ContractScanGrd;
 import com.radius.invoicing.ibatis.model.Goods;
+import com.radius.invoicing.ibatis.model.PurchaseContract;
 import com.radius.invoicing.ibatis.model.PurchaseContractGoodsGrd;
+import com.radius.invoicing.ibatis.model.PurchaseContractPayment;
 import com.radius.invoicing.ibatis.model.PurchaseContractPaymentGrd;
 import com.radius.invoicing.ibatis.model.PurchaseOrder;
 import com.radius.invoicing.ibatis.model.PurchaseOrderGrd;
@@ -68,7 +70,7 @@ public interface PurchaseContractService {
 	 * @return
 	 */
 	public JsonUtils removeContractScanInfo2Memcache(String key,
-			ContractScanGrd scan);
+			ContractScanGrd scan,boolean delete);
 
 	/**
 	 * 采购合同扫描件信息缓存
@@ -87,7 +89,7 @@ public interface PurchaseContractService {
 	 * @return
 	 */
 	public JsonUtils removePurchaseContractPaymentGrd2Memcache(String key,
-			PurchaseContractPaymentGrd contractPaymentGrd);
+			PurchaseContractPaymentGrd contractPaymentGrd,boolean delete);
 	
 	
 	
@@ -98,4 +100,17 @@ public interface PurchaseContractService {
 	 */
 	public EasyuiSplitPager<PurchaseOrderGrd> getPurchaseOrderProductInfo(String purchaseOrderId);
 
+	
+	/**
+	 * 保存采购合同信息
+	 * @param statusCode 当前操作的合同目标状态
+	 * @param purchaseContract
+	 * @param payment
+	 * @param productKey
+	 * @param payKey
+	 * @param scanKey
+	 * @return
+	 * @throws Exception
+	 */
+	public JsonUtils savePurchaseContractInfo(String statusCode,PurchaseContract purchaseContract,PurchaseContractPayment payment,String productKey,String payKey,String scanKey)throws Exception;
 }

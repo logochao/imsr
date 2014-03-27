@@ -15,13 +15,21 @@ import com.radius.base.page.EasyuiSplitPager;
 import com.radius.base.utils.Constants;
 import com.radius.base.utils.JsonUtils;
 import com.radius.base.utils.StringUtils;
+import com.radius.invoicing.contractmanage.compent.PurchaseContractCompent;
 import com.radius.invoicing.contractmanage.service.PurchaseContractService;
+import com.radius.invoicing.ibatis.dao.ContractScanGrdDao;
 import com.radius.invoicing.ibatis.dao.GoodsDao;
+import com.radius.invoicing.ibatis.dao.PurchaseContractDao;
+import com.radius.invoicing.ibatis.dao.PurchaseContractGoodsGrdDao;
+import com.radius.invoicing.ibatis.dao.PurchaseContractPaymentDao;
+import com.radius.invoicing.ibatis.dao.PurchaseContractPaymentGrdDao;
 import com.radius.invoicing.ibatis.dao.PurchaseOrderDao;
 import com.radius.invoicing.ibatis.dao.PurchaseOrderGrdDao;
 import com.radius.invoicing.ibatis.model.ContractScanGrd;
 import com.radius.invoicing.ibatis.model.Goods;
+import com.radius.invoicing.ibatis.model.PurchaseContract;
 import com.radius.invoicing.ibatis.model.PurchaseContractGoodsGrd;
+import com.radius.invoicing.ibatis.model.PurchaseContractPayment;
 import com.radius.invoicing.ibatis.model.PurchaseContractPaymentGrd;
 import com.radius.invoicing.ibatis.model.PurchaseOrder;
 import com.radius.invoicing.ibatis.model.PurchaseOrderGrd;
@@ -54,6 +62,26 @@ public class PurchaseContractServiceImpl implements Constants, PurchaseContractS
 	@Autowired(required=false)
 	@Qualifier("propertyConfigHelper")
 	private PropertyConfigHelper propertyConfigHelper;
+	
+	@Autowired(required=false)
+	@Qualifier("purchaseContractDaoImpl")
+	private PurchaseContractDao purchaseContractDao;
+	
+	@Autowired(required=false)
+	@Qualifier("purchaseContractPaymentDaoImpl")
+	private PurchaseContractPaymentDao purchaseContractPaymentDao;
+	
+	@Autowired(required=false)
+	@Qualifier("purchaseContractPaymentGrdDaoImpl")
+	private PurchaseContractPaymentGrdDao purchaseContractPaymentGrdDao;
+	
+	@Autowired(required=false)
+	@Qualifier("purchaseContractGoodsGrdDaoImpl")
+	private PurchaseContractGoodsGrdDao purchaseContractGoodsGrdDao;
+	
+	@Autowired(required=false)
+	@Qualifier("contractScanGrdDaoImpl")
+	private ContractScanGrdDao contractScanGrdDao;
 	
 	/**
 	 * 通过商品信息+供应商编号、采购订单号获取采购订单信息
@@ -186,13 +214,21 @@ public class PurchaseContractServiceImpl implements Constants, PurchaseContractS
 	/**
 	 * 删除memcache中的合同扫描件信息对象
 	 * @param key
-	 * @param payment
+	 * @param scan
+	 * @param delete
 	 * @return
 	 */
-	public JsonUtils removeContractScanInfo2Memcache(String key,ContractScanGrd scan){
+	public JsonUtils removeContractScanInfo2Memcache(String key,ContractScanGrd scan,boolean delete){
 		JsonUtils jsonUtils=new JsonUtils();
 		jsonUtils.setSuccess(false);
 		jsonUtils.setMessage("合同扫描件不存在对应的缓存对象");
+		
+		if(delete){//全部删除
+			MemcacheClient.delete(key);
+			jsonUtils.setSuccess(true);
+			jsonUtils.setMessage("删除缓存对象成功...");
+			return jsonUtils;
+		}
 		
 		String memo=scan.getMemo();//该字段存放带删除的主键信息
 		Map<String,ContractScanGrd> memcache=null;
@@ -249,13 +285,21 @@ public class PurchaseContractServiceImpl implements Constants, PurchaseContractS
 	/**
 	 * 删除memcache中的合同支付信息对象
 	 * @param key
-	 * @param payment
+	 * @param contractPaymentGrd
+	 * @param delete
 	 * @return
 	 */
-	public JsonUtils removePurchaseContractPaymentGrd2Memcache(String key,PurchaseContractPaymentGrd contractPaymentGrd){
+	public JsonUtils removePurchaseContractPaymentGrd2Memcache(String key,PurchaseContractPaymentGrd contractPaymentGrd,boolean delete){
 		JsonUtils jsonUtils=new JsonUtils();
 		jsonUtils.setSuccess(false);
 		jsonUtils.setMessage("采购合同支付详情不存在对应的缓存对象");
+		
+		if(delete){//全部删除
+			MemcacheClient.delete(key);
+			jsonUtils.setSuccess(true);
+			jsonUtils.setMessage("删除缓存对象成功...");
+			return jsonUtils;
+		}
 		
 		String memo=contractPaymentGrd.getMemo();//该字段存放带删除的主键信息
 		Map<String,PurchaseContractPaymentGrd> memcache=null;
@@ -298,7 +342,100 @@ public class PurchaseContractServiceImpl implements Constants, PurchaseContractS
 				pager.setTotal(list.size());
 			}
 		}
-		
 		return pager;
+	}
+	
+	/**
+	 * 保存采购合同信息
+	 * @param statusCode 重置当前界面合同目标状态
+	 * @param purchaseContract
+	 * @param payment
+	 * @param productKey
+	 * @param payKey
+	 * @param scanKey
+	 * @return
+	 * @throws Exception
+	 */
+	public JsonUtils savePurchaseContractInfo(String statusCode,PurchaseContract purchaseContract,PurchaseContractPayment payment,String productKey,String payKey,String scanKey)throws Exception{
+		String operater=purchaseContract.getCreater();
+		String ledgerId =purchaseContract.getLedgerId();
+		String status = purchaseContract.getStats();
+		String contractId= purchaseContract.getId();
+		boolean success=false;
+		String message="操作失败";
+		String code="-1";
+		try{
+			//--------------------------简查采购合同信息------------------------------
+			PurchaseContract temp =  purchaseContractDao.getPurchaseContractById(purchaseContract.getId());
+			if(temp==null){//添加相关对象
+				//---------------构建对象--------------
+				//1.采购合同
+				//2.采购商品列表
+				List<PurchaseContractGoodsGrd>  productList=PurchaseContractCompent.getPurchaseContractGoodsGrdList(operater,ledgerId, productKey, status);
+				//3.采购支付
+				//payment
+				payment.setLedgerId(ledgerId);
+				payment.setCreater(operater);
+				//4.采购支付详情
+				List<PurchaseContractPaymentGrd> paymentList = PurchaseContractCompent.getPurchaseContractPaymentGrdList(operater,ledgerId, payKey, status);
+				//5.采购合同扫描件
+				List<ContractScanGrd> scanList = PurchaseContractCompent.getPurchaseContractScanGrdList(operater, ledgerId, scanKey, status);
+				//--------------------------保存采购合同相关数据---------------------------
+				purchaseContractDao.insertPurchaseContract(purchaseContract);//采购合同
+				purchaseContractGoodsGrdDao.batchInsertPurchaseContractGoodsGrd(productList);//采购合同商品
+				purchaseContractPaymentDao.insertPurchaseContractPayment(payment);//采购支付
+				purchaseContractPaymentGrdDao.batchInsertPurchaseContractPaymentGrd(paymentList);//采购支付详情
+				contractScanGrdDao.batchInsertContractScanGrd(scanList);//合同扫描件
+				
+				logger.info("保存采购合同相关数据操作成功...");
+				success = true;
+				message="添加采购合同信息操作成功...";
+			}else if(temp!=null){//更新相关对象
+				//--------------------------保存采购合同相关数据---------------------------
+				//更新状态
+				
+				//采购合同
+				purchaseContract.setReviser(operater);
+				purchaseContractDao.updatePurchaseContractStatusById(purchaseContract);
+				//采购商品
+				PurchaseContractGoodsGrd product =new PurchaseContractGoodsGrd();
+				product.setContractId(contractId);
+				product.setStats(status);
+				product.setReviser(operater);
+				purchaseContractGoodsGrdDao.updatePurchaseContractGoodsGrdStatusByContractId(product);
+				//采购支付(****支付合同应该与当前合同状态有关)
+				PurchaseContractPayment payment2=new PurchaseContractPayment();
+				payment2.setContractId(contractId);
+				payment2.setStats(status);
+				payment2.setReviser(operater);
+				purchaseContractPaymentDao.updateStatusByContractId(payment);
+				//采购支付详情
+				PurchaseContractPaymentGrd paymentGrd =new PurchaseContractPaymentGrd();
+				paymentGrd.setContractId(contractId);
+				paymentGrd.setStats(status);
+				paymentGrd.setReviser(operater);
+				purchaseContractPaymentGrdDao.updatePurchaseContractPaymentGrdStatusBycontractId(paymentGrd);
+				//合同扫描件
+				success=true;
+				message="更新销售合同相关信息成功!!!";
+				logger.info(message);
+			}
+			if(success){
+				//--------------------------情况采购合同相关的缓存对象---------------------
+				//删除合同销售商品
+				MemcacheClient.delete(productKey);
+				//删除支付列表
+				MemcacheClient.delete(payKey);
+				//删除扫描件列表
+				MemcacheClient.delete(scanKey);
+			}
+		}catch(Exception e){
+			logger.error(e);
+			e.printStackTrace();
+		}
+		//--------------------------返回操作结果 -----------------------------------
+		JsonUtils result = new  JsonUtils(success,message);
+		result.setChild(code);
+		return result;
 	}
 }
