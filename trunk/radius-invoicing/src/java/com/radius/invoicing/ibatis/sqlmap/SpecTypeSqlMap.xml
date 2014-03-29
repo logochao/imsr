@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="specTypeSqlMap">
+
+  <typeAlias alias="specType" type="com.radius.invoicing.ibatis.model.SpecType" />
+  
+  <sql id="specTypeFileds">
+  	 spec_id specId,spec_name specName,spec_unit specUnit,equivalent_unit equivalentUnit,quantity_of_eu_per_unit quantityEuUnit,mome mome,ledger_id ledgerId,creater creater,createdate createdate,reviser reviser,revisedate revisedate,verifier verifydate
+  </sql>
+  
+  <resultMap id="specType" class="specType">
+    <result column="spec_id" jdbcType="int" javaType="java.lang.Integer" property="specId" />
+    <result column="spec_name" jdbcType="varchar" javaType="java.lang.String" property="specName" />
+    <result column="spec_unit" jdbcType="int" javaType="java.lang.Integer" property="specUnit" />
+    <result column="equivalent_unit" jdbcType="int" javaType="java.lang.Integer" property="equivalentUnit" />
+    <result column="quantity_of_eu_per_unit" jdbcType="int" javaType="java.lang.Integer" property="quantityEuUnit" />
+    <result column="mome" jdbcType="char" javaType="java.lang.String" property="mome" />
+    <result column="ledger_id" jdbcType="char" javaType="java.lang.String" property="ledgerId" />
+    <result column="creater" jdbcType="char" javaType="java.lang.String" property="creater" />
+    <result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createdate" />
+    <result column="reviser" jdbcType="char" javaType="java.lang.String" property="reviser" />
+    <result column="revisedate" jdbcType="datetime" javaType="java.util.Date" property="revisedate" />
+    <result column="verifier" jdbcType="char" javaType="java.lang.String" property="verifier" />    
+    <result column="verifydate" jdbcType="datetime" javaType="java.util.Date" property="verifydate"/>
+  </resultMap>
+  
+  <sql id="whereLike">
+  	<dynamic prepend="where">
+  		1=1 AND
+  		<isNotNull prepend="AND" property="specId"> spec_id = #specId# </isNotNull>
+  		<isNotNull prepend="AND" property="specName"> spec_name LIKE   CONCAT('%',#specName#,'%')</isNotNull>
+  		<isNotNull prepend="AND" property="specUnit"> spec_unit = #specUnit# </isNotNull>
+  		<isNotNull prepend="AND" property="equivalentUnit"> equivalent_unit = #equivalentUnit# </isNotNull>
+  		<isNotNull prepend="AND" property="quantityEuUnit"> quantity_of_eu_per_unit = #quantityEuUnit# </isNotNull>
+  		<isNotNull prepend="AND" property="mome"> mome = #mome# </isNotNull>
+  	</dynamic>
+  </sql>
+  
+  <sql id="updateSetFields"><!-- 暂时不开放名称的修改 -->
+  	<dynamic prepend="SET">
+  		<isNotNull prepend="," property="specUnit"> 
+  			spec_unit=#specUnit#
+  		</isNotNull>
+  		<isNotNull prepend="," property="equivalentUnit"> 
+  			equivalent_unit=#equivalentUnit#
+  		</isNotNull>
+  		<isNotNull prepend="," property="quantityEuUnit"> 
+  			quantity_of_eu_per_unit=#quantityEuUnit#
+  		</isNotNull>
+  		<isNotNull prepend="," property="mome"> 
+  			mome=#mome#
+  		</isNotNull>
+  		<isNotNull prepend="," property="ledgerId"> 
+  			ledger_id=#ledgerId#
+  		</isNotNull>
+  		<isNotNull prepend="," property="reviser"> 
+  			reviser=#reviser#,revisedate=now()
+  		</isNotNull>
+  		<isNotNull prepend="," property="verifier"> 
+  			verifier=#verifier#,verifydate=now()
+  		</isNotNull>
+  	</dynamic>
+  </sql>
+  <select id="getSpecTypeById" parameterClass="int" resultClass="specType">
+  	SELECT <include refid="specTypeFileds"/>
+  	FROM RS_SPEC_TYPE
+  	WHERE spec_id =#id#
+  </select>
+  
+  <insert id="insert" parameterClass="specType">
+  	INSERT INTO RS_SPEC_TYPE 
+  	(spec_name,spec_unit,equivalent_unit,quantity_of_eu_per_unit,<isNotNull  property="mome">mome,</isNotNull><isNotNull  property="ledgerId">ledger_id,</isNotNull><isNotNull  property="creater">creater,</isNotNull>createdate)
+  	VALUES
+  	(#specName#,#specUnit#,#equivalentUnit#,#quantityEuUnit#,<isNotNull  property="mome">#mome#,</isNotNull><isNotNull  property="ledgerId">#ledgerId#,</isNotNull><isNotNull  property="creater">#creater#,</isNotNull> now())
+  	 <selectKey resultClass="java.lang.Integer" keyProperty="specId">
+      select LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+  <update id="updateSpecType" parameterClass="specType">
+  	UPDATA RS_SPEC_TYPE
+  	<include refid="updateSetFields"/>
+  	WHERE spec_id =#specId# 
+  </update>
+  
+  <select id="getSpecType" parameterClass="specType" resultClass="specType">
+  	SELECT <include refid="specTypeFileds"/>
+  	FROM RS_SPEC_TYPE
+  	<include refid="whereLike"/>
+  </select>
+  
+  <delete id="deleteById" parameterClass="java.lang.Integer">
+  	DELETE FROM RS_SPEC_TYPE
+  	WHERE spec_id =#specId# 
+  </delete>
+  
+  <delete id="delete" parameterClass="specType">
+  	DELETE FROM RS_SPEC_TYPE
+  	<include refid="whereLike"/>
+  </delete>
+</sqlMap>
