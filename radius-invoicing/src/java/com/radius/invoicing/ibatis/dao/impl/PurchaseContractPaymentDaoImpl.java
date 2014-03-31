@@ -80,4 +80,12 @@ public class PurchaseContractPaymentDaoImpl extends BaseIbatisDaoImpl<PurchaseCo
 	public void deletePurchaseContractPaymentByPK(String contractId){
 		this.deleteObject(contractId, SQLMAPNAMESPACE+"deletePurchaseContractPaymentByPK");
 	}
+	/**
+	 * 更新采购合同支付状态
+	 * @param payment
+	 * @return
+	 */
+	public boolean updateStatusByContractId(PurchaseContractPayment payment){
+		return this.updateObject(payment, SQLMAPNAMESPACE+"updateStatusByContractId")==1;
+	}
 }

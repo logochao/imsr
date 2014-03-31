@@ -90,4 +90,13 @@ public class PurchaseContractGoodsGrdDaoImpl extends BaseIbatisDaoImpl<PurchaseC
 		params.put("goodsId", goodsId);
 		this.deleteObject(params, SQLMAPNAMESPACE+"deletePurchaseContractGoodsGrdByPK");
 	}
+	
+	/**
+	 * 通过合同编号修改采购合同商品信息状态
+	 * @param purchaseContractGoodsGrd
+	 * @return
+	 */
+	public boolean updatePurchaseContractGoodsGrdStatusByContractId(PurchaseContractGoodsGrd purchaseContractGoodsGrd){
+		return this.updateObject(purchaseContractGoodsGrd, SQLMAPNAMESPACE+"updatePurchaseContractGoodsGrdStatusByContractId")==1;
+	}
 }
