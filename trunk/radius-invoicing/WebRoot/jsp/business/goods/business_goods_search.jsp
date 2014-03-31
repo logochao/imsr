@@ -82,7 +82,21 @@ var business_goods_search_add_product_dialog = null;//添加商品信息对话�
  	
  	//-----------------------------------初始化添加商品信息界面---------------------------------------------------
  	//商品状态
- 	$('#business_goods_search_add_product_dialog_form_status').combobox({});
+ 	$('#business_goods_search_add_product_dialog_form_status').combobox({
+ 		url:'${path}/common/system/category_code_list.html?parentId=1100',
+ 		valueField: 'id',
+		textField: 'name',
+		onLoadSuccess:function(){
+			var target = $(this);
+			var data = target.combobox("getData");
+			var options = target.combobox("options");
+			if(data && data.length>0){
+				var fs = data[0];
+				target.combobox("setValue",fs[options.valueField]);
+			}
+		},
+		editable:false
+ 	});
  	//商品属性
  	$('#business_goods_search_add_product_dialog_form_property').combobox({});
  	//商品分类
@@ -106,7 +120,21 @@ var business_goods_search_add_product_dialog = null;//添加商品信息对话�
 		editable:false
  	});
  	//销售方式
- 	$('#business_goods_search_add_product_dialog_form_sales_type').combobox({});
+ 	$('#business_goods_search_add_product_dialog_form_sales_type').combobox({
+ 		url:'${path}/common/system/category_code_list.html?parentId=3600',
+ 		valueField: 'id',
+		textField: 'name',
+		onLoadSuccess:function(){
+			var target = $(this);
+			var data = target.combobox("getData");
+			var options = target.combobox("options");
+			if(data && data.length>0){
+				var fs = data[0];
+				target.combobox("setValue",fs[options.valueField]);
+			}
+		},
+		editable:false
+ 	});
  	//默认销售方式
  	$('#business_goods_search_add_product_dialog_form_defult_sales_institution').combobox({});
  	//商品系列
