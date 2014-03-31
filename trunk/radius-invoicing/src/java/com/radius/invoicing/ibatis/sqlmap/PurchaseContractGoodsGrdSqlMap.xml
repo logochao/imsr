@@ -140,4 +140,10 @@
    		DELETE FROM RS_PURCHASE_CONTRACT_GOODS_GRD
    		WHERE contract_id =#contractId# AND goods_id=#goodsId#
    	</delete>
+   	
+   	<update id="updatePurchaseContractGoodsGrdStatusByContractId" parameterClass="purchaseContractGoodsGrd">
+   		UPDATE RS_PURCHASE_CONTRACT_GOODS_GRD 
+   		SET STATUS=#stats# <isNotEmpty property="reviser">,reviser = #reviser#,revisedate = now() </isNotEmpty>
+   		WHERE contract_id =#contractId# 
+   	</update>
 </sqlMap>

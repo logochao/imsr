@@ -13,6 +13,7 @@
     <result column="contract_id" jdbcType="char" javaType="java.lang.String" property="contractId" />
     <result column="cash_type" jdbcType="char" javaType="java.lang.String" property="cashType" />
     <result column="total_amount" jdbcType="int" javaType="java.lang.Integer" property="totalAmount" />
+    <result column="status" jdbcType="char" javaType="java.lang.String" property="stats" />
     <result column="amount_in_words" jdbcType="char" javaType="java.lang.String" property="upperAmount" />
     <result column="payment_type" jdbcType="char" javaType="java.lang.String" property="paymentType" />
   	<result column="ledger_id" jdbcType="char" javaType="java.lang.String" property="ledgerId" />
@@ -28,6 +29,7 @@
   	<dynamic prepend="where">
   		1=1  
   		<isNotEmpty prepend="and" property="contractId">contract_id=#contractId#</isNotEmpty>
+  		<isNotEmpty prepend="and" property="stats">status=#stats#</isNotEmpty>
   		<isNotEmpty prepend="and" property="cashType">cash_type=#cashType#</isNotEmpty>
   		<isNotNull prepend="and" property="totalAmount">total_amount=#totalAmount#</isNotNull>
 		<isNotEmpty prepend="and" property="upperAmount">amount_in_words=#upperAmount#</isNotEmpty>
@@ -52,6 +54,7 @@
    		INSERT INTO RS_PURCHASE_CONTRACT_PAYMENT (
    			contract_id,
 	  		<isNotEmpty  property="cashType">cash_type,</isNotEmpty>
+	  		<isNotEmpty  property="stats">status,</isNotEmpty>
 	  		<isNotNull  property="totalAmount">total_amount,</isNotNull>
 			<isNotEmpty  property="upperAmount">amount_in_words,</isNotEmpty>
 			<isNotEmpty  property="paymentType">payment_type,</isNotEmpty>
@@ -61,6 +64,7 @@
    		)VALUES(
    			#contractId#,
 	  		<isNotEmpty  property="cashType">#cashType#,</isNotEmpty>
+	  		<isNotEmpty  property="stats">#stats#,</isNotEmpty>
 	  		<isNotNull  property="totalAmount">#totalAmount#,</isNotNull>
 			<isNotEmpty  property="upperAmount">#upperAmount#,</isNotEmpty>
 			<isNotEmpty  property="paymentType">#paymentType#,</isNotEmpty>
@@ -73,6 +77,7 @@
    		UPDATE RS_PURCHASE_CONTRACT_PAYMENT
    		<dynamic prepend="SET">
 	  		<isNotEmpty prepend="," property="cashType">cash_type=#cashType#</isNotEmpty>
+	  		<isNotEmpty prepend="," property="stats">status=#stats#</isNotEmpty>
 	  		<isNotNull prepend="," property="totalAmount">total_amount=#totalAmount#</isNotNull>
 			<isNotEmpty prepend="," property="upperAmount">amount_in_words=#upperAmount#</isNotEmpty>
 			<isNotEmpty prepend="," property="paymentType">payment_type=#paymentType#</isNotEmpty>
@@ -100,4 +105,10 @@
    		DELETE FROM RS_PURCHASE_CONTRACT_PAYMENT
    		WHERE contract_id =#contractId# 
    	</delete>
+   	
+   	<update id="updateStatusByContractId" parameterClass="purchaseContractPayment">
+   		UPDATE RS_PURCHASE_CONTRACT_PAYMENT
+   		SET status=#stats# <isNotEmpty property="reviser">,reviser = #reviser#,revisedate = now() </isNotEmpty>
+   		WHERE contract_id =#contractId# 
+   	</update>
 </sqlMap>
