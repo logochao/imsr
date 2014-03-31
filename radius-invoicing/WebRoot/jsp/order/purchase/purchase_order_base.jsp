@@ -11,7 +11,7 @@ var purchase_order_base_supplier_nature = null;//供应商(公司)性质
 var purchase_order_base_sales_order_goods_category_code=null;//销售订单分类编码
 $(document).ready(function(){
 	purchase_order_base_status=$('#purchase_order_base_status').combobox({
- 		url:'${path}/contract/manager/sales_status_json.html',
+ 		url:'${path}/common/system/category_code_list.html?parentId=3500',
  		valueField: 'id',
 		textField: 'name',
 		onLoadSuccess:function(){
@@ -249,7 +249,7 @@ function formatterSupplierNature(value,row,index){
 		<th>采购订单号<font color="red">*</font></th> 
 		<td><input class="easyui-validatebox" style="background:#eee;width: 150px;border:1px solid #95B8E7" id="purchase_order_base_id" type="text" readonly="readonly"  data-options="" value="${purchaseOrder.purchaseOrderId}"/></td>
 		<th>状态</th>
-		<td colspan="3"><input id="purchase_order_base_status"  class="easyui-validatebox" class="easyui-combobox"  data-options="" value="0"/></td>
+		<td colspan="3"><input id="purchase_order_base_status"  class="easyui-validatebox" class="easyui-combobox"  data-options="" value="3501"/></td>
 		<th>订货日期</th>
 		<td><input class="easyui-validatebox" type="text" id="purchase_order_base_order_time" style="border:1px solid #95B8E7"/></td>
 	</tr>
@@ -281,7 +281,7 @@ function formatterSupplierNature(value,row,index){
 		<td colspan="3"><input class="easyui-validatebox" type="text" style="width: 350px;border:1px solid #95B8E7;" id="purchase_order_base_delivery_point"/></td>
 		<th>业务员</th>
 		<td>
-			<input class="easyui-validatebox" type="text" style="border:1px solid #95B8E7"/>
+			<input class="easyui-validatebox" type="text" id="purchase_order_base_purchaser" style="border:1px solid #95B8E7"/>
 			<a id="btn" href="#" class="easyui-linkbutton" plain="true"><font style="font-size:3ex">...</font></a>
 		</td>
 		<th colspan="2" style="text-align: center;"></th>
@@ -294,7 +294,7 @@ function formatterSupplierNature(value,row,index){
 			<a id="purchase_order_base_sales_order_btn" href="#" class="easyui-linkbutton" plain="true"><font style="font-size:3ex">...</font></a>
 		</td>
 		<th>合同总金额</th>
-		<td><input id="purchase_order_base_total_amount"  readonly="readonly" style="background:#eee;width: 150px;border:1px solid #95B8E7;"/></td>
+		<td><input id="purchase_order_base_total_amount" value="0.00"  readonly="readonly" style="background:#eee;width: 150px;border:1px solid #95B8E7;"/></td>
 		<th colspan="4"></th>
 	</tr>
 </table>
