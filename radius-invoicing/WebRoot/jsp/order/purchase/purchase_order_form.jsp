@@ -190,7 +190,7 @@ function setPurchaseOrderGoodsGrd(row_data){
 			return ;
 		}
 	}
-	addSalesOrderGoods2PurchaseOrderGoodsGrd(row_data,url);
+	addPurchaseOrderGoods2PurchaseContractGoodsGrd(row_data,url);
 }
 
 /**
@@ -198,13 +198,8 @@ function setPurchaseOrderGoodsGrd(row_data){
  *@param row_data
  *@param memcached_url 缓存地址
  **/
-function addSalesOrderGoods2PurchaseOrderGoodsGrd(row_data,memcached_url){
+function addPurchaseOrderGoods2PurchaseContractGoodsGrd(row_data,memcached_url){
 	//1.添加行数据
-	/*
-	purchase_order_form_sales_order_goods_grd.datagrid('insertRow',{
-		index:0,
-		row:row_data
-	});*/
 	addTargetDataGridRowData(purchase_order_form_sales_order_goods_grd,row_data,0);
 	//2.将数据添加到缓存中
 	 //2.1 将数据格式化
