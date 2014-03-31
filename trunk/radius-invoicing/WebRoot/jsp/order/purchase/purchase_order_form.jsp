@@ -67,7 +67,6 @@ $(function(){
  					$.each(data.rows,function(index,d){
  						//1.1 将数据格式化
 						var row_data=getPurchaseOrderGoodsGrdRowFormatter(d);//将数据格式化
-						 console.info(row_data);
 						//1.2 在数据列表中添加、在缓存中添加
 						setPurchaseOrderGoodsGrd(row_data);
 						$('#purchase_order_form_sales_order_goods_grd').datagrid('acceptChanges');//接受改变
