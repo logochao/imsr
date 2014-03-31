@@ -61,4 +61,10 @@ public interface PurchaseContractPaymentGrdDao {
 	 */
 	public void deletePurchaseContractPaymentGrd(PurchaseContractPaymentGrd g);
 
+	/**
+	 * 更新采购支付列表状态
+	 * @param purchaseContractPaymentGrd
+	 * @return
+	 */
+	public boolean updatePurchaseContractPaymentGrdStatusBycontractId(PurchaseContractPaymentGrd purchaseContractPaymentGrd);
 }

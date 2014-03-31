@@ -62,5 +62,12 @@ public interface PurchaseContractGoodsGrdDao {
 	 */
 	public void deletePurcheaseContractGoodsGrdByPK(String contractId,
 			String goodsId);
+	
+	/**
+	 * 通过合同编号修改采购合同商品信息状态
+	 * @param purchaseContractGoodsGrd
+	 * @return
+	 */
+	public boolean updatePurchaseContractGoodsGrdStatusByContractId(PurchaseContractGoodsGrd purchaseContractGoodsGrd);
 
 }
