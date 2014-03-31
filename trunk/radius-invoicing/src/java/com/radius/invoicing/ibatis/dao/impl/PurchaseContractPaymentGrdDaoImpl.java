@@ -77,4 +77,12 @@ public class PurchaseContractPaymentGrdDaoImpl extends BaseIbatisDaoImpl<Purchas
 	public void deletePurchaseContractPaymentGrd(PurchaseContractPaymentGrd g){
 		this.deleteObject(g, SQLMAPNAMESPACE+"deletePurchaseContractPaymentGrd");
 	}
+	/**
+	 * 更新采购支付列表状态
+	 * @param purchaseContractPaymentGrd
+	 * @return
+	 */
+	public boolean updatePurchaseContractPaymentGrdStatusBycontractId(PurchaseContractPaymentGrd purchaseContractPaymentGrd){
+		return this.updateObject(purchaseContractPaymentGrd, SQLMAPNAMESPACE+"updatePurchaseContractPaymentGrdStatusBycontractId")==1;
+	}
 }

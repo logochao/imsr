@@ -69,4 +69,13 @@ public class PurchaseContractDaoImpl extends BaseIbatisDaoImpl<PurchaseContract>
 	public void deletePurchaseContract(PurchaseContract pc){
 		this.deleteObject(pc, SQLMAPNAMESPACE+"deletePurchaseContract");
 	}
+	
+	/**
+	 * 更新采购合同状态
+	 * @param purchaseContract
+	 * @return
+	 */
+	public boolean updatePurchaseContractStatusById(PurchaseContract purchaseContract){
+		return this.updateObject(purchaseContract, SQLMAPNAMESPACE+"updatePurchaseContractStatusById")==1;
+	}
 }
