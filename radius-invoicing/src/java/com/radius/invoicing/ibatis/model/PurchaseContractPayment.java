@@ -15,6 +15,7 @@ public class PurchaseContractPayment extends ExtInfo{
 	private Integer  totalAmount=null;//合同总金额
 	private String   upperAmount="";//大写金额
 	private String   paymentType="";//付款方式
+	private String   stats ="";//状态
 	private String   ledgerId="";//账套编号
 	
 	
@@ -53,6 +54,12 @@ public class PurchaseContractPayment extends ExtInfo{
 	}
 	public void setUpperAmount(String upperAmount) {
 		this.upperAmount = upperAmount;
+	}
+	public String getStats() {
+		return stats;
+	}
+	public void setStats(String stats) {
+		this.stats = stats;
 	}
 	
 	
