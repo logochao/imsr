@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -26,6 +28,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.radius.base.helper.PropertyConfigHelper;
 import com.radius.invoicing.cache.impl.CategoryCacheImpl;
@@ -50,6 +53,19 @@ public class CommonController {
 	@Qualifier("propertyConfigHelper")
 	private PropertyConfigHelper propertyConfigHelper;
 	
+	private final String prefix="/jsp/business/spectype/";
+	
+	private String spec_type_view=null;
+	
+	
+	@PostConstruct
+	public void init(){
+		if(spec_type_view==null){
+			spec_type_view=prefix+"spec_type_index.jsp";
+		}
+	}
+	
+	
 	/**
 	 * 获取分类代码列表
 	 * @param request
@@ -63,6 +79,20 @@ public class CommonController {
 		Integer parentId = ServletRequestUtils.getIntParameter(request, "parentId", 0);//获取参数值
 		return categoryCache.getCategoryCodeListByParentId(parentId);
 	} 
+	
+	/**
+	 * 规格管理界面
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ModelAndView specType(HttpServletRequest request,HttpServletResponse response)throws Exception{
+		return new ModelAndView(spec_type_view);
+	}
+	
+	
+	
 	
 	/**
 	 * 上传文件
@@ -147,6 +177,14 @@ public class CommonController {
 	                e.printStackTrace();  
 	            }  
 	        }   
+		}
+	}
+	
+	
+	@PreDestroy
+	public void destroy(){
+		if(spec_type_view!=null){
+			spec_type_view=null;
 		}
 	}
 }
