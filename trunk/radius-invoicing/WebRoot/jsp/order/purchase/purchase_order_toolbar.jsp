@@ -27,11 +27,11 @@ $(function(){
 	
 	//提交合同按钮
 	$('#purchase_order_toolbar_ok_btn').on('click',function(){
-		if(parseFloat($('#purchase_order_base_total_amount').val())*100>0&&purchase_order_base_status.combobox('getText')=='未确认'){
+		if(parseFloat($('#purchase_order_base_total_amount').val())*100>0){
 			var ajax_url = '${path}/order/manager/purchaseOrder/purchase_order_infos_add.html';
 			var combox_data=purchase_order_base_status.combobox('getData');
 			for(var i=0,length=combox_data.length;i<length;i++){
-				if(combox_data[i].name=='已确认'){//
+				if(combox_data[i].name=='已确认'&&purchase_order_base_status.combobox('getText')=='未确认'){//
 					//1.验证必须内容
 					var ajax_data=getPurchaseOrderFormAjaxDataFormatter(combox_data[i].id);
 					console.info(ajax_data);
@@ -61,7 +61,6 @@ $(function(){
 function commitPurchaseOrderFormAjax(ajax_url,ajax_data){
 	$.ajax({
 		url:ajax_url,
-		method:'POST',
 		data:ajax_data,
 		success:function(r){
 			if(r&&r.success){
