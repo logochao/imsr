@@ -51,5 +51,12 @@ public interface PurchaseContractDao {
 	 * @param pc
 	 */
 	public void deletePurchaseContract(PurchaseContract pc);
+	
+	/**
+	 * 更新采购合同状态
+	 * @param purchaseContract
+	 * @return
+	 */
+	public boolean updatePurchaseContractStatusById(PurchaseContract purchaseContract);
 
 }

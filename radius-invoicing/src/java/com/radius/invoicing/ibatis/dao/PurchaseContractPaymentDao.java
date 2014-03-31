@@ -59,5 +59,12 @@ public interface PurchaseContractPaymentDao {
 	 * @param contractId
 	 */
 	public void deletePurchaseContractPaymentByPK(String contractId);
+	
+	/**
+	 * 更新采购合同支付状态
+	 * @param payment
+	 * @return
+	 */
+	public boolean updateStatusByContractId(PurchaseContractPayment payment);
 
 }
