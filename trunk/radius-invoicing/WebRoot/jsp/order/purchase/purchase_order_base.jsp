@@ -294,7 +294,7 @@ function formatterSupplierNature(value,row,index){
 			<a id="purchase_order_base_sales_order_btn" href="#" class="easyui-linkbutton" plain="true"><font style="font-size:3ex">...</font></a>
 		</td>
 		<th>合同总金额</th>
-		<td><input id="purchase_order_base_total_amount" value="0.00"  readonly="readonly" style="background:#eee;width: 150px;border:1px solid #95B8E7;"/></td>
+		<td><input id="purchase_order_base_total_amount"  readonly="readonly" style="background:#eee;width: 150px;border:1px solid #95B8E7;"/></td>
 		<th colspan="4"></th>
 	</tr>
 </table>
