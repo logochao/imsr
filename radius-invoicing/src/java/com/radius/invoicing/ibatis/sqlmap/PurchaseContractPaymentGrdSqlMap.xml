@@ -123,4 +123,9 @@
    		DELETE FROM RS_PURCHASE_CONTRACT_PAYMENT_GRD
    		WHERE money_list_id =#id# 
    	</delete>
+   	<update id="updatePurchaseContractPaymentGrdStatusBycontractId" parameterClass="purchaseContractPaymentGrd">
+   		UPDATE RS_PURCHASE_CONTRACT_PAYMENT_GRD
+   		SET STATUS=#stats# <isNotEmpty  property="reviser">,reviser = #reviser#,revisedate = now() </isNotEmpty>
+   		WHERE contract_id=#contractId#
+   	</update>
 </sqlMap>
