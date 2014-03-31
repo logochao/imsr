@@ -87,6 +87,7 @@ public class CommonController {
 	 * @return
 	 * @throws Exception
 	 */
+	@RequestMapping("/system/manager/common/spec_type_view.html")
 	public ModelAndView specType(HttpServletRequest request,HttpServletResponse response)throws Exception{
 		return new ModelAndView(spec_type_view);
 	}
