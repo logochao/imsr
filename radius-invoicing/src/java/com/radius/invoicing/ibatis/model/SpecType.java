@@ -15,6 +15,7 @@ public class SpecType extends ExtInfo{
 	private Integer specUnit;//规格单位
 	private Integer equivalentUnit;//折合单位
 	private Integer quantityEuUnit;//折合数量/规格单位
+	private Integer status;//状态
 	private String mome;//描述
 	private String ledgerId;//装套
 	
@@ -60,6 +61,12 @@ public class SpecType extends ExtInfo{
 	}
 	public void setSpecUnit(Integer specUnit) {
 		this.specUnit = specUnit;
+	}
+	public Integer getStatus() {
+		return status;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 	
 	

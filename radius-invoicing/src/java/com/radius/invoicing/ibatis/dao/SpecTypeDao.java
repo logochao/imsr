@@ -47,5 +47,13 @@ public interface SpecTypeDao {
 	 * @return
 	 */
 	public boolean deleteSpecType(SpecType specType);
+	
+	
+	/**
+	 * 更新规格信息
+	 * @param specType
+	 * @return
+	 */
+	public boolean updateSpecType(SpecType specType);
 
 }

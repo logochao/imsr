@@ -60,7 +60,7 @@
    
    	<insert id="insert" parameterClass="purchaseContractPaymentGrd">
    		INSERT INTO RS_PURCHASE_CONTRACT_PAYMENT_GRD (
-	  		<isNotEmpty  property="name">money_list_nam,</isNotEmpty>
+	  		<isNotEmpty  property="name">money_list_name,</isNotEmpty>
 	  		<isNotEmpty  property="contractId">contract_id,</isNotEmpty>
 	  		<isNotEmpty  property="batch">money_list_batch,</isNotEmpty>
 	  		<isNotNull  property="amount">amount,</isNotNull>
