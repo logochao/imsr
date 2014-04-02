@@ -390,6 +390,7 @@ public class PurchaseContractServiceImpl implements Constants, PurchaseContractS
 				logger.info("保存采购合同相关数据操作成功...");
 				success = true;
 				message="添加采购合同信息操作成功...";
+				code=statusCode;
 			}else if(temp!=null){//更新相关对象
 				//--------------------------保存采购合同相关数据---------------------------
 				//更新状态

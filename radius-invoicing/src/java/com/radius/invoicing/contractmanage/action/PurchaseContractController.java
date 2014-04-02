@@ -221,6 +221,9 @@ public class PurchaseContractController extends BaseController{
 	public JsonUtils savePurchaseContractInfo(HttpServletRequest request,HttpServletResponse response,PurchaseContract purchaseContract)throws Exception{
 		String ledgerId ="0001";//帐套
 		String operator ="0001";//当前操作人员编号
+		purchaseContract.setLedgerId(ledgerId);
+		purchaseContract.setCreater(operator);
+		
 		//1.采购商品信息缓存key
 		String productKey=purchaseContract.getId()+"_purchase_contract_add_contract_product_info";
 		//2.采购支付详情缓存key
