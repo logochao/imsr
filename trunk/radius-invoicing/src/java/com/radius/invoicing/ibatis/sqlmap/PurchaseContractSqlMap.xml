@@ -79,7 +79,7 @@
   	</dynamic>
   </sql>
  
-	 <select id="getPurchaseContractById" parameterClass="purchaseContract" resultMap="purchaseContract">
+	 <select id="getPurchaseContractById" parameterClass="java.lang.String" resultMap="purchaseContract">
 	 	SELECT <include refid="purchaseContractFileds"/>
 	 	FROM RS_PURCHASE_CONTRACT
 	 	WHERE contract_id =#id#

@@ -5,7 +5,7 @@
   <typeAlias alias="specType" type="com.radius.invoicing.ibatis.model.SpecType" />
   
   <sql id="specTypeFileds">
-  	 spec_id specId,spec_name specName,spec_unit specUnit,equivalent_unit equivalentUnit,quantity_of_eu_per_unit quantityEuUnit,mome mome,ledger_id ledgerId,creater creater,createdate createdate,reviser reviser,revisedate revisedate,verifier verifydate
+  	 spec_id specId,spec_name specName,spec_unit specUnit,equivalent_unit equivalentUnit,quantity_of_eu_per_unit quantityEuUnit,spec_status status,mome mome,ledger_id ledgerId,creater creater,createdate createdate,reviser reviser,revisedate revisedate,verifier verifydate
   </sql>
   
   <resultMap id="specType" class="specType">
@@ -14,6 +14,7 @@
     <result column="spec_unit" jdbcType="int" javaType="java.lang.Integer" property="specUnit" />
     <result column="equivalent_unit" jdbcType="int" javaType="java.lang.Integer" property="equivalentUnit" />
     <result column="quantity_of_eu_per_unit" jdbcType="int" javaType="java.lang.Integer" property="quantityEuUnit" />
+    <result column="spec_status" jdbcType="smallint" javaType="java.lang.Integer" property="status" />
     <result column="mome" jdbcType="char" javaType="java.lang.String" property="mome" />
     <result column="ledger_id" jdbcType="char" javaType="java.lang.String" property="ledgerId" />
     <result column="creater" jdbcType="char" javaType="java.lang.String" property="creater" />
@@ -69,9 +70,9 @@
   
   <insert id="insert" parameterClass="specType">
   	INSERT INTO RS_SPEC_TYPE 
-  	(spec_name,spec_unit,equivalent_unit,quantity_of_eu_per_unit,<isNotNull  property="mome">mome,</isNotNull><isNotNull  property="ledgerId">ledger_id,</isNotNull><isNotNull  property="creater">creater,</isNotNull>createdate)
+  	(spec_name,spec_unit,equivalent_unit,quantity_of_eu_per_unit,spec_status,<isNotNull  property="mome">mome,</isNotNull><isNotNull  property="ledgerId">ledger_id,</isNotNull><isNotNull  property="creater">creater,</isNotNull>createdate)
   	VALUES
-  	(#specName#,#specUnit#,#equivalentUnit#,#quantityEuUnit#,<isNotNull  property="mome">#mome#,</isNotNull><isNotNull  property="ledgerId">#ledgerId#,</isNotNull><isNotNull  property="creater">#creater#,</isNotNull> now())
+  	(#specName#,#specUnit#,#equivalentUnit#,#quantityEuUnit#,#status#,<isNotNull  property="mome">#mome#,</isNotNull><isNotNull  property="ledgerId">#ledgerId#,</isNotNull><isNotNull  property="creater">#creater#,</isNotNull> now())
   	 <selectKey resultClass="java.lang.Integer" keyProperty="specId">
       select LAST_INSERT_ID()
     </selectKey>

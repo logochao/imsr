@@ -67,4 +67,12 @@ public class SpecTypeDaoImpl extends BaseIbatisDaoImpl<SpecType> implements Spec
 	public boolean deleteSpecType(SpecType specType){
 		return this.deleteObject(specType, SQLMAPNAMESPACE+"delete")==1;
 	}
+	/**
+	 * 更新规格信息
+	 * @param specType
+	 * @return
+	 */
+	public boolean updateSpecType(SpecType specType){
+		return this.updateObject(specType, SQLMAPNAMESPACE+"updateSpecType")==1;
+	}
 }
