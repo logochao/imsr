@@ -30,9 +30,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.radius.base.controller.BaseController;
 import com.radius.base.helper.PropertyConfigHelper;
+import com.radius.base.page.EasyuiSplitPager;
+import com.radius.base.utils.JsonUtils;
 import com.radius.invoicing.cache.impl.CategoryCacheImpl;
+import com.radius.invoicing.enums.UseStatusEnums;
 import com.radius.invoicing.ibatis.model.CategoryCode;
+import com.radius.invoicing.ibatis.model.SpecType;
+import com.radius.invoicing.sysmanage.service.SpecTypeService;
 
 /**
  * @author <a href="mailto:goodluck.sunlight@gmail.com">陈波宁</a>
@@ -43,7 +49,7 @@ import com.radius.invoicing.ibatis.model.CategoryCode;
 @Controller
 @Scope("request")
 @SuppressWarnings("static-access")
-public class CommonController {
+public class CommonController extends BaseController{
 
 	@Autowired(required=false)
 	@Qualifier("categoryCacheImpl")
@@ -52,6 +58,10 @@ public class CommonController {
 	@Autowired(required=false)
 	@Qualifier("propertyConfigHelper")
 	private PropertyConfigHelper propertyConfigHelper;
+	
+	@Autowired(required=false)
+	@Qualifier("specTypeServiceImpl")
+	private SpecTypeService specTypeService;
 	
 	private final String prefix="/jsp/business/spectype/";
 	
@@ -181,7 +191,35 @@ public class CommonController {
 		}
 	}
 	
+	@RequestMapping("/common/system/use_status_list.html")
+	public void getUseStatusJson(HttpServletRequest request,HttpServletResponse response)throws Exception{
+		String json=UseStatusEnums.getUseStatusEnums2Json();
+		super.ajaxMethod(response, json, "获取资源管理信息发生异常");
+	}
 	
+	/**
+	 * 添加规格信息
+	 * @param request
+	 * @param response
+	 * @param specType
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/system/manage/common/spec_type_info_add.html")
+	@ResponseBody
+	public JsonUtils addSpecTypeInfo(HttpServletRequest request,HttpServletResponse response,SpecType specType)throws Exception{
+		String ledgerId ="0001";
+		String creator ="0001";
+		specType.setLedgerId(ledgerId);
+		specType.setCreater(creator);
+		return specTypeService.saveSpecTypeInfo(specType);
+	}
+	
+	@RequestMapping("/system/manage/common/spec_type_info_list.html")
+	@ResponseBody
+	public EasyuiSplitPager<SpecType> getSpecTypeInfoList(HttpServletRequest request,HttpServletResponse response,SpecType specType)throws Exception{
+		return specTypeService.getSpecTypeInfoList(specType);
+	}
 	@PreDestroy
 	public void destroy(){
 		if(spec_type_view!=null){
