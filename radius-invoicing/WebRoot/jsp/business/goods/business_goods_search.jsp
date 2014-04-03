@@ -261,21 +261,21 @@ var business_goods_search_add_product_dialog = null;//添加商品信息对话�
 <div id="business_goods_search_search_product_info">
 	<table  style="width: 100%;">
 		<tr>
-			<td>商品名称:</td>
+			<th>商品名称:</th>
 			<td><input id="business_goods_search_product_name"  style="border:1px solid #95B8E7"/></td>
-			<td>分类:</td>
+			<th>分类:</th>
 			<td><input id="business_goods_search_category_name" style="border:1px solid #95B8E7"/></td>
-			<td>产地:</td>
+			<th>产地:</th>
 			<td><input id="business_goods_search_origin_place"  style="border:1px solid #95B8E7"/></td>
-			<td>商品性质:</td>
+			<th>商品性质:</th>
 			<td><input id="business_goods_search_product_property" style="border:1px solid #95B8E7"/></td>
 		</tr>
 		<tr>
-			<td>商品类型:</td>
+			<th>商品类型:</th>
 			<td><input id="business_goods_search_product_series"  style="border:1px solid #95B8E7"/></td>
-			<td>真实品名:</td>
+			<th>真实品名:</th>
 			<td><input id="business_goods_search_true_product_name" style="border:1px solid #95B8E7"/></td>
-			<td>批次号</td>
+			<th>批次号</th>
 			<td><input id="business_goods_search_batch_no"/></td>
 			<td colspan="2" style="text-align: center;" >
 				<div style="float: left;margin-top: 5px;">
