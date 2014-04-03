@@ -64,7 +64,7 @@ $(function (){
 				{field:'validityDate',title:'款项期限',width:80,align:'center'},
 				{field:'receiveType',title:'支付方式',width:120,align:'center'},
 				{field:'upperAmount',title:'人民币大写',width:220,align:'center'},
-				{field:'mome',title:'备注',width:250,align:'center'}
+				{field:'memo',title:'备注',width:250,align:'center'}
 			]]
 	});
 	
@@ -80,34 +80,38 @@ $(function (){
  	
  	
  	$('#purchase_contract_pay_detail_add_btn').on('click',function(){
- 		if(parseFloat($('#purchase_contract_pay_detail_amount').val())>0){
- 			var rows=purchase_contract_pay_detail_pay_grd.datagrid('getRows');
-	 		var row =null;//表示需要更改的对象
-	 		if(rows==null||rows.length==0){
-	 			addPurchaseContractPayDetailDataGrid();
-	 			purchase_contract_pay_detail_pay_grd.datagrid('acceptChanges');
-	 		}else if(rows.length>0){
-	 			//1.判断是否相同的批次
-	 			var isExist=false;
-	 			for(var  i=0;i<rows.length;i++){
-		 			if(rows[i].batch==$('#purchase_contract_pay_detail_batch').val()){//表示当前主键相同
-		 				isExist=true;
-		 				break;
-		 			}
-	 			}
-	 			if(isExist){//2.如果相同时，还选择需要保存,则更新对应的row
-	 				//弹出对话框
-	 				$.messager.confirm('提示','是否确定要修改当前已经存在的信息',function(r){
-	 					if(r){//再更改相关信息
-	 						$.messager.alert('提示','暂时不做任何处理...',warning);
-	 					}
-	 				});
-	 			}else{//3.如果不相同时,则直接添加
-	 				addPurchaseContractPayDetailDataGrid();
-	 			}
-	 		}
- 		}else{
+ 		if($('#purchase_contract_base_id').val().length<=0){
+ 			$.messager.alert('提示','请获取采购合同编号,再进行操作...','error');
+ 			return ;
+ 		}
+ 		if(parseFloat($('#purchase_contract_pay_detail_amount').val())<=0){
  			$.messager.alert('提示','请输入大于0元金额,再进行操作...','error');
+ 			return ;
+ 		}
+		var rows=purchase_contract_pay_detail_pay_grd.datagrid('getRows');
+ 		var row =null;//表示需要更改的对象
+ 		if(rows==null||rows.length==0){
+ 			addPurchaseContractPayDetailDataGrid();
+ 			purchase_contract_pay_detail_pay_grd.datagrid('acceptChanges');
+ 		}else if(rows.length>0){
+ 			//1.判断是否相同的批次
+ 			var isExist=false;
+ 			for(var  i=0;i<rows.length;i++){
+	 			if(rows[i].batch==$('#purchase_contract_pay_detail_batch').val()){//表示当前主键相同
+	 				isExist=true;
+	 				break;
+	 			}
+ 			}
+ 			if(isExist){//2.如果相同时，还选择需要保存,则更新对应的row
+ 				//弹出对话框
+ 				$.messager.confirm('提示','是否确定要修改当前已经存在的信息',function(r){
+ 					if(r){//再更改相关信息
+ 						$.messager.alert('提示','暂时不做任何处理...',warning);
+ 					}
+ 				});
+ 			}else{//3.如果不相同时,则直接添加
+ 				addPurchaseContractPayDetailDataGrid();
+ 			}
  		}
  	});
  	//支付详情删除按钮
@@ -150,10 +154,10 @@ $(function (){
  			$.messager.alert('提示','请选择待删除的行信息','error');
  		}
  	});
-	//---------------------------------业务处理-----------------------------------------
 });
 
 
+	//---------------------------------业务处理-----------------------------------------
 
 
 //添加合同支付明细
@@ -181,15 +185,14 @@ function getPurchaseContractPayDetailPayGrdRowFormatter(){
 		name:'采购合同支付明细',//款项名称
 		contractId:$('#purchase_contract_base_id').val(),//合同编号
 		batch:$('#purchase_contract_pay_detail_batch').val(),//款项批次
-		amount:$('#purchase_contract_pay_detail_amount').val(),//金额
+		amount:parseFloat($('#purchase_contract_pay_detail_amount').val())*100,//金额
 		upperAmount:$('#purchase_contract_pay_detail_upper_rmb').val(),//大写金额
-		receiveType:purchase_contract_pay_detail_pay.combobox('getText'),//收付款类型
-		validityDate:$('#contract_purchase_pay_detail_deadline_time').datebox('getValue'),//款项期限
+		receiveType:$('#purchase_contract_pay_detail_pay').combobox('getText'),//收付款类型
+		validityDate:$('#purchase_contract_pay_detail_deadline_time').datebox('getText'),//款项期限
 		stats:'',//状态
 		cashType:purchase_contract_pay_detail_currency.combobox('getText'),//币种
 		memo:$('#contract_sale_pay_detail_memo').val()//备注
 	};
-	
 	return json;
 }
 /**
@@ -198,20 +201,20 @@ function getPurchaseContractPayDetailPayGrdRowFormatter(){
  * @return   json
  **/
 function getPurchaseContractPayDetailMemcached(row_data){
+	console.info(row_data);
 	var json = {
 		id:row_data.id,//款项编号
 		name:row_data.name,//款项名称
 		contractId:row_data.contractId,//合同编号
-		batch:contractId.batch,//款项批次
+		batch:row_data.batch,//款项批次
 		amount:parseFloat(row_data.amount)*100,//金额
 		upperAmount:row_data.upperAmount,//大写金额
 		receiveType:purchase_contract_pay_detail_pay.combobox('getValue'),//收付款类型
-		validityDate:parseDate(row_data.validityDate),//款项期限
+		validityDate:parseDate($('#purchase_contract_pay_detail_deadline_time').datebox('getValue')),//款项期限
 		stats:row_data.stats,//状态
 		cashType:purchase_contract_pay_detail_currency.combobox('getValue'),//币种
 		memo:row_data.memo//备注
 	};
-	
 	return json;
 }
 

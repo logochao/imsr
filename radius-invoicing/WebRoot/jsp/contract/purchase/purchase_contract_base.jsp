@@ -10,6 +10,7 @@ var purchase_contract_base_purchase_order_dialog = null;//采购订单对话框
 var purchase_contract_base_purchase_order_grd = null;;//采购订单信息列表
 var purchase_contract_base_goods_property = null;//商品属性
 var purchase_contract_base_goods_category_code = null;//商品分类
+var purchase_contract_base_contract_type = null;//合同类型
 $(function(){
 	//-------------------------初始化---------------------------------------------------//
 	$('#purchase_contract_base_order_end_time').datebox({
@@ -125,7 +126,26 @@ $(function(){
 	//商品分类
  	purchase_contract_base_goods_category_code=$('#purchase_contract_base_goods_category_code').combobox({    
 	})
- 	
+ 	//合同类型
+ 	purchase_contract_base_contract_type=$('#purchase_contract_base_contract_type').combobox({
+ 		url:'${path}/common/system/category_code_list.html?parentId=1',
+ 		valueField: 'id',
+		textField: 'name',
+		onLoadSuccess:function(){
+			var target = $(this);
+			var data = target.combobox("getData");
+			var options = target.combobox("options");
+			if(data && data.length>0){
+				for(var i=0;i<data.length;i++){
+					var fs = data[i];
+					if(fs[options.valueField]==target.val()){//如果设置的值等于默认值，将将对应的显示内容显示
+						target.combobox("setValue",fs[options.textField]);
+					}
+				}
+			}
+			target.combobox('disable');//设置当前下拉列表不可用
+		}
+ 	}); 
  	
  	
  	
@@ -319,8 +339,10 @@ function getPurchaseOrderGrdFormatter(data){
 	<tr>
 		<th>采购合同号<font color="red">*</font></th> 
 		<td><input class="easyui-validatebox" style="background:#eee;width: 150px;border:1px solid #95B8E7" id="purchase_contract_base_id" type="text" readonly="readonly"/></td>
+		<th>合同类型</th>
+		<td><input id="purchase_contract_base_contract_type"  class="easyui-validatebox" class="easyui-combobox"   value="3"/></td>
 		<th>状态</th>
-		<td colspan="3"><input id="purchase_contract_base_status"  class="easyui-validatebox" class="easyui-combobox"   value="3541"/></td>
+		<td><input id="purchase_contract_base_status"  class="easyui-validatebox" class="easyui-combobox"   value="3541"/></td>
 		<th>订货日期</th>
 		<td><input class="easyui-validatebox" type="text" id="purchase_contract_base_order_time" style="border:1px solid #95B8E7"/></td>
 	</tr>
@@ -352,7 +374,7 @@ function getPurchaseOrderGrdFormatter(data){
 		<td colspan="3"><input class="easyui-validatebox" type="text" style="width: 350px;border:1px solid #95B8E7;" id="purchase_contract_base_delivery_point"/></td>
 		<th>业务员</th>
 		<td>
-			<input class="easyui-validatebox" type="text" style="border:1px solid #95B8E7"/>
+			<input class="easyui-validatebox" id="purchase_contract_base_clerk" type="text" style="border:1px solid #95B8E7"/>
 			<a id="btn" href="#" class="easyui-linkbutton" plain="true"><font style="font-size:3ex">...</font></a>
 		</td>
 		<th colspan="2" style="text-align: center;"></th>
