@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.radius.base.dao.ibatis.BaseIbatisDaoImpl;
 import com.radius.invoicing.ibatis.dao.SaleQuotationGrdDao;
-import com.radius.invoicing.ibatis.model.SaleQuotationGrd;
+import com.radius.invoicing.ibatis.model.SalesQuotationGrd;
 
 /**
  * @author <a href="mailto:goodluck.sunlight@gmail.com">陈波宁</a>
@@ -18,7 +18,7 @@ import com.radius.invoicing.ibatis.model.SaleQuotationGrd;
  * 类说明 销售报价商品明细Dao
  */
 @Repository
-public class SaleQuotationGrdDaoImpl extends BaseIbatisDaoImpl<SaleQuotationGrd> implements SaleQuotationGrdDao{
+public class SaleQuotationGrdDaoImpl extends BaseIbatisDaoImpl<SalesQuotationGrd> implements SaleQuotationGrdDao{
 
 	private final  String SQLMAPNAMESPACE="saleQuotationGrdSqlMap";
 	
@@ -27,7 +27,7 @@ public class SaleQuotationGrdDaoImpl extends BaseIbatisDaoImpl<SaleQuotationGrd>
 	 * @param grd
 	 * @return
 	 */
-	public SaleQuotationGrd getSaleQuotationGrdByPk(SaleQuotationGrd grd){
+	public SalesQuotationGrd getSaleQuotationGrdByPk(SalesQuotationGrd grd){
 		return this.getObjectByCondition(grd, SQLMAPNAMESPACE+".getSaleQuotationGrdByPk");
 	}
 	
@@ -36,14 +36,14 @@ public class SaleQuotationGrdDaoImpl extends BaseIbatisDaoImpl<SaleQuotationGrd>
 	 * @param grd
 	 * @return
 	 */
-	public List<SaleQuotationGrd> getSaleQuotationGrdByCondition( SaleQuotationGrd grd){
+	public List<SalesQuotationGrd> getSaleQuotationGrdByCondition( SalesQuotationGrd grd){
 		return this.getListObject(grd, SQLMAPNAMESPACE+".getSaleQuotationGrdByCondition");
 	}
 	/**
 	 * 保存销售报价订单
 	 * @param grd
 	 */
-	public void insertSaleQuotationGrd(SaleQuotationGrd grd){
+	public void insertSaleQuotationGrd(SalesQuotationGrd grd){
 		this.insertObject(grd, SQLMAPNAMESPACE+".insert");
 	}
 	
@@ -51,7 +51,7 @@ public class SaleQuotationGrdDaoImpl extends BaseIbatisDaoImpl<SaleQuotationGrd>
 	 * 批量保存销售报价
 	 * @param list
 	 */
-	public void batchInsertSaleQuotationGrd(List<SaleQuotationGrd> list){
+	public void batchInsertSaleQuotationGrd(List<SalesQuotationGrd> list){
 		this.batchInsertListObject(list, SQLMAPNAMESPACE+".insert");
 	}
 	
@@ -60,7 +60,7 @@ public class SaleQuotationGrdDaoImpl extends BaseIbatisDaoImpl<SaleQuotationGrd>
 	 * @param grd
 	 * @return
 	 */
-	public boolean updateSaleQuotationGrdByPk(SaleQuotationGrd grd){
+	public boolean updateSaleQuotationGrdByPk(SalesQuotationGrd grd){
 		return this.updateObject(grd, SQLMAPNAMESPACE+".updateSaleQuotationGrdById")==1;
 	}
 	
@@ -68,7 +68,7 @@ public class SaleQuotationGrdDaoImpl extends BaseIbatisDaoImpl<SaleQuotationGrd>
 	 * 删除销售报价
 	 * @param grd
 	 */
-	public void deleteSaleQuotationGrd(SaleQuotationGrd grd){
+	public void deleteSaleQuotationGrd(SalesQuotationGrd grd){
 		this.deleteObject(grd, SQLMAPNAMESPACE+".deleteSaleQuotationGrd");
 	}
 }
