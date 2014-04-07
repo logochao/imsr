@@ -10,57 +10,72 @@ package com.radius.invoicing.ibatis.model;
  */
 public class PurchaseContractPayment extends ExtInfo{
 
-	private String   contractId="";//合同编号
-	private String   cashType="";//币种	
-	private Integer  totalAmount=null;//合同总金额
-	private String   upperAmount="";//大写金额
-	private String   paymentType="";//付款方式
-	private String   stats ="";//状态
-	private String   ledgerId="";//账套编号
+	private String   contractId;//合同编号
+	private String   cashType;//币种	
+	private Integer  totalAmount;//合同总金额
+	private String   upperAmount;//大写金额
+	private String   paymentType;//付款方式
+	private String   auditedStatus;//审批状态
 	
-	
+	private String   status ;//状态
+
+	public String getAuditedStatus() {
+		return auditedStatus;
+	}
+
+	public void setAuditedStatus(String auditedStatus) {
+		this.auditedStatus = auditedStatus;
+	}
+
 	public String getCashType() {
 		return cashType;
 	}
+
 	public void setCashType(String cashType) {
 		this.cashType = cashType;
 	}
+
 	public String getContractId() {
 		return contractId;
 	}
+
 	public void setContractId(String contractId) {
 		this.contractId = contractId;
 	}
-	public String getLedgerId() {
-		return ledgerId;
-	}
-	public void setLedgerId(String ledgerId) {
-		this.ledgerId = ledgerId;
-	}
+
 	public String getPaymentType() {
 		return paymentType;
 	}
+
 	public void setPaymentType(String paymentType) {
 		this.paymentType = paymentType;
 	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	public Integer getTotalAmount() {
 		return totalAmount;
 	}
+
 	public void setTotalAmount(Integer totalAmount) {
 		this.totalAmount = totalAmount;
 	}
+
 	public String getUpperAmount() {
 		return upperAmount;
 	}
+
 	public void setUpperAmount(String upperAmount) {
 		this.upperAmount = upperAmount;
 	}
-	public String getStats() {
-		return stats;
-	}
-	public void setStats(String stats) {
-		this.stats = stats;
-	}
+	
+	
 	
 	
 }

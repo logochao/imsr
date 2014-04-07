@@ -1,10 +1,5 @@
 package com.radius.invoicing.ibatis.model;
 
-import java.util.Date;
-
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-
-import com.radius.base.utils.JsonDateSerializer;
 
 /**
  * @author <a href="mailto:goodluck.sunlight@gmail.com">陈波宁</a>
@@ -14,59 +9,41 @@ import com.radius.base.utils.JsonDateSerializer;
  */
 public class SalesOrderGoodsGrd extends ExtInfo {
 
-	   private Integer seriesNo = null ;//序号
-	   private String orderId = "";//销售订货单编号
-	   private String goodsId = "";//商品编号
-	   private String goodsName = "";//商品名称
-	   private Integer quantity = null ;//数量
-	   private String unit = "";//单位
-	   private String barCode = "";//条形码
-	   private String model = "";//型号
-	   private String property = "";//属性
-	   private Integer price  = null;//单价
-	   private Integer amount = null ;//金额
-	   private String stats = "";//状态
-	   private String other = "";//其他
-	   private String formate = "";//规格编号
-	   private Integer priceKg = null  ;//单价/kg
-	   private Integer totalWeight = null  ;//总重量
-	   private Integer tax  = null ;//税率
-	   private Integer taxAmount = null ;//税额
-	   private Integer weigthUnit = null ;//单位重量
-	   private Integer priceWeigthUnit = null  ;//单位重量单价
-	   private String operator = "";//
-	   private Integer weightUnit = null ;//每单位重量
-	   private Integer batchNo = null ;//batch_no
-	   private Date madeDate = null ;//生产日期
-	   private Date validityDate = null ;//有效期至
-	   private String  memo="";//商品备注
-	   private String  ledgerId="";//账套编号
-
-	
+   private String 		orderId;//销售订货单编号
+   private String 		goodsId;//商品编号
+   private String 		goodsName;//商品名称
+   private Integer 		specId;//规格编码
+   private Integer 		unit;//包装单位(规格)
+   private Integer 		priceUnit;//包装单位单价
+   private Integer 		equivalentUnit;//折合单位
+   private Integer 		priceEu;//折合单位单价
+   private Integer 		quantityEuPerUnit;//包装单位折合数量
+   private Integer 		quantityUnit;//数量
+   private Integer 		quantityEu;//折合数量
+   private Integer 		amount;//金额
+   private String   	upperAmount;//大写金额
+   private String  		memo;//商品备注
+   private String 		status;//状态
 	   
+	   
+	public SalesOrderGoodsGrd() {
+	}
+	   
+	public SalesOrderGoodsGrd(String orderId, String goodsId) {
+		this.orderId = orderId;
+		this.goodsId = goodsId;
+	}
 	public Integer getAmount() {
 		return amount;
 	}
 	public void setAmount(Integer amount) {
 		this.amount = amount;
 	}
-	public String getBarCode() {
-		return barCode;
+	public Integer getEquivalentUnit() {
+		return equivalentUnit;
 	}
-	public void setBarCode(String barCode) {
-		this.barCode = barCode;
-	}
-	public Integer getBatchNo() {
-		return batchNo;
-	}
-	public void setBatchNo(Integer batchNo) {
-		this.batchNo = batchNo;
-	}
-	public String getFormate() {
-		return formate;
-	}
-	public void setFormate(String formate) {
-		this.formate = formate;
+	public void setEquivalentUnit(Integer equivalentUnit) {
+		this.equivalentUnit = equivalentUnit;
 	}
 	public String getGoodsId() {
 		return goodsId;
@@ -80,36 +57,11 @@ public class SalesOrderGoodsGrd extends ExtInfo {
 	public void setGoodsName(String goodsName) {
 		this.goodsName = goodsName;
 	}
-	public String getLedgerId() {
-		return ledgerId;
-	}
-	public void setLedgerId(String ledgerId) {
-		this.ledgerId = ledgerId;
-	}
-	@JsonSerialize(using=JsonDateSerializer.class) 
-	public Date getMadeDate() {
-		return madeDate;
-	}
-	public void setMadeDate(Date madeDate) {
-		this.madeDate = madeDate;
-	}
 	public String getMemo() {
 		return memo;
 	}
 	public void setMemo(String memo) {
 		this.memo = memo;
-	}
-	public String getModel() {
-		return model;
-	}
-	public void setModel(String model) {
-		this.model = model;
-	}
-	public String getOperator() {
-		return operator;
-	}
-	public void setOperator(String operator) {
-		this.operator = operator;
 	}
 	public String getOrderId() {
 		return orderId;
@@ -117,101 +69,59 @@ public class SalesOrderGoodsGrd extends ExtInfo {
 	public void setOrderId(String orderId) {
 		this.orderId = orderId;
 	}
-	public String getOther() {
-		return other;
+	public Integer getPriceEu() {
+		return priceEu;
 	}
-	public void setOther(String other) {
-		this.other = other;
+	public void setPriceEu(Integer priceEu) {
+		this.priceEu = priceEu;
 	}
-	
-	public Integer getPrice() {
-		return price;
+	public Integer getPriceUnit() {
+		return priceUnit;
 	}
-	public void setPrice(Integer price) {
-		this.price = price;
+	public void setPriceUnit(Integer priceUnit) {
+		this.priceUnit = priceUnit;
 	}
-	public Integer getPriceKg() {
-		return priceKg;
+	public Integer getQuantityEu() {
+		return quantityEu;
 	}
-	public void setPriceKg(Integer priceKg) {
-		this.priceKg = priceKg;
+	public void setQuantityEu(Integer quantityEu) {
+		this.quantityEu = quantityEu;
 	}
-	public Integer getPriceWeigthUnit() {
-		return priceWeigthUnit;
+	public Integer getQuantityEuPerUnit() {
+		return quantityEuPerUnit;
 	}
-	public void setPriceWeigthUnit(Integer priceWeigthUnit) {
-		this.priceWeigthUnit = priceWeigthUnit;
+	public void setQuantityEuPerUnit(Integer quantityEuPerUnit) {
+		this.quantityEuPerUnit = quantityEuPerUnit;
 	}
-	public String getProperty() {
-		return property;
+	public Integer getQuantityUnit() {
+		return quantityUnit;
 	}
-	public void setProperty(String property) {
-		this.property = property;
+	public void setQuantityUnit(Integer quantityUnit) {
+		this.quantityUnit = quantityUnit;
 	}
-	public Integer getQuantity() {
-		return quantity;
+	public Integer getSpecId() {
+		return specId;
 	}
-	public void setQuantity(Integer quantity) {
-		this.quantity = quantity;
+	public void setSpecId(Integer specId) {
+		this.specId = specId;
 	}
-	public Integer getSeriesNo() {
-		return seriesNo;
+	public String getStatus() {
+		return status;
 	}
-	public void setSeriesNo(Integer seriesNo) {
-		this.seriesNo = seriesNo;
+	public void setStatus(String status) {
+		this.status = status;
 	}
-	public String getStats() {
-		return stats;
-	}
-	public void setStats(String stats) {
-		this.stats = stats;
-	}
-	public Integer getTax() {
-		return tax;
-	}
-	public void setTax(Integer tax) {
-		this.tax = tax;
-	}
-	public Integer getTaxAmount() {
-		return taxAmount;
-	}
-	public void setTaxAmount(Integer taxAmount) {
-		this.taxAmount = taxAmount;
-	}
-	public Integer getTotalWeight() {
-		return totalWeight;
-	}
-	public void setTotalWeight(Integer totalWeight) {
-		this.totalWeight = totalWeight;
-	}
-	public String getUnit() {
+	public Integer getUnit() {
 		return unit;
 	}
-	public void setUnit(String unit) {
+	public void setUnit(Integer unit) {
 		this.unit = unit;
 	}
-	@JsonSerialize(using=JsonDateSerializer.class) 
-	public Date getValidityDate() {
-		return validityDate;
+	public String getUpperAmount() {
+		return upperAmount;
 	}
-	public void setValidityDate(Date validityDate) {
-		this.validityDate = validityDate;
+	public void setUpperAmount(String upperAmount) {
+		this.upperAmount = upperAmount;
 	}
-	public Integer getWeightUnit() {
-		return weightUnit;
-	}
-	public void setWeightUnit(Integer weightUnit) {
-		this.weightUnit = weightUnit;
-	}
-	public Integer getWeigthUnit() {
-		return weigthUnit;
-	}
-	public void setWeigthUnit(Integer weigthUnit) {
-		this.weigthUnit = weigthUnit;
-	}
-	   
-	   
-	   
-	   
 	   
 }

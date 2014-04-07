@@ -13,93 +13,109 @@ import java.util.Date;
  */
 public class SalesContractPaymentGrd extends ExtInfo{
 
-	private Integer  id=null;//款项编号
-	private String  name="";//款项名称
-	private String  contractId="";//合同编号
-	private String  batch="";//款项批次
-	private Integer  amount=null;//金额
-	private String  upperAmount="";//大写金额
-	private String  receiveType="";//收付款类型
-	private Date  	validityDate=null;//款项期限
-	private String  stats="";//状态
-	private String  memo="";//备注
-	private String  ledgerId="";//账套编号
+	private Integer  	id;//款项编号
+	private String  	name;//款项名称
+	private String  	contractId;//合同编号
+	private Integer  	batch;//款项批次
+	private Integer  	amount;//金额
+	private String  	upperAmount;//大写金额
+	private String  	receiveType;//收付款类型
+	private Date  		validityDate;//款项期限
+	private String  	status;//状态
+	private String  	memo;//备注
 	
-	private String currency="";//货币单位
-	
-	
+	private String 		currency="";//货币单位
+
 	public Integer getAmount() {
 		return amount;
 	}
+
 	public void setAmount(Integer amount) {
 		this.amount = amount;
 	}
-	public String getBatch() {
+
+	public Integer getBatch() {
 		return batch;
 	}
-	public void setBatch(String batch) {
+
+	public void setBatch(Integer batch) {
 		this.batch = batch;
 	}
+
 	public String getContractId() {
 		return contractId;
 	}
+
 	public void setContractId(String contractId) {
 		this.contractId = contractId;
 	}
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	public String getLedgerId() {
-		return ledgerId;
-	}
-	public void setLedgerId(String ledgerId) {
-		this.ledgerId = ledgerId;
-	}
-	public String getMemo() {
-		return memo;
-	}
-	public void setMemo(String memo) {
-		this.memo = memo;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getReceiveType() {
-		return receiveType;
-	}
-	public void setReceiveType(String receiveType) {
-		this.receiveType = receiveType;
-	}
-	public String getStats() {
-		return stats;
-	}
-	public void setStats(String stats) {
-		this.stats = stats;
-	}
-	public String getUpperAmount() {
-		return upperAmount;
-	}
-	public void setUpperAmount(String upperAmount) {
-		this.upperAmount = upperAmount;
-	}
-	public Date getValidityDate() {
-		return validityDate;
-	}
-	public void setValidityDate(Date validityDate) {
-		this.validityDate = validityDate;
-	}
+
 	public String getCurrency() {
 		return currency;
 	}
+
 	public void setCurrency(String currency) {
 		this.currency = currency;
 	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getMemo() {
+		return memo;
+	}
+
+	public void setMemo(String memo) {
+		this.memo = memo;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getReceiveType() {
+		return receiveType;
+	}
+
+	public void setReceiveType(String receiveType) {
+		this.receiveType = receiveType;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getUpperAmount() {
+		return upperAmount;
+	}
+
+	public void setUpperAmount(String upperAmount) {
+		this.upperAmount = upperAmount;
+	}
+
+	public Date getValidityDate() {
+		return validityDate;
+	}
+
+	public void setValidityDate(Date validityDate) {
+		this.validityDate = validityDate;
+	}
+
+	
+	
 	
 	
 }

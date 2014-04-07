@@ -5,6 +5,10 @@ package com.radius.invoicing.ibatis.model;
 
 import java.util.Date;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+import com.radius.base.utils.JsonDateSerializer;
+
 /**
  * @author <a href="mailto:goodluck.sunlight@gmail.com">陈波宁</a>
  * @version 创建时间：2013-12-8 下午12:53:04<br/>
@@ -14,32 +18,39 @@ import java.util.Date;
  */
 public class PurchaseContract extends ExtInfo{
 
-	private String  id="";//合同编号
-	private String  orderId="";//采购订货单编号
-	private String  supplierId;//供货商编号
-	private String  supplierName="";//
-	private String  contractFile="";//供货商名称
-	private Date  effectDate=null;//生效日期
-	private Date  signTime=null;////签署日期
-	private String  tradeAssistant="";//营业员
-	private String  purchaser="";//采购员
-	private String  man="";//联系人
-	private String  mobile="";//联系人手机
-	private String  tel="";//联系电话
-	private String  fax="";//联系fax
-	private Date  orderedDate=null;//订货日期
-	private Date  deliveryDate=null;//送货日期
-	private String  deliveryPoint="";//送货地点
-	private String  contractTerms="";//合同条款
-	private Date  printTime=null;//最新打印时间
-	private String  printAcc="";//最新打印帐号
-	private String  printRecord="";//最新打印记录
-	private Integer  printTimes=null;//打印次数
-	private String  paymentedStatus="";//结帐状态
-	private Date  validityDate=null;//有效期至
-	private String  stats="";//状态
-	private String  ledgerId="";//账套编号
-	private String  memo="";//备注
+	private String  	id;//合同编号
+	private String  	orderId;//采购订货单编号
+	private String  	supplierId;//供货商编号
+	private String  	supplierName;//供货商名称
+	private String  	contractFile;//合同文件编号
+	private Date  		effectDate;//生效日期
+	private Date  		signTime;////签署日期
+	private String  	purchaser;//采购员
+	private String  	man;//联系人
+	private String  	mobile;//联系人手机
+	private String  	tel;//联系电话
+	private String 	 	fax;//联系fax
+	private Date  		orderedDate;//订货日期
+	private Date  		deliveryDate;//送货日期
+	private String  	deliveryPoint;//送货地点
+	private String  	contractTerms;//合同条款
+	private Date  		printTime;//最新打印时间
+	private String  	printAcc;//最新打印帐号
+	private String  	printRecord;//最新打印记录
+	private Integer  	printTimes;//打印次数
+	private String  	memo;//备注
+	private String  	paymentedStatus;//结帐状态
+	private Date  		validityDate;//有效期至
+	private String 		status;//状态
+	private String  	auditedStatus;//审批状态
+	
+	
+	public String getAuditedStatus() {
+		return auditedStatus;
+	}
+	public void setAuditedStatus(String auditedStatus) {
+		this.auditedStatus = auditedStatus;
+	}
 	public String getContractFile() {
 		return contractFile;
 	}
@@ -52,6 +63,7 @@ public class PurchaseContract extends ExtInfo{
 	public void setContractTerms(String contractTerms) {
 		this.contractTerms = contractTerms;
 	}
+	@JsonSerialize(using=JsonDateSerializer.class)
 	public Date getDeliveryDate() {
 		return deliveryDate;
 	}
@@ -82,12 +94,6 @@ public class PurchaseContract extends ExtInfo{
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getLedgerId() {
-		return ledgerId;
-	}
-	public void setLedgerId(String ledgerId) {
-		this.ledgerId = ledgerId;
-	}
 	public String getMan() {
 		return man;
 	}
@@ -106,6 +112,7 @@ public class PurchaseContract extends ExtInfo{
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
+	@JsonSerialize(using=JsonDateSerializer.class)
 	public Date getOrderedDate() {
 		return orderedDate;
 	}
@@ -160,11 +167,11 @@ public class PurchaseContract extends ExtInfo{
 	public void setSignTime(Date signTime) {
 		this.signTime = signTime;
 	}
-	public String getStats() {
-		return stats;
+	public String getStatus() {
+		return status;
 	}
-	public void setStats(String stats) {
-		this.stats = stats;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	public String getSupplierId() {
 		return supplierId;
@@ -184,20 +191,13 @@ public class PurchaseContract extends ExtInfo{
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
-	public String getTradeAssistant() {
-		return tradeAssistant;
-	}
-	public void setTradeAssistant(String tradeAssistant) {
-		this.tradeAssistant = tradeAssistant;
-	}
+	@JsonSerialize(using=JsonDateSerializer.class)
 	public Date getValidityDate() {
 		return validityDate;
 	}
 	public void setValidityDate(Date validityDate) {
 		this.validityDate = validityDate;
 	}
-	
-	
 	
 	
 	

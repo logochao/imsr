@@ -17,13 +17,15 @@ import com.radius.base.BaseEntity;
  */
 public class ExtInfo extends BaseEntity{
 
-	
-	public String creater;//创建人
-	public Date createDate;//创建时间
-	public String reviser;//审核人
-	public Date reviseDate;//审核时间
-	public String verifier;//复核人
-	public Date verifyDate;//复核时间
+	private String  	ledgerId;//账套编号
+	private String 		operator;//创建员
+	private Date 		modifyDate;//修改日期
+	private String 		creater;//创建人
+	private Date		createDate;//创建时间
+	private String 		reviser;//审核人
+	private Date 		reviseDate;//审核时间
+	private String 		verifier;//复核人
+	private Date 		verifyDate;//复核时间
 	
 	@JsonIgnore
 	public Date getCreateDate() {
@@ -67,6 +69,25 @@ public class ExtInfo extends BaseEntity{
 	}
 	public void setVerifyDate(Date verifyDate) {
 		this.verifyDate = verifyDate;
+	}
+	public String getOperator() {
+		return operator;
+	}
+	public void setOperator(String operator) {
+		this.operator = operator;
+	}
+	@JsonIgnore
+	public Date getModifyDate() {
+		return modifyDate;
+	}
+	public void setModifyDate(Date modifyDate) {
+		this.modifyDate = modifyDate;
+	}
+	public String getLedgerId() {
+		return ledgerId;
+	}
+	public void setLedgerId(String ledgerId) {
+		this.ledgerId = ledgerId;
 	}
 	
 	
