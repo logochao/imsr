@@ -5,77 +5,57 @@
   <typeAlias alias="purchaseOrderGrd" type="com.radius.invoicing.ibatis.model.PurchaseOrderGrd" />
   
   <sql id="purchaseOrderGrdFileds">
-  	 `purchase_order_id` purchaseOrderId,`bar_code` barCode,`goods_id` goodsId,`goods_name` goodsName,`quantity` quantity,
-	`unit` unit,`price` price,`amount` amount,`true_goods_name` trueGoodsName,`origin_place` originPlace,`appearance` appearance,
-	`format_type` formatType,`tax` tax,`tax_amount` taxAmount,`series_no` seriesNo,`model` model,`property` property,`weigth_per_unit` weigthPerUnit,
-	`price_of_weigth_per_unit` priceWeigthPerUnit,`operator` operator,`batch_no` batchNo,`made_date` madeDate,`validity_date` validityDate,
-  	 ledger_id ledgerId,memo memo,creater creater,createdate createdate,reviser reviser,revisedate revisedate,verifier verifydate
+  	 purchase_order_id purchaseOrderId,goods_id goodsId,goods_name goodsName,
+  	 spec_id specId,unit unit,price_of_unit priceUnit,equivalent_unit equivalentUnit,price_of_eu priceEu,quantity_of_eu_per_unit quantityEuPerUnit,
+  	 quantity_of_unit quantityUnit,quantity_of_eu quantityEu,
+  	 amount amount,memo memo,status status,
+  	 ledger_id ledgerId,operator operator,motify_date modifyDate,creater creater,createdate createDate,reviser reviser,revisedate reviseDate,verifier verifier,verifydate verifyDate
   </sql>
   
   <resultMap id="purchaseOrderGrd" class="purchaseOrderGrd">
-    <result column="`purchase_order_id`" jdbcType="char" javaType="java.lang.String" property="purchaseOrderId" />
-    <result column="bar_code" jdbcType="char" javaType="java.lang.String" property="barCode" />
-    <result column="goods_id" jdbcType="varchar" javaType="java.lang.String" property="goodsId" />
+    <result column="purchase_order_id" jdbcType="char" javaType="java.lang.String" property="purchaseOrderId" />
+    <result column="goods_id" jdbcType="char" javaType="java.lang.String" property="goodsId" />
     <result column="goods_name" jdbcType="char" javaType="java.lang.String" property="goodsName" />
-    <result column="quantity" jdbcType="int" javaType="java.lang.Integer" property="quantity" />
+    <result column="spec_id" jdbcType="int" javaType="java.lang.Integer" property="specId" />
     <result column="unit" jdbcType="char" javaType="java.lang.String" property="unit" />
-    <result column="price" jdbcType="int" javaType="java.lang.Integer" property="price" />
+    <result column="price_of_unit" jdbcType="int" javaType="java.lang.Integer" property="priceUnit" />
+    <result column="equivalent_unit" jdbcType="char" javaType="java.lang.String" property="equivalentUnit" />
+    <result column="price_of_eu" jdbcType="int" javaType="java.lang.Integer" property="priceEu" />
+    <result column="quantity_of_eu_per_unit" jdbcType="int" javaType="java.lang.Integer" property="quantityEuPerUnit" />
+    <result column="quantity_of_unit" jdbcType="int" javaType="java.lang.Integer" property="quantityUnit" />
+    <result column="quantity_of_eu" jdbcType="int" javaType="java.lang.Integer" property="quantityEu" />
     <result column="amount" jdbcType="int" javaType="java.lang.Integer" property="amount" />
-    <result column="true_goods_name" jdbcType="char" javaType="java.lang.String" property="trueGoodsName" />
-    <result column="origin_place" jdbcType="char" javaType="java.lang.String" property="originPlace" />
-    <result column="appearance" jdbcType="char" javaType="java.lang.String" property="appearance" />
-    <result column="format_type" jdbcType="char" javaType="java.lang.String" property="formatType" />
-    <result column="tax" jdbcType="int" javaType="java.lang.Integer" property="tax" />
-    <result column="tax_amount" jdbcType="int" javaType="java.lang.Integer" property="taxAmount" />
-    <result column="series_no" jdbcType="int" javaType="java.lang.Integer" property="seriesNo" />
-    <result column="model" jdbcType="char" javaType="java.lang.String" property="model" />
-    <result column="property" jdbcType="char" javaType="java.lang.String" property="property" />
-    <result column="weigth_per_unit" jdbcType="int" javaType="java.lang.Integer" property="weigthPerUnit" />
-    <result column="price_of_weigth_per_unit" jdbcType="int" javaType="java.lang.Integer" property="priceWeigthPerUnit" />
-    <result column="operator" jdbcType="char" javaType="java.lang.String" property="operator" />
-    <result column="weight_per_unit" jdbcType="int" javaType="java.lang.Integer" property="weightPerUnit" />
-    <result column="batch_no" jdbcType="int" javaType="java.lang.Integer" property="batchNo" />
-    <result column="made_date" jdbcType="datetime" javaType="java.util.Date" property="madeDate" />
-    <result column="validity_date" jdbcType="datetime" javaType="java.util.Date" property="validityDate" />
-  	<result column="ledger_id" jdbcType="char" javaType="java.lang.String" property="ledgerId" />
   	<result column="memo" jdbcType="text" javaType="java.lang.String" property="memo" />
+    <result column="status" jdbcType="char" javaType="java.lang.String" property="status" />
+    <result column="ledger_id" jdbcType="char" javaType="java.lang.String" property="ledgerId" />
+    <result column="operator" jdbcType="char" javaType="java.lang.String" property="operator" />
+    <result column="modify_date" jdbcType="datetime" javaType="java.util.Date" property="modifyDate" />
     <result column="creater" jdbcType="char" javaType="java.lang.String" property="creater" />
-    <result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createdate" />
+    <result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createDate" />
     <result column="reviser" jdbcType="char" javaType="java.lang.String" property="reviser" />
-    <result column="revisedate" jdbcType="datetime" javaType="java.util.Date" property="revisedate" />
+    <result column="revisedate" jdbcType="datetime" javaType="java.util.Date" property="reviseDate" />
     <result column="verifier" jdbcType="char" javaType="java.lang.String" property="verifier" />    
-    <result column="verifydate" jdbcType="datetime" javaType="java.util.Date" property="verifydate"/>
+    <result column="verifydate" jdbcType="datetime" javaType="java.util.Date" property="verifyDate"/>
   </resultMap>
   
   <sql id="whereLike">
   	<dynamic prepend="where">
   		1=1  AND 
-  		<isNotEmpty prepend="and" property="purchaseOrderId">purchase_order_id=#purchaseOrderId#</isNotEmpty>
-  		<isNotEmpty prepend="and" property="barCode">bar_code=#barCode#</isNotEmpty>
-  		<isNotEmpty prepend="and" property="goodsId">goods_id=#goodsId#</isNotEmpty>
-		<isNotEmpty prepend="and" property="goodsName">goods_name=#goodsName#</isNotEmpty>
-		<isNotNull prepend="and" property="quantity">quantity=#quantity#</isNotNull>
-		<isNotEmpty prepend="and" property="unit">unit=#unit#</isNotEmpty>
-		<isNotNull prepend="and" property="price">price=#price#</isNotNull>
-		<isNotNull prepend="and" property="amount">amount=#amount#</isNotNull>
-		<isNotEmpty prepend="and" property="trueGoodsName">true_goods_name=#trueGoodsName#</isNotEmpty>
-		<isNotEmpty prepend="and" property="originPlace">origin_place=#originPlace#</isNotEmpty>
-		<isNotEmpty prepend="and" property="appearance">appearance=#appearance#</isNotEmpty>
-		<isNotEmpty prepend="and" property="formatType">format_type=#formatType#</isNotEmpty>
-		<isNotNull prepend="and" property="tax">tax=#tax#</isNotNull>
-		<isNotNull prepend="and" property="taxAmount">tax_amount=#taxAmount#</isNotNull>
-		<isNotNull prepend="and" property="seriesNo">series_no=#seriesNo#</isNotNull>
-		<isNotEmpty prepend="and" property="model">model=#model#</isNotEmpty>
-		<isNotEmpty prepend="and" property="property">property=#property#</isNotEmpty>
-		<isNotNull prepend="and" property="weigthPerUnit">weigth_per_unit=#weigthPerUnit#</isNotNull>
-		<isNotNull prepend="and" property="priceWeigthPerUnit">price_of_weigth_per_unit=#priceWeigthPerUnit#</isNotNull>
-		<isNotEmpty prepend="and" property="operator">operator=#operator#</isNotEmpty>
-		<isNotNull prepend="and" property="weigthPerUnit">weight_per_unit=#weightPerUnit#</isNotNull>
-		<isNotNull prepend="and" property="batchNo">batch_no=#batchNo#</isNotNull>
-		<isNotNull prepend="and" property="madeDate">made_date=#madeDate#</isNotNull>
-		<isNotNull prepend="and" property="validityDate">validity_date=#validityDate#</isNotNull>
- 		<isNotEmpty prepend="and" property="ledgerId">ledger_id=#ledgerId#</isNotEmpty> 
- 		<isNotEmpty prepend="and" property="memo">memo=#memo#</isNotEmpty> 
+  		<isNotNull prepend="and" property="purchaseOrderId">purchase_order_id =#purchaseOrderId#</isNotNull>
+		<isNotNull prepend="and" property="goodsId">goods_id =#goodsId#</isNotNull>
+		<isNotNull prepend="and" property="goodsName">goods_name =#goodsName#</isNotNull>
+		<isNotNull prepend="and" property="specId">spec_id =#specId#</isNotNull>
+		<isNotNull prepend="and" property="unit">unit =#unit#</isNotNull>
+		<isNotNull prepend="and" property="priceUnit">price_of_unit =#priceUnit#</isNotNull>
+		<isNotNull prepend="and" property="equivalentUnit">equivalent_unit =#equivalentUnit#</isNotNull>
+		<isNotNull prepend="and" property="priceEu">price_of_eu =#priceEu#</isNotNull>
+		<isNotNull prepend="and" property="quantityEuPerUnit">quantity_of_eu_per_unit =#quantityEuPerUnit#</isNotNull>
+		<isNotNull prepend="and" property="quantityUnit">quantity_of_unit =#quantityUnit#</isNotNull>
+		<isNotNull prepend="and" property="quantityEu">quantity_of_eu =#quantityEu#</isNotNull>
+		<isNotNull prepend="and" property="amount">amount =#amount#</isNotNull>
+		<isNotNull prepend="and" property="memo">memo =#memo#</isNotNull>
+		<isNotNull prepend="and" property="status">status =#status#</isNotNull>
+ 		<isNotNull prepend="and" property="ledgerId">ledger_id=#ledgerId#</isNotNull> 
   	</dynamic>
   </sql>
  
@@ -94,56 +74,38 @@
    	<insert id="insert" parameterClass="purchaseOrderGrd">
    		INSERT INTO RS_PURCHASE_ORDER_GRD (
    			purchase_order_id,goods_id,
-	  		<isNotEmpty  property="barCode">bar_code,</isNotEmpty>
-			<isNotEmpty  property="goodsName">goods_name,</isNotEmpty>
-			<isNotNull  property="quantity">quantity,</isNotNull>
-			<isNotEmpty  property="unit">unit,</isNotEmpty>
-			<isNotNull  property="price">price,</isNotNull>
-			<isNotNull  property="amount">amount,</isNotNull>
-			<isNotEmpty  property="trueGoodsName">true_goods_name,</isNotEmpty>
-			<isNotEmpty  property="originPlace">origin_place,</isNotEmpty>
-			<isNotEmpty  property="appearance">appearance,</isNotEmpty>
-			<isNotEmpty  property="formatType">format_type,</isNotEmpty>
-			<isNotNull  property="tax">tax,</isNotNull>
-			<isNotNull  property="taxAmount">tax_amount,</isNotNull>
-			<isNotNull  property="seriesNo">series_no,</isNotNull>
-			<isNotEmpty  property="model">model,</isNotEmpty>
-			<isNotEmpty  property="property">property,</isNotEmpty>
-			<isNotNull  property="weigthPerUnit">weigth_per_unit,</isNotNull>
-			<isNotNull  property="priceWeigthPerUnit">price_of_weigth_per_unit,</isNotNull>
-			<isNotEmpty  property="operator">operator,</isNotEmpty>
-			<isNotNull  property="weightPerUnit">weight_per_unit,</isNotNull>
-			<isNotNull  property="madeDate">made_date,</isNotNull>
-			<isNotNull  property="validityDate">validity_date,</isNotNull>
-			<isNotEmpty  property="ledgerId">ledger_id,</isNotEmpty> 
- 		    <isNotEmpty  property="memo">memo,</isNotEmpty> 
+	  		<isNotNull  property="goodsName">goods_name ,</isNotNull>
+			<isNotNull  property="specId">spec_id ,</isNotNull>
+			<isNotNull  property="unit">unit ,</isNotNull>
+			<isNotNull  property="priceUnit">price_of_unit ,</isNotNull>
+			<isNotNull  property="equivalentUnit">equivalent_unit ,</isNotNull>
+			<isNotNull  property="priceEu">price_of_eu ,</isNotNull>
+			<isNotNull  property="quantityEuPerUnit">quantity_of_eu_per_unit ,</isNotNull>
+			<isNotNull  property="quantityUnit">quantity_of_unit ,</isNotNull>
+			<isNotNull  property="quantityEu">quantity_of_eu ,</isNotNull>
+			<isNotNull  property="amount">amount ,</isNotNull>
+			<isNotNull  property="memo">memo ,</isNotNull>
+			<isNotNull  property="status">status ,</isNotNull>
+	 		<isNotNull  property="operator">operator,</isNotNull>
+			<isNotNull  property="ledgerId">ledger_id,</isNotNull> 
 	  	    creater,
 	  	    createdate
    		)VALUES(
    			#purchaseOrderId#,#goodsId#,
-	  		<isNotEmpty  property="barCode">#barCode#,</isNotEmpty>
-			<isNotEmpty  property="goodsName">#goodsName#,</isNotEmpty>
-			<isNotNull  property="quantity">#quantity#,</isNotNull>
-			<isNotEmpty  property="unit">#unit#,</isNotEmpty>
-			<isNotNull  property="price">#price#,</isNotNull>
+	  		<isNotNull  property="goodsName">#goodsName#,</isNotNull>
+			<isNotNull  property="specId">#specId#,</isNotNull>
+			<isNotNull  property="unit">#unit#,</isNotNull>
+			<isNotNull  property="priceUnit">#priceUnit#,</isNotNull>
+			<isNotNull  property="equivalentUnit">#equivalentUnit#,</isNotNull>
+			<isNotNull  property="priceEu">#priceEu#,</isNotNull>
+			<isNotNull  property="quantityEuPerUnit">#quantityEuPerUnit#,</isNotNull>
+			<isNotNull  property="quantityUnit">#quantityUnit#,</isNotNull>
+			<isNotNull  property="quantityEu">#quantityEu#,</isNotNull>
 			<isNotNull  property="amount">#amount#,</isNotNull>
-			<isNotEmpty  property="trueGoodsName">#trueGoodsName#,</isNotEmpty>
-			<isNotEmpty  property="originPlace">#originPlace#,</isNotEmpty>
-			<isNotEmpty  property="appearance">#appearance#,</isNotEmpty>
-			<isNotEmpty  property="formatType">#formatType#,</isNotEmpty>
-			<isNotNull  property="tax">#tax#,</isNotNull>
-			<isNotNull  property="taxAmount">#taxAmount#,</isNotNull>
-			<isNotNull  property="seriesNo">#seriesNo#,</isNotNull>
-			<isNotEmpty  property="model">#model#,</isNotEmpty>
-			<isNotEmpty  property="property">#property#,</isNotEmpty>
-			<isNotNull  property="weigthPerUnit">#weigthPerUnit#,</isNotNull>
-			<isNotNull  property="priceWeigthPerUnit">#priceWeigthPerUnit#,</isNotNull>
-			<isNotEmpty  property="operator">#operator#,</isNotEmpty>
-			<isNotNull  property="weightPerUnit">#weightPerUnit#,</isNotNull>
-			<isNotNull  property="madeDate">#madeDate#,</isNotNull>
-			<isNotNull  property="validityDate">#validityDate#,</isNotNull>
-			<isNotEmpty  property="ledgerId">#ledgerId#,</isNotEmpty> 
- 		    <isNotEmpty  property="memo">#memo#,</isNotEmpty>  
+			<isNotNull  property="memo">#memo#,</isNotNull>
+			<isNotNull  property="status">#status#,</isNotNull>
+	 		<isNotNull  property="operator">operator,</isNotNull>
+			<isNotNull  property="ledgerId">#ledgerId#,</isNotNull> 
    			 creater,now()
    		)
    	</insert>
@@ -151,31 +113,22 @@
    	<update id="updatePurchaseOrderGrdByPK" parameterClass="purchaseOrderGrd">
    		UPDATE RS_PURCHASE_ORDER_GRD
    		<dynamic prepend="SET">
-	  		<isNotEmpty  prepend=","   property="barCode">bar_code=#barCode#</isNotEmpty>
-			<isNotEmpty  prepend=","   property="goodsName">goods_name=#goodsName#</isNotEmpty>
-			<isNotNull  prepend=","   property="quantity">quantity=#quantity#</isNotNull>
-			<isNotEmpty  prepend=","   property="unit">unit=#unit#</isNotEmpty>
-			<isNotNull  prepend=","   property="price">price=#price#</isNotNull>
-			<isNotNull  prepend=","   property="amount">amount=#amount#</isNotNull>
-			<isNotEmpty  prepend=","   property="trueGoodsName">true_goods_name=#trueGoodsName#</isNotEmpty>
-			<isNotEmpty  prepend=","   property="originPlace">origin_place=#originPlace#</isNotEmpty>
-			<isNotEmpty  prepend=","   property="appearance">appearance=#appearance#</isNotEmpty>
-			<isNotEmpty  prepend=","   property="formatType">format_type=#formatType#</isNotEmpty>
-			<isNotNull  prepend=","   property="tax">tax=#tax#</isNotNull>
-			<isNotNull  prepend=","   property="taxAmount">tax_amount=#taxAmount#</isNotNull>
-			<isNotNull  prepend=","   property="seriesNo">series_no=#seriesNo#</isNotNull>
-			<isNotEmpty  prepend=","   property="model">model=#model#</isNotEmpty>
-			<isNotEmpty  prepend=","   property="property">property=#property#</isNotEmpty>
-			<isNotNull  prepend=","   property="weigthPerUnit">weigth_per_unit=#weigthPerUnit#</isNotNull>
-			<isNotNull  prepend=","   property="priceWeigthPerUnit">price_of_weigth_per_unit=#priceWeigthPerUnit#</isNotNull>
-			<isNotEmpty  prepend=","   property="operator">operator=#operator#</isNotEmpty>
-			<isNotNull  prepend=","   property="weightPerUnit">weight_per_unit=#weightPerUnit#</isNotNull>
-			<isNotNull  prepend=","   property="madeDate">made_date=#madeDate#</isNotNull>
-			<isNotNull  prepend=","   property="validityDate">validity_date=#validityDate#</isNotNull>
-	 		<isNotEmpty prepend=","   property="ledgerId">ledger_id=#ledgerId#</isNotEmpty> 
-	 		<isNotEmpty prepend=","   property="memo">memo=#memo#</isNotEmpty> 
-  	 		<isNotEmpty  prepend=","  property="reviser">reviser = #reviser#,revisedate = now() </isNotEmpty>
-  			<isNotEmpty  prepend=","  property="verifier">verifier = #verifier#,verifydate = now() </isNotEmpty>
+			<isNotNull prepend="," property="goodsName">goods_name = #goodsName#</isNotNull>
+			<isNotNull prepend="," property="specId">spec_id = #specId#</isNotNull>
+			<isNotNull prepend="," property="unit">unit = #unit#</isNotNull>
+			<isNotNull prepend="," property="priceUnit">price_of_unit = #priceUnit#</isNotNull>
+			<isNotNull prepend="," property="equivalentUnit">equivalent_unit = #equivalentUnit#</isNotNull>
+			<isNotNull prepend="," property="priceEu">price_of_eu = #priceEu#</isNotNull>
+			<isNotNull prepend="," property="quantityEuPerUnit">quantity_of_eu_per_unit = #quantityEuPerUnit#</isNotNull>
+			<isNotNull prepend="," property="quantityUnit">quantity_of_unit = #quantityUnit#</isNotNull>
+			<isNotNull prepend="," property="quantityEu">quantity_of_eu = #quantityEu#</isNotNull>
+			<isNotNull prepend="," property="amount">amount = #amount#</isNotNull>
+			<isNotNull prepend="," property="memo">memo = #memo#</isNotNull>
+			<isNotNull prepend="," property="status">status = #status#</isNotNull>
+			<isNotNull prepend="," property="ledgerId">ledger_id=#ledgerId#</isNotNull> 
+			<isNotNull prepend="," property="operator">operator=#operator#,modify_date= now()</isNotNull>
+  	 		<isNotNull prepend=","  property="reviser">reviser = #reviser#,revisedate = now() </isNotNull>
+  			<isNotNull prepend=","  property="verifier">verifier = #verifier#,verifydate = now() </isNotNull>
    		</dynamic>
    		WHERE purchase_order_id=#purchaseOrderId# AND goods_id =#goodsId#
    	</update>

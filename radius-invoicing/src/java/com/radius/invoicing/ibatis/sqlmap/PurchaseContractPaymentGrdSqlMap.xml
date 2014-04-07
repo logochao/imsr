@@ -5,8 +5,8 @@
   <typeAlias alias="purchaseContractPaymentGrd" type="com.radius.invoicing.ibatis.model.PurchaseContractPaymentGrd" />
   
   <sql id="purchaseContractPaymentGrdFileds">
-  	 money_list_id id,money_list_name name,contract_id contractId,money_list_batch batch,amount amount,amount_in_word upperAmount,pay_receive_type receiveType,validity_date validityDate,STATUS stats,memo memo,
-  	 ledger_id ledgerId,creater creater,createdate createdate,reviser reviser,revisedate revisedate,verifier verifydate
+  	 money_list_id id,money_list_name name,contract_id contractId,money_list_batch batch,amount amount,amount_in_word upperAmount,pay_receive_type receiveType,validity_date validityDate,status status,memo memo,
+  	ledger_id ledgerId,operator operator,motify_date modifyDate,creater creater,createdate createDate,reviser reviser,revisedate reviseDate,verifier verifier,verifydate verifyDate
   </sql>
   
   <resultMap id="purchaseContractPaymentGrd" class="purchaseContractPaymentGrd">
@@ -18,22 +18,26 @@
     <result column="amount_in_word" jdbcType="text" javaType="java.lang.String" property="upperAmount" />
     <result column="pay_receive_type" jdbcType="char" javaType="java.lang.String" property="receiveType" />
     <result column="validity_date" jdbcType="datetime" javaType="java.util.Date" property="validityDate" />
-    <result column="STATUS" jdbcType="char" javaType="java.lang.String" property="stats" />
+    <result column="status" jdbcType="char" javaType="java.lang.String" property="status" />
     <result column="memo" jdbcType="char" javaType="java.lang.String" property="memo" />
-  	<result column="ledger_id" jdbcType="char" javaType="java.lang.String" property="ledgerId" />
+	
+	<result column="ledger_id" jdbcType="char" javaType="java.lang.String" property="ledgerId" />
+    <result column="operator" jdbcType="char" javaType="java.lang.String" property="operator" />
+    <result column="modify_date" jdbcType="datetime" javaType="java.util.Date" property="modifyDate" />
     <result column="creater" jdbcType="char" javaType="java.lang.String" property="creater" />
-    <result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createdate" />
+    <result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createDate" />
     <result column="reviser" jdbcType="char" javaType="java.lang.String" property="reviser" />
-    <result column="revisedate" jdbcType="datetime" javaType="java.util.Date" property="revisedate" />
+    <result column="revisedate" jdbcType="datetime" javaType="java.util.Date" property="reviseDate" />
     <result column="verifier" jdbcType="char" javaType="java.lang.String" property="verifier" />    
-    <result column="verifydate" jdbcType="datetime" javaType="java.util.Date" property="verifydate"/>
+    <result column="verifydate" jdbcType="datetime" javaType="java.util.Date" property="verifyDate"/>
+
   </resultMap>
   
   <sql id="whereLike">
   	<dynamic prepend="where">
-  		1=1  
+  		1=1  AND
   		<isNotNull prepend="and" property="id">money_list_id=#id#</isNotNull>
-  		<isNotEmpty prepend="and" property="name">money_list_name=#name#</isNotEmpty>
+  		<isNotEmpty prepend="and" property="name">money_list_nameLIKE CONCAT('%',#name#,'%')</isNotEmpty>
   		<isNotEmpty prepend="and" property="contractId">contract_id=#contractId#</isNotEmpty>
   		<isNotEmpty prepend="and" property="batch">money_list_batch=#batch#</isNotEmpty>
   		<isNotNull prepend="and" property="amount">amount=#amount#</isNotNull>
@@ -41,7 +45,7 @@
 		<isNotEmpty prepend="and" property="receiveType">pay_receive_type=#receiveType#</isNotEmpty>
 		<isNotNull prepend="and" property="validityDate">validity_date=#validityDate#</isNotNull>
  		<isNotEmpty prepend="and" property="ledgerId">ledger_id=#ledgerId#</isNotEmpty> 
- 		<isNotEmpty prepend="and" property="stats">STATUS=#stats#</isNotEmpty> 
+ 		<isNotEmpty prepend="and" property="status">status=#status#</isNotEmpty> 
  		<isNotEmpty prepend="and" property="memo">memo=#memo#</isNotEmpty> 
   	</dynamic>
   </sql>
@@ -68,8 +72,9 @@
 			<isNotEmpty  property="receiveType">pay_receive_type,</isNotEmpty>
 			<isNotNull  property="validityDate">validity_date,</isNotNull>
 	 		<isNotEmpty  property="ledgerId">ledger_id,</isNotEmpty> 
-	 		<isNotEmpty  property="stats">STATUS,</isNotEmpty> 
+	 		<isNotEmpty  property="status">status,</isNotEmpty> 
 	 		<isNotEmpty  property="memo">memo,</isNotEmpty>
+	 		<isNotNull  property="operator">operator,</isNotNull>
 	  	    creater,
 	  	    createdate
    		)VALUES(
@@ -81,8 +86,9 @@
 			<isNotEmpty  property="receiveType">#receiveType#,</isNotEmpty>
 			<isNotNull  property="validityDate">#validityDate#,</isNotNull>
 	 		<isNotEmpty  property="ledgerId">#ledgerId#,</isNotEmpty> 
-	 		<isNotEmpty  property="stats">#stats#,</isNotEmpty> 
+	 		<isNotEmpty  property="status">#status#,</isNotEmpty> 
 	 		<isNotEmpty  property="memo">#memo#,</isNotEmpty>
+	 		<isNotNull  property="operator">#operator#,</isNotNull>
    			 creater,now()
    		)
    	</insert>
@@ -98,8 +104,9 @@
 			<isNotEmpty prepend="," property="receiveType">pay_receive_type=#receiveType#</isNotEmpty>
 			<isNotNull prepend="," property="validityDate">validity_date=#validityDate#</isNotNull>
 	 		<isNotEmpty prepend="," property="ledgerId">ledger_id=#ledgerId#</isNotEmpty> 
-	 		<isNotEmpty prepend="," property="stats">STATUS=#stats#</isNotEmpty> 
+	 		<isNotEmpty prepend="," property="status">status=#status#</isNotEmpty> 
 	 		<isNotEmpty prepend="," property="memo">memo=#memo#</isNotEmpty> 
+	 		<isNotNull prepend="," property="operator">operator=#operator#,modify_date= now()</isNotNull>
   	 		<isNotEmpty  prepend="," property="reviser">reviser = #reviser#,revisedate = now() </isNotEmpty>
   			<isNotEmpty  prepend="," property="verifier">verifier = #verifier#,verifydate = now() </isNotEmpty>
    		</dynamic>

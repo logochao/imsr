@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="salesQuotationGrdSqlMap">
+
+  <typeAlias alias="salesQuotationGrd" type="com.radius.invoicing.ibatis.model.SalesQuotationGrd" />
+  
+  <sql id="salesQuotationGrdFileds">
+  	sales_quotation_id salesQuotationId,goods_id goodsId,goods_name goodsName,spec_id specId,unit unit,equivalent_unit equivalentUnit,quantity_of_eu_per_unit quantityEuPerUnit,
+	supply_cash_type supplyCashType,price_of_unit_of_supply priceUnitSupply,price_of_eu_of_supply priceEuSupply,sales_cash_type salesCashType,exch_rate exchRate,price_of_eu_to_customer priceEuCustomer,
+	mark_up_rate markUpRate,memo memo,made_date madeDate,validity_date validityDate,
+	ledger_id ledgerId,operator operator,motify_date modifyDate,creater creater,createdate createDate,reviser reviser,revisedate reviseDate,verifier verifier,verifydate verifyDate
+  </sql>
+  
+  <resultMap id="salesQuotationGrd" class="salesQuotationGrd">
+    <result column="sales_quotation_id" jdbcType="char" javaType="java.lang.String" property="salesQuotationId" />
+    <result column="goods_id" jdbcType="char" javaType="java.lang.String" property="goodsId" />
+    <result column="goods_name" jdbcType="varchar" javaType="java.lang.String" property="goodsName" />
+    <result column="spec_id" jdbcType="int" javaType="java.lang.Integer" property="specId" />
+    <result column="unit" jdbcType="char" javaType="java.lang.String" property="unit" />
+    <result column="equivalent_unit" jdbcType="char" javaType="java.lang.String" property="equivalentUnit" />
+    <result column="quantity_of_eu_per_unit" jdbcType="int" javaType="java.lang.Integer" property="quantityEuPerUnit" />
+  	<result column="supply_cash_type" jdbcType="char" javaType="java.lang.String" property="supplyCashType" />
+    <result column="price_of_unit_of_supply" jdbcType="int" javaType="java.lang.Integer" property="priceUnitSupply" />
+    <result column="price_of_eu_of_supply" jdbcType="int" javaType="java.lang.Integer" property="priceEuSupply" />
+  	<result column="sales_cash_type" jdbcType="char" javaType="java.lang.String" property="salesCashType" />
+    <result column="exch_rate" jdbcType="int" javaType="java.lang.Integer" property="exchRate" />
+    <result column="price_of_eu_to_customer" jdbcType="int" javaType="java.lang.Integer" property="priceEuCustomer" />
+    <result column="mark_up_rate" jdbcType="int" javaType="java.lang.Integer" property="markUpRate" />
+  	<result column="memo" jdbcType="text" javaType="java.lang.String" property="memo" />
+    <result column="made_date" jdbcType="datetime" javaType="java.util.Date" property="madeDate" />
+    <result column="validity_date" jdbcType="datetime" javaType="java.util.Date" property="validityDate" />
+    <result column="ledger_id" jdbcType="char" javaType="java.lang.String" property="ledgerId" />
+    <result column="operator" jdbcType="char" javaType="java.lang.String" property="operator" />
+    <result column="modify_date" jdbcType="datetime" javaType="java.util.Date" property="modifyDate" />
+    <result column="creater" jdbcType="char" javaType="java.lang.String" property="creater" />
+    <result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createDate" />
+    <result column="reviser" jdbcType="char" javaType="java.lang.String" property="reviser" />
+    <result column="revisedate" jdbcType="datetime" javaType="java.util.Date" property="reviseDate" />
+    <result column="verifier" jdbcType="char" javaType="java.lang.String" property="verifier" />    
+    <result column="verifydate" jdbcType="datetime" javaType="java.util.Date" property="verifyDate"/>
+  </resultMap>
+  
+  <sql id="whereLike">
+  	<dynamic prepend="where">
+  		1=1  AND
+		<isNotNull 	prepend="and" property="goodsName">goods_name LIKE CONCAT('%',#goodsName#,'%')#</isNotNull> 
+		<isNotNull 	prepend="and" property="specId">spec_id=#specId#</isNotNull> 
+		<isNotNull  prepend="and" property="unit">unit=#unit#</isNotNull> 
+		<isNotNull  prepend="and" property="equivalentUnit">equivalent_unit=#equivalentUnit#</isNotNull> 
+		<isNotNull  prepend="and" property="quantityEuPerUnit">quantity_of_eu_per_unit=#quantityEuPerUnit#</isNotNull> 
+		<isNotNull  prepend="and" property="supplyCashType">supply_cash_type=#supplyCashType#</isNotNull> 
+		<isNotNull  prepend="and" property="priceUnitSupply">price_of_unit_of_supply=#priceUnitSupply#</isNotNull> 
+		<isNotNull  prepend="and" property="priceEuSupply">price_of_eu_of_supply=#priceEuSupply#</isNotNull> 
+		<isNotNull  prepend="and" property="salesCashType">sales_cash_type=#salesCashType#</isNotNull> 
+		<isNotNull  prepend="and" property="exchRate">exch_rate=#exchRate#</isNotNull> 
+		<isNotNull  prepend="and" property="priceEuCustomer">price_of_eu_to_customer=#priceEuCustomer#</isNotNull> 
+		<isNotNull  prepend="and" property="markUpRate">mark_up_rate=#markUpRate#</isNotNull> 
+		<isNotNull  prepend="and" property="memo">memo=#memo#</isNotNull> 
+		<isNotNull  prepend="and" property="madeDate">made_date=#madeDate#</isNotNull> 
+		<isNotNull  prepend="and" property="validityDate">validity_date=#validityDate#</isNotNull> 
+ 		<isNotNull  prepend="and" property="ledgerId">ledger_id=#ledgerId#</isNotNull> 
+  	</dynamic>
+  </sql>
+ 
+	 <select id="getsalesQuotationGrdByPk" parameterClass="salesQuotationGrd" resultMap="salesQuotationGrd">
+	 	SELECT <include refid="salesQuotationGrdFileds"/>
+	 	FROM RS_SALES_QUOTATION_GRD
+	 	WHERE quotation_id =#quotationId# AND goods_id=#goodsId#
+	 </select>
+   
+   	<insert id="insert" parameterClass="salesQuotationGrd">
+   		INSERT INTO RS_SALES_QUOTATION_GRD (
+   			sales_quotation_id,
+   			goods_id,
+	  		<isNotNull  property="goodsName">goods_name ,</isNotNull>
+			<isNotNull  property="specId">spec_id ,</isNotNull>
+			<isNotNull  property="unit">unit ,</isNotNull>
+			<isNotNull  property="equivalentUnit">equivalent_unit ,</isNotNull>
+			<isNotNull  property="quantityEuPerUnit">quantity_of_eu_per_unit ,</isNotNull>
+			<isNotNull  property="supplyCashType">supply_cash_type ,</isNotNull>
+			<isNotNull  property="priceUnitSupply">price_of_unit_of_supply ,</isNotNull>
+			<isNotNull  property="priceEuSupply">price_of_eu_of_supply ,</isNotNull>
+			<isNotNull  property="salesCashType">sales_cash_type ,</isNotNull>
+			<isNotNull  property="exchRate">exch_rate ,</isNotNull>
+			<isNotNull  property="priceEuCustomer">price_of_eu_to_customer ,</isNotNull>
+			<isNotNull  property="markUpRate">mark_up_rate ,</isNotNull>
+			<isNotNull  property="memo">memo ,</isNotNull>
+			<isNotNull  property="madeDate">made_date ,</isNotNull>
+			<isNotNull  property="validityDate">validity_date ,</isNotNull>
+			<isNotNull  property="ledgerId">ledger_id,</isNotNull> 
+			<isNotNull  property="operator">operator,</isNotNull>
+	  	    creater,
+	  	    createdate
+   		)VALUES(
+   			#salesQuotationId#,
+   			#goodsId#,
+			<isNotNull  property="goodsName">#goodsName#,</isNotNull>
+			<isNotNull  property="specId">#specId#,</isNotNull>
+			<isNotNull  property="unit">#unit#,</isNotNull>
+			<isNotNull  property="equivalentUnit">#equivalentUnit#,</isNotNull>
+			<isNotNull  property="quantityEuPerUnit">#quantityEuPerUnit#,</isNotNull>
+			<isNotNull  property="supplyCashType">#supplyCashType#,</isNotNull>
+			<isNotNull  property="priceUnitSupply">#priceUnitSupply#,</isNotNull>
+			<isNotNull  property="priceEuSupply">#priceEuSupply#,</isNotNull>
+			<isNotNull  property="salesCashType">#salesCashType#,</isNotNull>
+			<isNotNull  property="exchRate">#exchRate#,</isNotNull>
+			<isNotNull  property="priceEuCustomer">#priceEuCustomer#,</isNotNull>
+			<isNotNull  property="markUpRate">#markUpRate#,</isNotNull>
+			<isNotNull  property="memo">#memo#,</isNotNull>
+			<isNotNull  property="madeDate">#madeDate#,</isNotNull>
+			<isNotNull  property="validityDate">#validityDate#,</isNotNull>
+	 		<isNotNull  property="ledgerId">#ledgerId#,</isNotNull> 
+	 		<isNotNull  property="operator">#operator#,</isNotNull>
+   			 creater,now()
+   		)
+   	</insert>
+   
+   	<update id="updatesalesQuotationGrdById" parameterClass="salesQuotationGrd">
+   		UPDATE RS_SALES_QUOTATION_GRD
+   		<dynamic prepend="SET">
+			<isNotNull prepend="," property="goodsName">goods_name=#goodsName#</isNotNull>
+			<isNotNull prepend="," property="specId">spec_id=#specId#</isNotNull>
+			<isNotNull prepend="," property="unit">unit=#unit#</isNotNull>
+			<isNotNull prepend="," property="equivalentUnit">equivalent_unit=#equivalentUnit#</isNotNull>
+			<isNotNull prepend="," property="quantityEuPerUnit">quantity_of_eu_per_unit=#quantityEuPerUnit#</isNotNull>
+			<isNotNull prepend="," property="supplyCashType">supply_cash_type=#supplyCashType#</isNotNull>
+			<isNotNull prepend="," property="priceUnitSupply">price_of_unit_of_supply=#priceUnitSupply#</isNotNull>
+			<isNotNull prepend="," property="priceEuSupply">price_of_eu_of_supply=#priceEuSupply#</isNotNull>
+			<isNotNull prepend="," property="salesCashType">sales_cash_type=#salesCashType#</isNotNull>
+			<isNotNull prepend="," property="exchRate">exch_rate=#exchRate#</isNotNull>
+			<isNotNull prepend="," property="priceEuCustomer">price_of_eu_to_customer=#priceEuCustomer#</isNotNull>
+			<isNotNull prepend="," property="markUpRate">mark_up_rate=#markUpRate#</isNotNull>
+			<isNotNull prepend="," property="memo">memo=#memo#</isNotNull>
+			<isNotNull prepend="," property="madeDate">made_date=#madeDate#</isNotNull>
+			<isNotNull prepend="," property="validityDate">validity_date=#validityDate#</isNotNull>
+	 		<isNotNull prepend="," property="ledgerId">ledger_id=#ledgerId#</isNotNull> 
+	 		<isNotNull prepend="," property="operator">operator=#operator#,modify_date= now()</isNotNull>
+  	 		<isNotNull  prepend="," property="reviser">reviser = #reviser#,revisedate = now() </isNotNull>
+  			<isNotNull  prepend="," property="verifier">verifier = #verifier#,verifydate = now() </isNotNull>
+  			<isNotNull prepend="," property="yesOrNo">delivery_or_not=#yesOrNo#</isNotNull> 
+   		</dynamic>
+   		WHERE quotation_id=#quotationId# AND goods_id=#goodsId#
+   	</update>
+   	<select id="getsalesQuotationGrdByCondition" parameterClass="salesQuotationGrd" resultMap="salesQuotationGrd">
+   		SELECT <include refid="salesQuotationGrdFileds"/>
+   		FROM RS_SALES_QUOTATION_GRD
+   		<include refid="whereLike"/>
+   	</select>
+   	<!-- 分页查询语句 -->
+   	<select id="getsalesQuotationGrdSplitPageBySQL" remapResults="true" parameterClass="java.lang.String" resultMap="salesQuotationGrd">
+   		$splitPageSQL$
+   	</select>
+   	<!-- end -->
+   	
+   	<select id="getsalesQuotationGrdSplitPageCountSQL" remapResults="true" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+   		$countSQL$
+   	</select>
+   	
+   	<delete id="deletesalesQuotationGrd" parameterClass="salesQuotationGrd">
+   		DELETE FROM RS_SALES_QUOTATION_GRD
+   		<include refid="whereLike"/>
+   	</delete>
+</sqlMap>

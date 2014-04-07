@@ -5,44 +5,46 @@
   <typeAlias alias="salesContractPaymentGrd" type="com.radius.invoicing.ibatis.model.SalesContractPaymentGrd" />
   
   <sql id="salesContractPaymentGrdFileds">
-  	 money_list_id id,money_list_name name,contract_id contractId,money_list_batch batch,amount amount,amount_in_word upperAmount,pay_receive_type receiveType,validity_date validityDate,STATUS stats,memo memo,
-  	 ledger_id ledgerId,creater creater,createdate createdate,reviser reviser,revisedate revisedate,verifier verifydate
+  	 money_list_id id,money_list_name name, contract_id contractId,money_list_batch batch,amount amount,amount_in_word upperAmount,pay_receive_type receiveType,validity_date validityDate,status status,mome  memo,
+  	 ledger_id ledgerId,operator operator,motify_date modifyDate,creater creater,createdate createDate,reviser reviser,revisedate reviseDate,verifier verifier,verifydate verifyDate
   </sql>
   
   <resultMap id="salesContractPaymentGrd" class="salesContractPaymentGrd">
     <result column="money_list_id" jdbcType="int" javaType="java.lang.Integer" property="id" />
     <result column="money_list_name" jdbcType="varchar" javaType="java.lang.String" property="name" />
-    <result column="contract_id" jdbcType="var" javaType="java.lang.Integer" property="contractId" />
-    <result column="money_list_batch" jdbcType="char" javaType="java.lang.String" property="batch" />
+    <result column="contract_id" jdbcType="char" javaType="java.lang.String" property="contractId" />
+    <result column="money_list_batch" jdbcType="int" javaType="java.lang.Integer" property="batch" />
     <result column="amount" jdbcType="int" javaType="java.lang.Integer" property="amount" />
     <result column="amount_in_word" jdbcType="text" javaType="java.lang.String" property="upperAmount" />
-    <result column="pay_receive_type" jdbcType="char" javaType="java.lang.String" property="receiveType" />
+    <result column="pay_receive_type" jdbcType="int" javaType="java.lang.Integer" property="receiveType" />
     <result column="validity_date" jdbcType="date" javaType="java.util.Date" property="validityDate" />
-    <result column="STATUS" jdbcType="char" javaType="java.lang.String" property="stats" />
-    <result column="memo" jdbcType="char" javaType="java.lang.String" property="memo" />
-  	<result column="ledger_id" jdbcType="char" javaType="java.lang.String" property="ledgerId" />
+    <result column="status" jdbcType="char" javaType="java.lang.String" property="status" />
+    
+    <result column="ledger_id" jdbcType="char" javaType="java.lang.String" property="ledgerId" />
+    <result column="operator" jdbcType="char" javaType="java.lang.String" property="operator" />
+    <result column="modify_date" jdbcType="datetime" javaType="java.util.Date" property="modifyDate" />
     <result column="creater" jdbcType="char" javaType="java.lang.String" property="creater" />
-    <result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createdate" />
+    <result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createDate" />
     <result column="reviser" jdbcType="char" javaType="java.lang.String" property="reviser" />
-    <result column="revisedate" jdbcType="datetime" javaType="java.util.Date" property="revisedate" />
+    <result column="revisedate" jdbcType="datetime" javaType="java.util.Date" property="reviseDate" />
     <result column="verifier" jdbcType="char" javaType="java.lang.String" property="verifier" />    
-    <result column="verifydate" jdbcType="datetime" javaType="java.util.Date" property="verifydate"/>
+    <result column="verifydate" jdbcType="datetime" javaType="java.util.Date" property="verifyDate"/>
   </resultMap>
   
   <sql id="whereLike">
   	<dynamic prepend="where">
-  		1=1  
+  		1=1  AND
   		<isNotNull prepend="and" property="id">money_list_id=#id#</isNotNull>
-  		<isNotEmpty prepend="and" property="name">money_list_name=#name#</isNotEmpty>
-  		<isNotEmpty prepend="and" property="contractId">contract_id=#contractId#</isNotEmpty>
-  		<isNotEmpty prepend="and" property="batch">money_list_batch=#batch#</isNotEmpty>
+  		<isNotNull prepend="and" property="name">money_list_name=#name#</isNotNull>
+  		<isNotNull prepend="and" property="contractId">contract_id=#contractId#</isNotNull>
+  		<isNotNull prepend="and" property="batch">money_list_batch=#batch#</isNotNull>
   		<isNotNull prepend="and" property="amount">amount=#amount#</isNotNull>
-		<isNotEmpty prepend="and" property="upperAmount">amount_in_word=#upperAmount#</isNotEmpty>
-		<isNotEmpty prepend="and" property="receiveType">pay_receive_type=#receiveType#</isNotEmpty>
+		<isNotNull prepend="and" property="upperAmount">amount_in_word=#upperAmount#</isNotNull>
+		<isNotNull prepend="and" property="receiveType">pay_receive_type=#receiveType#</isNotNull>
 		<isNotNull prepend="and" property="validityDate">validity_date=#validityDate#</isNotNull>
- 		<isNotEmpty prepend="and" property="ledgerId">ledger_id=#ledgerId#</isNotEmpty> 
- 		<isNotEmpty prepend="and" property="stats">STATUS=#stats#</isNotEmpty> 
- 		<isNotEmpty prepend="and" property="memo">memo=#memo#</isNotEmpty> 
+ 		<isNotNull prepend="and" property="status">status=#status#</isNotNull> 
+ 		<isNotNull prepend="and" property="memo">memo=#memo#</isNotNull> 
+ 		<isNotNull prepend="and" property="ledgerId">ledger_id=#ledgerId#</isNotNull> 
   	</dynamic>
   </sql>
  
@@ -60,29 +62,31 @@
    
    	<insert id="insert" parameterClass="salesContractPaymentGrd">
    		INSERT INTO RS_SALES_CONTRACT_PAYMENT_GRD (
-	  		<isNotEmpty  property="name">money_list_name,</isNotEmpty>
-	  		<isNotEmpty  property="contractId">contract_id,</isNotEmpty>
-	  		<isNotEmpty  property="batch">money_list_batch,</isNotEmpty>
+	  		<isNotNull  property="name">money_list_name,</isNotNull>
+	  		<isNotNull  property="contractId">contract_id,</isNotNull>
+	  		<isNotNull  property="batch">money_list_batch,</isNotNull>
 	  		<isNotNull  property="amount">amount,</isNotNull>
-			<isNotEmpty  property="upperAmount">amount_in_word,</isNotEmpty>
-			<isNotEmpty  property="receiveType">pay_receive_type,</isNotEmpty>
+			<isNotNull  property="upperAmount">amount_in_word,</isNotNull>
+			<isNotNull  property="receiveType">pay_receive_type,</isNotNull>
 			<isNotNull  property="validityDate">validity_date,</isNotNull>
-	 		<isNotEmpty  property="ledgerId">ledger_id,</isNotEmpty> 
-	 		<isNotEmpty  property="stats">STATUS,</isNotEmpty> 
-	 		<isNotEmpty  property="memo">memo,</isNotEmpty>
+	 		<isNotNull  property="ledgerId">ledger_id,</isNotNull> 
+	 		<isNotNull  property="status">status,</isNotNull> 
+	 		<isNotNull  property="memo">memo,</isNotNull>
+	 		<isNotNull  property="operator">operator,</isNotNull> 
 	  	    creater,
 	  	    createdate
    		)VALUES(
-	  		<isNotEmpty  property="name">#name#,</isNotEmpty>
-	  		<isNotEmpty  property="contractId">#contractId#,</isNotEmpty>
-	  		<isNotEmpty  property="batch">#batch#,</isNotEmpty>
+	  		<isNotNull  property="name">#name#,</isNotNull>
+	  		<isNotNull  property="contractId">#contractId#,</isNotNull>
+	  		<isNotNull  property="batch">#batch#,</isNotNull>
 	  		<isNotNull  property="amount">#amount#,</isNotNull>
-			<isNotEmpty  property="upperAmount">#upperAmount#,</isNotEmpty>
-			<isNotEmpty  property="receiveType">#receiveType#,</isNotEmpty>
+			<isNotNull  property="upperAmount">#upperAmount#,</isNotNull>
+			<isNotNull  property="receiveType">#receiveType#,</isNotNull>
 			<isNotNull  property="validityDate">#validityDate#,</isNotNull>
-	 		<isNotEmpty  property="ledgerId">#ledgerId#,</isNotEmpty> 
-	 		<isNotEmpty  property="stats">#stats#,</isNotEmpty> 
-	 		<isNotEmpty  property="memo">#memo#,</isNotEmpty>
+	 		<isNotNull  property="ledgerId">#ledgerId#,</isNotNull> 
+	 		<isNotNull  property="status">#status#,</isNotNull> 
+	 		<isNotNull  property="memo">#memo#,</isNotNull>
+	 		<isNotNull  property="operator">#operator#,</isNotNull> 
    			 creater,now()
    		)
    	</insert>
@@ -90,18 +94,19 @@
    	<update id="updateSalesContractPaymentGrdByPK" parameterClass="salesContractPaymentGrd">
    		UPDATE RS_SALES_CONTRACT_PAYMENT_GRD
    		<dynamic prepend="SET">
-	  		<isNotEmpty prepend="," property="name">money_list_name=#name#</isNotEmpty>
-	  		<isNotEmpty prepend="," property="contractId">contract_id=#contractId#</isNotEmpty>
-	  		<isNotEmpty prepend="," property="batch">money_list_batch=#batch#</isNotEmpty>
+	  		<isNotNull prepend="," property="name">money_list_name=#name#</isNotNull>
+	  		<isNotNull prepend="," property="contractId">contract_id=#contractId#</isNotNull>
+	  		<isNotNull prepend="," property="batch">money_list_batch=#batch#</isNotNull>
 	  		<isNotNull prepend="," property="amount">amount=#amount#</isNotNull>
-			<isNotEmpty prepend="," property="upperAmount">amount_in_word=#upperAmount#</isNotEmpty>
-			<isNotEmpty prepend="," property="receiveType">pay_receive_type=#receiveType#</isNotEmpty>
+			<isNotNull prepend="," property="upperAmount">amount_in_word=#upperAmount#</isNotNull>
+			<isNotNull prepend="," property="receiveType">pay_receive_type=#receiveType#</isNotNull>
 			<isNotNull prepend="," property="validityDate">validity_date=#validityDate#</isNotNull>
-	 		<isNotEmpty prepend="," property="ledgerId">ledger_id=#ledgerId#</isNotEmpty> 
-	 		<isNotEmpty prepend="," property="stats">STATUS=#stats#</isNotEmpty> 
-	 		<isNotEmpty prepend="," property="memo">memo=#memo#</isNotEmpty> 
-  	 		<isNotEmpty  prepend="," property="reviser">reviser = #reviser#,revisedate = now() </isNotEmpty>
-  			<isNotEmpty  prepend="," property="verifier">verifier = #verifier#,verifydate = now() </isNotEmpty>
+	 		<isNotNull prepend="," property="ledgerId">ledger_id=#ledgerId#</isNotNull> 
+	 		<isNotNull prepend="," property="status">status=#status#</isNotNull> 
+	 		<isNotNull prepend="," property="memo">memo=#memo#</isNotNull> 
+	 		<isNotNull prepend="," property="operator">operator=#operator#,modify_date= now()</isNotNull>
+  	 		<isNotNull prepend="," property="reviser">reviser = #reviser#,revisedate = now() </isNotNull>
+  			<isNotNull prepend="," property="verifier">verifier = #verifier#,verifydate = now() </isNotNull>
    		</dynamic>
    		WHERE money_list_id =#id#
    	</update>
@@ -125,7 +130,7 @@
    	</delete>
    	<update id="updateSalesContractPaymentGrdStatusBycontractId" parameterClass="salesContractPaymentGrd">
    		UPDATE RS_SALES_CONTRACT_PAYMENT_GRD
-   		SET STATUS=#stats#
+   		SET status=#status#
    		WHERE contract_id=#contractId#
    	</update>
 </sqlMap>
