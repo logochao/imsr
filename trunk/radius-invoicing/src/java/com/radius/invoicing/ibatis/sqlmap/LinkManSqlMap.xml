@@ -5,26 +5,40 @@
   <typeAlias alias="linkMan" type="com.radius.invoicing.ibatis.model.LinkMan" />
   
   <sql id="linkManFileds">
-    link_man_id id,link_type linkType,other_id other,link_man_name name,sex sex,card_no cardNo,link_mobile mobile,link_tel tel,email email,qq qq,address address,pinyin pinyin,
-  	memo memo, 
+    link_man_id id,link_man_name name,pinyin pinyin,sex sex,id_number numbers,link_mobile1 mobile1,link_mobile2 mobile2,link_mobile3 mobile3,link_tel tel,home_tel homeTel,
+    address address,qq qq,Email email,job_duty jobDuty,expertise expertise,job_title jobTitle,job_content jobContent,hobbies hobbies,post_code postCode,
+    serv_company_id companyId, serv_company_name companyName,customer_property customerProperty,customer_illustrate customerIllustrate,office_address officeAddress,
+    mome mome,staff_id staff, 
   	creater creater,createdate createdate,reviser reviser,revisedate revisedate,verifier verifydate
   </sql>
   
   <resultMap id="linkManMap" class="linkMan">
     <result column="link_man_id" jdbcType="int" javaType="java.lang.Integer" property="id" />
-    <result column="link_type" jdbcType="int" javaType="java.lang.Integer" property="linkType" />
-    <result column="other_id" jdbcType="char" javaType="java.lang.String" property="other" />
     <result column="link_man_name" jdbcType="varchar" javaType="java.lang.String" property="name" />
-    <result column="sex"   property="yesOrNo" typeHandler="com.radius.invoicing.enums.SexEnumsHandler" nullValue="2"/>
-	<result column="card_no" jdbcType="char" javaType="java.lang.String" property="cardNo"/> 
-	<result column="link_mobile" jdbcType="char" javaType="java.lang.String" property="mobile"/> 
-	<result column="link_tel" jdbcType="char" javaType="java.lang.String" property="tel"/>
-	<result column="email" jdbcType="varchar" javaType="java.lang.String" property="email"/>
-	<result column="qq" jdbcType="varchar" javaType="java.lang.String" property="qq"/>
-	<result column="address" jdbcType="varchar" javaType="java.lang.String" property="address"/>
 	<result column="pinyin" jdbcType="varchar" javaType="java.lang.String" property="pinyin"/>
-  	
-  	<result column="memo" jdbcType="text" javaType="java.lang.String" property="memo" /> 
+    <result column="sex"   property="sex" typeHandler="com.radius.invoicing.enums.SexEnumsHandler" nullValue="2"/>
+	<result column="id_number" jdbcType="char" javaType="java.lang.String" property="numbers"/> 
+	<result column="link_mobile1" jdbcType="char" javaType="java.lang.String" property="mobile1"/> 
+	<result column="link_mobile2" jdbcType="char" javaType="java.lang.String" property="mobile2"/> 
+	<result column="link_mobile3" jdbcType="char" javaType="java.lang.String" property="mobile3"/> 
+	<result column="link_tel" jdbcType="char" javaType="java.lang.String" property="tel"/>
+	<result column="home_tel" jdbcType="char" javaType="java.lang.String" property="homeTel"/>
+	<result column="address" jdbcType="varchar" javaType="java.lang.String" property="address"/>
+	<result column="qq" jdbcType="varchar" javaType="java.lang.String" property="qq"/>
+	<result column="email" jdbcType="varchar" javaType="java.lang.String" property="email"/>
+	<result column="job_duty" jdbcType="varchar" javaType="java.lang.String" property="jobDuty"/>
+	<result column="expertise" jdbcType="varchar" javaType="java.lang.String" property="expertise"/>
+	<result column="job_title" jdbcType="varchar" javaType="java.lang.String" property="jobTitle"/>
+	<result column="job_content" jdbcType="varchar" javaType="java.lang.String" property="jobContent"/>
+	<result column="hobbies" jdbcType="varchar" javaType="java.lang.String" property="hobbies"/>
+	<result column="post_code" jdbcType="char" javaType="java.lang.String" property="postCode"/>
+	<result column="serv_company_id" jdbcType="char" javaType="java.lang.String" property="companyId"/>
+	<result column="serv_company_name" jdbcType="varchar" javaType="java.lang.String" property="companyName"/>
+	<result column="customer_property" jdbcType="char" javaType="java.lang.String" property="customerProperty"/>
+	<result column="customer_illustrate" jdbcType="text" javaType="java.lang.String" property="customerIllustrate"/>
+	<result column="office_address" jdbcType="varchar" javaType="java.lang.String" property="officeAddress"/>
+  	<result column="mome" jdbcType="text" javaType="java.lang.String" property="memo" /> 
+  	<result column="staff_id" jdbcType="char" javaType="java.lang.String" property="staff" /> 
     <result column="creater" jdbcType="char" javaType="java.lang.String" property="creater" />
     <result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createdate" />
     <result column="reviser" jdbcType="char" javaType="java.lang.String" property="reviser" />
@@ -36,42 +50,81 @@
   <sql id="whereLike">
   	<dynamic prepend="where">
   		1=1  AND
-  		<isNotNull prepend="and" property="id">
+  		<isNotNull prepend="AND" property="id">
   			link_man_id=#id#
   		</isNotNull>
-		<isNotNull prepend="and" property="linkType">
-			link_type=#linkType#
-		</isNotNull>
-		<isNotEmpty prepend="and" property="other">
-			other_id=#other#
-		</isNotEmpty>
-		<isNotEmpty prepend="and" property="name">
-			link_man_name LIKE '%$name$%'
-		</isNotEmpty>
-		<isNotNull prepend="and" property="sex">
-			sex=#sex#
-		</isNotNull>
-		<isNotEmpty prepend="and" property="cardNo">
-			card_no=#cardNo#
-		</isNotEmpty>
-		<isNotEmpty prepend="and" property="mobile">
-			link_mobile=#mobile#
-		</isNotEmpty>
-		<isNotEmpty prepend="and" property="tel">
-			link_tel=#tel#
-		</isNotEmpty>
-		<isNotEmpty prepend="and" property="email">
-			email=#email#
-		</isNotEmpty>
-		<isNotEmpty prepend="and" property="qq">
-			qq=#qq#
-		</isNotEmpty>
-		<isNotEmpty prepend="and" property="address">
-			address=#address#
-		</isNotEmpty>
-		<isNotEmpty prepend="and" property="pinyin">
-			pinyin=#pinyin#
-		</isNotEmpty>
+  		<isNotNull prepend="AND" property="name">
+  			link_man_name  LIKE CONCAT('%',#name#,'%')
+  		</isNotNull>
+  		<isNotNull prepend="AND" property="pinyin">
+  			pinyin=#pinyin#
+  		</isNotNull>
+  		<isNotNull prepend="AND" property="sex">
+  			sex=#sex#
+  		</isNotNull>
+  		<isNotNull prepend="AND" property="numbers">
+  			id_number=#numbers#
+  		</isNotNull>
+  		<isNotNull prepend="AND" property="mobile1">
+  			link_mobile1=#mobile1#
+  		</isNotNull>
+  		<isNotNull prepend="AND" property="mobile2">
+  			link_mobile2=#mobile2#
+  		</isNotNull>
+  		<isNotNull prepend="AND" property="mobile3">
+  			link_mobile3=#mobile3#
+  		</isNotNull>
+  		<isNotNull prepend="AND" property="tel">
+  			link_tel=#tel#
+  		</isNotNull>
+  		<isNotNull prepend="AND" property="homeTel">
+  			home_tel=#homeTel#
+  		</isNotNull>
+  		<isNotNull prepend="AND" property="address">
+  			address=#address#
+  		</isNotNull>
+  		<isNotNull prepend="AND" property="qq">
+  			qq=#qq#
+  		</isNotNull>
+  		<isNotNull prepend="AND" property="email">
+  			email=#email#
+  		</isNotNull>
+  		<isNotNull prepend="AND" property="jobDuty">
+  			job_duty=#jobDuty#
+  		</isNotNull>
+  		<isNotNull prepend="AND" property="expertise">
+  			expertise=#expertise#
+  		</isNotNull>
+  		<isNotNull prepend="AND" property="jobTitle">
+  			job_title=#jobTitle#
+  		</isNotNull>
+  		<isNotNull prepend="AND" property="jobContent">
+  			job_content=#jobContent#
+  		</isNotNull>
+  		<isNotNull prepend="AND" property="hobbies">
+  			hobbies=#hobbies#
+  		</isNotNull>
+  		<isNotNull prepend="AND" property="postCode">
+  			post_code=#postCode#
+  		</isNotNull>
+  		<isNotNull prepend="AND" property="companyId">
+  			serv_company_id=#companyId#
+  		</isNotNull>
+  		<isNotNull prepend="AND" property="companyName">
+  			serv_company_name LIKE CONCAT('%',#companyName#,'%')
+  		</isNotNull>
+  		<isNotNull prepend="AND" property="customerProperty">
+  			customer_property=#customerProperty#
+  		</isNotNull>
+  		<isNotNull prepend="AND" property="customerIllustrate">
+  			customer_illustrate=#customerIllustrate#
+  		</isNotNull>
+  		<isNotNull prepend="AND" property="officeAddress">
+  			office_address=#officeAddress#
+  		</isNotNull>
+  		<isNotNull prepend="AND" property="mome">
+  			mome	LIKE CONCAT('%',#mome#,'%') 
+  		</isNotNull>
   	</dynamic>
   </sql>
  
@@ -83,52 +136,94 @@
    
    	<insert id="insert" parameterClass="linkMan">
    		INSERT INTO RS_LINK_MAN (
-			<isNotNull  property="linkType">link_type,</isNotNull>
-			<isNotEmpty  property="other">other_id,</isNotEmpty>
-			<isNotEmpty  property="name">link_man_name,</isNotEmpty>
+			<isNotNull  property="name">link_man_name,</isNotNull>
+			<isNotNull  property="pinyin">pinyin,</isNotNull>
 			<isNotNull  property="sex">sex,</isNotNull>
-			<isNotEmpty  property="cardNo">card_no,</isNotEmpty>
-			<isNotEmpty  property="mobile">link_mobile,</isNotEmpty>
-			<isNotEmpty  property="tel">link_tel,</isNotEmpty>
-			<isNotEmpty  property="email">email,</isNotEmpty>
-			<isNotEmpty  property="qq">qq,</isNotEmpty>
-			<isNotEmpty  property="address">address,</isNotEmpty>
-			<isNotEmpty  property="pinyin">pinyin,</isNotEmpty>
-	 		<isNotEmpty  property="memo">memo,</isNotEmpty>
+			<isNotNull  property="numbers">id_number,</isNotNull>
+			<isNotNull  property="mobile1">link_mobile1,</isNotNull>
+			<isNotNull  property="mobile2">link_mobile2 ,</isNotNull>
+			<isNotNull  property="mobile3">link_mobile3 ,</isNotNull>
+			<isNotNull  property="tel">link_tel ,</isNotNull>
+			<isNotNull  property="homeTel">home_tel,</isNotNull>
+			<isNotNull  property="address">address,</isNotNull>
+			<isNotNull  property="qq"> qq,</isNotNull>
+			<isNotNull  property="email"> email,</isNotNull>
+			<isNotNull  property="jobDuty">job_duty ,</isNotNull>
+			<isNotNull  property="expertise">expertise,</isNotNull>
+			<isNotNull  property="jobTitle">job_title,</isNotNull>
+			<isNotNull  property="jobContent">job_content,</isNotNull>
+			<isNotNull  property="hobbies"> hobbies,</isNotNull>
+			<isNotNull  property="postCode">post_code,</isNotNull>
+			<isNotNull  property="companyId">serv_company_id,</isNotNull> 
+			<isNotNull  property="companyName">serv_company_name,</isNotNull>
+			<isNotNull  property="customerProperty">customer_property,</isNotNull>
+			<isNotNull  property="customerIllustrate">customer_illustrate,</isNotNull>
+			<isNotNull  property="officeAddress">office_address,</isNotNull>
+			<isNotNull  property="mome">mome,</isNotNull>
+			<isNotNull  property="staff">staff_id,</isNotNull>
 	  	    creater,
 	  	    createdate
    		)VALUES(
-			<isNotNull  property="linkType">#linkType#,</isNotNull>
-			<isNotEmpty  property="other">#other#,</isNotEmpty>
-			<isNotEmpty  property="name">#name#,</isNotEmpty>
+			<isNotNull  property="name">#name#,</isNotNull>
+			<isNotNull  property="pinyin">#pinyin#,</isNotNull>
 			<isNotNull  property="sex">#sex#,</isNotNull>
-			<isNotEmpty  property="cardNo">#cardNo#,</isNotEmpty>
-			<isNotEmpty  property="mobile">#mobile#,</isNotEmpty>
-			<isNotEmpty  property="tel">#tel#,</isNotEmpty>
-			<isNotEmpty  property="email">#email#,</isNotEmpty>
-			<isNotEmpty  property="qq">#qq#,</isNotEmpty>
-			<isNotEmpty  property="address">#address#,</isNotEmpty>
-			<isNotEmpty  property="pinyin">#pinyin#,</isNotEmpty>
-	 		<isNotEmpty  property="memo">#memo#,</isNotEmpty>
+			<isNotNull  property="numbers">#numbers#,</isNotNull>
+			<isNotNull  property="mobile1">#mobile1#,</isNotNull>
+			<isNotNull  property="mobile2">#mobile2#,</isNotNull>
+			<isNotNull  property="mobile3">#mobile3#,</isNotNull>
+			<isNotNull  property="tel">#tel#,</isNotNull>
+			<isNotNull  property="homeTel">#homeTel#,</isNotNull>
+			<isNotNull  property="address">#address#,</isNotNull>
+			<isNotNull  property="qq">#qq#,</isNotNull>
+			<isNotNull  property="email">#email#,</isNotNull>
+			<isNotNull  property="jobDuty">#jobDuty#,</isNotNull>
+			<isNotNull  property="expertise">#expertise#,</isNotNull>
+			<isNotNull  property="jobTitle">#jobTitle#,</isNotNull>
+			<isNotNull  property="jobContent">#jobContent#,</isNotNull>
+			<isNotNull  property="hobbies">#hobbies#,</isNotNull>
+			<isNotNull  property="postCode">#postCode#,</isNotNull>
+			<isNotNull  property="companyId">#companyId#,</isNotNull> 
+			<isNotNull  property="companyName">#companyName#,</isNotNull>
+			<isNotNull  property="customerProperty">#customerProperty#,</isNotNull>
+			<isNotNull  property="customerIllustrate">#customerIllustrate#,</isNotNull>
+			<isNotNull  property="officeAddress">#officeAddress#,</isNotNull>
+			<isNotNull  property="mome">#mome#,</isNotNull>
+			<isNotNull  property="staff">#staff#,</isNotNull>
    			 creater,now()
    		)
+   		<selectKey resultClass="java.lang.Integer" keyProperty="id">
+	      select LAST_INSERT_ID()
+	    </selectKey>
    	</insert>
    
    	<update id="updateLinkManById" parameterClass="linkMan">
    		UPDATE RS_LINK_MAN
    		<dynamic prepend="SET">
-			<isNotNull prepend="," property="linkType">link_type=#linkType#</isNotNull>
-			<isNotEmpty prepend="," property="other">other_id=#other#</isNotEmpty>
-			<isNotEmpty prepend="," property="name">link_man_name=#name#</isNotEmpty>
-			<isNotNull prepend="," property="sex">sex=#sex#</isNotNull>
-			<isNotEmpty prepend="," property="cardNo">card_no=#cardNo#</isNotEmpty>
-			<isNotEmpty prepend="," property="mobile">link_mobile=#mobile#</isNotEmpty>
-			<isNotEmpty prepend="," property="tel">link_tel=#tel#</isNotEmpty>
-			<isNotEmpty prepend="," property="email">email=#email#</isNotEmpty>
-			<isNotEmpty prepend="," property="qq">qq=#qq#</isNotEmpty>
-			<isNotEmpty prepend="," property="address">address=#address#</isNotEmpty>
-			<isNotEmpty prepend="," property="pinyin">pinyin=#pinyin#</isNotEmpty>
-	 		<isNotEmpty prepend="," property="memo">memo=#memo#</isNotEmpty> 
+			<isNotNull   prepend="," property="name">link_man_name=#name#,</isNotNull>
+			<isNotNull   prepend="," property="pinyin">pinyin=#pinyin#,</isNotNull>
+			<isNotNull   prepend="," property="sex">sex=#sex#,</isNotNull>
+			<isNotNull   prepend="," property="numbers">id_number=#numbers#,</isNotNull>
+			<isNotNull   prepend="," property="mobile1">link_mobile1=#mobile1#,</isNotNull>
+			<isNotNull   prepend="," property="mobile2">link_mobile2 =#mobile2#,</isNotNull>
+			<isNotNull   prepend="," property="mobile3">link_mobile3 =#mobile3#,</isNotNull>
+			<isNotNull   prepend="," property="tel">link_tel =#tel#,</isNotNull>
+			<isNotNull   prepend="," property="homeTel">home_tel=#homeTel#,</isNotNull>
+			<isNotNull   prepend="," property="address">address=#address#,</isNotNull>
+			<isNotNull   prepend="," property="qq"> qq=#qq#,</isNotNull>
+			<isNotNull   prepend="," property="email"> email=#email#,</isNotNull>
+			<isNotNull   prepend="," property="jobDuty">job_duty =#jobDuty#,</isNotNull>
+			<isNotNull   prepend="," property="expertise">expertise=#expertise#,</isNotNull>
+			<isNotNull   prepend="," property="jobTitle">job_title=#jobTitle#,</isNotNull>
+			<isNotNull   prepend="," property="jobContent">job_content=#jobContent#,</isNotNull>
+			<isNotNull   prepend="," property="hobbies"> hobbies=#hobbies#,</isNotNull>
+			<isNotNull   prepend="," property="postCode">post_code=#postCode#,</isNotNull>
+			<isNotNull   prepend="," property="companyId">serv_company_id=#companyId#,</isNotNull> 
+			<isNotNull   prepend="," property="companyName">serv_company_name=#companyName#,</isNotNull>
+			<isNotNull   prepend="," property="customerProperty">customer_property=#customerProperty#,</isNotNull>
+			<isNotNull   prepend="," property="customerIllustrate">customer_illustrate=#customerIllustrate#,</isNotNull>
+			<isNotNull   prepend="," property="officeAddress">office_address=#officeAddress#,</isNotNull>
+			<isNotNull   prepend="," property="mome">mome=#mome#,</isNotNull>
+			<isNotNull   prepend="," property="staff">staff_id=#staff#,</isNotNull>
   	 		<isNotEmpty  prepend="," property="reviser">reviser = #reviser#,revisedate = now() </isNotEmpty>
   			<isNotEmpty  prepend="," property="verifier">verifier = #verifier#,verifydate = now() </isNotEmpty>
    		</dynamic>
@@ -137,7 +232,7 @@
    	<select id="getLinkManByCondition" parameterClass="linkMan" resultClass="linkMan">
    		SELECT <include refid="linkManFileds"/>
    		FROM RS_LINK_MAN
-   		$condition$
+   		<include refid="whereLike"/>
    	</select>
    	<!-- 分页查询语句 -->
    	<select id="getLinkManSplitPageBySQL" remapResults="true" parameterClass="java.lang.String" resultMap="linkManMap">

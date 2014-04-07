@@ -5,193 +5,91 @@
   <typeAlias alias="goods" type="com.radius.invoicing.ibatis.model.Goods" />
   
   <sql id="goodsFileds">
-  	goods_id id,goods_name name,goods_property property,category_id categoryId,category_name categoryName,goods_series series,unit unit,origin_place place,uses uses,weight_prop weightProp,goods_status status,
-  	vulnerability vulnerability,deposit_deadline depositDeadline,goods_description description,min_limit_of_store minStore,max_limit_of_store maxStore,cost cost,purchase_illustrate illustrate,
-  	price price,true_goods_name realName,cash_type cashType,batch batch,batch_no batchNo,use_status useStatus ,month_batch monthBatch,modify_batch_date modifyBatchDate,modify_batch_month modifyBatchMonth,format_no format,
-  	net_quantity netQuantity,little_unit_quantity littleUnitQuantity,little_unit littleUnit,sales_type salesType,defult_sales_institution defultSalesInstitution,tax_no taxNo,off_sales offSales,
-  	cost_of_convert_unit costConvertUnit,price_of_convert_unit priceConvertUnit,goods_bar_code barCode,weigth_per_unit weigthPerUnit,price_of_weigth_per_unit priceWeigthPerUnit,
-  	 ledger_id ledgerId,memo memo,creater creater,createdate createdate,reviser reviser,revisedate revisedate,verifier verifydate
+  	goods_id id,goods_name name,true_goods_name realName,goods_type goodsType,host_machine_series machineSeries,machine_position machinePosition,part_no partNo,
+  	map_series mapSeries,made_company company,goods_status goodStatus,weight_prop weightProp,vulnerability vulnerability,goods_description description,
+  	use_status useStatus,memo memo,ledger_id ledgerId,operator operator,motify_date modifyDate,
+  	creater creater,createdate createDate,reviser reviser,revisedate reviseDate,verifier verifier,verifydate verifyDate
   </sql>
   
   <resultMap id="goods" class="goods">
     <result column="goods_id" jdbcType="char" javaType="java.lang.String" property="id" />
     <result column="goods_name" jdbcType="varchar" javaType="java.lang.String" property="name" />
-    <result column="goods_property" jdbcType="varchar" javaType="java.lang.String" property="property" />
-  	<result column="category_id" jdbcType="char" javaType="java.lang.String" property="categoryId" />
-  	<result column="category_name" jdbcType="varchar" javaType="java.lang.String" property="categoryName" />
-  	<result column="goods_series" jdbcType="text" javaType="java.lang.String" property="series" />
-  	<result column="unit" jdbcType="char" javaType="java.lang.String" property="unit" />
-  	<result column="origin_place" jdbcType="varchar" javaType="java.lang.String" property="place" />
-  	<result column="uses" jdbcType="varchar" javaType="java.lang.String" property="uses" />
-  	<result column="weight_prop" jdbcType="int" javaType="java.lang.Integer" property="weightProp"/>
-  	<result column="goods_status" jdbcType="char" javaType="java.lang.String" property="status" />
-  	<result column="vulnerability" jdbcType="char" javaType="java.lang.String" property="vulnerability" />
-  	<result column="deposit_deadline" jdbcType="int" javaType="java.lang.Integer" property="depositDeadline"/>
-  	<result column="goods_description" jdbcType="text" javaType="java.lang.String" property="description" />
-  	<result column="min_limit_of_store" jdbcType="int" javaType="java.lang.Integer" property="minStore"/>
-  	<result column="max_limit_of_store" jdbcType="int" javaType="java.lang.Integer" property="maxStore"/>
-  	<result column="cost" jdbcType="int" javaType="java.lang.Integer" property="cost"/>
-  	<result column="purchase_illustrate" jdbcType="text" javaType="java.lang.String" property="illustrate" />
-  	<result column="price" jdbcType="int" javaType="java.lang.Integer" property="price"/>
   	<result column="true_goods_name" jdbcType="varchar" javaType="java.lang.String" property="realName" />
-  	<result column="cash_type" jdbcType="char" javaType="java.lang.String" property="cashType" />
-  	<result column="batch" jdbcType="int" javaType="java.lang.Integer" property="batch"/>
-  	<result column="batch_no" jdbcType="varchar" javaType="java.lang.String" property="batchNo" />
+  	<result column="goods_type" jdbcType="char" javaType="java.lang.String" property="goodsType" />
+  	<result column="host_machine_series" jdbcType="char" javaType="java.lang.String" property="machineSeries" />
+  	<result column="machine_position" jdbcType="varchar" javaType="java.lang.String" property="machinePosition" />
+  	<result column="part_no" jdbcType="varchar" javaType="java.lang.String" property="partNo" />
+  	<result column="map_series" jdbcType="varchar" javaType="java.lang.String" property="mapSeries" />
+  	<result column="made_company" jdbcType="varchar" javaType="java.lang.String" property="company" />
+  	<result column="goods_status" jdbcType="char" javaType="java.lang.String" property="goodStatus" />
+  	<result column="weight_prop" jdbcType="int" javaType="java.lang.Integer" property="weightProp"/>
+  	<result column="vulnerability" jdbcType="char" javaType="java.lang.String" property="vulnerability" />
+  	<result column="goods_description" jdbcType="text" javaType="java.lang.String" property="description" />
   	<result column="use_status" jdbcType="char" javaType="java.lang.String" property="useStatus" />
-  	<result column="month_batch" jdbcType="int" javaType="java.lang.Integer" property="monthBatch"/>
-  	<result column="modify_batch_date" jdbcType="datetime" javaType="java.util.Date" property="modifyBatchDate" />
-  	<result column="modify_batch_month" jdbcType="char" javaType="java.lang.String" property="modifyBatchMonth" />
-  	<result column="format_no" jdbcType="char" javaType="java.lang.String" property="format" />
-  	<result column="net_quantity" jdbcType="int" javaType="java.lang.Integer" property="netQuantity"/>
-  	<result column="little_unit_quantity" jdbcType="int" javaType="java.lang.Integer" property="littleUnitQuantity"/>
-  	<result column="little_unit" jdbcType="char" javaType="java.lang.String" property="littleUnit" />
-  	<result column="sales_type" jdbcType="char" javaType="java.lang.String" property="salesType" />
-  	<result column="defult_sales_institution" jdbcType="char" javaType="java.lang.String" property="defultSalesInstitution" />
-  	<result column="tax_no" jdbcType="varchar" javaType="java.lang.String" property="taxNo" />
-  	<result column="off_sales" jdbcType="int" javaType="java.lang.Integer" property="offSales" />
+  	
   	<result column="memo" jdbcType="text" javaType="java.lang.String" property="memo" />
-  	<result column="cost_of_convert_unit" jdbcType="int" javaType="java.lang.Integer" property="costConvertUnit" />
-  	<result column="price_of_convert_unit" jdbcType="int" javaType="java.lang.Integer" property="priceConvertUnit" />
-  	<result column="goods_bar_code" jdbcType="char" javaType="java.lang.String" property="barCode" />
-  	<result column="weigth_per_unit" jdbcType="int" javaType="java.lang.Integer" property="weigthPerUnit" />
-  	<result column="price_of_weigth_per_unit" jdbcType="int" javaType="java.lang.Integer" property="priceWeigthPerUnit" />
   	<result column="ledger_id" jdbcType="char" javaType="java.lang.String" property="ledgerId" />
+    <result column="operator" jdbcType="char" javaType="java.lang.String" property="operator" />
+    <result column="modify_date" jdbcType="datetime" javaType="java.util.Date" property="modifyDate" />
     <result column="creater" jdbcType="char" javaType="java.lang.String" property="creater" />
-    <result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createdate" />
+    <result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createDate" />
     <result column="reviser" jdbcType="char" javaType="java.lang.String" property="reviser" />
-    <result column="revisedate" jdbcType="datetime" javaType="java.util.Date" property="revisedate" />
+    <result column="revisedate" jdbcType="datetime" javaType="java.util.Date" property="reviseDate" />
     <result column="verifier" jdbcType="char" javaType="java.lang.String" property="verifier" />    
-    <result column="verifydate" jdbcType="datetime" javaType="java.util.Date" property="verifydate"/>
+    <result column="verifydate" jdbcType="datetime" javaType="java.util.Date" property="verifyDate"/>
   </resultMap>
   
   <sql id="whereLike">
   	<dynamic prepend="where" >
   		1=1  AND
-  		<isNotEmpty prepend="AND" property="id">
+  		<isNotNull prepend="AND" property="id">
   			goods_id=#id#
-  		</isNotEmpty>
-  		 <isNotEmpty prepend="and" property="name"> 
-           goods_name LIKE CONCAT('%',#name#,'%')
-  		</isNotEmpty>
-  		<isNotEmpty prepend="AND" property="property">
-  			goods_property=#property#
-  		</isNotEmpty>
-  		<isNotEmpty prepend="AND" property="categoryId">
-  			category_id=#categoryId#
-  		</isNotEmpty>
-  		<isNotEmpty prepend="AND" property="categoryName">
-  			category_name=#categoryName#
-  		</isNotEmpty>
-  		<isNotEmpty prepend="AND" property="series">
-  			goods_series=#series#
-  		</isNotEmpty>
-  		<isNotEmpty prepend="AND" property="unit">
-  			unit=#unit#
-  		</isNotEmpty>
-  		<isNotEmpty prepend="AND" property="place">
-  			origin_place=#place#
-  		</isNotEmpty>
-  		<isNotEmpty prepend="AND" property="uses">
-  			uses=#uses#
-  		</isNotEmpty>
+  		</isNotNull>
+  		<isNotNull prepend="AND" property="name">
+  			goods_name LIKE CONCAT('%',#name#,'%')	
+  		</isNotNull>
+  		<isNotNull prepend="AND" property="realName">
+  			true_goods_name  LIKE CONCAT('%',#realName#,'%')	
+  		</isNotNull>
+  		<isNotNull prepend="AND" property="goodsType">
+  			goods_type=#goodsType#
+  		</isNotNull>
+  		<isNotNull prepend="AND" property="machineSeries">
+  			host_machine_series=#machineSeries#
+  		</isNotNull>
+  		<isNotNull prepend="AND" property="machinePosition">
+  			machine_position=#machinePosition#
+  		</isNotNull>
+  		<isNotNull prepend="AND" property="partNo">
+  			part_no=#partNo#
+  		</isNotNull>
+  		<isNotNull prepend="AND" property="mapSeries">
+  			map_series=#mapSeries#
+  		</isNotNull>
+  		<isNotNull prepend="AND" property="company">
+  			made_company=#company#
+  		</isNotNull>
+  		<isNotNull prepend="AND" property="goodStatus">
+  			goods_status=#goodStatus#
+  		</isNotNull>
   		<isNotNull prepend="AND" property="weightProp">
   			weight_prop=#weightProp#
   		</isNotNull>
-  		<isNotEmpty prepend="AND" property="status">
-  			goods_status=#status#
-  		</isNotEmpty>
-  		<isNotEmpty prepend="AND" property="vulnerability">
+  		<isNotNull prepend="AND" property="vulnerability">
   			vulnerability=#vulnerability#
-  		</isNotEmpty>
-  		<isNotNull prepend="AND" property="depositDeadline">
-  			deposit_deadline=#depositDeadline#
   		</isNotNull>
-  		<isNotEmpty prepend="AND" property="description">
+  		<isNotNull prepend="AND" property="description">
   			goods_description=#description#
-  		</isNotEmpty>
-  		<isNotNull prepend="AND" property="minStore">
-  			min_limit_of_store=#minStore#
   		</isNotNull>
-  		<isNotNull prepend="AND" property="maxStore">
-  			max_limit_of_store=#maxStore#
-  		</isNotNull>
-  		<isNotNull prepend="AND" property="cost">
-  			cost=#cost#
-  		</isNotNull>
-  		<isNotEmpty prepend="AND" property="illustrate">
-  			purchase_illustrate=#illustrate#
-  		</isNotEmpty>
-  		<isNotNull prepend="AND" property="price">
-  			price=#price#
-  		</isNotNull>
-  		<isNotEmpty prepend="AND" property="realName">
-  			true_goods_name=#realName#
-  		</isNotEmpty>
-  		<isNotEmpty prepend="AND" property="cashType">
-  			cash_type=#cashType#
-  		</isNotEmpty>
-  		<isNotNull prepend="AND" property="batch">
-  			batch=#batch#
-  		</isNotNull>
-  		<isNotEmpty prepend="AND" property="batchNo">
-  			batch_no=#batchNo#
-  		</isNotEmpty>
-  		<isNotEmpty prepend="AND" property="useStatus">
+  		<isNotNull prepend="AND" property="useStatus">
   			use_status=#useStatus#
-  		</isNotEmpty>
-  		<isNotNull prepend="AND" property="monthBatch">
-  			month_batch=#monthBatch#
   		</isNotNull>
-  		<isNotNull prepend="AND" property="modifyBatchDate">
-  			modify_batch_date=#modifyBatchDate#
-  		</isNotNull>
-  		<isNotEmpty prepend="AND" property="modifyBatchMonth">
-  			modify_batch_month=#modifyBatchMonth#
-  		</isNotEmpty>
-  		<isNotEmpty prepend="AND" property="format">
-  			format_no=#format#
-  		</isNotEmpty>
-  		<isNotNull prepend="AND" property="netQuantity">
-  			net_quantity=#netQuantity#
-  		</isNotNull>
-  		<isNotNull prepend="AND" property="littleUnitQuantity">
-  			little_unit_quantity=#littleUnitQuantity#</isNotNull>
-  		<isNotEmpty prepend="AND" property="littleUnit">
-  			little_unit=#littleUnit#
-  		</isNotEmpty>
-  		<isNotEmpty prepend="AND" property="salesType">
-  			sales_type=#salesType#
-  		</isNotEmpty>
-  		<isNotEmpty prepend="AND" property="defultSalesInstitution">
-  			defult_sales_institution=#defultSalesInstitution#
-  		</isNotEmpty>
-  		<isNotEmpty prepend="AND" property="taxNo">
-  			tax_no=#taxNo#
-  		</isNotEmpty>
-  		<isNotNull prepend="AND" property="offSales">
-  			off_sales=#offSales#
-  		</isNotNull>
-  		<isNotEmpty prepend="AND" property="memo">
+  		<isNotNull prepend="AND" property="memo">
   			memo=#memo#
-  		</isNotEmpty>
-  		<isNotNull prepend="AND" property="costConvertUnit">
-  			cost_of_convert_unit=#costConvertUnit#
   		</isNotNull>
-  		<isNotNull prepend="AND" property="priceConvertUnit">
-  			price_of_convert_unit=#priceConvertUnit#
-  		</isNotNull>
-  		<isNotEmpty prepend="AND" property="barCode">
-  			goods_bar_code=#barCode#
-  		</isNotEmpty>
-  		<isNotEmpty prepend="AND" property="weigthPerUnit">
-  			weigth_per_unit=#weigthPerUnit#
-  		</isNotEmpty>
-  		<isNotEmpty prepend="AND" property="priceWeigthPerUnit">
-  			price_of_weigth_per_unit=#priceWeigthPerUnit#
-  		</isNotEmpty>
-  		<isNotEmpty prepend="AND" property="ledgerId">
+  		<isNotNull prepend="AND" property="ledgerId">
   			ledger_id=#ledgerId#
-  		</isNotEmpty>
+  		</isNotNull>
   	</dynamic>
   </sql>
  
@@ -203,151 +101,74 @@
    
    	<insert id="insert" parameterClass="goods">
    		INSERT INTO RS_GOODS (
-   			goods_id,
-			<isNotEmpty  property="name">goods_name,</isNotEmpty>
-	  		<isNotEmpty  property="property">goods_property,</isNotEmpty>
-	  		<isNotEmpty  property="categoryId">category_id,</isNotEmpty>
-	  		<isNotEmpty  property="categoryName">category_name,</isNotEmpty>
-	  		<isNotEmpty  property="goods_series">goods_series,</isNotEmpty>
-	  		<isNotEmpty  property="unit">unit,</isNotEmpty>
-	  		<isNotEmpty  property="place">origin_place,</isNotEmpty>
-	  		<isNotEmpty  property="uses">uses,</isNotEmpty>
-	  		<isNotNull  property="weightProp">weight_prop,</isNotNull>
-	  		<isNotEmpty  property="status">goods_status,</isNotEmpty>
-	  		<isNotEmpty  property="vulnerability">vulnerability,</isNotEmpty>
-	  		<isNotNull  property="depositDeadline">deposit_deadline,</isNotNull>
-	  		<isNotEmpty  property="description">goods_description,</isNotEmpty>
-	  		<isNotNull  property="minStore">min_limit_of_store,</isNotNull>
-	  		<isNotNull  property="maxStore">max_limit_of_store,</isNotNull>
-	  		<isNotNull  property="cost">cost,</isNotNull>
-	  		<isNotEmpty  property="illustrate">purchase_illustrate,</isNotEmpty>
-	  		<isNotNull  property="price">price,</isNotNull>
-	  		<isNotEmpty  property="realName">true_goods_name,</isNotEmpty>
-	  		<isNotEmpty  property="cashType">cash_type,</isNotEmpty>
-	  		<isNotNull  property="batch">batch,</isNotNull>
-	  		<isNotEmpty  property="batchNo">batch_no,</isNotEmpty>
-	  		<isNotEmpty  property="useStatus">use_status,</isNotEmpty>
-	  		<isNotNull  property="monthBatch">month_batch,</isNotNull>
-	  		<isNotNull  property="modifyBatchDate">modify_batch_date,</isNotNull>
-	  		<isNotEmpty  property="modifyBatchMonth">modify_batch_month,</isNotEmpty>
-	  		<isNotEmpty  property="format">format_no,</isNotEmpty>
-	  		<isNotNull  property="netQuantity">net_quantity,</isNotNull>
-	  		<isNotNull  property="littleUnitQuantity">little_unit_quantity,</isNotNull>
-	  		<isNotEmpty  property="littleUnit">little_unit,</isNotEmpty>
-	  		<isNotEmpty  property="salesType">sales_type,</isNotEmpty>
-	  		<isNotEmpty  property="defultSalesInstitution">defult_sales_institution,</isNotEmpty>
-	  		<isNotEmpty  property="taxNo">tax_no,</isNotEmpty>
-	  		<isNotNull  property="offSales">off_sales,</isNotNull>
-	  		<isNotEmpty  property="memo">memo,</isNotEmpty>
-	  		<isNotNull  property="costConvertUnit">cost_of_convert_unit,</isNotNull>
-	  		<isNotNull  property="priceConvertUnit">price_of_convert_unit,</isNotNull>
-	  		<isNotEmpty  property="barCode">goods_bar_code,</isNotEmpty>
-	  		<isNotEmpty  property="weigthPerUnit">weigth_per_unit,</isNotEmpty>
-	  		<isNotEmpty  property="priceWeigthPerUnit">price_of_weigth_per_unit,</isNotEmpty>
-	  		<isNotEmpty  property="ledgerId">ledger_id,</isNotEmpty>
+			goods_id,
+			<isNotNull 	property="name">goods_name,</isNotNull>
+			<isNotNull	property="realName">true_goods_name,</isNotNull>
+			<isNotNull	property="goodsType">goods_type,</isNotNull>
+			<isNotNull	property="machineSeries">host_machine_series,</isNotNull>
+			<isNotNull	property="machinePosition">machine_position,</isNotNull>
+			<isNotNull	property="partNo">part_no,</isNotNull>
+			<isNotNull	property="mapSeries">map_series,</isNotNull>
+			<isNotNull	property="company">made_company,</isNotNull>
+			<isNotNull	property="goodStatus">goods_status,</isNotNull>
+			<isNotNull	property="weightProp">weight_prop,</isNotNull>
+			<isNotNull	property="vulnerability">vulnerability,</isNotNull>
+			<isNotNull	property="description">goods_description,</isNotNull>
+			<isNotNull	property="useStatus">use_status,</isNotNull>
+	  		<isNotNull  property="memo">memo,</isNotNull>
+	  		<isNotNull  property="ledgerId">ledger_id,</isNotNull>
+	  		operator,
 	  	    creater,
 	  	    createdate
    		)VALUES(
    			#id#,
-   			<isNotEmpty  property="name">#name#,</isNotEmpty>
-	  		<isNotEmpty  property="property">#property#,</isNotEmpty>
-	  		<isNotEmpty  property="categoryId">#categoryId#,</isNotEmpty>
-	  		<isNotEmpty  property="categoryName">#categoryName#,</isNotEmpty>
-	  		<isNotEmpty  property="goods_series">#series#,</isNotEmpty>
-	  		<isNotEmpty  property="unit">#unit#,</isNotEmpty>
-	  		<isNotEmpty  property="place">#place#,</isNotEmpty>
-	  		<isNotEmpty  property="uses">#uses#,</isNotEmpty>
-	  		<isNotNull  property="weightProp">#weightProp#,</isNotNull>
-	  		<isNotEmpty  property="status">#status#,</isNotEmpty>
-	  		<isNotEmpty  property="vulnerability">#vulnerability#,</isNotEmpty>
-	  		<isNotNull  property="depositDeadline">#depositDeadline#,</isNotNull>
-	  		<isNotEmpty  property="description">#description#,</isNotEmpty>
-	  		<isNotNull  property="minStore">#minStore#,</isNotNull>
-	  		<isNotNull  property="maxStore">#maxStore#,</isNotNull>
-	  		<isNotNull  property="cost">#cost#,</isNotNull>
-	  		<isNotEmpty  property="illustrate">#illustrate#,</isNotEmpty>
-	  		<isNotNull  property="price">#price#,</isNotNull>
-	  		<isNotEmpty  property="realName">#realName#,</isNotEmpty>
-	  		<isNotEmpty  property="cashType">#cashType#,</isNotEmpty>
-	  		<isNotNull  property="batch">#batch#,</isNotNull>
-	  		<isNotEmpty  property="batchNo">#batchNo#,</isNotEmpty>
-	  		<isNotEmpty  property="useStatus">#useStatus#,</isNotEmpty>
-	  		<isNotNull  property="monthBatch">#monthBatch#,</isNotNull>
-	  		<isNotNull  property="modifyBatchDate">now(),</isNotNull>
-	  		<isNotEmpty  property="modifyBatchMonth">#modifyBatchMonth#,</isNotEmpty>
-	  		<isNotEmpty  property="format">#format#,</isNotEmpty>
-	  		<isNotNull  property="netQuantity">#netQuantity#,</isNotNull>
-	  		<isNotNull  property="littleUnitQuantity">#littleUnitQuantity#,</isNotNull>
-	  		<isNotEmpty  property="littleUnit">#littleUnit#,</isNotEmpty>
-	  		<isNotEmpty  property="salesType">#salesType#,</isNotEmpty>
-	  		<isNotEmpty  property="defultSalesInstitution">#defultSalesInstitution#,</isNotEmpty>
-	  		<isNotEmpty  property="taxNo">#taxNo#,</isNotEmpty>
-	  		<isNotNull  property="offSales">#offSales#,</isNotNull>
-	  		<isNotEmpty  property="memo">#memo#,</isNotEmpty>
-	  		<isNotNull  property="costConvertUnit">#costConvertUnit#,</isNotNull>
-	  		<isNotNull  property="priceConvertUnit">#priceConvertUnit#,</isNotNull>
-	  		<isNotEmpty  property="barCode">#barCode#,</isNotEmpty>
-	  		<isNotEmpty  property="weigthPerUnit">#weigthPerUnit#,</isNotEmpty>
-	  		<isNotEmpty  property="priceWeigthPerUnit">#priceWeigthPerUnit#,</isNotEmpty>
-	  		<isNotEmpty  property="ledgerId">#ledgerId#,</isNotEmpty>
-   			 creater,now()
+   			<isNotNull 	property="name">#name#,</isNotNull>
+			<isNotNull	property="realName">#realName#,</isNotNull>
+			<isNotNull	property="goodsType">#goodsType#,</isNotNull>
+			<isNotNull	property="machineSeries">#machineSeries#,</isNotNull>
+			<isNotNull	property="machinePosition">#machinePosition#,</isNotNull>
+			<isNotNull	property="partNo">#partNo#,</isNotNull>
+			<isNotNull	property="mapSeries">#mapSeries#,</isNotNull>
+			<isNotNull	property="company">#company#,</isNotNull>
+			<isNotNull	property="goodStatus">#goodStatus#,</isNotNull>
+			<isNotNull	property="weightProp">#weightProp#,</isNotNull>
+			<isNotNull	property="vulnerability">#vulnerability#,</isNotNull>
+			<isNotNull	property="description">#description#,</isNotNull>
+			<isNotNull	property="useStatus">#useStatus#,</isNotNull>
+	  		<isNotNull  property="memo">#memo#,</isNotNull>
+	  		<isNotNull  property="ledgerId">#ledgerId#,</isNotNull>
+   			 operator,creater,now()
    		)
    	</insert>
    
    	<update id="updateGoods" parameterClass="goods">
    		UPDATE RS_GOODS
    		<dynamic prepend="SET">
-			<isNotEmpty prepend="," property="name">goods_name=#name#</isNotEmpty>
-	  		<isNotEmpty prepend="," property="property">goods_property=#property#</isNotEmpty>
-	  		<isNotEmpty prepend="," property="categoryId">category_id=#categoryId#</isNotEmpty>
-	  		<isNotEmpty prepend="," property="categoryName">category_name=#categoryName#</isNotEmpty>
-	  		<isNotEmpty prepend="," property="goods_series">goods_series=#series#</isNotEmpty>
-	  		<isNotEmpty prepend="," property="unit">unit=#unit#</isNotEmpty>
-	  		<isNotEmpty prepend="," property="place">origin_place=#place#</isNotEmpty>
-	  		<isNotEmpty prepend="," property="uses">uses=#uses#</isNotEmpty>
-	  		<isNotNull prepend="," property="weightProp">weight_prop=#weightProp#</isNotNull>
-	  		<isNotEmpty prepend="," property="status">goods_status=#status#</isNotEmpty>
-	  		<isNotEmpty prepend="," property="vulnerability">vulnerability=#vulnerability#</isNotEmpty>
-	  		<isNotNull prepend="," property="depositDeadline">deposit_deadline=#depositDeadline#</isNotNull>
-	  		<isNotEmpty prepend="," property="description">goods_description=#description#</isNotEmpty>
-	  		<isNotNull prepend="," property="minStore">min_limit_of_store=#minStore#</isNotNull>
-	  		<isNotNull prepend="," property="maxStore">max_limit_of_store=#maxStore#</isNotNull>
-	  		<isNotNull prepend="," property="cost">cost=#cost#</isNotNull>
-	  		<isNotEmpty prepend="," property="illustrate">purchase_illustrate=#illustrate#</isNotEmpty>
-	  		<isNotNull prepend="," property="price">price=#price#</isNotNull>
-	  		<isNotEmpty prepend="," property="realName">true_goods_name=#realName#</isNotEmpty>
-	  		<isNotEmpty prepend="," property="cashType">cash_type=#cashType#</isNotEmpty>
-	  		<isNotNull prepend="," property="batch">batch=#batch#</isNotNull>
-	  		<isNotEmpty prepend="," property="batchNo">batch_no=#batchNo#</isNotEmpty>
-	  		<isNotEmpty prepend="," property="useStatus">use_status=#useStatus#</isNotEmpty>
-	  		<isNotNull prepend="," property="monthBatch">month_batch=#monthBatch#</isNotNull>
-	  		<isNotNull prepend="," property="modifyBatchDate">modify_batch_date=now()</isNotNull>
-	  		<isNotEmpty prepend="," property="modifyBatchMonth">modify_batch_month=#modifyBatchMonth#</isNotEmpty>
-	  		<isNotEmpty prepend="," property="format">format_no=#format#</isNotEmpty>
-	  		<isNotNull prepend="," property="netQuantity">net_quantity=#netQuantity#</isNotNull>
-	  		<isNotNull prepend="," property="littleUnitQuantity">little_unit_quantity=#littleUnitQuantity#</isNotNull>
-	  		<isNotEmpty prepend="," property="littleUnit">little_unit=#littleUnit#</isNotEmpty>
-	  		<isNotEmpty prepend="," property="salesType">sales_type=#salesType#</isNotEmpty>
-	  		<isNotEmpty prepend="," property="defultSalesInstitution">defult_sales_institution=#defultSalesInstitution#</isNotEmpty>
-	  		<isNotEmpty prepend="," property="taxNo">tax_no=#taxNo#</isNotEmpty>
-	  		<isNotNull prepend="," property="offSales">off_sales=#offSales#</isNotNull>
-	  		<isNotEmpty prepend="," property="memo">memo=#memo#</isNotEmpty>
-	  		<isNotNull prepend="," property="costConvertUnit">cost_of_convert_unit=#costConvertUnit#</isNotNull>
-	  		<isNotNull prepend="," property="priceConvertUnit">price_of_convert_unit=#priceConvertUnit#</isNotNull>
-	  		<isNotEmpty prepend="," property="barCode">goods_bar_code=#barCode#</isNotEmpty>
-	  		<isNotEmpty prepend="," property="weigthPerUnit">weigth_per_unit=#weigthPerUnit#</isNotEmpty>
-	  		<isNotEmpty prepend="," property="priceWeigthPerUnit">price_of_weigth_per_unit=#priceWeigthPerUnit#</isNotEmpty>
-	  		<isNotEmpty prepend="," property="ledgerId">ledger_id=#ledgerId#</isNotEmpty>
-  	 		<isNotEmpty  prepend="," property="reviser">reviser = #reviser#,revisedate = now() </isNotEmpty>
-  			<isNotEmpty  prepend="," property="verifier">verifier = #verifier#,verifydate = now() </isNotEmpty>
+			<isNotNull  prepend=","   property="name">goods_name=#name#</isNotNull>
+			<isNotNull  prepend=","   property="realName">true_goods_name=#realName#</isNotNull>
+			<isNotNull  prepend=","   property="goodsType">goods_type=#goodsType#</isNotNull>
+			<isNotNull  prepend=","   property="machineSeries">host_machine_series=#machineSeries#</isNotNull>
+			<isNotNull  prepend=","   property="machinePosition">machine_position=#machinePosition#</isNotNull>
+			<isNotNull  prepend=","   property="partNo">part_no=#partNo#</isNotNull>
+			<isNotNull  prepend=","   property="mapSeries">map_series=#mapSeries#</isNotNull>
+			<isNotNull  prepend=","   property="company">made_company=#company#</isNotNull>
+			<isNotNull  prepend=","   property="goodStatus">goods_status=#goodStatus#</isNotNull>
+			<isNotNull  prepend=","   property="weightProp">weight_prop=#weightProp#</isNotNull>
+			<isNotNull  prepend=","   property="vulnerability">vulnerability=#vulnerability#</isNotNull>
+			<isNotNull  prepend=","   property="description">goods_description=#description#</isNotNull>
+			<isNotNull  prepend=","   property="useStatus">use_status=#useStatus#</isNotNull>
+	 	    <isNotNull  prepend=","   property="memo">memo=#memo#</isNotNull>
+	  		<isNotNull  prepend=","   property="ledgerId">ledger_id=#ledgerId#</isNotNull>
+	  		<isNotNull  prepend=","   property="operator">operator=#operator#,modify_date= now()</isNotNull>
+  	 		<isNotNull  prepend=","   property="reviser">reviser = #reviser#,revisedate = now() </isNotNull>
+  			<isNotNull  prepend=","   property="verifier">verifier = #verifier#,verifydate = now() </isNotNull>
    		</dynamic>
    	  WHERE goods_id=#id#
    	</update>
    	<select id="getGoodsByCondition" parameterClass="goods" resultClass="goods">
    		SELECT <include refid="goodsFileds"/>
    		FROM RS_GOODS
-   		<!--<include refid="whereLike"/>-->
-   	    $condition$
+   		<include refid="whereLike"/>
    	</select>
    	<!-- 分页查询语句 -->
    	<select id="getGoodsSplitPageBySQL" remapResults="true" parameterClass="java.lang.String" resultMap="goods">
@@ -362,7 +183,7 @@
    	
    	<delete id="deleteGoods" parameterClass="goods">
    		DELETE FROM RS_GOODS
-   		$condition$
+   		<include refid="whereLike"/>
    	</delete>
    	
    	<select id="getGoodsInfoBySupplierAndGoods" parameterClass="goods" resultClass="java.lang.String">
@@ -372,128 +193,51 @@
    		ON sgs.goods_id = gs.goods_id 
    		<dynamic prepend="WHERE">
    			sgs.supplier_id =#supplierId# 
-	   		<isNotEmpty  property="name"> 
-	          AND  gs.goods_name LIKE CONCAT('%',#name#,'%')
-	  		</isNotEmpty>
-	  		<isNotEmpty  property="property">
-	  			AND	gs.goods_property=#property#
-	  		</isNotEmpty>
-	  		<isNotEmpty  property="categoryId">
-	  			AND	gs.category_id=#categoryId#
-	  		</isNotEmpty>
-	  		<isNotEmpty  property="categoryName">
-	  			AND	gs.category_name=#categoryName#
-	  		</isNotEmpty>
-	  		<isNotEmpty  property="series">
-	  			AND	gs.goods_series=#series#
-	  		</isNotEmpty>
-	  		<isNotEmpty  property="unit">
-	  			AND	gs.unit=#unit#
-	  		</isNotEmpty>
-	  		<isNotEmpty  property="place">
-	  			AND	gs.origin_place=#place#
-	  		</isNotEmpty>
-	  		<isNotEmpty  property="uses">
-	  			AND	gs.uses=#uses#
-	  		</isNotEmpty>
+	   		<isNotNull  property="name"> 
+	           AND  gs.goods_name LIKE CONCAT('%',#name#,'%')
+	  		</isNotNull>
+	  		<isNotNull  property="realName">
+	           AND  gs.true_goods_name  LIKE CONCAT('%',#realName#,'%')	
+	  		</isNotNull>
+	  		<isNotNull  property="goodsType">
+	           AND  gs.goods_type=#goodsType#
+	  		</isNotNull>
+	  		<isNotNull  property="machineSeries">
+	           AND  gs.host_machine_series=#machineSeries#
+	  		</isNotNull>
+	  		<isNotNull  property="machinePosition">
+	           AND  gs.machine_position=#machinePosition#
+	  		</isNotNull>
+	  		<isNotNull  property="partNo">
+	           AND  gs.part_no=#partNo#
+	  		</isNotNull>
+	  		<isNotNull  property="mapSeries">
+	           AND  gs.map_series=#mapSeries#
+	  		</isNotNull>
+	  		<isNotNull  property="company">
+	           AND  gs.made_company=#company#
+	  		</isNotNull>
+	  		<isNotNull  property="goodStatus">
+	           AND  gs.goods_status=#goodStatus#
+	  		</isNotNull>
 	  		<isNotNull  property="weightProp">
-	  			AND	gs.weight_prop=#weightProp#
+	           AND  gs.weight_prop=#weightProp#
 	  		</isNotNull>
-	  		<isNotEmpty  property="status">
-	  			AND	gs.goods_status=#status#
-	  		</isNotEmpty>
-	  		<isNotEmpty  property="vulnerability">
-	  			AND	gs.vulnerability=#vulnerability#
-	  		</isNotEmpty>
-	  		<isNotNull  property="depositDeadline">
-	  			AND	gs.deposit_deadline=#depositDeadline#
+	  		<isNotNull  property="vulnerability">
+	           AND  gs.vulnerability=#vulnerability#
 	  		</isNotNull>
-	  		<isNotEmpty  property="description">
-	  			AND	gs.goods_description=#description#
-	  		</isNotEmpty>
-	  		<isNotNull  property="minStore">
-	  			AND	gs.min_limit_of_store=#minStore#
+	  		<isNotNull  property="description">
+	           AND  gs.goods_description=#description#
 	  		</isNotNull>
-	  		<isNotNull  property="maxStore">
-	  			AND	gs.max_limit_of_store=#maxStore#
+	  		<isNotNull  property="useStatus">
+	           AND  gs.use_status=#useStatus#
 	  		</isNotNull>
-	  		<isNotNull  property="cost">
-	  			AND	gs.cost=#cost#
+	  		<isNotNull  property="memo">
+	           AND  gs.AND	gs.memo=#memo#
 	  		</isNotNull>
-	  		<isNotEmpty  property="illustrate">
-	  			AND	gs.purchase_illustrate=#illustrate#
-	  		</isNotEmpty>
-	  		<isNotNull  property="price">
-	  			AND	gs.price=#price#
-	  		</isNotNull>
-	  		<isNotEmpty  property="realName">
-	  			AND	gs.true_goods_name=#realName#
-	  		</isNotEmpty>
-	  		<isNotEmpty  property="cashType">
-	  			AND	gs.cash_type=#cashType#
-	  		</isNotEmpty>
-	  		<isNotNull  property="batch">
-	  			AND	gs.batch=#batch#
-	  		</isNotNull>
-	  		<isNotEmpty  property="batchNo">
-	  			AND	gs.batch_no=#batchNo#
-	  		</isNotEmpty>
-	  		<isNotEmpty  property="useStatus">
-	  			AND	gs.use_status=#useStatus#
-	  		</isNotEmpty>
-	  		<isNotNull  property="monthBatch">
-	  			AND	gs.month_batch=#monthBatch#
-	  		</isNotNull>
-	  		<isNotNull  property="modifyBatchDate">
-	  			AND	gs.modify_batch_date=#modifyBatchDate#
-	  		</isNotNull>
-	  		<isNotEmpty  property="modifyBatchMonth">
-	  			AND	gs.modify_batch_month=#modifyBatchMonth#
-	  		</isNotEmpty>
-	  		<isNotEmpty  property="format">
-	  			AND	gs.format_no=#format#
-	  		</isNotEmpty>
-	  		<isNotNull  property="netQuantity">
-	  			AND	gs.net_quantity=#netQuantity#
-	  		</isNotNull>
-	  		<isNotNull  property="littleUnitQuantity">
-	  			AND	gs.little_unit_quantity=#littleUnitQuantity#</isNotNull>
-	  		<isNotEmpty  property="littleUnit">
-	  			AND	gs.little_unit=#littleUnit#
-	  		</isNotEmpty>
-	  		<isNotEmpty  property="salesType">
-	  			AND	gs.sales_type=#salesType#
-	  		</isNotEmpty>
-	  		<isNotEmpty  property="defultSalesInstitution">
-	  			AND	gs.defult_sales_institution=#defultSalesInstitution#
-	  		</isNotEmpty>
-	  		<isNotEmpty  property="taxNo">
-	  			AND	gs.tax_no=#taxNo#
-	  		</isNotEmpty>
-	  		<isNotNull  property="offSales">
-	  			AND	gs.off_sales=#offSales#
-	  		</isNotNull>
-	  		<isNotEmpty  property="memo">
-	  			AND	gs.memo=#memo#
-	  		</isNotEmpty>
-	  		<isNotNull  property="costConvertUnit">
-	  			AND	gs.cost_of_convert_unit=#costConvertUnit#
-	  		</isNotNull>
-	  		<isNotNull  property="priceConvertUnit">
-	  			AND	gs.price_of_convert_unit=#priceConvertUnit#
-	  		</isNotNull>
-	  		<isNotEmpty  property="barCode">
-	  			AND	gs.goods_bar_code=#barCode#
-	  		</isNotEmpty>
-	  		<isNotEmpty  property="weigthPerUnit">
-	  			AND	gs.weigth_per_unit=#weigthPerUnit#
-	  		</isNotEmpty>
-	  		<isNotEmpty  property="priceWeigthPerUnit">
-	  			AND	gs.price_of_weigth_per_unit=#priceWeigthPerUnit#
-	  		</isNotEmpty>
-	  		<isNotEmpty  property="ledgerId">
+	  		<isNotNull  property="ledgerId">
 	  		   AND	gs.ledger_id=#ledgerId#
-	  		</isNotEmpty>
+	  		</isNotNull>
    		</dynamic>
    </select>
 </sqlMap>

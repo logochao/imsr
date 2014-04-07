@@ -5,17 +5,22 @@
   <typeAlias alias="salesContractPayment" type="com.radius.invoicing.ibatis.model.SalesContractPayment" />
   
   <sql id="salesContractPaymentFileds">
-  	 contract_id contractId,cash_type cashType,total_amount totalAmount,amount_in_words upperAmount,payment_type paymentType,status stats,
-  	 ledger_id ledgerId,creater creater,createdate createdate,reviser reviser,revisedate revisedate,verifier verifydate
+  	 contract_id contractId,cash_type cashType,total_amount totalAmount,amount_in_words upperAmount,payment_type paymentType,status status,audited_status auditedStatus,mome mome
+  	 ledger_id ledgerId,operator operator,motify_date modifyDate,creater creater,createdate createDate,reviser reviser,revisedate reviseDate,verifier verifier,verifydate verifyDate
   </sql>
   
   <resultMap id="salesContractPayment" class="salesContractPayment">
     <result column="contract_id" jdbcType="char" javaType="java.lang.String" property="contractId" />
-    <result column="cash_type" jdbcType="char" javaType="java.lang.String" property="cashType" />
+    <result column="cash_type" jdbcType="int" javaType="java.lang.Integer" property="cashType" />
     <result column="total_amount" jdbcType="int" javaType="java.lang.Integer" property="totalAmount" />
     <result column="amount_in_words" jdbcType="char" javaType="java.lang.String" property="upperAmount" />
-    <result column="payment_type" jdbcType="char" javaType="java.lang.String" property="paymentType" />
+    <result column="payment_type" jdbcType="int" javaType="java.lang.Integer" property="paymentType" />
+    <result column="status" jdbcType="int" javaType="java.lang.Integer" property="status" />
+    <result column="audited_status" jdbcType="int" javaType="java.lang.Integer" property="auditedStatus" />
+  	<result column="mome" jdbcType="char" javaType="java.lang.String" property="mome" />
   	<result column="ledger_id" jdbcType="char" javaType="java.lang.String" property="ledgerId" />
+  	<result column="operator" jdbcType="char" javaType="java.lang.String" property="operator" />
+    <result column="motify_date" jdbcType="datetime" javaType="java.util.Date" property="modifyDate" />
     <result column="creater" jdbcType="char" javaType="java.lang.String" property="creater" />
     <result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createdate" />
     <result column="reviser" jdbcType="char" javaType="java.lang.String" property="reviser" />
@@ -27,12 +32,15 @@
   <sql id="whereLike">
   	<dynamic prepend="where">
   		1=1  
-  		<isNotEmpty prepend="and" property="contractId">contract_id=#contractId#</isNotEmpty>
-  		<isNotEmpty prepend="and" property="cashType">cash_type=#cashType#</isNotEmpty>
+  		<isNotNull prepend="and" property="contractId">contract_id=#contractId#</isNotNull>
+  		<isNotNull prepend="and" property="cashType">cash_type=#cashType#</isNotNull>
   		<isNotNull prepend="and" property="totalAmount">total_amount=#totalAmount#</isNotNull>
-		<isNotEmpty prepend="and" property="upperAmount">amount_in_words=#upperAmount#</isNotEmpty>
-		<isNotEmpty prepend="and" property="paymentType">payment_type=#paymentType#</isNotEmpty>
- 		<isNotEmpty prepend="and" property="ledgerId">ledger_id=#ledgerId#</isNotEmpty> 
+		<isNotNull prepend="and" property="upperAmount">amount_in_words=#upperAmount#</isNotNull>
+		<isNotNull prepend="and" property="paymentType">payment_type=#paymentType#</isNotNull>
+		<isNotNull prepend="and" property="status">status=#status#</isNotNull>
+		<isNotNull prepend="and" property="audited_status">audited_status=#auditedStatus#</isNotNull>
+		<isNotNull prepend="and" property="mome">mome=#mome#</isNotNull>
+ 		<isNotNull prepend="and" property="ledgerId">ledger_id=#ledgerId#</isNotNull> 
   	</dynamic>
   </sql>
  
@@ -51,22 +59,26 @@
    	<insert id="insert" parameterClass="salesContractPayment">
    		INSERT INTO RS_SALES_CONTRACT_PAYMENT (
    			contract_id,
-	  		<isNotEmpty  property="cashType">cash_type,</isNotEmpty>
+	  		<isNotNull  property="cashType">cash_type,</isNotNull>
 	  		<isNotNull  property="totalAmount">total_amount,</isNotNull>
-			<isNotEmpty  property="upperAmount">amount_in_words,</isNotEmpty>
-			<isNotEmpty  property="paymentType">payment_type,</isNotEmpty>
-			<isNotEmpty  property="stats">STATUS,</isNotEmpty> 
-			<isNotEmpty  property="ledgerId">ledger_id,</isNotEmpty> 
+			<isNotNull  property="upperAmount">amount_in_words,</isNotNull>
+			<isNotNull  property="paymentType">payment_type,</isNotNull>
+			<isNotNull  property="status">status,</isNotNull> 
+			<isNotNull  property="ledgerId">ledger_id,</isNotNull> 
+			<isNotNull  property="mome">mome,</isNotNull> 
+			<isNotNull  property="operator">operator,</isNotNull> 
 	  	    creater,
 	  	    createdate
    		)VALUES(
    			#contractId#,
-	  		<isNotEmpty  property="cashType">#cashType#,</isNotEmpty>
+	  		<isNotNull  property="cashType">#cashType#,</isNotNull>
 	  		<isNotNull  property="totalAmount">#totalAmount#,</isNotNull>
-			<isNotEmpty  property="upperAmount">#upperAmount#,</isNotEmpty>
-			<isNotEmpty  property="paymentType">#paymentType#,</isNotEmpty>
-			<isNotEmpty  property="stats">#stats#,</isNotEmpty>
-	 		<isNotEmpty  property="ledgerId">#ledgerId#,</isNotEmpty> 
+			<isNotNull  property="upperAmount">#upperAmount#,</isNotNull>
+			<isNotNull  property="paymentType">#paymentType#,</isNotNull>
+			<isNotNull  property="status">#status#,</isNotNull>
+	 		<isNotNull  property="ledgerId">#ledgerId#,</isNotNull> 
+	 		<isNotNull  property="mome">#mome#,</isNotNull> 
+	 		<isNotNull  property="operator">#operator#,</isNotNull> 
    			 creater,now()
    		)
    	</insert>
@@ -74,14 +86,17 @@
    	<update id="updateSalesContractPaymentByPK" parameterClass="salesContractPayment">
    		UPDATE RS_SALES_CONTRACT_PAYMENT
    		<dynamic prepend="SET">
-	  		<isNotEmpty prepend="," property="cashType">cash_type=#cashType#</isNotEmpty>
+	  		<isNotNull prepend="," property="cashType">cash_type=#cashType#</isNotNull>
 	  		<isNotNull prepend="," property="totalAmount">total_amount=#totalAmount#</isNotNull>
-			<isNotEmpty prepend="," property="upperAmount">amount_in_words=#upperAmount#</isNotEmpty>
-			<isNotEmpty prepend="," property="paymentType">payment_type=#paymentType#</isNotEmpty>
-			<isNotEmpty prepend="," property="stats">STATUS=#stats#</isNotEmpty> 
-	 		<isNotEmpty prepend="," property="ledgerId">ledger_id=#ledgerId#</isNotEmpty> 
-  	 		<isNotEmpty  prepend="," property="reviser">reviser = #reviser#,revisedate = now() </isNotEmpty>
-  			<isNotEmpty  prepend="," property="verifier">verifier = #verifier#,verifydate = now() </isNotEmpty>
+			<isNotNull prepend="," property="upperAmount">amount_in_words=#upperAmount#</isNotNull>
+			<isNotNull prepend="," property="paymentType">payment_type=#paymentType#</isNotNull>
+			<isNotNull prepend="," property="status">status=#status#</isNotNull> 
+			<isNotNull prepend="," property="auditedStatus">audited_status=#auditedStatus#</isNotNull> 
+	 		<isNotNull prepend="," property="ledgerId">ledger_id=#ledgerId#</isNotNull> 
+	 		<isNotNull prepend="," property="memo">memo=#memo#</isNotNull> 
+	 		<isNotNull prepend="," property="operator">operator=#operator#,modify_date= now()</isNotNull>
+  	 		<isNotNull  prepend="," property="reviser">reviser = #reviser#,revisedate = now() </isNotNull>
+  			<isNotNull  prepend="," property="verifier">verifier = #verifier#,verifydate = now() </isNotNull>
    		</dynamic>
    		WHERE contract_id =#contractId#
    	</update>
@@ -105,7 +120,7 @@
    	</delete>
    	<update id="updateSalesContractPaymentStatusByContractId" parameterClass="salesContractPayment">
    		UPDATE RS_SALES_CONTRACT_PAYMENT
-   		SET STATUS=#stats#
+   		SET STATUS=#stats# <isNotNull prepend="," property="operator">,operator=#operator#,modify_date= now()</isNotNull>
    		WHERE contract_id =#contractId#
    	</update>
 </sqlMap>

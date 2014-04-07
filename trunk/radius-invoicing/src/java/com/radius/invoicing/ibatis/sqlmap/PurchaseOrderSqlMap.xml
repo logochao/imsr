@@ -5,85 +5,74 @@
   <typeAlias alias="purchaseOrder" type="com.radius.invoicing.ibatis.model.PurchaseOrder" />
   
   <sql id="purchaseOrderFileds">
-  	 purchase_order_id purchaseOrderId,purchase_order_merger_id purchaseOrderMergerId,`status` stats,ordered_date orderedDate,delivery_date deliveryDate,
-	supplier_id supplierId,supplier_name supplierName,tel tel,link_man linkMan,purchaser purchaser,terms terms,fax fax,customer_bill_id customerBillId,
-	delivery_point deliveryPoint,quality_status qualityStatus,audit_status auditStatus,instore_status instoreStatus,payment_status paymentStatus,
-	paymented_status paymentedStatus,purchase_receive_order_id purchaseReceiveOrderId,instore_id instoreId,goods_qt_id goodsQtId,
-	ordered_amount orderedAmount,print_times printTimes,newest_print_time printTime,newest_print_acc printAcc,newest_print_record printRecord,operator operator,
-  	 ledger_id ledgerId,memo memo,creater creater,createdate createdate,reviser reviser,revisedate revisedate,verifier verifydate
+  	purchase_order_id purchaseOrderId,supplier_id supplierId,supplier_name supplierName,link_man linkMan,link_mobile mobile,tel tel,fax fax,
+  	sales_order_id salesOrderId,total_amount totalAmount,ordered_date orderedDate,delivery_date deliveryDate,terms terms,memo memo,
+  	status status,consolidated_flg consolidatedFlg,consolidated_purchase_order_id consolidatedPurchaseOrderId,print_times printTimes,
+  	newest_print_time printTime,newest_print_acc printAcc,newest_print_record printRecord,purchaser_id purchaser
+  	ledger_id ledgerId,operator operator,motify_date modifyDate,creater creater,createdate createDate,reviser reviser,revisedate reviseDate,verifier verifier,verifydate verifyDate
   </sql>
   
   <resultMap id="purchaseOrder" class="purchaseOrder">
     <result column="purchase_order_id" jdbcType="char" javaType="java.lang.String" property="purchaseOrderId" />
-    <result column="purchase_order_merger_id" jdbcType="char" javaType="java.lang.String" property="purchaseOrderMergerId" />
-    <result column="status" jdbcType="char" javaType="java.lang.String" property="stats" />
+    <result column="supplier_id" jdbcType="char" javaType="java.lang.String" property="supplierId" />
+    <result column="supplier_name" jdbcType="char" javaType="java.lang.String" property="supplierName" />
+    <result column="link_man" jdbcType="char" javaType="java.lang.String" property="linkMan" />
+    <result column="link_mobile" jdbcType="char" javaType="java.lang.String" property="mobile" />
+    <result column="tel" jdbcType="char" javaType="java.lang.String" property="tel" />
+    <result column="fax" jdbcType="char" javaType="java.lang.String" property="fax" />
+    <result column="sales_order_id" jdbcType="char" javaType="java.lang.String" property="salesOrderId" />
+    <result column="total_amount" jdbcType="int" javaType="java.lang.Integer" property="totalAmount" />
     <result column="ordered_date" jdbcType="datetime" javaType="java.util.Date" property="orderedDate"/>
     <result column="delivery_date" jdbcType="datetime" javaType="java.util.Date" property="deliveryDate"/>
-    <result column="supplier_id" jdbcType="varchar" javaType="java.lang.String" property="supplierId" />
-    <result column="supplier_name" jdbcType="varchar" javaType="java.lang.String" property="supplierName" />
-    <result column="tel" jdbcType="char" javaType="java.lang.String" property="tel" />
-    <result column="link_man" jdbcType="char" javaType="java.lang.String" property="linkMan" />
-    <result column="purchaser" jdbcType="char" javaType="java.lang.String" property="purchaser" />
     <result column="terms" jdbcType="text" javaType="java.lang.String" property="terms" />
-    <result column="fax" jdbcType="char" javaType="java.lang.String" property="fax" />
-    <result column="customer_bill_id" jdbcType="char" javaType="java.lang.String" property="customerBillId" />
-    <result column="delivery_point" jdbcType="char" javaType="java.lang.String" property="deliveryPoint" />
-    <result column="quality_status" jdbcType="char" javaType="java.lang.String" property="qualityStatus" />
-    <result column="audit_status" jdbcType="char" javaType="java.lang.String" property="auditStatus" />
-    <result column="instore_status" jdbcType="char" javaType="java.lang.String" property="instoreStatus" />
-    <result column="payment_status" jdbcType="char" javaType="java.lang.String" property="paymentStatus" />
-    <result column="paymented_status" jdbcType="char" javaType="java.lang.String" property="paymentedStatus" />
-    <result column="purchase_receive_order_id" jdbcType="char" javaType="java.lang.String" property="purchaseReceiveOrderId" />
-    <result column="instore_id" jdbcType="char" javaType="java.lang.String" property="instoreId" />
-    <result column="goods_qt_id" jdbcType="char" javaType="java.lang.String" property="goodsQtId" />
-    <result column="ordered_amount" jdbcType="int" javaType="java.lang.Integer" property="orderedAmount" />
+  	<result column="memo" jdbcType="text" javaType="java.lang.String" property="memo" />
+    <result column="status" jdbcType="char" javaType="java.lang.String" property="status" />
+    <result column="consolidated_flg" jdbcType="int" javaType="java.lang.Integer" property="consolidatedFlg" />
+    <result column="consolidated_purchase_order_id" jdbcType="char" javaType="java.lang.String" property="consolidatedPurchaseOrderId" />
     <result column="print_times" jdbcType="int" javaType="java.lang.Integer" property="printTimes" />
     <result column="newest_print_time" jdbcType="datetime" javaType="java.util.Date" property="printTime"/>
     <result column="newest_print_acc" jdbcType="char" javaType="java.lang.String" property="printAcc" />
     <result column="newest_print_record" jdbcType="char" javaType="java.lang.String" property="printRecord" />
+    <result column="purchaser" jdbcType="char" javaType="java.lang.String" property="purchaser" />
+    
+    <result column="ledger_id" jdbcType="char" javaType="java.lang.String" property="ledgerId" />
     <result column="operator" jdbcType="char" javaType="java.lang.String" property="operator" />
-  	<result column="ledger_id" jdbcType="char" javaType="java.lang.String" property="ledgerId" />
-  	<result column="memo" jdbcType="text" javaType="java.lang.String" property="memo" /><!--
+    <result column="modify_date" jdbcType="datetime" javaType="java.util.Date" property="modifyDate" />
     <result column="creater" jdbcType="char" javaType="java.lang.String" property="creater" />
-    <result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createdate" />
+    <result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createDate" />
     <result column="reviser" jdbcType="char" javaType="java.lang.String" property="reviser" />
-    <result column="revisedate" jdbcType="datetime" javaType="java.util.Date" property="revisedate" />
+    <result column="revisedate" jdbcType="datetime" javaType="java.util.Date" property="reviseDate" />
     <result column="verifier" jdbcType="char" javaType="java.lang.String" property="verifier" />    
-    <result column="verifydate" jdbcType="datetime" javaType="java.util.Date" property="verifydate"/>
-  --></resultMap>
+    <result column="verifydate" jdbcType="datetime" javaType="java.util.Date" property="verifyDate"/>
+    
+    
+  </resultMap>
   
   <sql id="whereLike">
   	<dynamic prepend="where">
   		1=1  and 
-  		<isNotEmpty prepend="and" property="purchaseOrderId">purchase_order_id=#purchaseOrderId#</isNotEmpty>
-  		<isNotEmpty prepend="and" property="purchaseOrderMergerId">purchase_order_merger_id=#purchaseOrderMergerId#</isNotEmpty>
-  		<isNotEmpty prepend="and" property="stats">`status`=#stats#</isNotEmpty>
-		<isNotNull prepend="and" property="orderedDate">ordered_date=#orderedDate#</isNotNull>
-		<isNotNull prepend="and" property="deliveryDate">delivery_date=#deliveryDate#</isNotNull>
-  		<isNotEmpty prepend="and" property="supplierId">supplier_id=#supplierId#</isNotEmpty>
-  		<isNotEmpty prepend="and" property="supplierName">supplier_name=#supplierName#</isNotEmpty>
-  		<isNotEmpty prepend="and" property="tel">tel=#tel#</isNotEmpty>
-  		<isNotEmpty prepend="and" property="linkMan">link_man=#linkMan#</isNotEmpty>
-  		<isNotEmpty prepend="and" property="purchaser">purchaser=#purchaser#</isNotEmpty>
-  		<isNotEmpty prepend="and" property="fax">fax=#fax#</isNotEmpty>
-		<isNotEmpty prepend="and" property="customerBillId">customer_bill_id=#customerBillId#</isNotEmpty>
-		<isNotEmpty prepend="and" property="deliveryPoint">delivery_point=#deliveryPoint#</isNotEmpty>
-		<isNotEmpty prepend="and" property="qualityStatus">quality_status=#qualityStatus#</isNotEmpty>
-		<isNotEmpty prepend="and" property="auditStatus">audit_status=#auditStatus#</isNotEmpty>
-		<isNotEmpty prepend="and" property="instoreStatus">instore_status=#instoreStatus#</isNotEmpty>
-		<isNotEmpty prepend="and" property="paymentStatus">payment_status=#paymentStatus#</isNotEmpty>
-		<isNotEmpty prepend="and" property="paymentedStatus">paymented_status=#paymentedStatus#</isNotEmpty>
-		<isNotEmpty prepend="and" property="purchaseReceiveOrderId">purchase_receive_order_id=#purchaseReceiveOrderId#</isNotEmpty>
-		<isNotEmpty prepend="and" property="instoreId">instore_id=#instoreId#</isNotEmpty>
-		<isNotEmpty prepend="and" property="goodsQtId">goods_qt_id=#goodsQtId#</isNotEmpty>
-		<isNotNull prepend="and" property="orderedAmount">ordered_amount=#orderedAmount#</isNotNull>
-		<isNotNull prepend="and" property="equivalentUnit">print_times=#printTimes#</isNotNull>
-		<isNotEmpty prepend="and" property="printAcc">newest_print_acc=#printAcc#</isNotEmpty>
-		<isNotEmpty prepend="and" property="printRecord">newest_print_record=#printRecord#</isNotEmpty>
-		<isNotNull prepend="and" property="printTime">newest_print_time=#printTime#</isNotNull>
-		<isNotEmpty prepend="and" property="operator">operator=#operator#</isNotEmpty>
- 		<isNotEmpty prepend="and" property="ledgerId">ledger_id=#ledgerId#</isNotEmpty> 
- 		<isNotEmpty prepend="and" property="memo">memo=#memo#</isNotEmpty> 
+  		<isNotNull prepend="and" property="purchaseOrderId">purchase_order_id =#purchaseOrderId#</isNotNull>
+		<isNotNull prepend="and" property="supplierId">supplier_id =#supplierId#</isNotNull>
+		<isNotNull prepend="and" property="supplierName">supplier_name LIKE CONCAT('%',#supplierName#,'%')</isNotNull>
+		<isNotNull prepend="and" property="linkMan">link_man LIKE CONCAT('%',#linkMan#,'%')</isNotNull>
+		<isNotNull prepend="and" property="mobile">link_mobile =#mobile#</isNotNull>
+		<isNotNull prepend="and" property="tel">tel =#tel#</isNotNull>
+		<isNotNull prepend="and" property="fax">fax =#fax#</isNotNull>
+		<isNotNull prepend="and" property="salesOrderId">sales_order_id =#salesOrderId#</isNotNull>
+		<isNotNull prepend="and" property="totalAmount">total_amount =#totalAmount#</isNotNull>
+		<isNotNull prepend="and" property="orderedDate">ordered_date =#orderedDate#</isNotNull>
+		<isNotNull prepend="and" property="deliveryDate">delivery_date =#deliveryDate#</isNotNull>
+		<isNotNull prepend="and" property="terms">terms =#terms#</isNotNull>
+		<isNotNull prepend="and" property="memo">memo =#memo#</isNotNull>
+		<isNotNull prepend="and" property="status">status =#status#</isNotNull>
+		<isNotNull prepend="and" property="consolidatedFlg">consolidated_flg =#consolidatedFlg#</isNotNull>
+		<isNotNull prepend="and" property="consolidatedPurchaseOrderId">consolidated_purchase_order_id =#consolidatedPurchaseOrderId#</isNotNull>
+		<isNotNull prepend="and" property="printTimes">print_times =#printTimes#</isNotNull>
+		<isNotNull prepend="and" property="printTime">newest_print_time =#printTime#</isNotNull>
+		<isNotNull prepend="and" property="printAcc">newest_print_acc =#printAcc#</isNotNull>
+		<isNotNull prepend="and" property="printRecord">newest_print_record =#printRecord#</isNotNull>
+		<isNotNull prepend="and" property="purchaser">purchaser_id =#purchaser#</isNotNull>
+ 		<isNotNull prepend="and" property="ledgerId">ledger_id=#ledgerId#</isNotNull> 
   	</dynamic>
   </sql>
  
@@ -102,68 +91,54 @@
    	<insert id="insert" parameterClass="purchaseOrder">
    		INSERT INTO RS_PURCHASE_ORDER (
    			purchase_order_id,
-	  		<isNotEmpty  property="purchaseOrderMergerId">purchase_order_merger_id,</isNotEmpty>
-	  		<isNotEmpty  property="stats">`status`,</isNotEmpty>
-			<isNotNull  property="orderedDate">ordered_date,</isNotNull>
-			<isNotNull  property="deliveryDate">delivery_date,</isNotNull>
-			<isNotEmpty  property="supplierId">supplier_id,</isNotEmpty>
-			<isNotEmpty  property="supplierName">supplier_name,</isNotEmpty>
-			<isNotEmpty  property="tel">tel,</isNotEmpty>
-			<isNotEmpty  property="linkMan">link_man,</isNotEmpty>
-			<isNotEmpty  property="purchaser">purchaser,</isNotEmpty>
-			<isNotEmpty  property="terms">terms,</isNotEmpty>
-			<isNotEmpty  property="fax">fax,</isNotEmpty>
-			<isNotEmpty  property="customerBillId">customer_bill_id,</isNotEmpty>
-			<isNotEmpty  property="deliveryPoint">delivery_point,</isNotEmpty>
-			<isNotEmpty  property="qualityStatus">quality_status,</isNotEmpty>
-			<isNotEmpty  property="auditStatus">audit_status,</isNotEmpty>
-			<isNotEmpty  property="instoreStatus">instore_status,</isNotEmpty>
-			<isNotEmpty  property="paymentStatus">payment_status,</isNotEmpty>
-			<isNotEmpty  property="paymentedStatus">paymented_status,</isNotEmpty>
-			<isNotEmpty  property="purchaseReceiveOrderId">purchase_receive_order_id,</isNotEmpty>
-			<isNotEmpty  property="instoreId">instore_id,</isNotEmpty>
-			<isNotEmpty  property="goodsQtId">goods_qt_id,</isNotEmpty>
-			<isNotNull  property="orderedAmount">ordered_amount,</isNotNull>
-			<isNotNull  property="printTimes">print_times,</isNotNull>
-			<isNotEmpty  property="printAcc">newest_print_acc,</isNotEmpty>
-			<isNotEmpty  property="printRecord">newest_print_record,</isNotEmpty>
-			<isNotNull  property="printTimes">print_times,</isNotNull>
-			<isNotEmpty  property="operator">operator,</isNotEmpty>
-			<isNotEmpty  property="ledgerId">ledger_id,</isNotEmpty> 
- 		    <isNotEmpty  property="memo">memo,</isNotEmpty> 
+			<isNotNull  property="supplierId">supplier_id ,</isNotNull>
+			<isNotNull  property="supplierName">supplier_name,</isNotNull>
+			<isNotNull  property="linkMan">link_man,</isNotNull>
+			<isNotNull  property="mobile">link_mobile,</isNotNull>
+			<isNotNull  property="tel">tel,</isNotNull>
+			<isNotNull  property="fax"> fax,</isNotNull>
+			<isNotNull  property="salesOrderId">sales_order_id ,</isNotNull>
+			<isNotNull  property="totalAmount">total_amount ,</isNotNull>
+			<isNotNull  property="orderedDate">ordered_date ,</isNotNull>
+			<isNotNull  property="deliveryDate">delivery_date ,</isNotNull>
+			<isNotNull  property="terms">terms ,</isNotNull>
+			<isNotNull  property="memo">memo ,</isNotNull>
+			<isNotNull  property="status">status ,</isNotNull>
+			<isNotNull  property="consolidatedFlg">consolidated_flg ,</isNotNull>
+			<isNotNull  property="consolidatedPurchaseOrderId">consolidated_purchase_order_id ,</isNotNull>
+			<isNotNull  property="printTimes">print_times ,</isNotNull>
+			<isNotNull  property="printTime">newest_print_time ,</isNotNull>
+			<isNotNull  property="printAcc">newest_print_acc ,</isNotNull>
+			<isNotNull  property="printRecord">newest_print_record ,</isNotNull>
+			<isNotNull  property="purchaser">purchaser_id,</isNotNull>
+			<isNotNull  property="ledgerId">ledger_id,</isNotNull> 
+	 		<isNotNull  property="operator">operator,</isNotNull>
 	  	    creater,
 	  	    createdate
    		)VALUES(
    			#purchaseOrderId#,
-	  		<isNotEmpty  property="purchaseOrderMergerId">#purchaseOrderMergerId#,</isNotEmpty>
-	  		<isNotEmpty  property="stats">#stats#,</isNotEmpty>
+			<isNotNull  property="supplierId">#supplierId#,</isNotNull>
+			<isNotNull  property="supplierName">#supplierName#,</isNotNull>
+			<isNotNull  property="linkMan">#linkMan#,</isNotNull>
+			<isNotNull  property="mobile">#mobile#,</isNotNull>
+			<isNotNull  property="tel">#tel#,</isNotNull>
+			<isNotNull  property="fax">#fax#,</isNotNull>
+			<isNotNull  property="salesOrderId">#salesOrderId#,</isNotNull>
+			<isNotNull  property="totalAmount">#totalAmount#,</isNotNull>
 			<isNotNull  property="orderedDate">#orderedDate#,</isNotNull>
 			<isNotNull  property="deliveryDate">#deliveryDate#,</isNotNull>
-			<isNotEmpty  property="supplierId">#supplierId#,</isNotEmpty>
-			<isNotEmpty  property="supplierName">#supplierName#,</isNotEmpty>
-			<isNotEmpty  property="tel">#tel#,</isNotEmpty>
-			<isNotEmpty  property="linkMan">#linkMan#,</isNotEmpty>
-			<isNotEmpty  property="purchaser">#purchaser#,</isNotEmpty>
-			<isNotEmpty  property="terms">#terms#,</isNotEmpty>
-			<isNotEmpty  property="fax">#fax#,</isNotEmpty>
-			<isNotEmpty  property="customerBillId">#customerBillId#,</isNotEmpty>
-			<isNotEmpty  property="deliveryPoint">#deliveryPoint#,</isNotEmpty>
-			<isNotEmpty  property="qualityStatus">#qualityStatus#,</isNotEmpty>
-			<isNotEmpty  property="auditStatus">#auditStatus#,</isNotEmpty>
-			<isNotEmpty  property="instoreStatus">#instoreStatus#,</isNotEmpty>
-			<isNotEmpty  property="paymentStatus">#paymentStatus#,</isNotEmpty>
-			<isNotEmpty  property="paymentedStatus">#paymentedStatus#,</isNotEmpty>
-			<isNotEmpty  property="purchaseReceiveOrderId">#purchaseReceiveOrderId#,</isNotEmpty>
-			<isNotEmpty  property="instoreId">#instoreId#,</isNotEmpty>
-			<isNotEmpty  property="goodsQtId">#goodsQtId#,</isNotEmpty>
-			<isNotNull  property="orderedAmount">#orderedAmount#,</isNotNull>
+			<isNotNull  property="terms">#terms#,</isNotNull>
+			<isNotNull  property="memo">#memo#,</isNotNull>
+			<isNotNull  property="status">#status#,</isNotNull>
+			<isNotNull  property="consolidatedFlg">#consolidatedFlg#,</isNotNull>
+			<isNotNull  property="consolidatedPurchaseOrderId">#consolidatedPurchaseOrderId#,</isNotNull>
 			<isNotNull  property="printTimes">#printTimes#,</isNotNull>
-			<isNotEmpty  property="printAcc">#printAcc#,</isNotEmpty>
-			<isNotEmpty  property="printRecord">#printRecord#,</isNotEmpty>
-			<isNotNull  property="printTimes">#printTimes#,</isNotNull>
-			<isNotEmpty  property="operator">#operator#,</isNotEmpty>
-			<isNotEmpty  property="ledgerId">#ledgerId#,</isNotEmpty> 
- 		    <isNotEmpty  property="memo">#memo#,</isNotEmpty> 
+			<isNotNull  property="printTime">#printTime#,</isNotNull>
+			<isNotNull  property="printAcc">#printAcc#,</isNotNull>
+			<isNotNull  property="printRecord">#printRecord#,</isNotNull>
+			<isNotNull  property="purchaser">#purchaser#,</isNotNull> 
+			<isNotNull  property="ledgerId">#ledgerId#,</isNotNull> 
+			<isNotNull  property="operator">#operator#,</isNotNull>
    			 creater,now()
    		)
    	</insert>
@@ -171,35 +146,31 @@
    	<update id="updatePurchaseOrderByPK" parameterClass="purchaseOrder">
    		UPDATE RS_PURCHASE_ORDER
    		<dynamic prepend="SET">
-	  		<isNotEmpty   prepend=","  property="purchaseOrderMergerId">purchase_order_merger_id=#purchaseOrderMergerId#,</isNotEmpty>
-	  		<isNotEmpty   prepend=","  property="stats">`status`=#stats#,</isNotEmpty>
-			<isNotNull   prepend=","  property="orderedDate">ordered_date=#orderedDate#,</isNotNull>
-			<isNotNull   prepend=","  property="deliveryDate">delivery_date=#deliveryDate#,</isNotNull>
-			<isNotEmpty   prepend=","  property="supplierId">supplier_id=#supplierId#,</isNotEmpty>
-			<isNotEmpty   prepend=","  property="supplierName">supplier_name=#supplierName#,</isNotEmpty>
-			<isNotEmpty   prepend=","  property="tel">tel=#tel#,</isNotEmpty>
-			<isNotEmpty   prepend=","  property="linkMan">link_man=#linkMan#,</isNotEmpty>
-			<isNotEmpty   prepend=","  property="purchaser">purchaser=#purchaser#,</isNotEmpty>
-			<isNotEmpty   prepend=","  property="terms">terms=#terms#,</isNotEmpty>
-			<isNotEmpty   prepend=","  property="fax">fax=#fax#,</isNotEmpty>
-			<isNotEmpty   prepend=","  property="customerBillId">customer_bill_id=#customerBillId#,</isNotEmpty>
-			<isNotEmpty   prepend=","  property="deliveryPoint">delivery_point=#deliveryPoint#,</isNotEmpty>
-			<isNotEmpty   prepend=","  property="qualityStatus">quality_status=#qualityStatus#,</isNotEmpty>
-			<isNotEmpty   prepend=","  property="auditStatus">audit_status=#auditStatus#,</isNotEmpty>
-			<isNotEmpty   prepend=","  property="instoreStatus">instore_status=#instoreStatus#,</isNotEmpty>
-			<isNotEmpty   prepend=","  property="paymentStatus">payment_status=#paymentStatus#,</isNotEmpty>
-			<isNotEmpty   prepend=","  property="paymentedStatus">paymented_status=#paymentedStatus#,</isNotEmpty>
-			<isNotEmpty   prepend=","  property="purchaseReceiveOrderId">purchase_receive_order_id=#purchaseReceiveOrderId#,</isNotEmpty>
-			<isNotEmpty   prepend=","  property="instoreId">instore_id=#instoreId#,</isNotEmpty>
-			<isNotEmpty   prepend=","  property="goodsQtId">goods_qt_id=#goodsQtId#,</isNotEmpty>
-			<isNotNull   prepend=","  property="ordered_amount">orderedAmount=#ordered_amount#,</isNotNull>
-			<isNotNull   prepend=","  property="print_times">printTimes=#print_times#,</isNotNull>
-			<isNotEmpty   prepend=","  property="printAcc">newest_print_acc=#printAcc#,</isNotEmpty>
-			<isNotEmpty   prepend=","  property="printRecord">newest_print_record=#printRecord#,</isNotEmpty>
-			<isNotNull   prepend=","  property="print_times">printTimes=#print_times#,</isNotNull>
-			<isNotEmpty   prepend=","  property="operator">operator=#operator#,</isNotEmpty>
-  	 		<isNotEmpty  prepend="," property="reviser">reviser = #reviser#,revisedate = now() </isNotEmpty>
-  			<isNotEmpty  prepend="," property="verifier">verifier = #verifier#,verifydate = now() </isNotEmpty>
+	  		<isNotNull   prepend=","  property="purchaseOrderId">purchase_order_id =#purchaseOrderId#,</isNotNull>
+			<isNotNull   prepend=","  property="supplierId">supplier_id =#supplierId#,</isNotNull>
+			<isNotNull   prepend=","  property="supplierName">supplier_name =#supplierName#,</isNotNull>
+			<isNotNull   prepend=","  property="linkMan">link_man =#linkMan#,</isNotNull>
+			<isNotNull   prepend=","  property="mobile">link_mobile =#mobile#,</isNotNull>
+			<isNotNull   prepend=","  property="tel">tel =#tel#,</isNotNull>
+			<isNotNull   prepend=","  property="fax">fax =#fax#,</isNotNull>
+			<isNotNull   prepend=","  property="salesOrderId">sales_order_id =#salesOrderId#,</isNotNull>
+			<isNotNull   prepend=","  property="totalAmount">total_amount =#totalAmount#,</isNotNull>
+			<isNotNull   prepend=","  property="orderedDate">ordered_date =#orderedDate#,</isNotNull>
+			<isNotNull   prepend=","  property="deliveryDate">delivery_date =#deliveryDate#,</isNotNull>
+			<isNotNull   prepend=","  property="terms">terms =#terms#,</isNotNull>
+			<isNotNull   prepend=","  property="memo">memo =#memo#,</isNotNull>
+			<isNotNull   prepend=","  property="status">status =#status#,</isNotNull>
+			<isNotNull   prepend=","  property="consolidatedFlg">consolidated_flg =#consolidatedFlg#,</isNotNull>
+			<isNotNull   prepend=","  property="consolidatedPurchaseOrderId">consolidated_purchase_order_id =#consolidatedPurchaseOrderId#,</isNotNull>
+			<isNotNull   prepend=","  property="printTimes">print_times =#printTimes#,</isNotNull>
+			<isNotNull   prepend=","  property="printTime">newest_print_time =#printTime#,</isNotNull>
+			<isNotNull   prepend=","  property="printAcc">newest_print_acc =#printAcc#,</isNotNull>
+			<isNotNull   prepend=","  property="printRecord">newest_print_record =#printRecord#,</isNotNull>
+			<isNotNull   prepend=","  property="purchaser">purchaser_id =#purchaser#,</isNotNull>
+			<isNotNull   prepend=","  property="ledgerId">ledger_id=#ledgerId#</isNotNull> 
+	 		<isNotNull   prepend=","  property="operator">operator=#operator#,modify_date= now()</isNotNull>
+  	 		<isNotNull   prepend=","  property="reviser">reviser = #reviser#,revisedate = now() </isNotNull>
+  			<isNotNull   prepend=","  property="verifier">verifier = #verifier#,verifydate = now() </isNotNull>
    		</dynamic>
    		WHERE purchase_order_id =#purchaseOrderId# 
    	</update>
@@ -235,9 +206,9 @@
 		ON po.purchase_order_id = pog.purchase_order_id
 		WHERE pog.goods_id IN ($goodsIds$)
 		<dynamic>
-			<isNotEmpty property="salesOrderId">
+			<isNotNull property="salesOrderId">
 				AND po.purchase_order_id =#purchaseOrderId#
-			</isNotEmpty>
+			</isNotNull>
 		</dynamic>
    	</select>
 </sqlMap>

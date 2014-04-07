@@ -5,9 +5,10 @@
   <typeAlias alias="customer" type="com.radius.invoicing.ibatis.model.Customer" />
   
   <sql id="customerFileds">
-  	 customer_id id,customer_ab ab,customer_name name,address address,link_man linkMan,contact_info contactInfo,tel1 tel1,tel2 tel2,tel3 tel3,fax1 fax1,fax2 fax2,fax3 fax3,paymented_type paymentedType,customer_illustrate customerIllustrate,
+  	 customer_id id,customer_ab ab,customer_name name,address address,link_man linkMan,contact_info contactInfo,tel tel,fax fax,customer_illustrate customerIllustrate,
   	 customer_property customerProperty,office_address officeAddress,delivery_or_not yesOrNo,post_code postCode,salesman_id salesMan,pay_type payType,delivery_type deliveryType,bank_acc_no bankAccNo,tax_no taxNo,url url,email email,account_bank accountBank,
-  	 account_name accountName,account_no accountNo,paymented_man paymentedMan,voucher voucher,goods_bills_date goodsBillsDate,min_order_amount orderAmount,ledger_id ledgerId,memo memo,creater creater,createdate createdate,reviser reviser,revisedate revisedate,verifier verifydate
+  	 account_name accountName,voucher voucher,goods_bills_date goodsBillsDate,min_order_amount orderAmount,ledger_id ledgerId,memo memo,
+  	 operator operator,modify_date modifyDate,creater creater,createdate createdate,reviser reviser,revisedate revisedate,verifier verifydate
   </sql>
   
   <resultMap id="customerMap" class="customer">
@@ -17,14 +18,8 @@
     <result column="address" jdbcType="varchar" javaType="java.lang.String" property="address" />
     <result column="link_man" jdbcType="char" javaType="java.lang.String" property="linkMan" />
     <result column="contact_info" jdbcType="varchar" javaType="java.lang.String" property="contactInfo" />
-    <result column="tel1" jdbcType="varchar" javaType="java.lang.String" property="tel1" />
-    <result column="tel2" jdbcType="varchar" javaType="java.lang.String" property="tel2" />
-    <result column="tel3" jdbcType="varchar" javaType="java.lang.String" property="tel3" />
-    <result column="fax1" jdbcType="char" javaType="java.lang.String" property="fax1" />
-    <result column="fax2" jdbcType="char" javaType="java.lang.String" property="fax2" />
-    <result column="fax3" jdbcType="char" javaType="java.lang.String" property="fax3" />
-    <result column="fax3" jdbcType="char" javaType="java.lang.String" property="fax3" />
-    <result column="paymented_type" jdbcType="char" javaType="java.lang.String" property="paymentedType" />
+    <result column="tel" jdbcType="varchar" javaType="java.lang.String" property="tel" />
+    <result column="fax" jdbcType="char" javaType="java.lang.String" property="fax" />
     <result column="customer_illustrate" jdbcType="text" javaType="java.lang.String" property="customerIllustrate" />
   	 <result column="customer_property" jdbcType="varchar" javaType="java.lang.String" property="customerProperty" />
   	 <result column="office_address" jdbcType="varchar" javaType="java.lang.String" property="officeAddress" />
@@ -39,8 +34,6 @@
   	 <result column="email" jdbcType="varchar" javaType="java.lang.String" property="email" />
   	 <result column="account_bank" jdbcType="varchar" javaType="java.lang.String" property="accountBank" />
   	 <result column="account_name" jdbcType="varchar" javaType="java.lang.String" property="accountName" />
-  	 <result column="account_no" jdbcType="char" javaType="java.lang.String" property="accountNo" />
-  	 <result column="paymented_man" jdbcType="char" javaType="java.lang.String" property="paymentedMan" />
   	 <result column="voucher" jdbcType="char" javaType="java.lang.String" property="voucher" />
   	 <result column="goods_bills_date" jdbcType="int" javaType="java.lang.Integer" property="goodsBillsDate" />
   	 <result column="min_order_amount" jdbcType="int" javaType="java.lang.Integer" property="orderAmount" />
@@ -75,26 +68,11 @@
 		<isNotEmpty prepend="AND" property="contactInfo">
 			contact_info=#contactInfo#
 		</isNotEmpty>
-		<isNotEmpty prepend="AND" property="tel1">
-			tel1=#tel1#
+		<isNotEmpty prepend="AND" property="tel">
+			tel=#tel#
 		</isNotEmpty>
-		<isNotEmpty prepend="AND" property="tel2">
-			tel2=#tel2#
-		</isNotEmpty>
-		<isNotEmpty prepend="AND" property="tel3">
-			tel3=#tel3#
-		</isNotEmpty>
-		<isNotEmpty prepend="AND" property="fax1">
-			fax1=#fax1#
-		</isNotEmpty>
-		<isNotEmpty prepend="AND" property="fax2">
-			fax2=#fax2#
-		</isNotEmpty>
-		<isNotEmpty prepend="AND" property="fax3">
-			fax3=#fax3#
-		</isNotEmpty>
-		<isNotEmpty prepend="AND" property="paymentedType">
-			paymented_type=#paymentedType#
+		<isNotEmpty prepend="AND" property="fax">
+			fax=#fax#
 		</isNotEmpty>
 		<isNotEmpty prepend="AND" property="customerIllustrate">
 			customer_illustrate=#customerIllustrate#
@@ -135,12 +113,6 @@
  		<isNotEmpty prepend="AND" property="accountName">
  			account_name=#accountName#
  		</isNotEmpty> 
- 		<isNotEmpty prepend="AND" property="accountNo">
- 			account_no=#accountNo#
- 		</isNotEmpty> 
- 		<isNotEmpty prepend="AND" property="paymentedMan">
- 			paymented_man=#paymentedMan#
- 		</isNotEmpty> 
  		<isNotEmpty prepend="AND" property="voucher">
  			voucher=#voucher#
  		</isNotEmpty> 
@@ -172,13 +144,8 @@
    			<isNotEmpty property="address">address,</isNotEmpty>
    			<isNotEmpty property="linkMan">link_man,</isNotEmpty>
    			<isNotEmpty property="contactInfo">contact_info,</isNotEmpty>
-   			<isNotEmpty property="tel1">tel1,</isNotEmpty>
-   			<isNotEmpty property="tel2">tel2,</isNotEmpty>
-   			<isNotEmpty property="tel3">tel3,</isNotEmpty>
-   			<isNotEmpty property="fax1">fax1,</isNotEmpty>
-   			<isNotEmpty property="fax2">fax2,</isNotEmpty>
-   			<isNotEmpty property="fax3">fax3,</isNotEmpty>
-   			<isNotEmpty property="paymentedType">paymented_type,</isNotEmpty>
+   			<isNotEmpty property="tel">tel,</isNotEmpty>
+   			<isNotEmpty property="fax">fax,</isNotEmpty>
    			<isNotEmpty property="customerIllustrate">customer_illustrate,</isNotEmpty>
    			<isNotEmpty property="customerProperty">customer_property,</isNotEmpty>
    			<isNotEmpty property="officeAddress">office_address,</isNotEmpty>
@@ -193,8 +160,6 @@
   	 		<isNotEmpty property="email">email,</isNotEmpty>
   	 		<isNotEmpty property="accountBank">account_bank,</isNotEmpty> 
   	 		<isNotEmpty property="accountName">account_name,</isNotEmpty> 
-  	 		<isNotEmpty property="accountNo">account_no,</isNotEmpty> 
-  	 		<isNotEmpty property="paymentedMan">paymented_man,</isNotEmpty> 
   	 		<isNotEmpty property="voucher">voucher,</isNotEmpty> 
   	 		<isNotNull property="goodsBillsDate">goods_bills_date,</isNotNull> 
   	 		<isNotNull property="orderAmount">min_order_amount,</isNotNull> 
@@ -209,13 +174,8 @@
    			<isNotEmpty property="address">#address#,</isNotEmpty>
    			<isNotEmpty property="linkMan">#linkMan#,</isNotEmpty>
    			<isNotEmpty property="contactInfo">#contactInfo#,</isNotEmpty>
-   			<isNotEmpty property="tel1">#tel1#,</isNotEmpty>
-   			<isNotEmpty property="tel2">#tel2#,</isNotEmpty>
-   			<isNotEmpty property="tel3">#tel3#,</isNotEmpty>
-   			<isNotEmpty property="fax1">#fax1#,</isNotEmpty>
-   			<isNotEmpty property="fax2">#fax2#,</isNotEmpty>
-   			<isNotEmpty property="fax3">#fax3#,</isNotEmpty>
-   			<isNotEmpty property="paymentedType">#paymentedType#,</isNotEmpty>
+   			<isNotEmpty property="tel">#tel#,</isNotEmpty>
+   			<isNotEmpty property="fax">#fax#,</isNotEmpty>
    			<isNotEmpty property="customerIllustrate">#customerIllustrate#,</isNotEmpty>
    			<isNotEmpty property="customerProperty">#customerProperty#,</isNotEmpty>
    			<isNotEmpty property="officeAddress">#officeAddress#,</isNotEmpty>
@@ -230,8 +190,6 @@
    			<isNotEmpty property="email">#email#,</isNotEmpty> 
    			<isNotEmpty property="accountBank">#accountBank#,</isNotEmpty> 
    			<isNotEmpty property="accountName">#accountName#,</isNotEmpty> 
-   			<isNotEmpty property="accountNo">#accountNo#,</isNotEmpty> 
-   			<isNotEmpty property="paymentedMan">#paymentedMan#,</isNotEmpty> 
    			<isNotEmpty property="voucher">#voucher#,</isNotEmpty> 
    			<isNotNull property="goodsBillsDate">#goodsBillsDate#,</isNotNull> 
    			<isNotNull property="orderAmount">#orderAmount#,</isNotNull> 
@@ -249,13 +207,8 @@
    			<isNotEmpty prepend="," property="address">address=#address#</isNotEmpty>
    			<isNotEmpty prepend="," property="linkMan">link_man=#linkMan#</isNotEmpty>
    			<isNotEmpty prepend="," property="contactInfo">contact_info=#contactInfo#</isNotEmpty>
-   			<isNotEmpty prepend="," property="tel1">tel1=#tel1#</isNotEmpty>
-   			<isNotEmpty prepend="," property="tel2">tel2=#tel2#</isNotEmpty>
-   			<isNotEmpty prepend="," property="tel3">tel3=#tel3#</isNotEmpty>
-   			<isNotEmpty prepend="," property="fax1">fax1=#fax1#</isNotEmpty>
-   			<isNotEmpty prepend="," property="fax2">fax2=#fax2#</isNotEmpty>
-   			<isNotEmpty prepend="," property="fax3">fax3=#fax3#</isNotEmpty>
-   			<isNotEmpty prepend="," property="paymentedType">paymented_type=#paymentedType#</isNotEmpty>
+   			<isNotEmpty prepend="," property="tel">tel=#tel#</isNotEmpty>
+   			<isNotEmpty prepend="," property="fax">fax=#fax#</isNotEmpty>
    			<isNotEmpty prepend="," property="customerIllustrate">customer_illustrate=#customerIllustrate#</isNotEmpty>
    			<isNotEmpty prepend="," property="customerProperty">customer_property=#customerProperty#</isNotEmpty>
    			<isNotEmpty prepend="," property="officeAddress">office_address=#officeAddress#</isNotEmpty>
@@ -269,8 +222,6 @@
   	 		<isNotEmpty prepend="," property="email">email=#email#</isNotEmpty>
   	 		<isNotEmpty prepend="," property="accountBank">account_bank=#accountBank#</isNotEmpty> 
   	 		<isNotEmpty prepend="," property="accountName">account_name=#accountName#</isNotEmpty> 
-  	 		<isNotEmpty prepend="," property="accountNo">account_no=#accountNo#</isNotEmpty> 
-  	 		<isNotEmpty prepend="," property="paymentedMan">paymented_man=#paymentedMan#</isNotEmpty> 
   	 		<isNotEmpty prepend="," property="voucher">voucher=#voucher#</isNotEmpty> 
   	 		<isNotNull prepend="," property="goodsBillsDate">goods_bills_date,</isNotNull> 
   	 		<isNotNull prepend="," property="orderAmount">min_order_amount=#orderAmount#</isNotNull> 

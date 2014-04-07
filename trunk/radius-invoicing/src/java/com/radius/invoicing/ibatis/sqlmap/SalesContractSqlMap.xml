@@ -2,219 +2,366 @@
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 <sqlMap namespace="salesContractSqlMap">
 
-  <typeAlias alias="salesContract" type="com.radius.invoicing.ibatis.model.SalesContract" />
-  
-  <sql id="salesContractFileds">
-  	 contract_id id,customer_id customerId,customer_name customerName,contract_file_id contractFile,effect_date effectDate,sign_time signTime,
-  	 trade_assistant tradeAssistant,salesman_id salesMan,link_man man,link_mobile mobile,link_tel tel,link_fax fax,
-  	 ordered_date orderedDate,delivery_date deliveryDate,delivery_point deliveryPoint,contract_terms contractTerms,newest_print_time printTime,newest_print_acc printAcc,
-  	 newest_print_record printreCord,paymented_status paymentedStatus,validity_date validityDate,STATUS stats,print_times printTimes,
-  	 ledger_id ledgerId,memo memo,creater creater,createdate createdate,reviser reviser,revisedate revisedate,verifier verifydate
-  </sql>
-  
-  <resultMap id="salesContract" class="salesContract">
-    <result column="contract_id" jdbcType="char" javaType="java.lang.String" property="id" />
-    <result column="customer_id" jdbcType="char" javaType="java.lang.String" property="customerId" />
-    <result column="customer_name" jdbcType="varchar" javaType="java.lang.String" property="customerName" />
-    <result column="contract_file_id" jdbcType="int" javaType="java.lang.Integer" property="contractFile" />
-    <result column="effect_date" jdbcType="datetime" javaType="java.util.Date" property="effectDate" />
-    <result column="sign_time" jdbcType="datetime" javaType="java.util.Date" property="signTime" />
-    <result column="trade_assistant" jdbcType="char" javaType="java.lang.String" property="tradeAssistant" />
-    <result column="salesman_id" jdbcType="char" javaType="java.lang.String" property="salesMan" />
-    <result column="link_man" jdbcType="varchar" javaType="java.lang.String" property="man" />
-    <result column="link_mobile" jdbcType="char" javaType="java.lang.String" property="mobile" />
-    <result column="link_tel" jdbcType="char" javaType="java.lang.String" property="tel" />
-    <result column="link_fax" jdbcType="char" javaType="java.lang.String" property="fax" />
-    <result column="ordered_date" jdbcType="datetime" javaType="java.util.Date" property="orderedDate" />
-    <result column="delivery_date" jdbcType="datetime" javaType="java.util.Date" property="deliveryDate" />
-    <result column="delivery_point" jdbcType="varchar" javaType="java.lang.String" property="deliveryPoint" />
-    <result column="contract_terms" jdbcType="text" javaType="java.lang.String" property="contractTerms" />
-    <result column="newest_print_time" jdbcType="datetime" javaType="java.util.Date" property="printTime" />
-    <result column="newest_print_acc" jdbcType="char" javaType="java.lang.String" property="printAcc" />
-    <result column="newest_print_record" jdbcType="text" javaType="java.lang.String" property="printRecord" />
-  	<result column="print_times" jdbcType="int" javaType="java.lang.Integer" property="printTimes" />
-    <result column="paymented_status" jdbcType="char" javaType="java.lang.String" property="paymentedStatus" />
-    <result column="validity_date" jdbcType="datetime" javaType="java.util.Date" property="validityDate" />
-    <result column="STATUS" jdbcType="char" javaType="java.lang.String" property="stats" />
-  	<result column="ledger_id" jdbcType="char" javaType="java.lang.String" property="ledgerId" />
-  	<result column="memo" jdbcType="text" javaType="java.lang.String" property="memo" />
-    <result column="creater" jdbcType="char" javaType="java.lang.String" property="creater" />
-    <result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createdate" />
-    <result column="reviser" jdbcType="char" javaType="java.lang.String" property="reviser" />
-    <result column="revisedate" jdbcType="datetime" javaType="java.util.Date" property="revisedate" />
-    <result column="verifier" jdbcType="char" javaType="java.lang.String" property="verifier" />    
-    <result column="verifydate" jdbcType="datetime" javaType="java.util.Date" property="verifydate"/>
-  </resultMap>
-  
-  <sql id="whereLike">
-  	<dynamic prepend="where">
-  		1=1  
-  		<isNotEmpty prepend="and" property="id">contract_id=#id#</isNotEmpty>
-  		<isNotEmpty prepend="and" property="customerId">customer_id=#customerId#</isNotEmpty>
-  		<isNotEmpty prepend="and" property="customerName">customer_name=#customerName#</isNotEmpty>
-		<isNotEmpty prepend="and" property="contractFile">contract_file_id=#contractFile#</isNotEmpty>
-		<isNotNull prepend="and" property="effectDate">effect_date=#effectDate#</isNotNull>
-		<isNotNull prepend="and" property="signTime">sign_time=#signTime#</isNotNull>
-		<isNotEmpty prepend="and" property="contractFile">contract_file_id=#contractFile#</isNotEmpty>
-		<isNotNull prepend="and" property="effectDate">effect_date=#effectDate#</isNotNull>
-		<isNotNull prepend="and" property="signTime">sign_time=#signTime#</isNotNull>
-		<isNotEmpty prepend="and" property="tradeAssistant">trade_assistant=#tradeAssistant#</isNotEmpty>
-		<isNotEmpty prepend="and" property="salesMan">salesman_id=#salesMan#</isNotEmpty>
-		<isNotEmpty prepend="and" property="man">link_man=#man#</isNotEmpty>
-		<isNotEmpty prepend="and" property="mobile">link_mobile=#mobile#</isNotEmpty>
-		<isNotEmpty prepend="and" property="tel">link_tel=#tel#</isNotEmpty>
-		<isNotEmpty prepend="and" property="fax">link_fax=#fax#</isNotEmpty>
-		<isNotNull prepend="and" property="orderedDate">ordered_date=#orderedDate#</isNotNull>
-		<isNotNull prepend="and" property="deliveryDate">delivery_date=#deliveryDate#</isNotNull>
-		<isNotEmpty prepend="and" property="deliveryPoint">delivery_point=#deliveryPoint#</isNotEmpty>
-		<isNotEmpty prepend="and" property="contractTerms">contract_terms=#contractTerms#</isNotEmpty>
-		<isNotNull prepend="and" property="printTime">newest_print_time=#printTime#</isNotNull>
-		<isNotEmpty prepend="and" property="printAcc">newest_print_acc=#printAcc#</isNotEmpty>
-		<isNotEmpty prepend="and" property="printRecord">newest_print_record=#printRecord#</isNotEmpty>
-		<isNotNull prepend="and" property="printTimes">print_times=#printTimes#</isNotNull>
-		<isNotEmpty prepend="and" property="paymentedStatus">paymented_status=#paymentedStatus#</isNotEmpty>
-		<isNotNull prepend="and" property="validityDate">validity_date=#validityDate#</isNotNull>
- 		<isNotEmpty prepend="and" property="stats">STATUS=#stats#</isNotEmpty>
- 		<isNotEmpty prepend="and" property="ledgerId">ledger_id=#ledgerId#</isNotEmpty> 
- 		<isNotEmpty prepend="and" property="memo">memo=#memo#</isNotEmpty> 
-  	</dynamic>
-  </sql>
- 
-	 <select id="getSalesContractById" parameterClass="java.lang.String" resultClass="salesContract">
-	 	SELECT <include refid="salesContractFileds"/>
-	 	FROM RS_SALES_CONTRACT
-	 	WHERE contract_id =#id#
-	 </select>
-   
-   	<insert id="insert" parameterClass="salesContract">
-   		INSERT INTO RS_SALES_CONTRACT (
-   			contract_id,
-	  		<isNotEmpty  property="customerId">customer_id,</isNotEmpty>
-			<isNotEmpty  property="customerName">customer_name,</isNotEmpty>
-			<isNotEmpty  property="contractFile">contract_file_id,</isNotEmpty>
-			<isNotNull  property="effectDate">effect_date,</isNotNull>
-			<isNotNull  property="signTime">sign_time,</isNotNull>
-			<isNotEmpty  property="tradeAssistant">trade_assistant,</isNotEmpty>
-			<isNotEmpty  property="salesMan">salesman_id,</isNotEmpty>
-			<isNotEmpty  property="man">link_man,</isNotEmpty>
-			<isNotEmpty  property="mobile">link_mobile,</isNotEmpty>
-			<isNotEmpty  property="tel">link_tel,</isNotEmpty>
-			<isNotEmpty  property="fax">link_fax,</isNotEmpty>
-			<isNotNull  property="orderedDate">ordered_date,</isNotNull>
-			<isNotNull  property="deliveryDate">delivery_date,</isNotNull>
-			<isNotEmpty  property="deliveryPoint">delivery_point,</isNotEmpty>
-			<isNotEmpty  property="contractTerms">contract_terms,</isNotEmpty>
-			<!-- 
-			<isNotNull  property="printTime">newest_print_time,</isNotNull>
-			<isNotEmpty  property="printAcc">newest_print_acc,</isNotEmpty>
-			<isNotEmpty  property="printRecord">newest_print_record,</isNotEmpty>
-			<isNotNull  property="printTimes">print_times,</isNotNull>
-			 -->
-			<isNotEmpty  property="paymentedStatus">paymented_status,</isNotEmpty>
-			<isNotNull  property="validityDate">validity_date,</isNotNull>
-	 		<isNotEmpty  property="stats">STATUS,</isNotEmpty> 
-	 		<isNotEmpty  property="ledgerId">ledger_id,</isNotEmpty> 
-	 		<isNotEmpty  property="memo">memo,</isNotEmpty>
-	  	    creater,
-	  	    createdate
-   		)VALUES(
-   			#id#,
-	  		<isNotEmpty  property="customerId">#customerId#,</isNotEmpty>
-			<isNotEmpty  property="customerName">#customerName#,</isNotEmpty>
-			<isNotEmpty  property="contractFile">#contractFile#,</isNotEmpty>
-			<isNotNull  property="effectDate">#effectDate#,</isNotNull>
-			<isNotNull  property="signTime">#signTime#,</isNotNull>
-			<isNotEmpty  property="tradeAssistant">#tradeAssistant#,</isNotEmpty>
-			<isNotEmpty  property="salesMan">#salesMan#,</isNotEmpty>
-			<isNotEmpty  property="man">#man#,</isNotEmpty>
-			<isNotEmpty  property="mobile">#mobile#,</isNotEmpty>
-			<isNotEmpty  property="tel">#tel#,</isNotEmpty>
-			<isNotEmpty  property="fax">#fax#,</isNotEmpty>
-			<isNotNull  property="orderedDate">#orderedDate#,</isNotNull>
-			<isNotNull  property="deliveryDate">#deliveryDate#,</isNotNull>
-			<isNotEmpty  property="deliveryPoint">#deliveryPoint#,</isNotEmpty>
-			<isNotEmpty  property="contractTerms">#contractTerms#,</isNotEmpty>
-			<!-- 
-			<isNotNull  property="printTime">#printTime#,</isNotNull>
-			<isNotEmpty  property="printAcc">#printAcc#,</isNotEmpty>
-			<isNotEmpty  property="printRecord">#printRecord#,</isNotEmpty>
-			<isNotNull  property="printTimes">#printTimes#,</isNotNull>
-			 -->
-			<isNotEmpty  property="paymentedStatus">#paymentedStatus#,</isNotEmpty>
-			<isNotNull  property="validityDate">#validityDate#,</isNotNull>
-	 		<isNotEmpty  property="stats">#stats#,</isNotEmpty> 
-	 		<isNotEmpty  property="ledgerId">#ledgerId#,</isNotEmpty> 
-	 		<isNotEmpty  property="memo">#memo#,</isNotEmpty>
-   			 creater,now()
-   		)
-   	</insert>
-   
-   	<update id="updateSalesContractById" parameterClass="salesContract">
-   		UPDATE RS_SALES_CONTRACT
-   		<dynamic prepend="SET">
-	  		<isNotEmpty prepend="," property="customerId">customer_id=#customerId#</isNotEmpty>
-			<isNotEmpty prepend=","  property="customerName">customer_name=#customerName#</isNotEmpty>
-			<isNotEmpty prepend=","  property="contractFile">contract_file_id=#contractFile#</isNotEmpty>
-			<isNotNull  prepend="," property="effectDate">effect_date=#effectDate#</isNotNull>
-			<isNotNull  prepend=","  property="signTime">sign_time=#signTime#</isNotNull>
-			<isNotEmpty prepend=","  property="tradeAssistant">trade_assistant=#tradeAssistant#</isNotEmpty>
-			<isNotEmpty prepend="," property="salesMan">salesman_id=#salesMan#</isNotEmpty>
-			<isNotEmpty prepend="," property="man">link_man=#man#</isNotEmpty>
-			<isNotEmpty prepend="," property="mobile">link_mobile=#mobile#</isNotEmpty>
-			<isNotEmpty prepend="," property="tel">link_tel=#tel#</isNotEmpty>
-			<isNotEmpty prepend="," property="fax">link_fax=#fax#</isNotEmpty>
-			<isNotNull prepend="," property="orderedDate">ordered_date=#orderedDate#</isNotNull>
-			<isNotNull prepend="," property="deliveryDate">delivery_date=#deliveryDate#</isNotNull>
-			<isNotEmpty prepend="," property="deliveryPoint">delivery_point=#deliveryPoint#</isNotEmpty>
-			<isNotEmpty prepend="," property="contractTerms">contract_terms=#contractTerms#</isNotEmpty>
-			<isNotNull prepend="," property="printTime">newest_print_time=now()</isNotNull>
-			<isNotEmpty prepend="," property="printAcc">newest_print_acc=#printAcc#</isNotEmpty>
-			<isNotEmpty prepend="," property="printRecord">newest_print_record=#printRecord#</isNotEmpty>
-			<isNotNull prepend="," property="printTimes">print_times=#printTimes#</isNotNull>
-			<isNotEmpty prepend="," property="paymentedStatus">paymented_status=#paymentedStatus#</isNotEmpty>
-			<isNotNull prepend="," property="validityDate">validity_date=#validityDate#</isNotNull>
-	 		<isNotEmpty prepend="," property="stats">STATUS=#stats#</isNotEmpty> 
-	 		<isNotEmpty prepend="," property="ledgerId">ledger_id=#ledgerId#</isNotEmpty> 
-	 		<isNotEmpty prepend="," property="memo">memo=#memo#</isNotEmpty> 
-  	 		<isNotEmpty  prepend="," property="reviser">reviser = #reviser#,revisedate = now() </isNotEmpty>
-  			<isNotEmpty  prepend="," property="verifier">verifier = #verifier#,verifydate = now() </isNotEmpty>
-   		</dynamic>
-   		WHERE contract_id =#id# 
-   	</update>
-   	<select id="getSalesContractByCondition" parameterClass="salesContract" resultClass="salesContract">
-   		SELECT <include refid="salesContractFileds"/>
-   		FROM RS_SALES_CONTRACT
-   		<include refid="whereLike"/>
-   	</select>
-   	<!-- 分页查询语句 -->
-   	<select id="getSalesContractSplitPageBySQL" remapResults="true" parameterClass="java.lang.String" resultClass="salesContract">
-   		$splitPageSQL$
-   	</select>
-   	<!-- end -->
-   	
-   	<select id="getSalesContractSplitPageCountSQL" remapResults="true" parameterClass="java.lang.String" resultClass="java.lang.Integer">
-   		$countSQL$
-   	</select>
-   	
-   	<delete id="deleteSalesContract" parameterClass="salesContract">
-   		DELETE FROM RS_SALES_CONTRACT
-   		<include refid="whereLike"/>
-   	</delete>
-   	<delete id="deleteSalesContractById" parameterClass="java.lang.String">
-   		DELETE FROM RS_SALES_CONTRACT
-   		WHERE contract_id =#id# 
-   	</delete>
-   	<update id="updateSalesContractStatusById" parameterClass="salesContract">
-   		UPDATE RS_SALES_CONTRACT
-   		SET STATUS=#stats#
-   		WHERE contract_id =#id# 
-   	</update>
-   	
-   	<select id="getSalesContractByCustomerId" resultClass="salesContract" parameterClass="salesContract">
-   		SELECT  sc.contract_id id,sc.customer_name customerName,sc.effect_date effectDate,sc.sign_time signTime,scp.total_amount totalAmount,scp.amount_in_words upperAmount 
-		FROM RS_SALES_CONTRACT sc
-		LEFT JOIN RS_SALES_CONTRACT_PAYMENT scp
-		ON sc.contract_id = scp.contract_id
+	<typeAlias alias="salesContract"
+		type="com.radius.invoicing.ibatis.model.SalesContract" />
+
+	<sql id="salesContractFileds">
+		contract_id id,customer_id customerId,customer_name
+		customerName,contract_file_id contractFile,effect_date
+		effectDate,sign_time signTime,salesman_id salesMan, link_man
+		man, link_mobile mobile,link_tel tel,link_fax fax,ordered_date
+		orderedDate,delivery_date deliveryDate,delivery_point
+		deliveryPoint, contract_terms contractTerms,print_times
+		printTimes,newest_print_time printTime,newest_print_acc
+		printAcc,newest_print_record printRecord,memo memo, status
+		stats,audited_status auditedStatus,checked_status
+		checkedStatus,validity_date validityDate, ledger_id
+		ledgerId,operator operator,motify_date modifyDate,creater
+		creater,createdate createDate,reviser reviser,revisedate
+		reviseDate,verifier verifier,verifydate verifyDate
+	</sql>
+
+	<resultMap id="salesContract" class="salesContract">
+		<result column="contract_id" jdbcType="char"
+			javaType="java.lang.String" property="id" />
+		<result column="customer_id" jdbcType="char"
+			javaType="java.lang.String" property="customerId" />
+		<result column="customer_name" jdbcType="varchar"
+			javaType="java.lang.String" property="customerName" />
+		<result column="contract_file_id" jdbcType="int"
+			javaType="java.lang.Integer" property="contractFile" />
+		<result column="effect_date" jdbcType="datetime"
+			javaType="java.util.Date" property="effectDate" />
+		<result column="sign_time" jdbcType="datetime"
+			javaType="java.util.Date" property="signTime" />
+		<result column="salesman_id" jdbcType="char"
+			javaType="java.lang.String" property="salesMan" />
+		<result column="link_man" jdbcType="varchar"
+			javaType="java.lang.String" property="man" />
+		<result column="link_mobile" jdbcType="char"
+			javaType="java.lang.String" property="mobile" />
+		<result column="link_tel" jdbcType="char"
+			javaType="java.lang.String" property="tel" />
+		<result column="link_fax" jdbcType="char"
+			javaType="java.lang.String" property="fax" />
+		<result column="ordered_date" jdbcType="datetime"
+			javaType="java.util.Date" property="orderedDate" />
+		<result column="delivery_date" jdbcType="datetime"
+			javaType="java.util.Date" property="deliveryDate" />
+		<result column="delivery_point" jdbcType="varchar"
+			javaType="java.lang.String" property="deliveryPoint" />
+		<result column="contract_terms" jdbcType="text"
+			javaType="java.lang.String" property="contractTerms" />
+		<result column="print_times" jdbcType="int"
+			javaType="java.lang.Integer" property="printTimes" />
+		<result column="newest_print_time" jdbcType="datetime"
+			javaType="java.util.Date" property="printTime" />
+		<result column="newest_print_acc" jdbcType="char"
+			javaType="java.lang.String" property="printAcc" />
+		<result column="newest_print_record" jdbcType="text"
+			javaType="java.lang.String" property="printRecord" />
+		<result column="memo" jdbcType="text"
+			javaType="java.lang.String" property="memo" />
+		<result column="STATUS" jdbcType="char"
+			javaType="java.lang.String" property="stats" />
+		<result column="audited_status" jdbcType="char"
+			javaType="java.lang.String" property="auditedStatus" />
+		<result column="checked_status" jdbcType="char"
+			javaType="java.lang.String" property="checkedStatus" />
+		<result column="validity_date" jdbcType="datetime"
+			javaType="java.util.Date" property="validityDate" />
+
+		<result column="ledger_id" jdbcType="char"
+			javaType="java.lang.String" property="ledgerId" />
+		<result column="operator" jdbcType="char"
+			javaType="java.lang.String" property="operator" />
+		<result column="modify_date" jdbcType="datetime"
+			javaType="java.util.Date" property="modifyDate" />
+		<result column="creater" jdbcType="char"
+			javaType="java.lang.String" property="creater" />
+		<result column="createdate" jdbcType="datetime"
+			javaType="java.util.Date" property="createDate" />
+		<result column="reviser" jdbcType="char"
+			javaType="java.lang.String" property="reviser" />
+		<result column="revisedate" jdbcType="datetime"
+			javaType="java.util.Date" property="reviseDate" />
+		<result column="verifier" jdbcType="char"
+			javaType="java.lang.String" property="verifier" />
+		<result column="verifydate" jdbcType="datetime"
+			javaType="java.util.Date" property="verifyDate" />
+	</resultMap>
+
+	<sql id="whereLike">
+		<dynamic prepend="where">
+			1=1 AND
+			<isNotNull prepend="and" property="id">
+				contract_id=#id#
+			</isNotNull>
+			<isNotNull prepend="and" property="customerId">
+				customer_id=#customerId#
+			</isNotNull>
+			<isNotNull prepend="and" property="customerName">
+				customer_name=#customerName#
+			</isNotNull>
+			<isNotNull prepend="and" property="contractFile">
+				contract_file_id=#contractFile#
+			</isNotNull>
+			<isNotNull prepend="and" property="effectDate">
+				effect_date=#effectDate#
+			</isNotNull>
+			<isNotNull prepend="and" property="signTime">
+				sign_time=#signTime3
+			</isNotNull>
+			<isNotNull prepend="and" property="salesMan">
+				salesman_id=#salesMan#
+			</isNotNull>
+			<isNotNull prepend="and" property="man">
+				link_man=#man
+			</isNotNull>
+			<isNotNull prepend="and" property="mobile">
+				link_mobile=#mobile#
+			</isNotNull>
+			<isNotNull prepend="and" property="tel">
+				link_tel=#tel#
+			</isNotNull>
+			<isNotNull prepend="and" property="fax">
+				link_fax=#fax#
+			</isNotNull>
+			<isNotNull prepend="and" property="orderedDate">
+				ordered_date=#orderedDate#
+			</isNotNull>
+			<isNotNull prepend="and" property="deliveryDate">
+				delivery_date=#deliveryDate#
+			</isNotNull>
+			<isNotNull prepend="and" property="deliveryPoint">
+				delivery_point=#deliveryPoint#
+			</isNotNull>
+			<isNotNull prepend="and" property="contractTerms">
+				contract_terms=#contractTerms#
+			</isNotNull>
+			<isNotNull prepend="and" property="printTimes">
+				print_times=#printTimes#
+			</isNotNull>
+			<isNotNull prepend="and" property="printTime">
+				newest_print_time=#printTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="printAcc">
+				newest_print_acc=#printAcc#
+			</isNotNull>
+			<isNotNull prepend="and" property="printRecord">
+				newest_print_record=#printRecord#
+			</isNotNull>
+			<isNotNull prepend="and" property="memo">
+				memo=#memo#
+			</isNotNull>
+			<isNotNull prepend="and" property="stats">
+				status=#stats#
+			</isNotNull>
+			<isNotNull prepend="and" property="auditedStatus">
+				audited_status=#auditedStatus#
+			</isNotNull>
+			<isNotNull prepend="and" property="checkedStatus">
+				checked_status=#checkedStatus#
+			</isNotNull>
+			<isNotNull prepend="and" property="validityDate">
+				validity_date=#validityDate
+			</isNotNull>
+		</dynamic>
+	</sql>
+
+	<select id="getSalesContractById" parameterClass="java.lang.String"
+		resultClass="salesContract">
+		SELECT
+		<include refid="salesContractFileds" />
+		FROM RS_SALES_CONTRACT WHERE contract_id =#id#
+	</select>
+
+	<insert id="insert" parameterClass="salesContract">
+		INSERT INTO RS_SALES_CONTRACT
+		 ( 
+		 	contract_id,
+			<isNotNull property="customerId">customer_id,</isNotNull>
+			<isNotNull property="customerName">customer_name,</isNotNull>
+			<isNotNull property="contractFile">contract_file_id ,</isNotNull>
+			<isNotNull property="effectDate">effect_date ,</isNotNull>
+			<isNotNull property="signTime">sign_time ,</isNotNull>
+			<isNotNull property="salesMan">salesman_id ,</isNotNull>
+			<isNotNull property="man">link_man ,</isNotNull>
+			<isNotNull property="mobile">link_mobile ,</isNotNull>
+			<isNotNull property="tel">link_tel ,</isNotNull>
+			<isNotNull property="fax">link_fax ,</isNotNull>
+			<isNotNull property="orderedDate">ordered_date,</isNotNull>
+			<isNotNull property="deliveryDate">delivery_date ,</isNotNull>
+			<isNotNull property="deliveryPoint">delivery_point ,</isNotNull>
+			<isNotNull property="contractTerms">contract_terms ,</isNotNull>
+			<isNotNull property="printTimes">print_times ,</isNotNull>
+			<isNotNull property="printTime">newest_print_time ,</isNotNull>
+			<isNotNull property="printAcc">newest_print_acc ,</isNotNull>
+			<isNotNull property="printRecord">newest_print_record ,</isNotNull>
+			<isNotNull property="memo">memo,</isNotNull>
+			<isNotNull property="stats">status ,</isNotNull>
+			<isNotNull property="auditedStatus">audited_status,</isNotNull>
+			<isNotNull property="checkedStatus">checked_status,</isNotNull>
+			<isNotNull property="validityDate">validity_date,</isNotNull>
+			<isNotNull property="ledgerId">ledger_id,</isNotNull>
+			<isNotNull property="operator">operator,</isNotNull>
+			creater, 
+			createdate 
+		)VALUES( 
+			#id#,
+			<isNotNull property="customerId">#customerId#,</isNotNull>
+			<isNotNull property="customerName">#customerName#,</isNotNull>
+			<isNotNull property="contractFile">#contractFile#,</isNotNull>
+			<isNotNull property="effectDate">#effectDate#,</isNotNull>
+			<isNotNull property="signTime">#signTime#,</isNotNull>
+			<isNotNull property="salesMan">#salesMan#,</isNotNull>
+			<isNotNull property="man">#man#,</isNotNull>
+			<isNotNull property="mobile">#mobile#,</isNotNull>
+			<isNotNull property="tel">#tel#,</isNotNull>
+			<isNotNull property="fax">#fax#,</isNotNull>
+			<isNotNull property="orderedDate">#orderedDate#,</isNotNull>
+			<isNotNull property="deliveryDate">#deliveryDate#,</isNotNull>
+			<isNotNull property="deliveryPoint">#deliveryPoint#,</isNotNull>
+			<isNotNull property="contractTerms">#contractTerms#,</isNotNull>
+			<isNotNull property="printTimes">#printTimes#,</isNotNull>
+			<isNotNull property="printTime">#printTime#,</isNotNull>
+			<isNotNull property="printAcc">#printAcc#,</isNotNull>
+			<isNotNull property="printRecord">#printRecord#,</isNotNull>
+			<isNotNull property="memo">#memo#,</isNotNull>
+			<isNotNull property="stats">#stats#,</isNotNull>
+			<isNotNull property="auditedStatus">#auditedStatus#,</isNotNull>
+			<isNotNull property="checkedStatus">#checkedStatus#,</isNotNull>
+			<isNotNull property="validityDate">#validityDate##,</isNotNull>
+			<isNotNull property="ledgerId">#ledgerId#,</isNotNull>
+			<isNotNull property="operator">#operator#,</isNotNull>
+			creater,now() 
+		)
+	</insert>
+
+	<update id="updateSalesContractById"
+		parameterClass="salesContract">
+		UPDATE RS_SALES_CONTRACT
+		<dynamic prepend="SET">
+			<isNotNull prepend="," property="customerId">
+				customer_id=#customerId#
+			</isNotNull>
+			<isNotNull prepend="," property="customerName">
+				customer_name=#customerName#
+			</isNotNull>
+			<isNotNull prepend="," property="contractFile">
+				contract_file_id=#contractFile#
+			</isNotNull>
+			<isNotNull prepend="," property="effectDate">
+				effect_date=#effectDate#
+			</isNotNull>
+			<isNotNull prepend="," property="signTime">
+				sign_time=#signTime#
+			</isNotNull>
+			<isNotNull prepend="," property="salesMan">
+				salesman_id=#salesMan#
+			</isNotNull>
+			<isNotNull prepend="," property="man">
+				link_man=#man#
+			</isNotNull>
+			<isNotNull prepend="," property="mobile">
+				link_mobile=#mobile#
+			</isNotNull>
+			<isNotNull prepend="," property="tel">
+				link_tel=#tel#
+			</isNotNull>
+			<isNotNull prepend="," property="fax">
+				link_fax=#fax#
+			</isNotNull>
+			<isNotNull prepend="," property="orderedDate">
+				ordered_date=#orderedDate#
+			</isNotNull>
+			<isNotNull prepend="," property="deliveryDate">
+				delivery_date=#deliveryDate#
+			</isNotNull>
+			<isNotNull prepend="," property="deliveryPoint">
+				delivery_point=#deliveryPoint#
+			</isNotNull>
+			<isNotNull prepend="," property="contractTerms">
+				contract_terms=#contractTerms#
+			</isNotNull>
+			<isNotNull prepend="," property="printTimes">
+				print_times=#printTimes#
+			</isNotNull>
+			<isNotNull prepend="," property="printTime">
+				newest_print_time=#printTime#
+			</isNotNull>
+			<isNotNull prepend="," property="printAcc">
+				newest_print_acc=#printAcc#
+			</isNotNull>
+			<isNotNull prepend="," property="printRecord">
+				newest_print_record=#printRecord#
+			</isNotNull>
+			<isNotNull prepend="," property="stats">
+				status=#stats#
+			</isNotNull>
+			<isNotNull prepend="," property="auditedStatus">
+				audited_status=#auditedStatus#
+			</isNotNull>
+			<isNotNull prepend="," property="checkedStatus">
+				checked_status=#checkedStatus#
+			</isNotNull>
+			<isNotNull prepend="," property="validityDate">
+				validity_date=#validityDate#
+			</isNotNull>
+			<isNotNull prepend="," property="memo">
+				memo=#memo#
+			</isNotNull>
+			<isNotNull prepend="," property="ledgerId">
+				ledger_id=#ledgerId#
+			</isNotNull>
+			<isNotNull prepend="," property="operator">
+				operator=#operator#,modify_date= now()
+			</isNotNull>
+			<isNotNull prepend="," property="reviser">
+				reviser = #reviser#,revisedate = now()
+			</isNotNull>
+			<isNotNull prepend="," property="verifier">
+				verifier = #verifier#,verifydate = now()
+			</isNotNull>
+		</dynamic>
+		WHERE contract_id =#id#
+	</update>
+	<select id="getSalesContractByCondition"
+		parameterClass="salesContract" resultClass="salesContract">
+		SELECT
+		<include refid="salesContractFileds" />
+		FROM RS_SALES_CONTRACT
+		<include refid="whereLike" />
+	</select>
+	<!-- 分页查询语句 -->
+	<select id="getSalesContractSplitPageBySQL" remapResults="true" parameterClass="java.lang.String" resultClass="salesContract">
+		$splitPageSQL$
+	</select>
+	<!-- end -->
+
+	<select id="getSalesContractSplitPageCountSQL" remapResults="true" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+		$countSQL$
+	</select>
+
+	<delete id="deleteSalesContract" parameterClass="salesContract">
+		DELETE FROM RS_SALES_CONTRACT
+		<include refid="whereLike" />
+	</delete>
+	<delete id="deleteSalesContractById"  parameterClass="java.lang.String">
+		DELETE FROM RS_SALES_CONTRACT 
+		WHERE contract_id =#id#
+	</delete>
+	<update id="updateSalesContractStatusById" parameterClass="salesContract">
+		UPDATE RS_SALES_CONTRACT 
+		SET STATUS=#stats# 
+		WHERE contract_id=#id#
+	</update>
+
+	<select id="getSalesContractByCustomerId" resultClass="salesContract" parameterClass="salesContract">
+		SELECT sc.contract_id id,sc.customer_name customerName,sc.effect_date effectDate,sc.sign_time signTime,scp.total_amount totalAmount,scp.amount_in_words  upperAmount 
+		FROM RS_SALES_CONTRACT sc 
+		LEFT JOIN RS_SALES_CONTRACT_PAYMENT scp 
+		ON sc.contract_id = scp.contract_id 
 		WHERE sc.customer_id=#customerId#
-   	</select>
+	</select>
 </sqlMap>
