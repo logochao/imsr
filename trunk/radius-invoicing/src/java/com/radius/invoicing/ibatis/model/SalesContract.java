@@ -17,36 +17,39 @@ import com.radius.base.utils.JsonDateSerializer;
  */
 public class SalesContract extends ExtInfo{
 
-	private String   id="";//合同编号
-	private String   customerId="";//客户编号
-	private String   customerName="";//客户名称
-	private String   contractFile="";//合同文件编号
-	private Date     effectDate=null;//生效日期
-	private Date     signTime=null;//签署日期
-	private String   tradeAssistant="";//营业员
-	private String   salesMan="";//业务员
-	private String   man="";//联系人
-	private String   mobile="";//联系人手机
-	private String   tel="";//联系电话
-	private String   fax="";//联系fax
-	private Date	 orderedDate=null;//订货日期
-	private Date     deliveryDate=null;//送货日期
-	private String   deliveryPoint="";//送货地点
-	private String   contractTerms="";//合同条款
-	private Date     printTime=null;//最新打印时间
-	private String   printAcc="";//最新打印帐号
-	private String   printreCord="";//最新打印记录
-	private String   paymentedStatus="";//结帐状态
-	private Date     validityDate=null;//有效期至
-	private String   stats="";//状态
-	private Integer  printTimes=null;//打印次数
-	private String   memo="";//合同备注
-	private String   ledgerId="";//账套编号
+	private String   id;//合同编号
+	private String   customerId;//客户编号
+	private String   customerName;//客户名称
+	private String   contractFile;//合同文件编号
+	private Date     effectDate;//生效日期
+	private Date     signTime;//签署日期
+	private String   salesMan;//业务员
+	private String   man;//联系人
+	private String   mobile;//联系人手机
+	private String   tel;//联系电话
+	private String   fax;//联系fax
+	private Date	 orderedDate;//订货日期
+	private Date     deliveryDate;//送货日期
+	private String   deliveryPoint;//送货地点
+	private String   contractTerms;//合同条款
+	private Integer  printTimes;//打印次数
+	private Date     printTime;//最新打印时间
+	private String   printAcc;//最新打印帐号
+	private String   printreCord;//最新打印记录
+	private String   memo;//合同备注
+	private String   stats;//状态
+	private String   auditedStatus;//审批状态
+	private String   checkedStatus;//验货状态
+	private Date     validityDate;//有效期至
 	
+	
+	//------------
+	private String   paymentedStatus;//结帐状态
+	private String   tradeAssistant;//营业员
 	//合同金额
 	private Integer totalAmount=0;//合同总金额 
 	//合同大写金额
-	private String upperAmount="";//大小金额
+	private String upperAmount;//大小金额
 	
 	public String getContractFile() {
 		return contractFile;
@@ -102,12 +105,6 @@ public class SalesContract extends ExtInfo{
 	}
 	public void setId(String id) {
 		this.id = id;
-	}
-	public String getLedgerId() {
-		return ledgerId;
-	}
-	public void setLedgerId(String ledgerId) {
-		this.ledgerId = ledgerId;
 	}
 	public String getMan() {
 		return man;
@@ -211,6 +208,18 @@ public class SalesContract extends ExtInfo{
 	}
 	public void setUpperAmount(String upperAmount) {
 		this.upperAmount = upperAmount;
+	}
+	public String getAuditedStatus() {
+		return auditedStatus;
+	}
+	public void setAuditedStatus(String auditedStatus) {
+		this.auditedStatus = auditedStatus;
+	}
+	public String getCheckedStatus() {
+		return checkedStatus;
+	}
+	public void setCheckedStatus(String checkedStatus) {
+		this.checkedStatus = checkedStatus;
 	}
 	
 	

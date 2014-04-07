@@ -10,19 +10,26 @@ package com.radius.invoicing.ibatis.model;
  */
 public class SalesContractPayment extends ExtInfo{
 
-	private String   contractId="";//合同编号
-	private String   cashType="";//币种	
-	private Integer  totalAmount=null;//合同总金额
-	private String   upperAmount="";//大写金额
-	private String   paymentType="";//付款方式
-	private String   ledgerId="";//账套编号
-	private String   stats="";//状态
+	private String   	contractId;//合同编号
+	private Integer   	cashType;//币种	
+	private Integer  	totalAmount;//合同总金额
+	private String   	upperAmount;//大写金额
+	private Integer   	paymentType;//付款方式
+	private String   	status="";//状态
+	private Integer  	auditedStatus;//审批状态
+	private String   	mome;//备注
 	
 	
-	public String getCashType() {
+	public Integer getAuditedStatus() {
+		return auditedStatus;
+	}
+	public void setAuditedStatus(Integer auditedStatus) {
+		this.auditedStatus = auditedStatus;
+	}
+	public Integer getCashType() {
 		return cashType;
 	}
-	public void setCashType(String cashType) {
+	public void setCashType(Integer cashType) {
 		this.cashType = cashType;
 	}
 	public String getContractId() {
@@ -31,17 +38,23 @@ public class SalesContractPayment extends ExtInfo{
 	public void setContractId(String contractId) {
 		this.contractId = contractId;
 	}
-	public String getLedgerId() {
-		return ledgerId;
+	public String getMome() {
+		return mome;
 	}
-	public void setLedgerId(String ledgerId) {
-		this.ledgerId = ledgerId;
+	public void setMome(String mome) {
+		this.mome = mome;
 	}
-	public String getPaymentType() {
+	public Integer getPaymentType() {
 		return paymentType;
 	}
-	public void setPaymentType(String paymentType) {
+	public void setPaymentType(Integer paymentType) {
 		this.paymentType = paymentType;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	public Integer getTotalAmount() {
 		return totalAmount;
@@ -55,12 +68,8 @@ public class SalesContractPayment extends ExtInfo{
 	public void setUpperAmount(String upperAmount) {
 		this.upperAmount = upperAmount;
 	}
-	public String getStats() {
-		return stats;
-	}
-	public void setStats(String stats) {
-		this.stats = stats;
-	}
+	
+	
 	
 	
 }

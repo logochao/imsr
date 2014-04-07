@@ -15,313 +15,249 @@ import org.codehaus.jackson.annotate.JsonIgnore;
  */
 public class Goods extends ExtInfo{
 
-	private String  id="";//商品编号
-	private String  name="";//商品名称
-	private String  property="";//商品性质
-	private String  categoryId="";//分类码
-	private String  categoryName="";//分类名称
-	private String  series="";//商品系列
-	private String  unit="";//单位
-	private String  place="";//产地
-	private String  uses="";//用途
-	private Integer  weightProp=null;//比重
-	private String  status="";//商品状态
-	private String  vulnerability="";//易损性
-	private Integer  depositDeadline=null;//存放期限
-	private String  description="";//商品说明
-	private Integer  minStore=null;//最低库限
-	private Integer  maxStore=null;//最高库限
-	private Integer  cost=null;//成本
-	private String  illustrate="";//采购说明
-	private Integer  price=null;//单价
-	private String  realName="";//真实品名
-	private String  cashType="";//币种
-	private Integer  batch=null;//批次
-	private String  batchNo="";//批次号
-	private String  useStatus="";//使用状态
-	private Integer  monthBatch=null;//月批次
-	private Date  modifyBatchDate=null;//更新批次日
-	private String  modifyBatchMonth="";//更新批次月份
-	private String  format="";//规格编号
-	private Integer  netQuantity=null;//净数量
-	private Integer  littleUnitQuantity=null;//小单位数量
-	private String  littleUnit="";//小单位
-	private String  salesType="";//销售方式
-	private String  defultSalesInstitution;//默认销售单位
-	private String  taxNo="";//税号
-	private Integer  offSales=null;//折扣
-	private String  memo="";//备注
-	private Integer  costConvertUnit=null;//折合单位成本
-	private Integer  priceConvertUnit=null;//折合单位单价
-	private String  barCode="";//商品条码
-	private String  weigthPerUnit="";//商品单位重量
-	private String  priceWeigthPerUnit="";//商品单位重量单价
-	private String  ledgerId="";//账套编号
-	
-	private String supplierId="";//供应商编号 -->为查询方便而提供的属性
+	private String  	id;//商品编号
+	private String  	name;//商品名称
+	private String  	realName;//真实品名
+	private String  	goodsType;//商品类型
+	private String  	machineSeries;//所属设备名称/型号(主机序列号)
+	private String  	machinePosition;//设备位号
+	private String  	partNo;//备件号
+	private String  	mapSeries;//图号
+	private String      company;//生产厂商
+	private String  	goodStatus;//商品状态 液态/固态
+	private Integer  	weightProp;//比重
+	private String  	vulnerability;//易损性
+	private String 		description;//商品说明
+	private String  	useStatus;//使用状态
+	private String  	memo;//备注
+	private String  	ledgerId;//账套编号
+	private Integer  	depositDeadline;//存放期限
 	
 	
 	
-	
-	public String getSupplierId() {
-		return supplierId;
+	private String 		supplierId="";//供应商编号 -->为查询方便而提供的属性
+
+
+
+	public String getCompany() {
+		return company;
 	}
-	public void setSupplierId(String supplierId) {
-		this.supplierId = supplierId;
+
+
+
+	public void setCompany(String company) {
+		this.company = company;
 	}
-	public String getBarCode() {
-		return barCode;
-	}
-	public void setBarCode(String barCode) {
-		this.barCode = barCode;
-	}
-	public Integer getBatch() {
-		return batch;
-	}
-	public void setBatch(Integer batch) {
-		this.batch = batch;
-	}
-	public String getBatchNo() {
-		return batchNo;
-	}
-	public void setBatchNo(String batchNo) {
-		this.batchNo = batchNo;
-	}
-	public String getCashType() {
-		return cashType;
-	}
-	public void setCashType(String cashType) {
-		this.cashType = cashType;
-	}
-	public String getCategoryId() {
-		return categoryId;
-	}
-	public void setCategoryId(String categoryId) {
-		this.categoryId = categoryId;
-	}
-	public String getCategoryName() {
-		return categoryName;
-	}
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
-	}
-	public Integer getCost() {
-		return cost;
-	}
-	public void setCost(Integer cost) {
-		this.cost = cost;
-	}
-	public Integer getCostConvertUnit() {
-		return costConvertUnit;
-	}
-	public void setCostConvertUnit(Integer costConvertUnit) {
-		this.costConvertUnit = costConvertUnit;
-	}
-	public String getDefultSalesInstitution() {
-		return defultSalesInstitution;
-	}
-	public void setDefultSalesInstitution(String defultSalesInstitution) {
-		this.defultSalesInstitution = defultSalesInstitution;
-	}
+
+
+
 	public Integer getDepositDeadline() {
 		return depositDeadline;
 	}
+
+
+
 	public void setDepositDeadline(Integer depositDeadline) {
 		this.depositDeadline = depositDeadline;
 	}
-	@JsonIgnore //转为json时,将其剔除
+
+
+
 	public String getDescription() {
 		return description;
 	}
+
+
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getFormat() {
-		return format;
+
+
+
+	public String getGoodStatus() {
+		return goodStatus;
 	}
-	public void setFormat(String format) {
-		this.format = format;
+
+
+
+	public void setGoodStatus(String goodStatus) {
+		this.goodStatus = goodStatus;
 	}
+
+
+
+	public String getGoodsType() {
+		return goodsType;
+	}
+
+
+
+	public void setGoodsType(String goodsType) {
+		this.goodsType = goodsType;
+	}
+
+
+
 	public String getId() {
 		return id;
 	}
+
+
+
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getIllustrate() {
-		return illustrate;
-	}
-	public void setIllustrate(String illustrate) {
-		this.illustrate = illustrate;
-	}
+
+
+
 	public String getLedgerId() {
 		return ledgerId;
 	}
+
+
+
 	public void setLedgerId(String ledgerId) {
 		this.ledgerId = ledgerId;
 	}
-	public String getLittleUnit() {
-		return littleUnit;
+
+
+
+	public String getMachinePosition() {
+		return machinePosition;
 	}
-	public void setLittleUnit(String littleUnit) {
-		this.littleUnit = littleUnit;
+
+
+
+	public void setMachinePosition(String machinePosition) {
+		this.machinePosition = machinePosition;
 	}
-	public Integer getLittleUnitQuantity() {
-		return littleUnitQuantity;
+
+
+
+	public String getMachineSeries() {
+		return machineSeries;
 	}
-	public void setLittleUnitQuantity(Integer littleUnitQuantity) {
-		this.littleUnitQuantity = littleUnitQuantity;
+
+
+
+	public void setMachineSeries(String machineSeries) {
+		this.machineSeries = machineSeries;
 	}
-	public Integer getMaxStore() {
-		return maxStore;
+
+
+
+	public String getMapSeries() {
+		return mapSeries;
 	}
-	public void setMaxStore(Integer maxStore) {
-		this.maxStore = maxStore;
+
+
+
+	public void setMapSeries(String mapSeries) {
+		this.mapSeries = mapSeries;
 	}
+
+
+
 	public String getMemo() {
 		return memo;
 	}
+
+
+
 	public void setMemo(String memo) {
 		this.memo = memo;
 	}
-	public Integer getMinStore() {
-		return minStore;
-	}
-	public void setMinStore(Integer minStore) {
-		this.minStore = minStore;
-	}
-	public String getModifyBatchMonth() {
-		return modifyBatchMonth;
-	}
-	public void setModifyBatchMonth(String modifyBatchMonth) {
-		this.modifyBatchMonth = modifyBatchMonth;
-	}
-	public Integer getMonthBatch() {
-		return monthBatch;
-	}
-	public void setMonthBatch(Integer monthBatch) {
-		this.monthBatch = monthBatch;
-	}
+
+
+
 	public String getName() {
 		return name;
 	}
+
+
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Integer getNetQuantity() {
-		return netQuantity;
+
+
+
+	public String getPartNo() {
+		return partNo;
 	}
-	public void setNetQuantity(Integer netQuantity) {
-		this.netQuantity = netQuantity;
+
+
+
+	public void setPartNo(String partNo) {
+		this.partNo = partNo;
 	}
-	public Integer getOffSales() {
-		return offSales;
-	}
-	public void setOffSales(Integer offSales) {
-		this.offSales = offSales;
-	}
-	public String getPlace() {
-		return place;
-	}
-	public void setPlace(String place) {
-		this.place = place;
-	}
-	public Integer getPrice() {
-		return price;
-	}
-	public void setPrice(Integer price) {
-		this.price = price;
-	}
-	public Integer getPriceConvertUnit() {
-		return priceConvertUnit;
-	}
-	public void setPriceConvertUnit(Integer priceConvertUnit) {
-		this.priceConvertUnit = priceConvertUnit;
-	}
-	public String getPriceWeigthPerUnit() {
-		return priceWeigthPerUnit;
-	}
-	public void setPriceWeigthPerUnit(String priceWeigthPerUnit) {
-		this.priceWeigthPerUnit = priceWeigthPerUnit;
-	}
-	public String getProperty() {
-		return property;
-	}
-	public void setProperty(String property) {
-		this.property = property;
-	}
+
+
+
 	public String getRealName() {
 		return realName;
 	}
+
+
+
 	public void setRealName(String realName) {
 		this.realName = realName;
 	}
-	public String getSalesType() {
-		return salesType;
+
+
+
+	public String getSupplierId() {
+		return supplierId;
 	}
-	public void setSalesType(String salesType) {
-		this.salesType = salesType;
+
+
+
+	public void setSupplierId(String supplierId) {
+		this.supplierId = supplierId;
 	}
-	public String getSeries() {
-		return series;
-	}
-	public void setSeries(String series) {
-		this.series = series;
-	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
-	public String getTaxNo() {
-		return taxNo;
-	}
-	public void setTaxNo(String taxNo) {
-		this.taxNo = taxNo;
-	}
-	public String getUnit() {
-		return unit;
-	}
-	public void setUnit(String unit) {
-		this.unit = unit;
-	}
-	public String getUses() {
-		return uses;
-	}
-	public void setUses(String uses) {
-		this.uses = uses;
-	}
+
+
+
 	public String getUseStatus() {
 		return useStatus;
 	}
+
+
+
 	public void setUseStatus(String useStatus) {
 		this.useStatus = useStatus;
 	}
+
+
+
 	public String getVulnerability() {
 		return vulnerability;
 	}
+
+
+
 	public void setVulnerability(String vulnerability) {
 		this.vulnerability = vulnerability;
 	}
+
+
+
 	public Integer getWeightProp() {
 		return weightProp;
 	}
+
+
+
 	public void setWeightProp(Integer weightProp) {
 		this.weightProp = weightProp;
 	}
-	public String getWeigthPerUnit() {
-		return weigthPerUnit;
-	}
-	public void setWeigthPerUnit(String weigthPerUnit) {
-		this.weigthPerUnit = weigthPerUnit;
-	}
-	public Date getModifyBatchDate() {
-		return modifyBatchDate;
-	}
-	public void setModifyBatchDate(Date modifyBatchDate) {
-		this.modifyBatchDate = modifyBatchDate;
-	}
+
+
+
+	
+	
+	
 	
 	
 	

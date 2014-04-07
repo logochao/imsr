@@ -21,9 +21,8 @@ public class PurchaseContractPaymentGrd extends ExtInfo{
 	private String  upperAmount="";//大写金额
 	private String  receiveType="";//收付款类型
 	private Date  	validityDate=null;//款项期限
-	private String  stats="";//状态
+	private String  status="";//状态
 	private String  memo="";//备注
-	private String  ledgerId="";//账套编号
 	
 	
 	public Integer getAmount() {
@@ -50,12 +49,6 @@ public class PurchaseContractPaymentGrd extends ExtInfo{
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getLedgerId() {
-		return ledgerId;
-	}
-	public void setLedgerId(String ledgerId) {
-		this.ledgerId = ledgerId;
-	}
 	public String getMemo() {
 		return memo;
 	}
@@ -74,11 +67,11 @@ public class PurchaseContractPaymentGrd extends ExtInfo{
 	public void setReceiveType(String receiveType) {
 		this.receiveType = receiveType;
 	}
-	public String getStats() {
-		return stats;
+	public String getStatus() {
+		return status;
 	}
-	public void setStats(String stats) {
-		this.stats = stats;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	public String getUpperAmount() {
 		return upperAmount;

@@ -14,92 +14,51 @@ import com.radius.base.utils.JsonDateSerializer;
  */
 public class PurchaseOrder extends ExtInfo {
 
-	private String purchaseOrderId="";//采购订货单编号
-	private String purchaseOrderMergerId="";//合并后的订单号
-	private String stats="";//状态
-	private Date   orderedDate=null;//订货日期
-	private Date   deliveryDate=null;//送货日期
-	private String supplierId="";//供货商编号
-	private String supplierName="";//供货商名称
-	private String tel="";//电话
-	private String linkMan="";//联系人
-	private String purchaser="";//采购员
-	private String terms="";//条款
-	private String fax="";//fax
-	private String customerBillId="";//客户订单号
-	private String deliveryPoint="";//送货地点
-	private String qualityStatus="";//质检状态
-	private String auditStatus="";//审核状态
-	private String instoreStatus="";//入库状态
-	private String paymentStatus="";//收货状态
-	private String paymentedStatus="";//结帐状态
-	private String purchaseReceiveOrderId="";//采购收货单编号
-	private String instoreId="";//入库单号
-	private String goodsQtId="";//商品质检单编号
-	private Integer orderedAmount=null;//订货金额
-	private Integer printTimes=null;//打印次数
-	private Date    printTime=null;//最新打印时间
-	private String  printAcc="";//最新打印帐号
-	private String  printRecord="";//最新打印记录
-	private String  operator="";//操作员
-	private String   ledgerId="";//账套编号
-	private String   memo="";//备注
-	
-	
-	public String getAuditStatus() {
-		return auditStatus;
+	private String 	purchaseOrderId;//采购订货单编号
+	private String 	supplierId;//供货商编号
+	private String 	supplierName;//供货商名称
+	private String 	linkMan;//联系人
+	private String 	mobile;//联系人手机
+	private String 	tel;//电话
+	private String 	fax;//fax
+	private String 	salesOrderId;//销售订货单编号
+	private Integer totalAmont;//订货金额
+	private Date   	orderedDate;//订货日期
+	private Date   	deliveryDate;//送货日期
+	private String 	terms;//条款
+	private String  memo;//备注
+	private String 	status;//状态
+	private Integer consolidatedFlg;//合单标识
+	private String 	consolidatedPurchaseOrderId;//合单后订单号
+	private Integer printTimes;//打印次数
+	private Date    printTime;//最新打印时间
+	private String  printAcc;//最新打印帐号
+	private String  printRecord;//最新打印记录
+	private String 	purchaser;//采购员
+	public Integer getConsolidatedFlg() {
+		return consolidatedFlg;
 	}
-	public void setAuditStatus(String auditStatus) {
-		this.auditStatus = auditStatus;
+	public void setConsolidatedFlg(Integer consolidatedFlg) {
+		this.consolidatedFlg = consolidatedFlg;
 	}
-	public String getCustomerBillId() {
-		return customerBillId;
+	public String getConsolidatedPurchaseOrderId() {
+		return consolidatedPurchaseOrderId;
 	}
-	public void setCustomerBillId(String customerBillId) {
-		this.customerBillId = customerBillId;
+	public void setConsolidatedPurchaseOrderId(String consolidatedPurchaseOrderId) {
+		this.consolidatedPurchaseOrderId = consolidatedPurchaseOrderId;
 	}
-	@JsonSerialize(using=JsonDateSerializer.class) 
+	@JsonSerialize(using=JsonDateSerializer.class)
 	public Date getDeliveryDate() {
 		return deliveryDate;
 	}
 	public void setDeliveryDate(Date deliveryDate) {
 		this.deliveryDate = deliveryDate;
 	}
-	public String getDeliveryPoint() {
-		return deliveryPoint;
-	}
-	public void setDeliveryPoint(String deliveryPoint) {
-		this.deliveryPoint = deliveryPoint;
-	}
 	public String getFax() {
 		return fax;
 	}
 	public void setFax(String fax) {
 		this.fax = fax;
-	}
-	public String getGoodsQtId() {
-		return goodsQtId;
-	}
-	public void setGoodsQtId(String goodsQtId) {
-		this.goodsQtId = goodsQtId;
-	}
-	public String getInstoreId() {
-		return instoreId;
-	}
-	public void setInstoreId(String instoreId) {
-		this.instoreId = instoreId;
-	}
-	public String getInstoreStatus() {
-		return instoreStatus;
-	}
-	public void setInstoreStatus(String instoreStatus) {
-		this.instoreStatus = instoreStatus;
-	}
-	public String getLedgerId() {
-		return ledgerId;
-	}
-	public void setLedgerId(String ledgerId) {
-		this.ledgerId = ledgerId;
 	}
 	public String getLinkMan() {
 		return linkMan;
@@ -113,30 +72,18 @@ public class PurchaseOrder extends ExtInfo {
 	public void setMemo(String memo) {
 		this.memo = memo;
 	}
-	public Integer getOrderedAmount() {
-		return orderedAmount;
+	public String getMobile() {
+		return mobile;
 	}
-	public void setOrderedAmount(Integer orderedAmount) {
-		this.orderedAmount = orderedAmount;
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
 	}
-	@JsonSerialize(using=JsonDateSerializer.class) 
+	@JsonSerialize(using=JsonDateSerializer.class)
 	public Date getOrderedDate() {
 		return orderedDate;
 	}
 	public void setOrderedDate(Date orderedDate) {
 		this.orderedDate = orderedDate;
-	}
-	public String getPaymentedStatus() {
-		return paymentedStatus;
-	}
-	public void setPaymentedStatus(String paymentedStatus) {
-		this.paymentedStatus = paymentedStatus;
-	}
-	public String getPaymentStatus() {
-		return paymentStatus;
-	}
-	public void setPaymentStatus(String paymentStatus) {
-		this.paymentStatus = paymentStatus;
 	}
 	public String getPrintAcc() {
 		return printAcc;
@@ -168,35 +115,23 @@ public class PurchaseOrder extends ExtInfo {
 	public void setPurchaseOrderId(String purchaseOrderId) {
 		this.purchaseOrderId = purchaseOrderId;
 	}
-	public String getPurchaseOrderMergerId() {
-		return purchaseOrderMergerId;
-	}
-	public void setPurchaseOrderMergerId(String purchaseOrderMergerId) {
-		this.purchaseOrderMergerId = purchaseOrderMergerId;
-	}
 	public String getPurchaser() {
 		return purchaser;
 	}
 	public void setPurchaser(String purchaser) {
 		this.purchaser = purchaser;
 	}
-	public String getPurchaseReceiveOrderId() {
-		return purchaseReceiveOrderId;
+	public String getSalesOrderId() {
+		return salesOrderId;
 	}
-	public void setPurchaseReceiveOrderId(String purchaseReceiveOrderId) {
-		this.purchaseReceiveOrderId = purchaseReceiveOrderId;
+	public void setSalesOrderId(String salesOrderId) {
+		this.salesOrderId = salesOrderId;
 	}
-	public String getQualityStatus() {
-		return qualityStatus;
+	public String getStatus() {
+		return status;
 	}
-	public void setQualityStatus(String qualityStatus) {
-		this.qualityStatus = qualityStatus;
-	}
-	public String getStats() {
-		return stats;
-	}
-	public void setStats(String stats) {
-		this.stats = stats;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	public String getSupplierId() {
 		return supplierId;
@@ -222,12 +157,14 @@ public class PurchaseOrder extends ExtInfo {
 	public void setTerms(String terms) {
 		this.terms = terms;
 	}
-	public String getOperator() {
-		return operator;
+	public Integer getTotalAmont() {
+		return totalAmont;
 	}
-	public void setOperator(String operator) {
-		this.operator = operator;
+	public void setTotalAmont(Integer totalAmont) {
+		this.totalAmont = totalAmont;
 	}
+	
+	
 	
 	
 	

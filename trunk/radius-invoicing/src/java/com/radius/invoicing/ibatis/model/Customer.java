@@ -20,34 +20,32 @@ public class Customer extends ExtInfo{
 	private String address="";//地址
 	private String linkMan="";//联系人
 	private String contactInfo="";//联系方式（存放手机号）
-	private String tel1="";//电话1
-	private String tel2="";//电话2
-	private String tel3="";//电话3
-	private String fax1="";//传真1
-	private String fax2="";//传真2
-	private String fax3="";//传真3
-	private String paymentedType="";//结帐方式
+	private String tel="";//电话
+	private String fax="";//传真
 	private String customerIllustrate="";//客户说明
 	private String customerProperty="";//客户性质
 	private String officeAddress="";//办公地址
-	private YesOrNoEnums yesOrNo=null;//是否送货 
 	private String postCode="";//邮编
-	private String salesMan="";//业务员
-	private String payType="";//支付类型
-	private String deliveryType="";//送货方式
-	private String bankAccNo="";//银行帐号
-	private String taxNo="";//税号
 	private String url="";//网址
 	private String email="";//Email
+	private YesOrNoEnums yesOrNo=null;//是否送货 
+	private String deliveryType="";//送货方式
+	private String payType="";//支付类型
 	private String accountBank="";//开户行
 	private String accountName="";//帐户名
-	private String accountNo="";//帐号
-	private String memo="";//备注
-	private String paymentedMan="";//结款人
+	private String bankAccNo="";//银行帐号
+	private String taxNo="";//税号
 	private String voucher="";//票据
 	private Integer goodsBillsDate=null;//货期
 	private Integer orderAmount=null;//起订额
+	private String salesMan="";//业务员
+	private String memo="";//备注
 	private String ledgerId="";//账套编号
+	
+	
+	//private String accountNo="";//帐号
+	//private String paymentedType="";//结帐方式
+	//private String paymentedMan="";//结款人
 	
 	public String getAb() {
 		return ab;
@@ -66,12 +64,6 @@ public class Customer extends ExtInfo{
 	}
 	public void setAccountName(String accountName) {
 		this.accountName = accountName;
-	}
-	public String getAccountNo() {
-		return accountNo;
-	}
-	public void setAccountNo(String accountNo) {
-		this.accountNo = accountNo;
 	}
 	public String getAddress() {
 		return address;
@@ -115,23 +107,11 @@ public class Customer extends ExtInfo{
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getFax1() {
-		return fax1;
+	public String getFax() {
+		return fax;
 	}
-	public void setFax1(String fax1) {
-		this.fax1 = fax1;
-	}
-	public String getFax2() {
-		return fax2;
-	}
-	public void setFax2(String fax2) {
-		this.fax2 = fax2;
-	}
-	public String getFax3() {
-		return fax3;
-	}
-	public void setFax3(String fax3) {
-		this.fax3 = fax3;
+	public void setFax(String fax) {
+		this.fax = fax;
 	}
 	public Integer getGoodsBillsDate() {
 		return goodsBillsDate;
@@ -181,18 +161,6 @@ public class Customer extends ExtInfo{
 	public void setOrderAmount(Integer orderAmount) {
 		this.orderAmount = orderAmount;
 	}
-	public String getPaymentedMan() {
-		return paymentedMan;
-	}
-	public void setPaymentedMan(String paymentedMan) {
-		this.paymentedMan = paymentedMan;
-	}
-	public String getPaymentedType() {
-		return paymentedType;
-	}
-	public void setPaymentedType(String paymentedType) {
-		this.paymentedType = paymentedType;
-	}
 	public String getPayType() {
 		return payType;
 	}
@@ -217,23 +185,11 @@ public class Customer extends ExtInfo{
 	public void setTaxNo(String taxNo) {
 		this.taxNo = taxNo;
 	}
-	public String getTel1() {
-		return tel1;
+	public String getTel() {
+		return tel;
 	}
-	public void setTel1(String tel1) {
-		this.tel1 = tel1;
-	}
-	public String getTel2() {
-		return tel2;
-	}
-	public void setTel2(String tel2) {
-		this.tel2 = tel2;
-	}
-	public String getTel3() {
-		return tel3;
-	}
-	public void setTel3(String tel3) {
-		this.tel3 = tel3;
+	public void setTel(String tel) {
+		this.tel = tel;
 	}
 	public String getUrl() {
 		return url;
@@ -254,6 +210,9 @@ public class Customer extends ExtInfo{
 		this.yesOrNo = yesOrNo;
 	}
 	
+	//private String accountNo="";//帐号
+	//private String paymentedType="";//结帐方式
+	//private String paymentedMan="";//结款人
 	
 	
 	
