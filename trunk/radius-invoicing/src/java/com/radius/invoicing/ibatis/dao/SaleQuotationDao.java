@@ -2,7 +2,7 @@ package com.radius.invoicing.ibatis.dao;
 
 import java.util.List;
 
-import com.radius.invoicing.ibatis.model.SaleQuotation;
+import com.radius.invoicing.ibatis.model.SalesQuotation;
 
 /**
  * @author <a href="mailto:goodluck.sunlight@gmail.com">陈波宁</a>
@@ -17,33 +17,33 @@ public interface SaleQuotationDao {
 	 * @param id
 	 * @return
 	 */
-	public SaleQuotation getSaleQuotationById(String id);
+	public SalesQuotation getSaleQuotationById(String id);
 
 	/**
 	 * 通过条件查询销售报价
 	 * @param saleQuotation
 	 * @return
 	 */
-	public List<SaleQuotation> getSaleQuotationByCondition(
-			SaleQuotation saleQuotation);
+	public List<SalesQuotation> getSaleQuotationByCondition(
+			SalesQuotation saleQuotation);
 
 	/**
 	 * 保存销售报价
 	 * @param saleQuotation
 	 */
-	public void insertSaleQuotation(SaleQuotation saleQuotation);
+	public void insertSaleQuotation(SalesQuotation saleQuotation);
 
 	/**
 	 * 更新销售报价
 	 * @param saleQuotation
 	 * @return
 	 */
-	public boolean updateSaleQuotationById(SaleQuotation saleQuotation);
+	public boolean updateSaleQuotationById(SalesQuotation saleQuotation);
 
 	/**
 	 * 删除销售报价
 	 * @param saleQuotation
 	 */
-	public void deleteSaleQuotation(SaleQuotation saleQuotation);
+	public void deleteSaleQuotation(SalesQuotation saleQuotation);
 
 }

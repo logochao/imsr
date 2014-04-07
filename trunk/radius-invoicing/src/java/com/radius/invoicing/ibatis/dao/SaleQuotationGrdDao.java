@@ -2,7 +2,7 @@ package com.radius.invoicing.ibatis.dao;
 
 import java.util.List;
 
-import com.radius.invoicing.ibatis.model.SaleQuotationGrd;
+import com.radius.invoicing.ibatis.model.SalesQuotationGrd;
 
 /**
  * @author <a href="mailto:goodluck.sunlight@gmail.com">陈波宁</a>
@@ -17,39 +17,39 @@ public interface SaleQuotationGrdDao {
 	 * @param grd
 	 * @return
 	 */
-	public SaleQuotationGrd getSaleQuotationGrdByPk(SaleQuotationGrd grd);
+	public SalesQuotationGrd getSaleQuotationGrdByPk(SalesQuotationGrd grd);
 
 	/**
 	 * 根据条件获取销售报价明细
 	 * @param grd
 	 * @return
 	 */
-	public List<SaleQuotationGrd> getSaleQuotationGrdByCondition(
-			SaleQuotationGrd grd);
+	public List<SalesQuotationGrd> getSaleQuotationGrdByCondition(
+			SalesQuotationGrd grd);
 
 	/**
 	 * 保存销售报价订单
 	 * @param grd
 	 */
-	public void insertSaleQuotationGrd(SaleQuotationGrd grd);
+	public void insertSaleQuotationGrd(SalesQuotationGrd grd);
 
 	/**
 	 * 批量保存销售报价
 	 * @param list
 	 */
-	public void batchInsertSaleQuotationGrd(List<SaleQuotationGrd> list);
+	public void batchInsertSaleQuotationGrd(List<SalesQuotationGrd> list);
 
 	/**
 	 * 更新销售报价信息
 	 * @param grd
 	 * @return
 	 */
-	public boolean updateSaleQuotationGrdByPk(SaleQuotationGrd grd);
+	public boolean updateSaleQuotationGrdByPk(SalesQuotationGrd grd);
 
 	/**
 	 * 删除销售报价
 	 * @param grd
 	 */
-	public void deleteSaleQuotationGrd(SaleQuotationGrd grd);
+	public void deleteSaleQuotationGrd(SalesQuotationGrd grd);
 
 }

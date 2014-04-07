@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.radius.base.dao.ibatis.BaseIbatisDaoImpl;
 import com.radius.invoicing.ibatis.dao.SaleQuotationDao;
-import com.radius.invoicing.ibatis.model.SaleQuotation;
+import com.radius.invoicing.ibatis.model.SalesQuotation;
 
 /**
  * @author <a href="mailto:goodluck.sunlight@gmail.com">陈波宁</a>
@@ -18,7 +18,7 @@ import com.radius.invoicing.ibatis.model.SaleQuotation;
  * 类说明 销售报价Dao
  */
 @Repository
-public class SaleQuotationDaoImpl extends BaseIbatisDaoImpl<SaleQuotation> implements SaleQuotationDao{
+public class SaleQuotationDaoImpl extends BaseIbatisDaoImpl<SalesQuotation> implements SaleQuotationDao{
 
 	private final String SQLMAPNAMESPACE="saleQuotationSqlMap"; 
 	
@@ -27,7 +27,7 @@ public class SaleQuotationDaoImpl extends BaseIbatisDaoImpl<SaleQuotation> imple
 	 * @param id
 	 * @return
 	 */
-	public SaleQuotation getSaleQuotationById(String id){
+	public SalesQuotation getSaleQuotationById(String id){
 		return this.getObjectByCondition(id, SQLMAPNAMESPACE+".getSaleQuotationById");
 	}
 	
@@ -36,7 +36,7 @@ public class SaleQuotationDaoImpl extends BaseIbatisDaoImpl<SaleQuotation> imple
 	 * @param saleQuotation
 	 * @return
 	 */
-	public List<SaleQuotation> getSaleQuotationByCondition(SaleQuotation saleQuotation){
+	public List<SalesQuotation> getSaleQuotationByCondition(SalesQuotation saleQuotation){
 		return this.getListObject(saleQuotation, SQLMAPNAMESPACE+".getSaleQuotationByCondition");
 	}
 	
@@ -44,7 +44,7 @@ public class SaleQuotationDaoImpl extends BaseIbatisDaoImpl<SaleQuotation> imple
 	 * 保存销售报价
 	 * @param saleQuotation
 	 */
-	public void insertSaleQuotation(SaleQuotation saleQuotation){
+	public void insertSaleQuotation(SalesQuotation saleQuotation){
 		this.insertObject(saleQuotation, SQLMAPNAMESPACE+".insert");
 	}
 	
@@ -53,7 +53,7 @@ public class SaleQuotationDaoImpl extends BaseIbatisDaoImpl<SaleQuotation> imple
 	 * @param saleQuotation
 	 * @return
 	 */
-	public boolean updateSaleQuotationById(SaleQuotation saleQuotation){
+	public boolean updateSaleQuotationById(SalesQuotation saleQuotation){
 		return this.updateObject(saleQuotation, SQLMAPNAMESPACE+".updateSaleQuotationById")==1;
 	}
 	
@@ -61,7 +61,7 @@ public class SaleQuotationDaoImpl extends BaseIbatisDaoImpl<SaleQuotation> imple
 	 * 删除销售报价
 	 * @param saleQuotation
 	 */
-	public void deleteSaleQuotation(SaleQuotation saleQuotation){
+	public void deleteSaleQuotation(SalesQuotation saleQuotation){
 		this.deleteObject(saleQuotation, SQLMAPNAMESPACE+".deleteSaleQuotation");
 	}
 }
