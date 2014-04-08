@@ -48,7 +48,6 @@ import com.radius.invoicing.sysmanage.service.SpecTypeService;
  */
 @Controller
 @Scope("request")
-@SuppressWarnings("static-access")
 public class CommonController extends BaseController{
 
 	@Autowired(required=false)
