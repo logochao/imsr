@@ -3,21 +3,23 @@
  */
 package com.radius.invoicing.customermange.action;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.radius.base.controller.BaseController;
 import com.radius.base.page.EasyuiSplitPager;
 import com.radius.invoicing.customermange.service.CustomerService;
-import com.radius.invoicing.enums.LinkManTypeEnums;
 import com.radius.invoicing.ibatis.model.Customer;
 import com.radius.invoicing.ibatis.model.LinkMan;
 
@@ -31,9 +33,35 @@ import com.radius.invoicing.ibatis.model.LinkMan;
 @Scope("request")
 public class CustomerController extends BaseController {
 
+	private Logger logger= Logger.getLogger(this.getClass());
+	
+	private final String prefix="/jsp/business/customer/";
+	
+	private String customer_manager_view= null;//客户信息管理界面
+	
 	@Resource(name="customerServiceImpl")
 	private CustomerService customerService;
 	
+	
+	
+	@PostConstruct
+	public void init(){
+		if(customer_manager_view==null){
+			customer_manager_view=prefix+"business_customer_index.jsp";//
+		}
+	}
+	
+	/**
+	 * 客户管理
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/customer/manager/customer/customer_manager_view.html")
+	public ModelAndView customerManager(HttpServletRequest request,HttpServletResponse response)throws Exception{
+		return new  ModelAndView(customer_manager_view);
+	}
 	
 	@RequestMapping("/customer/split_page.html")
 	@ResponseBody
@@ -53,10 +81,21 @@ public class CustomerController extends BaseController {
 	@ResponseBody
 	public EasyuiSplitPager<LinkMan> getLinkManSplitPage(@PathVariable String type,HttpServletRequest request,HttpServletResponse response,LinkMan linkMan)throws Exception{
 		if("sales".equalsIgnoreCase(type)){
-			linkMan.setLinkType(LinkManTypeEnums.CUSTOMER.getId());//客户
+			//linkMan.setLinkType(LinkManTypeEnums.CUSTOMER.getId());//客户
 		}else if("supplier".equalsIgnoreCase(type)){
-			linkMan.setLinkType(LinkManTypeEnums.SUPPLIER.getId());//供应商
+			//linkMan.setLinkType(LinkManTypeEnums.SUPPLIER.getId());//供应商
 		}
 		return customerService.getLinkManInfoSplitPage(linkMan);
+	}
+	
+	
+	
+	
+	
+	@PreDestroy
+	public void destroy(){
+		if(customer_manager_view!=null){
+			customer_manager_view=null;
+		}
 	}
 }
