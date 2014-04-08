@@ -15,7 +15,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.radius.base.controller.BaseController;
 import com.radius.base.jstl.RadiusFunctions;
@@ -33,7 +32,7 @@ import com.radius.invoicing.sysmanage.service.SysInvoicingService;
 @Scope("request")
 public class ResourceController extends BaseController{
 	
-	private Logger logger=Logger.getLogger(this.getClass());
+//	private Logger logger=Logger.getLogger(this.getClass());
 	private String prefix="/jsp/resource/";
 	private String resouce_manage_view=null;
 	private String resource_add_view=null;
