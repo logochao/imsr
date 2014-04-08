@@ -37,7 +37,7 @@ public class SalesContract extends ExtInfo{
 	private String   printAcc;//最新打印帐号
 	private String   printreCord;//最新打印记录
 	private String   memo;//合同备注
-	private String   stats;//状态
+	private String   status;//状态
 	private String   auditedStatus;//审批状态
 	private String   checkedStatus;//验货状态
 	private Date     validityDate;//有效期至
@@ -173,11 +173,11 @@ public class SalesContract extends ExtInfo{
 	public void setSignTime(Date signTime) {
 		this.signTime = signTime;
 	}
-	public String getStats() {
-		return stats;
+	public String getStatus() {
+		return status;
 	}
-	public void setStats(String stats) {
-		this.stats = stats;
+	public void setStats(String status) {
+		this.status = status;
 	}
 	public String getTel() {
 		return tel;

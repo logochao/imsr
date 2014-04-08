@@ -65,7 +65,7 @@
 	 <select id="getsalesQuotationGrdByPk" parameterClass="salesQuotationGrd" resultMap="salesQuotationGrd">
 	 	SELECT <include refid="salesQuotationGrdFileds"/>
 	 	FROM RS_SALES_QUOTATION_GRD
-	 	WHERE quotation_id =#quotationId# AND goods_id=#goodsId#
+	 	WHERE quotation_id =#salesQuotationId# AND goods_id=#goodsId#
 	 </select>
    
    	<insert id="insert" parameterClass="salesQuotationGrd">
@@ -139,7 +139,7 @@
   			<isNotNull  prepend="," property="verifier">verifier = #verifier#,verifydate = now() </isNotNull>
   			<isNotNull prepend="," property="yesOrNo">delivery_or_not=#yesOrNo#</isNotNull> 
    		</dynamic>
-   		WHERE quotation_id=#quotationId# AND goods_id=#goodsId#
+   		WHERE quotation_id=#salesQuotationId# AND goods_id=#goodsId#
    	</update>
    	<select id="getsalesQuotationGrdByCondition" parameterClass="salesQuotationGrd" resultMap="salesQuotationGrd">
    		SELECT <include refid="salesQuotationGrdFileds"/>
