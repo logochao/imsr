@@ -195,7 +195,7 @@
    	
    	<update id="updateStatusByPurchaseOrderId" parameterClass="purchaseOrder">
    		UPDATE RS_PURCHASE_ORDER 
-		SET `status`=#stats#
+		SET status=#status#
 		WHERE purchase_order_id = #purchaseOrderId#
    	</update>
    	

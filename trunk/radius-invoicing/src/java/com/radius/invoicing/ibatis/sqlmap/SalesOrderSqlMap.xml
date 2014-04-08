@@ -203,16 +203,16 @@
    	
    	<update id="updateSalesOrderStatusBySalesOrderId" parameterClass="salesOrder">
    		UPDATE RS_SALES_ORDER
-   		SET `status`=#stats#
+   		SET status=#status#
    		WHERE sales_order_id=#salesOrderId#
    	</update>
    	<!-- 未验证方法 -->
    	<select id="getSalesOrderBySupplierId" parameterClass="java.lang.String" resultMap="salesOrder">
    		SELECT so.* 
-		FROM `rs_sales_order` AS  so ,(
+		FROM RS_SALES_ORDER AS  so ,(
 			SELECT sogg.`sales_order_id` sales_order_id 
-			FROM `rs_supplier_goods`  sg
-			INNER JOIN `rs_sales_order_goods_grd` sogg  
+			FROM RS_SUPPLIER_GOODS  sg
+			INNER JOIN RS_SALES_ORDER_GOODS_GRD sogg  
 			ON sg.`goods_id`= sogg.`goods_id`
 			AND sg.`supplier_id` =#supplierId# 
 		)  AS temp 

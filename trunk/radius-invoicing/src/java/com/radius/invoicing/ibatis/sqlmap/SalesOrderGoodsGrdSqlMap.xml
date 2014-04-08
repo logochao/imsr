@@ -108,10 +108,11 @@
 			<isNotNull  property="amount">#amount#,</isNotNull> 
 			<isNotNull  property="upperAmount">#upperAmount#,</isNotNull> 
 			<isNotNull  property="memo">#memo#,</isNotNull> 
-			<isNotNull  property="status">#status,</isNotNull> 
+			<isNotNull  property="status">#status#,</isNotNull> 
 	 		<isNotNull  property="ledgerId">#ledgerId#,</isNotNull> 
-	 		<isNotNull  property="operator">operator,</isNotNull> 
-   			 #creater#,now()
+	 		<isNotNull  property="operator">#operator#,</isNotNull> 
+   			 #creater#,
+			 now()
    		)
    	</insert>
    

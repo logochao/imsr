@@ -160,7 +160,7 @@
    	
    	<update id="updateSalesContractGoodsGrdStatusByContractId" parameterClass="salesContractGoodsGrd">
    		UPDATE RS_SALES_CONTRACT_GOODS_GRD
-   		SET STATUS=#stats#
+   		SET status=#status#
    		WHERE contract_id =#contractId#
    	</update>
 </sqlMap>
