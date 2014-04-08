@@ -46,7 +46,7 @@ public class SalesContractCom {
 				goods=cacheMap.get(key);
 				logger.info("合同商品列表 "+key +" ---> "+goods);
 				//设置状态
-				goods.setStats(status);
+				goods.setStatus(status);
 				goods.setLedgerId(ledgerId);
 				goodsList.add(goods);
 			}
@@ -69,8 +69,8 @@ public class SalesContractCom {
 		Float totalAmount = ServletRequestUtils.getFloatParameter(request, "totalAmount", 0f);
 		Integer amount=Integer.valueOf(((Float)(totalAmount.floatValue()*100)).intValue()+"");
 		payment.setTotalAmount(amount);
-		payment.setPaymentType(ServletRequestUtils.getStringParameter(request, "paymentType",""));//支付类型
-		payment.setCashType(ServletRequestUtils.getStringParameter(request, "cashType", ""));//币种类型
+		payment.setPaymentType(ServletRequestUtils.getIntParameter(request, "paymentType",0));//支付类型
+		payment.setCashType(ServletRequestUtils.getIntParameter(request, "cashType", 0));//币种类型
 		payment.setUpperAmount(ServletRequestUtils.getStringParameter(request, "upperAmount", ""));//大写货币
 		payment.setLedgerId(ledgerId);
 		return payment;
@@ -94,7 +94,7 @@ public class SalesContractCom {
 				key = (String) entry.getKey(); 
 				payment=memcache.get(key);
 				logger.info("合同支付详情列表 "+key +" ---> "+payment);
-				payment.setStats(status);//设置状态
+				payment.setStatus(status);//设置状态
 				payment.setLedgerId(ledgerId);
 				paymentsList.add(payment);
 			}

@@ -322,11 +322,11 @@ public class SalesContractServiceImpl implements SalesContractService,Constants 
 				//2.构建相关的待保存对象
 				salesContract.setLedgerId(ledgerId);
 				//销售合同商品
-				List<SalesContractGoodsGrd> goodsList=SalesContractCom.getSalesContractGoodsGrdByRequest(ledgerId,goodsMemcacheKey, salesContract.getId(), salesContract.getStats());
+				List<SalesContractGoodsGrd> goodsList=SalesContractCom.getSalesContractGoodsGrdByRequest(ledgerId,goodsMemcacheKey, salesContract.getId(), salesContract.getStatus());
 				//合同支付
 		//		SalesContractPayment payment = SalesContractCom.getSalesContractPaymentByRequest(request, salesContract.getId());
 				//合同支付列表
-				List<SalesContractPaymentGrd> paymentsList = SalesContractCom.getSalesContractPaymentGrdByRequest(salesContract.getId(),ledgerId, paymentMemcacheKey, salesContract.getStats());
+				List<SalesContractPaymentGrd> paymentsList = SalesContractCom.getSalesContractPaymentGrdByRequest(salesContract.getId(),ledgerId, paymentMemcacheKey, salesContract.getStatus());
 				//保函条款
 				
 				//合同扫描件列表
@@ -350,26 +350,26 @@ public class SalesContractServiceImpl implements SalesContractService,Constants 
 					code="1";
 					logger.info(message);
 				}else if(temp!=null){////3.1 存在则调用更新对象 只更新对应的状态值和修改时间
-					String status=salesContract.getStats();
+					String status=salesContract.getStatus();
 					String contractId=salesContract.getId();
 					//保存销售合同
 					//salesContractDao.updateSalesContractById(salesContract);
 					salesContractDao.updateSalesContractStatusById(salesContract);
 					//销售合同商品列表
 					SalesContractGoodsGrd goodsGrd=new SalesContractGoodsGrd();
-					goodsGrd.setStats(status);
+					goodsGrd.setStatus(status);
 					goodsGrd.setContractId(contractId);
 					salesContractGoodsGrdDao.updateSalesContractGoodsGrdStatusByContractId(goodsGrd);
 					
 					//保存支付		
 					SalesContractPayment salesContractPayment=new SalesContractPayment();
 					salesContractPayment.setContractId(contractId);
-					salesContractPayment.setStats(status);
+					salesContractPayment.setStatus(status);
 					contractPaymentDao.updateSalesContractPaymentStatusByContractId(salesContractPayment);
 					//保存支付列表
 					SalesContractPaymentGrd paymentGrd=new SalesContractPaymentGrd();
 					paymentGrd.setContractId(contractId);
-					paymentGrd.setStats(status);
+					paymentGrd.setStatus(status);
 					
 					contractPaymentGrdDao.updateSalesContractPaymentGrdStatusBycontractId(paymentGrd);
 					//保存合同扫描件列表
