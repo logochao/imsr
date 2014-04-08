@@ -72,7 +72,7 @@ public class PurchaseContractCompent {
 				product=memcached.get(key);
 				logger.info("采购合同商品列表 "+key +" ---> "+product);
 				//设置状态
-				product.setStats(status);
+				product.setStatus(status);
 				product.setLedgerId(ledgerId);
 				product.setCreater(creater);
 				list.add(product);
@@ -105,7 +105,7 @@ public class PurchaseContractCompent {
 				payment=memcached.get(key);
 				logger.info("采购合同支付列表 "+key +" ---> "+payment);
 				//设置状态
-				payment.setStats(status);
+				payment.setStatus(status);
 				payment.setLedgerId(ledgerId);
 				payment.setCreater(creater);
 				list.add(payment);

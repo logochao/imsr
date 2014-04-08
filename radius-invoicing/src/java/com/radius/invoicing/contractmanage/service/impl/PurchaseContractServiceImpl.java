@@ -359,7 +359,7 @@ public class PurchaseContractServiceImpl implements Constants, PurchaseContractS
 	public JsonUtils savePurchaseContractInfo(String statusCode,PurchaseContract purchaseContract,PurchaseContractPayment payment,String productKey,String payKey,String scanKey)throws Exception{
 		String operater=purchaseContract.getCreater();
 		String ledgerId =purchaseContract.getLedgerId();
-		String status = purchaseContract.getStats();
+		String status = purchaseContract.getStatus();
 		String contractId= purchaseContract.getId();
 		boolean success=false;
 		String message="操作失败";
@@ -401,19 +401,19 @@ public class PurchaseContractServiceImpl implements Constants, PurchaseContractS
 				//采购商品
 				PurchaseContractGoodsGrd product =new PurchaseContractGoodsGrd();
 				product.setContractId(contractId);
-				product.setStats(status);
+				product.setStatus(status);
 				product.setReviser(operater);
 				purchaseContractGoodsGrdDao.updatePurchaseContractGoodsGrdStatusByContractId(product);
 				//采购支付(****支付合同应该与当前合同状态有关)
 				PurchaseContractPayment payment2=new PurchaseContractPayment();
 				payment2.setContractId(contractId);
-				payment2.setStats(status);
+				payment2.setStatus(status);
 				payment2.setReviser(operater);
 				purchaseContractPaymentDao.updateStatusByContractId(payment);
 				//采购支付详情
 				PurchaseContractPaymentGrd paymentGrd =new PurchaseContractPaymentGrd();
 				paymentGrd.setContractId(contractId);
-				paymentGrd.setStats(status);
+				paymentGrd.setStatus(status);
 				paymentGrd.setReviser(operater);
 				purchaseContractPaymentGrdDao.updatePurchaseContractPaymentGrdStatusBycontractId(paymentGrd);
 				//合同扫描件
