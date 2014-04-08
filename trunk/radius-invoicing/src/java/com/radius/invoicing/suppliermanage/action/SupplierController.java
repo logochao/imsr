@@ -27,7 +27,7 @@ import com.radius.invoicing.suppliermanage.service.SupplierService;
 public class SupplierController extends BaseController {
 
 	
-	private Logger logger=Logger.getLogger(this.getClass());
+//	private Logger logger=Logger.getLogger(this.getClass());
 	
 	@Autowired(required=false)
 	@Qualifier("supplierServiceImpl")
