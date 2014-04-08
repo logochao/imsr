@@ -1,14 +1,9 @@
 package com.radius.invoicing.goodsmanage.service;
 
 import com.radius.base.page.EasyuiSplitPager;
+import com.radius.base.utils.JsonUtils;
 import com.radius.invoicing.ibatis.model.Goods;
 
-/**
- * @author <a href="mailto:goodluck.sunlight@gmail.com">陈波宁</a>
- * @version 创建时间：2013-12-8 下午12:53:04<br/>
- * Copyright (c) 2013 by 陈波宁.<br/>
- * 类说明
- */
 public interface GoodsService {
 
 	/**
@@ -17,5 +12,26 @@ public interface GoodsService {
 	 * @return
 	 */
 	public EasyuiSplitPager<Goods> getGoodsSplitPage(Goods goods);
+
+	/**
+	 * 保存商品信息 <br> 1.如果存在,则更新;<br/>2.如果不存在,则添加
+	 * @param goods
+	 * @return
+	 */
+	public JsonUtils saveGoodsInfo(Goods goods, String statusCode);
+
+	/**
+	 * 更新商品信息
+	 * @param goods
+	 * @return
+	 */
+	public JsonUtils updateGoodsInfo(Goods goods, String statusCode);
+
+	/**
+	 * 添加商品信息
+	 * @param goods
+	 * @return
+	 */
+	public JsonUtils addGoodsInfo(Goods goods, String statusCode);
 
 }
