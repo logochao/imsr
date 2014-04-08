@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.radius.base.page.EasyuiSplitPager;
+import com.radius.base.utils.JsonUtils;
 import com.radius.invoicing.goodsmanage.service.GoodsService;
 import com.radius.invoicing.ibatis.model.Goods;
 
@@ -70,8 +71,18 @@ public class GoodsController {
 		return new ModelAndView(goods_manager_view);
 	}
 	
-	
-	
+	/**
+	 * 
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public JsonUtils addGoodInfo(HttpServletRequest request,HttpServletResponse response)throws Exception{
+		
+		
+		return null;
+	}
 	
 	
 	
