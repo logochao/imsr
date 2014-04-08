@@ -79,7 +79,7 @@ public class SalesOrderServiceImpl implements Constants, SalesOrderService{
 			SalesOrderGoodsGrd goodGrd=memcache.get(mapKey);
 			if(grd!=null){//更新map对象
 				goodGrd.setAmount(grd.getAmount());
-				goodGrd.setQuantity(grd.getQuantity());
+				goodGrd.setQuantityUnit(grd.getQuantityUnit());
 				logger.error("key "+key+",已经将其缓存在对象中 "+cache);
 				grd=goodGrd;
 			}
@@ -142,7 +142,7 @@ public class SalesOrderServiceImpl implements Constants, SalesOrderService{
 		String resultCode="0";
 		//1.销售订单信息
 	    //2.销售订单商品
-		List<SalesOrderGoodsGrd> salesOrderGoodsGrdList=SalesOrderCompent.getSalesOrderGoodsGrdByMemcached(ledgerId, salesOrderGoodsGrdMemcachedkey, salesContractId, salesOrder.getStats(),salesOrder.getCreater());
+		List<SalesOrderGoodsGrd> salesOrderGoodsGrdList=SalesOrderCompent.getSalesOrderGoodsGrdByMemcached(ledgerId, salesOrderGoodsGrdMemcachedkey, salesContractId, salesOrder.getStatus(),salesOrder.getCreater());
 		
 		SalesOrder temp=salesOrderDao.getSalesOrderByPk(salesOrder.getSalesOrderId());//
 		if(temp==null){
@@ -159,7 +159,7 @@ public class SalesOrderServiceImpl implements Constants, SalesOrderService{
 			salesOrderDao.updateSalesOrderStatusBySalesOrderId(salesOrder);
 			
 			SalesOrderGoodsGrd salesOrderGoodsGrd = new SalesOrderGoodsGrd();
-			salesOrderGoodsGrd.setStats(salesOrder.getStats());
+			salesOrderGoodsGrd.setStatus(salesOrder.getStatus());
 			salesOrderGoodsGrd.setOrderId(salesOrder.getSalesOrderId());
 			
 			salesOrderGoodsGrdDao.updateSalesOrderGoodsGrdStatusByPK(salesOrderGoodsGrd);

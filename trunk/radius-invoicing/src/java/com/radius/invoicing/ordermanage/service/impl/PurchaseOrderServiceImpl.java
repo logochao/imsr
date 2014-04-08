@@ -64,7 +64,7 @@ public class PurchaseOrderServiceImpl implements Constants, PurchaseOrderService
 			PurchaseOrderGrd grd = memcache.get(mapKey);
 			if(grd!=null){//更新map对象
 				grd.setAmount(purchaseOrderGrd.getAmount());
-				grd.setQuantity(purchaseOrderGrd.getQuantity());
+				grd.setQuantityUnit(purchaseOrderGrd.getQuantityUnit());
 				logger.error("key "+key+",已经将其缓存在对象中 "+cache);
 				purchaseOrderGrd=grd;
 			}
@@ -127,7 +127,7 @@ public class PurchaseOrderServiceImpl implements Constants, PurchaseOrderService
 		boolean success=false;
 		String message="操作失败";
 		String resultCode="0";
-		String status=purchaseOrder.getStats();
+		String status=purchaseOrder.getStatus();
 		String purchaseOrderId = purchaseOrder.getPurchaseOrderId();
 		List<PurchaseOrderGrd> purchaseOrderGrdList = PurchaseOrderCompent.getPurchaseOrderGoodsByMemcached(purchaseOrder.getLedgerId(), purchaseOrderGrdMemcachedKey,purchaseOrderId, purchaseOrder.getOperator(), status);
 		
@@ -137,7 +137,7 @@ public class PurchaseOrderServiceImpl implements Constants, PurchaseOrderService
 			purchaseOrderGrdDao.batchInsertPurchaseOrderGrd(purchaseOrderGrdList);
 			success=true;
 			message="添加采购订单相关信息成功!!!";
-			resultCode=""+purchaseOrder.getStats();
+			resultCode=""+purchaseOrder.getStatus();
 			logger.info(message);
 		}else{
 			//更新采购订单状态
@@ -146,7 +146,7 @@ public class PurchaseOrderServiceImpl implements Constants, PurchaseOrderService
 			success=true;
 			message="更新销售订单相关信息成功!!!";
 			logger.info(message);
-			resultCode=""+purchaseOrder.getStats();
+			resultCode=""+purchaseOrder.getStatus();
 		}
 		if(success){
 			MemcacheClient.delete(purchaseOrderGrdMemcachedKey);
