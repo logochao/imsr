@@ -156,6 +156,7 @@ public class PurchaseContractServiceImpl implements Constants, PurchaseContractS
 		Object cache=MemcacheClient.get(key);
 		if(cache!=null){
 			String mapKey=null;
+			memcache = (Map<String,SalesOrderGoodsGrd>)cache;
 			if(memo.contains(",")){
 				for(String goodsId:memo.split(",")){
 					mapKey=contractGoodsGrd.getContractId()+"_"+goodsId;//采购合同订单号_商品编号
