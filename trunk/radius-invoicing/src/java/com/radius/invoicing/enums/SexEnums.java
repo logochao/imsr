@@ -43,7 +43,7 @@ public enum SexEnums {
 	 */
 	public static SexEnums getSexEnumsById(Integer id){
 		SexEnums result=null;
-		if(id==null) return null;
+		if(id==null) return SexEnums.UNKNOW;
 		for(SexEnums enums:SexEnums.values()){
 			if(enums.getId().intValue()==id.intValue()){
 				result= enums;
@@ -68,5 +68,16 @@ public enum SexEnums {
 			}
 		}
 		return result;
+	}
+	
+	public static String getSexEnums2Json(){
+		StringBuffer bf=new StringBuffer("[");
+		for(SexEnums enums:SexEnums.values()){
+			bf.append("{\"id\":").append(enums.getId().intValue()).append(",");
+			bf.append("\"name\":\"").append(enums.getName()).append("\"},");
+		}
+		bf.substring(0, bf.length()-1);
+		
+		return bf.substring(0, bf.length()-1)+"]";
 	}
 }

@@ -72,4 +72,15 @@ public enum YesOrNoEnums {
 		}
 		return null;
 	}
+	
+	public static String getYesOrNoEnums2Json(){
+		StringBuffer bf=new StringBuffer("[");
+		for(YesOrNoEnums enums:YesOrNoEnums.values()){
+			bf.append("{\"id\":").append(enums.getId().intValue()).append(",");
+			bf.append("\"name\":\"").append(enums.getName()).append("\"},");
+		}
+		bf.substring(0, bf.length()-1);
+		
+		return bf.substring(0, bf.length()-1)+"]";
+	}
 }
