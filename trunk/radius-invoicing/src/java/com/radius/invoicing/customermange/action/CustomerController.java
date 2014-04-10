@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.radius.base.controller.BaseController;
 import com.radius.base.page.EasyuiSplitPager;
+import com.radius.base.utils.JsonUtils;
 import com.radius.invoicing.customermange.service.CustomerService;
 import com.radius.invoicing.ibatis.model.Customer;
 import com.radius.invoicing.ibatis.model.LinkMan;
@@ -60,7 +62,11 @@ public class CustomerController extends BaseController {
 	 */
 	@RequestMapping("/customer/manager/customer/customer_manager_view.html")
 	public ModelAndView customerManager(HttpServletRequest request,HttpServletResponse response)throws Exception{
-		return new  ModelAndView(customer_manager_view);
+		ModelAndView mv = new  ModelAndView(customer_manager_view); 
+		Customer customer =new Customer();
+		customer.setId(Long.toString(System.currentTimeMillis(), 36));
+		mv.addObject("customer", customer);
+		return mv;
 	}
 	
 	@RequestMapping("/customer/split_page.html")
@@ -88,7 +94,27 @@ public class CustomerController extends BaseController {
 		return customerService.getLinkManInfoSplitPage(linkMan);
 	}
 	
+	@RequestMapping("/customer/manager/customer/customer_link_man_info_memcached.html")
+	@ResponseBody
+	public JsonUtils addCustomerLinkManInfo(HttpServletRequest request,HttpServletResponse response,LinkMan linkMan)throws Exception{
+		String key =linkMan.getCompanyId()+"_customer_add_customer_link_man_info";
+		return customerService.addCustomerLinkMan2Memcached(key, linkMan);
+	}
 	
+	@RequestMapping("/customer/manager/customer/customer_link_man_info_remove_memcached.html")
+	@ResponseBody
+	public JsonUtils removeCustomerLinkManInfo(HttpServletRequest request,HttpServletResponse response,LinkMan linkMan)throws Exception{
+		String key =linkMan.getCompanyId()+"_customer_add_customer_link_man_info";
+		boolean delete = ServletRequestUtils.getBooleanParameter(request, "delete", false);//表示是否全部删除 默认为 false
+		return customerService.removeCustomerLinkMan2Memcached(key, delete, linkMan);
+	}
+	
+	@RequestMapping("/customer/manager/customer/customer_infos_add.html")
+	@ResponseBody
+	public JsonUtils saveCustomerInfo(HttpServletRequest request,HttpServletResponse response,Customer customer)throws Exception{
+		String key =customer.getId() + "_customer_add_customer_link_man_info";
+		return customerService.saveCustomerInfo(key,customer);
+	}
 	
 	
 	
