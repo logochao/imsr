@@ -35,7 +35,10 @@ import com.radius.base.helper.PropertyConfigHelper;
 import com.radius.base.page.EasyuiSplitPager;
 import com.radius.base.utils.JsonUtils;
 import com.radius.invoicing.cache.impl.CategoryCacheImpl;
+import com.radius.invoicing.cache.impl.SpecTypeCacheImpl;
+import com.radius.invoicing.enums.SexEnums;
 import com.radius.invoicing.enums.UseStatusEnums;
+import com.radius.invoicing.enums.YesOrNoEnums;
 import com.radius.invoicing.ibatis.model.CategoryCode;
 import com.radius.invoicing.ibatis.model.SpecType;
 import com.radius.invoicing.sysmanage.service.SpecTypeService;
@@ -48,11 +51,16 @@ import com.radius.invoicing.sysmanage.service.SpecTypeService;
  */
 @Controller
 @Scope("request")
+@SuppressWarnings("static-access")
 public class CommonController extends BaseController{
 
 	@Autowired(required=false)
 	@Qualifier("categoryCacheImpl")
 	private CategoryCacheImpl categoryCache;
+	
+	@Autowired(required=false)
+	@Qualifier("specTypeCacheImpl")
+	private SpecTypeCacheImpl specTypeCache;
 	
 	@Autowired(required=false)
 	@Qualifier("propertyConfigHelper")
@@ -88,6 +96,33 @@ public class CommonController extends BaseController{
 		Integer parentId = ServletRequestUtils.getIntParameter(request, "parentId", 0);//获取参数值
 		return categoryCache.getCategoryCodeListByParentId(parentId);
 	} 
+	
+	/**
+	 *获取规格信息
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/common/system/spec_type.html")
+	@ResponseBody
+	public SpecType getSpecType(HttpServletRequest request,HttpServletResponse response)throws Exception{
+		Integer specTypeId = ServletRequestUtils.getIntParameter(request, "specTypeId", 0);//获取参数值
+		return specTypeCache.getSpecTypeBySpecTypeId(specTypeId);
+	}
+	/**
+	 * 获取规格信息列表
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/common/system/spec_type_list.html")
+	@ResponseBody
+	public List<SpecType> getSpecTypeList(HttpServletRequest request,HttpServletResponse response)throws Exception{
+		String key =propertyConfigHelper.getPropertyValue("spec.type.cached.root").toString();
+		return specTypeCache.getSpecTypeList(key);
+	}
 	
 	/**
 	 * 规格管理界面
@@ -193,8 +228,23 @@ public class CommonController extends BaseController{
 	@RequestMapping("/common/system/use_status_list.html")
 	public void getUseStatusJson(HttpServletRequest request,HttpServletResponse response)throws Exception{
 		String json=UseStatusEnums.getUseStatusEnums2Json();
-		super.ajaxMethod(response, json, "获取资源管理信息发生异常");
+		super.ajaxMethod(response, json, "获取使用状态信息发生异常");
 	}
+	
+	@RequestMapping("/common/system/yes_no_list.html")
+	public void getYesOrNoJson(HttpServletRequest request,HttpServletResponse response)throws Exception{
+		String  json  =YesOrNoEnums.getYesOrNoEnums2Json();
+		super.ajaxMethod(response, json, "获取是与否信息发生异常");
+	}
+	
+	@RequestMapping("/common/system/sex_list.html")
+	public void getSexJson(HttpServletRequest request,HttpServletResponse response)throws Exception{
+		String json=SexEnums.getSexEnums2Json();
+		super.ajaxMethod(response, json, "获取性别信息发生异常");
+	}
+	
+	
+	
 	
 	/**
 	 * 添加规格信息
@@ -219,6 +269,12 @@ public class CommonController extends BaseController{
 	public EasyuiSplitPager<SpecType> getSpecTypeInfoList(HttpServletRequest request,HttpServletResponse response,SpecType specType)throws Exception{
 		return specTypeService.getSpecTypeInfoList(specType);
 	}
+	
+	
+	
+	
+	
+	
 	@PreDestroy
 	public void destroy(){
 		if(spec_type_view!=null){
