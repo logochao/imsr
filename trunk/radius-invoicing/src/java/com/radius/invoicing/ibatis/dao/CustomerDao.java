@@ -50,5 +50,8 @@ public interface CustomerDao {
 	 * @return
 	 */
 	public boolean updateCustomerById(Customer c);
+	
+	
+	public String getCustomerMaxId();
 
 }

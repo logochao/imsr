@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.radius.base.dao.ibatis.BaseIbatisDaoImpl;
 import com.radius.base.page.Pager;
+import com.radius.base.utils.StringUtils;
 import com.radius.invoicing.ibatis.dao.SupplierDao;
 import com.radius.invoicing.ibatis.model.Supplier;
 
@@ -75,5 +76,13 @@ public class SupplierDaoImpl extends BaseIbatisDaoImpl<Supplier> implements Supp
 	 */
 	public boolean deleteSupplier(String id){
 		return  this.deleteObject(id, "supplierSqlMap.deleteSupplierById")==1;
+	}
+	/**
+	 *获取供应商最大编号
+	 * @return
+	 */
+	public String getSupplierMaxId(){
+		Integer id=(Integer)this.getSqlMapClientTemplate().queryForObject("supplierSqlMap.getSupplierMaxId");
+		return StringUtils.getSpecifyStringByLengthBefore((id.intValue()+1)+"", 5, "0");
 	}
 }

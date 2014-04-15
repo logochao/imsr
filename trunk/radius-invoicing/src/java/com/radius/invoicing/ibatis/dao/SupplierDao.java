@@ -56,5 +56,12 @@ public interface SupplierDao {
 	 * @return
 	 */
 	public boolean deleteSupplier(String id);
+	
+	
+	/**
+	 *获取供应商最大编号
+	 * @return
+	 */
+	public String getSupplierMaxId();
 
 }

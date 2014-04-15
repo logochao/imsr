@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.radius.base.dao.ibatis.BaseIbatisDaoImpl;
 import com.radius.base.page.Pager;
+import com.radius.base.utils.StringUtils;
 import com.radius.invoicing.ibatis.dao.GoodsDao;
 import com.radius.invoicing.ibatis.model.Goods;
 
@@ -27,8 +28,8 @@ public class GoodsDaoImpl extends BaseIbatisDaoImpl<Goods> implements GoodsDao{
 	 * @param goods
 	 * @return
 	 */
-	public List<Goods> getGoods(Goods goods){
-		return this.getListObject(goods, "goodsSqlMap.getGoods");
+	public Goods getGoods(String goodsId){
+		return this.getObjectByCondition(goodsId, "goodsSqlMap.getGoods");
 	}
 	/**
 	 * 保存商品信息
@@ -84,5 +85,10 @@ public class GoodsDaoImpl extends BaseIbatisDaoImpl<Goods> implements GoodsDao{
 	 */
 	public List<String> getGoodsInfoBySupplierAndGoods(Goods goods){
 		return this.getSqlMapClientTemplate().queryForList("goodsSqlMap.getGoodsInfoBySupplierAndGoods", goods);
+	}
+	
+	public String getGoodsMaxId(){
+		Integer id=(Integer)this.getSqlMapClientTemplate().queryForObject("goodsSqlMap.getGoodsMaxId");
+		return StringUtils.getSpecifyStringByLengthBefore((id.intValue()+1)+"", 5, "0");
 	}
 }

@@ -60,6 +60,16 @@ public class LinkManDaoImpl extends BaseIbatisDaoImpl<LinkMan> implements LinkMa
 	public void insertLinkMan(LinkMan l){
 		this.insertObject(l, "linkManSqlMap.insert");
 	}
+	
+	/**
+	 * 批量保存联系人信息
+	 * @param list
+	 */
+	public void batchInsertLinkMan(List<LinkMan> list){
+		this.batchInsertListObject(list, "linkManSqlMap.insert");
+	}
+	
+	
 	/**
 	 * 更新供应商信息
 	 * @param s

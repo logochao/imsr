@@ -6,6 +6,8 @@ import com.radius.invoicing.ibatis.model.SpecType;
 
 public interface SpecTypeDao {
 
+	
+	List<SpecType> getSpecTypeAllList();
 	/**
 	 * 通过主键获取规格信息
 	 * @param id

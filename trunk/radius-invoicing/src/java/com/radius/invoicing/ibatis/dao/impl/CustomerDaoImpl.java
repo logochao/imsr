@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.radius.base.dao.ibatis.BaseIbatisDaoImpl;
 import com.radius.base.page.Pager;
+import com.radius.base.utils.StringUtils;
 import com.radius.invoicing.ibatis.dao.CustomerDao;
 import com.radius.invoicing.ibatis.model.Customer;
 
@@ -67,5 +68,10 @@ public class CustomerDaoImpl extends BaseIbatisDaoImpl<Customer> implements Cust
 	 */
 	public boolean updateCustomerById(Customer c){
 		return this.updateObject(c, "customerSqlMap.updateCustomerById")==1;
+	}
+	
+	public String getCustomerMaxId(){
+		Integer id=(Integer)this.getSqlMapClientTemplate().queryForObject("customerSqlMap.getCustomerMaxId");
+		return StringUtils.getSpecifyStringByLengthBefore((id.intValue()+1)+"", 5, "0");
 	}
 }
