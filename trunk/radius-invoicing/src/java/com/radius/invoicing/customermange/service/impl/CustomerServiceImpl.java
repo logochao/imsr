@@ -10,6 +10,8 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import sun.awt.image.ImageWatched.Link;
@@ -20,6 +22,7 @@ import com.radius.base.utils.Constants;
 import com.radius.base.utils.JsonUtils;
 import com.radius.invoicing.customermange.compent.CustomerCompent;
 import com.radius.invoicing.customermange.service.CustomerService;
+import com.radius.invoicing.enums.YesOrNoEnums;
 import com.radius.invoicing.ibatis.dao.CustomerDao;
 import com.radius.invoicing.ibatis.dao.LinkManDao;
 import com.radius.invoicing.ibatis.model.ContractScanGrd;
@@ -38,11 +41,13 @@ public class CustomerServiceImpl implements Constants, CustomerService {
 
 	
 	private Logger logger =Logger.getLogger(this.getClass());
-	
-	@Resource(name="customerDaoImpl")
+
+	@Autowired(required=false)
+	@Qualifier("customerDaoImpl")
 	CustomerDao customerDao;
 	
-	@Resource(name="linkManDaoImpl")
+	@Autowired(required=false)
+	@Qualifier("linkManDaoImpl")
 	LinkManDao linkManDao;
 	
 	
@@ -150,11 +155,17 @@ public class CustomerServiceImpl implements Constants, CustomerService {
 		boolean success =false;
 		try{
 			//1.将数据完成化
-			
+			if(customer.isDelivery()){
+				customer.setYesOrNo(YesOrNoEnums.YES);
+			}else{
+				customer.setYesOrNo(YesOrNoEnums.NO);
+			}
 			//2.检查数据是否存在
 			Customer temp = customerDao.getCustomerById(customer.getId());
 			if(temp ==null){//说明是添加
 				//3.添加数据
+				String id = customerDao.getCustomerMaxId();
+				customer.setId(id);
 				customerDao.insertCustomer(customer);
 				message="添加客户信息操作成功...";
 				success=true;
