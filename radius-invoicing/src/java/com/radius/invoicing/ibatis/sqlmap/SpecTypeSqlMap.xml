@@ -98,4 +98,9 @@
   	DELETE FROM RS_SPEC_TYPE
   	<include refid="whereLike"/>
   </delete>
+  
+  <select id="getSpecTypeAllList" resultClass="specType">
+  	SELECT <include refid="specTypeFileds"/>
+  	FROM RS_SPEC_TYPE
+  </select>
 </sqlMap>

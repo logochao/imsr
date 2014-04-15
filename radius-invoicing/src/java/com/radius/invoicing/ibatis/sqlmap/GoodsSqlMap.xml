@@ -41,102 +41,102 @@
   
   <sql id="whereLike">
   	<dynamic prepend="where" >
-  		1=1  AND
-  		<isNotNull prepend="AND" property="id">
-  			goods_id=#id#
+  		1=1  
+  		<isNotEmpty  property="id">
+  			 AND	goods_id=#id#
+  		</isNotEmpty>
+  		<isNotEmpty  property="name">
+  			AND		goods_name LIKE CONCAT('%',#name#,'%')	
+  		</isNotEmpty>
+  		<isNotEmpty  property="realName">
+  			AND		true_goods_name  LIKE CONCAT('%',#realName#,'%')	
+  		</isNotEmpty>
+  		<isNotEmpty  property="goodsType">
+  			AND		goods_type=#goodsType#
+  		</isNotEmpty>
+  		<isNotEmpty  property="machineSeries">
+  			AND		host_machine_series=#machineSeries#
+  		</isNotEmpty>
+  		<isNotEmpty  property="machinePosition">
+  			AND		machine_position=#machinePosition#
+  		</isNotEmpty>
+  		<isNotEmpty  property="partNo">
+  			AND		part_no=#partNo#
+  		</isNotEmpty>
+  		<isNotEmpty  property="mapSeries">
+  			AND		map_series=#mapSeries#
+  		</isNotEmpty>
+  		<isNotEmpty  property="company">
+  			AND		made_company=#company#
+  		</isNotEmpty>
+  		<isNotEmpty  property="goodStatus">
+  			AND		goods_status=#goodStatus#
+  		</isNotEmpty>
+  		<isNotNull  property="weightProp">
+  			AND		weight_prop=#weightProp#
   		</isNotNull>
-  		<isNotNull prepend="AND" property="name">
-  			goods_name LIKE CONCAT('%',#name#,'%')	
-  		</isNotNull>
-  		<isNotNull prepend="AND" property="realName">
-  			true_goods_name  LIKE CONCAT('%',#realName#,'%')	
-  		</isNotNull>
-  		<isNotNull prepend="AND" property="goodsType">
-  			goods_type=#goodsType#
-  		</isNotNull>
-  		<isNotNull prepend="AND" property="machineSeries">
-  			host_machine_series=#machineSeries#
-  		</isNotNull>
-  		<isNotNull prepend="AND" property="machinePosition">
-  			machine_position=#machinePosition#
-  		</isNotNull>
-  		<isNotNull prepend="AND" property="partNo">
-  			part_no=#partNo#
-  		</isNotNull>
-  		<isNotNull prepend="AND" property="mapSeries">
-  			map_series=#mapSeries#
-  		</isNotNull>
-  		<isNotNull prepend="AND" property="company">
-  			made_company=#company#
-  		</isNotNull>
-  		<isNotNull prepend="AND" property="goodStatus">
-  			goods_status=#goodStatus#
-  		</isNotNull>
-  		<isNotNull prepend="AND" property="weightProp">
-  			weight_prop=#weightProp#
-  		</isNotNull>
-  		<isNotNull prepend="AND" property="vulnerability">
-  			vulnerability=#vulnerability#
-  		</isNotNull>
-  		<isNotNull prepend="AND" property="description">
-  			goods_description=#description#
-  		</isNotNull>
-  		<isNotNull prepend="AND" property="useStatus">
-  			use_status=#useStatus#
-  		</isNotNull>
-  		<isNotNull prepend="AND" property="memo">
-  			memo=#memo#
-  		</isNotNull>
-  		<isNotNull prepend="AND" property="ledgerId">
-  			ledger_id=#ledgerId#
-  		</isNotNull>
+  		<isNotEmpty  property="vulnerability">
+  			AND		vulnerability=#vulnerability#
+  		</isNotEmpty>
+  		<isNotEmpty  property="description">
+  			AND		goods_description=#description#
+  		</isNotEmpty>
+  		<isNotEmpty  property="useStatus">
+  			AND		use_status=#useStatus#
+  		</isNotEmpty>
+  		<isNotEmpty  property="memo">
+  			AND		memo=#memo#
+  		</isNotEmpty>
+  		<isNotEmpty  property="ledgerId">
+  			AND		ledger_id=#ledgerId#
+  		</isNotEmpty>
   	</dynamic>
   </sql>
  
-	 <select id="getGoods" parameterClass="goods" resultMap="goods">
+	 <select id="getGoods" parameterClass="java.lang.String" resultClass="goods">
 	 	SELECT <include refid="goodsFileds"/>
 	 	FROM RS_GOODS
-	 	$condition$
+	 	WHERE goods_id=#id#
 	 </select>
    
    	<insert id="insert" parameterClass="goods">
    		INSERT INTO RS_GOODS (
 			goods_id,
-			<isNotNull 	property="name">goods_name,</isNotNull>
-			<isNotNull	property="realName">true_goods_name,</isNotNull>
-			<isNotNull	property="goodsType">goods_type,</isNotNull>
-			<isNotNull	property="machineSeries">host_machine_series,</isNotNull>
-			<isNotNull	property="machinePosition">machine_position,</isNotNull>
-			<isNotNull	property="partNo">part_no,</isNotNull>
-			<isNotNull	property="mapSeries">map_series,</isNotNull>
-			<isNotNull	property="company">made_company,</isNotNull>
-			<isNotNull	property="goodStatus">goods_status,</isNotNull>
+			<isNotEmpty 	property="name">goods_name,</isNotEmpty>
+			<isNotEmpty	property="realName">true_goods_name,</isNotEmpty>
+			<isNotEmpty	property="goodsType">goods_type,</isNotEmpty>
+			<isNotEmpty	property="machineSeries">host_machine_series,</isNotEmpty>
+			<isNotEmpty	property="machinePosition">machine_position,</isNotEmpty>
+			<isNotEmpty	property="partNo">part_no,</isNotEmpty>
+			<isNotEmpty	property="mapSeries">map_series,</isNotEmpty>
+			<isNotEmpty	property="company">made_company,</isNotEmpty>
+			<isNotEmpty	property="goodStatus">goods_status,</isNotEmpty>
 			<isNotNull	property="weightProp">weight_prop,</isNotNull>
-			<isNotNull	property="vulnerability">vulnerability,</isNotNull>
-			<isNotNull	property="description">goods_description,</isNotNull>
-			<isNotNull	property="useStatus">use_status,</isNotNull>
-	  		<isNotNull  property="memo">memo,</isNotNull>
-	  		<isNotNull  property="ledgerId">ledger_id,</isNotNull>
+			<isNotEmpty	property="vulnerability">vulnerability,</isNotEmpty>
+			<isNotEmpty	property="description">goods_description,</isNotEmpty>
+			<isNotEmpty	property="useStatus">use_status,</isNotEmpty>
+	  		<isNotEmpty  property="memo">memo,</isNotEmpty>
+	  		<isNotEmpty  property="ledgerId">ledger_id,</isNotEmpty>
 	  		operator,
 	  	    creater,
 	  	    createdate
    		)VALUES(
    			#id#,
-   			<isNotNull 	property="name">#name#,</isNotNull>
-			<isNotNull	property="realName">#realName#,</isNotNull>
-			<isNotNull	property="goodsType">#goodsType#,</isNotNull>
-			<isNotNull	property="machineSeries">#machineSeries#,</isNotNull>
-			<isNotNull	property="machinePosition">#machinePosition#,</isNotNull>
-			<isNotNull	property="partNo">#partNo#,</isNotNull>
-			<isNotNull	property="mapSeries">#mapSeries#,</isNotNull>
-			<isNotNull	property="company">#company#,</isNotNull>
-			<isNotNull	property="goodStatus">#goodStatus#,</isNotNull>
+   			<isNotEmpty 	property="name">#name#,</isNotEmpty>
+			<isNotEmpty	property="realName">#realName#,</isNotEmpty>
+			<isNotEmpty	property="goodsType">#goodsType#,</isNotEmpty>
+			<isNotEmpty	property="machineSeries">#machineSeries#,</isNotEmpty>
+			<isNotEmpty	property="machinePosition">#machinePosition#,</isNotEmpty>
+			<isNotEmpty	property="partNo">#partNo#,</isNotEmpty>
+			<isNotEmpty	property="mapSeries">#mapSeries#,</isNotEmpty>
+			<isNotEmpty	property="company">#company#,</isNotEmpty>
+			<isNotEmpty	property="goodStatus">#goodStatus#,</isNotEmpty>
 			<isNotNull	property="weightProp">#weightProp#,</isNotNull>
-			<isNotNull	property="vulnerability">#vulnerability#,</isNotNull>
-			<isNotNull	property="description">#description#,</isNotNull>
-			<isNotNull	property="useStatus">#useStatus#,</isNotNull>
-	  		<isNotNull  property="memo">#memo#,</isNotNull>
-	  		<isNotNull  property="ledgerId">#ledgerId#,</isNotNull>
+			<isNotEmpty	property="vulnerability">#vulnerability#,</isNotEmpty>
+			<isNotEmpty	property="description">#description#,</isNotEmpty>
+			<isNotEmpty	property="useStatus">#useStatus#,</isNotEmpty>
+	  		<isNotEmpty  property="memo">#memo#,</isNotEmpty>
+	  		<isNotEmpty  property="ledgerId">#ledgerId#,</isNotEmpty>
    			 operator,creater,now()
    		)
    	</insert>
@@ -144,24 +144,24 @@
    	<update id="updateGoods" parameterClass="goods">
    		UPDATE RS_GOODS
    		<dynamic prepend="SET">
-			<isNotNull  prepend=","   property="name">goods_name=#name#</isNotNull>
-			<isNotNull  prepend=","   property="realName">true_goods_name=#realName#</isNotNull>
-			<isNotNull  prepend=","   property="goodsType">goods_type=#goodsType#</isNotNull>
-			<isNotNull  prepend=","   property="machineSeries">host_machine_series=#machineSeries#</isNotNull>
-			<isNotNull  prepend=","   property="machinePosition">machine_position=#machinePosition#</isNotNull>
-			<isNotNull  prepend=","   property="partNo">part_no=#partNo#</isNotNull>
-			<isNotNull  prepend=","   property="mapSeries">map_series=#mapSeries#</isNotNull>
-			<isNotNull  prepend=","   property="company">made_company=#company#</isNotNull>
-			<isNotNull  prepend=","   property="goodStatus">goods_status=#goodStatus#</isNotNull>
+			<isNotEmpty  prepend=","   property="name">goods_name=#name#</isNotEmpty>
+			<isNotEmpty  prepend=","   property="realName">true_goods_name=#realName#</isNotEmpty>
+			<isNotEmpty  prepend=","   property="goodsType">goods_type=#goodsType#</isNotEmpty>
+			<isNotEmpty  prepend=","   property="machineSeries">host_machine_series=#machineSeries#</isNotEmpty>
+			<isNotEmpty  prepend=","   property="machinePosition">machine_position=#machinePosition#</isNotEmpty>
+			<isNotEmpty  prepend=","   property="partNo">part_no=#partNo#</isNotEmpty>
+			<isNotEmpty  prepend=","   property="mapSeries">map_series=#mapSeries#</isNotEmpty>
+			<isNotEmpty  prepend=","   property="company">made_company=#company#</isNotEmpty>
+			<isNotEmpty  prepend=","   property="goodStatus">goods_status=#goodStatus#</isNotEmpty>
 			<isNotNull  prepend=","   property="weightProp">weight_prop=#weightProp#</isNotNull>
-			<isNotNull  prepend=","   property="vulnerability">vulnerability=#vulnerability#</isNotNull>
-			<isNotNull  prepend=","   property="description">goods_description=#description#</isNotNull>
-			<isNotNull  prepend=","   property="useStatus">use_status=#useStatus#</isNotNull>
-	 	    <isNotNull  prepend=","   property="memo">memo=#memo#</isNotNull>
-	  		<isNotNull  prepend=","   property="ledgerId">ledger_id=#ledgerId#</isNotNull>
-	  		<isNotNull  prepend=","   property="operator">operator=#operator#,modify_date= now()</isNotNull>
-  	 		<isNotNull  prepend=","   property="reviser">reviser = #reviser#,revisedate = now() </isNotNull>
-  			<isNotNull  prepend=","   property="verifier">verifier = #verifier#,verifydate = now() </isNotNull>
+			<isNotEmpty  prepend=","   property="vulnerability">vulnerability=#vulnerability#</isNotEmpty>
+			<isNotEmpty  prepend=","   property="description">goods_description=#description#</isNotEmpty>
+			<isNotEmpty  prepend=","   property="useStatus">use_status=#useStatus#</isNotEmpty>
+	 	    <isNotEmpty  prepend=","   property="memo">memo=#memo#</isNotEmpty>
+	  		<isNotEmpty  prepend=","   property="ledgerId">ledger_id=#ledgerId#</isNotEmpty>
+	  		<isNotEmpty  prepend=","   property="operator">operator=#operator#,modify_date= now()</isNotEmpty>
+  	 		<isNotEmpty  prepend=","   property="reviser">reviser = #reviser#,revisedate = now() </isNotEmpty>
+  			<isNotEmpty  prepend=","   property="verifier">verifier = #verifier#,verifydate = now() </isNotEmpty>
    		</dynamic>
    	  WHERE goods_id=#id#
    	</update>
@@ -193,51 +193,56 @@
    		ON sgs.goods_id = gs.goods_id 
    		<dynamic prepend="WHERE">
    			sgs.supplier_id =#supplierId# 
-	   		<isNotNull  property="name"> 
+	   		<isNotEmpty  property="name"> 
 	           AND  gs.goods_name LIKE CONCAT('%',#name#,'%')
-	  		</isNotNull>
-	  		<isNotNull  property="realName">
+	  		</isNotEmpty>
+	  		<isNotEmpty  property="realName">
 	           AND  gs.true_goods_name  LIKE CONCAT('%',#realName#,'%')	
-	  		</isNotNull>
-	  		<isNotNull  property="goodsType">
+	  		</isNotEmpty>
+	  		<isNotEmpty  property="goodsType">
 	           AND  gs.goods_type=#goodsType#
-	  		</isNotNull>
-	  		<isNotNull  property="machineSeries">
+	  		</isNotEmpty>
+	  		<isNotEmpty  property="machineSeries">
 	           AND  gs.host_machine_series=#machineSeries#
-	  		</isNotNull>
-	  		<isNotNull  property="machinePosition">
+	  		</isNotEmpty>
+	  		<isNotEmpty  property="machinePosition">
 	           AND  gs.machine_position=#machinePosition#
-	  		</isNotNull>
-	  		<isNotNull  property="partNo">
+	  		</isNotEmpty>
+	  		<isNotEmpty  property="partNo">
 	           AND  gs.part_no=#partNo#
-	  		</isNotNull>
-	  		<isNotNull  property="mapSeries">
+	  		</isNotEmpty>
+	  		<isNotEmpty  property="mapSeries">
 	           AND  gs.map_series=#mapSeries#
-	  		</isNotNull>
-	  		<isNotNull  property="company">
+	  		</isNotEmpty>
+	  		<isNotEmpty  property="company">
 	           AND  gs.made_company=#company#
-	  		</isNotNull>
-	  		<isNotNull  property="goodStatus">
+	  		</isNotEmpty>
+	  		<isNotEmpty  property="goodStatus">
 	           AND  gs.goods_status=#goodStatus#
-	  		</isNotNull>
+	  		</isNotEmpty>
 	  		<isNotNull  property="weightProp">
 	           AND  gs.weight_prop=#weightProp#
 	  		</isNotNull>
-	  		<isNotNull  property="vulnerability">
+	  		<isNotEmpty  property="vulnerability">
 	           AND  gs.vulnerability=#vulnerability#
-	  		</isNotNull>
-	  		<isNotNull  property="description">
+	  		</isNotEmpty>
+	  		<isNotEmpty  property="description">
 	           AND  gs.goods_description=#description#
-	  		</isNotNull>
-	  		<isNotNull  property="useStatus">
+	  		</isNotEmpty>
+	  		<isNotEmpty  property="useStatus">
 	           AND  gs.use_status=#useStatus#
-	  		</isNotNull>
-	  		<isNotNull  property="memo">
+	  		</isNotEmpty>
+	  		<isNotEmpty  property="memo">
 	           AND  gs.AND	gs.memo=#memo#
-	  		</isNotNull>
-	  		<isNotNull  property="ledgerId">
+	  		</isNotEmpty>
+	  		<isNotEmpty  property="ledgerId">
 	  		   AND	gs.ledger_id=#ledgerId#
-	  		</isNotNull>
+	  		</isNotEmpty>
    		</dynamic>
    </select>
+   
+   <select id="getGoodsMaxId" resultClass="java.lang.Integer">
+   		SELECT IFNULL((SELECT MAX(goods_id) FROM  RS_GOODS),0) 
+   </select>
+   
 </sqlMap>
