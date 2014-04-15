@@ -113,10 +113,26 @@ public class CustomerController extends BaseController {
 	@ResponseBody
 	public JsonUtils saveCustomerInfo(HttpServletRequest request,HttpServletResponse response,Customer customer)throws Exception{
 		String key =customer.getId() + "_customer_add_customer_link_man_info";
-		return customerService.saveCustomerInfo(key,customer);
+		JsonUtils result = customerService.saveCustomerInfo(key,customer);
+		customer = (Customer)result.getChild();
+		customer.setAddress(Long.toString(System.currentTimeMillis(), 36));//获取新的临时客户编号
+		result.setChild(customer);
+		return result;
 	}
 	
-	
+	/**
+	 * 通过客户信息查询客户详情信息
+	 * @param request
+	 * @param response
+	 * @param customer
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/customer/manager/customer/customer_info_detail_2_customer.html")
+	@ResponseBody
+	public EasyuiSplitPager<Customer> getCustomerInfoList(HttpServletRequest request,HttpServletResponse response,Customer customer)throws Exception{
+		return customerService.getCustomerInfoSplitPage(customer);
+	}
 	
 	@PreDestroy
 	public void destroy(){
