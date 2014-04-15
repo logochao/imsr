@@ -5,18 +5,17 @@
   <typeAlias alias="customer" type="com.radius.invoicing.ibatis.model.Customer" />
   
   <sql id="customerFileds">
-  	 customer_id id,customer_ab ab,customer_name name,address address,link_man linkMan,contact_info contactInfo,tel tel,fax fax,customer_illustrate customerIllustrate,
+  	 customer_id id,customer_ab ab,customer_name name,link_man linkMan,contact_info contactInfo,tel tel,fax fax,customer_illustrate customerIllustrate,
   	 customer_property customerProperty,office_address officeAddress,delivery_or_not yesOrNo,post_code postCode,salesman_id salesMan,pay_type payType,delivery_type deliveryType,bank_acc_no bankAccNo,tax_no taxNo,url url,email email,account_bank accountBank,
   	 account_name accountName,voucher voucher,goods_bills_date goodsBillsDate,min_order_amount orderAmount,ledger_id ledgerId,memo memo,
-  	 operator operator,modify_date modifyDate,creater creater,createdate createdate,reviser reviser,revisedate revisedate,verifier verifydate
+  	 operator operator,motify_date modifyDate,creater creater,createdate createdate,reviser reviser,revisedate revisedate,verifier verifydate
   </sql>
   
   <resultMap id="customerMap" class="customer">
     <result column="customer_id" jdbcType="char" javaType="java.lang.String" property="id"/>
     <result column="customer_ab" jdbcType="varchar" javaType="java.lang.String" property="ab" />
     <result column="customer_name" jdbcType="varchar" javaType="java.lang.String" property="name" />
-    <result column="address" jdbcType="varchar" javaType="java.lang.String" property="address" />
-    <result column="link_man" jdbcType="char" javaType="java.lang.String" property="linkMan" />
+    <result column="link_man" jdbcType="varchar" javaType="java.lang.String" property="linkMan" />
     <result column="contact_info" jdbcType="varchar" javaType="java.lang.String" property="contactInfo" />
     <result column="tel" jdbcType="varchar" javaType="java.lang.String" property="tel" />
     <result column="fax" jdbcType="char" javaType="java.lang.String" property="fax" />
@@ -54,16 +53,13 @@
   			customer_id=#id#
   		</isNotEmpty>
   		<isNotEmpty prepend="AND" property="ab">
-  			customer_ab=#ab#
+  			customer_ab LIKE CONCAT('%',#ab#,'%')
   		</isNotEmpty>
 		<isNotEmpty prepend="AND" property="name">
-			customer_name LIKE '%$name$%'
-		</isNotEmpty>
-		<isNotEmpty prepend="AND" property="address">
-			address=#address#
+			customer_name LIKE CONCAT('%',#name#,'%')
 		</isNotEmpty>
 		<isNotEmpty prepend="AND" property="linkMan">
-			link_man=#linkMan#
+			link_man LIKE CONCAT('%',#linkMan#,'%')
 		</isNotEmpty>
 		<isNotEmpty prepend="AND" property="contactInfo">
 			contact_info=#contactInfo#
@@ -141,7 +137,6 @@
    			customer_id,
    			<isNotEmpty property="ab">customer_ab,</isNotEmpty>
    			<isNotEmpty property="name">customer_name,</isNotEmpty>
-   			<isNotEmpty property="address">address,</isNotEmpty>
    			<isNotEmpty property="linkMan">link_man,</isNotEmpty>
    			<isNotEmpty property="contactInfo">contact_info,</isNotEmpty>
    			<isNotEmpty property="tel">tel,</isNotEmpty>
@@ -171,7 +166,6 @@
    			#id#,
    			<isNotEmpty property="ab">#ab#,</isNotEmpty>
    			<isNotEmpty property="name">#name#,</isNotEmpty>
-   			<isNotEmpty property="address">#address#,</isNotEmpty>
    			<isNotEmpty property="linkMan">#linkMan#,</isNotEmpty>
    			<isNotEmpty property="contactInfo">#contactInfo#,</isNotEmpty>
    			<isNotEmpty property="tel">#tel#,</isNotEmpty>
@@ -198,13 +192,14 @@
    			 creater,now()
    		)
    	</insert>
-   
+   <select id="getCustomerMaxId" resultClass="java.lang.Integer">
+   		SELECT IFNULL((SELECT MAX(customer_id) FROM  RS_CUSTOMER),0) 
+   </select>
    	<update id="updateCustomerById" parameterClass="customer">
    		UPDATE RS_CUSTOMER
    		<dynamic prepend="SET">
    			<isNotEmpty prepend="," property="ab">customer_ab=#ab#</isNotEmpty>
    			<isNotEmpty prepend="," property="name">customer_name=#name#</isNotEmpty>
-   			<isNotEmpty prepend="," property="address">address=#address#</isNotEmpty>
    			<isNotEmpty prepend="," property="linkMan">link_man=#linkMan#</isNotEmpty>
    			<isNotEmpty prepend="," property="contactInfo">contact_info=#contactInfo#</isNotEmpty>
    			<isNotEmpty prepend="," property="tel">tel=#tel#</isNotEmpty>
