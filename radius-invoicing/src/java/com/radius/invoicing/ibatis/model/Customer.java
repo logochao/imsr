@@ -47,6 +47,8 @@ public class Customer extends ExtInfo{
 	//private String paymentedType="";//结帐方式
 	//private String paymentedMan="";//结款人
 	
+	private boolean isDelivery=false;//是否送货
+	
 	public String getAb() {
 		return ab;
 	}
@@ -209,10 +211,12 @@ public class Customer extends ExtInfo{
 	public void setYesOrNo(YesOrNoEnums yesOrNo) {
 		this.yesOrNo = yesOrNo;
 	}
-	
-	//private String accountNo="";//帐号
-	//private String paymentedType="";//结帐方式
-	//private String paymentedMan="";//结款人
+	public boolean isDelivery() {
+		return isDelivery;
+	}
+	public void setDelivery(boolean isDelivery) {
+		this.isDelivery = isDelivery;
+	}
 	
 	
 	

@@ -17,6 +17,7 @@ import com.radius.base.BaseEntity;
  */
 public class ExtInfo extends BaseEntity{
 
+	private String		backup="";//备用
 	private String  	ledgerId;//账套编号
 	private String 		operator;//创建员
 	private Date 		modifyDate;//修改日期
@@ -88,6 +89,12 @@ public class ExtInfo extends BaseEntity{
 	}
 	public void setLedgerId(String ledgerId) {
 		this.ledgerId = ledgerId;
+	}
+	public String getBackup() {
+		return backup;
+	}
+	public void setBackup(String backup) {
+		this.backup = backup;
 	}
 	
 	

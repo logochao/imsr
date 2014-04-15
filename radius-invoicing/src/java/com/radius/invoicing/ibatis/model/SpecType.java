@@ -13,7 +13,9 @@ public class SpecType extends ExtInfo{
 	private Integer specId;//规格编码
 	private String specName;//规格名称
 	private Integer specUnit;//规格单位
+	private String  specUnitName;//规格单位名称
 	private Integer equivalentUnit;//折合单位
+	private String  equivalentUnitName;//折合单位名称
 	private Integer quantityEuUnit;//折合数量/规格单位
 	private Integer status;//状态
 	private String mome;//描述
@@ -67,6 +69,18 @@ public class SpecType extends ExtInfo{
 	}
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+	public String getEquivalentUnitName() {
+		return equivalentUnitName;
+	}
+	public void setEquivalentUnitName(String equivalentUnitName) {
+		this.equivalentUnitName = equivalentUnitName;
+	}
+	public String getSpecUnitName() {
+		return specUnitName;
+	}
+	public void setSpecUnitName(String specUnitName) {
+		this.specUnitName = specUnitName;
 	}
 	
 	

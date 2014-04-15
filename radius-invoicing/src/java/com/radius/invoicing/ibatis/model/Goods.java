@@ -15,25 +15,23 @@ import org.codehaus.jackson.annotate.JsonIgnore;
  */
 public class Goods extends ExtInfo{
 
-	private String  	id;//商品编号
-	private String  	name;//商品名称
-	private String  	realName;//真实品名
-	private String  	goodsType;//商品类型
-	private String  	machineSeries;//所属设备名称/型号(主机序列号)
-	private String  	machinePosition;//设备位号
-	private String  	partNo;//备件号
-	private String  	mapSeries;//图号
-	private String      company;//生产厂商
-	private String  	goodStatus;//商品状态 液态/固态
+	private String  	id="";//商品编号
+	private String  	name="";//商品名称
+	private String  	realName="";//真实品名
+	private String  	goodsType="";//商品类型
+	private String  	machineSeries="";//所属设备名称/型号(主机序列号)
+	private String  	machinePosition="";//设备位号
+	private String  	partNo="";//备件号
+	private String  	mapSeries="";//图号
+	private String      company="";//生产厂商
+	private String  	goodStatus="";//商品状态 液态/固态
 	private Integer  	weightProp;//比重
-	private String  	vulnerability;//易损性
-	private String 		description;//商品说明
-	private String  	useStatus;//使用状态
-	private String  	memo;//备注
-	private String  	ledgerId;//账套编号
+	private String  	vulnerability="";//易损性
+	private String 		description="";//商品说明
+	private String  	useStatus="";//使用状态
+	private String  	memo="";//备注
+	private String  	ledgerId="";//账套编号
 	private Integer  	depositDeadline;//存放期限
-	
-	
 	
 	private String 		supplierId="";//供应商编号 -->为查询方便而提供的属性
 

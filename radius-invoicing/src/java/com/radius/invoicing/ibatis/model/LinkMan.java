@@ -41,6 +41,7 @@ public class LinkMan extends ExtInfo{
 	private String  	staff;//业务员编号
 	
 	
+	private Integer     sex2;
 	public String getAddress() {
 		return address;
 	}
@@ -196,6 +197,12 @@ public class LinkMan extends ExtInfo{
 	}
 	public void setTel(String tel) {
 		this.tel = tel;
+	}
+	public Integer getSex2() {
+		return sex2;
+	}
+	public void setSex2(Integer sex2) {
+		this.sex2 = sex2;
 	}
 	
 	
