@@ -144,3 +144,29 @@ INSERT INTO `rs_category_code` (`category_id`,`category_name`,`category_type`,`c
  INSERT INTO `rs_category_code` (`category_id`,`category_name`,`category_type`,`creater`,`createdate`)VALUES(3612,'品牌式营销',3600,'0001',NOW());
  INSERT INTO `rs_category_code` (`category_id`,`category_name`,`category_type`,`creater`,`createdate`)VALUES(3613,'深度营销',3600,'0001',NOW());
 
+#送货方式 1600
+INSERT INTO rs_category_code(category_id,category_name,category_type,creater,createdate) VALUES (1601,'自营',1600,0001,NOW());
+INSERT INTO rs_category_code(category_id,category_name,category_type,creater,createdate) VALUES (1602,'顺丰',1600,0001,NOW());
+INSERT INTO rs_category_code(category_id,category_name,category_type,creater,createdate) VALUES (1603,'申通',1600,0001,NOW());
+INSERT INTO rs_category_code(category_id,category_name,category_type,creater,createdate) VALUES (1604,'中通',1600,0001,NOW());
+INSERT INTO rs_category_code(category_id,category_name,category_type,creater,createdate) VALUES (1605,'圆通',1600,0001,NOW());
+INSERT INTO rs_category_code(category_id,category_name,category_type,creater,createdate) VALUES (1606,'EMS',1600,0001,NOW());
+
+##商品状态 3700
+INSERT INTO rs_category_code (category_id,category_name,category_type,creater,createdate)VALUES(3701,'液态',3700,'0001',NOW());
+INSERT INTO rs_category_code (category_id,category_name,category_type,creater,createdate)VALUES(3702,'固态',3700,'0001',NOW());
+
+
+###全国市场区域 3800~5500 ###
+INSERT INTO rs_category_code (category_id,category_name,category_type,creater,createdate) VALUES (3801,'华东地区',3800,'0001',NOW());
+INSERT INTO rs_category_code (category_id,category_name,category_type,creater,createdate) VALUES (3901,'华南地区',3800,'0001',NOW());
+INSERT INTO rs_category_code (category_id,category_name,category_type,creater,createdate) VALUES (4001,'华中地区',3800,'0001',NOW());
+INSERT INTO rs_category_code (category_id,category_name,category_type,creater,createdate) VALUES (4101,'华北地区',3800,'0001',NOW());
+INSERT INTO rs_category_code (category_id,category_name,category_type,creater,createdate) VALUES (4201,'西北地区',3800,'0001',NOW());
+INSERT INTO rs_category_code (category_id,category_name,category_type,creater,createdate) VALUES (4301,'西南地区',3800,'0001',NOW());
+INSERT INTO rs_category_code (category_id,category_name,category_type,creater,createdate) VALUES (4401,'东北地区',3800,'0001',NOW());
+INSERT INTO rs_category_code (category_id,category_name,category_type,creater,createdate) VALUES (4501,'台港澳地区',3800,'0001',NOW());
+
+###表单状态2400 未确认、已确认 
+INSERT INTO `rs_category_code` (`category_id`,`category_name`,`category_type`,`creater`,`createdate`) VALUES (2401,'未确认',2400,'0001',NOW());
+INSERT INTO `rs_category_code` (`category_id`,`category_name`,`category_type`,`creater`,`createdate`) VALUES (2402,'已确认',2400,'0001',NOW());
