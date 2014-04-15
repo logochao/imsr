@@ -13,43 +13,52 @@ import com.radius.invoicing.enums.YesOrNoEnums;
  */
 public class Supplier  extends ExtInfo{
 
-	private String id="";//供应商编号
-	private String name="";//供应商名称
+	private YesOrNoEnums yesOrNo=null;//是否送货=""
+	private String supplierId="";//供应商编号        
 	private String shortName="";//供应商简称
-	private String  nature="";//公司性质
-	private String deliveryType="";//送货方式
-	private Integer payType=null;//支付方式
-	private String marketZone="";//市场区域
-	private String  deliveryAddress="";//送货地址
-	private String linkMan="";//联系人
-	private String contactInfo="";//联系方式
-	private String tel1="";//电话1
-	private String tel2="";//电话2
-	private String tel3="";//电话3
-	private String fax1="";//传真1
-	private String fax2="";//传真2
-	private String fax3="";//传真3
-	private Integer paymentedType=null;//结帐方式
-	private String supplierNotes="";//
-	private String purchaser="";//采购员
-	private String officeAddress="";//办公地址
-	private YesOrNoEnums yesOrNo=null;//是否送货
-	//private String delivery_or_not;//是否送货
-	private String postCode="";//邮编
-	private String bankAccNo="";//银行帐号
-	private String taxNo="";//税号
-	private String url="";//网站
-	private String email="";//电子邮箱
-	private String ledgerId="";//账套编号
-	private String memo="";//备注
+	private String supplierName="";//  供应商名称 
+	private String linkman="";//  联系人        
+	private String contactInfo="";// 联系方式     
+	private String tel="";// 电话             
+	private String fax="";//  fax           
+	private String supplierIllustrate="";//供应商说明
+	private String supplierProperty="";//供应商性质
+	private String officeAddress="";//办公地址    
+	private String postCode="";//邮编       
+	private String url="";// 网站             
+	private String email="";//    电子邮箱         
+	private String marketZone="";//市场区域       
+	private String deliveryNot="";//  是否送货
+	private String deliveryType="";// 送货方式    
+	private String payType="";// 支付方式        
+	private String accountBank="";//   开户行  
+	private String accountName="";//帐户名      
+	private String bankAccno="";// 银行帐号     
+	private String taxNo="";//   税号        
+	private String voucher="";// 票据类型          
+	private Integer goodsBillsdate=null;// 货期
+	private Integer minOrderAmount=null;// 起订额
+	private String memo="";//   备注        
+	private String purchaser="";// 采购员    
 	
 	
-	
-	public String getBankAccNo() {
-		return bankAccNo;
+	public String getAccountBank() {
+		return accountBank;
 	}
-	public void setBankAccNo(String bankAccNo) {
-		this.bankAccNo = bankAccNo;
+	public void setAccountBank(String accountBank) {
+		this.accountBank = accountBank;
+	}
+	public String getAccountName() {
+		return accountName;
+	}
+	public void setAccountName(String accountName) {
+		this.accountName = accountName;
+	}
+	public String getBankAccno() {
+		return bankAccno;
+	}
+	public void setBankAccno(String bankAccno) {
+		this.bankAccno = bankAccno;
 	}
 	public String getContactInfo() {
 		return contactInfo;
@@ -57,11 +66,11 @@ public class Supplier  extends ExtInfo{
 	public void setContactInfo(String contactInfo) {
 		this.contactInfo = contactInfo;
 	}
-	public String getDeliveryAddress() {
-		return deliveryAddress;
+	public String getDeliveryNot() {
+		return deliveryNot;
 	}
-	public void setDeliveryAddress(String deliveryAddress) {
-		this.deliveryAddress = deliveryAddress;
+	public void setDeliveryNot(String deliveryNot) {
+		this.deliveryNot = deliveryNot;
 	}
 	public String getDeliveryType() {
 		return deliveryType;
@@ -75,35 +84,23 @@ public class Supplier  extends ExtInfo{
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getFax1() {
-		return fax1;
+	public String getFax() {
+		return fax;
 	}
-	public void setFax1(String fax1) {
-		this.fax1 = fax1;
+	public void setFax(String fax) {
+		this.fax = fax;
 	}
-	public String getFax2() {
-		return fax2;
+	public Integer getGoodsBillsdate() {
+		return goodsBillsdate;
 	}
-	public void setFax2(String fax2) {
-		this.fax2 = fax2;
+	public void setGoodsBillsdate(Integer goodsBillsdate) {
+		this.goodsBillsdate = goodsBillsdate;
 	}
-	public String getFax3() {
-		return fax3;
+	public String getLinkman() {
+		return linkman;
 	}
-	public void setFax3(String fax3) {
-		this.fax3 = fax3;
-	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getLinkMan() {
-		return linkMan;
-	}
-	public void setLinkMan(String linkMan) {
-		this.linkMan = linkMan;
+	public void setLinkman(String linkman) {
+		this.linkman = linkman;
 	}
 	public String getMarketZone() {
 		return marketZone;
@@ -117,17 +114,11 @@ public class Supplier  extends ExtInfo{
 	public void setMemo(String memo) {
 		this.memo = memo;
 	}
-	public String getName() {
-		return name;
+	public Integer getMinOrderAmount() {
+		return minOrderAmount;
 	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getNature() {
-		return nature;
-	}
-	public void setNature(String nature) {
-		this.nature = nature;
+	public void setMinOrderAmount(Integer minOrderAmount) {
+		this.minOrderAmount = minOrderAmount;
 	}
 	public String getOfficeAddress() {
 		return officeAddress;
@@ -135,16 +126,10 @@ public class Supplier  extends ExtInfo{
 	public void setOfficeAddress(String officeAddress) {
 		this.officeAddress = officeAddress;
 	}
-	public Integer getPaymentedType() {
-		return paymentedType;
-	}
-	public void setPaymentedType(Integer paymentedType) {
-		this.paymentedType = paymentedType;
-	}
-	public Integer getPayType() {
+	public String getPayType() {
 		return payType;
 	}
-	public void setPayType(Integer payType) {
+	public void setPayType(String payType) {
 		this.payType = payType;
 	}
 	public String getPostCode() {
@@ -165,11 +150,29 @@ public class Supplier  extends ExtInfo{
 	public void setShortName(String shortName) {
 		this.shortName = shortName;
 	}
-	public String getSupplierNotes() {
-		return supplierNotes;
+	public String getSupplierId() {
+		return supplierId;
 	}
-	public void setSupplierNotes(String supplierNotes) {
-		this.supplierNotes = supplierNotes;
+	public void setSupplierId(String supplierId) {
+		this.supplierId = supplierId;
+	}
+	public String getSupplierIllustrate() {
+		return supplierIllustrate;
+	}
+	public void setSupplierIllustrate(String supplierIllustrate) {
+		this.supplierIllustrate = supplierIllustrate;
+	}
+	public String getSupplierName() {
+		return supplierName;
+	}
+	public void setSupplierName(String supplierName) {
+		this.supplierName = supplierName;
+	}
+	public String getSupplierProperty() {
+		return supplierProperty;
+	}
+	public void setSupplierProperty(String supplierProperty) {
+		this.supplierProperty = supplierProperty;
 	}
 	public String getTaxNo() {
 		return taxNo;
@@ -177,23 +180,11 @@ public class Supplier  extends ExtInfo{
 	public void setTaxNo(String taxNo) {
 		this.taxNo = taxNo;
 	}
-	public String getTel1() {
-		return tel1;
+	public String getTel() {
+		return tel;
 	}
-	public void setTel1(String tel1) {
-		this.tel1 = tel1;
-	}
-	public String getTel2() {
-		return tel2;
-	}
-	public void setTel2(String tel2) {
-		this.tel2 = tel2;
-	}
-	public String getTel3() {
-		return tel3;
-	}
-	public void setTel3(String tel3) {
-		this.tel3 = tel3;
+	public void setTel(String tel) {
+		this.tel = tel;
 	}
 	public String getUrl() {
 		return url;
@@ -201,18 +192,20 @@ public class Supplier  extends ExtInfo{
 	public void setUrl(String url) {
 		this.url = url;
 	}
+	public String getVoucher() {
+		return voucher;
+	}
+	public void setVoucher(String voucher) {
+		this.voucher = voucher;
+	}
 	public YesOrNoEnums getYesOrNo() {
 		return yesOrNo;
 	}
 	public void setYesOrNo(YesOrNoEnums yesOrNo) {
 		this.yesOrNo = yesOrNo;
 	}
-	public String getLedgerId() {
-		return ledgerId;
-	}
-	public void setLedgerId(String ledgerId) {
-		this.ledgerId = ledgerId;
-	}
+
+	
 
 	
 	
