@@ -18,7 +18,7 @@ public interface GoodsDao {
 	 * @param goods
 	 * @return
 	 */
-	public List<Goods> getGoods(Goods goods);
+	public Goods getGoods(String goodsId);
 
 	/**
 	 * 保存商品信息
@@ -65,5 +65,7 @@ public interface GoodsDao {
 	 * @return
 	 */
 	public List<String> getGoodsInfoBySupplierAndGoods(Goods goods);
+	
+	String getGoodsMaxId();
 
 }

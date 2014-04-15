@@ -43,6 +43,12 @@ public interface LinkManDao {
 	 */
 	public void insertLinkMan(LinkMan l);
 
+	
+	/**
+	 * 批量保存联系人信息
+	 * @param list
+	 */
+	public void batchInsertLinkMan(List<LinkMan> list);
 	/**
 	 * 更新供应商信息
 	 * @param s

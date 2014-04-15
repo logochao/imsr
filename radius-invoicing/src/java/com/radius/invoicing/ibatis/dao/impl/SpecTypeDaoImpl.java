@@ -9,9 +9,15 @@ import com.radius.invoicing.ibatis.dao.SpecTypeDao;
 import com.radius.invoicing.ibatis.model.SpecType;
 
 @Repository
+@SuppressWarnings("unchecked")
 public class SpecTypeDaoImpl extends BaseIbatisDaoImpl<SpecType> implements SpecTypeDao{
 
 	private final String SQLMAPNAMESPACE="specTypeSqlMap."; 
+	
+	public List<SpecType> getSpecTypeAllList(){
+		return this.getSqlMapClientTemplate().queryForList(SQLMAPNAMESPACE+"getSpecTypeAllList");
+	}
+	
 	
 	/**
 	 * 通过主键获取规格信息
