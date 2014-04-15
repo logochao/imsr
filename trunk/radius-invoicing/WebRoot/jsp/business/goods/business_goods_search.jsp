@@ -2,150 +2,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <script type="text/javascript">
 <!--
-var business_goods_search_origin_place = null;//商品产地
-var business_goods_search_product_property = null;//商品属性
+var business_goods_search_goods_status = null;//商品属性
 var business_goods_search_product_series = null ;//商品类别
-var business_goods_search_category_name = null ;//商品分类
+var business_goods_search_goods_type = null ;//商品分类
 var business_goods_search_add_product_dialog = null;//添加商品信息对话框 
+var business_goods_info_company_dialog = null;
  $(function (){
  
  	//----------------------------------初始化--------------------------------------------------------
- 	//产地
- 	business_goods_search_origin_place=$('#business_goods_search_origin_place').combobox({
- 		url:'/stock/common/system/category_code_list.html?parentId=200',
- 		valueField: 'id',
-		textField: 'name',
-		onLoadSuccess:function(){
-			var target = $(this);
-			var data = target.combobox("getData");
-			var options = target.combobox("options");
-			if(data && data.length>0){
-				var fs = data[0];
-				target.combobox("setValue",fs[options.valueField]);
-			}
-		}
- 	});
- 	//商品属性
- 	business_goods_search_product_property=$('#business_goods_search_product_property').combobox({
- 		url:'/stock/common/system/category_code_list.html?parentId=1200',
- 		valueField: 'id',
-		textField: 'name',
-		onLoadSuccess:function(){
-			var target = $(this);
-			var data = target.combobox("getData");
-			var options = target.combobox("options");
-			if(data && data.length>0){
-				var fs = data[0];
-				target.combobox("setValue",fs[options.valueField]);
-			}
-		}
- 	});
- 	//商品类别(系列)
- 	business_goods_search_product_series=$('#business_goods_search_product_series').combobox({
- 		url:'/stock/common/system/category_code_list.html?parentId=2600',
- 		valueField: 'id',
-		textField: 'name',
-		onLoadSuccess:function(){
-			var target = $(this);
-			var data = target.combobox("getData");
-			var options = target.combobox("options");
-			if(data && data.length>0){
-				var fs = data[0];
-				target.combobox("setValue",fs[options.valueField]);
-			}
-		}
- 	});
- 	
- 	//商品分类
- 	business_goods_search_category_name=$('#business_goods_search_category_name').combobox({
- 		url:'/stock/common/system/category_code_list.html?parentId=2600',
- 		valueField: 'id',
-		textField: 'name',
-		onLoadSuccess:function(){
-			var target = $(this);
-			var data = target.combobox("getData");
-			var options = target.combobox("options");
-			if(data && data.length>0){
-				var fs = data[0];
-				target.combobox("setValue",fs[options.valueField]);
-			}
-		}
- 	});
- 	//商品批次
- 	$('#business_goods_search_batch_no').numberspinner({
- 		value:0,
- 		min:0,
- 		max:1000,
- 		increment:1,
- 		editable:false
- 	});
- 	
- 	//-----------------------------------初始化添加商品信息界面---------------------------------------------------
- 	//商品状态
- 	$('#business_goods_search_add_product_dialog_form_status').combobox({
- 		url:'${path}/common/system/category_code_list.html?parentId=1100',
- 		valueField: 'id',
-		textField: 'name',
-		onLoadSuccess:function(){
-			var target = $(this);
-			var data = target.combobox("getData");
-			var options = target.combobox("options");
-			if(data && data.length>0){
-				var fs = data[0];
-				target.combobox("setValue",fs[options.valueField]);
-			}
-		},
-		editable:false
- 	});
- 	//商品属性
- 	$('#business_goods_search_add_product_dialog_form_property').combobox({});
- 	//商品分类
- 	$('#business_goods_search_add_product_dialog_form_category_name').combobox({});
- 	//商品产地
- 	$('#business_goods_search_add_product_dialog_form_place').combobox({});
- 	//币种
- 	$('#business_goods_search_add_product_dialog_form_cash_type').combobox({
- 		url:'${path}/common/system/category_code_list.html?parentId=800',
- 		valueField: 'id',
-		textField: 'name',
-		onLoadSuccess:function(){
-			var target = $(this);
-			var data = target.combobox("getData");
-			var options = target.combobox("options");
-			if(data && data.length>0){
-				var fs = data[0];
-				target.combobox("setValue",fs[options.valueField]);
-			}
-		},
-		editable:false
- 	});
- 	//销售方式
- 	$('#business_goods_search_add_product_dialog_form_sales_type').combobox({
- 		url:'${path}/common/system/category_code_list.html?parentId=3600',
- 		valueField: 'id',
-		textField: 'name',
-		onLoadSuccess:function(){
-			var target = $(this);
-			var data = target.combobox("getData");
-			var options = target.combobox("options");
-			if(data && data.length>0){
-				var fs = data[0];
-				target.combobox("setValue",fs[options.valueField]);
-			}
-		},
-		editable:false
- 	});
- 	//默认销售方式
- 	$('#business_goods_search_add_product_dialog_form_defult_sales_institution').combobox({});
- 	//商品系列
- 	$('#business_goods_search_add_product_dialog_form_series').combobox({});
- 	//存放期限
- 	$('#business_goods_search_add_product_dialog_form_deposit_deadline').datebox({});
- 	//最低库限
- 	$('#business_goods_search_add_product_dialog_form_min_store').datebox({});
- 	//最高库限
- 	$('#business_goods_search_add_product_dialog_form_max_store').datebox({});
- 	
  	business_goods_search_add_product_dialog=$('#business_goods_search_add_product_dialog').show().dialog({
 		 title:'添加商品信息',
 		 width:800,
@@ -168,13 +32,60 @@ var business_goods_search_add_product_dialog = null;//添加商品信息对话�
 	 		'-']
 	});
  	
+ 	//商品状态
+ 	business_goods_search_goods_status=$('#business_goods_search_goods_status').combobox({
+ 		url:'${path}/common/system/category_code_list.html?parentId=3700',
+ 		valueField: 'id',
+		textField: 'name',
+		editable:false
+ 	});
+ 	
+ 	//商品分类
+ 	business_goods_search_goods_type=$('#business_goods_search_goods_type').combobox({
+ 		url:'/stock/common/system/category_code_list.html?parentId=2600',
+ 		valueField: 'id',
+		textField: 'name',
+		editable:false
+ 	});
+ 	
+ 	//查询供应商(生产厂商)信息对话框
+ 	business_goods_info_company_dialog=$('#business_goods_info_company_dialog').show().dialog({
+		 title:'查询生产厂商信息',
+		 width:800,
+		 height:380,
+		 collapsible:true,//向上缩小按钮
+		 maximizable:true,
+		 modal:true,
+		 closed:true
+	});
+ 	
+ 	//打开供应商查询界面
+ 	$('#business_goods_search_product_supplier_search_btn').on('click',function(){
+ 		business_goods_info_company_dialog.dialog('open');
+ 		business_goods_company_from=$(this).attr('from');
+ 	});
+ 	
+ 	
+ 	
  	//---------------------------------------业务处理--------------------------------------------------------------
  	//查询按钮
  	$('#business_goods_search_query_btn').on('click',function(){
- 		
+ 		business_goods_grd_product_grid.datagrid('options').url='${path}/goods/manager/goods/product_info_2_goods.html';
+ 		business_goods_grd_product_grid.datagrid('load',{
+ 			name			:$('#business_goods_search_name').val(),
+ 			realName		:$('#business_goods_search_real_name').val(),
+ 			goodsType		:business_goods_search_goods_type.combobox('getValue'),
+ 			machineSeries	:$('#business_goods_search_machine_series').val(),
+ 			machinePosition	:$('#business_goods_search_machine_position').val(),
+ 			partNo			:$('#business_goods_search_part_no').val(),
+ 			mapSeries		:$('#business_goods_search_map_series').val(),
+ 			company			:$('#business_goods_search_company_id').val(),
+ 			goodStatus		:business_goods_search_goods_status.combobox('getValue')
+ 		});
  	});
  	//确定按钮
  	$('#business_goods_search_ok_btn').on('click',function(){
+ 		
  	});
  });
  
@@ -187,7 +98,7 @@ var business_goods_search_add_product_dialog = null;//添加商品信息对话�
  	var validate = validateAddProductInfo();
  	if(validate){
  		$.ajax({
- 			url:'${path}',
+ 			url:'${path}/goods/manager/goods/product_infos_add.html',
  			method:'POST',
  			data:goods_data,
  			success:function(r){
@@ -197,6 +108,10 @@ var business_goods_search_add_product_dialog = null;//添加商品信息对话�
  					addBusinessGoodsGrdProductGrid(row_data);
  					//2.将添加商品界面进行清空处理
  					resetBusinessGoodsSearchAddProductDialogForm();
+ 					//3.商品编号
+ 					$('#business_goods_info_form_id').val(r.child.backup);
+ 					//4.关闭对话框
+ 					addProductInfoCloseBtn();
  				}
  			},
  			error:function(r){
@@ -204,6 +119,32 @@ var business_goods_search_add_product_dialog = null;//添加商品信息对话�
  			}
  		});
  	}
+ }
+ 
+ /**
+  * 将后台数据转化为商品列表datagrid row_data
+  * @params{} _data 后台数据对象
+  * @return   json
+  **/
+ function getGoodsInfo2ProductGrid(_data){
+ 	var  json ={
+ 		id					:_data.id,//商品编号
+ 		name				:_data.name,//商品名称
+ 		realName			:_data.realName,//真实品名
+ 		goodsType			:_data.realName,//商品类型
+ 		machineSeries		:_data.machineSeries,//所属设备名称/型号(主机序列号)
+ 		machinePosition		:_data.machinePosition,//设备位号
+ 		partNo				:_data.partNo,//备件号
+ 		mapSeries			:_data.mapSeries,//图号
+ 		company				:_data.company,//生产厂商
+ 		goodStatus			:_data.goodStatus,//商品状态 液态/固态
+ 		weightProp			:_data.weightProp,//比重
+ 		vulnerability		:_data.vulnerability,//易损性
+ 		description			:_data.description,//商品说明
+ 		useStatus			:_data.useStatus,//使用状态
+ 		memo				:_data.memo//备注
+ 	};
+ 	return json;
  }
  
  /**
@@ -215,68 +156,37 @@ var business_goods_search_add_product_dialog = null;//添加商品信息对话�
  	//2.关闭对话框
  	business_goods_search_add_product_dialog.dialog('close');
  }
- 
- /**
-  * 获取添加商品信息格式化后的商品信息(符合后台model对象)
-  * @return json
-  **/
- function getAddProductInfoFormatter(){
- 	var json={
- 	
- 	};
- 	return json;
- }
- 
- /**
-  * 验证添加商品信息
-  * @return boolean 
-  **/
- function validateAddProductInfo(){
- 	var validate =false;
- 	
- 	return validate;
- }
- /**
-  * 将后台数据转化为商品列表datagrid row_data
-  * @params{} _data 后台数据对象
-  * @return   json
-  **/
- function getGoodsInfo2ProductGrid(_data){
- 	var  json ={
- 		
- 	};
- 	return json;
- }
- 
- /**
-  * 重置添加商品信息表单
-  *
-  **/
- function resetBusinessGoodsSearchAddProductDialogForm(){
- 	
- }
- 
 //-->
 </script>
 <div id="business_goods_search_search_product_info">
 	<table  style="width: 100%;">
 		<tr>
 			<th>商品名称:</th>
-			<td><input id="business_goods_search_product_name"  style="border:1px solid #95B8E7"/></td>
-			<th>分类:</th>
-			<td><input id="business_goods_search_category_name" style="border:1px solid #95B8E7"/></td>
-			<th>产地:</th>
-			<td><input id="business_goods_search_origin_place"  style="border:1px solid #95B8E7"/></td>
-			<th>商品性质:</th>
-			<td><input id="business_goods_search_product_property" style="border:1px solid #95B8E7"/></td>
+			<td><input id="business_goods_search_name"  style="border:1px solid #95B8E7"/></td>
+			<th>真实品名称:</th>
+			<td><input id="business_goods_search_real_name" style="border:1px solid #95B8E7"/></td>
+			<th>商品类型:</th>
+			<td><input id="business_goods_search_goods_type"  style="border:1px solid #95B8E7"/></td>
+			<th>商品状态:</th>
+			<td><input id="business_goods_search_goods_status"  style="border:1px solid #95B8E7"/></td>
 		</tr>
 		<tr>
-			<th>商品类型:</th>
-			<td><input id="business_goods_search_product_series"  style="border:1px solid #95B8E7"/></td>
-			<th>真实品名:</th>
-			<td><input id="business_goods_search_true_product_name" style="border:1px solid #95B8E7"/></td>
-			<th>批次号</th>
-			<td><input id="business_goods_search_batch_no"/></td>
+			<th>设备名称:</th>
+			<td><input id="business_goods_search_machine_series" style="border:1px solid #95B8E7"/></td>
+			<th>设备位号:</th>
+			<td><input id="business_goods_search_machine_position" style="border:1px solid #95B8E7"/></td>
+			<th>备件号:</th>
+			<td><input id="business_goods_search_part_no" style="border:1px solid #95B8E7"/></td>
+			<th>图号:</th>
+			<td><input id="business_goods_search_map_series" style="border:1px solid #95B8E7"/></td>
+		</tr>
+		<tr>
+			<th>生产厂商:</th>
+			<td>
+				<input id="business_goods_search_company_name" style="border:1px solid #95B8E7"/>
+				<input id="business_goods_search_company_id" type="hidden"/>
+				<a id="business_goods_search_product_supplier_search_btn" href="#" class="easyui-linkbutton" plain="true" from="1"><font style="font-size:3ex">...</font></a>
+			</td>
 			<td colspan="2" style="text-align: center;" >
 				<div style="float: left;margin-top: 5px;">
 					<a id="business_goods_search_query_btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" plain="true">查询</a>
@@ -291,79 +201,9 @@ var business_goods_search_add_product_dialog = null;//添加商品信息对话�
 
 <div id="business_goods_search_add_product_dialog">
 	<form id="business_goods_search_add_product_dialog_form">
-		<table  style="width: 100%;margin-left: 10px;height: 100px;">
-			<tr>
-				<td>商品名称</td>
-				<td><input id="business_goods_search_add_product_dialog_form_name" style="border:1px solid #95B8E7"/> </td>
-				<td>真实品名</td>
-				<td><input id="business_goods_search_add_product_dialog_form_real_name" style="border:1px solid #95B8E7"/> </td>
-				<td>商品条码</td>
-				<td><input id="business_goods_search_add_product_dialog_form_bar_code" style="border:1px solid #95B8E7"/> </td>
-			</tr>
-			<tr>
-				<td>商品状态</td>
-				<td><input id="business_goods_search_add_product_dialog_form_status" style="border:1px solid #95B8E7"/> </td>
-				<td>商品性质</td>
-				<td><input id="business_goods_search_add_product_dialog_form_property" style="border:1px solid #95B8E7"/> </td>
-				<td>分类名称</td>
-				<td><input id="business_goods_search_add_product_dialog_form_category_name" style="border:1px solid #95B8E7"/> </td>
-			</tr>
-			<tr>
-				<td>产地</td>
-				<td><input id="business_goods_search_add_product_dialog_form_place" style="border:1px solid #95B8E7"/> </td>
-				<td>用途</td>
-				<td><input id="business_goods_search_add_product_dialog_form_uses" style="border:1px solid #95B8E7"/> </td>
-				<td>比重</td>
-				<td><input id="business_goods_search_add_product_dialog_form_weight_prop" style="border:1px solid #95B8E7"/> </td>
-			</tr>
-			<tr>
-				<td>单价</td>
-				<td><input id="business_goods_search_add_product_dialog_form_price" style="border:1px solid #95B8E7"/> </td>
-				<td>成本</td>
-				<td><input id="business_goods_search_add_product_dialog_form_cost" style="border:1px solid #95B8E7"/> </td>
-				<td>币种</td>
-				<td><input id="business_goods_search_add_product_dialog_form_cash_type" style="border:1px solid #95B8E7"/> </td>
-			</tr>
-			<tr>
-				<td>销售方式</td>
-				<td><input   id="business_goods_search_add_product_dialog_form_sales_type" style="border:1px solid #95B8E7"/> </td>
-				<td>默认销售单位</td>
-				<td><input   id="business_goods_search_add_product_dialog_form_defult_sales_institution" style="border:1px solid #95B8E7"/> </td>
-				<td>税号</td>
-				<td><input   id="business_goods_search_add_product_dialog_form_tax_no" style="border:1px solid #95B8E7"/> </td>
-			</tr>
-			<tr>
-				<td>商品系列</td>
-				<td><input   id="business_goods_search_add_product_dialog_form_series" style="border:1px solid #95B8E7"/> </td>
-				<td>易损性</td>
-				<td><input   id="business_goods_search_add_product_dialog_form_vulnerability" style="border:1px solid #95B8E7"/> </td>
-				<td>折扣</td>
-				<td><input   id="business_goods_search_add_product_dialog_form_off_sales" style="border:1px solid #95B8E7"/> </td>
-			</tr>
-			<tr>
-				<td>存放期限</td>
-				<td><input   id="business_goods_search_add_product_dialog_form_deposit_deadline" style="border:1px solid #95B8E7"/> </td>
-				<td>最低库限</td>
-				<td><input   id="business_goods_search_add_product_dialog_form_min_store" style="border:1px solid #95B8E7"/> </td>
-				<td>最高库限</td>
-				<td><input   id="business_goods_search_add_product_dialog_form_max_store" style="border:1px solid #95B8E7"/> </td>
-			</tr>
-		</table>
-		
-		<div id="tt" class="easyui-tabs" data-options="split:true" fit="true" border="false" style="margin-top: 10px;"> 
-			<div title="商品批次信息">
-				<jsp:include flush="true" page="business_goods_search_batch.jsp"></jsp:include>
-			</div>  
-			<div title="商品规格信息">
-				<jsp:include flush="true" page="business_goods_search_format.jsp"></jsp:include>
-			</div>  
-			<div title="商品描述信息">
-			</div>  
-			<div title="商品说明">
-			</div>
-			<div title="采购说明">
-			</div>
-		</div>
+		<jsp:include flush="true" page="business_goods_info.jsp"></jsp:include>
 	</form>
 </div>
-
+<div id="business_goods_info_company_dialog" style="margin-top: 5px;">
+	<jsp:include flush="true" page="business_goods_info_company.jsp"></jsp:include>
+</div>

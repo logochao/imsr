@@ -10,48 +10,22 @@ $(function(){
    		striped:true,
    		rownumbers:true,
    		collapsible:true,
-   		frozenColumns:[[
-   			 {field:'id',title:'商品编号',width:100},
-   			 {field:'name',title:'商品名称',width:120},
-   			 {field:'realName',title:'真实品名',width:120},
-   			 {field:'goodsName',title:'商品条码',width:120},
-   			 {field:'goodsName',title:'商品状态',width:120},
-   			 {field:'goodsName',title:'商品性质',width:120},
-   			 {field:'categoryName',title:'分类名称',width:120}
-   		]],
    		columns:[[
-   			{field:'goodsName',title:'产地',width:120},
-   			{field:'goodsName',title:'用途',width:120},
-   			{field:'goodsName',title:'比重',width:120},
-   			{field:'goodsName',title:'单价',width:120},
-   			{field:'goodsName',title:'成本',width:120},
-   			{field:'goodsName',title:'币种',width:120},
-   			{field:'goodsName',title:'销售方式',width:120},
-   			{field:'goodsName',title:'默认销售单位',width:120},
-   			{field:'goodsName',title:'税号',width:120},
-   			{field:'goodsName',title:'商品系列',width:120},
-   			{field:'goodsName',title:'易损性',width:120},
-   			{field:'goodsName',title:'折扣',width:120},
-   			{field:'goodsName',title:'存放期限',width:120},
-   			{field:'goodsName',title:'最低库限',width:120},
-   			{field:'goodsName',title:'最高库限',width:120},
-   			{field:'goodsName',title:'批次',width:120},
-   			{field:'goodsName',title:'批次号',width:120},
-   			{field:'goodsName',title:'更新批次日',width:120},
-   			{field:'goodsName',title:'月批次',width:120},
-   			{field:'goodsName',title:'更新批次月份',width:120},
-   			{field:'goodsName',title:'使用状态',width:120},
-   			{field:'goodsName',title:'规格编号',width:120},
-			{field:'goodsName',title:'净数量',width:120},
-   			{field:'goodsName',title:'小单位',width:120},
-   			{field:'goodsName',title:'小单位数量',width:120},
-   			{field:'goodsName',title:'折合单位成本',width:120},
-   			{field:'goodsName',title:'折合单位单价',width:120},
-   			{field:'goodsName',title:'商品单位重量',width:120},
-   			{field:'goodsName',title:'商品单位重量单价',width:120},
-   			{field:'quantityUnit',title:'采购说明',width:60},
-			{field:'equivalentUnit',title:'商品说明',width:60},
-			{field:'mome',title:'备注',width:250,align:'center'}
+	   		{field:'id',title:'商品编号',width:120},//商品编号
+			{field:'name',title:'商品名称',width:120},//商品名称
+			{field:'realName',title:'真实品名称',width:120},//真实品名
+			{field:'goodsType',title:'商品类型',width:120,formatter:goodsTypeFormatter},//商品类型
+			{field:'machineSeries',title:'所属设备名称',width:180},//所属设备名
+			{field:'machinePosition',title:'设备位号',width:120},//设备位号
+			{field:'partNo',title:'备件号',width:120},//备件号
+			{field:'mapSeries',title:'图号',width:120},//图号
+			{field:'company',title:'生产厂商',width:120},//生产厂商
+			{field:'goodStatus',title:'商品状态',width:120,formatter:goodStatusFormatter},//商品状态 液态
+			{field:'weightProp',title:'比重',width:120},//比重
+			{field:'vulnerability',title:'易损性',width:120},//易损性
+			{field:'description',title:'商品说明',width:120},//商品说明
+			{field:'useStatus',title:'使用状态',width:120,formatter:useStatusFormatter},//使用状态
+			{field:'memo',title:'备注',width:120}//备注
 		]]
 	});
 });
@@ -66,7 +40,56 @@ function addBusinessGoodsGrdProductGrid(row_data){
 	addTargetDataGridRowData(business_goods_grd_product_grid,row_data,0);//target_grid,row_data,row_index
 	business_goods_grd_product_grid.datagrid('acceptChanges');//接受改变
 }
-
-
+/**
+ * 商品类型信息
+ *@params{}  value
+ *@params{}  row
+ *@params{}  index
+ *@return   
+ **/
+function goodsTypeFormatter(value,row,index){
+	var combobox_data = business_goods_search_goods_type.combobox('getData');
+	for(var i=0,length=combobox_data.length;i<length;i++){
+		if(combobox_data[i].id==value){
+			value=combobox_data[i].name;
+			break;
+		}
+	}
+	return value;
+}
+/**
+ * 商品状态信息
+ *@params{}  value
+ *@params{}  row
+ *@params{}  index
+ *@return   
+ **/
+function goodStatusFormatter(value,row,index){
+	var combobox_data = business_goods_info_form_goods_status.combobox('getData');
+	for(var i=0,length=combobox_data.length;i<length;i++){
+		if(combobox_data[i].id==value){
+			value=combobox_data[i].name;
+			break;
+		}
+	}
+	return value;
+}
+/**
+ * 使用状态信息
+ *@params{}  value
+ *@params{}  row
+ *@params{}  index
+ *@return   
+ **/
+function useStatusFormatter(value,row,index){
+	var combobox_data = business_goods_info_form_cash_use_status.combobox('getData');
+	for(var i=0,length=combobox_data.length;i<length;i++){
+		if(combobox_data[i].id==value){
+			value=combobox_data[i].name;
+			break;
+		}
+	}
+	return value;
+}
 </script>
 <div id="business_goods_grd_product_grid"><%--商品列表--%></div>
