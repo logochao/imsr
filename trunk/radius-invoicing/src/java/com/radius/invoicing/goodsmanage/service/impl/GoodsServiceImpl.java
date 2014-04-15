@@ -48,8 +48,8 @@ public class GoodsServiceImpl implements GoodsService   {
 	 * @return
 	 */
 	public JsonUtils saveGoodsInfo(Goods goods,String statusCode){
-		List list = goodsDao.getGoods(goods);
-		if(list!=null&&!list.isEmpty()&&list.size()>0){
+		Goods temp = goodsDao.getGoods(goods.getId());
+		if(temp!=null){
 			return updateGoodsInfo(goods,statusCode);
 		}
 		return addGoodsInfo(goods,statusCode);
@@ -81,11 +81,12 @@ public class GoodsServiceImpl implements GoodsService   {
 	public JsonUtils addGoodsInfo(Goods goods,String statusCode){
 		JsonUtils jsonUtils =new JsonUtils();
 		jsonUtils.setMessage("添加商品信息失败...");
-		
+		goods.setId(goodsDao.getGoodsMaxId());
 		goodsDao.insert(goods);
 		jsonUtils.setSuccess(true);
 		jsonUtils.setMessage("添加商品信息成功...");
-		jsonUtils.setChild(statusCode);
+		goods.setBackup(statusCode);
+		jsonUtils.setChild(goods);
 		return jsonUtils;
 	}
 }
