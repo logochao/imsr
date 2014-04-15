@@ -54,7 +54,7 @@ public class GoodsController {
 	
 	
 	
-	@RequestMapping({"/goods/split_page.html","/goods/manager/goods/goods_list.html"})
+	@RequestMapping({"/goods/split_page.html","/goods/manager/goods/goods_list.html","/goods/manager/goods/product_info_2_goods.html"})
 	@ResponseBody
 	public EasyuiSplitPager<Goods> getGoodsSplitPage(HttpServletRequest request,HttpServletResponse response,Goods goods)throws Exception{
 		return goodsService.getGoodsSplitPage(goods);
@@ -68,7 +68,11 @@ public class GoodsController {
 	 */
 	@RequestMapping("/goods/manager/goods/goods_manager_view.html")
 	public ModelAndView goodsManager(HttpServletRequest request,HttpServletResponse response)throws Exception{
-		return new ModelAndView(goods_manager_view);
+		ModelAndView mv = new ModelAndView(goods_manager_view);
+		Goods goods = new Goods();
+		goods.setId(Long.toString(System.currentTimeMillis(), 36));
+		mv.addObject("goods", goods);
+		return mv;
 	}
 	
 	/**
@@ -78,10 +82,14 @@ public class GoodsController {
 	 * @return
 	 * @throws Exception
 	 */
-	public JsonUtils addGoodInfo(HttpServletRequest request,HttpServletResponse response)throws Exception{
-		
-		
-		return null;
+	@RequestMapping("/goods/manager/goods/product_infos_add.html")
+	@ResponseBody
+	public JsonUtils addGoodInfo(HttpServletRequest request,HttpServletResponse response,Goods goods)throws Exception{
+		String ledgerId = "0010";
+		String creater = "0010";
+		goods.setLedgerId(ledgerId);
+		goods.setCreater(creater);
+		return goodsService.saveGoodsInfo(goods, Long.toString(System.currentTimeMillis(), 36));
 	}
 	
 	
