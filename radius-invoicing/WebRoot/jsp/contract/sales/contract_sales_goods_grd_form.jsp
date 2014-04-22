@@ -199,15 +199,16 @@ function addProuctInfoMemcache(){
 * @param amount  金额
 * @param quantityUnit 数量
 */
-function updateProuctInfoMemcache(amount,quantityUnit,goodsId){
+function updateProuctInfoMemcache(amount,quantityUnit,quantityEuPerUnit,goodsId){
 	$.ajax({
-		url:'${path}/contract/manager/sales_contract_product_info_memcache.html',//销售合同商品列表
+		url:'${path}/contract/manager/salescontract/sales_contract_product_info_memcache.html',//销售合同商品列表
 		method:'POST',//请求方式
 		data:{
-			contractId:$('#constract_sales_sale_base_id').val(),//合同编号
-			goodsId:goodsId,//商品编号
-			quantityUnit:quantityUnit,
-			amount:amount
+			contractId				:$('#constract_sales_sale_base_id').val(),//合同编号
+			goodsId					:goodsId,//商品编号
+			quantityUnit			:quantityUnit,
+			quantityEuPerUnit		:quantityEuPerUnit,
+			amount					:amount
 		},//参数
 		success:function (data){
 			console.info(data);
@@ -282,12 +283,12 @@ function calculateTotalAmount(){
 		<th>数量</th>
 		<td>
 			<input style="width: 100px;" type="text" class="easyui-numberspinner" id="contract_sales_goods_grd_form_quantity_unit"/>
-			<input type="text"  style="width: 20px;" readonly="readonly" value="桶"/>
+			<input type="text"  style="width: 20px;" id="contract_sales_goods_grd_form_unit" readonly="readonly" value="桶"/><%-- 包装单位--%>
 		</td>
 		<th>折合数量</th>
 		<td colspan="3">
 			<input style="width: 100px;" type="text" class="easyui-numberspinner" id="contract_sales_goods_grd_form_quantity_eu" data-options="min:0,editable:false"/>
-			<input type="text" id="contract_sales_goods_grd_form_equivalent_unit" style="width: 20px;" readonly="readonly" value="吨"/>
+			<input type="text" id="contract_sales_goods_grd_form_equivalent_unit" style="width: 20px;" readonly="readonly" value="吨"/><%--折合单位 --%>
 		</td>
 		<th>金额</th>
 		<td>
