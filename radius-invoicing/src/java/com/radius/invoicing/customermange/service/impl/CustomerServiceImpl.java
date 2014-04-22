@@ -22,6 +22,7 @@ import com.radius.base.utils.Constants;
 import com.radius.base.utils.JsonUtils;
 import com.radius.invoicing.customermange.compent.CustomerCompent;
 import com.radius.invoicing.customermange.service.CustomerService;
+import com.radius.invoicing.enums.SexEnums;
 import com.radius.invoicing.enums.YesOrNoEnums;
 import com.radius.invoicing.ibatis.dao.CustomerDao;
 import com.radius.invoicing.ibatis.dao.LinkManDao;
@@ -72,6 +73,10 @@ public class CustomerServiceImpl implements Constants, CustomerService {
 	 */
 	public EasyuiSplitPager<LinkMan> getLinkManInfoSplitPage(LinkMan linkman){
 		EasyuiSplitPager<LinkMan> customerEasyuiSplitPage=new EasyuiSplitPager<LinkMan>();
+		Integer sex2= linkman.getSex2();
+		if(sex2!=SexEnums.UNKNOW.getId()){
+			linkman.setSex(SexEnums.getSexEnumsById(sex2));
+		}
 		List<LinkMan> list= linkManDao.getLinkManByCondition(linkman);
 		customerEasyuiSplitPage.setRows(list);
 		customerEasyuiSplitPage.setTotal(list.size());
