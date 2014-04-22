@@ -159,6 +159,7 @@ public class SalesContractServiceImpl implements SalesContractService,Constants 
 				//更新金额与数量
 				grd.setAmount(goods.getAmount());
 				grd.setQuantityUnit(goods.getQuantityUnit());
+				grd.setQuantityEuPerUnit(goods.getQuantityEuPerUnit());
 				logger.error("key "+key+",已经将其缓存在对象中 "+cache);
 				goods=grd;
 			}

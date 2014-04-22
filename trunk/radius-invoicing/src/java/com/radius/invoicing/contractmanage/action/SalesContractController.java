@@ -130,7 +130,7 @@ public class SalesContractController extends BaseController{
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping("/contract/manager/sales_contract_product_info_memcache.html")
+	@RequestMapping(value={"/contract/manager/sales_contract_product_info_memcache.html","/contract/manager/salescontract/sales_contract_product_info_memcache.html"})
 	@ResponseBody
 	public JsonUtils addSalesContractProductInfo2Memcache(HttpServletRequest request,HttpServletResponse response,SalesContractGoodsGrd goods)throws Exception{
 		//将销售合同商品添加到内存中
@@ -145,7 +145,7 @@ public class SalesContractController extends BaseController{
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping("/contract/manager/sales_contract_product_info_remove_memcache.html")
+	@RequestMapping(value={"/contract/manager/sales_contract_product_info_remove_memcache.html","/contract/manager/salescontract/sales_contract_product_info_remove_memcache.html"})
 	@ResponseBody
 	public JsonUtils removeSaleContractProductInfo2Memcache(HttpServletRequest request,HttpServletResponse response,SalesContractGoodsGrd goods)throws Exception{
 		return contractService.removeSalesContractProductInfo2Memcache(goods.getContractId()+"_add_sales_contract_proudct_info", goods);
