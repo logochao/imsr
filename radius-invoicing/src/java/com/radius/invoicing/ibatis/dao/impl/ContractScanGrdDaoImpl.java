@@ -105,6 +105,19 @@ public class ContractScanGrdDaoImpl extends BaseIbatisDaoImpl<ContractScanGrd> i
 	public void batchDeleteContractScanGrd(List<ContractScanGrd> list){
 		this.batchDeleteListObject(list, SQLMAPNAMESPACE+"deleteContractScanGrd");
 	}
+	
+	/**
+	 * 根据合同号获取合同扫描件行数
+	 * @param contractId
+	 * @return
+	 */
+	public Integer getContractScanGrdCountByContractId(String contractId){
+		return (Integer)this.getSqlMapClientTemplate().queryForObject(SQLMAPNAMESPACE+"getContractScanGrdCountByContractId", contractId);
+	}
+	
+	public void deleteContractScanGrdByContractId(String contractId){
+		this.deleteObject(contractId, SQLMAPNAMESPACE+"deleteContractScanGrdByContractId");
+	}
 }
 
 

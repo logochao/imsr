@@ -30,6 +30,14 @@ public class SalesContractPaymentDaoImpl extends BaseIbatisDaoImpl<SalesContract
 	public SalesContractPayment getSalesContractPaymentByPk(String contractId){
 		return this.getObjectByCondition(contractId, SQLMAPNAMESPACE+"getSalesContractPaymentByPk");
 	}
+	/**
+	 * 根据合同号查询销售合同支付
+	 * @param contractId
+	 * @return
+	 */
+	public Integer getSalesContractPaymentCountByContractId(String contractId){
+		return (Integer)this.getSqlMapClientTemplate().queryForObject(SQLMAPNAMESPACE+"getSalesContractPaymentCountByContractId", contractId);
+	}
 	
 	/**
 	 * 通过条件查询

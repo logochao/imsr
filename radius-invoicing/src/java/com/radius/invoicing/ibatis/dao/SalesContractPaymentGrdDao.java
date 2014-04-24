@@ -73,5 +73,16 @@ public interface SalesContractPaymentGrdDao {
 	 * @param g
 	 */
 	public void deleteSalesContractPaymentGrd(SalesContractPaymentGrd g);
+	
+	
+	/**
+	 * 根据合同号获取销售合同支付列表行数
+	 * @param contractId
+	 * @return
+	 */
+	public Integer getSalesContractPaymentGrdCountByContractId(String contractId);
+	
+	
+	public void deleteSalesContractPaymentGrdByContractId(String contractId);
 
 }
