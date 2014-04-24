@@ -1,5 +1,7 @@
 package com.radius.invoicing.contractmanage.service;
 
+import java.util.List;
+
 import com.radius.base.page.EasyuiSplitPager;
 import com.radius.base.utils.JsonUtils;
 import com.radius.invoicing.ibatis.model.ContractScanGrd;
@@ -50,6 +52,14 @@ public interface SalesContractService {
 	 */
 	public JsonUtils removeObject2MemcacheByPayDetail(String key,SalesContractPaymentGrd payment);
 	
+	/**
+	 * 删除memcache中的缓存对象
+	 * @param key
+	 * @param payment
+	 * @return
+	 */
+	public JsonUtils removeObject2MemcacheByPayDetail(String key,SalesContractPaymentGrd payment,boolean delete);
+	
 	
 	/**
 	 * 删除memcache中的缓存对象
@@ -58,6 +68,14 @@ public interface SalesContractService {
 	 * @return
 	 */
 	public JsonUtils removeSalesContractProductInfo2Memcache(String key,SalesContractGoodsGrd goods);
+	/**
+	 * 删除memcache中的缓存对象
+	 * @param key
+	 * @param payment
+	 * @param delete
+	 * @return
+	 */
+	public JsonUtils removeSalesContractProductInfo2Memcache(String key,SalesContractGoodsGrd goods,boolean delete);
 	
 	
 	/**
@@ -76,6 +94,13 @@ public interface SalesContractService {
 	 * @return
 	 */
 	public JsonUtils removeContractScanInfo2Memcache(String key,ContractScanGrd scan);
+	/**
+	 * 删除memcache中的缓存对象
+	 * @param key
+	 * @param payment
+	 * @return
+	 */
+	public JsonUtils removeContractScanInfo2Memcache(String key,ContractScanGrd scan,boolean delete);
 	
 	
 	/**
@@ -89,6 +114,18 @@ public interface SalesContractService {
 	 * @return
 	 */
 	public JsonUtils saveSalesContractInfos(String ledgerId,SalesContract salesContract,String goodsMemcacheKey,String paymentMemcacheKey,String scansMemecacheKey,SalesContractPayment payment)throws Exception;
+	/**
+	 * 保存销售合同信息
+	 * @param ledgerId
+	 * @param salesContract
+	 * @param goodsMemcacheKey
+	 * @param paymentMemcacheKey
+	 * @param scansMemecacheKey
+	 * @param payment
+	 * @param guaranteePaymentList 保函条款
+	 * @return
+	 */
+	public JsonUtils saveSalesContractInfos(String ledgerId,SalesContract salesContract,String goodsMemcacheKey,String paymentMemcacheKey,String scansMemecacheKey,SalesContractPayment payment,List<SalesContractPaymentGrd> guaranteePaymentList)throws Exception;
 
 	
 	/**
@@ -104,4 +141,33 @@ public interface SalesContractService {
 	 * @return
 	 */
 	public EasyuiSplitPager<SalesContractGoodsGrd> getSalesContractGoodsGrd(SalesContractGoodsGrd salesContractGoodsGrd);
+	
+	/**
+	 * 根据条件查询销售合同信息列表
+	 * @param salesContract
+	 * @return
+	 */
+	public EasyuiSplitPager<SalesContract> getSalesContractInfoList(SalesContract salesContract);
+	
+
+	/**
+	 * 获取销售支付信息
+	 * @param salesContractPayment
+	 * @return
+	 */
+	public EasyuiSplitPager<SalesContractPayment> getSalesContractPayment(SalesContractPayment salesContractPayment);
+	
+	/**
+	 * 获取销售合同支付明细
+	 * @param salesContractPaymentGrd
+	 * @return
+	 */
+	public  EasyuiSplitPager<SalesContractPaymentGrd> getSalesContractPaymentGrd(SalesContractPaymentGrd salesContractPaymentGrd);
+
+	/**
+	 * 获取销售合同扫描件
+	 * @param contractScanGrd
+	 * @return
+	 */
+	public EasyuiSplitPager<ContractScanGrd> getContractScanGrd(ContractScanGrd contractScanGrd);
 }
