@@ -103,4 +103,21 @@ public class SalesContractGoodsGrdDaoImpl extends BaseIbatisDaoImpl<SalesContrac
 		params.put("goodsId", goodsId);
 		this.deleteObject(params, SQLMAPNAMESPACE+"deleteSalesContractGoodsGrdByPK");
 	}
+	/**
+	 * 根据合同编号获取合同商品行数
+	 * @param contractId
+	 * @return
+	 */
+	public Integer getSalesContractGoodsGrdCountByContractId(String contractId){
+		return (Integer)this.getSqlMapClientTemplate().queryForObject(SQLMAPNAMESPACE+"getSalesContractGoodsGrdCountByContractId",contractId);
+	}
+	
+	/**
+	 * 根据合同号删除合同商品信息
+	 * @param contractId
+	 */
+	public void deleteSalesContractGoodsGrdByContractId(String contractId){
+		this.deleteObject(contractId,SQLMAPNAMESPACE+"deleteSalesContractGoodsGrdByContractId");
+		
+	}
 }

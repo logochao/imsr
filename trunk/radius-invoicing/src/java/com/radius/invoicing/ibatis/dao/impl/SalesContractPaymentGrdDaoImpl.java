@@ -94,4 +94,16 @@ public class SalesContractPaymentGrdDaoImpl extends BaseIbatisDaoImpl<SalesContr
 	public void deleteSalesContractPaymentGrd(SalesContractPaymentGrd g){
 		this.deleteObject(g, SQLMAPNAMESPACE+"deleteSalesContractPaymentGrd");
 	}
+	/**
+	 * 根据合同号获取销售合同支付列表行数
+	 * @param contractId
+	 * @return
+	 */
+	public Integer getSalesContractPaymentGrdCountByContractId(String contractId){
+		return (Integer)this.getSqlMapClientTemplate().queryForObject(SQLMAPNAMESPACE+"getSalesContractPaymentGrdCountByContractId",contractId);
+	}
+	
+	public void deleteSalesContractPaymentGrdByContractId(String contractId){
+		this.deleteObject(contractId, SQLMAPNAMESPACE+"deleteSalesContractPaymentGrdByContractId");
+	}
 }

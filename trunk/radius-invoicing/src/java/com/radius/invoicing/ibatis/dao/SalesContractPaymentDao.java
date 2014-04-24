@@ -27,6 +27,13 @@ public interface SalesContractPaymentDao {
 	public List<SalesContractPayment> getSalesContractPayment(
 			SalesContractPayment p);
 
+	
+	/**
+	 * 根据合同号查询销售合同支付
+	 * @param contractId
+	 * @return
+	 */
+	public Integer getSalesContractPaymentCountByContractId(String contractId);
 	/**
 	 * 保存销售合同信息
 	 * @param p
@@ -64,5 +71,9 @@ public interface SalesContractPaymentDao {
 	 * @return
 	 */
 	public void updateSalesContractPaymentStatusByContractId(SalesContractPayment p);
+	
+	
+	
+	
 
 }

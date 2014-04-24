@@ -77,5 +77,19 @@ public interface ContractScanGrdDao {
 	 * @param list
 	 */
 	public void batchDeleteContractScanGrd(List<ContractScanGrd> list);
+	
+	
+	/**
+	 * 根据合同号获取合同扫描件行数
+	 * @param contractId
+	 * @return
+	 */
+	public Integer getContractScanGrdCountByContractId(String contractId);
+	
+	/**
+	 * 根据合同编号删除合同扫描件信息
+	 * @param contractId
+	 */
+	public void deleteContractScanGrdByContractId(String contractId);
 
 }

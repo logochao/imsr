@@ -76,5 +76,18 @@ public interface SalesContractGoodsGrdDao {
 	 * @return
 	 */
 	public void updateSalesContractGoodsGrdStatusByContractId(SalesContractGoodsGrd g);
+	
+	/**
+	 * 根据合同编号获取合同商品行数
+	 * @param contractId
+	 * @return
+	 */
+	public Integer getSalesContractGoodsGrdCountByContractId(String contractId);
+	
+	/**
+	 * 根据合同号删除合同商品信息
+	 * @param contractId
+	 */
+	public void deleteSalesContractGoodsGrdByContractId(String contractId);
 
 }
