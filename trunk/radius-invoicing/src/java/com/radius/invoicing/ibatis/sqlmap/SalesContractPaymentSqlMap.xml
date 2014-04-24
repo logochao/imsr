@@ -5,7 +5,7 @@
   <typeAlias alias="salesContractPayment" type="com.radius.invoicing.ibatis.model.SalesContractPayment" />
   
   <sql id="salesContractPaymentFileds">
-  	 contract_id contractId,cash_type cashType,total_amount totalAmount,amount_in_words upperAmount,payment_type paymentType,status status,audited_status auditedStatus,mome mome
+  	 contract_id contractId,cash_type cashType,total_amount totalAmount,amount_in_words upperAmount,payment_type paymentType,status status,audited_status auditedStatus,mome mome,
   	 ledger_id ledgerId,operator operator,motify_date modifyDate,creater creater,createdate createDate,reviser reviser,revisedate reviseDate,verifier verifier,verifydate verifyDate
   </sql>
   
@@ -32,25 +32,25 @@
   <sql id="whereLike">
   	<dynamic prepend="where">
   		1=1  
-  		<isNotNull prepend="and" property="contractId">contract_id=#contractId#</isNotNull>
-  		<isNotNull prepend="and" property="cashType">cash_type=#cashType#</isNotNull>
-  		<isNotNull prepend="and" property="totalAmount">total_amount=#totalAmount#</isNotNull>
-		<isNotNull prepend="and" property="upperAmount">amount_in_words=#upperAmount#</isNotNull>
-		<isNotNull prepend="and" property="paymentType">payment_type=#paymentType#</isNotNull>
-		<isNotNull prepend="and" property="status">status=#status#</isNotNull>
-		<isNotNull prepend="and" property="audited_status">audited_status=#auditedStatus#</isNotNull>
-		<isNotNull prepend="and" property="mome">mome=#mome#</isNotNull>
- 		<isNotNull prepend="and" property="ledgerId">ledger_id=#ledgerId#</isNotNull> 
+  		<isNotEmpty  property="contractId"> and contract_id=#contractId#</isNotEmpty>
+  		<isNotNull  property="cashType"> and cash_type=#cashType#</isNotNull>
+  		<isNotNull  property="totalAmount">  and total_amount=#totalAmount#</isNotNull>
+		<isNotEmpty  property="upperAmount"> and amount_in_words=#upperAmount#</isNotEmpty>
+		<isNotNull  property="paymentType"> and payment_type=#paymentType#</isNotNull>
+		<isNotEmpty  property="status"> and status=#status#</isNotEmpty>
+		<isNotNull  property="auditedStatus"> and audited_status=#auditedStatus#</isNotNull>
+		<isNotEmpty  property="mome"> and mome=#mome#</isNotEmpty>
+ 		<isNotEmpty  property="ledgerId"> and ledger_id=#ledgerId#</isNotEmpty> 
   	</dynamic>
   </sql>
  
-	 <select id="getSalesContractPaymentByPk" parameterClass="java.lang.String" resultMap="salesContractPayment">
+	 <select id="getSalesContractPaymentByPk" parameterClass="java.lang.String" resultClass="salesContractPayment">
 	 	SELECT <include refid="salesContractPaymentFileds"/>
 	 	FROM RS_SALES_CONTRACT_PAYMENT
 	 	WHERE contract_id =#contractId# 
 	 </select>
 	 
-	 <select id="getSalesContractPayment" parameterClass="salesContractPayment" resultMap="salesContractPayment">
+	 <select id="getSalesContractPayment" parameterClass="salesContractPayment" resultClass="salesContractPayment">
 	 	SELECT <include refid="salesContractPaymentFileds"/>
 	 	FROM RS_SALES_CONTRACT_PAYMENT
 	 	<include refid="whereLike"/>
@@ -61,25 +61,25 @@
    			contract_id,
 	  		<isNotNull  property="cashType">cash_type,</isNotNull>
 	  		<isNotNull  property="totalAmount">total_amount,</isNotNull>
-			<isNotNull  property="upperAmount">amount_in_words,</isNotNull>
+			<isNotEmpty  property="upperAmount">amount_in_words,</isNotEmpty>
 			<isNotNull  property="paymentType">payment_type,</isNotNull>
-			<isNotNull  property="status">status,</isNotNull> 
-			<isNotNull  property="ledgerId">ledger_id,</isNotNull> 
-			<isNotNull  property="mome">mome,</isNotNull> 
-			<isNotNull  property="operator">operator,</isNotNull> 
+			<isNotEmpty  property="status">status,</isNotEmpty> 
+			<isNotEmpty  property="ledgerId">ledger_id,</isNotEmpty> 
+			<isNotEmpty  property="mome">mome,</isNotEmpty> 
+			<isNotEmpty  property="operator">operator,</isNotEmpty> 
 	  	    creater,
 	  	    createdate
    		)VALUES(
    			#contractId#,
 	  		<isNotNull  property="cashType">#cashType#,</isNotNull>
 	  		<isNotNull  property="totalAmount">#totalAmount#,</isNotNull>
-			<isNotNull  property="upperAmount">#upperAmount#,</isNotNull>
+			<isNotEmpty  property="upperAmount">#upperAmount#,</isNotEmpty>
 			<isNotNull  property="paymentType">#paymentType#,</isNotNull>
-			<isNotNull  property="status">#status#,</isNotNull>
-	 		<isNotNull  property="ledgerId">#ledgerId#,</isNotNull> 
-	 		<isNotNull  property="mome">#mome#,</isNotNull> 
-	 		<isNotNull  property="operator">#operator#,</isNotNull> 
-   			 creater,now()
+			<isNotEmpty  property="status">#status#,</isNotEmpty>
+	 		<isNotEmpty  property="ledgerId">#ledgerId#,</isNotEmpty> 
+	 		<isNotEmpty  property="mome">#mome#,</isNotEmpty> 
+	 		<isNotEmpty  property="operator">#operator#,</isNotEmpty> 
+   			 #creater#,now()
    		)
    	</insert>
    
@@ -88,15 +88,15 @@
    		<dynamic prepend="SET">
 	  		<isNotNull prepend="," property="cashType">cash_type=#cashType#</isNotNull>
 	  		<isNotNull prepend="," property="totalAmount">total_amount=#totalAmount#</isNotNull>
-			<isNotNull prepend="," property="upperAmount">amount_in_words=#upperAmount#</isNotNull>
+			<isNotEmpty prepend="," property="upperAmount">amount_in_words=#upperAmount#</isNotEmpty>
 			<isNotNull prepend="," property="paymentType">payment_type=#paymentType#</isNotNull>
-			<isNotNull prepend="," property="status">status=#status#</isNotNull> 
+			<isNotEmpty prepend="," property="status">status=#status#</isNotEmpty> 
 			<isNotNull prepend="," property="auditedStatus">audited_status=#auditedStatus#</isNotNull> 
-	 		<isNotNull prepend="," property="ledgerId">ledger_id=#ledgerId#</isNotNull> 
-	 		<isNotNull prepend="," property="memo">memo=#memo#</isNotNull> 
-	 		<isNotNull prepend="," property="operator">operator=#operator#,modify_date= now()</isNotNull>
-  	 		<isNotNull  prepend="," property="reviser">reviser = #reviser#,revisedate = now() </isNotNull>
-  			<isNotNull  prepend="," property="verifier">verifier = #verifier#,verifydate = now() </isNotNull>
+	 		<isNotEmpty prepend="," property="ledgerId">ledger_id=#ledgerId#</isNotEmpty> 
+	 		<isNotEmpty prepend="," property="memo">memo=#memo#</isNotEmpty> 
+	 		<isNotEmpty prepend="," property="operator">operator=#operator#,modify_date= now()</isNotEmpty>
+  	 		<isNotEmpty  prepend="," property="reviser">reviser = #reviser#,revisedate = now() </isNotEmpty>
+  			<isNotEmpty  prepend="," property="verifier">verifier = #verifier#,verifydate = now() </isNotEmpty>
    		</dynamic>
    		WHERE contract_id =#contractId#
    	</update>
@@ -120,7 +120,11 @@
    	</delete>
    	<update id="updateSalesContractPaymentStatusByContractId" parameterClass="salesContractPayment">
    		UPDATE RS_SALES_CONTRACT_PAYMENT
-   		SET STATUS=#stats# <isNotNull prepend="," property="operator">,operator=#operator#,modify_date= now()</isNotNull>
+   		SET STATUS=#status# <isNotEmpty prepend="," property="operator">,operator=#operator#,modify_date= now()</isNotEmpty>
    		WHERE contract_id =#contractId#
    	</update>
+   	<!-- 根据合同编号获取合同支付行数 -->
+   	<select id="getSalesContractPaymentCountByContractId" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+   		SELECT COUNT(1) FROM RS_SALES_CONTRACT_PAYMENT WHERE contract_id =#contractId# 
+   	</select>
 </sqlMap>

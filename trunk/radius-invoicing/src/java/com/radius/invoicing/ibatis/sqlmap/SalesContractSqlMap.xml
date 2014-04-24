@@ -8,7 +8,7 @@
 		contract_id id,customer_id customerId,customer_name customerName,contract_file_id contractFile,effect_date effectDate,sign_time signTime,
 		salesman_id salesMan, link_man man, link_mobile mobile,link_tel tel,link_fax fax,
 		ordered_date orderedDate,delivery_date deliveryDate,delivery_point deliveryPoint, contract_terms contractTerms,print_times printTimes,
-		newest_print_time printTime,newest_print_acc printAcc,newest_print_record printRecord,memo memo, status stats,audited_status auditedStatus,
+		newest_print_time printTime,newest_print_acc printAcc,newest_print_record printRecord,memo memo, status status,audited_status auditedStatus,
 		checked_status checkedStatus,validity_date validityDate, 
 		ledger_id ledgerId,operator operator,motify_date modifyDate,creater creater,createdate createDate,reviser reviser,revisedate reviseDate,verifier verifier,verifydate verifyDate
 	</sql>
@@ -52,31 +52,31 @@
 
 	<sql id="whereLike">
 		<dynamic prepend="where">
-			1=1 AND
-			<isNotNull prepend="and" property="id">contract_id=#id#</isNotNull>
-			<isNotNull prepend="and" property="customerId">customer_id=#customerId#</isNotNull>
-			<isNotNull prepend="and" property="customerName">customer_name=#customerName#</isNotNull>
-			<isNotNull prepend="and" property="contractFile">contract_file_id=#contractFile#</isNotNull>
-			<isNotNull prepend="and" property="effectDate">effect_date=#effectDate#</isNotNull>
-			<isNotNull prepend="and" property="signTime">sign_time=#signTime#</isNotNull>
-			<isNotNull prepend="and" property="salesMan">salesman_id=#salesMan#</isNotNull>
-			<isNotNull prepend="and" property="man">link_man=#man#</isNotNull>
-			<isNotNull prepend="and" property="mobile">link_mobile=#mobile#</isNotNull>
-			<isNotNull prepend="and" property="tel">link_tel=#tel#</isNotNull>
-			<isNotNull prepend="and" property="fax">link_fax=#fax#</isNotNull>
-			<isNotNull prepend="and" property="orderedDate">ordered_date=#orderedDate#</isNotNull>
-			<isNotNull prepend="and" property="deliveryDate">delivery_date=#deliveryDate#</isNotNull>
-			<isNotNull prepend="and" property="deliveryPoint">delivery_point=#deliveryPoint#</isNotNull>
-			<isNotNull prepend="and" property="contractTerms">contract_terms=#contractTerms#</isNotNull>
-			<isNotNull prepend="and" property="printTimes">print_times=#printTimes#</isNotNull>
-			<isNotNull prepend="and" property="printTime">newest_print_time=#printTime#</isNotNull>
-			<isNotNull prepend="and" property="printAcc">newest_print_acc=#printAcc#</isNotNull>
-			<isNotNull prepend="and" property="printRecord">newest_print_record=#printRecord#</isNotNull>
-			<isNotNull prepend="and" property="memo">memo=#memo#</isNotNull>
-			<isNotNull prepend="and" property="status">status=#status#</isNotNull>
-			<isNotNull prepend="and" property="auditedStatus">audited_status=#auditedStatus#</isNotNull>
-			<isNotNull prepend="and" property="checkedStatus">checked_status=#checkedStatus#</isNotNull>
-			<isNotNull prepend="and" property="validityDate">validity_date=#validityDate#</isNotNull>
+			1=1 
+			<isNotEmpty  property="id"> AND contract_id=#id#</isNotEmpty>
+			<isNotEmpty  property="customerId"> AND customer_id=#customerId#</isNotEmpty>
+			<isNotEmpty  property="customerName"> AND customer_name  LIKE CONCAT('%',#customerName#,'%')</isNotEmpty>
+			<isNotEmpty  property="contractFile"> AND contract_file_id=#contractFile#</isNotEmpty>
+			<isNotNull  property="effectDate"> AND effect_date=#effectDate#</isNotNull>
+			<isNotNull  property="signTime"> AND sign_time=#signTime#</isNotNull>
+			<isNotEmpty  property="salesMan"> AND salesman_id=#salesMan#</isNotEmpty>
+			<isNotEmpty  property="man"> AND link_man LIKE CONCAT('%',#man#,'%')</isNotEmpty>
+			<isNotEmpty  property="mobile"> AND link_mobile=#mobile#</isNotEmpty>
+			<isNotEmpty  property="tel"> AND link_tel=#tel#</isNotEmpty>
+			<isNotEmpty  property="fax"> AND link_fax=#fax#</isNotEmpty>
+			<isNotNull  property="orderedDate"> AND ordered_date=#orderedDate#</isNotNull>
+			<isNotNull  property="deliveryDate"> AND delivery_date=#deliveryDate#</isNotNull>
+			<isNotEmpty  property="deliveryPoint"> AND delivery_point=#deliveryPoint#</isNotEmpty>
+			<isNotEmpty  property="contractTerms"> AND contract_terms=#contractTerms#</isNotEmpty>
+			<isNotNull  property="printTimes"> AND print_times=#printTimes#</isNotNull>
+			<isNotNull  property="printTime"> AND newest_print_time=#printTime#</isNotNull>
+			<isNotEmpty  property="printAcc"> AND newest_print_acc=#printAcc#</isNotEmpty>
+			<isNotEmpty  property="printRecord"> AND newest_print_record=#printRecord#</isNotEmpty>
+			<isNotEmpty  property="memo"> AND memo=#memo#</isNotEmpty>
+			<isNotEmpty  property="status"> AND status=#status#</isNotEmpty>
+			<isNotEmpty  property="auditedStatus"> AND audited_status=#auditedStatus#</isNotEmpty>
+			<isNotEmpty  property="checkedStatus"> AND checked_status=#checkedStatus#</isNotEmpty>
+			<isNotNull  property="validityDate"> AND validity_date=#validityDate#</isNotNull>
 		</dynamic>
 	</sql>
 
@@ -88,33 +88,33 @@
 	<update id="updateSalesContractById" parameterClass="salesContract">
 		UPDATE RS_SALES_CONTRACT
 		<dynamic prepend="SET">
-			<isNotNull prepend="," property="customerId">customer_id=#customerId#</isNotNull>
-			<isNotNull prepend="," property="customerName">customer_name=#customerName#</isNotNull>
-			<isNotNull prepend="," property="contractFile">contract_file_id=#contractFile#</isNotNull>
+			<isNotEmpty prepend="," property="customerId">customer_id=#customerId#</isNotEmpty>
+			<isNotEmpty prepend="," property="customerName">customer_name=#customerName#</isNotEmpty>
+			<isNotEmpty prepend="," property="contractFile">contract_file_id=#contractFile#</isNotEmpty>
 			<isNotNull prepend="," property="effectDate">effect_date=#effectDate#</isNotNull>
-			<isNotNull prepend="," property="signTime">sign_time=#signTime#</isNotNull>
-			<isNotNull prepend="," property="salesMan">salesman_id=#salesMan#</isNotNull>
-			<isNotNull prepend="," property="man">link_man=#man#</isNotNull>
-			<isNotNull prepend="," property="mobile">link_mobile=#mobile#</isNotNull>
-			<isNotNull prepend="," property="tel">link_tel=#tel#</isNotNull>
-			<isNotNull prepend="," property="fax">link_fax=#fax#</isNotNull>
+			<isNotEmpty prepend="," property="signTime">sign_time=#signTime#</isNotEmpty>
+			<isNotEmpty prepend="," property="salesMan">salesman_id=#salesMan#</isNotEmpty>
+			<isNotEmpty prepend="," property="man">link_man=#man#</isNotEmpty>
+			<isNotEmpty prepend="," property="mobile">link_mobile=#mobile#</isNotEmpty>
+			<isNotEmpty prepend="," property="tel">link_tel=#tel#</isNotEmpty>
+			<isNotEmpty prepend="," property="fax">link_fax=#fax#</isNotEmpty>
 			<isNotNull prepend="," property="orderedDate">ordered_date=#orderedDate#</isNotNull>
 			<isNotNull prepend="," property="deliveryDate">delivery_date=#deliveryDate#</isNotNull>
-			<isNotNull prepend="," property="deliveryPoint">delivery_point=#deliveryPoint#</isNotNull>
-			<isNotNull prepend="," property="contractTerms">contract_terms=#contractTerms#</isNotNull>
+			<isNotEmpty prepend="," property="deliveryPoint">delivery_point=#deliveryPoint#</isNotEmpty>
+			<isNotEmpty prepend="," property="contractTerms">contract_terms=#contractTerms#</isNotEmpty>
 			<isNotNull prepend="," property="printTimes">print_times=#printTimes#</isNotNull>
 			<isNotNull prepend="," property="printTime">newest_print_time=#printTime#</isNotNull>
-			<isNotNull prepend="," property="printAcc">newest_print_acc=#printAcc#</isNotNull>
-			<isNotNull prepend="," property="printRecord">newest_print_record=#printRecord#</isNotNull>
-			<isNotNull prepend="," property="stats">status=#status#</isNotNull>
-			<isNotNull prepend="," property="auditedStatus">audited_status=#auditedStatus#</isNotNull>
-			<isNotNull prepend="," property="checkedStatus">checked_status=#checkedStatus#</isNotNull>
+			<isNotEmpty prepend="," property="printAcc">newest_print_acc=#printAcc#</isNotEmpty>
+			<isNotEmpty prepend="," property="printRecord">newest_print_record=#printRecord#</isNotEmpty>
+			<isNotEmpty prepend="," property="stats">status=#status#</isNotEmpty>
+			<isNotEmpty prepend="," property="auditedStatus">audited_status=#auditedStatus#</isNotEmpty>
+			<isNotEmpty prepend="," property="checkedStatus">checked_status=#checkedStatus#</isNotEmpty>
 			<isNotNull prepend="," property="validityDate">validity_date=#validityDate#</isNotNull>
-			<isNotNull prepend="," property="memo">memo=#memo#</isNotNull>
-			<isNotNull prepend="," property="ledgerId">ledger_id=#ledgerId#</isNotNull>
-			<isNotNull prepend="," property="operator">operator=#operator#,modify_date= now()</isNotNull>
-			<isNotNull prepend="," property="reviser">reviser = #reviser#,revisedate = now()</isNotNull>
-			<isNotNull prepend="," property="verifier">verifier = #verifier#,verifydate = now()</isNotNull>
+			<isNotEmpty prepend="," property="memo">memo=#memo#</isNotEmpty>
+			<isNotEmpty prepend="," property="ledgerId">ledger_id=#ledgerId#</isNotEmpty>
+			<isNotEmpty prepend="," property="operator">operator=#operator#,modify_date= now()</isNotEmpty>
+			<isNotEmpty prepend="," property="reviser">reviser = #reviser#,revisedate = now()</isNotEmpty>
+			<isNotEmpty prepend="," property="verifier">verifier = #verifier#,verifydate = now()</isNotEmpty>
 		</dynamic>
 		WHERE contract_id =#id#
 	</update>
@@ -159,60 +159,60 @@
 	<insert id="insert" parameterClass="salesContract">
 		INSERT INTO RS_SALES_CONTRACT ( 
 			contract_id,
-			<isNotNull property="customerId">customer_id,</isNotNull>
-			<isNotNull property="customerName">customer_name,</isNotNull>
-			<isNotNull property="contractFile">contract_file_id ,</isNotNull>
+			<isNotEmpty property="customerId">customer_id,</isNotEmpty>
+			<isNotEmpty property="customerName">customer_name,</isNotEmpty>
+			<isNotEmpty property="contractFile">contract_file_id ,</isNotEmpty>
 			<isNotNull property="effectDate">effect_date ,</isNotNull>
 			<isNotNull property="signTime">sign_time ,</isNotNull>
-			<isNotNull property="salesMan">salesman_id ,</isNotNull>
-			<isNotNull property="man">link_man ,</isNotNull>
-			<isNotNull property="mobile">link_mobile ,</isNotNull>
-			<isNotNull property="tel">link_tel ,</isNotNull>
-			<isNotNull property="fax">link_fax ,</isNotNull>
+			<isNotEmpty property="salesMan">salesman_id ,</isNotEmpty>
+			<isNotEmpty property="man">link_man ,</isNotEmpty>
+			<isNotEmpty property="mobile">link_mobile ,</isNotEmpty>
+			<isNotEmpty property="tel">link_tel ,</isNotEmpty>
+			<isNotEmpty property="fax">link_fax ,</isNotEmpty>
 			<isNotNull property="orderedDate">ordered_date,</isNotNull>
 			<isNotNull property="deliveryDate">delivery_date ,</isNotNull>
-			<isNotNull property="deliveryPoint">delivery_point ,</isNotNull>
-			<isNotNull property="contractTerms">contract_terms ,</isNotNull>
+			<isNotEmpty property="deliveryPoint">delivery_point ,</isNotEmpty>
+			<isNotEmpty property="contractTerms">contract_terms ,</isNotEmpty>
 			<isNotNull property="printTimes">print_times ,</isNotNull>
 			<isNotNull property="printTime">newest_print_time ,</isNotNull>
-			<isNotNull property="printAcc">newest_print_acc ,</isNotNull>
-			<isNotNull property="printRecord">newest_print_record ,</isNotNull>
-			<isNotNull property="memo">memo,</isNotNull>
-			<isNotNull property="status">status,</isNotNull>
-			<isNotNull property="auditedStatus">audited_status,</isNotNull>
-			<isNotNull property="checkedStatus">checked_status,</isNotNull>
+			<isNotEmpty property="printAcc">newest_print_acc ,</isNotEmpty>
+			<isNotEmpty property="printRecord">newest_print_record ,</isNotEmpty>
+			<isNotEmpty property="memo">memo,</isNotEmpty>
+			<isNotEmpty property="status">status,</isNotEmpty>
+			<isNotEmpty property="auditedStatus">audited_status,</isNotEmpty>
+			<isNotEmpty property="checkedStatus">checked_status,</isNotEmpty>
 			<isNotNull property="validityDate">validity_date,</isNotNull>
-			<isNotNull property="ledgerId">ledger_id,</isNotNull>
-			<isNotNull property="operator">operator,</isNotNull>
+			<isNotEmpty property="ledgerId">ledger_id,</isNotEmpty>
+			<isNotEmpty property="operator">operator,</isNotEmpty>
 			creater, 
 			createdate 
 		)VALUES( 
 			#id#,
-			<isNotNull property="customerId">#customerId#,</isNotNull>
-			<isNotNull property="customerName">#customerName#,</isNotNull>
-			<isNotNull property="contractFile">#contractFile#,</isNotNull>
+			<isNotEmpty property="customerId">#customerId#,</isNotEmpty>
+			<isNotEmpty property="customerName">#customerName#,</isNotEmpty>
+			<isNotEmpty property="contractFile">#contractFile#,</isNotEmpty>
 			<isNotNull property="effectDate">#effectDate#,</isNotNull>
 			<isNotNull property="signTime">#signTime#,</isNotNull>
-			<isNotNull property="salesMan">#salesMan#,</isNotNull>
-			<isNotNull property="man">#man#,</isNotNull>
-			<isNotNull property="mobile">#mobile#,</isNotNull>
-			<isNotNull property="tel">#tel#,</isNotNull>
-			<isNotNull property="fax">#fax#,</isNotNull>
+			<isNotEmpty property="salesMan">#salesMan#,</isNotEmpty>
+			<isNotEmpty property="man">#man#,</isNotEmpty>
+			<isNotEmpty property="mobile">#mobile#,</isNotEmpty>
+			<isNotEmpty property="tel">#tel#,</isNotEmpty>
+			<isNotEmpty property="fax">#fax#,</isNotEmpty>
 			<isNotNull property="orderedDate">#orderedDate#,</isNotNull>
 			<isNotNull property="deliveryDate">#deliveryDate#,</isNotNull>
-			<isNotNull property="deliveryPoint">#deliveryPoint#,</isNotNull>
-			<isNotNull property="contractTerms">#contractTerms#,</isNotNull>
+			<isNotEmpty property="deliveryPoint">#deliveryPoint#,</isNotEmpty>
+			<isNotEmpty property="contractTerms">#contractTerms#,</isNotEmpty>
 			<isNotNull property="printTimes">#printTimes#,</isNotNull>
 			<isNotNull property="printTime">#printTime#,</isNotNull>
-			<isNotNull property="printAcc">#printAcc#,</isNotNull>
-			<isNotNull property="printRecord">#printRecord#,</isNotNull>
-			<isNotNull property="memo">#memo#,</isNotNull>
-			<isNotNull property="status">#status#,</isNotNull>
-			<isNotNull property="auditedStatus">#auditedStatus#,</isNotNull>
-			<isNotNull property="checkedStatus">#checkedStatus#,</isNotNull>
+			<isNotEmpty property="printAcc">#printAcc#,</isNotEmpty>
+			<isNotEmpty property="printRecord">#printRecord#,</isNotEmpty>
+			<isNotEmpty property="memo">#memo#,</isNotEmpty>
+			<isNotEmpty property="status">#status#,</isNotEmpty>
+			<isNotEmpty property="auditedStatus">#auditedStatus#,</isNotEmpty>
+			<isNotEmpty property="checkedStatus">#checkedStatus#,</isNotEmpty>
 			<isNotNull property="validityDate">#validityDate#,</isNotNull>
-			<isNotNull property="ledgerId">#ledgerId#,</isNotNull>
-			<isNotNull property="operator">#operator#,</isNotNull>
+			<isNotEmpty property="ledgerId">#ledgerId#,</isNotEmpty>
+			<isNotEmpty property="operator">#operator#,</isNotEmpty>
 			creater,now() 
 	  )
 	</insert>

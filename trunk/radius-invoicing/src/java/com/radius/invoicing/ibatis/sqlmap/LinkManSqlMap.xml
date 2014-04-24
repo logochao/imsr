@@ -49,81 +49,81 @@
   
   <sql id="whereLike">
   	<dynamic prepend="where">
-  		1=1  AND
-  		<isNotNull prepend="AND" property="id">
-  			link_man_id=#id#
+  		1=1  
+  		<isNotNull  property="id">
+  			AND	link_man_id=#id#
   		</isNotNull>
-  		<isNotNull prepend="AND" property="name">
-  			link_man_name  LIKE CONCAT('%',#name#,'%')
+  		<isNotNull  property="name">
+  			AND	link_man_name  LIKE CONCAT('%',#name#,'%')
   		</isNotNull>
-  		<isNotNull prepend="AND" property="pinyin">
-  			pinyin=#pinyin#
+  		<isNotNull  property="pinyin">
+  			AND	pinyin=#pinyin#
   		</isNotNull>
-  		<isNotNull prepend="AND" property="sex">
-  			sex=#sex#
+  		<isNotNull  property="sex">
+  			AND	sex=#sex#
   		</isNotNull>
-  		<isNotNull prepend="AND" property="numbers">
-  			id_number=#numbers#
+  		<isNotNull  property="numbers">
+  			AND	id_number=#numbers#
   		</isNotNull>
-  		<isNotNull prepend="AND" property="mobile1">
-  			link_mobile1=#mobile1#
+  		<isNotNull  property="mobile1">
+  			AND	link_mobile1=#mobile1#
   		</isNotNull>
-  		<isNotNull prepend="AND" property="mobile2">
-  			link_mobile2=#mobile2#
+  		<isNotNull  property="mobile2">
+  			AND	link_mobile2=#mobile2#
   		</isNotNull>
-  		<isNotNull prepend="AND" property="mobile3">
-  			link_mobile3=#mobile3#
+  		<isNotNull  property="mobile3">
+  			AND	link_mobile3=#mobile3#
   		</isNotNull>
-  		<isNotNull prepend="AND" property="tel">
-  			link_tel=#tel#
+  		<isNotNull  property="tel">
+  			AND	link_tel=#tel#
   		</isNotNull>
-  		<isNotNull prepend="AND" property="homeTel">
-  			home_tel=#homeTel#
+  		<isNotNull  property="homeTel">
+  			AND	home_tel=#homeTel#
   		</isNotNull>
-  		<isNotNull prepend="AND" property="address">
-  			address=#address#
+  		<isNotNull  property="address">
+  			AND	address=#address#
   		</isNotNull>
-  		<isNotNull prepend="AND" property="qq">
-  			qq=#qq#
+  		<isNotNull  property="qq">
+  			AND	qq=#qq#
   		</isNotNull>
-  		<isNotNull prepend="AND" property="email">
-  			email=#email#
+  		<isNotNull  property="email">
+  			AND	email=#email#
   		</isNotNull>
-  		<isNotNull prepend="AND" property="jobDuty">
-  			job_duty=#jobDuty#
+  		<isNotNull  property="jobDuty">
+  			AND	job_duty=#jobDuty#
   		</isNotNull>
-  		<isNotNull prepend="AND" property="expertise">
-  			expertise=#expertise#
+  		<isNotNull  property="expertise">
+  			AND	expertise=#expertise#
   		</isNotNull>
-  		<isNotNull prepend="AND" property="jobTitle">
-  			job_title=#jobTitle#
+  		<isNotNull  property="jobTitle">
+  			AND	job_title=#jobTitle#
   		</isNotNull>
-  		<isNotNull prepend="AND" property="jobContent">
-  			job_content=#jobContent#
+  		<isNotNull  property="jobContent">
+  			AND	job_content=#jobContent#
   		</isNotNull>
-  		<isNotNull prepend="AND" property="hobbies">
-  			hobbies=#hobbies#
+  		<isNotNull  property="hobbies">
+  			AND	hobbies=#hobbies#
   		</isNotNull>
-  		<isNotNull prepend="AND" property="postCode">
-  			post_code=#postCode#
+  		<isNotNull  property="postCode">
+  			AND	post_code=#postCode#
   		</isNotNull>
-  		<isNotNull prepend="AND" property="companyId">
-  			serv_company_id=#companyId#
+  		<isNotNull  property="companyId">
+  			AND	serv_company_id=#companyId#
   		</isNotNull>
-  		<isNotNull prepend="AND" property="companyName">
-  			serv_company_name LIKE CONCAT('%',#companyName#,'%')
+  		<isNotNull  property="companyName">
+  			AND	serv_company_name LIKE CONCAT('%',#companyName#,'%')
   		</isNotNull>
-  		<isNotNull prepend="AND" property="customerProperty">
-  			customer_property=#customerProperty#
+  		<isNotNull  property="customerProperty">
+  			AND	customer_property=#customerProperty#
   		</isNotNull>
-  		<isNotNull prepend="AND" property="customerIllustrate">
-  			customer_illustrate=#customerIllustrate#
+  		<isNotNull  property="customerIllustrate">
+  			AND	customer_illustrate=#customerIllustrate#
   		</isNotNull>
-  		<isNotNull prepend="AND" property="officeAddress">
-  			office_address=#officeAddress#
+  		<isNotNull  property="officeAddress">
+  			AND	office_address=#officeAddress#
   		</isNotNull>
-  		<isNotNull prepend="AND" property="mome">
-  			mome	LIKE CONCAT('%',#mome#,'%') 
+  		<isNotNull  property="mome">
+  			AND	mome	LIKE CONCAT('%',#mome#,'%') 
   		</isNotNull>
   	</dynamic>
   </sql>
