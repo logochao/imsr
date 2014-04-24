@@ -33,6 +33,37 @@
 	});
  }
  /**
+  * 移除memcached中的数据
+  * @param {} memcached_url
+  * @param {} memcached_data
+  */
+ function removeFormatterData2Memecached(memcached_url,memcached_data){
+ 	$.ajax({
+		url:memcached_url,//缓存地址
+		method:'POST',//请求方式
+		data:memcached_data,
+		success:function (data){
+			if(!data.success){//请求缓存失败的提示信息
+				$.messager.show({
+					title:'提示',
+					msg:data.message,
+					timeout:5000,
+					showType:'slide'
+				});
+			}
+			console.info(data);
+		},
+		error:function(data){
+			$.messager.show({
+				title:'提示',
+				msg:'与后台通讯失败..',
+				timeout:5000,
+				showType:'slide'
+			});
+		}
+	});
+ }
+ /**
   * 添加目标datagrid的数据行
   * @param {} target_grid 目标对象
   * @param {} row_data   待添加的数据
@@ -107,4 +138,59 @@ function commitForm2Ajax(ajax_url,ajax_data){
 				$.messager.alert('提示','访问服务发生异常....','error');
 			}
 	});
+}
+/**
+ * 是否为空
+ * @param {} value
+ * @return {Boolean}
+ */
+function isBank(value){
+	 if(value=='null'||value==null&&value==undefined||value.length==0){
+	 	return false;
+	 }
+	 return true;
+}
+
+/**
+ * 设置input框的value属性
+ * @param {} target 当前元素对象
+ * @param {} value  待设置的值
+ */
+function setInputElementValue(target,value){
+	if(isBank(value)){
+		$(target).val(value);
+	}
+}
+/**
+ * 设置easyui datebox组件 
+ * @param {} target    组件对象
+ * @param {} method_name 方法名
+ * @param {} value		
+ */
+function setDateboxElement(target,method_name,value){
+	 if(isBank(value)){
+	 	$(target).datebox(method_name, value);
+	 }
+}
+/**
+ * 设置easyui combobox组件
+ * @param {} target
+ * @param {} method_name
+ * @param {} value
+ */
+function setComboboxElement(target,method_name,value){
+	 if(isBank(value)){
+	 	$(target).combobox(method_name, value);
+	 }
+}
+/**
+ * 设置easyui numberbox 组件
+ * @param {} target
+ * @param {} method_name
+ * @param {} value
+ */
+function setNumberboxElement(target,method_name,value){
+	if(isBank(value)){
+	 	$(target).numberbox(method_name, value);
+	 }
 }
