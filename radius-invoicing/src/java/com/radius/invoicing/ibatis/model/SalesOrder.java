@@ -15,28 +15,28 @@ import com.radius.base.utils.JsonDateSerializer;
 public class SalesOrder extends ExtInfo{
 	
 	
-	   private String  	salesOrderId;//销售订货单编号
-	   private String  	customerId;//客户编号
-	   private String  	customerName;//客户名称
-	   private String  	linkMan;//联系人
-	   private String  	mobile;//联系人手机
-	   private String  	tel;//电话
-	   private String  	fax;//fax
-	   private String  	contractId;//合同编号
-	   private Integer  totalAmount;//总金额
-	   private String   upperAmount;//大写金额
-	   private Date  	orderedDate;//订货日期
-	   private Date  	deliveryDate;//送货日期
-	   private String  	deliveryAddress;//送货地址
-	   private String  	terms;//条款
-	   private String 	memo;//备注
-	   private String  	status;//状态
-	   private Integer 	splitedFlg;//拆单标识
-	   private String  	spliteSalesOrderId;//拆分前的订单号
-	   private Integer  printTimes;//打印次数
-	   private Date  	newestPrintTime;//最新打印时间
-	   private String  	newestPrintAcc;//最新打印帐号
-	   private String  	newestPrintRecord;//最新打印记录
+	   private String  	salesOrderId="";//销售订货单编号
+	   private String  	customerId="";//客户编号
+	   private String  	customerName="";//客户名称
+	   private String  	linkMan="";//联系人
+	   private String  	mobile="";//联系人手机
+	   private String  	tel="";//电话
+	   private String  	fax="";//fax
+	   private String  	contractId="";//合同编号
+	   private Integer  totalAmount=null;//总金额
+	   private String   upperAmount="";//大写金额
+	   private Date  	orderedDate=null;//订货日期
+	   private Date  	deliveryDate=null;//送货日期
+	   private String  	deliveryAddress="";//送货地址
+	   private String  	terms="";//条款
+	   private String 	memo="";//备注
+	   private String  	status="";//状态
+	   private Integer 	splitedFlg=null;;//拆单标识
+	   private String  	spliteSalesOrderId="";//拆分前的订单号
+	   private Integer  printTimes=null;//打印次数
+	   private Date  	newestPrintTime=null;//最新打印时间
+	   private String  	newestPrintAcc="";//最新打印帐号
+	   private String  	newestPrintRecord="";//最新打印记录
 	   private String  	salesManId="";//销售人员//业务员
 	   
 		public String getContractId() {
@@ -106,6 +106,7 @@ public class SalesOrder extends ExtInfo{
 		public void setNewestPrintRecord(String newestPrintRecord) {
 			this.newestPrintRecord = newestPrintRecord;
 		}
+		@JsonSerialize(using=JsonDateSerializer.class) 
 		public Date getNewestPrintTime() {
 			return newestPrintTime;
 		}

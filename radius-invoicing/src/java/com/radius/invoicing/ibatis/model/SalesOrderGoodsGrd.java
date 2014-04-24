@@ -9,9 +9,9 @@ package com.radius.invoicing.ibatis.model;
  */
 public class SalesOrderGoodsGrd extends ExtInfo {
 
-   private String 		orderId;//销售订货单编号
-   private String 		goodsId;//商品编号
-   private String 		goodsName;//商品名称
+   private String 		orderId="";//销售订货单编号
+   private String 		goodsId="";//商品编号
+   private String 		goodsName="";//商品名称
    private Integer 		specId;//规格编码
    private Integer 		unit;//包装单位(规格)
    private Integer 		priceUnit;//包装单位单价
@@ -21,9 +21,9 @@ public class SalesOrderGoodsGrd extends ExtInfo {
    private Integer 		quantityUnit;//数量
    private Integer 		quantityEu;//折合数量
    private Integer 		amount;//金额
-   private String   	upperAmount;//大写金额
-   private String  		memo;//商品备注
-   private String 		status;//状态
+   private String   	upperAmount="";//大写金额
+   private String  		memo="";//商品备注
+   private String 		status="";//状态
 	   
 	   
 	public SalesOrderGoodsGrd() {
