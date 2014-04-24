@@ -93,7 +93,7 @@ public class SalesContractServiceImpl implements SalesContractService,Constants 
 		if(cache!=null){
 			logger.error("key "+key+",已经将其缓存在对象中 "+cache);
 		}
-		MemcacheClient.set(key, obj,this.CACHE_ONE_HOURE_TIME );//将带缓存的对象进行写入
+		MemcacheClient.set(key, obj,CACHE_ONE_HOURE_TIME );//将带缓存的对象进行写入
 	}
 	/**
 	 * 将memcache中的缓存对象进行删除
@@ -264,6 +264,7 @@ public class SalesContractServiceImpl implements SalesContractService,Constants 
 		if(path!=null){
 			path=propertyConfigHelper.getPropertyValue("contract.image.file.web.path");
 		}
+		scan.setFilePath(path.toString());
 		memcache.put(mapKey, scan);
 		MemcacheClient.set(key, memcache, CACHE_ONE_HOURE_TIME);//将带缓存的对象进行写入
 		JsonUtils result=new JsonUtils (true,"将合同扫描件缓存到内存中成功....");
@@ -279,7 +280,8 @@ public class SalesContractServiceImpl implements SalesContractService,Constants 
 	 * @return
 	 */
 	public JsonUtils removeContractScanInfo2Memcache(String key,ContractScanGrd scan){
-//		JsonUtils jsonUtils=new JsonUtils();
+		JsonUtils jsonUtils=new JsonUtils();
+		
 		String memo=scan.getMemo();//该字段存放带删除的主键信息
 		Map<String,ContractScanGrd> memcache=null;
 		Object cache=MemcacheClient.get(key);
@@ -315,92 +317,180 @@ public class SalesContractServiceImpl implements SalesContractService,Constants 
 	 * @return
 	 */
 	public JsonUtils saveSalesContractInfos(String ledgerId,SalesContract salesContract,String goodsMemcacheKey,String paymentMemcacheKey,String scansMemecacheKey,SalesContractPayment payment)throws Exception{
-		boolean success=false;
-		String message="操作失败";
-		String code="-1";
-//		try{
-				//1.通过memcache获取所有带保存的对象
-				//2.构建相关的待保存对象
-				salesContract.setLedgerId(ledgerId);
-				//销售合同商品
-				List<SalesContractGoodsGrd> goodsList=SalesContractCom.getSalesContractGoodsGrdByRequest(ledgerId,goodsMemcacheKey, salesContract.getId(), salesContract.getStatus());
-				//合同支付
-		//		SalesContractPayment payment = SalesContractCom.getSalesContractPaymentByRequest(request, salesContract.getId());
-				//合同支付列表
-				List<SalesContractPaymentGrd> paymentsList = SalesContractCom.getSalesContractPaymentGrdByRequest(salesContract.getId(),ledgerId, paymentMemcacheKey, salesContract.getStatus());
-				//保函条款
-				
-				//合同扫描件列表
-				List<ContractScanGrd> scansList = SalesContractCom.getContractScanGrdsByRequest(salesContract.getId(), scansMemecacheKey);
-				//3.根据当前提供的合同编号，判断数据库中是否存在对用的合同信息
-				SalesContract temp=salesContractDao.getSalesContractById(salesContract.getId());
-				if(temp==null){//添加//3.2 不存在则调用insert
-					//添加销售合同
-					salesContractDao.insertSalesContract(salesContract);
-					//添加销售合同商品列表
-					salesContractGoodsGrdDao.batchInsertSalesContractGoodsGrd(goodsList);
-					
-					//添加支付		
-					contractPaymentDao.insertSalesContractPayment(payment);
-					//添加支付列表
-					contractPaymentGrdDao.batchInsertSalesContractPaymentGrd(paymentsList);
-					//添加合同扫描件列表
-					contractScanGrdDao.batchInsertContractScanGrd(scansList);
-					success=true;
-					message="添加销售合同相关信息成功!!!";
-					code="1";
-					logger.info(message);
-				}else if(temp!=null){////3.1 存在则调用更新对象 只更新对应的状态值和修改时间
-					String status=salesContract.getStatus();
-					String contractId=salesContract.getId();
-					//保存销售合同
-					//salesContractDao.updateSalesContractById(salesContract);
-					salesContractDao.updateSalesContractStatusById(salesContract);
-					//销售合同商品列表
-					SalesContractGoodsGrd goodsGrd=new SalesContractGoodsGrd();
-					goodsGrd.setStatus(status);
-					goodsGrd.setContractId(contractId);
-					salesContractGoodsGrdDao.updateSalesContractGoodsGrdStatusByContractId(goodsGrd);
-					
-					//保存支付		
-					SalesContractPayment salesContractPayment=new SalesContractPayment();
-					salesContractPayment.setContractId(contractId);
-					salesContractPayment.setStatus(status);
-					contractPaymentDao.updateSalesContractPaymentStatusByContractId(salesContractPayment);
-					//保存支付列表
-					SalesContractPaymentGrd paymentGrd=new SalesContractPaymentGrd();
-					paymentGrd.setContractId(contractId);
-					paymentGrd.setStatus(status);
-					
-					contractPaymentGrdDao.updateSalesContractPaymentGrdStatusBycontractId(paymentGrd);
-					//保存合同扫描件列表
-					contractScanGrdDao.batchUpdateContractScanGrdByPrimaryKey(scansList);
-					success=true;
-					message="更新销售合同相关信息成功!!!";
-					logger.info(message);
-					code="0";
-				}
-				
-				if(success){
-					//4.清理memcache缓存对象
-					//4.1 删除合同销售商品
-					MemcacheClient.delete(goodsMemcacheKey);
-					//4.2 删除支付列表
-					MemcacheClient.delete(paymentMemcacheKey);
-					//4.3 删除扫描件列表
-					MemcacheClient.delete(scansMemecacheKey);
-				}
-				
-//		}catch(Exception e){
-//			logger.error(e);
-//			e.printStackTrace();
-//			throw new RuntimeException(e);
-//		}
-		//5.返回json对象
-				JsonUtils result = new  JsonUtils(success,message);
-				result.setChild(code);
+		//返回json对象
+		JsonUtils result =null;
+		//1.销售合同
+		String creater  =salesContract.getCreater();
+		String status 	=salesContract.getStatus();
+		//2.销售合同商品
+		List<SalesContractGoodsGrd> goodsList=SalesContractCom.getSalesContractGoodsGrdByRequest(ledgerId,goodsMemcacheKey, salesContract.getId(), status,creater);
+		//3.销售合同支付
+		
+		//4.销售合同支付详情
+		List<SalesContractPaymentGrd> paymentsList = SalesContractCom.getSalesContractPaymentGrdByRequest(salesContract.getId(),ledgerId, paymentMemcacheKey, status,creater);
+		//5.合同扫描件
+		List<ContractScanGrd> scansList = SalesContractCom.getContractScanGrdsByRequest(salesContract.getId(), scansMemecacheKey,creater);
+		
+		SalesContract temp=salesContractDao.getSalesContractById(salesContract.getId());
+		
+		if(temp==null){//不存在
+			result = insertSalesContractInfos(salesContract, goodsList, payment, paymentsList, scansList);
+		}else{//存在
+			result = updateSalesContractInfos(salesContract, goodsList, payment, paymentsList, scansList);
+		}
+		
+		if(result.isSuccess()){
+			//4.清理memcache缓存对象
+			//4.1 删除合同销售商品
+			MemcacheClient.delete(goodsMemcacheKey);
+			//4.2 删除支付列表
+			MemcacheClient.delete(paymentMemcacheKey);
+			//4.3 删除扫描件列表
+			MemcacheClient.delete(scansMemecacheKey);
+		}
 		return result;
 	}
+	/**
+	 * 保存销售合同信息
+	 * @param salesContract
+	 * @param goodsMemcacheKey
+	 * @param paymentMemcacheKey
+	 * @param scansMemecacheKey
+	 * @param payment
+	 * @return
+	 */
+	public JsonUtils saveSalesContractInfos(String ledgerId,SalesContract salesContract,String goodsMemcacheKey,String paymentMemcacheKey,String scansMemecacheKey,SalesContractPayment payment,List<SalesContractPaymentGrd> guaranteePaymentList)throws Exception{
+		//返回json对象
+		JsonUtils result =null;
+		//1.销售合同
+		String creater  =salesContract.getCreater();
+		String status 	=salesContract.getStatus();
+		//2.销售合同商品
+		List<SalesContractGoodsGrd> goodsList=SalesContractCom.getSalesContractGoodsGrdByRequest(ledgerId,goodsMemcacheKey, salesContract.getId(), status,creater);
+		//3.销售合同支付
+		
+		//4.销售合同支付详情
+		List<SalesContractPaymentGrd> paymentsList = SalesContractCom.getSalesContractPaymentGrdByRequest(salesContract.getId(),ledgerId, paymentMemcacheKey, status,creater);
+		//5.保函条款与销售支付列表合并
+		paymentsList.addAll(guaranteePaymentList);
+		
+		//6.合同扫描件
+		List<ContractScanGrd> scansList = SalesContractCom.getContractScanGrdsByRequest(salesContract.getId(), scansMemecacheKey,creater);
+		
+		SalesContract temp=salesContractDao.getSalesContractById(salesContract.getId());
+		
+		if(temp==null){//不存在
+			result = insertSalesContractInfos(salesContract, goodsList, payment, paymentsList, scansList);
+		}else{//存在
+			result = updateSalesContractInfos(salesContract, goodsList, payment, paymentsList, scansList);
+		}
+		
+		if(result.isSuccess()){
+			//4.清理memcache缓存对象
+			//4.1 删除合同销售商品
+			MemcacheClient.delete(goodsMemcacheKey);
+			//4.2 删除支付列表
+			MemcacheClient.delete(paymentMemcacheKey);
+			//4.3 删除扫描件列表
+			MemcacheClient.delete(scansMemecacheKey);
+		}
+		return result;
+	}
+	
+	
+	
+	public JsonUtils insertSalesContractInfos(SalesContract salesContract,List<SalesContractGoodsGrd> goodsList,SalesContractPayment payment,List<SalesContractPaymentGrd> paymentsList,List<ContractScanGrd> scansList){
+		boolean success=false;
+		String message="添加合同操作失败...";
+		String status 	=salesContract.getStatus();
+		//添加销售合同
+		salesContractDao.insertSalesContract(salesContract);
+		//添加销售合同商品列表
+		if(!goodsList.isEmpty()&&goodsList.size()>0)
+			salesContractGoodsGrdDao.batchInsertSalesContractGoodsGrd(goodsList);
+		//添加支付	
+		payment.setStatus(status);
+		contractPaymentDao.insertSalesContractPayment(payment);
+		//添加支付列表
+		if(!paymentsList.isEmpty()&&paymentsList.size()>0)
+			contractPaymentGrdDao.batchInsertSalesContractPaymentGrd(paymentsList);
+		//添加合同扫描件列表
+		if(!scansList.isEmpty()&&scansList.size()>0)
+			contractScanGrdDao.batchInsertContractScanGrd(scansList);
+		success=true;
+		message="添加销售合同相关信息成功!!!";
+		logger.info(message);
+		JsonUtils result = new  JsonUtils(success,message);
+		result.setChild(status);
+		
+		return result;
+	}
+	
+	
+	public JsonUtils updateSalesContractInfos(SalesContract salesContract,List<SalesContractGoodsGrd> goodsList,SalesContractPayment payment,List<SalesContractPaymentGrd> paymentsList,List<ContractScanGrd> scansList){
+		boolean success=false;
+		String message="添加合同操作失败...";
+		String status 	=salesContract.getStatus();
+		String contractId =salesContract.getId();
+		//销售合同
+		salesContractDao.updateSalesContractStatusById(salesContract);
+		//销售合同商品
+		Integer count = salesContractGoodsGrdDao.getSalesContractGoodsGrdCountByContractId(contractId);
+		if((count>0&&goodsList.size()>0)||count==0){//存在,且memcached也存在 或 不存在
+			//1.删除商品列表数据
+			salesContractGoodsGrdDao.deleteSalesContractGoodsGrdByContractId(contractId);
+			//2.保存商品列表数据
+			salesContractGoodsGrdDao.batchInsertSalesContractGoodsGrd(goodsList);
+		}else{//存在,则memcached中不存在,对数据库中的数据进行更新
+			SalesContractGoodsGrd goodsGrd=new SalesContractGoodsGrd();
+			goodsGrd.setStatus(status);
+			goodsGrd.setContractId(contractId);
+			salesContractGoodsGrdDao.updateSalesContractGoodsGrdStatusByContractId(goodsGrd);
+		}
+		//销售合同支付
+		count = contractPaymentDao.getSalesContractPaymentCountByContractId(contractId);
+		if(count==0){//存在,且memcached也存在 或 不存在
+			//1.保存商品列表数据
+			contractPaymentDao.insertSalesContractPayment(payment);
+		}else{//存在,对数据库中的数据进行更新
+			SalesContractPayment salesContractPayment=new SalesContractPayment();
+			salesContractPayment.setContractId(contractId);
+			salesContractPayment.setStatus(status);
+			contractPaymentDao.updateSalesContractPaymentStatusByContractId(salesContractPayment);
+		}
+		//销售合同支付详情
+		count = contractPaymentGrdDao.getSalesContractPaymentGrdCountByContractId(contractId);
+		if((count>0&&paymentsList.size()>0)||count==0){//存在,且memcached也存在 或 不存在
+			//1.删除商品列表数据
+			contractPaymentGrdDao.deleteSalesContractPaymentGrdByContractId(contractId);
+			//2.保存商品列表数据
+			contractPaymentGrdDao.batchInsertSalesContractPaymentGrd(paymentsList);
+		}else{//存在,则memcached中不存在,对数据库中的数据进行更新
+			SalesContractPaymentGrd paymentGrd=new SalesContractPaymentGrd();
+			paymentGrd.setContractId(contractId);
+			paymentGrd.setStatus(status);
+			contractPaymentGrdDao.updateSalesContractPaymentGrdStatusBycontractId(paymentGrd);
+		}
+		//合同扫描件
+		count = contractScanGrdDao.getContractScanGrdCountByContractId(contractId);
+		if((count>0&&scansList.size()>0)||count==0){//存在,且memcached也存在 或 不存在
+			//1.删除商品列表数据
+			contractScanGrdDao.deleteContractScanGrdByContractId(contractId);
+			//2.保存商品列表数据
+			contractScanGrdDao.batchInsertContractScanGrd(scansList);
+		}else{//存在,则memcached中不存在,对数据库中的数据进行更新
+			contractScanGrdDao.batchUpdateContractScanGrdByPrimaryKey(scansList);
+		}
+		
+		
+		success=true;
+		message="更新销售合同相关信息成功!!!";
+		logger.info(message);
+		JsonUtils result = new  JsonUtils(success,message);
+		result.setChild(status);
+		return result;
+	}
+	
 	
 	/**
 	 * 通过客户编号获取销售合同信息
@@ -425,6 +515,170 @@ public class SalesContractServiceImpl implements SalesContractService,Constants 
 	public EasyuiSplitPager<SalesContractGoodsGrd> getSalesContractGoodsGrd(SalesContractGoodsGrd salesContractGoodsGrd){
 		EasyuiSplitPager<SalesContractGoodsGrd> pager=new EasyuiSplitPager<SalesContractGoodsGrd>();
 		List<SalesContractGoodsGrd> list=salesContractGoodsGrdDao.getSalesContractGoodsGrd(salesContractGoodsGrd);
+		pager.setRows(list);
+		if(list!=null&&!list.isEmpty()){
+			pager.setTotal(list.size());
+		}
+		return pager;
+	}
+	/**
+	 * 根据条件查询销售合同信息列表
+	 * @param salesContract
+	 * @return
+	 */
+	public EasyuiSplitPager<SalesContract> getSalesContractInfoList(SalesContract salesContract){
+		EasyuiSplitPager<SalesContract> pager=new EasyuiSplitPager<SalesContract>();
+		List<SalesContract> list= salesContractDao.getSalesContractByCondition(salesContract);
+		pager.setRows(list);
+		if(list!=null&&!list.isEmpty()){
+			pager.setTotal(list.size());
+		}
+		return pager;
+	}
+
+	public JsonUtils removeSalesContractProductInfo2Memcache(String key, SalesContractGoodsGrd goods, boolean delete) {
+		JsonUtils jsonUtils=new JsonUtils();
+		jsonUtils.setSuccess(false);
+		jsonUtils.setMessage("不存在对应的缓存对象");
+		if(delete){//全部删除
+			MemcacheClient.delete(key);
+			jsonUtils.setSuccess(true);
+			jsonUtils.setMessage("删除缓存对象成功...");
+			return jsonUtils;
+		}
+		String memo=goods.getMemo();//该字段存放带删除的主键信息
+		Map<String,SalesContractGoodsGrd> memcache=null;
+		Object cache=MemcacheClient.get(key);
+		if(cache!=null){
+			memcache=(Map<String,SalesContractGoodsGrd>)cache;
+			String mapKey=null;
+			if(memo.contains(",")){//表示需要删除多行数据
+				for(String batch:memo.split(",")){
+					mapKey=goods.getContractId()+"_"+batch;
+					memcache.remove(mapKey);//将key对应的对象进行删除
+				}
+			}else{
+				mapKey=goods.getContractId()+"_"+memo;
+				memcache.remove(mapKey);//将key对应的对象进行删除
+			}
+			jsonUtils.setSuccess(true);
+			jsonUtils.setMessage("销售合同商品删除缓存对象成功...");
+		}else{
+			jsonUtils.setSuccess(false);
+			jsonUtils.setMessage("销售合同商品不存在对应的缓存对象");
+		}
+		MemcacheClient.set(key, memcache, CACHE_ONE_HOURE_TIME);//将带缓存的对象进行写入
+		return jsonUtils;
+	}
+
+	public JsonUtils removeContractScanInfo2Memcache(String key, ContractScanGrd scan, boolean delete) {
+		JsonUtils jsonUtils=new JsonUtils();
+		jsonUtils.setSuccess(false);
+		jsonUtils.setMessage("不存在对应的缓存对象");
+		if(delete){//全部删除
+			MemcacheClient.delete(key);
+			jsonUtils.setSuccess(true);
+			jsonUtils.setMessage("删除缓存对象成功...");
+			return jsonUtils;
+		}
+		String memo=scan.getMemo();//该字段存放带删除的主键信息
+		Map<String,ContractScanGrd> memcache=null;
+		Object cache=MemcacheClient.get(key);
+		if(cache!=null){
+			memcache=(Map<String,ContractScanGrd>)cache;
+			String mapKey=null;
+			if(memo.contains(",")){//表示需要删除多行数据
+				for(String scanCode:memo.split(",")){
+					mapKey=scan.getContractId()+"_"+scanCode; //合同号_文件编号
+					memcache.remove(mapKey);//将key对应的对象进行删除
+				}
+			}else{
+				mapKey=scan.getContractId()+"_"+memo;
+				memcache.remove(mapKey);//将key对应的对象进行删除
+			}
+			jsonUtils.setSuccess(true);
+			jsonUtils.setMessage("合同扫描件删除缓存对象成功...");
+		}else{
+			jsonUtils.setSuccess(false);
+			jsonUtils.setMessage("合同扫描件不存在对应的缓存对象");
+		}
+		MemcacheClient.set(key, memcache, CACHE_ONE_HOURE_TIME);//将带缓存的对象进行写入
+		return jsonUtils;
+	}
+
+	public JsonUtils removeObject2MemcacheByPayDetail(String key, SalesContractPaymentGrd payment, boolean delete) {
+		JsonUtils jsonUtils=new JsonUtils();
+		jsonUtils.setSuccess(false);
+		jsonUtils.setMessage("不存在对应的缓存对象");
+		if(delete){//全部删除
+			MemcacheClient.delete(key);
+			jsonUtils.setSuccess(true);
+			jsonUtils.setMessage("删除缓存对象成功...");
+			return jsonUtils;
+		}
+		String memo=payment.getMemo();//该字段存放带删除的主键信息
+		Map<String,SalesContractPaymentGrd> memcache=null;
+		Object cache=MemcacheClient.get(key);
+		if(cache!=null){
+			memcache=(Map<String,SalesContractPaymentGrd>)cache;
+			String mapKey=null;
+			if(memo.contains(",")){//表示需要删除多行数据
+				for(String batch:memo.split(",")){
+					mapKey=payment.getContractId()+"_"+batch;
+					memcache.remove(mapKey);//将key对应的对象进行删除
+				}
+			}else{
+				mapKey=payment.getContractId()+"_"+memo;
+				memcache.remove(mapKey);//将key对应的对象进行删除
+			}
+			jsonUtils.setSuccess(true);
+			jsonUtils.setMessage("删除缓存对象成功...");
+		}else{
+			jsonUtils.setSuccess(false);
+			jsonUtils.setMessage("不存在对应的缓存对象");
+		}
+		MemcacheClient.set(key, memcache, CACHE_ONE_HOURE_TIME);//将带缓存的对象进行写入
+		return jsonUtils;
+	}
+	
+	/**
+	 * 获取销售支付信息
+	 * @param salesContractPayment
+	 * @return
+	 */
+	public EasyuiSplitPager<SalesContractPayment> getSalesContractPayment(SalesContractPayment salesContractPayment){
+		EasyuiSplitPager<SalesContractPayment> pager=new EasyuiSplitPager<SalesContractPayment>();
+		List<SalesContractPayment> list = contractPaymentDao.getSalesContractPayment(salesContractPayment);
+		pager.setRows(list);
+		if(list!=null&&!list.isEmpty()){
+			pager.setTotal(list.size());
+		}
+		return pager;
+	}
+	/**
+	 * 获取销售合同支付明细
+	 * @param salesContractPaymentGrd
+	 * @return
+	 */
+	public  EasyuiSplitPager<SalesContractPaymentGrd> getSalesContractPaymentGrd(SalesContractPaymentGrd salesContractPaymentGrd){
+		EasyuiSplitPager<SalesContractPaymentGrd> pager=new EasyuiSplitPager<SalesContractPaymentGrd>();
+		List<SalesContractPaymentGrd> list = contractPaymentGrdDao.getSalesContractPaymentGrd(salesContractPaymentGrd);
+		pager.setRows(list);
+		if(list!=null&&!list.isEmpty()){
+			pager.setTotal(list.size());
+		}
+		return pager;
+	}
+	
+	/**
+	 * 获取销售合同扫描件
+	 * @param contractScanGrd
+	 * @return
+	 */
+	public EasyuiSplitPager<ContractScanGrd> getContractScanGrd(ContractScanGrd contractScanGrd){
+		
+		EasyuiSplitPager<ContractScanGrd> pager=new EasyuiSplitPager<ContractScanGrd>();
+		List<ContractScanGrd> list = contractScanGrdDao.getContractScanGrdList(contractScanGrd);
 		pager.setRows(list);
 		if(list!=null&&!list.isEmpty()){
 			pager.setTotal(list.size());
