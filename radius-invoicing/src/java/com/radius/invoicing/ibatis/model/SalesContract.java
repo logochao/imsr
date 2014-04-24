@@ -5,6 +5,7 @@ package com.radius.invoicing.ibatis.model;
 
 import java.util.Date;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 import com.radius.base.utils.JsonDateSerializer;
@@ -17,30 +18,30 @@ import com.radius.base.utils.JsonDateSerializer;
  */
 public class SalesContract extends ExtInfo{
 
-	private String   id;//合同编号
-	private String   customerId;//客户编号
-	private String   customerName;//客户名称
-	private String   contractFile;//合同文件编号
-	private Date     effectDate;//生效日期
-	private Date     signTime;//签署日期
-	private String   salesMan;//业务员
-	private String   man;//联系人
-	private String   mobile;//联系人手机
-	private String   tel;//联系电话
-	private String   fax;//联系fax
-	private Date	 orderedDate;//订货日期
-	private Date     deliveryDate;//送货日期
-	private String   deliveryPoint;//送货地点
-	private String   contractTerms;//合同条款
-	private Integer  printTimes;//打印次数
-	private Date     printTime;//最新打印时间
-	private String   printAcc;//最新打印帐号
-	private String   printreCord;//最新打印记录
-	private String   memo;//合同备注
-	private String   status;//状态
-	private String   auditedStatus;//审批状态
-	private String   checkedStatus;//验货状态
-	private Date     validityDate;//有效期至
+	private String   id="";//合同编号
+	private String   customerId="";//客户编号
+	private String   customerName="";//客户名称
+	private String   contractFile="";//合同文件编号
+	private Date     effectDate=null;//生效日期
+	private Date     signTime=null;//签署日期
+	private String   salesMan="";//业务员
+	private String   man="";//联系人
+	private String   mobile="";//联系人手机
+	private String   tel="";//联系电话
+	private String   fax="";//联系fax
+	private Date	 orderedDate=null;//订货日期
+	private Date     deliveryDate=null;//送货日期
+	private String   deliveryPoint="";//送货地点
+	private String   contractTerms="";//合同条款
+	private Integer  printTimes=null;//打印次数
+	private Date     printTime=null;//最新打印时间
+	private String   printAcc="";//最新打印帐号
+	private String   printRecord="";//最新打印记录
+	private String   memo="";//合同备注
+	private String   status="";//状态
+	private String   auditedStatus="";//审批状态
+	private String   checkedStatus="";//验货状态
+	private Date     validityDate=null;//有效期至
 	
 	
 	//------------
@@ -50,7 +51,22 @@ public class SalesContract extends ExtInfo{
 	private Integer totalAmount=0;//合同总金额 
 	//合同大写金额
 	private String upperAmount;//大小金额
+	private Date payTime;//保函支付时间
+	private Date receivablesTime;//保函收款时间
 	
+	
+	public String getAuditedStatus() {
+		return auditedStatus;
+	}
+	public void setAuditedStatus(String auditedStatus) {
+		this.auditedStatus = auditedStatus;
+	}
+	public String getCheckedStatus() {
+		return checkedStatus;
+	}
+	public void setCheckedStatus(String checkedStatus) {
+		this.checkedStatus = checkedStatus;
+	}
 	public String getContractFile() {
 		return contractFile;
 	}
@@ -75,6 +91,7 @@ public class SalesContract extends ExtInfo{
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
 	}
+	@JsonSerialize(using=JsonDateSerializer.class)
 	public Date getDeliveryDate() {
 		return deliveryDate;
 	}
@@ -87,7 +104,7 @@ public class SalesContract extends ExtInfo{
 	public void setDeliveryPoint(String deliveryPoint) {
 		this.deliveryPoint = deliveryPoint;
 	}
-	@JsonSerialize(using=JsonDateSerializer.class) 
+	@JsonSerialize(using=JsonDateSerializer.class)
 	public Date getEffectDate() {
 		return effectDate;
 	}
@@ -124,6 +141,7 @@ public class SalesContract extends ExtInfo{
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
+	@JsonSerialize(using=JsonDateSerializer.class) 
 	public Date getOrderedDate() {
 		return orderedDate;
 	}
@@ -142,12 +160,13 @@ public class SalesContract extends ExtInfo{
 	public void setPrintAcc(String printAcc) {
 		this.printAcc = printAcc;
 	}
-	public String getPrintreCord() {
-		return printreCord;
+	public String getPrintRecord() {
+		return printRecord;
 	}
-	public void setPrintreCord(String printreCord) {
-		this.printreCord = printreCord;
+	public void setPrintRecord(String printRecord) {
+		this.printRecord = printRecord;
 	}
+	@JsonSerialize(using=JsonDateSerializer.class)
 	public Date getPrintTime() {
 		return printTime;
 	}
@@ -166,7 +185,7 @@ public class SalesContract extends ExtInfo{
 	public void setSalesMan(String salesMan) {
 		this.salesMan = salesMan;
 	}
-	@JsonSerialize(using=JsonDateSerializer.class) 
+	@JsonSerialize(using=JsonDateSerializer.class)
 	public Date getSignTime() {
 		return signTime;
 	}
@@ -176,7 +195,7 @@ public class SalesContract extends ExtInfo{
 	public String getStatus() {
 		return status;
 	}
-	public void setStats(String status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 	public String getTel() {
@@ -185,23 +204,17 @@ public class SalesContract extends ExtInfo{
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
-	public String getTradeAssistant() {
-		return tradeAssistant;
-	}
-	public void setTradeAssistant(String tradeAssistant) {
-		this.tradeAssistant = tradeAssistant;
-	}
-	public Date getValidityDate() {
-		return validityDate;
-	}
-	public void setValidityDate(Date validityDate) {
-		this.validityDate = validityDate;
-	}
 	public Integer getTotalAmount() {
 		return totalAmount;
 	}
 	public void setTotalAmount(Integer totalAmount) {
 		this.totalAmount = totalAmount;
+	}
+	public String getTradeAssistant() {
+		return tradeAssistant;
+	}
+	public void setTradeAssistant(String tradeAssistant) {
+		this.tradeAssistant = tradeAssistant;
 	}
 	public String getUpperAmount() {
 		return upperAmount;
@@ -209,19 +222,25 @@ public class SalesContract extends ExtInfo{
 	public void setUpperAmount(String upperAmount) {
 		this.upperAmount = upperAmount;
 	}
-	public String getAuditedStatus() {
-		return auditedStatus;
+	@JsonSerialize(using=JsonDateSerializer.class)
+	public Date getValidityDate() {
+		return validityDate;
 	}
-	public void setAuditedStatus(String auditedStatus) {
-		this.auditedStatus = auditedStatus;
+	public void setValidityDate(Date validityDate) {
+		this.validityDate = validityDate;
 	}
-	public String getCheckedStatus() {
-		return checkedStatus;
+	@JsonIgnore
+	public Date getPayTime() {
+		return payTime;
 	}
-	public void setCheckedStatus(String checkedStatus) {
-		this.checkedStatus = checkedStatus;
+	public void setPayTime(Date payTime) {
+		this.payTime = payTime;
 	}
-	
-	
-	
+	@JsonIgnore
+	public Date getReceivablesTime() {
+		return receivablesTime;
+	}
+	public void setReceivablesTime(Date receivablesTime) {
+		this.receivablesTime = receivablesTime;
+	}
 }

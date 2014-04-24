@@ -13,19 +13,22 @@ public class SalesContractGoodsGrd extends ExtInfo{
 	private String  	contractId="";//合同编号
 	private String  	goodsId="";//商品编号
 	private String  	goodsName="";//商品名称
-	private Integer  	specId;//规格编码
+	private Integer  	specId=null;//规格编码
 	private String  	unit="";//包装单位(规格)
 	private Integer  	priceUnit;//包装单位单价
 	private String  	equivalentUnit="";//折合单位
-	private Integer  	priceEu;//折合单位单价
-	private Integer  	quantityEuPerUnit;//包装单位折合数量
-	private Integer  	quantityEu;//折合数量
-	private Integer  	quantityUnit;//数量
+	private Integer  	priceEu=null;//折合单位单价
+	private Integer  	quantityEuPerUnit=null;//包装单位折合数量
+	private Integer  	quantityEu=null;//折合数量
+	private Integer  	quantityUnit=null;//数量
 	private String 		memo="";//商品备注
-	private Integer		settledAmount;//已生成订单商品数量
-	private Integer  	amount;//金额
+	private Integer		settledAmount=null;//已生成订单商品数量
+	private Integer  	amount=null;//金额
 	private String  	status="";//状态
 	private String  	ledgerId="";//账套编号
+	
+	
+	
 	
 	
 	//-----
