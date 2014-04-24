@@ -30,14 +30,14 @@
   <sql id="whereLike">
   	<dynamic prepend="where">
   		1=1  
-  		<isNotEmpty prepend="and" property="contractId">contract_id=#contractId#</isNotEmpty>
-  		<isNotNull prepend="and" property="contractType">contract_type=#contractType#</isNotNull>
-  		<isNotEmpty prepend="and" property="scanCode">scan_code=#scanCode#</isNotEmpty>
-		<isNotEmpty prepend="and" property="fileName">file_name=#fileName#</isNotEmpty>
-		<isNotEmpty prepend="and" property="filePath">file_path=#filePath#</isNotEmpty>
-		<isNotEmpty prepend="and" property="fileOrder">file_order=#fileOrder#</isNotEmpty>
-		<isNotNull prepend="and" property="quantity">scan_quantity=#quantity#</isNotNull>
- 		<isNotEmpty prepend="and" property="ledgerId">ledger_id=#ledgerId#</isNotEmpty> 
+  		<isNotEmpty prepend="and" property="contractId"> AND contract_id=#contractId#</isNotEmpty>
+  		<isNotNull prepend="and" property="contractType"> AND contract_type=#contractType#</isNotNull>
+  		<isNotEmpty prepend="and" property="scanCode"> AND scan_code=#scanCode#</isNotEmpty>
+		<isNotEmpty prepend="and" property="fileName"> AND file_name=#fileName#</isNotEmpty>
+		<isNotEmpty prepend="and" property="filePath"> AND file_path=#filePath#</isNotEmpty>
+		<isNotEmpty prepend="and" property="fileOrder"> AND file_order=#fileOrder#</isNotEmpty>
+		<isNotNull prepend="and" property="quantity"> AND scan_quantity=#quantity#</isNotNull>
+ 		<isNotEmpty prepend="and" property="ledgerId"> AND ledger_id=#ledgerId#</isNotEmpty> 
   	</dynamic>
   </sql>
  
@@ -112,5 +112,15 @@
    	<delete id="deleteContractScanGrdByPK" parameterClass="java.util.Map">
    		DELETE FROM RS_CONTRACT_SCAN_GRD
    		WHERE contract_id =#contractId# AND scan_code=#scanCode#
+   	</delete>
+   	
+   	<!-- 根据合同编号获取扫描件行数 -->
+   	<select id="getContractScanGrdCountByContractId" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+   		SELECT COUNT(1) FROM RS_CONTRACT_SCAN_GRD WHERE contract_id =#contractId# 
+   	</select>
+   	
+   	<delete id="deleteContractScanGrdByContractId" parameterClass="java.lang.String">
+   		DELETE FROM RS_CONTRACT_SCAN_GRD
+   		WHERE contract_id =#contractId# 
    	</delete>
 </sqlMap>

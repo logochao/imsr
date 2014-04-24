@@ -5,7 +5,7 @@
   <typeAlias alias="salesContractPaymentGrd" type="com.radius.invoicing.ibatis.model.SalesContractPaymentGrd" />
   
   <sql id="salesContractPaymentGrdFileds">
-  	 money_list_id id,money_list_name name, contract_id contractId,money_list_batch batch,amount amount,amount_in_word upperAmount,pay_receive_type receiveType,validity_date validityDate,status status,mome  memo,
+  	 money_list_id id,money_list_name name, contract_id contractId,money_list_batch batch,amount amount,amount_in_word upperAmount,pay_receive_type receiveType,validity_date validityDate,status status,memo  memo,
   	 ledger_id ledgerId,operator operator,motify_date modifyDate,creater creater,createdate createDate,reviser reviser,revisedate reviseDate,verifier verifier,verifydate verifyDate
   </sql>
   
@@ -54,7 +54,7 @@
 	 	WHERE money_list_id =#id# 
 	 </select>
 	 
-	 <select id="getSalesContractPaymentGrd" parameterClass="salesContractPaymentGrd" resultMap="salesContractPaymentGrd">
+	 <select id="getSalesContractPaymentGrd" parameterClass="salesContractPaymentGrd" resultClass="salesContractPaymentGrd">
 	 	SELECT <include refid="salesContractPaymentGrdFileds"/>
 	 	FROM RS_SALES_CONTRACT_PAYMENT_GRD
 	 	<include refid="whereLike"/>
@@ -87,7 +87,7 @@
 	 		<isNotNull  property="status">#status#,</isNotNull> 
 	 		<isNotNull  property="memo">#memo#,</isNotNull>
 	 		<isNotNull  property="operator">#operator#,</isNotNull> 
-   			 creater,now()
+   			 #creater#,now()
    		)
    	</insert>
    
@@ -133,4 +133,12 @@
    		SET status=#status#
    		WHERE contract_id=#contractId#
    	</update>
+   	<!-- 根据合同编号获取销售支付列表行数 -->
+   	<select id="getSalesContractPaymentGrdCountByContractId" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+   		SELECT COUNT(1)  FROM RS_SALES_CONTRACT_PAYMENT_GRD WHERE contract_id=#contractId#
+   	</select>
+   	<delete id="deleteSalesContractPaymentGrdByContractId" parameterClass="java.lang.String">
+   		DELETE FROM RS_SALES_CONTRACT_PAYMENT_GRD
+   		WHERE contract_id=#contractId#
+   	</delete>
 </sqlMap>
