@@ -5,6 +5,10 @@ package com.radius.invoicing.ibatis.model;
 
 import java.util.Date;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+import com.radius.base.utils.JsonDateSerializer;
+
 /**
  * @author <a href="mailto:goodluck.sunlight@gmail.com">陈波宁</a>
  * @version 创建时间：2013-12-8 下午12:53:04<br/>
@@ -81,7 +85,7 @@ public class SalesContractPaymentGrd extends ExtInfo{
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
 	public String getReceiveType() {
 		return receiveType;
 	}
@@ -105,7 +109,7 @@ public class SalesContractPaymentGrd extends ExtInfo{
 	public void setUpperAmount(String upperAmount) {
 		this.upperAmount = upperAmount;
 	}
-
+	@JsonSerialize(using=JsonDateSerializer.class) 
 	public Date getValidityDate() {
 		return validityDate;
 	}
