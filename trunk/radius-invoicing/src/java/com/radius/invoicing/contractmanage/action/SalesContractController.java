@@ -4,6 +4,8 @@
 package com.radius.invoicing.contractmanage.action;
 
 
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.servlet.http.HttpServletRequest;
@@ -53,7 +55,7 @@ public class SalesContractController extends BaseController{
 	@PostConstruct
 	public void init(){
 		if(sales_view==null){
-			sales_view=prefix+"index.jsp";
+			sales_view=prefix+"contract_sales_index.jsp";
 		}
 	}
 	
@@ -79,6 +81,18 @@ public class SalesContractController extends BaseController{
 		ModelAndView mv = new ModelAndView(sales_view); 
 		mv.addObject("salesContract", salesContract);
 		return mv;
+	}
+	
+	
+	@RequestMapping("/contract/manager/salescontract/get_sales_contract_info.html")
+	@ResponseBody
+	public JsonUtils getSalesContractInfo(HttpServletRequest request,HttpServletResponse response,SalesContract salesContract)throws Exception{
+		JsonUtils<SalesContract> jsonUtils =new JsonUtils<SalesContract>();
+		salesContract.setId(StockUtils.getSalesContractId());
+		jsonUtils.setChild(salesContract);
+		jsonUtils.setSuccess(true);
+		jsonUtils.setMessage("获取销售合同信息成功...");
+		return jsonUtils;
 	}
 	
 	@RequestMapping("/contract/manager/sales_status_json.html")
@@ -120,7 +134,8 @@ public class SalesContractController extends BaseController{
 	@ResponseBody
 	public JsonUtils removeSaleContractPayDetail2Memcache(HttpServletRequest request,HttpServletResponse response,SalesContractPaymentGrd contractPaymentGrd)throws Exception{
 		//将缓存对象进行删除
-		return contractService.removeObject2MemcacheByPayDetail(contractPaymentGrd.getContractId()+"_add_sales_contract_pay_detail", contractPaymentGrd);
+		boolean delete = ServletRequestUtils.getBooleanParameter(request, "delete", false);//表示是否全部删除 默认为 false
+		return contractService.removeObject2MemcacheByPayDetail(contractPaymentGrd.getContractId()+"_add_sales_contract_pay_detail", contractPaymentGrd,delete);
 	}
 	/**
 	 * 将销售合同商品添加到内存里
@@ -148,7 +163,8 @@ public class SalesContractController extends BaseController{
 	@RequestMapping(value={"/contract/manager/sales_contract_product_info_remove_memcache.html","/contract/manager/salescontract/sales_contract_product_info_remove_memcache.html"})
 	@ResponseBody
 	public JsonUtils removeSaleContractProductInfo2Memcache(HttpServletRequest request,HttpServletResponse response,SalesContractGoodsGrd goods)throws Exception{
-		return contractService.removeSalesContractProductInfo2Memcache(goods.getContractId()+"_add_sales_contract_proudct_info", goods);
+		boolean delete = ServletRequestUtils.getBooleanParameter(request, "delete", false);//表示是否全部删除 默认为 false
+		return contractService.removeSalesContractProductInfo2Memcache(goods.getContractId()+"_add_sales_contract_proudct_info", goods,delete);
 	}
 	
 	/**
@@ -162,7 +178,7 @@ public class SalesContractController extends BaseController{
 	@RequestMapping("/contract/manager/salescontract/contract_scan_info_memcache.html")
 	@ResponseBody
 	public JsonUtils addContractScanInfo2Memcache(HttpServletRequest request,HttpServletResponse response,ContractScanGrd scan)throws Exception{
-		String key =scan.getContractId()+"_"+scan.getContractType().intValue()+"_add_contract_scan_info";//合同编号_合同类型_xxxxxxxx
+		String key =scan.getContractId()+"_add_contract_scan_info";//合同编号_合同类型_xxxxxxxx
 		return contractService.addContractScanInfo2Memcache(key, scan);
 	}
 	/**
@@ -176,8 +192,9 @@ public class SalesContractController extends BaseController{
 	@RequestMapping("/contract/manager/salescontract/contract_scan_info_remove_memcache.html")
 	@ResponseBody
 	public JsonUtils removeContractScanInfo2Memcache(HttpServletRequest request,HttpServletResponse response,ContractScanGrd scan)throws Exception{
-		String key =scan.getContractId()+"_"+scan.getContractType().intValue()+"_add_contract_scan_info";//合同编号_合同类型_xxxxxxxx
-		return contractService.removeContractScanInfo2Memcache(key, scan);
+		String key =scan.getContractId()+"_add_contract_scan_info";//合同编号_合同类型_xxxxxxxx
+		boolean delete = ServletRequestUtils.getBooleanParameter(request, "delete", false);//表示是否全部删除 默认为 false
+		return contractService.removeContractScanInfo2Memcache(key, scan,delete);
 	}
 	
 	/**
@@ -191,19 +208,24 @@ public class SalesContractController extends BaseController{
 	@ResponseBody
 	public JsonUtils  addSaleContractInfos(HttpServletRequest request,HttpServletResponse response,SalesContract salesContract)throws Exception{
 		String ledgerId="00000001";
+		String creater ="0001";
+		salesContract.setLedgerId(ledgerId);
+		salesContract.setCreater(creater);
 		//1.构建对象
 		String goodsMemcacheKey=salesContract.getId()+"_add_sales_contract_proudct_info";
 		//销售合同商品
 		//合同支付
-		SalesContractPayment payment = SalesContractCom.getSalesContractPaymentByRequest(ledgerId,request, salesContract.getId());
+		SalesContractPayment payment = SalesContractCom.getSalesContractPaymentByRequest(ledgerId,request, salesContract.getId(),creater);
 		//合同支付列表
 		String paymentMemcacheKey=salesContract.getId()+"_add_sales_contract_pay_detail";
+		//保函条款
+		List<SalesContractPaymentGrd> guaranteePaymentList = SalesContractCom.getSalesContractGuaranteePaymentGrd(request, salesContract);
 		//合同扫描件列表
-		String scansMemecacheKey = salesContract.getId()+"_"+ServletRequestUtils.getStringParameter(request, "contractType","")+"_add_contract_scan_info";//合同编号_合同类型_xxxxxxxx
+		String scansMemecacheKey = salesContract.getId()+"_add_contract_scan_info";//合同编号_合同类型_xxxxxxxx
 		//2.保存相关对象
 		JsonUtils result=null;
 		try{
-			result=contractService.saveSalesContractInfos(ledgerId,salesContract, goodsMemcacheKey, paymentMemcacheKey, scansMemecacheKey, payment);
+			result=contractService.saveSalesContractInfos(ledgerId,salesContract, goodsMemcacheKey, paymentMemcacheKey, scansMemecacheKey, payment,guaranteePaymentList);
 		}catch(Exception e){
 			logger.error(e);
 			e.printStackTrace();
@@ -240,4 +262,49 @@ public class SalesContractController extends BaseController{
 		return contractService.getSalesContractGoodsGrd(salesContractGoodsGrd);
 	}
 	
+	@RequestMapping("/contract/manager/salescontract/sales_contract_info_list.html")
+	@ResponseBody
+	public EasyuiSplitPager<SalesContract> getSalesContractInfoList(HttpServletRequest request,HttpServletResponse response,SalesContract contract){
+		return contractService.getSalesContractInfoList(contract);
+	}
+	/**
+	 * 获取销售合同支付
+	 * @param request
+	 * @param response
+	 * @param salesContractPayment
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/contract/manager/salescontract/sales_contract_payment_list.html")
+	@ResponseBody
+	public EasyuiSplitPager<SalesContractPayment> getSalesContractPayment(HttpServletRequest request,HttpServletResponse response,SalesContractPayment salesContractPayment)throws Exception{
+		return contractService.getSalesContractPayment(salesContractPayment);
+	}
+	
+	/**
+	 * 获取销售合同支付明细
+	 * @param request
+	 * @param response
+	 * @param salesContractPaymentGrd
+	 * @return
+	 */
+	@RequestMapping("/contract/manager/salescontract/sales_contract_payment_grd_list.html")
+	@ResponseBody
+	public EasyuiSplitPager<SalesContractPaymentGrd> getSalesContractPaymentGrd(HttpServletRequest request,HttpServletResponse response,SalesContractPaymentGrd salesContractPaymentGrd)throws Exception{
+		return contractService.getSalesContractPaymentGrd(salesContractPaymentGrd);
+	}
+	
+	/**
+	 * 获取销售合同扫描件
+	 * @param request
+	 * @param response
+	 * @param contractScanGrd
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/contract/manager/salescontract/contract_scan_list.html")
+	@ResponseBody
+	public EasyuiSplitPager<ContractScanGrd> getContractScanGrd(HttpServletRequest request,HttpServletResponse response,ContractScanGrd contractScanGrd)throws Exception{
+		return contractService.getContractScanGrd(contractScanGrd);
+	}
 }
