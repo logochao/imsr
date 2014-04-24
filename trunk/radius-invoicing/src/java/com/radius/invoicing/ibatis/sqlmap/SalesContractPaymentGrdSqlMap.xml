@@ -34,17 +34,17 @@
   <sql id="whereLike">
   	<dynamic prepend="where">
   		1=1  AND
-  		<isNotNull prepend="and" property="id">money_list_id=#id#</isNotNull>
-  		<isNotNull prepend="and" property="name">money_list_name=#name#</isNotNull>
-  		<isNotNull prepend="and" property="contractId">contract_id=#contractId#</isNotNull>
-  		<isNotNull prepend="and" property="batch">money_list_batch=#batch#</isNotNull>
-  		<isNotNull prepend="and" property="amount">amount=#amount#</isNotNull>
-		<isNotNull prepend="and" property="upperAmount">amount_in_word=#upperAmount#</isNotNull>
-		<isNotNull prepend="and" property="receiveType">pay_receive_type=#receiveType#</isNotNull>
-		<isNotNull prepend="and" property="validityDate">validity_date=#validityDate#</isNotNull>
- 		<isNotNull prepend="and" property="status">status=#status#</isNotNull> 
- 		<isNotNull prepend="and" property="memo">memo=#memo#</isNotNull> 
- 		<isNotNull prepend="and" property="ledgerId">ledger_id=#ledgerId#</isNotNull> 
+  		<isNotNull  property="id"> AND money_list_id=#id#</isNotNull>
+  		<isNotEmpty property="name"> AND money_list_name  LIKE CONCAT('%',#name#,'%')</isNotEmpty>
+  		<isNotEmpty  property="contractId"> AND contract_id=#contractId#</isNotEmpty>
+  		<isNotNull  property="batch"> AND money_list_batch=#batch#</isNotNull>
+  		<isNotNull  property="amount"> AND amount=#amount#</isNotNull>
+		<isNotEmpty  property="upperAmount"> AND amount_in_word=#upperAmount#</isNotEmpty>
+		<isNotEmpty  property="receiveType"> AND pay_receive_type=#receiveType#</isNotEmpty>
+		<isNotNull  property="validityDate"> AND validity_date=#validityDate#</isNotNull>
+ 		<isNotEmpty  property="status"> AND status=#status#</isNotEmpty> 
+ 		<isNotEmpty  property="memo"> AND memo=#memo#</isNotEmpty> 
+ 		<isNotEmpty  property="ledgerId"> AND ledger_id=#ledgerId#</isNotEmpty> 
   	</dynamic>
   </sql>
  
@@ -62,31 +62,31 @@
    
    	<insert id="insert" parameterClass="salesContractPaymentGrd">
    		INSERT INTO RS_SALES_CONTRACT_PAYMENT_GRD (
-	  		<isNotNull  property="name">money_list_name,</isNotNull>
-	  		<isNotNull  property="contractId">contract_id,</isNotNull>
+	  		<isNotEmpty  property="name">money_list_name,</isNotEmpty>
+	  		<isNotEmpty  property="contractId">contract_id,</isNotEmpty>
 	  		<isNotNull  property="batch">money_list_batch,</isNotNull>
 	  		<isNotNull  property="amount">amount,</isNotNull>
-			<isNotNull  property="upperAmount">amount_in_word,</isNotNull>
-			<isNotNull  property="receiveType">pay_receive_type,</isNotNull>
+			<isNotEmpty  property="upperAmount">amount_in_word,</isNotEmpty>
+			<isNotEmpty  property="receiveType">pay_receive_type,</isNotEmpty>
 			<isNotNull  property="validityDate">validity_date,</isNotNull>
-	 		<isNotNull  property="ledgerId">ledger_id,</isNotNull> 
-	 		<isNotNull  property="status">status,</isNotNull> 
-	 		<isNotNull  property="memo">memo,</isNotNull>
-	 		<isNotNull  property="operator">operator,</isNotNull> 
+	 		<isNotEmpty  property="ledgerId">ledger_id,</isNotEmpty> 
+	 		<isNotEmpty  property="status">status,</isNotEmpty> 
+	 		<isNotEmpty  property="memo">memo,</isNotEmpty>
+	 		<isNotEmpty  property="operator">operator,</isNotEmpty> 
 	  	    creater,
 	  	    createdate
    		)VALUES(
-	  		<isNotNull  property="name">#name#,</isNotNull>
-	  		<isNotNull  property="contractId">#contractId#,</isNotNull>
+	  		<isNotEmpty  property="name">#name#,</isNotEmpty>
+	  		<isNotEmpty  property="contractId">#contractId#,</isNotEmpty>
 	  		<isNotNull  property="batch">#batch#,</isNotNull>
 	  		<isNotNull  property="amount">#amount#,</isNotNull>
-			<isNotNull  property="upperAmount">#upperAmount#,</isNotNull>
-			<isNotNull  property="receiveType">#receiveType#,</isNotNull>
+			<isNotEmpty  property="upperAmount">#upperAmount#,</isNotEmpty>
+			<isNotEmpty  property="receiveType">#receiveType#,</isNotEmpty>
 			<isNotNull  property="validityDate">#validityDate#,</isNotNull>
-	 		<isNotNull  property="ledgerId">#ledgerId#,</isNotNull> 
-	 		<isNotNull  property="status">#status#,</isNotNull> 
-	 		<isNotNull  property="memo">#memo#,</isNotNull>
-	 		<isNotNull  property="operator">#operator#,</isNotNull> 
+	 		<isNotEmpty  property="ledgerId">#ledgerId#,</isNotEmpty> 
+	 		<isNotEmpty  property="status">#status#,</isNotEmpty> 
+	 		<isNotEmpty  property="memo">#memo#,</isNotEmpty>
+	 		<isNotEmpty  property="operator">#operator#,</isNotEmpty> 
    			 #creater#,now()
    		)
    	</insert>
@@ -94,19 +94,19 @@
    	<update id="updateSalesContractPaymentGrdByPK" parameterClass="salesContractPaymentGrd">
    		UPDATE RS_SALES_CONTRACT_PAYMENT_GRD
    		<dynamic prepend="SET">
-	  		<isNotNull prepend="," property="name">money_list_name=#name#</isNotNull>
-	  		<isNotNull prepend="," property="contractId">contract_id=#contractId#</isNotNull>
+	  		<isNotEmpty prepend="," property="name">money_list_name=#name#</isNotEmpty>
+	  		<isNotEmpty prepend="," property="contractId">contract_id=#contractId#</isNotEmpty>
 	  		<isNotNull prepend="," property="batch">money_list_batch=#batch#</isNotNull>
 	  		<isNotNull prepend="," property="amount">amount=#amount#</isNotNull>
-			<isNotNull prepend="," property="upperAmount">amount_in_word=#upperAmount#</isNotNull>
-			<isNotNull prepend="," property="receiveType">pay_receive_type=#receiveType#</isNotNull>
+			<isNotEmpty prepend="," property="upperAmount">amount_in_word=#upperAmount#</isNotEmpty>
+			<isNotEmpty prepend="," property="receiveType">pay_receive_type=#receiveType#</isNotEmpty>
 			<isNotNull prepend="," property="validityDate">validity_date=#validityDate#</isNotNull>
-	 		<isNotNull prepend="," property="ledgerId">ledger_id=#ledgerId#</isNotNull> 
-	 		<isNotNull prepend="," property="status">status=#status#</isNotNull> 
-	 		<isNotNull prepend="," property="memo">memo=#memo#</isNotNull> 
-	 		<isNotNull prepend="," property="operator">operator=#operator#,modify_date= now()</isNotNull>
-  	 		<isNotNull prepend="," property="reviser">reviser = #reviser#,revisedate = now() </isNotNull>
-  			<isNotNull prepend="," property="verifier">verifier = #verifier#,verifydate = now() </isNotNull>
+	 		<isNotEmpty prepend="," property="ledgerId">ledger_id=#ledgerId#</isNotEmpty> 
+	 		<isNotEmpty prepend="," property="status">status=#status#</isNotEmpty> 
+	 		<isNotEmpty prepend="," property="memo">memo=#memo#</isNotEmpty> 
+	 		<isNotEmpty prepend="," property="operator">operator=#operator#,modify_date= now()</isNotEmpty>
+  	 		<isNotEmpty prepend="," property="reviser">reviser = #reviser#,revisedate = now() </isNotEmpty>
+  			<isNotEmpty prepend="," property="verifier">verifier = #verifier#,verifydate = now() </isNotEmpty>
    		</dynamic>
    		WHERE money_list_id =#id#
    	</update>

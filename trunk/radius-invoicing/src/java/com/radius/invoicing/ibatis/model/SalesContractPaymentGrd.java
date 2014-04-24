@@ -18,15 +18,15 @@ import com.radius.base.utils.JsonDateSerializer;
 public class SalesContractPaymentGrd extends ExtInfo{
 
 	private Integer  	id;//款项编号
-	private String  	name;//款项名称
-	private String  	contractId;//合同编号
+	private String  	name="";//款项名称
+	private String  	contractId="";//合同编号
 	private Integer  	batch;//款项批次
 	private Integer  	amount;//金额
-	private String  	upperAmount;//大写金额
-	private String  	receiveType;//收付款类型
+	private String  	upperAmount="";//大写金额
+	private String  	receiveType="";//收付款类型
 	private Date  		validityDate;//款项期限
-	private String  	status;//状态
-	private String  	memo;//备注
+	private String  	status="";//状态
+	private String  	memo="";//备注
 	
 	private String 		currency="";//货币单位
 
