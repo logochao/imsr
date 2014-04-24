@@ -126,7 +126,7 @@ $(function(){
 							url:'${path}/contract/manager/salescontract/contract_scan_info_remove_memcache.html',
 							method:'POST',
 							data:{
-								contractId:$('#constract_sales_sale_base_id').val(),//合同编号
+								contractId:$('#constract_sales_base_id').val(),//合同编号
 								contractType:contract_sales_base_contract_type.val(),//合同类型
 								memo:array.join(',')
 							},
@@ -165,7 +165,7 @@ function addContractScan2Cache(){
 		url:'${path}/contract/manager/salescontract/contract_scan_info_memcache.html',//请求地址
 		method:'POST',
 		data:{
-			contractId:$('#contract_sales_clause_contract_id').val(),//合同编号
+			contractId:$('#constract_sales_base_id').val(),//合同编号
 			contractType:contract_sales_base_contract_type.val(),//合同类型
 			scanCode:$('#contract_sales_contract_scan_code').val(),//文件编码
 			quantity:$('#contract_sales_contract_scan_quantity').val(),//文件数量
@@ -189,7 +189,6 @@ function addContractScan2Cache(){
 function contractSalesScanGrdAddRow(filepath){
 	var path=null;
 	if(filepath&&filepath.length==0){
-		console.info(filepath);
 		path='${path}/image/'+$('#contract_sales_contract_scan_res').text();
 	}else{
 		path=filepath+$('#contract_sales_contract_scan_res').text();
@@ -237,8 +236,69 @@ function contractSalesScanGrdOpenFormatter(value,row,index){
 	var stop=fileName.indexOf('.');
 	return '<a id="'+fileName.substring(0,stop)+'" herf="" rel="'+value+'" plain="true" class="easyui-linkbutton">预览</a>';
 }
+
+/**
+ * 设置销售合同扫描件
+ *@params{} _data
+ *
+ */
+function setContractSalesContractScanTab(_data){
+
+	var contract_id =_data.id;
+	contract_sales_contract_scan_grd.datagrid('loadData',{ total: 0, rows: []});
+	//1.将缓存中的数据进行删除
+	var memcached_url='${path}/contract/manager/salescontract/contract_scan_info_remove_memcache.html';
+	var memcached_data={
+		contractId:contract_id,
+		delete:true
+	};
+	removeFormatterData2Memecached(memcached_url,memcached_data);
+	//2.根据合同编号获取销售合同明细列表
+	$.ajax({
+		url:'${path}/contract/manager/salescontract/contract_scan_list.html',
+		method:'POST',
+		data:{contractId:contract_id},
+		success:function(r){
+			if(r&&r.total>0){
+				$.each(r.rows,function(index,d){
+					//遍历销售合同支付明细
+					//1.获取格式化数据并设置到表格里
+						var row_data = salesContractScanGrdFormatter(d);
+						addTargetDataGridRowData(contract_sales_contract_scan_grd,row_data,0);
+						$('#contract_sales_contract_scan_grd').datagrid('acceptChanges');
+						//2.将数据添加到memcahed中
+						var memcached_url = '${path}/contract/manager/salescontract/contract_scan_info_memcache.html';//销售合同扫描列表
+						if(d.validityDate!=null&&d.validityDate!=undefined){
+							d.validityDate=parseDate(d.validityDate);
+						}
+						addFormatterData2Memecached(memcached_url,d);
+				});
+			}
+		},error:function(r){
+			$.messager.alert('提示','访问服务发生异常....','error');
+		}
+	});
+}
+
+function salesContractScanGrdFormatter(_data){
+	var json={
+		code:_data.scanCode,
+		scanFileName:_data.fileName,
+		fileOrder:_data.fileOrder,
+		open:_data.filePath
+	};
+	
+	return json;
+}
+
+function clearContractSalesContractScan(){
+	setInputElementValue($('#contract_sales_contract_scan_code'),'');
+	setInputElementValue($('#contract_sales_contract_scan_res'),'');
+	contract_sales_contract_scan_grd.datagrid('loadData',{ total: 0, rows: []});
+}
 //-->
 </script>
+<div style="padding:0px 15px 0px 15px;">
 <table class="table" style="width: 100%;">
 	<tr>
 		<th>扫描件数量</th>
@@ -260,4 +320,5 @@ function contractSalesScanGrdOpenFormatter(value,row,index){
 		</td>
 	</tr>
 </table>
+</div>
 <div id="contract_sales_contract_scan_grd"><%--合同扫描件--%></div>

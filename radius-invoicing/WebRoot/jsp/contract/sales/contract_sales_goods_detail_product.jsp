@@ -9,7 +9,7 @@ var contract_sales_goods_detail_product_dialog = null;//生产厂商
 $(function(){
 	contract_sales_goods_detail_product_dialog=$('#contract_sales_goods_detail_product_dialog').show().dialog({
 		 title:'选择商品',
-		 width:800,
+		 width:720,
 		 height:400,
 		 collapsible:true,//向上缩小按钮
 		 maximizable:true,
@@ -17,16 +17,18 @@ $(function(){
 		 closed:true
 	});
 	contract_sales_goods_detail_product_grd=$('#contract_sales_goods_detail_product_grd').datagrid({
-			fit:true,
-      		autoRowHeight:false,
-      		border:false,
-      		striped:true,
-      		rownumbers:true,
-      		collapsible:true,
-      		columns:[[
+			fitColumns:false,
+	   		autoRowHeight:false,
+	   		border:false,
+	   		striped:true,
+	   		rownumbers:true,
+	   		collapsible:true,
+      		frozenColumns:[[
       			{field:'id',title:'商品编号',width:120},//商品编号
 				{field:'name',title:'商品名称',width:120},//商品名称
-				{field:'realName',title:'真实品名称',width:120},//真实品名
+				{field:'realName',title:'真实品名称',width:120}//真实品名
+      		]],
+      		columns:[[
 				{field:'goodsType',title:'商品类型',width:120},//商品类型
 				{field:'machineSeries',title:'所属设备名称',width:180},//所属设备名
 				{field:'machinePosition',title:'设备位号',width:120},//设备位号
@@ -88,7 +90,7 @@ $(function(){
 });
 //-->
 </script>
-<div id="contract_sales_goods_detail_product_dialog" style="display: none;">
+<div id="contract_sales_goods_detail_product_dialog" style="display: none;width: 99.5">
 	<fieldset>
 			<legend>筛选条件</legend>
 			<table class="table" style="width: 100%;">
@@ -105,22 +107,21 @@ $(function(){
 					<td><input  id="contract_sales_goods_detail_product_goods_status" style="border:1px solid #95B8E7;"/></td>
 					<th>生产厂商</th>
 					<td>
-						<input  id="contract_sales_goods_detail_product_goods_company_name" style="border:1px solid #95B8E7;"/>
-						<input type="hidden"  id="contract_sales_goods_detail_product_goods_company_id" style="border:1px solid #95B8E7;"/>
+						<input  id="contract_sales_goods_detail_product_goods_company_name" style="border:1px solid #95B8E7;float:left;"/>
+						<input type="hidden"  id="contract_sales_goods_detail_product_goods_company_id"/>
 						<a id="contract_sales_goods_detail_product_goods_company_search_btn" href="#" class="easyui-linkbutton" plain="true" from="0"><font style="font-size:3ex">...</font></a>	
 					</td>
 					<td colspan="2">
 						<div style="float: left;">
-						<a id="contract_sales_goods_detail_product_search_btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" plain="true">查询</a>
+							<a id="contract_sales_goods_detail_product_search_btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" plain="true">查询</a>
 						</div>
 						<div class="datagrid-btn-separator"></div>
 						<div style="float: left;">
-						<a id="contract_sales_goods_detail_product_ok_btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-true'" plain="true">确定</a>
+							<a id="contract_sales_goods_detail_product_ok_btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-true'" plain="true">确定</a>
 						<div>
 					</td>
 				</tr>
 			</table>
-	</fieldset>
 	<div id="contract_sales_goods_detail_product_grd">
 	</div>
 </div>

@@ -18,7 +18,8 @@ $(function(){
 			contract_sales_goods_detail_equivalent_unit.combobox('setText',record.equivalentUnitName);
 			contract_sales_goods_detail_equivalent_unit.combobox('setValue',record.equivalentUnit);
 			//3.折合数量
-			$('#contract_sales_goods_detail_quantity_eu').val(record.quantityEuUnit);
+			$('#contract_sales_goods_detail_quantity_eu_per_unit').val(record.quantityEuUnit);
+			//4.折合数量
 		},
 		editable:false
 	});
@@ -45,10 +46,6 @@ $(function(){
 		}
 	});
 	//折合数量
-	$('#contract_sales_goods_detail_quantity_eu').numberspinner({
-		disabled:true,
-		value:0
-	});
 	
 	//商品对话框
 	$('#constract_sales_goods_grd_form_btn').on('click',function(){
@@ -62,6 +59,8 @@ $(function(){
  		onChange:function(value){//通过数量计算出金额
  			var contract_sales_goods_detail_price=parseFloat($('#contract_sales_goods_detail_price').val());
  			$('#contract_sales_goods_detail_amount').val(contract_sales_goods_detail_price*parseInt(value));	
+ 			//折合数量=包装单位折合数量*数量
+ 			$('#contract_sales_goods_detail_quantity_eu').val(parseInt($('#contract_sales_goods_detail_quantity_eu_per_unit').val())*parseInt(value));
  		}
 	});
 	
@@ -70,15 +69,20 @@ $(function(){
 		//1.没有选择商品信息
 		if($('#contract_sales_goods_grd_form_id').val().length<=0){
 			$.messager.alert('提示','请选择商品信息...','error');
-			return null;
+			return ;
 		}
 		//2.没有选择规格信息
 		if(contract_sales_goods_detail_spec_type.combobox('getValue').length<=0){
 			$.messager.alert('提示','请选择规格信息...','error');
-			return null;
+			return;
+		}
+		if($('#constract_sales_base_id').val().length==0){
+			$.messager.alert('提示','请新建按钮,构建新的销售合同...','error');
+			return;
 		}
 		var rows=contract_sales_goods_detail_grd.datagrid('getRows');
 		if(rows.length==0){
+			
 			addDataGridRow();
 			contract_sales_goods_detail_grd.datagrid('acceptChanges');
 			calculateTotalAmount();
@@ -135,7 +139,6 @@ $(function(){
 		 			//3.将内存中的缓存数据删除
 		 			if(array.length>0){
 		 				removeProudctInfoMemcache(array);
-		 				calculateTotalAmount();
 		 			}
  				}
  			});
@@ -165,7 +168,7 @@ function updateProuctInfoMemcache(amount,quantityUnit,quantityEuPerUnit,goodsId)
 			console.info(data);
 		},
 		error:function(data){
-			console.info("与后台通讯失败.. ");
+			$.messager.alert('提示','与服务端通讯失败...','error');
 		}
 	});
 }
@@ -178,7 +181,6 @@ function addDataGridRow(){
 	var memcached_url = '${path}/contract/manager/sales_contract_product_info_memcache.html';//销售合同商品列表
 	var memcached_data= getContractSalesGoodsInfo(row_data);
 	//2.将数据保存到内存中
-	console.info(memcached_data);
 	addFormatterData2Memecached(memcached_url,memcached_data);
 }
 
@@ -192,10 +194,10 @@ function getContractSalesGoodsDetailProductGrdFormatter(){
 	 var json={
 		goodsId				:$('#contract_sales_goods_grd_form_id').val(),//商品编号
    		goodsName			:$('#contract_sales_goods_grd_form_name').val(),//商品名称
-		specId				:contract_sales_goods_detail_spec_type.combobox('getText'),//规格
-		unit				:contract_sales_goods_detail_spec_unit.combobox('getText'),//包装单位
+		specId				:contract_sales_goods_detail_spec_type.combobox('getValue'),//规格
+		unit				:contract_sales_goods_detail_spec_unit.combobox('getValue'),//包装单位
 		priceUnit			:$('#contract_sales_goods_detail_price').val(),//包装单位单价
-		equivalentUnit		:contract_sales_goods_detail_equivalent_unit.combobox('getText'),//折合单位
+		equivalentUnit		:contract_sales_goods_detail_equivalent_unit.combobox('getValue'),//折合单位
 		priceEu				:$('#contract_sales_goods_detail_price_convert_unit').val(),//折合单位单价
 		quantityEuPerUnit	:$('#contract_sales_goods_detail_quantity_eu_per_unit').val(),//包装单位折合数量
 		quantityEu			:$('#contract_sales_goods_detail_quantity_eu').val(),//折合数量
@@ -256,12 +258,17 @@ function calculateTotalAmount(){
 	//计算总金额
 	var rows=contract_sales_goods_detail_grd.datagrid('getRows');
 	contract_sales_total_amount=0;
+	if(rows.length==0){
+		contract_sales_total_amount=0;
+	}
 	for(var i=0;i<rows.length;i++){
 		contract_sales_total_amount+=parseFloat(rows[i].amount)*100;
-		$('#contract_sales_base_total_amount').val(parseFloat(contract_sales_total_amount/100));
-		//转换为大写
-		toUpper($('#contract_sales_base_total_amount'),$('#contract_sales_base_upper_rmb'));
 	}
+	$('#contract_sales_base_total_amount').val(parseFloat(contract_sales_total_amount/100));
+	$('#contract_sales_pay_detail_total_amount').val($('#contract_sales_base_total_amount').val());
+	$('#contract_sales_pay_detail_surplus_amount').val($('#contract_sales_base_total_amount').val());
+	//转换为大写
+	toUpper($('#contract_sales_base_total_amount'),$('#contract_sales_base_upper_rmb'));
 }
 
 /**
@@ -277,68 +284,86 @@ function removeProudctInfoMemcache(array){
 		},
 		success:function (data){//2.将dategrid的行数据进行删除操作
 			if(data.success){
+				var rows=contract_sales_goods_detail_grd.datagrid('getSelections');
 				for(var i=0;i<rows.length;i++){
 					var index=contract_sales_goods_detail_grd.datagrid('getRowIndex',rows[i]);
 					contract_sales_goods_detail_grd.datagrid('deleteRow',index);
 					contract_sales_goods_detail_grd.datagrid('acceptChanges');//接受改变
 				}
+				calculateTotalAmount();
 			}
 		},
 		error: function(data){
-			console.info(data);
-			$.messager.alert('提示','处理缓存失败...',error);
+			$.messager.alert('提示','与服务端通讯失败...','error');
 		}
 	});
 }
+
+/**
+ *清空销售合同商品明细
+ *
+ **/
+function clearContractSalesGoodsDetail(){
+
+	//1.清空表格
+	contract_sales_goods_detail_grd.datagrid('loadData',{ total: 0, rows: []});
+	//2.
+	$("input[id^='contract_sales_goods_detail_']").each(function(e){
+			$(this).val('');
+	})
+	
+	$('#contract_sales_goods_grd_form_name').val('');
+	$('#contract_sales_goods_grd_form_id').val('');
+}
 </script>
-<table class="table" style="width: 100%;">
+<table class="table" style="width: 99.8%;">
 	<tr>
 		<th>商品</th>
 		<td colspan="3">
-			<input class="easyui-validatebox" type="text" style="width: 300px;border:1px solid #95B8E7;" id="contract_sales_goods_grd_form_name" name="contract_sales_goods_grd_name" data-options="" readonly="readonly"/>
+			<input class="easyui-validatebox" type="text" style="width: 300px;border:1px solid #95B8E7;float: left;" id="contract_sales_goods_grd_form_name" name="contract_sales_goods_grd_name" data-options="" readonly="readonly"/>
 			<input type="hidden" id="contract_sales_goods_grd_form_id"/>
 			<a id="constract_sales_goods_grd_form_btn" href="#" class="easyui-linkbutton" plain="true"><font style="font-size:3ex">...</font></a>
 		</td>
 		<th>规格</th>
-		<td colspan="3">
+		<td>
 			<input class="easyui-validatebox" type="text" style="border:1px solid #95B8E7;" id="contract_sales_goods_detail_spec_type"/>
 		</td>
 		<th>包装单位单价</th>
 		<td>
-			<input class="easyui-validatebox"  id="contract_sales_goods_detail_price" style="border:1px solid #95B8E7;" data-options=""/>
+			<input class="easyui-validatebox"  id="contract_sales_goods_detail_price" style="border:1px solid #95B8E7;float: left;" data-options="" value="0.00"/>
 			<a id="btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-font'"  plain="true"></a>
 		</td>
 	</tr>
 	<tr>
+		<th>包装单位折合数量</th>
+		<td>
+			<input id="contract_sales_goods_detail_quantity_eu_per_unit" style="background:#eee;border:1px solid #95B8E7;" value="0"/>
+		</td>
 		<th>折合单位单价</th>
 		<td>
-			<input class="easyui-validatebox"  id="contract_sales_goods_detail_price_convert_unit" style="border:1px solid #95B8E7;" data-options="validType:'numberic',missingMessage:'请输入折合单价',invalidMessage:'请输入正确的格式'"/>
+			<input class="easyui-validatebox" value="0.00"  id="contract_sales_goods_detail_price_convert_unit" style="border:1px solid #95B8E7;" data-options="validType:'numberic',missingMessage:'请输入折合单价',invalidMessage:'请输入正确的格式'"/>
 		</td>
 		<th>数量</th>
 		<td>
 			<input style="width: 100px;"  id="contract_sales_goods_detail_quantity_unit"/>
-			<input  id="contract_sales_goods_detail_spec_unit" style="background:#eee;width: 40px;;border:1px solid #95B8E7;" readonly="readonly" value="1401"/><%--包装单位(规格)--%>
+			<input  id="contract_sales_goods_detail_spec_unit" style="background:#eee;width: 40px;border:1px solid #95B8E7;" readonly="readonly" value="1401"/><%--包装单位(规格)--%>
 		</td>
 		<th>折合数量</th>
-		<td colspan="3">
-			<input style="width: 100px;background:#eee;"   id="contract_sales_goods_detail_quantity_eu"/>
-			<input  id="contract_sales_goods_detail_equivalent_unit" style="background:#eee;width: 40px;;border:1px solid #95B8E7;" readonly="readonly" value="1401"/><%--折合单位--%>
-		</td>
-		<th>包装单位折合数量</th>
 		<td>
-			<input style="width: 100px;"  class="easyui-numberspinner" id="contract_sales_goods_detail_quantity_eu_per_unit" data-options="min:0,editable:false"/>
+			<input style="width: 100px;background:#eee;border:1px solid #95B8E7;"   id="contract_sales_goods_detail_quantity_eu" readonly="readonly"/>
+			<input  id="contract_sales_goods_detail_equivalent_unit" style="background:#eee;width: 40px;border:1px solid #95B8E7;" readonly="readonly" value="1401"/><%--折合单位--%>
 		</td>
 	</tr>
 	<tr>
 		<th>金额</th>
 		<td>
-			<input class="easyui-validatebox"  id="contract_sales_goods_detail_amount" style="border:1px solid #95B8E7;" data-options="" value="0" readonly="readonly"/>
+			<input class="easyui-validatebox"  id="contract_sales_goods_detail_amount" style="border:1px solid #95B8E7;" data-options="" value="0.00" readonly="readonly"/>
 		</td>
 		<th>备注</th>
-		<td colspan="5">
-			<input class="easyui-validatebox" style="width: 500px;border:1px solid #95B8E7;"  id="contract_sales_goods_detail_mome" data-options=""/>
+		<td colspan="2">
+			<input class="easyui-validatebox" style="width: 250px;border:1px solid #95B8E7;"  id="contract_sales_goods_detail_mome" data-options=""/>
 		</td>
-		<th style="text-align: center;"><input type="checkbox"/> 加入后不置空</th>
+		<th style="text-align: center;" colspan="2"><input type="checkbox"/> 加入后不置空</th>
 		<td>
 			<a id="contract_sales_goods_grd_add_btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" plain="true">加入(A)</a>
 			<a id="contract_sales_goods_grd_delete_btn" href="#" class="easyui-linkbutton" style="margin-left:20px;" data-options="iconCls:'icon-remove'" plain="true">删除(D)</a>

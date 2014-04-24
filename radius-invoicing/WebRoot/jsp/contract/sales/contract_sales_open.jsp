@@ -101,6 +101,9 @@ $(function(){
  		//8.合同扫描件
  		setContractSalesContractScanTab(rows[0]);
  		
+ 		//清空查询列表
+ 		contract_sales_open_sales_contract_grd.datagrid('loadData',{ total: 0, rows: []});
+ 		
  		contract_sales_open_dialog.dialog('close');
  	});
 });
