@@ -189,7 +189,7 @@ function addProuctInfoMemcache(){
 				console.info(data);
 			},
 			error:function(data){
-				console.info("与后台通讯失败.. ");
+				$.messager.alert('提示','与服务端通讯失败...','error');
 			}
 		});
 	}
@@ -214,7 +214,7 @@ function updateProuctInfoMemcache(amount,quantityUnit,quantityEuPerUnit,goodsId)
 			console.info(data);
 		},
 		error:function(data){
-			console.info("与后台通讯失败.. ");
+			$.messager.alert('提示','与服务端通讯失败...','error');
 		}
 	});
 }
@@ -257,13 +257,13 @@ function calculateTotalAmount(){
 	}
 }
 </script>
-<table class="table" style="width: 100%;">
+<table class="table" style="width: 98%;">
 	<tr>
 		<th>商品</th>
 		<td colspan="3">
-			<input class="easyui-validatebox" type="text" style="width: 300px;border:1px solid #95B8E7;" id="contract_sales_goods_grd_form_name" name="contract_sales_goods_grd_name" data-options="" readonly="readonly"/>
+			<input class="easyui-validatebox" type="text" style="width: 300px;border:1px solid #95B8E7;float: left;" id="contract_sales_goods_grd_form_name" name="contract_sales_goods_grd_name" data-options="" readonly="readonly"/>
 			<input type="hidden" id="contract_sales_goods_grd_form_id"/>
-			<a id="constract_sales_goods_grd_form_btn" href="#" class="easyui-linkbutton" plain="true"><font style="font-size:3ex">...</font></a>
+			<a id="constract_sales_goods_grd_form_btn"style="float: left;" href="#" class="easyui-linkbutton" plain="true"><font style="font-size:3ex">...</font></a>
 		</td>
 		<th>规格</th>
 		<td colspan="3">

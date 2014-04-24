@@ -28,5 +28,9 @@ $(function (){
 			]]
 	});
 });
+
+function clearContractSalesGoodsQuoted(){
+	contract_sales_goods_quoted_grd.datagrid('loadData',{ total: 0, rows: []});
+}
 </script>
 <div id="contract_sales_goods_quoted_grd"></div>

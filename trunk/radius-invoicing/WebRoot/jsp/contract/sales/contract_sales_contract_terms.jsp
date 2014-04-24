@@ -8,6 +8,29 @@
  	$('#contract_sales_contract_terms_effivit_time').datebox({});
  	$('#contract_sales_contract_terms_fail_time').datebox({});
  });
+ 
+ /**
+  * 设置销售合同条款页签
+  *@params{} row_data
+  **/
+ function setContractSalesContractTermsTab(row_data){
+	setInputElementValue($('#contract_sales_contract_terms_contract_file_id'),row_data.contractFile);//合同文件编号
+ 	setDateboxElement($('#contract_sales_contract_terms_sign_time'),'setValue',row_data.signTime);//签署日期
+ 	setDateboxElement($('#contract_sales_contract_terms_effivit_time'),'setValue',row_data.effectDate);//生效日期
+ 	setDateboxElement($('#contract_sales_contract_terms_fail_time'),'setValue',row_data.validityDate);//有效期至
+	setInputElementValue($('#contract_sales_contract_terms_contract_terms'),row_data.contractTerms);//合同文件编号
+ }
+ 
+ /**
+  * 清空合同条款
+  **/
+ function clearContractSalesContractTerms(){
+	$('#contract_sales_contract_terms_contract_file_id').val('');
+	$('#contract_sales_contract_terms_contract_terms').val('');
+	$('#contract_sales_contract_terms_sign_time').datebox('setValue','');
+	$('#contract_sales_contract_terms_effivit_time').datebox('setValue','');
+	$('#contract_sales_contract_terms_fail_time').datebox('setValue','');
+ }
 //-->
 </script>
 <table class="table" style="width: 99.5%;">

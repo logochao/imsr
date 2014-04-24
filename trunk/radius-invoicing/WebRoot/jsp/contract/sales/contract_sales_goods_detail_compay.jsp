@@ -125,12 +125,13 @@ function supplierPropertyFormatter(value,row,index){
 			</tr>
 			<tr>
 				<th>默认手机号:</th>
-				<td><input id="business_goods_info_company_contact_info" style="border:1px solid #95B8E7"/></td>
-				<td colspan="2" style="text-align: center;" >
-					<div style="float: left;margin-top: 5px;">
+				<td colspan="4"><input id="business_goods_info_company_contact_info" style="border:1px solid #95B8E7"/></td>
+				<td style="text-align: center;" >
+					<div style="float: left;">
 						<a id="business_goods_info_company_query_btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" plain="true">查询</a>
 					</div>
-					<div style="float: left;margin-left: 10px;margin-top: 5px;">
+					<div class="datagrid-btn-separator"></div>
+					<div style="float: left;">
 						<a id="business_goods_info_company_ok_btn"  href="#" class="easyui-linkbutton" data-options="iconCls:'icon-true'" plain="true">确定</a>
 					<div>
 				</td>
