@@ -1,6 +1,7 @@
 package com.radius.invoicing.contractmanage.compent;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.ServletRequestUtils;
 
 import com.radius.base.cache.memcache.MemcacheClient;
 import com.radius.invoicing.ibatis.model.ContractScanGrd;
+import com.radius.invoicing.ibatis.model.SalesContract;
 import com.radius.invoicing.ibatis.model.SalesContractGoodsGrd;
 import com.radius.invoicing.ibatis.model.SalesContractPayment;
 import com.radius.invoicing.ibatis.model.SalesContractPaymentGrd;
@@ -31,7 +33,7 @@ public class SalesContractCom {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public static List<SalesContractGoodsGrd> getSalesContractGoodsGrdByRequest(String ledgerId,String cacheKey,String contractId,String status){
+	public static List<SalesContractGoodsGrd> getSalesContractGoodsGrdByRequest(String ledgerId,String cacheKey,String contractId,String status,String creater){
 		List<SalesContractGoodsGrd> goodsList=new ArrayList<SalesContractGoodsGrd>();
 //		String key=contractId+"_add_sales_contract_proudct_info";
 		//获取缓存中的Map销售合同商品信息
@@ -48,6 +50,7 @@ public class SalesContractCom {
 				//设置状态
 				goods.setStatus(status);
 				goods.setLedgerId(ledgerId);
+				goods.setCreater(creater);
 				goodsList.add(goods);
 			}
 		}
@@ -63,7 +66,7 @@ public class SalesContractCom {
 	 * @param contractId
 	 * @return
 	 */
-	public static SalesContractPayment getSalesContractPaymentByRequest(String ledgerId,HttpServletRequest request,String contractId){
+	public static SalesContractPayment getSalesContractPaymentByRequest(String ledgerId,HttpServletRequest request,String contractId,String creater){
 		SalesContractPayment payment = new  SalesContractPayment();
 		payment.setContractId(contractId);//合同编号
 		Float totalAmount = ServletRequestUtils.getFloatParameter(request, "totalAmount", 0f);
@@ -73,6 +76,7 @@ public class SalesContractCom {
 		payment.setCashType(ServletRequestUtils.getIntParameter(request, "cashType", 0));//币种类型
 		payment.setUpperAmount(ServletRequestUtils.getStringParameter(request, "upperAmount", ""));//大写货币
 		payment.setLedgerId(ledgerId);
+		payment.setCreater(creater);
 		return payment;
 	}
 	/**
@@ -82,7 +86,7 @@ public class SalesContractCom {
 	 * @param status
 	 * @return
 	 */
-	public static List<SalesContractPaymentGrd> getSalesContractPaymentGrdByRequest(String contractId,String ledgerId,String cacheKey,String status){
+	public static List<SalesContractPaymentGrd> getSalesContractPaymentGrdByRequest(String contractId,String ledgerId,String cacheKey,String status,String creater){
 		List<SalesContractPaymentGrd>  paymentsList=new ArrayList<SalesContractPaymentGrd>();
 		Map<String,SalesContractPaymentGrd> memcache =(Map<String,SalesContractPaymentGrd>)MemcacheClient.get(cacheKey);
 		String key = null;
@@ -96,6 +100,7 @@ public class SalesContractCom {
 				logger.info("合同支付详情列表 "+key +" ---> "+payment);
 				payment.setStatus(status);//设置状态
 				payment.setLedgerId(ledgerId);
+				payment.setCreater(creater);
 				paymentsList.add(payment);
 			}
 		}
@@ -111,7 +116,7 @@ public class SalesContractCom {
 	 * @param cacheKey
 	 * @return
 	 */
-	public static List<ContractScanGrd> getContractScanGrdsByRequest(String contractId,String cacheKey){
+	public static List<ContractScanGrd> getContractScanGrdsByRequest(String contractId,String cacheKey,String creater){
 		List<ContractScanGrd> scansList=new ArrayList<ContractScanGrd>();
 		Map<String,ContractScanGrd> memcache=(Map<String,ContractScanGrd>)MemcacheClient.get(cacheKey);
 		String key = null;
@@ -123,6 +128,7 @@ public class SalesContractCom {
 				key = (String) entry.getKey(); 
 				scan=memcache.get(key);
 				logger.info("合同扫描件列表 "+key +" ---> "+scan);
+				scan.setCreater(creater);
 				scansList.add(scan);
 			}
 		}
@@ -131,5 +137,42 @@ public class SalesContractCom {
 		scan=null;
 		
 		return scansList;
+	}
+	
+	/**
+	 * 获取保函条款记录
+	 * @param request
+	 * @param salesContract
+	 * @return
+	 */
+	public static List<SalesContractPaymentGrd> getSalesContractGuaranteePaymentGrd(HttpServletRequest request,SalesContract salesContract){
+		List<SalesContractPaymentGrd> list =new ArrayList<SalesContractPaymentGrd>();
+		String guaranteeName =ServletRequestUtils.getStringParameter(request, "guaranteeName","");//支付#收款
+		int payamount=ServletRequestUtils.getIntParameter(request, "payamount", 0);
+		String guaranteeReceiveType=ServletRequestUtils.getStringParameter(request, "guaranteeReceiveType","");//收付款类型 付款类型#收款类型
+		String upperAmount =ServletRequestUtils.getStringParameter(request, "quaranteeUpperAmount","");//大写金额
+		String[]names=guaranteeName.split("#");
+		String[]receiveTypes=guaranteeReceiveType.split("#");
+		String contractId=salesContract.getId();
+		SalesContractPaymentGrd receivables =new SalesContractPaymentGrd();//收款
+		receivables.setName(names[0]);
+		receivables.setContractId(contractId);
+		receivables.setAmount(payamount);
+		receivables.setUpperAmount(upperAmount);
+		receivables.setReceiveType(receiveTypes[0]);
+		receivables.setValidityDate(salesContract.getPayTime());
+		receivables.setStatus(salesContract.getStatus());
+		list.add(receivables);
+		
+		SalesContractPaymentGrd payment =new SalesContractPaymentGrd();//付款
+		payment.setName(names[0]);
+		payment.setContractId(contractId);
+		payment.setAmount(payamount);
+		payment.setUpperAmount(upperAmount);
+		payment.setReceiveType(receiveTypes[0]);
+		payment.setValidityDate(salesContract.getPayTime());
+		payment.setStatus(salesContract.getStatus());
+		list.add(payment);
+		return list;
 	}
 }
