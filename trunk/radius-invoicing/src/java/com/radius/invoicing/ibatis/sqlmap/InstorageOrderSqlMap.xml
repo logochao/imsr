@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="instoreOrderSqlMap">
+
+  <typeAlias alias="instoreOrder" type="com.radius.invoicing.ibatis.model.InstoreOrder" />
+  <sql id="instoreOrderFields">
+  	instorage_id instorageId,supplier_id supplierId,supplier_name supplierName,certificate_no certificateNo,link_man man,link_mobile mobile,tel tel,fax fax,
+  	contract_id contractId,total_amount totalAmount,ordered_date orderedDate,delivery_date deliveryDate,terms terms,memo memo,STATUS status,print_times printTimes,
+  	newest_print_time printTime,newest_print_acc printAcc,newest_print_record printRecord,purchaser_id purchaserId,
+	ledger_id ledgerId,operator operator,motify_date modifyDate,creater creater,createdate createDate,reviser reviser,revisedate reviseDate,verifier verifier,verifydate verifyDate      
+  </sql> 
+  <resultMap class="instoreOrder" id="instoreOrder">
+  	<result column="instorage_id" jdbcType="char" javaType="java.lang.String" property="instorageId" /> 
+  	<result column="supplier_id" jdbcType="char" javaType="java.lang.String" property="supplierId" /> 
+  	<result column="supplier_name" jdbcType="char" javaType="java.lang.String" property="supplierName" /> 
+  	<result column="certificate_no" jdbcType="char" javaType="java.lang.String" property="certificateNo" /> 
+  	<result column="ink_man" jdbcType="char" javaType="java.lang.String" property="man" /> 
+  	<result column="link_mobile" jdbcType="char" javaType="java.lang.String" property="mobile" /> 
+  	<result column="tel" jdbcType="char" javaType="java.lang.String" property="tel" /> 
+  	<result column="fax" jdbcType="char" javaType="java.lang.String" property="fax" /> 
+  	<result column="contract_id" jdbcType="char" javaType="java.lang.String" property="contractId" /> 
+  	<result column="total_amount" jdbcType="int" javaType="java.lang.Integer" property="totalAmount" /> 
+  	<result column="ordered_date" jdbcType="date" javaType="java.util.Date" property="orderedDate" /> 
+  	<result column="delivery_date" jdbcType="date" javaType="java.util.Date" property="deliveryDate" /> 
+  	<result column="terms" jdbcType="char" javaType="java.lang.String" property="terms" /> 
+  	<result column="memo" jdbcType="char" javaType="java.lang.String" property="memo" /> 
+  	<result column="STATUS" jdbcType="char" javaType="java.lang.String" property="status" /> 
+  	<result column="print_times" jdbcType="int" javaType="java.lang.Integer" property="printTimes" /> 
+  	<result column="newest_print_time" jdbcType="datetime" javaType="java.util.Date" property="printTime" /> 
+  	<result column="newest_print_acc" jdbcType="char" javaType="java.lang.String" property="printAcc" /> 
+  	<result column="newest_print_record" jdbcType="char" javaType="java.lang.String" property="printRecord"/> 
+  	<result column="purchaser_id" jdbcType="char" javaType="java.lang.String" property="purchaserId" /> 
+	
+	<result column="ledger_id" jdbcType="char" javaType="java.lang.String" property="ledgerId" />
+    <result column="operator" jdbcType="char" javaType="java.lang.String" property="operator" />
+    <result column="motify_date" jdbcType="datetime" javaType="java.util.Date" property="modifyDate" />
+    <result column="creater" jdbcType="char" javaType="java.lang.String" property="creater" />
+    <result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createDate" />
+    <result column="reviser" jdbcType="char" javaType="java.lang.String" property="reviser" />
+    <result column="revisedate" jdbcType="datetime" javaType="java.util.Date" property="reviseDate" />
+    <result column="verifier" jdbcType="char" javaType="java.lang.String" property="verifier" />    
+    <result column="verifydate" jdbcType="datetime" javaType="java.util.Date" property="verifyDate"/>
+  </resultMap>  
+  
+  <sql id="whereLike">
+  	<dynamic prepend="where">
+  		1=1
+  		<isNotEmpty  property="instorageId"> AND instorage_id=#instorageId#</isNotEmpty> 
+		<isNotEmpty  property="supplierId"> AND supplier_id=#supplierId#</isNotEmpty> 
+		<isNotEmpty  property="supplierName"> AND supplier_name=#supplierName#</isNotEmpty> 
+		<isNotEmpty  property="certificateNo"> AND certificate_no=#certificateNo#</isNotEmpty> 
+		<isNotEmpty  property="man"> AND link_man=#man#</isNotEmpty> 
+		<isNotEmpty  property="mobile"> AND link_mobile=#mobile#</isNotEmpty> 
+		<isNotEmpty  property="tel"> AND tel=#tel#</isNotEmpty> 
+		<isNotEmpty  property="fax"> AND fax=#fax#</isNotEmpty> 
+		<isNotEmpty  property="contractId"> AND contract_id=#contractId#</isNotEmpty> 
+		<isNotNull  property="totalAmount"> AND total_amount=#totalAmount#</isNotNull> 
+		<isNotNull  property="orderedDate"> AND ordered_date=#orderedDate#</isNotNull> 
+		<isNotNull  property="deliveryDate"> AND delivery_date=#deliveryDate#</isNotNull> 
+		<isNotEmpty  property="terms"> AND terms=#terms#</isNotEmpty> 
+		<isNotEmpty  property="memo"> AND memo=#memo#</isNotEmpty> 
+		<isNotEmpty  property="status"> AND STATUS=#status#</isNotEmpty> 
+		<isNotEmpty  property="purchaserId"> AND purchaser_id=#purchaserId#</isNotEmpty> 
+		<isNotEmpty  property="ledgerId"> AND ledger_id=#ledgerId#</isNotEmpty> 
+  	</dynamic>
+  </sql>
+  
+  <select id="getInstoreOrderById" parameterClass="java.lang.String" resultClass="instoreOrder">
+  	SELECT <include refid="instoreOrderFields"/>
+  	FROM RS_INSTORE_ORDER
+  	WHERE instorage_id=#instorageId#
+  </select>
+  
+  <select id="getInstoreOrderCondition" parameterClass="instoreOrder" resultClass="instoreOrder">
+  	SELECT <include refid="instoreOrderFields"/>
+  	FROM RS_INSTORE_ORDER
+  	<include refid="whereLike"/>
+  </select>
+  
+  <select id="getInstoreOrderCountById" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+  	SELECT COUNT(1) FROM RS_INSTORE_ORDER  WHERE instorage_id=#instorageId#
+  </select>
+  
+  <insert id="insert" parameterClass="instoreOrder">
+  	INSERT INTO RS_INSTORE_ORDER 
+  	(
+  		instorage_id
+		<isNotEmpty  property="supplierId">  supplier_id</isNotEmpty> 
+		<isNotEmpty  property="supplierName">  supplier_name</isNotEmpty> 
+		<isNotEmpty  property="certificateNo">  certificate_no</isNotEmpty> 
+		<isNotEmpty  property="man">  link_man</isNotEmpty> 
+		<isNotEmpty  property="mobile">  link_mobile</isNotEmpty> 
+		<isNotEmpty  property="tel">  tel</isNotEmpty> 
+		<isNotEmpty  property="fax">  fax</isNotEmpty> 
+		<isNotEmpty  property="contractId">  contract_id</isNotEmpty> 
+		<isNotNull  property="totalAmount">  total_amount</isNotNull> 
+		<isNotNull  property="orderedDate">  ordered_date</isNotNull> 
+		<isNotNull  property="deliveryDate">  delivery_date</isNotNull> 
+		<isNotEmpty  property="terms">terms</isNotEmpty> 
+		<isNotEmpty  property="memo">memo</isNotEmpty> 
+		<isNotEmpty  property="status">STATUS</isNotEmpty> 
+		<isNotEmpty  property="purchaserId"> purchaser_id</isNotEmpty> 
+  	    creater,
+	    createdate 
+  	) VALUES (
+  		#instorageId#
+		<isNotEmpty  property="supplierId">#supplierId#</isNotEmpty> 
+		<isNotEmpty  property="supplierName">#supplierName#</isNotEmpty> 
+		<isNotEmpty  property="certificateNo">#certificateNo#</isNotEmpty> 
+		<isNotEmpty  property="man">#man#</isNotEmpty> 
+		<isNotEmpty  property="mobile">#mobile#</isNotEmpty> 
+		<isNotEmpty  property="tel">#tel#</isNotEmpty> 
+		<isNotEmpty  property="fax">#fax#</isNotEmpty> 
+		<isNotEmpty  property="contractId">#contractId#</isNotEmpty> 
+		<isNotNull  property="totalAmount">#totalAmount#</isNotNull> 
+		<isNotNull  property="orderedDate">#orderedDate#</isNotNull> 
+		<isNotNull  property="deliveryDate">#deliveryDate#</isNotNull> 
+		<isNotEmpty  property="terms">#terms#</isNotEmpty> 
+		<isNotEmpty  property="memo">#memo#</isNotEmpty> 
+		<isNotEmpty  property="status">#status#</isNotEmpty> 
+		<isNotEmpty  property="purchaserId">#purchaserId#</isNotEmpty> 
+  	    #creater#,
+	    now()
+  	)
+  </insert>
+  
+  <update id="updateInstoreOrder" parameterClass="instoreOrder">
+  	UPDATE RS_INSTORE_ORDER
+	<dynamic prepend="SET">
+		<isNotEmpty prepend=","  property="supplierId">  supplier_id=#supplierId#</isNotEmpty> 
+		<isNotEmpty prepend="," property="supplierName">  supplier_name=#supplierName#</isNotEmpty> 
+		<isNotEmpty prepend="," property="certificateNo">  certificate_no=#certificateNo#</isNotEmpty> 
+		<isNotEmpty prepend="," property="man">  link_man=#man#</isNotEmpty> 
+		<isNotEmpty prepend="," property="mobile">  link_mobile=#mobile#</isNotEmpty> 
+		<isNotEmpty prepend="," property="tel">  tel=#tel#</isNotEmpty> 
+		<isNotEmpty prepend="," property="fax">  fax=#fax#</isNotEmpty> 
+		<isNotEmpty prepend="," property="contractId">  contract_id=#contractId#</isNotEmpty> 
+		<isNotNull prepend="," property="totalAmount">  total_amount=#totalAmount#</isNotNull> 
+		<isNotNull prepend="," property="orderedDate">  ordered_date=#orderedDate#</isNotNull> 
+		<isNotNull prepend="," property="deliveryDate">  delivery_date=#deliveryDate#</isNotNull> 
+		<isNotEmpty prepend=","  property="terms">  terms=#terms#</isNotEmpty> 
+		<isNotEmpty prepend=","  property="memo">  memo=#memo#</isNotEmpty> 
+		<isNotEmpty prepend="," property="status">  STATUS=#status#</isNotEmpty> 
+		<isNotEmpty prepend=","  property="purchaserId">purchaser_id=#purchaserId#</isNotEmpty> 
+		<isNotEmpty prepend=","  property="operator">operator=#operator#,motify_date= now()</isNotEmpty>
+  	 	<isNotEmpty prepend=","  property="reviser">reviser = #reviser#,revisedate = now() </isNotEmpty>
+  		<isNotEmpty prepend=","  property="verifier">verifier = #verifier#,verifydate = now() </isNotEmpty>
+  	</dynamic>
+  	WHERE instorage_id=#instorageId#
+  </update>
+  
+  <update id="updateInstoreOrderStatus" parameterClass="instoreOrder">
+  	UPDATE RS_INSTORE_ORDER
+   	SET status=#status# <isNotEmpty prepend=","  property="operator">operator=#operator#,motify_date= now()</isNotEmpty>
+   	WHERE instorage_id=#instorageId#
+  </update>
+  
+  <delete id="deleteInstoreOrderByCondition" parameterClass="instoreOrder">
+  	DELETE FROM RS_INSTORE_ORDER
+   	<include refid="whereLike"/>
+  </delete>
+  
+  <delete id="deleteInstoreOrderById" parameterClass="java.lang.String">
+  	DELETE FROM RS_INSTORE_ORDER
+  	WHERE instorage_id=#instorageId#
+  </delete>
+  
+</sqlMap>
