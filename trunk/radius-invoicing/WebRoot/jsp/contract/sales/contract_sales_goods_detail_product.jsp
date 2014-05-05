@@ -9,7 +9,7 @@ var contract_sales_goods_detail_product_dialog = null;//生产厂商
 $(function(){
 	contract_sales_goods_detail_product_dialog=$('#contract_sales_goods_detail_product_dialog').show().dialog({
 		 title:'选择商品',
-		 width:720,
+		 width:750,
 		 height:400,
 		 collapsible:true,//向上缩小按钮
 		 maximizable:true,
