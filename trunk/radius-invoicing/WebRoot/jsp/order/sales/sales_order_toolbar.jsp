@@ -15,6 +15,9 @@ $(function(){
 		if($(this).attr("disabled")){
 			return ;
 		}
+		if(!validataSalesOrderBase()){
+			return ;
+		}
 		var pend_data = getAjaxDataFormatter(pend_status);
 		var pend_url ='${path}/order/manager/salesorder/sales_order_infos_add.html';
 		if($('#sales_order_base_id').val().length>0){
@@ -95,15 +98,11 @@ function getAjaxDataFormatter(_status){
 function validataSalesOrderBase(){
 	var success =true; 
 	if($('#sales_order_base_id').val().length==0){
-		$.messager.alert('提示','请点击新建按钮,新建销售合同信息....','error');
+		$.messager.alert('提示','请点击新建按钮,新建销售订单信息....','error');
 		return false;
 	}
-	if(parseFloat($('#contract_sales_base_total_amount').val())==0){
-		$.messager.alert('提示','销售合同总金额为0,不需要保存....','warning');
-		return false;
-	}
-	if(parseFloat($('#contract_sales_pay_detail_surplus_amount').val())>0){
-		$.messager.alert('提示','销售合同支付批次未完成,请核实....','warning');
+	if(parseFloat($('#sales_order_base_total_amount').val())==0){
+		$.messager.alert('提示','销售订单总金额为0,不需要保存....','warning');
 		return false;
 	}
 	//基本数据合法性
