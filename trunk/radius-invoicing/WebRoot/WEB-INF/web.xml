@@ -114,9 +114,10 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
-  <!--加载自定义标签-->
+  <!--加载自定义标签
   <taglib>
     <taglib-uri>http://www.radius.com/functions</taglib-uri>    
     <taglib-location>/WEB-INF/tld/radius.tld</taglib-location>  
   </taglib>
+  -->
 </web-app>
