@@ -43,6 +43,7 @@ public class SalesOrderCompent {
 				goods=memcache.get(key);
 				goods.setLedgerId(ledgerId);
 				goods.setCreater(operatorId);
+				goods.setStatus(status);
 				logger.info("销售订单商品列表 "+key +" ---> "+goods);
 				salesOrderGoodsList.add(goods);
 			}

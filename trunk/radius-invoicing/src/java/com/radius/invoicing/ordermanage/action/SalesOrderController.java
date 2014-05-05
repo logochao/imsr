@@ -52,6 +52,8 @@ public class SalesOrderController extends BaseController {
 		}
 	}
 	
+	
+	
 	/**
 	 * 进入销售订单管理界面
 	 * @param request
@@ -70,6 +72,23 @@ public class SalesOrderController extends BaseController {
 		
 		return mv;
 	}
+	
+	@RequestMapping("/order/manager/salesOrder/sales_order_info.html")
+	@ResponseBody
+	public JsonUtils getSalesOrder(HttpServletRequest request,HttpServletResponse response)throws Exception{
+		JsonUtils jsonUtils = new JsonUtils();
+		jsonUtils.setMessage("获取销售订单商品编号失败...");
+		try{
+			String salesOrderId=StockUtils.getSalesOrderId();
+			jsonUtils.setChild(salesOrderId);
+			jsonUtils.setSuccess(true);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return jsonUtils;
+	}
+	
+	
 	/**
 	 * 将销售订单商品列表添加memcached
 	 * @param request
@@ -163,8 +182,12 @@ public class SalesOrderController extends BaseController {
 		return salesOrderService.getSalesOrderGoodsGrdByGoodsGrd(goodsGrd);
 	}
 	
-	
-	
+	@RequestMapping("/order/manager/salesorder/sales_order_info_list.html")
+	@ResponseBody
+	public EasyuiSplitPager<SalesOrder> getSalesOrderList(HttpServletRequest request,HttpServletResponse response,SalesOrder salesOrder)throws Exception{
+		return salesOrderService.getSalesOrderList(salesOrder);
+	}
+
 	
 	
 	

@@ -57,5 +57,12 @@ public interface SalesOrderService {
 	 * @return
 	 */
 	public EasyuiSplitPager<SalesOrderGoodsGrd> getSalesOrderGoodsGrdByGoodsGrd(SalesOrderGoodsGrd salesOrderGoodsGrd);
+	
+	/**
+	 * 获取销售订单列表
+	 * @param salesOrder
+	 * @return
+	 */
+	public EasyuiSplitPager<SalesOrder> getSalesOrderList(SalesOrder salesOrder);
 
 }
