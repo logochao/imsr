@@ -14,27 +14,27 @@ import com.radius.base.utils.JsonDateSerializer;
  */
 public class PurchaseOrder extends ExtInfo {
 
-	private String 	purchaseOrderId;//采购订货单编号
-	private String 	supplierId;//供货商编号
-	private String 	supplierName;//供货商名称
-	private String 	linkMan;//联系人
-	private String 	mobile;//联系人手机
-	private String 	tel;//电话
-	private String 	fax;//fax
-	private String 	salesOrderId;//销售订货单编号
+	private String 	purchaseOrderId="";//采购订货单编号
+	private String 	supplierId="";//供货商编号
+	private String 	supplierName="";//供货商名称
+	private String 	linkMan="";//联系人
+	private String 	mobile="";//联系人手机
+	private String 	tel="";//电话
+	private String 	fax="";//fax
+	private String 	salesOrderId="";//销售订货单编号
 	private Integer totalAmont;//订货金额
 	private Date   	orderedDate;//订货日期
 	private Date   	deliveryDate;//送货日期
-	private String 	terms;//条款
-	private String  memo;//备注
-	private String 	status;//状态
+	private String 	terms="";//条款
+	private String  memo="";//备注
+	private String 	status="";//状态
 	private Integer consolidatedFlg;//合单标识
-	private String 	consolidatedPurchaseOrderId;//合单后订单号
+	private String 	consolidatedPurchaseOrderId="";//合单后订单号
 	private Integer printTimes;//打印次数
 	private Date    printTime;//最新打印时间
-	private String  printAcc;//最新打印帐号
-	private String  printRecord;//最新打印记录
-	private String 	purchaser;//采购员
+	private String  printAcc="";//最新打印帐号
+	private String  printRecord="";//最新打印记录
+	private String 	purchaser="";//采购员
 	public Integer getConsolidatedFlg() {
 		return consolidatedFlg;
 	}
