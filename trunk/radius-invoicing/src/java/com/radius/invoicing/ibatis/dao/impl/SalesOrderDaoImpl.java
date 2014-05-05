@@ -90,7 +90,7 @@ public class SalesOrderDaoImpl extends BaseIbatisDaoImpl<SalesOrder> implements 
 	 * @param salesOrder
 	 */
 	public void updateSalesOrderStatusBySalesOrderId(SalesOrder salesOrder){
-		this.updateObject(salesOrder, SQLMAPNAMESPACE+"salesOrder");
+		this.updateObject(salesOrder, SQLMAPNAMESPACE+"updateSalesOrderStatusBySalesOrderId");
 	}
 	
 	/**

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.radius.base.dao.ibatis.BaseIbatisDaoImpl;
+import com.radius.invoicing.ibatis.dao.InstorageOrderDao;
 import com.radius.invoicing.ibatis.model.InstorageOrder;
 
 /**
@@ -13,7 +14,7 @@ import com.radius.invoicing.ibatis.model.InstorageOrder;
  * 描述  入库信息Dao
  */
 @Repository
-public class InstorageOrderDaoImpl extends BaseIbatisDaoImpl<InstorageOrder> {
+public class InstorageOrderDaoImpl extends BaseIbatisDaoImpl<InstorageOrder> implements InstorageOrderDao{
 
 	private final String SQLMAPNAMESPACE="instorageOrderSqlMap.";
 	

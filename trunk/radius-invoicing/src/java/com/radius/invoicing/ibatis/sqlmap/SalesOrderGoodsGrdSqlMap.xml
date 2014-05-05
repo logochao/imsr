@@ -40,23 +40,23 @@
   
   <sql id="whereLike">
   	<dynamic prepend="where">
-  		1=1  AND 
-  		<isNotNull prepend="and" property="orderId">sales_order_id =#orderId#</isNotNull> 
-		<isNotNull prepend="and" property="goodsId">goods_id =#goodsId#</isNotNull> 
-		<isNotNull prepend="and" property="goodsName">goods_name =#goodsName#</isNotNull> 
-		<isNotNull prepend="and" property="specId">spec_id =#specId#</isNotNull> 
-		<isNotNull prepend="and" property="unit">unit =#unit#</isNotNull> 
-		<isNotNull prepend="and" property="priceUnit">price_of_unit =#priceUnit#</isNotNull> 
-		<isNotNull prepend="and" property="equivalentUnit">equivalent_unit =#equivalentUnit#</isNotNull> 
-		<isNotNull prepend="and" property="priceEu">price_of_eu =#priceEu#</isNotNull> 
-		<isNotNull prepend="and" property="quantityEuPerUnit">quantity_of_eu_per_unit =#quantityEuPerUnit#</isNotNull> 
-		<isNotNull prepend="and" property="quantityUnit">quantity_of_unit =#quantityUnit#</isNotNull> 
-		<isNotNull prepend="and" property="quantityEu">quantity_of_eu =#quantityEu#</isNotNull> 
-		<isNotNull prepend="and" property="amount">amount =#amount#</isNotNull> 
-		<isNotNull prepend="and" property="upperAmount">amount_in_words =#upperAmount#</isNotNull> 
-		<isNotNull prepend="and" property="memo">memo =#memo#</isNotNull> 
-		<isNotNull prepend="and" property="status">status =#status#</isNotNull> 
- 		<isNotNull prepend="and" property="ledgerId">ledger_id=#ledgerId#</isNotNull> 
+  		1=1 
+  		<isNotEmpty prepend="and" property="orderId"> AND sales_order_id =#orderId#</isNotEmpty> 
+		<isNotEmpty prepend="and" property="goodsId"> AND goods_id =#goodsId#</isNotEmpty> 
+		<isNotEmpty prepend="and" property="goodsName"> AND goods_name LIKE CONCAT('%',#goodsName#,'%')</isNotEmpty> 
+		<isNotNull prepend="and" property="specId"> AND spec_id =#specId#</isNotNull> 
+		<isNotNull prepend="and" property="unit"> AND unit =#unit#</isNotNull> 
+		<isNotNull prepend="and" property="priceUnit"> AND price_of_unit =#priceUnit#</isNotNull> 
+		<isNotNull prepend="and" property="equivalentUnit"> AND equivalent_unit =#equivalentUnit#</isNotNull> 
+		<isNotNull prepend="and" property="priceEu"> AND price_of_eu =#priceEu#</isNotNull> 
+		<isNotNull prepend="and" property="quantityEuPerUnit"> AND quantity_of_eu_per_unit =#quantityEuPerUnit#</isNotNull> 
+		<isNotNull prepend="and" property="quantityUnit"> AND quantity_of_unit =#quantityUnit#</isNotNull> 
+		<isNotNull prepend="and" property="quantityEu"> AND quantity_of_eu =#quantityEu#</isNotNull> 
+		<isNotNull prepend="and" property="amount"> AND amount =#amount#</isNotNull> 
+		<isNotEmpty prepend="and" property="upperAmount"> AND amount_in_words =#upperAmount#</isNotEmpty> 
+		<isNotEmpty prepend="and" property="memo"> AND memo =#memo#</isNotEmpty> 
+		<isNotEmpty prepend="and" property="status"> AND status =#status#</isNotEmpty> 
+ 		<isNotEmpty prepend="and" property="ledgerId"> AND ledger_id=#ledgerId#</isNotEmpty> 
   	</dynamic>
   </sql>
  
@@ -76,7 +76,7 @@
    		INSERT INTO RS_SALES_ORDER_GOODS_GRD ( 
    			sales_order_id,
    			goods_id,
-			<isNotNull  property="goodsName">goods_name,</isNotNull> 
+			<isNotEmpty  property="goodsName">goods_name,</isNotEmpty> 
 			<isNotNull  property="specId">spec_id,</isNotNull> 
 			<isNotNull  property="unit">unit,</isNotNull> 
 			<isNotNull  property="priceUnit">price_of_unit,</isNotNull> 
@@ -86,17 +86,17 @@
 			<isNotNull  property="quantityUnit">quantity_of_unit,</isNotNull> 
 			<isNotNull  property="quantityEu">quantity_of_eu,</isNotNull> 
 			<isNotNull  property="amount">amount,</isNotNull> 
-			<isNotNull  property="upperAmount">amount_in_words,</isNotNull> 
-			<isNotNull  property="memo">memo,</isNotNull> 
-			<isNotNull  property="status">status,</isNotNull> 
-	 		<isNotNull  property="ledgerId">ledger_id,</isNotNull> 
-	 		<isNotNull  property="operator">operator,</isNotNull> 
+			<isNotEmpty  property="upperAmount">amount_in_words,</isNotEmpty> 
+			<isNotEmpty  property="memo">memo,</isNotEmpty> 
+			<isNotEmpty  property="status">status,</isNotEmpty> 
+	 		<isNotEmpty  property="ledgerId">ledger_id,</isNotEmpty> 
+	 		<isNotEmpty  property="operator">operator,</isNotEmpty> 
 	  	    creater,
 	  	    createdate
    		)VALUES(
    			#orderId#,
    			#goodsId#,
-			<isNotNull  property="goodsName">#goodsName#,</isNotNull> 
+			<isNotEmpty  property="goodsName">#goodsName#,</isNotEmpty> 
 			<isNotNull  property="specId">#specId#,</isNotNull> 
 			<isNotNull  property="unit">#unit#,</isNotNull> 
 			<isNotNull  property="priceUnit">#priceUnit#,</isNotNull> 
@@ -106,11 +106,11 @@
 			<isNotNull  property="quantityUnit">#quantityUnit#,</isNotNull> 
 			<isNotNull  property="quantityEu">#quantityEu#,</isNotNull> 
 			<isNotNull  property="amount">#amount#,</isNotNull> 
-			<isNotNull  property="upperAmount">#upperAmount#,</isNotNull> 
-			<isNotNull  property="memo">#memo#,</isNotNull> 
-			<isNotNull  property="status">#status#,</isNotNull> 
-	 		<isNotNull  property="ledgerId">#ledgerId#,</isNotNull> 
-	 		<isNotNull  property="operator">#operator#,</isNotNull> 
+			<isNotEmpty  property="upperAmount">#upperAmount#,</isNotEmpty> 
+			<isNotEmpty  property="memo">#memo#,</isNotEmpty> 
+			<isNotEmpty  property="status">#status#,</isNotEmpty> 
+	 		<isNotEmpty  property="ledgerId">#ledgerId#,</isNotEmpty> 
+	 		<isNotEmpty  property="operator">#operator#,</isNotEmpty> 
    			 #creater#,
 			 now()
    		)
@@ -119,7 +119,7 @@
    	<update id="updateSalesOrderGoodsGrdByPK" parameterClass="salesOrderGoodsGrd">
    		UPDATE RS_SALES_ORDER_GOODS_GRD
    		<dynamic prepend="SET">
-			<isNotNull   prepend="," property="goodsName">goods_name =#goodsName#</isNotNull> 
+			<isNotEmpty   prepend="," property="goodsName">goods_name =#goodsName#</isNotEmpty> 
 			<isNotNull   prepend="," property="specId">spec_id =#specId#</isNotNull> 
 			<isNotNull   prepend="," property="unit">unit =#unit#</isNotNull> 
 			<isNotNull   prepend="," property="priceUnit">price_of_unit =#priceUnit#</isNotNull> 
@@ -129,14 +129,14 @@
 			<isNotNull   prepend="," property="quantityUnit">quantity_of_unit =#quantityUnit#</isNotNull> 
 			<isNotNull   prepend="," property="quantityEu">quantity_of_eu =#quantityEu#</isNotNull> 
 			<isNotNull   prepend="," property="amount">amount =#amount#</isNotNull> 
-			<isNotNull   prepend="," property="upperAmount">amount_in_words =#upperAmount#</isNotNull> 
-			<isNotNull   prepend="," property="memo">memo =#memo#</isNotNull> 
-			<isNotNull   prepend="," property="status">status =#status#</isNotNull> 
+			<isNotEmpty   prepend="," property="upperAmount">amount_in_words =#upperAmount#</isNotEmpty> 
+			<isNotEmpty   prepend="," property="memo">memo =#memo#</isNotEmpty> 
+			<isNotEmpty   prepend="," property="status">status =#status#</isNotEmpty> 
 
-	 		<isNotNull prepend="," property="ledgerId">ledger_id=#ledgerId#</isNotNull> 
-	 		<isNotNull prepend="," property="operator">operator=#operator#,modify_date= now()</isNotNull>
-  	 		<isNotNull  prepend="," property="reviser">reviser = #reviser#,revisedate = now() </isNotNull>
-  			<isNotNull  prepend="," property="verifier">verifier = #verifier#,verifydate = now() </isNotNull>
+	 		<isNotEmpty prepend="," property="ledgerId">ledger_id=#ledgerId#</isNotEmpty> 
+	 		<isNotEmpty prepend="," property="operator">operator=#operator#,modify_date= now()</isNotEmpty>
+  	 		<isNotEmpty  prepend="," property="reviser">reviser = #reviser#,revisedate = now() </isNotEmpty>
+  			<isNotEmpty  prepend="," property="verifier">verifier = #verifier#,verifydate = now() </isNotEmpty>
    		</dynamic>
    		WHERE sales_order_id=#orderId# AND goods_id=#goodsId#
    	</update>

@@ -12,6 +12,14 @@
 		checked_status checkedStatus,validity_date validityDate, 
 		ledger_id ledgerId,operator operator,motify_date modifyDate,creater creater,createdate createDate,reviser reviser,revisedate reviseDate,verifier verifier,verifydate verifyDate
 	</sql>
+	
+	<sql id="salesContractPaymentFileds">
+		sc.contract_id id,sc.customer_id customerId,sc.customer_name customerName,sc.contract_file_id contractFile,sc.effect_date effectDate,sc.sign_time signTime,
+		sc.salesman_id salesMan, sc.link_man man, sc.link_mobile mobile,sc.link_tel tel,sc.link_fax fax,
+		sc.ordered_date orderedDate,sc.delivery_date deliveryDate,sc.delivery_point deliveryPoint, sc.contract_terms contractTerms,sc.print_times printTimes,
+		sc.newest_print_time printTime,sc.newest_print_acc printAcc,sc.newest_print_record printRecord,sc.memo memo, sc.status status,sc.audited_status auditedStatus,
+		sc.checked_status checkedStatus,sc.validity_date validityDate, scp.total_amount totalAmount,scp.amount_in_words upperAmount 
+	</sql>
 
 	<resultMap id="salesContract" class="salesContract">
 		<result column="contract_id" jdbcType="char" javaType="java.lang.String" property="id" />
@@ -148,7 +156,7 @@
 	</update>
 
 	<select id="getSalesContractByCustomerId" resultClass="salesContract" parameterClass="salesContract">
-		SELECT sc.contract_id id,sc.customer_name customerName,sc.effect_date effectDate,sc.sign_time signTime,scp.total_amount totalAmount,scp.amount_in_words upperAmount 
+		SELECT <include refid="salesContractPaymentFileds"/>
 		FROM RS_SALES_CONTRACT sc 
 		LEFT JOIN RS_SALES_CONTRACT_PAYMENT scp 
 		ON sc.contract_id = scp.contract_id
