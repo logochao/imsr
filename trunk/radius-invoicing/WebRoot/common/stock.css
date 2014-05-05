@@ -21,15 +21,6 @@
 .table tbody th {
 	text-align: right;
 }
-
-.table tr:hover {
-	background-color: #f6fafd;
-}
-
-.table td:hover {
-	background-color: #f9feff;
-}
-
 .form th {
 	text-align: right;
 }
@@ -54,4 +45,9 @@ fieldset {
 legend {
 	border: 1px dotted #D1D7DC;
 	font-size: small;
+}
+
+.table_td td{
+	padding: 0.3em 0.7em;
+	text-align: right;
 }

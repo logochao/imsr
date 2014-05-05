@@ -24,11 +24,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 --%>
 
-<%-- 引入ueditor控件 --%>
+<%-- 引入ueditor控件 
 <script type="text/javascript" charset="utf-8">window.UEDITOR_HOME_URL ='<%=path%>/jslib/ueditor1_2_6_1-utf8-jsp/';</script>
 <script src="<%=path%>/jslib/ueditor1_2_6_1-utf8-jsp/ueditor.config.js" type="text/javascript" charset="utf-8"></script>
 <script src="<%=path%>/jslib/ueditor1_2_6_1-utf8-jsp/ueditor.all.min.js" type="text/javascript" charset="utf-8"></script>
-
+--%>
 <%--<!-- 引入EasyUI Portal插件 -->
 <link rel="stylesheet" href="<%=path%>/easyui/jquery-easyui-portal/portal.css" type="text/css">
 <script type="text/javascript" src="<%=path%>/easyui/jquery-easyui-portal/jquery.portal.js" charset="utf-8"></script>
@@ -42,5 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="<%=path%>/jslib/rmb-tools.js" charset="utf-8"></script>
 <!-- 图片预览插件 -->
 <script type="text/javascript" src="<%=path%>/jslib/imagepreview/jquery.imgpreview.js"></script>
+<script type="text/javascript" src="<%=path%>/jslib/stock.js"></script>
+<script type="text/javascript" src="<%=path%>/jslib/radius.js"></script>
 
 <link rel="stylesheet" href="<%=path%>/common/stock.css" type="text/css">
