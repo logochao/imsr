@@ -77,7 +77,7 @@ public class SalesOrderServiceImpl implements Constants, SalesOrderService{
 		if(cache!=null){
 			memcache=(Map<String,SalesOrderGoodsGrd>)cache;
 			SalesOrderGoodsGrd goodGrd=memcache.get(mapKey);
-			if(grd!=null){//更新map对象
+			if(goodGrd!=null){//更新map对象
 				goodGrd.setAmount(grd.getAmount());
 				goodGrd.setQuantityUnit(grd.getQuantityUnit());
 				logger.error("key "+key+",已经将其缓存在对象中 "+cache);
@@ -113,6 +113,7 @@ public class SalesOrderServiceImpl implements Constants, SalesOrderService{
 		}
 		Object cache=MemcacheClient.get(key);
 		if(cache!=null){
+			memcache=(Map<String, SalesOrderGoodsGrd>) cache;
 			String mapKey=null;
 			if(memo.contains(",")){
 				for(String goodsId:memo.split(",")){
@@ -153,7 +154,7 @@ public class SalesOrderServiceImpl implements Constants, SalesOrderService{
 			
 			success=true;
 			message="添加销售订单相关信息成功!!!";
-			resultCode="1";
+			resultCode=salesOrder.getStatus();
 			logger.info(message);
 		}else{
 			salesOrderDao.updateSalesOrderStatusBySalesOrderId(salesOrder);
@@ -167,7 +168,7 @@ public class SalesOrderServiceImpl implements Constants, SalesOrderService{
 			success=true;
 			message="更新销售订单相关信息成功!!!";
 			logger.info(message);
-			resultCode="0";
+			resultCode=salesOrder.getStatus();
 		}
 		if(success){
 			MemcacheClient.delete(salesOrderGoodsGrdMemcachedkey);
@@ -209,6 +210,21 @@ public class SalesOrderServiceImpl implements Constants, SalesOrderService{
 		List<SalesOrderGoodsGrd> list=salesOrderGoodsGrdDao.getSalesOrderGoodsGrd(salesOrderGoodsGrd);
 		pager.setRows(list);
 		pager.setTotal(list.size());
+		return pager;
+	}
+	/**
+	 * 获取销售订单列表
+	 * @param salesOrder
+	 * @return
+	 */
+	public EasyuiSplitPager<SalesOrder> getSalesOrderList(SalesOrder salesOrder){
+		EasyuiSplitPager<SalesOrder> pager=new EasyuiSplitPager<SalesOrder>();
+		
+		List<SalesOrder> list = salesOrderDao.getSalesOrder(salesOrder);
+		pager.setRows(list);
+		if(list!=null&&!list.isEmpty()){
+			pager.setTotal(list.size());
+		}
 		return pager;
 	}
 	
