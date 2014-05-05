@@ -49,42 +49,42 @@
   
   <sql id="whereLike">
   	<dynamic prepend="where">
-  		1=1  AND 
-  		<isNotNull prepend="and" property="sales_order_id">sales_order_id=#salesOrderId#</isNotNull>
-		<isNotNull prepend="and" property="customerId">customer_id=#customerId#</isNotNull>
-		<isNotNull prepend="and" property="customerName">customer_name LIKE CONCAT('%',#customerName#,'%')</isNotNull>
-		<isNotNull prepend="and" property="linkMan">link_man LIKE CONCAT('%',#linkMan#,'%')</isNotNull>
-		<isNotNull prepend="and" property="mobile">link_mobile=#mobile#</isNotNull>
-		<isNotNull prepend="and" property="tel">tel=#tel#</isNotNull>
-		<isNotNull prepend="and" property="fax">fax=#fax#</isNotNull>
-		<isNotNull prepend="and" property="contractId">contract_id=#contractId#</isNotNull>
-		<isNotNull prepend="and" property="totalAmount">total_amount=#totalAmount#</isNotNull>
-		<isNotNull prepend="and" property="upperAmount">amount_in_words=#upperAmount#</isNotNull>
-		<isNotNull prepend="and" property="orderedDate">ordered_date=#orderedDate#</isNotNull>
-		<isNotNull prepend="and" property="deliveryDate">delivery_date=#deliveryDate#</isNotNull>
-		<isNotNull prepend="and" property="deliveryAddress">delivery_address=#deliveryAddress#</isNotNull>
-		<isNotNull prepend="and" property="terms">terms=#terms#</isNotNull>
-		<isNotNull prepend="and" property="memo">memo=#memo#</isNotNull>
-		<isNotNull prepend="and" property="status">status=#status#</isNotNull>
-		<isNotNull prepend="and" property="splitedFlg">splited_flg=#splitedFlg#</isNotNull>
-		<isNotNull prepend="and" property="spliteSalesOrderId">splited_sales_order_id=#spliteSalesOrderId#</isNotNull>
-		<isNotNull prepend="and" property="printTimes">print_times=#printTimes#</isNotNull>
-		<isNotNull prepend="and" property="newestPrintTime">newest_print_time=#newestPrintTime#</isNotNull>
-		<isNotNull prepend="and" property="newestPrintAcc">newest_print_acc=#newestPrintAcc#</isNotNull>
-		<isNotNull prepend="and" property="newestPrintRecord">newest_print_record=#newestPrintRecord#</isNotNull>
-		<isNotNull prepend="and" property="salesManId">salesman_id=#salesManId#</isNotNull>
- 		<isNotNull prepend="and" property="ledgerId">ledger_id=#ledgerId#</isNotNull> 
+  		1=1 
+  		<isNotEmpty  property="salesOrderId"> AND sales_order_id=#salesOrderId#</isNotEmpty>
+		<isNotEmpty  property="customerId"> AND customer_id=#customerId#</isNotEmpty>
+		<isNotEmpty  property="customerName"> AND customer_name LIKE CONCAT('%',#customerName#,'%')</isNotEmpty>
+		<isNotEmpty  property="linkMan"> AND link_man LIKE CONCAT('%',#linkMan#,'%')</isNotEmpty>
+		<isNotEmpty  property="mobile"> AND link_mobile=#mobile#</isNotEmpty>
+		<isNotEmpty  property="tel"> AND tel=#tel#</isNotEmpty>
+		<isNotEmpty  property="fax"> AND fax=#fax#</isNotEmpty>
+		<isNotEmpty  property="contractId"> AND contract_id=#contractId#</isNotEmpty>
+		<isNotNull  property="totalAmount"> AND total_amount=#totalAmount#</isNotNull>
+		<isNotEmpty  property="upperAmount"> AND amount_in_words=#upperAmount#</isNotEmpty>
+		<isNotNull  property="orderedDate"> AND ordered_date=#orderedDate#</isNotNull>
+		<isNotNull  property="deliveryDate"> AND delivery_date=#deliveryDate#</isNotNull>
+		<isNotEmpty  property="deliveryAddress"> AND delivery_address=#deliveryAddress#</isNotEmpty>
+		<isNotEmpty  property="terms"> AND terms=#terms#</isNotEmpty>
+		<isNotEmpty  property="memo"> AND memo=#memo#</isNotEmpty>
+		<isNotEmpty  property="status"> AND status=#status#</isNotEmpty>
+		<isNotEmpty  property="splitedFlg"> AND splited_flg=#splitedFlg#</isNotEmpty>
+		<isNotEmpty  property="spliteSalesOrderId"> AND splited_sales_order_id=#spliteSalesOrderId#</isNotEmpty>
+		<isNotNull  property="printTimes"> AND print_times=#printTimes#</isNotNull>
+		<isNotNull  property="newestPrintTime"> AND newest_print_time=#newestPrintTime#</isNotNull>
+		<isNotEmpty  property="newestPrintAcc"> AND newest_print_acc=#newestPrintAcc#</isNotEmpty>
+		<isNotEmpty  property="newestPrintRecord"> AND newest_print_record=#newestPrintRecord#</isNotEmpty>
+		<isNotEmpty  property="salesManId"> AND salesman_id=#salesManId#</isNotEmpty>
+ 		<isNotEmpty  property="ledgerId"> AND ledger_id=#ledgerId#</isNotEmpty> 
   	</dynamic>
   </sql>
  
-	 <select id="getSalesOrderByPk" parameterClass="java.lang.String" resultMap="salesOrder">
-	 	SELECT *
+	 <select id="getSalesOrderByPk" parameterClass="java.lang.String" resultClass="salesOrder">
+	 	SELECT <include refid="salesOrderFileds"/>
 	 	FROM RS_SALES_ORDER
 	 	WHERE sales_order_id=#salesOrderId#
 	 </select>
 	 
-	 <select id="getSalesOrder" parameterClass="salesOrder" resultMap="salesOrder">
-	 	SELECT *
+	 <select id="getSalesOrder" parameterClass="salesOrder" resultClass="salesOrder">
+	 	SELECT <include refid="salesOrderFileds"/>
 	 	FROM RS_SALES_ORDER
 	 	<include refid="whereLike"/>
 	 </select>
@@ -92,93 +92,92 @@
    	<insert id="insert" parameterClass="salesOrder">
    		INSERT INTO RS_SALES_ORDER (
    			sales_order_id,
-			<isNotNull	property="customerId">customer_id ,</isNotNull>
-			<isNotNull	property="customerName">customer_name ,</isNotNull>
-			<isNotNull	property="linkMan">link_man ,</isNotNull>
-			<isNotNull	property="mobile">link_mobile,</isNotNull>
-			<isNotNull	property="tel"> tel,</isNotNull>
-			<isNotNull	property="fax"> fax,</isNotNull>
-			<isNotNull	property="contractId">contract_id ,</isNotNull>
+			<isNotEmpty	property="customerId">customer_id ,</isNotEmpty>
+			<isNotEmpty	property="customerName">customer_name ,</isNotEmpty>
+			<isNotEmpty	property="linkMan">link_man ,</isNotEmpty>
+			<isNotEmpty	property="mobile">link_mobile,</isNotEmpty>
+			<isNotEmpty	property="tel"> tel,</isNotEmpty>
+			<isNotEmpty	property="fax"> fax,</isNotEmpty>
+			<isNotEmpty	property="contractId">contract_id ,</isNotEmpty>
 			<isNotNull	property="totalAmount">total_amount ,</isNotNull>
-			<isNotNull	property="upperAmount">amount_in_words ,</isNotNull>
+			<isNotEmpty	property="upperAmount">amount_in_words ,</isNotEmpty>
 			<isNotNull	property="orderedDate">ordered_date ,</isNotNull>
 			<isNotNull	property="deliveryDate">delivery_date ,</isNotNull>
-			<isNotNull	property="deliveryAddress">delivery_address ,</isNotNull>
-			<isNotNull	property="terms">terms ,</isNotNull>
-			<isNotNull	property="memo"> memo,</isNotNull>
-			<isNotNull	property="status"> status,</isNotNull>
-			<isNotNull	property="splitedFlg">splited_flg ,</isNotNull>
-			<isNotNull	property="spliteSalesOrderId">splited_sales_order_id ,</isNotNull>
+			<isNotEmpty	property="deliveryAddress">delivery_address ,</isNotEmpty>
+			<isNotEmpty	property="terms">terms ,</isNotEmpty>
+			<isNotEmpty	property="memo"> memo,</isNotEmpty>
+			<isNotEmpty	property="status"> status,</isNotEmpty>
+			<isNotEmpty	property="splitedFlg">splited_flg ,</isNotEmpty>
+			<isNotEmpty	property="spliteSalesOrderId">splited_sales_order_id ,</isNotEmpty>
 			<isNotNull	property="printTimes">print_times ,</isNotNull>
 			<isNotNull	property="newestPrintTime">newest_print_time ,</isNotNull>
-			<isNotNull	property="newestPrintAcc">newest_print_acc ,</isNotNull>
-			<isNotNull	property="newestPrintRecord">newest_print_record ,</isNotNull>
-			<isNotNull	property="salesManId">salesman_id ,</isNotNull>
-	 		<isNotNull  property="ledgerId">ledger_id,</isNotNull> 
-	 		<isNotNull  property="operator">operator,</isNotNull>
+			<isNotEmpty	property="newestPrintAcc">newest_print_acc ,</isNotEmpty>
+			<isNotEmpty	property="newestPrintRecord">newest_print_record ,</isNotEmpty>
+			<isNotEmpty	property="salesManId">salesman_id ,</isNotEmpty>
+	 		<isNotEmpty  property="ledgerId">ledger_id,</isNotEmpty> 
+	 		<isNotEmpty  property="operator">operator,</isNotEmpty>
 	  	    creater,
 	  	    createdate
    		)VALUES(
    			#salesOrderId#,
-	  		<isNotNull  property="salesOrderId">#salesOrderId#,</isNotNull>
-			<isNotNull  property="customerId">#customerId#,</isNotNull>
-			<isNotNull  property="customerName">#customerName#,</isNotNull>
-			<isNotNull  property="linkMan">#linkMan#,</isNotNull>
-			<isNotNull  property="mobile">#mobile#,</isNotNull>
-			<isNotNull  property="tel">#tel#,</isNotNull>
-			<isNotNull  property="fax">#fax#,</isNotNull>
-			<isNotNull  property="contractId">#contractId#,</isNotNull>
+			<isNotEmpty  property="customerId">#customerId#,</isNotEmpty>
+			<isNotEmpty  property="customerName">#customerName#,</isNotEmpty>
+			<isNotEmpty  property="linkMan">#linkMan#,</isNotEmpty>
+			<isNotEmpty  property="mobile">#mobile#,</isNotEmpty>
+			<isNotEmpty  property="tel">#tel#,</isNotEmpty>
+			<isNotEmpty  property="fax">#fax#,</isNotEmpty>
+			<isNotEmpty  property="contractId">#contractId#,</isNotEmpty>
 			<isNotNull  property="totalAmount">#totalAmount#,</isNotNull>
-			<isNotNull  property="upperAmount">#upperAmount#,</isNotNull>
+			<isNotEmpty  property="upperAmount">#upperAmount#,</isNotEmpty>
 			<isNotNull  property="orderedDate">#orderedDate#,</isNotNull>
 			<isNotNull  property="deliveryDate">#deliveryDate#,</isNotNull>
-			<isNotNull  property="deliveryAddress">#deliveryAddress#,</isNotNull>
-			<isNotNull  property="terms">#terms#,</isNotNull>
-			<isNotNull  property="memo">#memo#,</isNotNull>
-			<isNotNull  property="status">#status#,</isNotNull>
-			<isNotNull  property="splitedFlg">#splitedFlg#,</isNotNull>
-			<isNotNull  property="spliteSalesOrderId">#spliteSalesOrderId#,</isNotNull>
+			<isNotEmpty  property="deliveryAddress">#deliveryAddress#,</isNotEmpty>
+			<isNotEmpty  property="terms">#terms#,</isNotEmpty>
+			<isNotEmpty  property="memo">#memo#,</isNotEmpty>
+			<isNotEmpty  property="status">#status#,</isNotEmpty>
+			<isNotEmpty  property="splitedFlg">#splitedFlg#,</isNotEmpty>
+			<isNotEmpty  property="spliteSalesOrderId">#spliteSalesOrderId#,</isNotEmpty>
 			<isNotNull  property="printTimes">#printTimes#,</isNotNull>
 			<isNotNull  property="newestPrintTime">#newestPrintTime#,</isNotNull>
-			<isNotNull  property="newestPrintAcc">#newestPrintAcc#,</isNotNull>
-			<isNotNull  property="newestPrintRecord">#newestPrintRecord#,</isNotNull>
-			<isNotNull  property="salesManId">#salesManId#,</isNotNull>
-	 		<isNotNull  property="ledgerId">#ledgerId#,</isNotNull> 
-	 		<isNotNull  property="operator">#operator#,</isNotNull>
-   			 creater,now()
+			<isNotEmpty  property="newestPrintAcc">#newestPrintAcc#,</isNotEmpty>
+			<isNotEmpty  property="newestPrintRecord">#newestPrintRecord#,</isNotEmpty>
+			<isNotEmpty  property="salesManId">#salesManId#,</isNotEmpty>
+	 		<isNotEmpty  property="ledgerId">#ledgerId#,</isNotEmpty> 
+	 		<isNotEmpty  property="operator">#operator#,</isNotEmpty>
+   			 #creater#,now()
    		)
    	</insert>
    
    	<update id="updateSalesOrderByPK" parameterClass="salesOrder">
    		UPDATE RS_SALES_ORDER
    		<dynamic prepend="SET">
-	  		<isNotNull prepend="," property="salesOrderId">sales_order_id =#salesOrderId#</isNotNull> 
-			<isNotNull prepend="," property="customerId">customer_id =#customerId#</isNotNull>
-			<isNotNull prepend="," property="customerName">customer_name =#customerName#</isNotNull>
-			<isNotNull prepend="," property="linkMan">link_man =#linkMan#</isNotNull>
-			<isNotNull prepend="," property="mobile">link_mobile =#mobile#</isNotNull>
-			<isNotNull prepend="," property="tel">tel =#tel#</isNotNull>
-			<isNotNull prepend="," property="fax">fax =#fax#</isNotNull>
-			<isNotNull prepend="," property="contractId">contract_id =#contractId#</isNotNull>
+	  		<isNotEmpty prepend="," property="salesOrderId">sales_order_id =#salesOrderId#</isNotEmpty> 
+			<isNotEmpty prepend="," property="customerId">customer_id =#customerId#</isNotEmpty>
+			<isNotEmpty prepend="," property="customerName">customer_name =#customerName#</isNotEmpty>
+			<isNotEmpty prepend="," property="linkMan">link_man =#linkMan#</isNotEmpty>
+			<isNotEmpty prepend="," property="mobile">link_mobile =#mobile#</isNotEmpty>
+			<isNotEmpty prepend="," property="tel">tel =#tel#</isNotEmpty>
+			<isNotEmpty prepend="," property="fax">fax =#fax#</isNotEmpty>
+			<isNotEmpty prepend="," property="contractId">contract_id =#contractId#</isNotEmpty>
 			<isNotNull prepend="," property="totalAmount">total_amount =#totalAmount#</isNotNull>
-			<isNotNull prepend="," property="upperAmount">amount_in_words =#upperAmount#</isNotNull>
+			<isNotEmpty prepend="," property="upperAmount">amount_in_words =#upperAmount#</isNotEmpty>
 			<isNotNull prepend="," property="orderedDate">ordered_date =#orderedDate#</isNotNull>
 			<isNotNull prepend="," property="deliveryDate">delivery_date =#deliveryDate#</isNotNull>
-			<isNotNull prepend="," property="deliveryAddress">delivery_address =#deliveryAddress#</isNotNull>
-			<isNotNull prepend="," property="terms">terms =#terms#</isNotNull>
-			<isNotNull prepend="," property="memo">memo =#memo#</isNotNull>
-			<isNotNull prepend="," property="status">status =#status#</isNotNull>
-			<isNotNull prepend="," property="splitedFlg">splited_flg =#splitedFlg#</isNotNull>
-			<isNotNull prepend="," property="spliteSalesOrderId">splited_sales_order_id =#spliteSalesOrderId#</isNotNull>
+			<isNotEmpty prepend="," property="deliveryAddress">delivery_address =#deliveryAddress#</isNotEmpty>
+			<isNotEmpty prepend="," property="terms">terms =#terms#</isNotEmpty>
+			<isNotEmpty prepend="," property="memo">memo =#memo#</isNotEmpty>
+			<isNotEmpty prepend="," property="status">status =#status#</isNotEmpty>
+			<isNotEmpty prepend="," property="splitedFlg">splited_flg =#splitedFlg#</isNotEmpty>
+			<isNotEmpty prepend="," property="spliteSalesOrderId">splited_sales_order_id =#spliteSalesOrderId#</isNotEmpty>
 			<isNotNull prepend="," property="printTimes">print_times =#printTimes#</isNotNull>
 			<isNotNull prepend="," property="newestPrintTime">newest_print_time =#newestPrintTime#</isNotNull>
-			<isNotNull prepend="," property="newestPrintAcc">newest_print_acc =#newestPrintAcc#</isNotNull>
-			<isNotNull prepend="," property="newestPrintRecord">newest_print_record =#newestPrintRecord#</isNotNull>
-			<isNotNull prepend="," property="salesManId">salesman_id =#salesManId#</isNotNull>
-	 		<isNotNull prepend="," property="ledgerId">ledger_id=#ledgerId#</isNotNull> 
-	 		<isNotNull prepend="," property="operator">operator=#operator#,modify_date= now()</isNotNull>
-  	 		<isNotNull  prepend="," property="reviser">reviser = #reviser#,revisedate = now() </isNotNull>
-  			<isNotNull  prepend="," property="verifier">verifier = #verifier#,verifydate = now() </isNotNull>
+			<isNotEmpty prepend="," property="newestPrintAcc">newest_print_acc =#newestPrintAcc#</isNotEmpty>
+			<isNotEmpty prepend="," property="newestPrintRecord">newest_print_record =#newestPrintRecord#</isNotEmpty>
+			<isNotEmpty prepend="," property="salesManId">salesman_id =#salesManId#</isNotEmpty>
+	 		<isNotEmpty prepend="," property="ledgerId">ledger_id=#ledgerId#</isNotEmpty> 
+	 		<isNotEmpty prepend="," property="operator">operator=#operator#,modify_date= now()</isNotEmpty>
+  	 		<isNotEmpty  prepend="," property="reviser">reviser = #reviser#,revisedate = now() </isNotEmpty>
+  			<isNotEmpty  prepend="," property="verifier">verifier = #verifier#,verifydate = now() </isNotEmpty>
    		</dynamic>
    		WHERE sales_order_id=#salesOrderId#
    	</update>
@@ -225,9 +224,9 @@
 		ON so.sales_order_id =sogg.sales_order_id
 		WHERE sogg.goods_id in($goodsIds$)
 		<dynamic>
-			<isNotNull property="salesOrderId">
+			<isNotEmpty property="salesOrderId">
 				AND so.sales_order_id =#salesOrderId#
-			</isNotNull>
+			</isNotEmpty>
 		</dynamic>
    	</select>
 </sqlMap>

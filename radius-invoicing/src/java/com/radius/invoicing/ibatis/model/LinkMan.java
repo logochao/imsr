@@ -14,31 +14,31 @@ import com.radius.invoicing.enums.SexEnums;
 public class LinkMan extends ExtInfo{
 
 	private Integer 	id;//联系人编号
-	private String 		name;//姓名
-	private String  	pinyin;//拼音
+	private String 		name="";//姓名
+	private String  	pinyin="";//拼音
 	private SexEnums  	sex;//性别
-	private String  	numbers;//身份证号码
-	private String  	mobile1;//手机1
-	private String  	mobile2;//手机
-	private String  	mobile3;//手机3
-	private String  	tel;//电话号码
-	private String 		homeTel;
-	private String  	address;//通讯地址
-	private String  	qq;
-	private String  	email;
-	private String 		jobDuty;//职务
-	private String  	expertise;//职业专长
-	private String 		jobTitle;//职称
-	private String  	jobContent;//负责工作内容
-	private String  	hobbies;//兴趣爱好
-	private String  	postCode;//邮编
-	private String  	companyId;//任职公司编号
-	private String 		companyName;//任职公司名称
-	private String  	customerProperty;//公司性质
-	private String  	customerIllustrate;//公司说明
-	private String  	officeAddress;//办公地址
-	private String  	mome;//备注
-	private String  	staff;//业务员编号
+	private String  	numbers="";//身份证号码
+	private String  	mobile1="";//手机1
+	private String  	mobile2="";//手机
+	private String  	mobile3="";//手机3
+	private String  	tel="";//电话号码
+	private String 		homeTel="";
+	private String  	address="";//通讯地址
+	private String  	qq="";
+	private String  	email="";
+	private String 		jobDuty="";//职务
+	private String  	expertise="";//职业专长
+	private String 		jobTitle="";//职称
+	private String  	jobContent="";//负责工作内容
+	private String  	hobbies="";//兴趣爱好
+	private String  	postCode="";//邮编
+	private String  	companyId="";//任职公司编号
+	private String 		companyName="";//任职公司名称
+	private String  	customerProperty="";//公司性质
+	private String  	customerIllustrate="";//公司说明
+	private String  	officeAddress="";//办公地址
+	private String  	mome="";//备注
+	private String  	staff="";//业务员编号
 	
 	
 	private Integer     sex2;
@@ -184,6 +184,9 @@ public class LinkMan extends ExtInfo{
 		return sex;
 	}
 	public void setSex(SexEnums sex) {
+		if(sex!=null){
+			this.sex2=sex.getId();
+		}
 		this.sex = sex;
 	}
 	public String getStaff() {
