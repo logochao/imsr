@@ -4,6 +4,16 @@
   <head>
   <jsp:include flush="true" page="/common/includ.jsp"></jsp:include>
     <title></title>
+    <style type="">
+    	#top { 
+			height: 150px;
+			background-image: url(${path}/title.jpg);
+			background-position: center center;
+			background-repeat: no-repeat;
+			background-size: 1438px 241px;
+		} 
+    	
+    </style>
     <script type="text/javascript">
     	var mainMenu;
 		var mainTabs;
@@ -103,7 +113,8 @@
     </script>
   </head>
 <body class="easyui-layout">  
-    <div data-options="region:'north',title:'North Title',split:true,href:'${path}/jsp/layout/layout_north.jsp'" style="height:150px;"></div>  
+    <div data-options="region:'north',title:'北京沃德科斯科技发展有限公司',split:true,href:'${path}/jsp/layout/layout_north.jsp'" id="top">
+    </div>  
     <%--<div data-options="region:'south',title:'落款',split:true" style="height:100px;"></div>  --%>
     <div data-options="region:'west',title:'导航',split:true" style="width:200px;">
     	<div class="easyui-accordion" data-options="fit:true,border:false">
