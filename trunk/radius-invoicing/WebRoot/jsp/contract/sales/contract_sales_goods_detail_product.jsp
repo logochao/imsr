@@ -2,7 +2,7 @@
 <script type="text/javascript">
 <!--
 var contract_sales_goods_detail_product_dialog = null;//查询商品对话框
-var contract_sales_goods_detail_product_grd = null;//查询商品信息列表
+var sales_order_goods_detail_product_grd = null;//查询商品信息列表
 var contract_sales_goods_detail_product_goods_type = null;//商品类型
 var contract_sales_goods_detail_product_goods_status = null;//商品状态
 var contract_sales_goods_detail_product_dialog = null;//生产厂商
@@ -16,7 +16,7 @@ $(function(){
 		 modal:true,
 		 closed:true
 	});
-	contract_sales_goods_detail_product_grd=$('#contract_sales_goods_detail_product_grd').datagrid({
+	sales_order_goods_detail_product_grd=$('#sales_order_goods_detail_product_grd').datagrid({
 			fitColumns:false,
 	   		autoRowHeight:false,
 	   		border:false,
@@ -45,8 +45,8 @@ $(function(){
  	});
  	//查询商品信息
  	$('#contract_sales_goods_detail_product_search_btn').on('click',function(){
- 		contract_sales_goods_detail_product_grd.datagrid('options').url='${path}/goods/split_page.html';
- 		contract_sales_goods_detail_product_grd.datagrid('load',{
+ 		sales_order_goods_detail_product_grd.datagrid('options').url='${path}/goods/split_page.html';
+ 		sales_order_goods_detail_product_grd.datagrid('load',{
  			name			:$('#contract_sales_goods_detail_product_goods_name').val(),
  			realName		:$('#contract_sales_goods_detail_product_goods_real_name').val(),
  			goodsType		:contract_sales_goods_detail_product_goods_type.combobox('getValue'),
@@ -75,7 +75,7 @@ $(function(){
 	});
 	
 	$('#contract_sales_goods_detail_product_ok_btn').on('click',function(){
-		var	rows = contract_sales_goods_detail_product_grd.datagrid('getSelections');//获取所有选择的行记录
+		var	rows = sales_order_goods_detail_product_grd.datagrid('getSelections');//获取所有选择的行记录
  		if(rows&&rows.length>1){
  			$.messager.alert('提示','请选择单行商品信息...','warning');
  		}else if(rows&&rows.length==1){
@@ -122,7 +122,7 @@ $(function(){
 					</td>
 				</tr>
 			</table>
-	<div id="contract_sales_goods_detail_product_grd">
+	<div id="sales_order_goods_detail_product_grd">
 	</div>
 </div>
 <jsp:include flush="true" page="contract_sales_goods_detail_compay.jsp"></jsp:include>
