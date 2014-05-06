@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <script type="text/javascript">
 <!--
  var sales_order_base_status=null;
@@ -298,7 +297,7 @@ function setSalesOrderBaseInfo(row_data){
 <table class="table" style="width: 100%;">
 	<tr>
 		<th>销售订单号<font color="red">*</font></th> 
-		<td><input class="easyui-validatebox" style="background:#eee;width: 150px;border:1px solid #95B8E7" id="sales_order_base_id" type="text" readonly="readonly"  data-options="" value="${salesOrder.salesOrderId}"/></td>
+		<td><input class="easyui-validatebox" style="background:#eee;width: 150px;border:1px solid #95B8E7" id="sales_order_base_id" type="text" readonly="readonly"  data-options=""/></td>
 		<th>状态</th>
 		<td colspan="3"><input id="sales_order_base_status"  class="easyui-validatebox" class="easyui-combobox"  data-options="" value="2401"/></td>
 		<th>订货日期</th>
