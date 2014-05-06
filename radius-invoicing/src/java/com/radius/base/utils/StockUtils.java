@@ -26,8 +26,10 @@ public class StockUtils implements Constants {
 		StringBuffer bf=new  StringBuffer();
 		bf.append(SALES_CONTRACT_PREFIX);
 		bf.append(DateConvertUtils.format(new Date(), DATE_FORMAT_YEAR_MONTH_DAY));
-		
-		Integer cache=(Integer)MemcacheClient.get(bf.toString());//H_X20140205(01)括号内的表示系列化的值
+		Integer cache =null;
+		if(isTheSameDay(bf.toString())){//是否是同一天
+			cache=(Integer)MemcacheClient.get(bf.toString());//H_X20140205(01)括号内的表示系列化的值
+		}
 		if(cache!=null){
 			SALES_CONTRACT_SERI_NUM=cache.intValue();//当缓存中存在则将其获取
 			SALES_CONTRACT_SERI_NUM++;//将其+1
@@ -49,7 +51,10 @@ public class StockUtils implements Constants {
 		bf.append(PURCHASE_CONTRACT_PREFIX);
 		bf.append(DateConvertUtils.format(new Date(), DATE_FORMAT_YEAR_MONTH_DAY));
 		
-		Integer cache=(Integer)MemcacheClient.get(bf.toString());//H_X20140205(01)括号内的表示系列化的值
+		Integer cache =null;
+		if(isTheSameDay(bf.toString())){//是否是同一天
+			cache=(Integer)MemcacheClient.get(bf.toString());
+		}
 		if(cache!=null){
 			PURCHASE_CONTRACT_SERI_NUM=cache.intValue();//当缓存中存在则将其获取
 			PURCHASE_CONTRACT_SERI_NUM++;//将其+1
@@ -69,7 +74,10 @@ public class StockUtils implements Constants {
 		bf.append(SALES_ORDER_PREFIX);
 		bf.append(DateConvertUtils.format(new Date(), DATE_FORMAT_YEAR_MONTH_DAY));
 		
-		Integer cache=(Integer)MemcacheClient.get(bf.toString());//H_X20140205(01)括号内的表示系列化的值
+		Integer cache =null;
+		if(isTheSameDay(bf.toString())){//是否是同一天
+			cache=(Integer)MemcacheClient.get(bf.toString());
+		}
 		if(cache!=null){
 			SALES_ORDER_SERI_NUM=cache.intValue();//当缓存中存在则将其获取
 			SALES_ORDER_SERI_NUM++;//将其+1
@@ -91,8 +99,10 @@ public class StockUtils implements Constants {
 		StringBuffer bf=new  StringBuffer();
 		bf.append(PURCHASE_ORDER_PREFIX);
 		bf.append(DateConvertUtils.format(new Date(), DATE_FORMAT_YEAR_MONTH_DAY));
-		
-		Integer cache=(Integer)MemcacheClient.get(bf.toString());//H_X20140205(01)括号内的表示系列化的值
+		Integer cache =null;
+		if(isTheSameDay(bf.toString())){//是否是同一天
+			cache=(Integer)MemcacheClient.get(bf.toString());
+		}
 		if(cache!=null){
 			PURCHASE_ORDER_SERI_NUM=cache.intValue();//当缓存中存在则将其获取
 			PURCHASE_ORDER_SERI_NUM++;//将其+1
@@ -112,8 +122,10 @@ public class StockUtils implements Constants {
 	public static String getSupplierId(){
 		StringBuffer bf=new  StringBuffer();
 		bf.append(SUPPLIER_PREFIX);
-		
-		Integer cache=(Integer)MemcacheClient.get(bf.toString());//H_X20140205(01)括号内的表示系列化的值
+		Integer cache =null;
+		if(isTheSameDay(bf.toString())){//是否是同一天
+			cache=(Integer)MemcacheClient.get(bf.toString());
+		}
 		if(cache!=null){
 			SUPPLIER_SERI_NUM=cache.intValue();//当缓存中存在则将其获取
 			SUPPLIER_SERI_NUM++;//将其+1
@@ -129,7 +141,21 @@ public class StockUtils implements Constants {
 		return bf.toString();
 	}
 	
-	
+	/**
+     * 是否为同一天
+     * @param key
+     * @return
+     */
+    private static boolean isTheSameDay(String key){
+        String memcachedKey=MemcacheClient.getMemcachedKey("time_"+key);
+        String time =(String)MemcacheClient.get(memcachedKey);
+        String now= DateConvertUtils.format(new Date(), "yyyy-MM-dd");
+        if(org.apache.commons.lang.StringUtils.isBlank(time)||!now.equalsIgnoreCase(time)){
+            MemcacheClient.set(memcachedKey, now, 24*60*60 );//一天之后过期
+            return false;
+        }
+        return true;
+    }
 	
 	
     /**
