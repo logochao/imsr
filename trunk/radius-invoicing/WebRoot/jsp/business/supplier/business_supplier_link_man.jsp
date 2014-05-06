@@ -105,11 +105,11 @@ $(function(){
 						},
 						success:function (data){//2.将dategrid的行数据进行删除操作
 							if(data&&data.success){
-								var rows=business_supplier_link_man_grd.datagrid('getSelections');
+								var rows=$('#business_supplier_link_man_grd').datagrid('getSelections');
 								for(var i=0;i<rows.length;i++){
-									var index=business_supplier_link_man_grd.datagrid('getRowIndex',rows[i]);
-									business_supplier_link_man_grd.datagrid('deleteRow',index);
-									business_supplier_link_man_grd.datagrid('acceptChanges');//接受改变
+									var index=$('#business_supplier_link_man_grd').datagrid('getRowIndex',rows[i]);
+									$('#business_supplier_link_man_grd').datagrid('deleteRow',index);
+									$('#business_supplier_link_man_grd').datagrid('acceptChanges');//接受改变
 								}
 							}
 						},
