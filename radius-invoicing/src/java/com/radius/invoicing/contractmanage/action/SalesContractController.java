@@ -75,11 +75,11 @@ public class SalesContractController extends BaseController{
 	@RequestMapping(value={"/contract/manager/sales_view.html"})
 	public ModelAndView salesContract(HttpServletRequest request,HttpServletResponse response)throws Exception{
 		logger.info("进入销售合同管理界面");
-		SalesContract salesContract=new SalesContract();
-		salesContract.setId(StockUtils.getSalesContractId());//设置销售合同编号
+		//SalesContract salesContract=new SalesContract();
+		//salesContract.setId(StockUtils.getSalesContractId());//设置销售合同编号
 		
 		ModelAndView mv = new ModelAndView(sales_view); 
-		mv.addObject("salesContract", salesContract);
+		//mv.addObject("salesContract", salesContract);
 		return mv;
 	}
 	
