@@ -60,12 +60,12 @@ $(function(){
  		}else if(rows&&rows.length==1){
  			//1将数据加载到指定的界面
  			var row=rows[0];
- 			$('#contract_sales_base_customer_id').attr('value',row.id);
- 			$('#contract_sales_base_customer_name').attr('value',row.name);
- 			$('#contract_sales_base_link_man').attr('value',row.linkMan);
- 			$('#contract_sales_base_link_tel').attr('value',row.tel);
- 			$('#contract_sales_base_link_mobile').attr('value',row.contactInfo);
- 			$('#contract_sales_base_link_fax').attr('value',row.fax);
+ 			$('#contract_sales_base_customer_id').val(row.id);
+ 			$('#contract_sales_base_customer_name').val(row.name);
+ 			$('#contract_sales_base_link_man').val(row.linkMan);
+ 			$('#contract_sales_base_link_tel').val(row.tel);
+ 			$('#contract_sales_base_link_mobile').val(row.contactInfo);
+ 			$('#contract_sales_base_link_fax').val(row.fax);
  			//2将显示界面关闭
  			contract_sales_base_customer_dialog.dialog('close');
  			contract_sales_base_customer_dialog.dialog('options').closed=true;
