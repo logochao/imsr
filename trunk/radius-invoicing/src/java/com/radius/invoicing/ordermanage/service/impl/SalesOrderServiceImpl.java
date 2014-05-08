@@ -194,9 +194,12 @@ public class SalesOrderServiceImpl implements Constants, SalesOrderService{
 		//2.通过供应商商品与销售订单商品信息对比获取销售订单编号
 		//3.根据销售订单编号获取销售订单信息
 		EasyuiSplitPager<SalesOrder> page=new EasyuiSplitPager<SalesOrder>();
-		List<SalesOrder>  list = salesOrderDao.getSalesOrderByGoodsIds(goodsIds,salesOrderId);
-		page.setRows(list);
-		page.setTotal(list.size());
+		List<SalesOrder>  list = null;
+		if(org.apache.commons.lang.StringUtils.isNotBlank(goodsIds)){
+			list = salesOrderDao.getSalesOrderByGoodsIds(goodsIds,salesOrderId);
+			page.setRows(list);
+			page.setTotal(list.size());
+		}
 		return page;
 	}
 	
@@ -208,8 +211,10 @@ public class SalesOrderServiceImpl implements Constants, SalesOrderService{
 	public EasyuiSplitPager<SalesOrderGoodsGrd> getSalesOrderGoodsGrdByGoodsGrd(SalesOrderGoodsGrd salesOrderGoodsGrd){
 		EasyuiSplitPager<SalesOrderGoodsGrd> pager=new EasyuiSplitPager<SalesOrderGoodsGrd>();
 		List<SalesOrderGoodsGrd> list=salesOrderGoodsGrdDao.getSalesOrderGoodsGrd(salesOrderGoodsGrd);
-		pager.setRows(list);
-		pager.setTotal(list.size());
+		if(list!=null&&!list.isEmpty()){
+			pager.setRows(list);
+			pager.setTotal(list.size());
+		}
 		return pager;
 	}
 	/**
@@ -221,8 +226,8 @@ public class SalesOrderServiceImpl implements Constants, SalesOrderService{
 		EasyuiSplitPager<SalesOrder> pager=new EasyuiSplitPager<SalesOrder>();
 		
 		List<SalesOrder> list = salesOrderDao.getSalesOrder(salesOrder);
-		pager.setRows(list);
 		if(list!=null&&!list.isEmpty()){
+			pager.setRows(list);
 			pager.setTotal(list.size());
 		}
 		return pager;
