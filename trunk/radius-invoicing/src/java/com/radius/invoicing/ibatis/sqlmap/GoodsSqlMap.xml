@@ -187,58 +187,9 @@
    	</delete>
    	
    	<select id="getGoodsInfoBySupplierAndGoods" parameterClass="goods" resultClass="java.lang.String">
-   		SELECT gs.goods_id goodsId 
-   		FROM RS_SUPPLIER_GOODS sgs
-   		LEFT JOIN RS_GOODS  gs
-   		ON sgs.goods_id = gs.goods_id 
-   		<dynamic prepend="WHERE">
-   			sgs.supplier_id =#supplierId# 
-	   		<isNotEmpty  property="name"> 
-	           AND  gs.goods_name LIKE CONCAT('%',#name#,'%')
-	  		</isNotEmpty>
-	  		<isNotEmpty  property="realName">
-	           AND  gs.true_goods_name  LIKE CONCAT('%',#realName#,'%')	
-	  		</isNotEmpty>
-	  		<isNotEmpty  property="goodsType">
-	           AND  gs.goods_type=#goodsType#
-	  		</isNotEmpty>
-	  		<isNotEmpty  property="machineSeries">
-	           AND  gs.host_machine_series=#machineSeries#
-	  		</isNotEmpty>
-	  		<isNotEmpty  property="machinePosition">
-	           AND  gs.machine_position=#machinePosition#
-	  		</isNotEmpty>
-	  		<isNotEmpty  property="partNo">
-	           AND  gs.part_no=#partNo#
-	  		</isNotEmpty>
-	  		<isNotEmpty  property="mapSeries">
-	           AND  gs.map_series=#mapSeries#
-	  		</isNotEmpty>
-	  		<isNotEmpty  property="company">
-	           AND  gs.made_company=#company#
-	  		</isNotEmpty>
-	  		<isNotEmpty  property="goodStatus">
-	           AND  gs.goods_status=#goodStatus#
-	  		</isNotEmpty>
-	  		<isNotNull  property="weightProp">
-	           AND  gs.weight_prop=#weightProp#
-	  		</isNotNull>
-	  		<isNotEmpty  property="vulnerability">
-	           AND  gs.vulnerability=#vulnerability#
-	  		</isNotEmpty>
-	  		<isNotEmpty  property="description">
-	           AND  gs.goods_description=#description#
-	  		</isNotEmpty>
-	  		<isNotEmpty  property="useStatus">
-	           AND  gs.use_status=#useStatus#
-	  		</isNotEmpty>
-	  		<isNotEmpty  property="memo">
-	           AND  gs.AND	gs.memo=#memo#
-	  		</isNotEmpty>
-	  		<isNotEmpty  property="ledgerId">
-	  		   AND	gs.ledger_id=#ledgerId#
-	  		</isNotEmpty>
-   		</dynamic>
+   		SELECT goods_id goodsId 
+   		FROM RS_GOODS
+   		<include refid="whereLike"/>
    </select>
    
    <select id="getGoodsMaxId" resultClass="java.lang.Integer">
