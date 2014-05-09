@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.radius.base.controller.BaseController;
+import com.radius.base.page.EasyuiSplitPager;
 import com.radius.base.utils.JsonUtils;
 import com.radius.base.utils.StockUtils;
 import com.radius.invoicing.ibatis.model.PurchaseOrder;
@@ -58,10 +59,6 @@ public class PurchaseOrderController extends BaseController {
 	@RequestMapping("/order/manager/purchaseOrder/purchase_order_view.html")
 	public ModelAndView purchaseOrder(HttpServletRequest request,HttpServletResponse response)throws Exception{
 		ModelAndView mv=new ModelAndView(purchase_order_view);
-		String orderId=StockUtils.getPurchaseOrderId();
-		PurchaseOrder purchaseOrder =new PurchaseOrder();
-		purchaseOrder.setPurchaseOrderId(orderId);
-		mv.addObject("purchaseOrder", purchaseOrder);
 		return mv;
 	}
 	
@@ -117,6 +114,27 @@ public class PurchaseOrderController extends BaseController {
 		return purchaseOrderService.removePurchaseOrderGoodsGrd2Memcached(key, purchaseOrderGrd, delete);
 	}
 	
+	@RequestMapping("/order/manager/purchaseOrder/purchase_order_info.html")
+	@ResponseBody
+	public JsonUtils<String> getPurchaseOrderInfo(HttpServletRequest request,HttpServletResponse response)throws Exception{
+		
+		JsonUtils<String> jsonUtils = new JsonUtils<String>();
+		jsonUtils.setMessage("获取采购订单编号失败...");
+		try{
+			String orderId=StockUtils.getPurchaseOrderId();
+			jsonUtils.setChild(orderId);
+			jsonUtils.setSuccess(true);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return jsonUtils;
+	}
+	
+	@RequestMapping("/order/manager/purchaseOrder/purchase_order_info_list.html")
+	@ResponseBody
+	public EasyuiSplitPager<PurchaseOrder> getPurchaseOrderList(HttpServletRequest request,HttpServletResponse response,PurchaseOrder purchaseOrder)throws Exception{
+		return purchaseOrderService.getPurchaseOrderList(purchaseOrder);
+	}
 	
 	@PreDestroy
 	public void destroy(){

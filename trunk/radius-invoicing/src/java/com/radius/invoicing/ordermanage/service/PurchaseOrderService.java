@@ -1,5 +1,6 @@
 package com.radius.invoicing.ordermanage.service;
 
+import com.radius.base.page.EasyuiSplitPager;
 import com.radius.base.utils.JsonUtils;
 import com.radius.invoicing.ibatis.model.PurchaseOrder;
 import com.radius.invoicing.ibatis.model.PurchaseOrderGrd;
@@ -40,5 +41,12 @@ public interface PurchaseOrderService {
 	 * @return
 	 */
 	public JsonUtils removePurchaseOrderGoodsGrd2Memcached(String key,PurchaseOrderGrd purchaseOrderGrd,boolean delete);
+	
+	/**
+	 * 通过条件查询销售订单信息列表
+	 * @param purchaseOrder
+	 * @return
+	 */
+	public EasyuiSplitPager<PurchaseOrder> getPurchaseOrderList(PurchaseOrder purchaseOrder);
 
 }

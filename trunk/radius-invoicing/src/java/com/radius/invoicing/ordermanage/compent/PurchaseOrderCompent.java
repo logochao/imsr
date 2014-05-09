@@ -46,6 +46,7 @@ public class PurchaseOrderCompent {
 				goods.setCreater(operatorId);
 				logger.info("采购订单商品列表 "+key +" ---> "+goods);
 				goodsList.add(goods);
+				goods.setStatus(status);
 			}
 		}
 		//释放资源
