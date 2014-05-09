@@ -30,7 +30,7 @@
 		//工具栏列界面
 		sales_order_panel_tools=$("#sales_order_panel_tools").panel({
 			border:false,
-			href:'${path}/jsp/order/sales/copy/sales_order_toolbar.jsp'
+			href:'${path}/jsp/order/sales/sales_order_toolbar.jsp'
 		});
 		
 		$('#sales_order_index_pay_time').datebox({
