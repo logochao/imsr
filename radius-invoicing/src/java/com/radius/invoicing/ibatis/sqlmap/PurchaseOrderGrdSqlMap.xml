@@ -103,7 +103,7 @@
 			<isNotNull  property="quantityEu">#quantityEu#,</isNotNull>
 			<isNotNull  property="amount">#amount#,</isNotNull>
 			<isNotEmpty  property="memo">#memo#,</isNotEmpty>
-			<isNotNull  property="status">#status#,</isNotNull>
+			<isNotEmpty  property="status">#status#,</isNotEmpty>
 	 		<isNotEmpty  property="operator">operator,</isNotEmpty>
 			<isNotEmpty  property="ledgerId">#ledgerId#,</isNotEmpty> 
    			 #creater#,now()
