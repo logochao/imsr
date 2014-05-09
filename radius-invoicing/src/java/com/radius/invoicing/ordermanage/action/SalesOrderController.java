@@ -63,13 +63,12 @@ public class SalesOrderController extends BaseController {
 	 */
 	@RequestMapping("/order/manager/salesOrder/sales_order_view.html")
 	public ModelAndView salesOrder(HttpServletRequest request,HttpServletResponse response)throws Exception{
-		String salesOrderId=StockUtils.getSalesOrderId();
+		/*String salesOrderId=StockUtils.getSalesOrderId();
 		SalesOrder salesOrder=new  SalesOrder();
 		salesOrder.setSalesOrderId(salesOrderId);//销售订单号
-		
+*/		
 		ModelAndView mv=new ModelAndView(sales_order_view);
-		mv.addObject("salesOrder", salesOrder);
-		
+		/*mv.addObject("salesOrder", salesOrder);*/
 		return mv;
 	}
 	

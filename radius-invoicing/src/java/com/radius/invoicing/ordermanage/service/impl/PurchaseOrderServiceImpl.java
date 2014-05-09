@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.radius.base.cache.memcache.MemcacheClient;
+import com.radius.base.page.EasyuiSplitPager;
 import com.radius.base.utils.Constants;
 import com.radius.base.utils.JsonUtils;
 import com.radius.invoicing.ibatis.dao.PurchaseOrderDao;
@@ -155,6 +156,20 @@ public class PurchaseOrderServiceImpl implements Constants, PurchaseOrderService
 		jsonUtils.setMessage(message);
 		jsonUtils.setChild(resultCode);
 		return jsonUtils;
+	}
+	/**
+	 * 通过条件查询销售订单信息列表
+	 * @param purchaseOrder
+	 * @return
+	 */
+	public EasyuiSplitPager<PurchaseOrder> getPurchaseOrderList(PurchaseOrder purchaseOrder){
+		EasyuiSplitPager<PurchaseOrder> pager =new EasyuiSplitPager<PurchaseOrder>();
+		List<PurchaseOrder> list =purchaseOrderDao.getPurchaseOrder(purchaseOrder);
+		if(list!=null&&!list.isEmpty()){
+			pager.setRows(list);
+			pager.setTotal(list.size());
+		}
+		return pager;
 	}
 	
 	
