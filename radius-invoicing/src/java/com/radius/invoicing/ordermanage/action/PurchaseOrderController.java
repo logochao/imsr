@@ -90,6 +90,7 @@ public class PurchaseOrderController extends BaseController {
 	public JsonUtils addPurchaseOrderInfo(HttpServletRequest request,HttpServletResponse response,PurchaseOrder purchaseOrder)throws Exception{
 		String ledgerId = "000101";//帐套
 		String operator="0001";//当前操作员
+		purchaseOrder.setCreater(operator);
 		//1.构建采购订单信息
 		purchaseOrder.setLedgerId(ledgerId);
 		purchaseOrder.setOperator(operator);
