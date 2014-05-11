@@ -44,6 +44,10 @@ public interface Constants {
 	 * 供应商编号的开始字母
 	 */
 	public String SUPPLIER_PREFIX="G";//供运商
+	/**
+	 * 客户编号的开始字母
+	 */
+	public String CUSTOMER_PREFIX="K";//客户
 	
 	/**
 	 * 时间格式yyyyMMdd
