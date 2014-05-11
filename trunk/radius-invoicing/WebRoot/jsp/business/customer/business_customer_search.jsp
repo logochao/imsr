@@ -124,7 +124,15 @@ var business_customer_search_add_customer_dialog_form_pay_type = null;
  			contactInfo			:$('#business_customer_search_customer_contact_info').val()//联系方式（存放手机号）
  		});
  	});
- 	
+ 	$('#business_customer_search_clear_btn').on('click',function(){
+ 		$('#business_customer_search_customer_ab').val('');//客户简称
+ 		$('#business_customer_search_customer_name').val('');//客户名称
+ 		business_customer_search_customer_property.combobox('setValue','');//客户性质
+ 		$('#business_customer_search_customer_url').val('');//网址
+ 		$('#business_customer_search_customer_tax_no').val('');//税号
+ 		$('#business_customer_search_customer_link_man').val('');//联系人
+ 		$('#business_customer_search_customer_contact_info').val('');//联系方式（存放手机号）
+ 	});
  	//-----------------------------------初始化添加商品信息界面---------------------------------------------------
  });
  	
@@ -334,7 +342,7 @@ var business_customer_search_add_customer_dialog_form_pay_type = null;
 					<a id="business_customer_search_query_btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" plain="true">查询</a>
 				</div>
 				<div style="float: left;margin-left: 10px;margin-top: 5px;">
-					<a id="business_customer_search_ok_btn"  href="#" class="easyui-linkbutton" data-options="iconCls:'icon-true'" plain="true">确定</a>
+					<a id="business_customer_search_clear_btn"  href="#" class="easyui-linkbutton" data-options="iconCls:'icon-undo'" plain="true">重置</a>
 				<div>
 			</td>
 		</tr>

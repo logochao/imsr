@@ -84,8 +84,17 @@ var business_goods_info_company_dialog = null;
  		});
  	});
  	//确定按钮
- 	$('#business_goods_search_ok_btn').on('click',function(){
- 		
+ 	$('#business_goods_search_clear_btn').on('click',function(){
+ 			$('#business_goods_search_name').val('');
+ 			$('#business_goods_search_real_name').val('');
+ 			business_goods_search_goods_type.combobox('setValue','');
+ 			$('#business_goods_search_machine_series').val('');
+ 			$('#business_goods_search_machine_position').val('');
+ 			$('#business_goods_search_part_no').val('');
+ 			$('#business_goods_search_map_series').val('');
+ 			$('#business_goods_search_company_id').val('');
+ 			business_goods_search_goods_status.combobox('setValue','');
+ 			$('#business_goods_search_company_name').val('');
  	});
  });
  
@@ -183,7 +192,7 @@ var business_goods_info_company_dialog = null;
 		<tr>
 			<th>生产厂商:</th>
 			<td>
-				<input id="business_goods_search_company_name" style="border:1px solid #95B8E7"/>
+				<input id="business_goods_search_company_name" style="border:1px solid #95B8E7;float: left;"/>
 				<input id="business_goods_search_company_id" type="hidden"/>
 				<a id="business_goods_search_product_supplier_search_btn" href="#" class="easyui-linkbutton" plain="true" from="1"><font style="font-size:3ex">...</font></a>
 			</td>
@@ -192,7 +201,7 @@ var business_goods_info_company_dialog = null;
 					<a id="business_goods_search_query_btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" plain="true">查询</a>
 				</div>
 				<div style="float: left;margin-left: 10px;margin-top: 5px;">
-					<a id="business_goods_search_ok_btn"  href="#" class="easyui-linkbutton" data-options="iconCls:'icon-true'" plain="true">确定</a>
+					<a id="business_goods_search_clear_btn"  href="#" class="easyui-linkbutton" data-options="iconCls:'icon-undo'" plain="true">重置</a>
 				<div>
 			</td>
 		</tr>

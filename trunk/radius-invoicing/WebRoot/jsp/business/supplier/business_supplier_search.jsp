@@ -141,7 +141,15 @@ var business_supplier_search_add_supplier_dialog_form_market_zone = null;//市�
  			contactInfo					:$('#business_supplier_search_supplier_contact_info').val()//联系方式（存放手机号）
  		});
  	});
- 	
+ 	$('#business_supplier_search_clear_btn').on('click',function(){
+ 		$('#business_supplier_search_supplier_ab').val('');//简称
+ 		$('#business_supplier_search_supplier_name').val('');//名称
+ 		business_supplier_search_supplier_property.combobox('setValue','');//性质
+ 		$('#business_supplier_search_supplier_url').val('');//网址
+ 		$('#business_supplier_search_supplier_tax_no').val('');//税号
+ 		$('#business_supplier_search_supplier_link_man').val('');//联系人
+ 		$('#business_supplier_search_supplier_contact_info').val('');//联系方式（存放手机号）
+ 	});
  	//-----------------------------------初始化添加商品信息界面---------------------------------------------------
  });
  	
@@ -354,7 +362,7 @@ var business_supplier_search_add_supplier_dialog_form_market_zone = null;//市�
 					<a id="business_supplier_search_query_btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" plain="true">查询</a>
 				</div>
 				<div style="float: left;margin-left: 10px;margin-top: 5px;">
-					<a id="business_supplier_search_ok_btn"  href="#" class="easyui-linkbutton" data-options="iconCls:'icon-true'" plain="true">确定</a>
+					<a id="business_supplier_search_clear_btn"  href="#" class="easyui-linkbutton" data-options="iconCls:'icon-undo'" plain="true">重置</a>
 				<div>
 			</td>
 		</tr>
