@@ -25,6 +25,7 @@ public class PurchaseOrder extends ExtInfo {
 	private Integer totalAmont;//订货金额
 	private Date   	orderedDate;//订货日期
 	private Date   	deliveryDate;//送货日期
+	private String  deliveryPoint="";//送货地址
 	private String 	terms="";//条款
 	private String  memo="";//备注
 	private String 	status="";//状态
@@ -163,9 +164,10 @@ public class PurchaseOrder extends ExtInfo {
 	public void setTotalAmont(Integer totalAmont) {
 		this.totalAmont = totalAmont;
 	}
-	
-	
-	
-	
-	
+	public String getDeliveryPoint() {
+		return deliveryPoint;
+	}
+	public void setDeliveryPoint(String deliveryPoint) {
+		this.deliveryPoint = deliveryPoint;
+	}
 }
