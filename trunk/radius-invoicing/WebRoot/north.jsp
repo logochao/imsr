@@ -85,6 +85,7 @@
 	}
 </script>
 <div id="sessionInfoDiv" style="position: absolute; right: 0px; top: 0px;" class="alert alert-info">
+	<img src="title.jpg">
 	<c:if test="${sessionInfo.id != null}">[<strong>${sessionInfo.name}</strong>]，欢迎你！您使用[<strong>${sessionInfo.ip}</strong>]IP登录！</c:if>
 </div>
 <div style="position: absolute; right: 0px; bottom: 0px;">
