@@ -23,7 +23,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="<%=path%>/easyuiplugins/jquery.layout.js" charset="utf-8"></script>
 
 --%>
-
+<!-- 引入my97日期时间控件 -->
+<script type="text/javascript" src="<%=path%>/My97/My97DatePicker/WdatePicker.js" charset="utf-8"></script>
 <%-- 引入ueditor控件 
 <script type="text/javascript" charset="utf-8">window.UEDITOR_HOME_URL ='<%=path%>/jslib/ueditor1_2_6_1-utf8-jsp/';</script>
 <script src="<%=path%>/jslib/ueditor1_2_6_1-utf8-jsp/ueditor.config.js" type="text/javascript" charset="utf-8"></script>
