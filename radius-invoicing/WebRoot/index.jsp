@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+﻿<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <!doctype html>
 <html>
 <head>
@@ -7,12 +7,12 @@
   <jsp:include flush="true" page="/common/includ.jsp"></jsp:include>
 <style type="text/css">
 <!--
-body{margin:0;padding:0;font-size:12px;background:#fff;}
-.m{margin:100px auto 0;width:582px;height:329px;background:url(indexbg.jpg) no-repeat;position:relative;}
-.put{height:24px;line-height:24px;width:140px;background:#fff;border:1px solid #95B8E7;}
+body{margin:100;padding:0;font-size:12px;background:#fff;}
+.m{margin-top:60px;margin-left:180px;width:1024px;height:568px;background:url(indexbg.jpg) no-repeat;position:relative;}
+.put{height:16px;line-height:24px;width:132px;background:#fff;border:1px solid #95B8E7;}
 .p6{width:60px;}
-.fm{padding:110px 0 0 180px;}
-.btn{position:absolute;bottom:25px;left:230px;}
+.fm{padding:215px 0 0 718px;}
+.btn{position:absolute;bottom:187px;left:708px;}
 .but{height:24px;line-height:24px;background:#fff;border:1px solid #95b8e7;padding:0 20px;display:inline-block;cursor:pointer;margin:0 4px;}
 table{border-collapse:collapse;border-spacing:0;}
 th,td{padding:6px 0;margin:0;border:none;}
@@ -36,6 +36,8 @@ th,td{padding:6px 0;margin:0;border:none;}
 		
 		index_login_form.submit();
 		**/
+		
+		$('#index_account').combobox({});
 	});
 </script>
 </head>
@@ -45,21 +47,18 @@ th,td{padding:6px 0;margin:0;border:none;}
 	<form id="index_login_form" action="${path}/system/manage/sys/login_sys.html" method="POST">
 		<table>
 			<tr>
-				<th>用户名：</th>
-				<td><input type="text" class="put"></td>
+				<td><input id="index_account"></td>
 			</tr>
 			<tr>
-				<th>密&nbsp;&nbsp;码：</th>
-				<td><input type="password" class="put"></td>
+				<td><input type="text" class="put" style="margin-top: 10px;"></td>
 			</tr>
 			<tr>
-				<th>验证码：</th>
-				<td><input type="text" class="put p6"></td>
+				<td><input type="password" class="put" style="margin-top: 3px;"></td>
 			</tr>
 		</table>
 		<div class="btn">
 			<input type="submit" class="but" value="登录">
-			<input type="reset" class="but" value="重置">
+			<input type="reset" class="but" value="重置" style="margin-left: -1px;">
 		</div>
 	</form>
 	</div>
