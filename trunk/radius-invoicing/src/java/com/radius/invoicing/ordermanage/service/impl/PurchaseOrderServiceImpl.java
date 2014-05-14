@@ -128,9 +128,9 @@ public class PurchaseOrderServiceImpl implements Constants, PurchaseOrderService
 		boolean success=false;
 		String message="操作失败";
 		String resultCode="0";
+		String status=purchaseOrder.getStatus();
 		String purchaseOrderId = purchaseOrder.getPurchaseOrderId();
-		
-		List<PurchaseOrderGrd> purchaseOrderGrdList = PurchaseOrderCompent.getPurchaseOrderGoodsByMemcached(purchaseOrderGrdMemcachedKey,purchaseOrder);
+		List<PurchaseOrderGrd> purchaseOrderGrdList = PurchaseOrderCompent.getPurchaseOrderGoodsByMemcached(purchaseOrder.getLedgerId(), purchaseOrderGrdMemcachedKey,purchaseOrderId, purchaseOrder.getOperator(), status);
 		
 		PurchaseOrder temp = purchaseOrderDao.getPurchaseOrderById(purchaseOrderId);
 		if(temp==null){
