@@ -158,7 +158,7 @@ public class SupplierServiceImpl implements Constants, SupplierService {
 			if(temp==null){
 				//insert
 				String id = supplierDao.getSupplierMaxId();
-				supplier.setSupplierId(id);
+				supplier.setSupplierId(SUPPLIER_PREFIX+id);//G0001
 				supplierDao.insertSupplier(supplier);
 				message="添加供应商信息操作成功...";
 				success=true;
