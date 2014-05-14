@@ -5,7 +5,6 @@ import javax.annotation.PreDestroy;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
@@ -187,26 +186,6 @@ public class SalesOrderController extends BaseController {
 		return salesOrderService.getSalesOrderList(salesOrder);
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	@PreDestroy
 	public void destroy(){
 		if(sales_order_view!=null){
