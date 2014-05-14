@@ -8,7 +8,6 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import com.radius.base.cache.memcache.MemcacheClient;
-import com.radius.invoicing.ibatis.model.PurchaseOrder;
 import com.radius.invoicing.ibatis.model.PurchaseOrderGrd;
 
 /**
@@ -24,11 +23,14 @@ public class PurchaseOrderCompent {
 	
 	/**
 	 * 获取memcached中的采购订单商品信息
+	 * @param ledgerId
 	 * @param cacheKey
-	 * @param purchaseOrder
+	 * @param purchaseOrderId
+	 * @param operatorId
+	 * @param status
 	 * @return
 	 */
-	public static List<PurchaseOrderGrd> getPurchaseOrderGoodsByMemcached(String cacheKey,PurchaseOrder purchaseOrder ){
+	public static List<PurchaseOrderGrd> getPurchaseOrderGoodsByMemcached(String ledgerId,String cacheKey,String purchaseOrderId,String operatorId,String status){
 		List<PurchaseOrderGrd> goodsList=new ArrayList<PurchaseOrderGrd>();
 		
 		Map<String,PurchaseOrderGrd> memcache=(Map<String,PurchaseOrderGrd>)MemcacheClient.get(cacheKey); 
@@ -40,12 +42,11 @@ public class PurchaseOrderCompent {
 				Map.Entry entry = (Map.Entry) iter.next();
 				key = (String) entry.getKey(); 
 				goods=memcache.get(key);
-				goods.setLedgerId(purchaseOrder.getLedgerId());
-				goods.setOperator(purchaseOrder.getOperator());
-				goods.setCreater(purchaseOrder.getCreater());
+				goods.setLedgerId(ledgerId);
+				goods.setCreater(operatorId);
 				logger.info("采购订单商品列表 "+key +" ---> "+goods);
 				goodsList.add(goods);
-				goods.setStatus(purchaseOrder.getStatus());
+				goods.setStatus(status);
 			}
 		}
 		//释放资源
