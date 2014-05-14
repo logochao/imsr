@@ -1,7 +1,6 @@
 <%@ page language="java" pageEncoding="utf-8"%>
 <%@ page import="java.io.BufferedReader"%>
 <%@ page import="java.io.IOException"%>
-<%@ page import="java.io.InputStream"%>
 <%@ page import="java.io.InputStreamReader"%>
 <%@ page import="java.net.MalformedURLException"%>
 <%@ page import="java.net.URL"%>
