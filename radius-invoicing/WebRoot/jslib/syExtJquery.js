@@ -279,7 +279,9 @@ sy.setIframeHeight = function(iframe, height) {
 	iframe.height = height;
 };
 
-
+/***
+ * 间隔多少分钟之后调用
+ */
 (function($){
 	var _sleeptimer;
 	$.sleep = function( time2sleep, callback )
