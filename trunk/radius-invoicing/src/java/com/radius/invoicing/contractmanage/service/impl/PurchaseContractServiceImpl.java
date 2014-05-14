@@ -33,6 +33,7 @@ import com.radius.invoicing.ibatis.model.PurchaseContractPayment;
 import com.radius.invoicing.ibatis.model.PurchaseContractPaymentGrd;
 import com.radius.invoicing.ibatis.model.PurchaseOrder;
 import com.radius.invoicing.ibatis.model.PurchaseOrderGrd;
+import com.radius.invoicing.ibatis.model.SalesContract;
 import com.radius.invoicing.ibatis.model.SalesOrderGoodsGrd;
 
 /**
@@ -83,24 +84,6 @@ public class PurchaseContractServiceImpl implements Constants, PurchaseContractS
 	@Qualifier("contractScanGrdDaoImpl")
 	private ContractScanGrdDao contractScanGrdDao;
 	
-	/**
-	 * 通过商品信息+供应商编号、采购订单号获取采购订单信息
-	 * @param goods
-	 * @param purchaseOrderId
-	 * @return
-	 * @throws Exception
-	 */
-	public EasyuiSplitPager<PurchaseOrder> getPurchaseOrderInfon2Goods(Goods goods,String purchaseOrderId)throws Exception{
-		EasyuiSplitPager<PurchaseOrder> pager = new EasyuiSplitPager<PurchaseOrder>();
-		List<String> goodsIdList= goodsDao.getGoodsInfoBySupplierAndGoods(goods);
-		String goodsIds=StringUtils.ArrayList2SQLString(goodsIdList, ",");
-		if(goodsIds.length()>0){
-			List<PurchaseOrder>  list = purchaseOrderDao.getPurchaseOrderByGoodsIds(purchaseOrderId, goodsIds);
-			pager.setRows(list);
-			pager.setTotal(list.size());
-		}
-		return pager;
-	}
 	/**
 	 * 采购额合同商品信息缓存
 	 * @param key
@@ -434,10 +417,63 @@ public class PurchaseContractServiceImpl implements Constants, PurchaseContractS
 		}catch(Exception e){
 			logger.error(e);
 			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 		//--------------------------返回操作结果 -----------------------------------
 		JsonUtils result = new  JsonUtils(success,message);
 		result.setChild(code);
 		return result;
+	}
+	/**
+	 * 获取采购订单信息列表
+	 * @param goods
+	 * @param purchaseOrderId
+	 * @return
+	 * @throws Exception
+	 */
+	public EasyuiSplitPager<PurchaseOrder> getPurchaseOrderList(Goods goods,String purchaseOrderId)throws Exception{
+		EasyuiSplitPager<PurchaseOrder> pager=new EasyuiSplitPager<PurchaseOrder>();
+		List<String> goodsIdList = goodsDao.getGoodsInfoBySupplierAndGoods(goods);
+		String goodsIds=StringUtils.ArrayList2SQLString(goodsIdList, ",");
+		List<PurchaseOrder> list = null;
+		if(org.apache.commons.lang.StringUtils.isNotBlank(goodsIds)){
+			list = purchaseOrderDao.getPurchaseOrderByGoodsIds(purchaseOrderId, goodsIds);
+			if(list!=null&&!list.isEmpty()&&list.size()>0){
+				pager.setRows(list);
+				pager.setTotal(list.size());
+			}
+		}
+		return pager;
+	}
+	
+	/**
+	 * 获取采购合同信息
+	 * @param purchaseContract
+	 * @return
+	 * @throws Exception
+	 */
+	public EasyuiSplitPager<PurchaseContract> getPurchaseContract(PurchaseContract purchaseContract)throws Exception{
+		EasyuiSplitPager<PurchaseContract> pager=new EasyuiSplitPager<PurchaseContract>();
+		List<PurchaseContract> list =purchaseContractDao.getPurchaseContractByCondition(purchaseContract);
+		if(list!=null&&!list.isEmpty()&&list.size()>0){
+			pager.setRows(list);
+			pager.setTotal(list.size());
+		}
+		return pager;
+	}
+	/**
+	 * 通过采购订单列表
+	 * @param purchaseOrderGrd
+	 * @return
+	 * @throws Exception
+	 */
+	public EasyuiSplitPager<PurchaseOrderGrd> getPurchaseOrderGrdList(PurchaseOrderGrd purchaseOrderGrd)throws Exception{
+		EasyuiSplitPager<PurchaseOrderGrd> pager =new EasyuiSplitPager<PurchaseOrderGrd>();
+		List<PurchaseOrderGrd> list = purchaseOrderGrdDao.getPurchaseOrderGrd(purchaseOrderGrd);
+		if(list!=null&&!list.isEmpty()&&list.size()>0){
+			pager.setRows(list);
+			pager.setTotal(list.size());
+		}
+		return pager;
 	}
 }
