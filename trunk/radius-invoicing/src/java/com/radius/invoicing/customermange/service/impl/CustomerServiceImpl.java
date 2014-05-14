@@ -170,7 +170,7 @@ public class CustomerServiceImpl implements Constants, CustomerService {
 			if(temp ==null){//说明是添加
 				//3.添加数据
 				String id = customerDao.getCustomerMaxId();
-				customer.setId(id);
+				customer.setId(CUSTOMER_PREFIX+id);//K00001
 				customerDao.insertCustomer(customer);
 				message="添加客户信息操作成功...";
 				success=true;
