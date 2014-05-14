@@ -18,32 +18,32 @@ import com.radius.base.utils.JsonDateSerializer;
  */
 public class PurchaseContract extends ExtInfo{
 
-	private String  	id;//合同编号
-	private String  	orderId;//采购订货单编号
-	private String  	supplierId;//供货商编号
-	private String  	supplierName;//供货商名称
-	private String  	contractFile;//合同文件编号
+	private String  	id="";//合同编号
+	private String  	orderId="";//采购订货单编号
+	private String  	supplierId="";//供货商编号
+	private String  	supplierName="";//供货商名称
+	private String  	contractFile="";//合同文件编号
 	private Date  		effectDate;//生效日期
 	private Date  		signTime;////签署日期
-	private String  	purchaser;//采购员
-	private String  	man;//联系人
-	private String  	mobile;//联系人手机
-	private String  	tel;//联系电话
-	private String 	 	fax;//联系fax
+	private String  	purchaser="";//采购员
+	private String  	man="";//联系人
+	private String  	mobile="";//联系人手机
+	private String  	tel="";//联系电话
+	private String 	 	fax="";//联系fax
 	private Date  		orderedDate;//订货日期
 	private Date  		deliveryDate;//送货日期
-	private String  	deliveryPoint;//送货地点
-	private String  	contractTerms;//合同条款
+	private String  	deliveryPoint="";//送货地点
+	private String  	contractTerms="";//合同条款
 	private Date  		printTime;//最新打印时间
-	private String  	printAcc;//最新打印帐号
-	private String  	printRecord;//最新打印记录
+	private String  	printAcc="";//最新打印帐号
+	private String  	printRecord="";//最新打印记录
 	private Integer  	printTimes;//打印次数
-	private String  	memo;//备注
-	private String  	paymentedStatus;//结帐状态
+	private String  	memo="";//备注
+	private String  	paymentedStatus="";//结帐状态
 	private Date  		validityDate;//有效期至
-	private String 		status;//状态
-	private String  	auditedStatus;//审批状态
-	
+	private String 		status="";//状态
+	private String  	auditedStatus="";//审批状态
+	private Integer		totalAmount;//合同总金额
 	
 	public String getAuditedStatus() {
 		return auditedStatus;
@@ -197,6 +197,12 @@ public class PurchaseContract extends ExtInfo{
 	}
 	public void setValidityDate(Date validityDate) {
 		this.validityDate = validityDate;
+	}
+	public Integer getTotalAmount() {
+		return totalAmount;
+	}
+	public void setTotalAmount(Integer totalAmount) {
+		this.totalAmount = totalAmount;
 	}
 	
 	
