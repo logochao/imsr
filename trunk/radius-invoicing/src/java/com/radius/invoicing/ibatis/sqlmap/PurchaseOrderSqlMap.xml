@@ -6,7 +6,7 @@
   
   <sql id="purchaseOrderFileds">
   	purchase_order_id purchaseOrderId,supplier_id supplierId,supplier_name supplierName,link_man linkMan,link_mobile mobile,tel tel,fax fax,
-  	sales_order_id salesOrderId,total_amount totalAmont,ordered_date orderedDate,delivery_date deliveryDate,delivery_point deliveryPoint,terms terms,memo memo,
+  	sales_order_id salesOrderId,total_amount totalAmont,ordered_date orderedDate,delivery_date deliveryDate,terms terms,memo memo,
   	status status,consolidated_flg consolidatedFlg,consolidated_purchase_order_id consolidatedPurchaseOrderId,print_times printTimes,
   	newest_print_time printTime,newest_print_acc printAcc,newest_print_record printRecord,purchaser_id purchaser,
   	ledger_id ledgerId,operator operator,motify_date modifyDate,creater creater,createdate createDate,reviser reviser,revisedate reviseDate,verifier verifier,verifydate verifyDate
@@ -24,7 +24,6 @@
     <result column="total_amount" jdbcType="int" javaType="java.lang.Integer" property="totalAmont" />
     <result column="ordered_date" jdbcType="datetime" javaType="java.util.Date" property="orderedDate"/>
     <result column="delivery_date" jdbcType="datetime" javaType="java.util.Date" property="deliveryDate"/>
-    <result column="delivery_point" jdbcType="varchar" javaType="java.lang.String" property="deliveryPoint" />
     <result column="terms" jdbcType="text" javaType="java.lang.String" property="terms" />
   	<result column="memo" jdbcType="text" javaType="java.lang.String" property="memo" />
     <result column="status" jdbcType="char" javaType="java.lang.String" property="status" />
@@ -34,11 +33,11 @@
     <result column="newest_print_time" jdbcType="datetime" javaType="java.util.Date" property="printTime"/>
     <result column="newest_print_acc" jdbcType="char" javaType="java.lang.String" property="printAcc" />
     <result column="newest_print_record" jdbcType="char" javaType="java.lang.String" property="printRecord" />
-    <result column="purchaser" jdbcType="char" javaType="java.lang.String" property="purchaser" />
+    <result column="purchaser_id" jdbcType="char" javaType="java.lang.String" property="purchaser" />
     
     <result column="ledger_id" jdbcType="char" javaType="java.lang.String" property="ledgerId" />
     <result column="operator" jdbcType="char" javaType="java.lang.String" property="operator" />
-    <result column="modify_date" jdbcType="datetime" javaType="java.util.Date" property="modifyDate" />
+    <result column="motify_date" jdbcType="datetime" javaType="java.util.Date" property="modifyDate" />
     <result column="creater" jdbcType="char" javaType="java.lang.String" property="creater" />
     <result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createDate" />
     <result column="reviser" jdbcType="char" javaType="java.lang.String" property="reviser" />
@@ -63,7 +62,6 @@
 		<isNotNull  property="totalAmont">  AND total_amount =#totalAmont#</isNotNull>
 		<isNotNull  property="orderedDate">  AND ordered_date =#orderedDate#</isNotNull>
 		<isNotNull  property="deliveryDate">  AND delivery_date =#deliveryDate#</isNotNull>
-		<isNotEmpty  property="deliveryPoint">  AND delivery_point =#deliveryPoint#</isNotEmpty>
 		<isNotEmpty  property="terms">  AND terms =#terms#</isNotEmpty>
 		<isNotEmpty  property="memo">  AND memo =#memo#</isNotEmpty>
 		<isNotEmpty  property="status">  AND status =#status#</isNotEmpty>
@@ -103,7 +101,6 @@
 			<isNotNull  property="totalAmont">total_amount ,</isNotNull>
 			<isNotNull  property="orderedDate">ordered_date ,</isNotNull>
 			<isNotNull  property="deliveryDate">delivery_date ,</isNotNull>
-			<isNotEmpty  property="deliveryPoint">delivery_point ,</isNotEmpty>
 			<isNotEmpty  property="terms">terms ,</isNotEmpty>
 			<isNotEmpty  property="memo">memo ,</isNotEmpty>
 			<isNotEmpty  property="status">status ,</isNotEmpty>
@@ -120,6 +117,30 @@
 	  	    createdate
    		)VALUES(
    			#purchaseOrderId#,
+		  <!-- 
+			<isNotEmpty  property="supplierId">#supplierId#,</isNotEmpty>
+			<isNotEmpty  property="supplierName">#supplierName#,</isNotEmpty>
+			<isNotEmpty  property="linkMan">#linkMan#,</isNotEmpty>
+			<isNotEmpty  property="mobile">#mobile#,</isNotEmpty>
+			<isNotEmpty  property="tel">#tel#,</isNotEmpty>
+			<isNotEmpty  property="fax">#fax#,</isNotEmpty>
+			<isNotEmpty  property="salesOrderId">#salesOrderId#,</isNotEmpty>
+			<isNotNull  property="totalAmont">#totalAmont#,</isNotNull>
+			<isNotNull  property="orderedDate">#orderedDate#,</isNotNull>
+			<isNotNull  property="deliveryDate">#deliveryDate#,</isNotNull>
+			<isNotEmpty  property="terms">#terms#,</isNotEmpty>
+			<isNotEmpty  property="memo">#memo#,</isNotEmpty>
+			<isNotEmpty  property="status">#status#,</isNotEmpty>
+			<isNotNull  property="consolidatedFlg">#consolidatedFlg#,</isNotNull>
+			<isNotEmpty  property="consolidatedPurchaseOrderId">#consolidatedPurchaseOrderId#,</isNotEmpty>
+			<isNotNull  property="printTimes">#printTimes#,</isNotNull>
+			<isNotNull  property="printTime">#printTime#,</isNotNull>
+			<isNotEmpty  property="printAcc">#printAcc#,</isNotEmpty>
+			<isNotEmpty  property="printRecord">#printRecord#,</isNotEmpty>
+			<isNotEmpty  property="purchaser">#purchaser#,</isNotEmpty> 
+			<isNotEmpty  property="ledgerId">#ledgerId#,</isNotEmpty> 
+			<isNotEmpty  property="operator">#operator#,</isNotEmpty>
+			-->
 			<isNotEmpty  property="supplierId">#supplierId# ,</isNotEmpty>
 			<isNotEmpty  property="supplierName">#supplierName#,</isNotEmpty>
 			<isNotEmpty  property="linkMan">#linkMan#,</isNotEmpty>
@@ -130,7 +151,6 @@
 			<isNotNull  property="totalAmont">#totalAmont# ,</isNotNull>
 			<isNotNull  property="orderedDate">#orderedDate# ,</isNotNull>
 			<isNotNull  property="deliveryDate">#deliveryDate# ,</isNotNull>
-			<isNotEmpty  property="deliveryPoint">#deliveryPoint# ,</isNotEmpty>
 			<isNotEmpty  property="terms">#terms# ,</isNotEmpty>
 			<isNotEmpty  property="memo">#memo# ,</isNotEmpty>
 			<isNotEmpty  property="status">#status# ,</isNotEmpty>
@@ -161,7 +181,6 @@
 			<isNotNull   prepend=","  property="totalAmont">total_amount =#totalAmont#,</isNotNull>
 			<isNotNull   prepend=","  property="orderedDate">ordered_date =#orderedDate#,</isNotNull>
 			<isNotNull   prepend=","  property="deliveryDate">delivery_date =#deliveryDate#,</isNotNull>
-			<isNotEmpty   prepend=","  property="deliveryPoint">delivery_point =#deliveryPoint#,</isNotEmpty>
 			<isNotEmpty   prepend=","  property="terms">terms =#terms#,</isNotEmpty>
 			<isNotEmpty   prepend=","  property="memo">memo =#memo#,</isNotEmpty>
 			<isNotEmpty   prepend=","  property="status">status =#status#,</isNotEmpty>

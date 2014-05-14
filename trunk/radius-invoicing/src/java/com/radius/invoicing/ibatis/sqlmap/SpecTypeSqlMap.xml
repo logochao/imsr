@@ -27,13 +27,13 @@
   
   <sql id="whereLike">
   	<dynamic prepend="where">
-  		1=1 AND
-  		<isNotNull prepend="AND" property="specId"> spec_id = #specId# </isNotNull>
-  		<isNotNull prepend="AND" property="specName"> spec_name LIKE   CONCAT('%',#specName#,'%')</isNotNull>
-  		<isNotNull prepend="AND" property="specUnit"> spec_unit = #specUnit# </isNotNull>
-  		<isNotNull prepend="AND" property="equivalentUnit"> equivalent_unit = #equivalentUnit# </isNotNull>
-  		<isNotNull prepend="AND" property="quantityEuUnit"> quantity_of_eu_per_unit = #quantityEuUnit# </isNotNull>
-  		<isNotNull prepend="AND" property="mome"> mome = #mome# </isNotNull>
+  		1=1 
+  		<isNotNull  property="specId"> AND spec_id = #specId# </isNotNull>
+  		<isNotEmpty property="specName"> AND  spec_name LIKE   CONCAT('%',#specName#,'%')</isNotEmpty>
+  		<isNotNull  property="specUnit">  AND spec_unit = #specUnit# </isNotNull>
+  		<isNotNull  property="equivalentUnit"> AND  equivalent_unit = #equivalentUnit# </isNotNull>
+  		<isNotNull  property="quantityEuUnit"> AND  quantity_of_eu_per_unit = #quantityEuUnit# </isNotNull>
+  		<isNotEmpty  property="mome"> AND  mome = #mome# </isNotEmpty>
   	</dynamic>
   </sql>
   
