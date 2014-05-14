@@ -104,7 +104,7 @@ public class PurchaseContractController extends BaseController{
 	@ResponseBody
 	public EasyuiSplitPager<PurchaseOrder> getPurchaseOrderInfo(HttpServletRequest request,HttpServletResponse response,Goods goods)throws Exception{
 		String purchaseOrderId=ServletRequestUtils.getStringParameter(request,"purchaseOrderId","");
-		return purchaseContractService.getPurchaseOrderInfon2Goods(goods, purchaseOrderId);
+		return purchaseContractService.getPurchaseOrderList(goods, purchaseOrderId);
 	}
 	/**
 	 * 添加采购合同商品信息到缓存中
@@ -235,5 +235,28 @@ public class PurchaseContractController extends BaseController{
 		//5.获取当前操作的合同目标状态 如未确认-->确认 statusCode 为确认状态代码
 		String statusCode = ServletRequestUtils.getStringParameter(request, "statusCode", "");
 		return purchaseContractService.savePurchaseContractInfo(statusCode, purchaseContract, payment, productKey, payDetailKey, scanKey);
+	}
+	/**
+	 * 获取采购合同信息
+	 * @param request
+	 * @param response
+	 * @param purchaseContract
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/contract/manager/purchaseContract/purchase_contract_info_list.html")
+	@ResponseBody
+	public EasyuiSplitPager<PurchaseContract> getPurchaseOrderList(HttpServletRequest request,HttpServletResponse response,PurchaseContract purchaseContract)throws Exception{
+		return purchaseContractService.getPurchaseContract(purchaseContract);
+	}
+	
+	@RequestMapping("/contract/manager/purchaseContract/purchase_order_goods_list.html")
+	@ResponseBody
+	public EasyuiSplitPager<PurchaseOrderGrd> getPurchaseOrderGrdList(HttpServletRequest request,HttpServletResponse response)throws Exception{
+		PurchaseOrderGrd purchaseOrderGrd=new PurchaseOrderGrd();
+		String purchaseOrderId =  ServletRequestUtils.getStringParameter(request, "purchaseOrderId", "");
+		purchaseOrderGrd.setPurchaseOrderId(purchaseOrderId);
+		
+		return purchaseContractService.getPurchaseOrderGrdList(purchaseOrderGrd);
 	}
 }

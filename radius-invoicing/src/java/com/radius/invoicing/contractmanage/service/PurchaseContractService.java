@@ -19,15 +19,6 @@ import com.radius.invoicing.ibatis.model.PurchaseOrderGrd;
  */
 public interface PurchaseContractService {
 
-	/**
-	 * 通过商品信息+供应商编号、采购订单号获取采购订单信息
-	 * @param goods
-	 * @param purchaseOrderId
-	 * @return
-	 * @throws Exception
-	 */
-	public EasyuiSplitPager<PurchaseOrder> getPurchaseOrderInfon2Goods(
-			Goods goods, String purchaseOrderId) throws Exception;
 
 	/**
 	 * 采购额合同商品信息缓存
@@ -113,4 +104,31 @@ public interface PurchaseContractService {
 	 * @throws Exception
 	 */
 	public JsonUtils savePurchaseContractInfo(String statusCode,PurchaseContract purchaseContract,PurchaseContractPayment payment,String productKey,String payKey,String scanKey)throws Exception;
+	
+	/**
+	 * 获取采购订单信息列表
+	 * @param goods
+	 * @param purchaseOrderId
+	 * @return
+	 * @throws Exception
+	 */
+	public EasyuiSplitPager<PurchaseOrder> getPurchaseOrderList(Goods goods,String purchaseOrderId)throws Exception;
+	
+	
+	/**
+	 * 获取采购合同信息
+	 * @param purchaseContract
+	 * @return
+	 * @throws Exception
+	 */
+	public EasyuiSplitPager<PurchaseContract> getPurchaseContract(PurchaseContract purchaseContract)throws Exception;
+	
+	
+	/**
+	 * 通过采购订单列表
+	 * @param purchaseOrderGrd
+	 * @return
+	 * @throws Exception
+	 */
+	public EasyuiSplitPager<PurchaseOrderGrd> getPurchaseOrderGrdList(PurchaseOrderGrd purchaseOrderGrd)throws Exception;
 }

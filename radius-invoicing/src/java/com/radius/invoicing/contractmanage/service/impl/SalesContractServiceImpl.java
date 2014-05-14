@@ -529,8 +529,8 @@ public class SalesContractServiceImpl implements SalesContractService,Constants 
 	public EasyuiSplitPager<SalesContract> getSalesContractInfoList(SalesContract salesContract){
 		EasyuiSplitPager<SalesContract> pager=new EasyuiSplitPager<SalesContract>();
 		List<SalesContract> list= salesContractDao.getSalesContractByCondition(salesContract);
-		pager.setRows(list);
 		if(list!=null&&!list.isEmpty()){
+			pager.setRows(list);
 			pager.setTotal(list.size());
 		}
 		return pager;
