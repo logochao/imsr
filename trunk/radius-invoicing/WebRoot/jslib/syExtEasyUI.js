@@ -193,6 +193,36 @@ $.extend($.fn.validatebox.defaults.rules, {
 		 return /^([+]?)\d*\.?\d+$/.test(value);
 		},
 		message : '请输入正确的格式'
+	},
+	phone  : {/*手机号校验*/
+		validator:function (value,param){
+			return /^((\+86)|(86))?(13)\d{9}$/.test(value);
+		},
+		message:'请输入正确的手机号'
+	},
+	tel :{/*电话号码验证*/
+		validator:function (value,param){
+			return /^((13[0-9])|(15[^4,\d])|(18[0,5-9]))\d{8}$/.test(value);
+		},
+		message:'请输入正确的电话号码'
+	},
+	idCardNo :{/*身份证验证*/
+		validator:function (value,param){
+			return /^(\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$/.test(value);
+		},
+		message:'请输入正确的身份证号'
+	},
+	email :{/*邮箱验证*/
+		validator:function (value,param){
+			return /^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/.test(value);
+		},
+		message:'请输入正确的邮箱格式'
+	},
+	webUrl:{/*网址验证*/
+		validator:function (value,param){
+			return /^(http:|ftp:|https:|www){0,1}[^\u4e00-\u9fa5\\s]*?\\.(com|net|cn|me|tw|fr)[^\u4e00-\u9fa5\\s]*$/.test(value);
+		},
+		message:'请输入正确的url格式'
 	}
 });
 
