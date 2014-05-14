@@ -8,7 +8,6 @@
   <script type="text/javascript">
   	var client_inquiry_index_panel_tools=null; //工具栏列界面
   	$(document).ready(function(){
-  		//
   		client_inquiry_index_panel_tools=$('#client_inquiry_index_panel_tools').panel({
 			border:false,
 			href:'${path}/jsp/inquiry/client/client_inquiry_toolbar.jsp'
@@ -24,7 +23,7 @@
     		<jsp:include flush="true" page="client_inquiry_base.jsp"></jsp:include>
     	</div>
     </div>
-    <div data-options="region:'center',split:true" fit="true" border="false">
+    <div data-options="region:'center',split:true" fit="true" border="false" style="padding:0px 15px 0px 15px;">
     	<jsp:include flush="true" page="client_inquiry_goods_grd_form.jsp"></jsp:include>
     </div>
 </div>

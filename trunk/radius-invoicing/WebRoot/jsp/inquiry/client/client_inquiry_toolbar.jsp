@@ -5,33 +5,18 @@
 $(function(){
 	//打开按钮
 	$('#client_inquiry_toolbar_open_btn').on('click',function(){
-		
 	});
-	
 	//挂单按钮
 	$('#client_inquiry_toolbar_pend_btn').on('click',function(){
-		
 	});
-	
 	//提交合同按钮
 	$('#client_inquiry_toolbar_ok_btn').on('click',function(){
 	});
-	
 	//打印按钮
 	$('#client_inquiry_toolbar_print_btn').on('click',function(){
-	
 	});
-	
-	
 	//报表按钮
 	$('#client_inquiry_toolbar_report_btn').on('click',function(){
-	
-	});
-	
-	
-	//关闭按钮
-	$('#client_inquiry_toolbar_close_btn').on('click',function(){
-	
 	});
 });
 //-->
@@ -46,7 +31,4 @@ $(function(){
 	<input id="client_inquiry_tool_bar_save" type="hidden" value="-1">
 	<a id="client_inquiry_toolbar_report_btn" href="#" class="easyui-linkbutton" style="margin-left:20px;" data-options="iconCls:'icon-chart_bar'">报表</a>
 	<a id="client_inquiry_toolbar_print_btn" href="#" class="easyui-linkbutton" style="margin-left:20px;" data-options="iconCls:'icon-print'">打印</a>
-</div>
-<div style="display:inline;margin-left:200px;">
-	<a id="client_inquiry_toolbar_close_btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'">关闭</a>
 </div>
