@@ -4,8 +4,6 @@
 <script type="text/javascript">
 <!--
  $(function(){
- 	$('#contract_sales_contract_guarantee_pay_time').datebox({});
- 	$('#contract_sales_contract_guarantee_receivables_time').datebox({});
  	$('#contract_sales_contract_guarantee_pay_amount').on('change',function(){
  		//转换为大写
 		toUpper($('#contract_sales_contract_guarantee_pay_amount'),$('#contract_sales_contract_guarantee_pay_upper_amount'));
@@ -15,8 +13,8 @@
  function clearContractSalesContractGuarantee(){
 	 setInputElementValue($('#contract_sales_contract_guarantee_pay_amount'),'0.00');
 	 setInputElementValue($('#contract_sales_contract_guarantee_pay_upper_amount'),'');
- 	$('#contract_sales_contract_guarantee_pay_time').datebox('setValue','');//签署日期
- 	$('#contract_sales_contract_guarantee_receivables_time').datebox('setValue','');//签署日期
+ 	$('#contract_sales_contract_guarantee_pay_time').val('');//签署日期
+ 	$('#contract_sales_contract_guarantee_receivables_time').val('');//签署日期
  }
 //-->
 </script>
@@ -28,8 +26,8 @@
 			<input type="hidden" id="contract_sales_contract_guarantee_pay_upper_amount" style="border:1px solid #95B8E7;"/>
 		</td>
 		<th>付款日期*</th>
-		<td><input id="contract_sales_contract_guarantee_pay_time"/></td>
+		<td><input id="contract_sales_contract_guarantee_pay_time" class="Wdate" onClick="WdatePicker()"/></td>
 		<th>收款日期*</th>
-		<td><input id="contract_sales_contract_guarantee_receivables_time"/></td>
+		<td><input id="contract_sales_contract_guarantee_receivables_time" class="Wdate" onClick="WdatePicker()"/></td>
 	</tr>
 </table>
