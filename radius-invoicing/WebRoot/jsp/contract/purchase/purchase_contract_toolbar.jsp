@@ -79,15 +79,15 @@ function getPurchaseOrderFormAjaxDataFormatter(_status){
 		supplierId		:$('#purchase_contract_base_supplier_id').val(),//供货商编号
 		supplierName	:$('#purchase_contract_base_supplier_name').val(),//供应商名称
 		contractFile	:$('#purchase_contract_terms_contract_file').val(),//合同文件名称
-		effectDate		:parseDate($('#purchase_contract_terms_effivit_time').datebox('getValue')),//生效日期
-		signTime		:parseDate($('#purchase_contract_terms_sign_time').datebox('getValue')),//签署日期
+		effectDate		:parseDate($('#purchase_contract_terms_effivit_time').val()),//生效日期
+		signTime		:parseDate($('#purchase_contract_terms_sign_time').val()),//签署日期
 		purchaser		:$('#purchase_contract_base_clerk').val(),//采购员
 		man				:$('#purchase_contract_base_link_man').val(),//联系人
 		mobile			:$('#purchase_contract_base_link_mobile').val(),//联系人手机
 		tel				:$('#purchase_contract_base_link_tel').val(),//联系电话
 		fax				:$('#purchase_contract_base_link_fax').val(),//联系fax
-		orderedDate		:parseDate($('#purchase_contract_base_order_time').datebox('getValue')),//订货日期
-		deliveryDate	:parseDate($('#purchase_contract_base_order_end_time').datebox('getValue')),//送货日期
+		orderedDate		:parseDate($('#purchase_contract_base_order_time').val()),//订货日期
+		deliveryDate	:parseDate($('#purchase_contract_base_order_end_time').val()),//送货日期
 		deliveryPoint	:$('#purchase_contract_base_delivery_point').val(),//送货地点
 		contractTerms	:$('#purchase_contract_terms').val(),//合同条款
 		//printTime		:'',//最新打印时间
@@ -95,7 +95,7 @@ function getPurchaseOrderFormAjaxDataFormatter(_status){
 		//printRecord	:'',//最新打印记录
 		//printTimes	:'',//打印次数
 		//paymentedStatus:'',//结帐状态
-		validityDate	:parseDate($('#purchase_contract_terms_validity_time').datebox('getValue')),//有效期至
+		validityDate	:parseDate($('#purchase_contract_terms_validity_time').val()),//有效期至
 		status			:_status,
 		memo			:$('#purchase_contract_memo').val(),
 		 //-------------采购支付数据类型

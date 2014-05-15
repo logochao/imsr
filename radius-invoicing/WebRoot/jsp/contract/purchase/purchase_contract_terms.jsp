@@ -2,12 +2,6 @@
 <script type="text/javascript">
 <!--
  $(function(){
- 	$('#purchase_contract_terms_sign_time').datebox({
- 	});
- 	$('#purchase_contract_terms_effivit_time').datebox({
- 	});
- 	$('#purchase_contract_terms_validity_time').datebox({
- 	});
  }); 
  function clearPurchaseContractTermsTab(){
  	$('#purchase_contract_terms_contract_file').val('');
@@ -35,11 +29,11 @@
 		<th>合同文件编号</th>
    		<td><input id="purchase_contract_terms_contract_file" style="border:1px solid #95B8E7;"/></td>
 		<th>签署日期</th>
-   		<td><input id="purchase_contract_terms_sign_time"/></td>
+   		<td><input id="purchase_contract_terms_sign_time" class="Wdate" onClick="WdatePicker()"/></td>
    		<th>生效日期</th>
-   		<td><input id="purchase_contract_terms_effivit_time"/></td>
+   		<td><input id="purchase_contract_terms_effivit_time" class="Wdate" onClick="WdatePicker()"/></td>
    		<th>有效期到</th>
-   		<td><input id="purchase_contract_terms_validity_time"/></td>
+   		<td><input id="purchase_contract_terms_validity_time" class="Wdate" onClick="WdatePicker()"/></td>
 	</tr>
 	<tr>
 		<th>合同条款</th>
