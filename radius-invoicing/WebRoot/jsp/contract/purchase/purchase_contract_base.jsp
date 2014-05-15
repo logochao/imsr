@@ -36,11 +36,6 @@ $(function(){
 		}
  	});
  	
- 	$('#purchase_contract_base_order_end_time').datebox({
- 	});
-	$('#purchase_contract_base_order_time').datebox({
- 	});
- 	
  	$('#purchase_contract_base_supplier_btn').on('click',function(){
  		purchase_contract_base_supplier_dialog.dialog('open');
  	});
@@ -97,7 +92,7 @@ function setPurchaseContractBaseInfo(row_data){
 	$('#purchase_contract_base_link_fax').val(row_data.fax);
 	$('#purchase_contract_base_delivery_point').val(row_data.deliveryPoint);
 	$('#purchase_contract_base_clerk').val(row_data.purchaser);
-	$('#purchase_contract_base_purchase_order_id').val(row_data.orderId);\
+	$('#purchase_contract_base_purchase_order_id').val(row_data.orderId);
 	
 	resetSupplierDialog();
 	com.radius.datagrid.clear(purchase_order_base_supplier_grd);
@@ -115,7 +110,7 @@ function setPurchaseContractBaseInfo(row_data){
 		<th>状态</th>
 		<td colspan="3"><input id="purchase_contract_base_status"  class="easyui-validatebox"  value="3541"/></td>
 		<th>订货日期</th>
-		<td><input class="easyui-validatebox" type="text" id="purchase_contract_base_order_time" style="border:1px solid #95B8E7"/></td>
+		<td><input class="easyui-validatebox Wdate" type="text" id="purchase_contract_base_order_time" onClick="WdatePicker()" style="border:1px solid #95B8E7"/></td>
 	</tr>
 	<tr>
 		<th>供应商<font color="red">*</font></th>
@@ -125,7 +120,7 @@ function setPurchaseContractBaseInfo(row_data){
 			<a id="purchase_contract_base_supplier_btn" href="#" class="easyui-linkbutton" plain="true"><font style="font-size:3ex">...</font></a>
 		</td>
 		<th>交货日期</th>
-		<td><input class="easyui-validatebox" type="text" id="purchase_contract_base_order_end_time" style="border:1px solid #95B8E7" /></td>
+		<td><input class="easyui-validatebox Wdate" type="text" id="purchase_contract_base_order_end_time"  onClick="WdatePicker()" style="border:1px solid #95B8E7" /></td>
 	</tr>
 	<tr>
 		<th>联系人</th>
