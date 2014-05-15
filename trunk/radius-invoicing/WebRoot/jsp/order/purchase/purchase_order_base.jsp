@@ -61,7 +61,8 @@ function clearPurchaseOrderBase(){
  *设置采购订单基本信息
  **/
 function setPurchaseOrderBase(row_data){
-	console.info(row_data.salesOrderId);
+	
+	$('#purchase_order_base_id').val(row_data.purchaseOrderId);
 	com.radius.combobox.setelement(purchase_order_base_status,'setValue',row_data.status);//设置合同默认状态
 	$('#purchase_order_base_order_time').val(row_data.orderedDate);
 	$('#purchase_order_base_supplier_name').val(row_data.supplierName);
@@ -81,6 +82,7 @@ function setPurchaseOrderBase(row_data){
 	com.radius.datagrid.clear($('#purchase_order_base_link_man_grd'));
 	clearPurchaseOrderBaseSalesOrderDialog();
 	com.radius.datagrid.clear($('#purchase_order_base_sales_order_grd'));
+	$('#purchase_order_base_sales_order_id').val(row_data.salesOrderId);
 }
 </script>
 <table class="table" style="width: 99.2%;">
