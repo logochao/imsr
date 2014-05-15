@@ -170,4 +170,5 @@ public class PurchaseOrder extends ExtInfo {
 	public void setDeliveryPoint(String deliveryPoint) {
 		this.deliveryPoint = deliveryPoint;
 	}
+	
 }
