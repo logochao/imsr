@@ -74,8 +74,8 @@ function setContractSalesBaseInfo(row_data){
 	contract_sales_base_status.combobox('setValue',row_data.status);//状态
 	setInputElementValue($('#contract_sales_base_customer_name'),row_data.customerName);//客户名称
 	setInputElementValue($('#contract_sales_base_customer_id'),row_data.customerId);//客户编号
-	setDateboxElement($('#contract_sales_base_order_time'),'setValue',row_data.orderedDate);//订货日期
-	setDateboxElement($('#contract_sales_base_delivery_date'),'setValue',row_data.deliveryDate);//送货日期
+	$('#contract_sales_base_order_time').val(row_data.orderedDate);//订货日期
+	$('#contract_sales_base_delivery_date').val(row_data.deliveryDate);//送货日期
 	setInputElementValue($('#contract_sales_base_link_man'),row_data.man);//联系人
 	setInputElementValue($('#contract_sales_base_link_tel'),row_data.tel);//联系电话
 	setInputElementValue($('#contract_sales_base_link_mobile'),row_data.mobile);//联系人手机
@@ -91,9 +91,7 @@ function clearContractSalesBase(){
 	$("input[id^='contract_sales_base_']").each(function(e){
 			$(this).val('');
 	})
-	$('#contract_sales_base_order_time').datebox('setValue','');
-	$('#contract_sales_base_delivery_date').datebox('setValue','');
-	$('#contract_sales_contract_mome').val();
+	$('#contract_sales_contract_mome').val('');
 }
 //-->
 

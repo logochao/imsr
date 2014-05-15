@@ -80,7 +80,7 @@ $(function(){
  			//选择了未确认的销售合同,并将挂单按钮禁用
  			pend_btn.attr("disabled",true);
 			pend_btn.linkbutton('disable');
- 		}else{//选择当前已确认的销售合同
+ 		}else if($("#contract_sales_toolbar_ok_btn").attr('contract_status')==rows[0].status){//选择当前已确认的销售合同
  			//禁用挂单按钮
  			pend_btn.attr("disabled",true);
 			pend_btn.linkbutton('disable');
