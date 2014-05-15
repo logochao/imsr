@@ -11,7 +11,7 @@ var purchase_contract_panel_tools = null;
 $(function(){
 	purchase_contract_panel_tools=$('#purchase_contract_panel_tools').panel({
 		border:false,
-		href:'${path}/jsp/contract/purchase/copy/purchase_contract_toolbar.jsp'
+		href:'${path}/jsp/contract/purchase/purchase_contract_toolbar.jsp'
 	});
 	
 	$('#purchase_contract_index_tabs').tabs({//页签
