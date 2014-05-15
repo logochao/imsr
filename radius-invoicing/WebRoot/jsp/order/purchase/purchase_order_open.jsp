@@ -33,6 +33,7 @@ $(function(){
 			{field:'totalAmont',title:'订货金额',width:120},
 			{field:'orderedDate',title:'订货日期',width:120},
 			{field:'deliveryDate',title:'送货日期',width:120},
+			{field:'deliveryPoint',title:'送货地址',width:120},
 			{field:'status',title:'状态',width:120},
 			{field:'terms',title:'条款',width:200},
 			//{field:'consolidatedFlg',title:'合单标识',width:120},

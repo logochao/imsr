@@ -2,8 +2,6 @@
 <script type="text/javascript">
 <!--
  var sales_order_base_status=null;
- var sales_order_base_order_time=null;
- var sales_order_base_order_end_time=null;
  $(function (){
  	//合同状态
 	sales_order_base_status=$('#sales_order_base_status').combobox({
@@ -16,8 +14,6 @@
 			target.combobox('disable');
 		}
  	});
- 	$('#sales_order_base_order_time').datebox({});
- 	$('#sales_order_base_order_end_time').datebox({});
  	
  	$('#sales_order_base_custmer_btn').on('click',function(){
  		sales_order_base_customer_dialog.dialog('open');
@@ -257,11 +253,10 @@ function removeDataGrid2Memcached(){
  **/
 function clearSalesOrderBase(){
 	com.radius.combobox.setelement(sales_order_base_status,'setValue','2401');//设置合同默认状态
-	com.radius.combo.clear($('#sales_order_base_order_time'));//清空订货日期
-	$('#sales_order_base_order_end_time').datebox('clear');
+	$('#sales_order_base_order_time').val('');//清空订货日期
 	$('#sales_order_base_customer_name').val('');
 	$('#sales_order_base_customer_id').val('');
-	com.radius.combo.clear($('#sales_order_base_order_end_time'));
+	$('#sales_order_base_order_end_time').val('');
 	$('#sales_order_base_link_man').val('');
 	$('#sales_order_base_link_tel').val('');
 	$('#sales_order_base_link_mobile').val('');
@@ -281,8 +276,8 @@ function setSalesOrderBaseInfo(row_data){
 	sales_order_base_status.combobox('setValue',row_data.status);//状态
 	setInputElementValue($('#sales_order_base_customer_name'),row_data.customerName);//客户名称
 	setInputElementValue($('#sales_order_base_customer_id'),row_data.customerId);//客户编号
-	setDateboxElement($('#sales_order_base_order_time'),'setValue',row_data.orderedDate);//订货日期
-	setDateboxElement($('#sales_order_base_order_end_time'),'setValue',row_data.deliveryDate);//交货时间
+	$('#sales_order_base_order_time').val(row_data.orderedDate);//订货日期
+	$('#sales_order_base_order_end_time').val(row_data.deliveryDate);//交货时间
 	setInputElementValue($('#sales_order_base_link_man'),row_data.linkMan);//联系人
 	setInputElementValue($('#sales_order_base_link_tel'),row_data.tel);//联系电话
 	setInputElementValue($('#sales_order_base_link_mobile'),row_data.mobile);//联系人手机
@@ -301,7 +296,7 @@ function setSalesOrderBaseInfo(row_data){
 		<th>状态</th>
 		<td colspan="3"><input id="sales_order_base_status"  class="easyui-validatebox" class="easyui-combobox"  data-options="" value="2401"/></td>
 		<th>订货日期</th>
-		<td><input class="easyui-validatebox" type="text" id="sales_order_base_order_time" style="border:1px solid #95B8E7"/></td>
+		<td><input class="easyui-validatebox Wdate" type="text" id="sales_order_base_order_time"  onClick="WdatePicker()" style="border:1px solid #95B8E7"/></td>
 	</tr>
 	<tr>
 		<th>客户<font color="red">*</font></th>
@@ -311,7 +306,7 @@ function setSalesOrderBaseInfo(row_data){
 			<a id="sales_order_base_custmer_btn" href="#" class="easyui-linkbutton" plain="true"><font style="font-size:3ex">...</font></a>
 		</td>
 		<th>交货日期</th>
-		<td><input class="easyui-validatebox" type="text" id="sales_order_base_order_end_time" data-options=""/></td>
+		<td><input class="easyui-validatebox Wdate" type="text" id="sales_order_base_order_end_time" onClick="WdatePicker()"/></td>
 	</tr>
 	<tr>
 		<th>联系人</th>

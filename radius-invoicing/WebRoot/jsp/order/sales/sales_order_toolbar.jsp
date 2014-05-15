@@ -74,8 +74,8 @@ function getAjaxDataFormatter(_status){
 		contractId			:$('#sales_order_base_sales_contract_id').val(),//合同编号
 		totalAmount			:parseFloat($('#sales_order_base_total_amount').val())*100,//总金额
 		upperAmount			:$('#sales_order_base_upper_total_amount').val(),//大写金额
-		orderedDate			:parseDate($('#sales_order_base_order_time').datebox('getValue')),//订货日期
-		deliveryDate		:parseDate($('#sales_order_base_order_end_time').datebox('getValue')),//送货日期
+		orderedDate			:parseDate($('#sales_order_base_order_time').val()),//订货日期
+		deliveryDate		:parseDate($('#sales_order_base_order_end_time').val()),//送货日期
 		deliveryAddress		:$('#sales_order_base_delivery_point').val(),//送货地址
 		terms				:$('#sales_order_terms_terms').val(),//条款
 		memo				:$('#sales_order_memo_memo').val(),//备注

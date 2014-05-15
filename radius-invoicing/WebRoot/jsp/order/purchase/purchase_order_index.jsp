@@ -11,7 +11,7 @@ var sales_order_panel_tools = null;
 $(document).ready(function(){
 	sales_order_panel_tools=$('#sales_order_panel_tools').panel({
 		border:false,
-		href:'${path}/jsp/order/purchase/copy/purchase_order_toolbar.jsp'
+		href:'${path}/jsp/order/purchase/purchase_order_toolbar.jsp'
 	});
 	
 	$('#purchase_order_index_tabs').tabs({//页签
