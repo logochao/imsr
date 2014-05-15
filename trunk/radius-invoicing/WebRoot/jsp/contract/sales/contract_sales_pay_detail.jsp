@@ -4,7 +4,6 @@ var contract_sales_pay_detail_currency=null;
 var contract_sales_pay_receive_type=null;
 var contract_sales_pay_grd = null;
 var contract_sales_pay_detail_batch_amount = null;
-var contract_sales_pay_detail_deadline_time=null;
 var contract_sales_pay_detail_pay = null;
 $(function (){
 	//销售合同支付详情列表
@@ -81,7 +80,6 @@ $(function (){
  		required:true
  	});
  	
- 	contract_sales_pay_detail_deadline_time=$('#contract_sales_pay_detail_deadline_time').datebox({});
  	contract_sales_pay_detail_batch_amount=$('#contract_sales_pay_detail_batch_amount').on('focusout',function(){//输入框失去焦点
  		if(parseFloat($(this).val())*100>parseFloat($('#contract_sales_pay_detail_surplus_amount').val())*100){
  			document.getElementById('contract_sales_pay_detail_batch_amount').value='0.00';
@@ -96,7 +94,7 @@ $(function (){
  			$.messager.alert('提示','请填写商品明细页签...','error');
  			return ;
  		}
- 		if(contract_sales_pay_detail_deadline_time.datebox('getValue').length==0){
+ 		if($('#contract_sales_pay_detail_deadline_time').val().length==0){
  			$.messager.alert('提示','请输入款项期限...','error');
  			return ;
  		}
@@ -193,7 +191,7 @@ function getSalesContractPayDetailGrdFormatter(){
 		batch:$('#contract_sales_pay_detail_batch').val(),//款项批次
 		cashType:contract_sales_pay_detail_currency.combobox('getValue'),//币种
 		amount:parseFloat($('#contract_sales_pay_detail_batch_amount').val())*100,//金额
-		validityDate:$('#contract_sales_pay_detail_deadline_time').datebox('getValue'),//款项期限
+		validityDate:$('#contract_sales_pay_detail_deadline_time').val(),//款项期限
 		receiveType:contract_sales_pay_receive_type.combobox('getText'),//收付款支付方式
 		payType:contract_sales_pay_detail_pay.combobox('getValue'),//付款方式
 		upperAmount:$('#contract_sales_pay_detail_upper_rmb').val(),//人民币大写
@@ -212,7 +210,7 @@ function getSalesContractPayDetailFormatter(){
 			batch:$('#contract_sales_pay_detail_batch').val(),//款项批次
 			amount:parseFloat($('#contract_sales_pay_detail_batch_amount').val())*100,//金额
 			upperAmount:$('#contract_sales_pay_detail_upper_rmb').val(),//大写金额
-			validityDate:parseDate($('#contract_sales_pay_detail_deadline_time').datebox('getValue')),//款项期限
+			validityDate:parseDate($('#contract_sales_pay_detail_deadline_time').val()),//款项期限
 			currency:contract_sales_pay_detail_currency.combobox('getValue'),//币种
 			receiveType:contract_sales_pay_receive_type.combobox('getValue'),//支付方式(收付款类型)
 			memo:$('#contract_sales_pay_detail_memo').val()//备注	
@@ -393,7 +391,7 @@ function clearContractSalesPayDetail(){
 		<th>款项批次</th>
 		<td><input id="contract_sales_pay_detail_batch" value="1"/></td>
 		<th>款项期限</th>
-		<td><input id="contract_sales_pay_detail_deadline_time"/></td>
+		<td><input id="contract_sales_pay_detail_deadline_time" class="Wdate" onClick="WdatePicker()"/></td>
 		<th>收付款方式</th>
 		<td>
 			<input id="contract_sales_pay_receive_type" value="601"/>

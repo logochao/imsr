@@ -121,15 +121,15 @@ function getContractSalesInfo(contract_status){
 		customerId						:$('#contract_sales_base_customer_id').val(),//客户编号
 		customerName					:$('#contract_sales_base_customer_name').val(),//客户名称
 		contractFile					:$('#contract_sales_contract_terms_contract_file_id').val(),//合同文件编号
-		effectDate						:parseDate($('#contract_sales_contract_terms_effivit_time').datebox('getValue')),//生效日期
-		signTime						:parseDate($('#contract_sales_contract_terms_sign_time').datebox('getValue')),//签署日期
+		effectDate						:parseDate($('#contract_sales_contract_terms_effivit_time').val()),//生效日期
+		signTime						:parseDate($('#contract_sales_contract_terms_sign_time').val()),//签署日期
 		salesMan						:$('#contract_sales_base_sales_man').val(),//业务员
 		man								:$('#contract_sales_base_link_man').val(),//联系人
 		mobile							:$('#contract_sales_base_link_mobile').val(),//联系人手机
 		tel								:$('#contract_sales_base_link_tel').val(),//联系电话
 		fax								:$('#contract_sales_base_link_fax').val(),//联系fax
-		orderedDate						:parseDate($('#contract_sales_base_order_time').datebox('getValue')),//订货日期
-		deliveryDate					:parseDate($('#contract_sales_base_delivery_date').datebox('getValue')),//送货日期
+		orderedDate						:parseDate($('#contract_sales_base_order_time').val()),//订货日期
+		deliveryDate					:parseDate($('#contract_sales_base_delivery_date').val()),//送货日期
 		deliveryPoint					:$('#contract_sales_base_delivery_point').val(),//送货地点
 		contractTerms					:$('#contract_sales_contract_terms_contract_terms').val(),//合同条款
 		//printTimes					:$('#').val();//打印次数
@@ -140,7 +140,7 @@ function getContractSalesInfo(contract_status){
 		status							:contract_status,//状态
 		//auditedStatus					:$('#').val(),//审批状态
 		//checkedStatus					:$('#').val(),//验货状态
-		validityDate					:parseDate($('#contract_sales_contract_terms_fail_time').datebox('getValue')),//有效期至
+		validityDate					:parseDate($('#contract_sales_contract_terms_fail_time').val()),//有效期至
 	//---------------销售合同支付信息-------------------------------------
 	//contractId						:$('#').val(),//合同编号
 		cashType						:contract_sales_pay_detail_currency.combobox('getValue'),//币种	
@@ -153,8 +153,8 @@ function getContractSalesInfo(contract_status){
 	//--------------保函条款信息------------------------------------------
 		guaranteeName:'销售合同保函付款#销售合同保函收款',
 		payamount:parseFloat($('#contract_sales_contract_guarantee_pay_amount').val())*100,//保函条款金额
-		payTime:parseDate($('#contract_sales_contract_guarantee_pay_time').datebox('getValue')),//付款日期
-		receivablesTime:parseDate($('#contract_sales_contract_guarantee_receivables_time').datebox('getValue')),//收款日期
+		payTime:parseDate($('#contract_sales_contract_guarantee_pay_time').val()),//付款日期
+		receivablesTime:parseDate($('#contract_sales_contract_guarantee_receivables_time').val()),//收款日期
 		quaranteeUpperAmount:$('#contract_sales_contract_guarantee_pay_upper_amount').val(),
 		guaranteeReceiveType:'602#603'//收付款类型
 	};

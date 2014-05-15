@@ -16,12 +16,6 @@ $(function(){
 			target.combobox('disable');
 		}
  	});
- 	//订货日期
- 	$('#contract_sales_base_order_time').datebox({
- 	
- 	});
- 	//送货日期
- 	$('#contract_sales_base_delivery_date').datebox({});
  	//合同类型
  	contract_sales_base_contract_type=$('#contract_sales_base_contract_type').combobox({
  		url:'${path}/common/system/category_code_list.html?parentId=1',
@@ -112,7 +106,7 @@ function clearContractSalesBase(){
 		<th>状态</th>
 		<td colspan="3"><input id="contract_sales_base_status"  class="easyui-validatebox" class="easyui-combobox"  data-options="" value="2401"/></td>
 		<th>订货日期</th>
-		<td><input class="easyui-validatebox" type="text" id="contract_sales_base_order_time"/></td>
+		<td><input class="easyui-validatebox Wdate" type="text" onClick="WdatePicker()" id="contract_sales_base_order_time"/></td>
 	</tr>
 	<tr>
 		<th>客户</th>
@@ -123,7 +117,7 @@ function clearContractSalesBase(){
 			<a id="contract_sales_base_custmer_add_btn" href="#" style="float: left;" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-mini_add'"></a>
 		</td>
 		<th>送货日期</th>
-		<td><input class="easyui-validatebox" type="text" id="contract_sales_base_delivery_date" data-options=""/></td>
+		<td><input class="easyui-validatebox Wdate" onClick="WdatePicker()" type="text" id="contract_sales_base_delivery_date" data-options=""/></td>
 	</tr>
 	<tr>
 		<th>联系人</th>
