@@ -151,7 +151,7 @@ $(function(){
 		<td><input id="business_goods_info_form_map_series" style="border:1px solid #95B8E7"/> </td>
 		<td>生产厂商</td>
 		<td>
-				<input id="business_goods_info_form_made_company_name" style="border:1px solid #95B8E7"/>
+				<input id="business_goods_info_form_made_company_name" style="border:1px solid #95B8E7;float:left;"/>
 				<input id="business_goods_info_form_made_company_id" type="hidden"/>
 				<a id="business_goods_info_form_supplier_search_btn" href="#" class="easyui-linkbutton" plain="true" from="0"><font style="font-size:3ex">...</font></a>
 		</td>
