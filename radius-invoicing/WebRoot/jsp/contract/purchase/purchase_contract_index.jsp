@@ -33,16 +33,16 @@ $(function(){
     		<div title="合同商品明细" fit="true">
                 <jsp:include flush="true" page="purchase_contract_goods_detail.jsp"></jsp:include>
 	        </div>
-    		<div title="订单条款" fit="true">
+    		<div title="合同条款" fit="true" style="padding:5px 15px 0px 15px;">
     			<jsp:include flush="true" page="purchase_contract_terms.jsp"></jsp:include>
 	        </div>
-    		<div title="订单备注" fit="true">
+    		<div title="合同备注" fit="true" style="padding:5px 15px 0px 15px;">
     			<jsp:include flush="true" page="purchase_contract_memo.jsp"></jsp:include>
 	        </div>
-            <div title="支付方式详情" fit="true">
+            <div title="支付方式详情" fit="true" style="padding:5px 15px 0px 15px;">
                 <jsp:include flush="true" page="purchase_contract_payment.jsp"></jsp:include>
             </div>
-             <div title="合同扫描件" fit="true">
+             <div title="合同扫描件" fit="true" style="padding:5px 15px 0px 15px;">
                 <jsp:include flush="true" page="purchase_contract_scan.jsp"></jsp:include>
             </div>
     		<div title="询价记录" fit="true">

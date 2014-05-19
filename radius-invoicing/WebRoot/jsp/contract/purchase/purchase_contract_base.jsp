@@ -26,7 +26,7 @@ $(function(){
  	});
  	//状态
  	purchase_contract_base_status=$('#purchase_contract_base_status').combobox({
- 		url:'${path}/common/system/category_code_list.html?parentId=3540',
+ 		url:'${path}/common/system/category_code_list.html?parentId=2400',
  		valueField: 'id',
 		textField: 'name',
 		onLoadSuccess:function(){
@@ -56,7 +56,7 @@ $(function(){
  **/
 function clearPurchaseContractBase(){
 	$('#purchase_contract_base_id').val('');
-	purchase_contract_base_status.combobox('setValue','3541');
+	purchase_contract_base_status.combobox('setValue','2401');
 	$('#purchase_contract_base_supplier_name').val('');
 	$('#purchase_contract_base_supplier_id').val('');
 	$('#purchase_contract_base_link_man').val('');
@@ -81,7 +81,6 @@ function clearPurchaseContractBase(){
  **/
 function setPurchaseContractBaseInfo(row_data){
 	$('#purchase_contract_base_id').val(row_data.id);
-	purchase_contract_base_status.combobox('setValue',row_data.status);
 	$('#purchase_contract_base_order_time').val(row_data.orderedDate);
 	$('#purchase_contract_base_supplier_id').val(row_data.supplierId);
 	$('#purchase_contract_base_supplier_name').val(row_data.supplierName);
@@ -92,7 +91,6 @@ function setPurchaseContractBaseInfo(row_data){
 	$('#purchase_contract_base_link_fax').val(row_data.fax);
 	$('#purchase_contract_base_delivery_point').val(row_data.deliveryPoint);
 	$('#purchase_contract_base_clerk').val(row_data.purchaser);
-	$('#purchase_contract_base_purchase_order_id').val(row_data.orderId);
 	
 	resetSupplierDialog();
 	com.radius.datagrid.clear(purchase_order_base_supplier_grd);
@@ -100,6 +98,8 @@ function setPurchaseContractBaseInfo(row_data){
 	com.radius.datagrid.clear(purchase_contract_base_link_man_grd);
 	clearPurchaseOrderBaseSalesOrderDialog();
 	com.radius.datagrid.clear(purchase_contract_base_purchase_order_grd);
+	purchase_contract_base_status.combobox('setValue',row_data.status);
+	$('#purchase_contract_base_purchase_order_id').val(row_data.orderId);
 }
 //-->
 </script>
@@ -108,7 +108,7 @@ function setPurchaseContractBaseInfo(row_data){
 		<th>采购合同号<font color="red">*</font></th> 
 		<td><input class="easyui-validatebox" style="background:#eee;width: 150px;border:1px solid #95B8E7" id="purchase_contract_base_id" type="text" readonly="readonly"/></td>
 		<th>状态</th>
-		<td colspan="3"><input id="purchase_contract_base_status"  class="easyui-validatebox"  value="3541"/></td>
+		<td colspan="3"><input id="purchase_contract_base_status"  class="easyui-validatebox"  value="2401"/></td>
 		<th>订货日期</th>
 		<td><input class="easyui-validatebox Wdate" type="text" id="purchase_contract_base_order_time" onClick="WdatePicker()" style="border:1px solid #95B8E7"/></td>
 	</tr>

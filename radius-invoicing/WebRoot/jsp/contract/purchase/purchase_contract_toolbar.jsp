@@ -27,8 +27,8 @@ $(function(){
 		}
 		
 		//2.提交表单数据通过ajax
-		var ajax_url = '${path}/order/manager/purchaseOrder/purchase_contract_infos_add.html';
-		var ajax_data=getPurchaseOrderFormAjaxDataFormatter('3541');
+		var ajax_url = '${path}/contract/manager/purchaseContract/purchase_contract_infos_add.html';
+		var ajax_data=getPurchaseOrderFormAjaxDataFormatter(_status);
 		submitPurchseContractInfo(ajax_url,ajax_data);
 	});
 	
@@ -99,10 +99,10 @@ function getPurchaseOrderFormAjaxDataFormatter(_status){
 		status			:_status,
 		memo			:$('#purchase_contract_memo').val(),
 		 //-------------采购支付数据类型
-		cashType		:$('#purchase_contract_pay_detail_currency').combobox('getText'),//币种
-		totalAmount		:parseFloat($('#purchase_contract_base_total_amount').val())*100,//合同总金额
-		upperAmount		:$('#purchase_contract_base_upper_rmb').val(),//大写金额
-		paymentType		:$('#purchase_contract_pay_detail_pay').combobox('getText')//付款方式
+		cashType		:purchase_contract_payment_detail_currency.combobox('getValue'),//币种
+		totalAmount		:parseFloat($('#purchase_contract_payment_detail_total_amount').val())*100,//合同总金额
+		upperAmount		:$('#purchase_contract_payment_upper_rmb').val(),//大写金额
+		paymentType		:$('#purchase_contract_payment_detail_pay').combobox('getValue')//付款方式
 		 
 	};
 	return json;
