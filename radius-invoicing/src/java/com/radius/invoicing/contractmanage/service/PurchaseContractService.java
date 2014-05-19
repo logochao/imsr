@@ -130,5 +130,21 @@ public interface PurchaseContractService {
 	 * @return
 	 * @throws Exception
 	 */
-	public EasyuiSplitPager<PurchaseOrderGrd> getPurchaseOrderGrdList(PurchaseOrderGrd purchaseOrderGrd)throws Exception;
+	public EasyuiSplitPager<PurchaseContractGoodsGrd> getPurchaseContractGoodsGrdList(PurchaseContractGoodsGrd PurchaseContractGoodsGrd)throws Exception;
+	
+	
+	/**
+	 * 获取采购合同支付明细
+	 * @param salesContractPayment
+	 * @return
+	 */
+	public EasyuiSplitPager<PurchaseContractPaymentGrd> getPurchaseContractPaymentGrd(PurchaseContractPaymentGrd purchaseContractPaymentGrd);
+	
+	
+	/**
+	 * 获取采购合同支付信息
+	 * @param payment
+	 * @return
+	 */
+	public EasyuiSplitPager<PurchaseContractPayment> getPurchaseContractPaymentList(PurchaseContractPayment payment);
 }

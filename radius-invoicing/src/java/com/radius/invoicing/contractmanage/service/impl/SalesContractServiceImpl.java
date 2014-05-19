@@ -37,7 +37,7 @@ import com.radius.invoicing.ibatis.model.SalesContractPaymentGrd;
  * 类说明 销售合同service
  */
 @Service
-@SuppressWarnings("unchecked")
+@SuppressWarnings({"unchecked","static-access"})
 public class SalesContractServiceImpl implements SalesContractService,Constants {
 
 	
@@ -316,6 +316,7 @@ public class SalesContractServiceImpl implements SalesContractService,Constants 
 	 * @param payment
 	 * @return
 	 */
+	
 	public JsonUtils saveSalesContractInfos(String ledgerId,SalesContract salesContract,String goodsMemcacheKey,String paymentMemcacheKey,String scansMemecacheKey,SalesContractPayment payment)throws Exception{
 		//返回json对象
 		JsonUtils result =null;
@@ -329,7 +330,8 @@ public class SalesContractServiceImpl implements SalesContractService,Constants 
 		//4.销售合同支付详情
 		List<SalesContractPaymentGrd> paymentsList = SalesContractCom.getSalesContractPaymentGrdByRequest(salesContract.getId(),ledgerId, paymentMemcacheKey, status,creater);
 		//5.合同扫描件
-		List<ContractScanGrd> scansList = SalesContractCom.getContractScanGrdsByRequest(salesContract.getId(), scansMemecacheKey,creater);
+		String filePath=propertyConfigHelper.getPropertyValue("contract.image.file.web.path").toString();
+		List<ContractScanGrd> scansList = SalesContractCom.getContractScanGrdsByRequest(salesContract.getId(), scansMemecacheKey,creater,filePath);
 		
 		SalesContract temp=salesContractDao.getSalesContractById(salesContract.getId());
 		
@@ -375,7 +377,8 @@ public class SalesContractServiceImpl implements SalesContractService,Constants 
 		paymentsList.addAll(guaranteePaymentList);
 		
 		//6.合同扫描件
-		List<ContractScanGrd> scansList = SalesContractCom.getContractScanGrdsByRequest(salesContract.getId(), scansMemecacheKey,creater);
+		String filePath=propertyConfigHelper.getPropertyValue("contract.image.file.web.path").toString();
+		List<ContractScanGrd> scansList = SalesContractCom.getContractScanGrdsByRequest(salesContract.getId(), scansMemecacheKey,creater,filePath);
 		
 		SalesContract temp=salesContractDao.getSalesContractById(salesContract.getId());
 		
