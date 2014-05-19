@@ -15,7 +15,7 @@ function setPurchaseContractMemo(row_data){
 </script>
 <table class="table" style="width: 99.5%;margin-top: 10px;">
    	<tr>
-   		<th>合同条款</th>
+   		<th>合同备注</th>
    		<td colspan="7">
    			<textarea rows="5" cols="170" id="purchase_contract_memo" style="border:1px solid #95B8E7"></textarea>
    		</td>

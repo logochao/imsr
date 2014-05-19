@@ -19,12 +19,12 @@ $(function(){
    		rownumbers:true,
    		collapsible:true,
    		frozenColumns:[[
-			{field:'id',title:'合同编号',width:120},
-			{field:'orderId',title:'采购订货单编号',width:120},
-			{field:'supplierId',title:'供货商编号',width:120},
+			{field:'id',title:'合同编号',width:100},
+			{field:'orderId',title:'采购订单号',width:100},
+			{field:'supplierId',title:'供货商编号',width:60},
 			{field:'supplierName',title:'供货商名称',width:120},
-			{field:'contractFile',title:'合同文件编号',width:120},
-			{field:'totalAmount',title:'总金额',width:120,formatter: function(value,row,index){
+			{field:'contractFile',title:'合同文件号',width:100},
+			{field:'totalAmount',title:'总金额',width:100,formatter: function(value,row,index){
 					return (value/100).toFixed(2);
 				}
 			}
@@ -105,7 +105,9 @@ $(function(){
 		$('#contract_sales_goods_grd_delete_btn').linkbutton('disable');
 		//6.获取采购合同扫描件列表
 		setPurchaseContractScan(rows[0]);
- 		//7.报价记录
+		//7.支付列表
+		setPurchaseContractPayDetail(rows[0]);
+ 		//8.报价记录
  		//清空查询列表
  		purchase_contract_open_purchase_contract_grd.datagrid('loadData',{ total: 0, rows: []});
  		purchase_contract_open_dialog.dialog('close');

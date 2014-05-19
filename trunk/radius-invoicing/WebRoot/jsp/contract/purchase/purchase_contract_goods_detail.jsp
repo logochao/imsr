@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <script type="text/javascript">
 <!--
-var sales_order_total_amount = 0;//合同总金额
+var purchase_contract_total_amount = 0;//合同总金额
 var purchase_contract_order_goods_detail_grd = null ;
 $(function(){
 	//销售合同商品列表
@@ -67,7 +67,7 @@ function removeFullSalesOrderGoodsGrd(){
 		success:function(r){
 			if(r&&r.success){
 				$('#purchase_contract_order_goods_detail_grd').datagrid('loadData', {total: 0,rows:[]});
-				sales_order_total_amount=0;
+				purchase_contract_total_amount=0;
 			}
 		},
 		error:function(r){
@@ -96,7 +96,7 @@ function setPurchaseOrderGoodsGrd(row_data){
 			}
 		}
 		if(isExist){
-			var total_amount=parseFloat($('#purchase_order_base_total_amount').val())*100;//获取总金额
+			var total_amount=parseFloat($('#purchase_contract_payment_detail_total_amount').val())*100;//获取总金额
 			 total_amount+=parseFloat(row_data.amount)*100;//获取当前商品的金额
 			var quantity_unit=parseInt(row_data.quantityUnit)+parseInt(row.quantityUnit);
 			//更新datagrid row 更新缓存
@@ -105,11 +105,12 @@ function setPurchaseOrderGoodsGrd(row_data){
 				amount:total_amount/100//金额
 			};
 			updatePurchaseOrderGoodsGrdRow(url,row_data_update,goodsId,row_index);
-			$('#sales_order_base_total_amount').val(total_amount/100);//将显示总金额进行修改
+			$('#purchase_contract_payment_detail_total_amount').val(total_amount/100);//将显示总金额进行修改
 			return ;
 		}
 	}
 	addPurchaseOrderGoods2PurchaseOrderGoodsGrd(row_data,url);
+	calculateTotalAmount();
 }
 
 /**
@@ -124,7 +125,7 @@ function addPurchaseOrderGoods2PurchaseOrderGoodsGrd(row_data,memcached_url){
 	 //2.1 将数据格式化
 	var memeched_data = getPurchaseOrderGoodsInfoFormatter(row_data);
 	 //2.2 将数据添加到内存中
-	purchaseOrderGoodsMemcached(memcached_url,memeched_data);
+	addFormatterData2Memecached(memcached_url,memeched_data);
 }
 
 
@@ -156,7 +157,7 @@ function updatePurchaseOrderGoodsGrdRow(memcached_url,row_data,goodsId,row_index
  **/
 function getPurchaseOrderGoodsInfoFormatter(row_data){
 	var json={
-		contractId			:$('#purchase_order_base_id').val(),//采购合同编号
+		contractId			:$('#purchase_contract_base_id').val(),//采购合同编号
 		goodsId				:row_data.goodsId,//商品编号
 		goodsName			:row_data.goodsName,//商品名称
 		specId				:row_data.specId,//规格编码
@@ -178,8 +179,11 @@ function getPurchaseOrderGoodsInfoFormatter(row_data){
  *获取采购订单商品明细
  **/
 function getPurchaseOrderGoodsDetail(purchaseOrderId){
-	var ajax_url ='${path}/contract/manager/purchaseContract/purchase_order_goods_list.html';
-	var ajax_data={purchaseOrderId:purchaseOrderId};
+	var ajax_url ='${path}/contract/manager/purchaseContract/purchase_order_goods_2_purchase_order_id.html';
+	var ajax_data={
+			purchaseOrderId:purchaseOrderId,
+			
+	};
 	getPurchaseContractGoodsDetail(ajax_url,ajax_data);
 }
 
@@ -246,10 +250,22 @@ function setPurchaseContractGoodsDetail(row_data){
 	var ajax_url='${path}/contract/manager/purchaseContract/purchase_contact_goods_list.html';
 	var ajax_data={contractId:row_data.id};
 	//移除缓存内容
-	purchase_contract_order_goods_detail_grd.datagrid('loadData',{ total: 0, rows: []});
 	removeFullSalesOrderGoodsGrd();
+	
 	//获取采购合同商品
 	getPurchaseContractGoodsDetail(ajax_url,ajax_data);
+}
+
+function calculateTotalAmount(){
+	//计算总金额
+	var rows=purchase_contract_order_goods_detail_grd.datagrid('getRows');
+	purchase_contract_total_amount=0;
+	for(var i=0;i<rows.length;i++){
+		purchase_contract_total_amount+=parseFloat(rows[i].amount)*100;
+		$('#purchase_contract_payment_detail_total_amount').val(purchase_contract_total_amount/100);
+		//转换为大写
+	}
+	toUpper($('#purchase_contract_payment_detail_total_amount'),$('#purchase_contract_payment_upper_rmb'));
 }
 //-->
 </script>
