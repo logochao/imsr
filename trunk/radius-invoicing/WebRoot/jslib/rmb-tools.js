@@ -12,12 +12,12 @@ function toUpper(lowerInputId,upperInputId){
 	if(num.lastIndexOf(".") == num.length - 1 ){
 		return ;
 	}
-	for ( var int = 0; int < num.length; int++) {
+	for ( var a = 0; a < num.length; a++) {
 		if(checkNum(num)){
 			break;
 		}else{
 			num = removeLastChar(num);
-			int --;
+			 a--;
 		}
 		if(isNull(num)) return;
 	}
