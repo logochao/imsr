@@ -1,7 +1,6 @@
 package com.radius.invoicing.contractmanage.compent;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -116,7 +115,7 @@ public class SalesContractCom {
 	 * @param cacheKey
 	 * @return
 	 */
-	public static List<ContractScanGrd> getContractScanGrdsByRequest(String contractId,String cacheKey,String creater){
+	public static List<ContractScanGrd> getContractScanGrdsByRequest(String contractId,String cacheKey,String creater,String filePath){
 		List<ContractScanGrd> scansList=new ArrayList<ContractScanGrd>();
 		Map<String,ContractScanGrd> memcache=(Map<String,ContractScanGrd>)MemcacheClient.get(cacheKey);
 		String key = null;
@@ -129,6 +128,7 @@ public class SalesContractCom {
 				scan=memcache.get(key);
 				logger.info("合同扫描件列表 "+key +" ---> "+scan);
 				scan.setCreater(creater);
+				scan.setFilePath(filePath);
 				scansList.add(scan);
 			}
 		}

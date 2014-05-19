@@ -188,7 +188,7 @@ public class PurchaseContractController extends BaseController{
 	@RequestMapping("/contract/manager/purchaseContract/contract_scan_info_memcached.html")
 	@ResponseBody
 	public JsonUtils addPurchaseContractScanInfo(HttpServletRequest request,HttpServletResponse response,ContractScanGrd contractScanGrd)throws Exception{
-		String key =contractScanGrd.getContractId()+"_"+contractScanGrd.getContractType().intValue()+"_add_contract_scan_info";//合同编号_合同类型_xxxxxxxx
+		String key =contractScanGrd.getContractId()+"_add_contract_scan_info";//合同编号_xxxxxxxx
 		return purchaseContractService.addPurchaseContractScanGrd2Memcached(key, contractScanGrd);
 	}
 	
@@ -202,7 +202,7 @@ public class PurchaseContractController extends BaseController{
 	 */
 	@RequestMapping("/contract/manager/purchaseContract/contract_scan_info_remove_memcached.html")
 	public JsonUtils removePurchaseContractScanInfo(HttpServletRequest request,HttpServletResponse response,ContractScanGrd contractScanGrd)throws Exception{
-		String key =contractScanGrd.getContractId()+"_"+contractScanGrd.getContractType().intValue()+"_add_contract_scan_info";//合同编号_合同类型_xxxxxxxx
+		String key =contractScanGrd.getContractId()+"_add_contract_scan_info";//合同编号_xxxxxxxx
 		boolean delete = ServletRequestUtils.getBooleanParameter(request, "delete", false);//表示是否全部删除 默认为 false
 		return purchaseContractService.removeContractScanInfo2Memcache(key, contractScanGrd, delete);
 	}
@@ -221,20 +221,30 @@ public class PurchaseContractController extends BaseController{
 	public JsonUtils savePurchaseContractInfo(HttpServletRequest request,HttpServletResponse response,PurchaseContract purchaseContract)throws Exception{
 		String ledgerId ="0001";//帐套
 		String operator ="0001";//当前操作人员编号
+		
 		purchaseContract.setLedgerId(ledgerId);
 		purchaseContract.setCreater(operator);
-		
+		purchaseContract.setVerifier(operator);
+		purchaseContract.setReviser(operator);
 		//1.采购商品信息缓存key
 		String productKey=purchaseContract.getId()+"_purchase_contract_add_contract_product_info";
 		//2.采购支付详情缓存key
 		String payDetailKey=purchaseContract.getId()+"_add_purchase_contract_pay_detail";
 		//3.采购合同扫描缓存key
-		String scanKey=purchaseContract.getId()+ServletRequestUtils.getStringParameter(request, "contractType","")+"_add_contract_scan_info";
+		String scanKey=purchaseContract.getId()+"_add_contract_scan_info";
 		//4.构建支付对象
 		PurchaseContractPayment payment =PurchaseContractCompent.getPurchaseContractPaymentByRequest(request, ledgerId, operator, purchaseContract.getId()) ;
 		//5.获取当前操作的合同目标状态 如未确认-->确认 statusCode 为确认状态代码
 		String statusCode = ServletRequestUtils.getStringParameter(request, "statusCode", "");
-		return purchaseContractService.savePurchaseContractInfo(statusCode, purchaseContract, payment, productKey, payDetailKey, scanKey);
+		JsonUtils result=null;
+		try{
+			result=purchaseContractService.savePurchaseContractInfo(statusCode, purchaseContract, payment, productKey, payDetailKey, scanKey);
+		}catch(Exception e){
+			logger.error(e);
+			result=new JsonUtils();
+			result.setMessage("操作失败...");
+		}
+		return result;
 	}
 	/**
 	 * 获取采购合同信息
@@ -250,13 +260,24 @@ public class PurchaseContractController extends BaseController{
 		return purchaseContractService.getPurchaseContract(purchaseContract);
 	}
 	
-	@RequestMapping("/contract/manager/purchaseContract/purchase_order_goods_list.html")
+	@RequestMapping("/contract/manager/purchaseContract/purchase_contact_goods_list.html")
 	@ResponseBody
-	public EasyuiSplitPager<PurchaseOrderGrd> getPurchaseOrderGrdList(HttpServletRequest request,HttpServletResponse response)throws Exception{
-		PurchaseOrderGrd purchaseOrderGrd=new PurchaseOrderGrd();
-		String purchaseOrderId =  ServletRequestUtils.getStringParameter(request, "purchaseOrderId", "");
-		purchaseOrderGrd.setPurchaseOrderId(purchaseOrderId);
-		
-		return purchaseContractService.getPurchaseOrderGrdList(purchaseOrderGrd);
+	public EasyuiSplitPager<PurchaseContractGoodsGrd> getPurchaseGrdList(HttpServletRequest request,HttpServletResponse response)throws Exception{
+		PurchaseContractGoodsGrd goodsGrd=new PurchaseContractGoodsGrd();
+		String contractId =  ServletRequestUtils.getStringParameter(request, "contractId", "");
+		goodsGrd.setContractId(contractId);
+		return purchaseContractService.getPurchaseContractGoodsGrdList(goodsGrd);
 	}
+	@RequestMapping("/contract/manager/purchaseContract/purchase_contract_payment_list.html")
+	@ResponseBody
+	public EasyuiSplitPager<PurchaseContractPayment> getPurchaseContractPayment(HttpServletRequest request,HttpServletResponse response,PurchaseContractPayment payment){
+		return purchaseContractService.getPurchaseContractPaymentList(payment);
+	}
+	
+	@RequestMapping("/contract/manager/purchaseContract/purchase_contract_payment_grd_list.html")
+	@ResponseBody
+	public EasyuiSplitPager<PurchaseContractPaymentGrd> getPurchaseContractPaymentGrdList(PurchaseContractPaymentGrd paymentGrd){
+		return purchaseContractService.getPurchaseContractPaymentGrd(paymentGrd);
+	}
+	
 }

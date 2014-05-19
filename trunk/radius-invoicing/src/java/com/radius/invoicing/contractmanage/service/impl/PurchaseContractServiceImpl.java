@@ -25,6 +25,7 @@ import com.radius.invoicing.ibatis.dao.PurchaseContractPaymentDao;
 import com.radius.invoicing.ibatis.dao.PurchaseContractPaymentGrdDao;
 import com.radius.invoicing.ibatis.dao.PurchaseOrderDao;
 import com.radius.invoicing.ibatis.dao.PurchaseOrderGrdDao;
+import com.radius.invoicing.ibatis.dao.impl.PurchaseContractPaymentGrdDaoImpl;
 import com.radius.invoicing.ibatis.model.ContractScanGrd;
 import com.radius.invoicing.ibatis.model.Goods;
 import com.radius.invoicing.ibatis.model.PurchaseContract;
@@ -34,6 +35,9 @@ import com.radius.invoicing.ibatis.model.PurchaseContractPaymentGrd;
 import com.radius.invoicing.ibatis.model.PurchaseOrder;
 import com.radius.invoicing.ibatis.model.PurchaseOrderGrd;
 import com.radius.invoicing.ibatis.model.SalesContract;
+import com.radius.invoicing.ibatis.model.SalesContractGoodsGrd;
+import com.radius.invoicing.ibatis.model.SalesContractPayment;
+import com.radius.invoicing.ibatis.model.SalesContractPaymentGrd;
 import com.radius.invoicing.ibatis.model.SalesOrderGoodsGrd;
 
 /**
@@ -344,86 +348,182 @@ public class PurchaseContractServiceImpl implements Constants, PurchaseContractS
 		String operater=purchaseContract.getCreater();
 		String ledgerId =purchaseContract.getLedgerId();
 		String status = purchaseContract.getStatus();
-		String contractId= purchaseContract.getId();
-		boolean success=false;
-		String message="操作失败";
-		String code="-1";
-		try{
-			//--------------------------简查采购合同信息------------------------------
-			PurchaseContract temp =  purchaseContractDao.getPurchaseContractById(purchaseContract.getId());
-			if(temp==null){//添加相关对象
-				//---------------构建对象--------------
-				//1.采购合同
-				//2.采购商品列表
-				List<PurchaseContractGoodsGrd>  productList=PurchaseContractCompent.getPurchaseContractGoodsGrdList(operater,ledgerId, productKey, status);
-				//3.采购支付
-				//payment
-				payment.setLedgerId(ledgerId);
-				payment.setCreater(operater);
-				//4.采购支付详情
-				List<PurchaseContractPaymentGrd> paymentList = PurchaseContractCompent.getPurchaseContractPaymentGrdList(operater,ledgerId, payKey, status);
-				//5.采购合同扫描件
-				List<ContractScanGrd> scanList = PurchaseContractCompent.getPurchaseContractScanGrdList(operater, ledgerId, scanKey, status);
-				//--------------------------保存采购合同相关数据---------------------------
-				purchaseContractDao.insertPurchaseContract(purchaseContract);//采购合同
-				purchaseContractGoodsGrdDao.batchInsertPurchaseContractGoodsGrd(productList);//采购合同商品
-				purchaseContractPaymentDao.insertPurchaseContractPayment(payment);//采购支付
-				purchaseContractPaymentGrdDao.batchInsertPurchaseContractPaymentGrd(paymentList);//采购支付详情
-				contractScanGrdDao.batchInsertContractScanGrd(scanList);//合同扫描件
-				
-				logger.info("保存采购合同相关数据操作成功...");
-				success = true;
-				message="添加采购合同信息操作成功...";
-				code=statusCode;
-			}else if(temp!=null){//更新相关对象
-				//--------------------------保存采购合同相关数据---------------------------
-				//更新状态
-				
-				//采购合同
-				purchaseContract.setReviser(operater);
-				purchaseContractDao.updatePurchaseContractStatusById(purchaseContract);
-				//采购商品
-				PurchaseContractGoodsGrd product =new PurchaseContractGoodsGrd();
-				product.setContractId(contractId);
-				product.setStatus(status);
-				product.setReviser(operater);
-				purchaseContractGoodsGrdDao.updatePurchaseContractGoodsGrdStatusByContractId(product);
-				//采购支付(****支付合同应该与当前合同状态有关)
-				PurchaseContractPayment payment2=new PurchaseContractPayment();
-				payment2.setContractId(contractId);
-				payment2.setStatus(status);
-				payment2.setReviser(operater);
-				purchaseContractPaymentDao.updateStatusByContractId(payment);
-				//采购支付详情
-				PurchaseContractPaymentGrd paymentGrd =new PurchaseContractPaymentGrd();
-				paymentGrd.setContractId(contractId);
-				paymentGrd.setStatus(status);
-				paymentGrd.setReviser(operater);
-				purchaseContractPaymentGrdDao.updatePurchaseContractPaymentGrdStatusBycontractId(paymentGrd);
-				//合同扫描件
-				success=true;
-				message="更新销售合同相关信息成功!!!";
-				logger.info(message);
-			}
-			if(success){
-				//--------------------------情况采购合同相关的缓存对象---------------------
-				//删除合同销售商品
-				MemcacheClient.delete(productKey);
-				//删除支付列表
-				MemcacheClient.delete(payKey);
-				//删除扫描件列表
-				MemcacheClient.delete(scanKey);
-			}
-		}catch(Exception e){
-			logger.error(e);
-			e.printStackTrace();
-			throw new RuntimeException(e);
+		JsonUtils result = null;
+		//---------------构建对象--------------
+		//1.采购合同
+		//2.采购商品列表
+		List<PurchaseContractGoodsGrd>  productList=PurchaseContractCompent.getPurchaseContractGoodsGrdList(operater,ledgerId, productKey, status);
+		//3.采购支付
+		//payment
+		payment.setLedgerId(ledgerId);
+		payment.setCreater(operater);
+		//4.采购支付详情
+		List<PurchaseContractPaymentGrd> paymentList = PurchaseContractCompent.getPurchaseContractPaymentGrdList(operater,ledgerId, payKey, status);
+		//5.采购合同扫描件
+		List<ContractScanGrd> scanList = PurchaseContractCompent.getPurchaseContractScanGrdList(operater, ledgerId, scanKey, status);
+		//--------------------------简查采购合同信息------------------------------
+		PurchaseContract temp =  purchaseContractDao.getPurchaseContractById(purchaseContract.getId());
+		if(temp==null){//添加相关对象
+			/*//--------------------------保存采购合同相关数据---------------------------
+			purchaseContractDao.insertPurchaseContract(purchaseContract);//采购合同
+			purchaseContractGoodsGrdDao.batchInsertPurchaseContractGoodsGrd(productList);//采购合同商品
+			purchaseContractPaymentDao.insertPurchaseContractPayment(payment);//采购支付
+			purchaseContractPaymentGrdDao.batchInsertPurchaseContractPaymentGrd(paymentList);//采购支付详情
+			contractScanGrdDao.batchInsertContractScanGrd(scanList);//合同扫描件
+			
+			logger.info("保存采购合同相关数据操作成功...");
+			success = true;
+			message="添加采购合同信息操作成功...";
+			code=statusCode;*/
+			
+			result=insertPurchaseContractInfo(purchaseContract, productList, payment, paymentList, scanList);
+		}else if(temp!=null){//更新相关对象
+			//--------------------------保存采购合同相关数据---------------------------
+			//更新状态
+			
+			//采购合同
+			/*purchaseContract.setReviser(operater);
+			purchaseContractDao.updatePurchaseContractStatusById(purchaseContract);
+			//采购商品
+			PurchaseContractGoodsGrd product =new PurchaseContractGoodsGrd();
+			product.setContractId(contractId);
+			product.setStatus(status);
+			product.setReviser(operater);
+			purchaseContractGoodsGrdDao.updatePurchaseContractGoodsGrdStatusByContractId(product);
+			//采购支付(****支付合同应该与当前合同状态有关)
+			PurchaseContractPayment payment2=new PurchaseContractPayment();
+			payment2.setContractId(contractId);
+			payment2.setStatus(status);
+			payment2.setReviser(operater);
+			purchaseContractPaymentDao.updateStatusByContractId(payment);
+			//采购支付详情
+			PurchaseContractPaymentGrd paymentGrd =new PurchaseContractPaymentGrd();
+			paymentGrd.setContractId(contractId);
+			paymentGrd.setStatus(status);
+			paymentGrd.setReviser(operater);
+			purchaseContractPaymentGrdDao.updatePurchaseContractPaymentGrdStatusBycontractId(paymentGrd);
+			//合同扫描件
+			success=true;
+			message="更新销售合同相关信息成功!!!";
+			logger.info(message);*/
+			
+			result=updatePurchaseContractInfo(purchaseContract, productList, payment, paymentList, scanList);
+		}
+		if(result.isSuccess()){
+			//--------------------------情况采购合同相关的缓存对象---------------------
+			//删除合同销售商品
+			MemcacheClient.delete(productKey);
+			//删除支付列表
+			MemcacheClient.delete(payKey);
+			//删除扫描件列表
+			MemcacheClient.delete(scanKey);
 		}
 		//--------------------------返回操作结果 -----------------------------------
-		JsonUtils result = new  JsonUtils(success,message);
-		result.setChild(code);
+		result.setChild(status);
 		return result;
 	}
+	
+	
+	public JsonUtils  insertPurchaseContractInfo(PurchaseContract purchaseContract,List<PurchaseContractGoodsGrd>  productList,PurchaseContractPayment payment,List<PurchaseContractPaymentGrd> paymentList,List<ContractScanGrd> scanList){
+		
+		boolean success=false;
+		String message="添加合同操作失败...";
+		String status 	=purchaseContract.getStatus();
+		//添加采购合同
+		purchaseContractDao.insertPurchaseContract(purchaseContract);
+		//添加销售合同商品列表
+		if(!productList.isEmpty()&&productList.size()>0)
+			purchaseContractGoodsGrdDao.batchInsertPurchaseContractGoodsGrd(productList);
+		//添加支付	
+		payment.setStatus(status);
+		purchaseContractPaymentDao.insertPurchaseContractPayment(payment);
+		
+		//添加支付列表
+		if(!paymentList.isEmpty()&&paymentList.size()>0)
+		purchaseContractPaymentGrdDao.batchInsertPurchaseContractPaymentGrd(paymentList);
+		//添加合同扫描件列表
+		if(!scanList.isEmpty()&&scanList.size()>0)
+			contractScanGrdDao.batchInsertContractScanGrd(scanList);
+		success=true;
+		message="添加采购合同相关信息成功!!!";
+		logger.info(message);
+		JsonUtils result = new  JsonUtils(success,message);
+		result.setChild(status);
+		return result;
+	}
+	
+	
+	public JsonUtils updatePurchaseContractInfo(PurchaseContract purchaseContract,List<PurchaseContractGoodsGrd>  productList,PurchaseContractPayment payment,List<PurchaseContractPaymentGrd> paymentList,List<ContractScanGrd> scanList){
+		boolean success=false;
+		String message="添加合同操作失败...";
+		String status 	=purchaseContract.getStatus();
+		String contractId =purchaseContract.getId();
+		//采购合同
+		purchaseContractDao.getPurchaseContractById(purchaseContract.getId());
+		purchaseContractDao.updatePurchaseContractById(purchaseContract);
+		//销售合同商品
+		Integer count = purchaseContractGoodsGrdDao.getPurchaseContractGoodsGrdCountByContractId(contractId);
+		if((count>0&&productList.size()>0)||count==0){//存在,且memcached也存在 或 不存在
+			//1.删除商品列表数据
+			purchaseContractGoodsGrdDao.deletePurchaseContractGoodsGrdByContractId(contractId);
+			//2.保存商品列表数据
+			purchaseContractGoodsGrdDao.batchInsertPurchaseContractGoodsGrd(productList);
+		}else{//存在,则memcached中不存在,对数据库中的数据进行更新
+			PurchaseContractGoodsGrd goodsGrd=new PurchaseContractGoodsGrd();
+			goodsGrd.setStatus(status);
+			goodsGrd.setContractId(contractId);
+			goodsGrd.setVerifier(purchaseContract.getVerifier());
+			goodsGrd.setReviser(purchaseContract.getReviser());
+			purchaseContractGoodsGrdDao.updatePurchaseContractGoodsGrdStatusByContractId(goodsGrd);
+		}
+		//销售合同支付
+		count = purchaseContractPaymentDao.getPurchaseContractPaymentCountByContractId(contractId);
+		if(count==0){//存在,且memcached也存在 或 不存在
+			//1.保存商品列表数据
+			purchaseContractPaymentDao.insertPurchaseContractPayment(payment);
+		}else{//存在,对数据库中的数据进行更新
+			PurchaseContractPayment payment2=new PurchaseContractPayment();
+			payment2.setContractId(contractId);
+			payment2.setStatus(status);
+			payment2.setReviser(purchaseContract.getReviser());
+			payment2.setVerifier(purchaseContract.getVerifier());
+			purchaseContractPaymentDao.updatePurchaseContractPaymentByPK(payment2);
+		}
+		//销售合同支付详情
+		count = purchaseContractPaymentGrdDao.getPurchaseContractPaymentGrdCountByContractId(contractId);
+		if((count>0&&paymentList.size()>0)||count==0){//存在,且memcached也存在 或 不存在
+			//1.删除商品列表数据
+			purchaseContractPaymentGrdDao.deletePurchaseContractPaymentGrdByContractId(contractId);
+			//2.保存商品列表数据
+			purchaseContractPaymentGrdDao.batchInsertPurchaseContractPaymentGrd(paymentList);
+		}else{//存在,则memcached中不存在,对数据库中的数据进行更新
+			PurchaseContractPaymentGrd paymentGrd=new PurchaseContractPaymentGrd();
+			paymentGrd.setContractId(contractId);
+			paymentGrd.setStatus(status);
+			paymentGrd.setReviser(purchaseContract.getReviser());
+			paymentGrd.setVerifier(purchaseContract.getVerifier());
+			purchaseContractPaymentGrdDao.updatePurchaseContractPaymentGrdStatusBycontractId(paymentGrd);
+		}
+		//合同扫描件
+		count = contractScanGrdDao.getContractScanGrdCountByContractId(contractId);
+		if((count>0&&scanList.size()>0)||count==0){//存在,且memcached也存在 或 不存在
+			//1.删除商品列表数据
+			contractScanGrdDao.deleteContractScanGrdByContractId(contractId);
+			//2.保存商品列表数据
+			contractScanGrdDao.batchInsertContractScanGrd(scanList);
+		}else{//存在,则memcached中不存在,对数据库中的数据进行更新
+			contractScanGrdDao.batchUpdateContractScanGrdByPrimaryKey(scanList);
+		}
+		
+		
+		success=true;
+		message="更新采购合同相关信息成功!!!";
+		logger.info(message);
+		JsonUtils result = new  JsonUtils(success,message);
+		result.setChild(status);
+		return result;
+	}
+	
 	/**
 	 * 获取采购订单信息列表
 	 * @param goods
@@ -467,13 +567,47 @@ public class PurchaseContractServiceImpl implements Constants, PurchaseContractS
 	 * @return
 	 * @throws Exception
 	 */
-	public EasyuiSplitPager<PurchaseOrderGrd> getPurchaseOrderGrdList(PurchaseOrderGrd purchaseOrderGrd)throws Exception{
-		EasyuiSplitPager<PurchaseOrderGrd> pager =new EasyuiSplitPager<PurchaseOrderGrd>();
-		List<PurchaseOrderGrd> list = purchaseOrderGrdDao.getPurchaseOrderGrd(purchaseOrderGrd);
+	public EasyuiSplitPager<PurchaseContractGoodsGrd> getPurchaseContractGoodsGrdList(PurchaseContractGoodsGrd PurchaseContractGoodsGrd)throws Exception{
+		EasyuiSplitPager<PurchaseContractGoodsGrd> pager =new EasyuiSplitPager<PurchaseContractGoodsGrd>();
+		List<PurchaseContractGoodsGrd> list = purchaseContractGoodsGrdDao.getPurchaseContractGoodsGrd(PurchaseContractGoodsGrd);
 		if(list!=null&&!list.isEmpty()&&list.size()>0){
 			pager.setRows(list);
 			pager.setTotal(list.size());
 		}
 		return pager;
 	}
+	
+	
+	
+	/**
+	 * 获取采购合同支付明细
+	 * @param salesContractPayment
+	 * @return
+	 */
+	public EasyuiSplitPager<PurchaseContractPaymentGrd> getPurchaseContractPaymentGrd(PurchaseContractPaymentGrd purchaseContractPaymentGrd){
+		EasyuiSplitPager<PurchaseContractPaymentGrd> pager=new EasyuiSplitPager<PurchaseContractPaymentGrd>();
+		List<PurchaseContractPaymentGrd> list = purchaseContractPaymentGrdDao.getPurchaseContractPaymentGrd(purchaseContractPaymentGrd);
+		if(list!=null&&!list.isEmpty()){
+			pager.setRows(list);
+			pager.setTotal(list.size());
+		}
+		return pager;
+	}
+	
+	/**
+	 * 获取采购合同支付信息
+	 * @param payment
+	 * @return
+	 */
+	public EasyuiSplitPager<PurchaseContractPayment> getPurchaseContractPaymentList(PurchaseContractPayment payment){
+		EasyuiSplitPager<PurchaseContractPayment> pager=new EasyuiSplitPager<PurchaseContractPayment>();
+		List<PurchaseContractPayment> list =  purchaseContractPaymentDao.getPurchaseContractPayment(payment);
+		if(list!=null&&!list.isEmpty()){
+			pager.setRows(list);
+			pager.setTotal(list.size());
+		}
+		return pager;
+	}
+	
+	
 }
