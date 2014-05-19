@@ -5,12 +5,12 @@
   <typeAlias alias="purchaseContractPayment" type="com.radius.invoicing.ibatis.model.PurchaseContractPayment" />
   
   <sql id="purchaseContractPaymentFileds">
-  	 contract_id contractId,cash_type cashType,total_amount totalAmount,amount_in_words upperAmount,payment_type paymentType,audited_status auditedStatus
+  	 purchase_contract_id contractId,cash_type cashType,total_amount totalAmount,amount_in_words upperAmount,payment_type paymentType,audited_status auditedStatus,
   	 ledger_id ledgerId,operator operator,motify_date modifyDate,creater creater,createdate createDate,reviser reviser,revisedate reviseDate,verifier verifier,verifydate verifyDate
   </sql>
   
   <resultMap id="purchaseContractPayment" class="purchaseContractPayment">
-    <result column="contract_id" jdbcType="char" javaType="java.lang.String" property="contractId" />
+    <result column="purchase_contract_id" jdbcType="char" javaType="java.lang.String" property="contractId" />
     <result column="cash_type" jdbcType="char" javaType="java.lang.String" property="cashType" />
     <result column="total_amount" jdbcType="int" javaType="java.lang.Integer" property="totalAmount" />
     <result column="amount_in_words" jdbcType="char" javaType="java.lang.String" property="upperAmount" />
@@ -30,13 +30,13 @@
   <sql id="whereLike">
   	<dynamic prepend="where">
   		1=1  
-  		<isNotNull prepend="and" property="contractId">contract_id=#contractId#</isNotNull>
-  		<isNotNull prepend="and" property="auditedStatus">audited_status=#auditedStatus#</isNotNull>
-  		<isNotNull prepend="and" property="cashType">cash_type=#cashType#</isNotNull>
-  		<isNotNull prepend="and" property="totalAmount">total_amount=#totalAmount#</isNotNull>
-		<isNotNull prepend="and" property="upperAmount">amount_in_words=#upperAmount#</isNotNull>
-		<isNotNull prepend="and" property="paymentType">payment_type=#paymentType#</isNotNull>
- 		<isNotNull prepend="and" property="ledgerId">ledger_id=#ledgerId#</isNotNull> 
+  		<isNotEmpty  property="contractId"> AND purchase_contract_id=#contractId#</isNotEmpty>
+  		<isNotEmpty  property="auditedStatus"> AND audited_status=#auditedStatus#</isNotEmpty>
+  		<isNotEmpty  property="cashType"> AND cash_type=#cashType#</isNotEmpty>
+  		<isNotNull  property="totalAmount"> AND total_amount=#totalAmount#</isNotNull>
+		<isNotEmpty  property="upperAmount"> AND amount_in_words=#upperAmount#</isNotEmpty>
+		<isNotEmpty  property="paymentType"> AND payment_type=#paymentType#</isNotEmpty>
+ 		<isNotEmpty  property="ledgerId"> AND ledger_id=#ledgerId#</isNotEmpty> 
   	</dynamic>
   </sql>
  
@@ -46,7 +46,7 @@
 	 	WHERE contract_id =#contractId# 
 	 </select>
 	 
-	 <select id="getPurchaseContractPayment" parameterClass="purchaseContractPayment" resultMap="purchaseContractPayment">
+	 <select id="getPurchaseContractPayment" parameterClass="purchaseContractPayment" resultClass="purchaseContractPayment">
 	 	SELECT <include refid="purchaseContractPaymentFileds"/>
 	 	FROM RS_PURCHASE_CONTRACT_PAYMENT
 	 	<include refid="whereLike"/>
@@ -54,43 +54,43 @@
    
    	<insert id="insert" parameterClass="purchaseContractPayment">
    		INSERT INTO RS_PURCHASE_CONTRACT_PAYMENT (
-   			contract_id,
-	  		<isNotNull  property="cashType">cash_type,</isNotNull>
-	  		<isNotNull  property="auditedStatus">audited_status,</isNotNull>
+   			purchase_contract_id,
+	  		<isNotEmpty  property="cashType">cash_type,</isNotEmpty>
+	  		<isNotEmpty  property="auditedStatus">audited_status,</isNotEmpty>
 	  		<isNotNull  property="totalAmount">total_amount,</isNotNull>
-			<isNotNull  property="upperAmount">amount_in_words,</isNotNull>
-			<isNotNull  property="paymentType">payment_type,</isNotNull>
-			<isNotNull  property="ledgerId">ledger_id,</isNotNull> 
-	 		<isNotNull  property="operator">operator,</isNotNull> 
+			<isNotEmpty  property="upperAmount">amount_in_words,</isNotEmpty>
+			<isNotEmpty  property="paymentType">payment_type,</isNotEmpty>
+			<isNotEmpty  property="ledgerId">ledger_id,</isNotEmpty> 
+	 		<isNotEmpty  property="operator">operator,</isNotEmpty> 
 	  	    creater,
 	  	    createdate
    		)VALUES(
    			#contractId#,
-	  		<isNotNull  property="cashType">#cashType#,</isNotNull>
-	  		<isNotNull  property="auditedStatus">#auditedStatus#,</isNotNull>
+	  		<isNotEmpty  property="cashType">#cashType#,</isNotEmpty>
+	  		<isNotEmpty  property="auditedStatus">#auditedStatus#,</isNotEmpty>
 	  		<isNotNull  property="totalAmount">#totalAmount#,</isNotNull>
-			<isNotNull  property="upperAmount">#upperAmount#,</isNotNull>
-			<isNotNull  property="paymentType">#paymentType#,</isNotNull>
-	 		<isNotNull  property="ledgerId">#ledgerId#,</isNotNull> 
-	 		<isNotNull  property="operator">#operator#,</isNotNull>
-   			 creater,now()
+			<isNotEmpty  property="upperAmount">#upperAmount#,</isNotEmpty>
+			<isNotEmpty  property="paymentType">#paymentType#,</isNotEmpty>
+	 		<isNotEmpty  property="ledgerId">#ledgerId#,</isNotEmpty> 
+	 		<isNotEmpty  property="operator">#operator#,</isNotEmpty>
+   			 #creater#,now()
    		)
    	</insert>
    
    	<update id="updatePurchaseContractPaymentByPK" parameterClass="purchaseContractPayment">
    		UPDATE RS_PURCHASE_CONTRACT_PAYMENT
    		<dynamic prepend="SET">
-	  		<isNotNull prepend="," property="cashType">cash_type=#cashType#</isNotNull>
-	  		<isNotNull prepend="," property="auditedStatus">audited_status=#auditedStatus#</isNotNull>
+	  		<isNotEmpty prepend="," property="cashType">cash_type=#cashType#</isNotEmpty>
+	 		<isNotEmpty prepend="," property="ledgerId">ledger_id=#ledgerId#</isNotEmpty> 
 	  		<isNotNull prepend="," property="totalAmount">total_amount=#totalAmount#</isNotNull>
-			<isNotNull prepend="," property="upperAmount">amount_in_words=#upperAmount#</isNotNull>
-			<isNotNull prepend="," property="paymentType">payment_type=#paymentType#</isNotNull>
-	 		<isNotNull prepend="," property="ledgerId">ledger_id=#ledgerId#</isNotNull> 
-	 		<isNotNull prepend="," property="operator">operator=#operator#,modify_date= now()</isNotNull>
-  	 		<isNotNull  prepend="," property="reviser">reviser = #reviser#,revisedate = now() </isNotNull>
-  			<isNotNull  prepend="," property="verifier">verifier = #verifier#,verifydate = now() </isNotNull>
+			<isNotEmpty prepend="," property="upperAmount">amount_in_words=#upperAmount#</isNotEmpty>
+			<isNotEmpty prepend="," property="paymentType">payment_type=#paymentType#</isNotEmpty>
+	 		<isNotEmpty prepend="," property="ledgerId">ledger_id=#ledgerId#</isNotEmpty> 
+	 		<isNotEmpty prepend="," property="operator">operator=#operator#,modify_date= now()</isNotEmpty>
+  	 		<isNotEmpty  prepend="," property="reviser">reviser = #reviser#,revisedate = now() </isNotEmpty>
+  			<isNotEmpty  prepend="," property="verifier">verifier = #verifier#,verifydate = now() </isNotEmpty>
    		</dynamic>
-   		WHERE contract_id =#contractId#
+   		WHERE purchase_contract_id =#contractId#
    	</update>
    	<!-- 分页查询语句 -->
    	<select id="getPurchaseContractPaymentSplitPageBySQL" remapResults="true" parameterClass="java.lang.String" resultMap="purchaseContractPayment">
@@ -108,12 +108,18 @@
    	</delete>
    	<delete id="deletePurchaseContractPaymentByPK" parameterClass="java.lang.String">
    		DELETE FROM RS_PURCHASE_CONTRACT_PAYMENT
-   		WHERE contract_id =#contractId# 
+   		WHERE purchase_contract_id =#contractId# 
    	</delete>
+   	
+   	<!-- 根据合同编号获取合同支付行数 -->
+   	<select id="getPurchaseContractPaymentCountByContractId" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+   		SELECT COUNT(1) FROM RS_PURCHASE_CONTRACT_PAYMENT WHERE purchase_contract_id =#contractId# 
+   	</select>
+   	
    	
    	<update id="updateStatusByContractId" parameterClass="purchaseContractPayment">
    		UPDATE RS_PURCHASE_CONTRACT_PAYMENT
-   		SET status=#stats# <isNotNull property="reviser">,reviser = #reviser#,revisedate = now() </isNotNull>
-   		WHERE contract_id =#contractId# 
+   		SET status=#status# <isNotEmpty property="reviser">,reviser = #reviser#,revisedate = now() </isNotEmpty>
+   		WHERE purchase_contract_id =#contractId# 
    	</update>
 </sqlMap>

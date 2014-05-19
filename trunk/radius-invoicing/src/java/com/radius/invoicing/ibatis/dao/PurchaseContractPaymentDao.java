@@ -66,5 +66,8 @@ public interface PurchaseContractPaymentDao {
 	 * @return
 	 */
 	public boolean updateStatusByContractId(PurchaseContractPayment payment);
+	
+	
+	Integer getPurchaseContractPaymentCountByContractId(String contractId);
 
 }

@@ -10,12 +10,12 @@ package com.radius.invoicing.ibatis.model;
  */
 public class PurchaseContractPayment extends ExtInfo{
 
-	private String   contractId;//合同编号
-	private String   cashType;//币种	
+	private String   contractId="";//合同编号
+	private String   cashType="";//币种	
 	private Integer  totalAmount;//合同总金额
-	private String   upperAmount;//大写金额
-	private String   paymentType;//付款方式
-	private String   auditedStatus;//审批状态
+	private String   upperAmount="";//大写金额
+	private String   paymentType="";//付款方式
+	private String   auditedStatus="";//审批状态
 	
 	private String   status ;//状态
 

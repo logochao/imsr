@@ -88,4 +88,8 @@ public class PurchaseContractPaymentDaoImpl extends BaseIbatisDaoImpl<PurchaseCo
 	public boolean updateStatusByContractId(PurchaseContractPayment payment){
 		return this.updateObject(payment, SQLMAPNAMESPACE+"updateStatusByContractId")==1;
 	}
+	
+	public Integer getPurchaseContractPaymentCountByContractId(String contractId){
+		return (Integer)this.getSqlMapClientTemplate().queryForObject(SQLMAPNAMESPACE+"getPurchaseContractPaymentCountByContractId", contractId);
+	}
 }

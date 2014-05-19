@@ -90,7 +90,7 @@
   </sql>
  
 	 <select id="getSupplierById" parameterClass="string" resultMap="supplier">
-	 	SELECT <include refid="supplierFileds"/>
+	 	SELECT *
 	 	FROM RS_SUPPLIER
 	 	WHERE supplier_id =#supplierId#
 	 </select>

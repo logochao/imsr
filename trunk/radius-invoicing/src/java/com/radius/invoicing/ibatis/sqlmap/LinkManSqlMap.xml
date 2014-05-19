@@ -8,7 +8,7 @@
 		link_man_id id,link_man_name name,pinyin pinyin,sex	sex,id_number numbers,link_mobile1 mobile1,link_mobile2	mobile2,link_mobile3 mobile3,link_tel tel,home_tel homeTel,
 		address address,qq qq,Email email,job_duty jobDuty,expertise expertise,job_title jobTitle,job_content jobContent,hobbies hobbies,post_code postCode, serv_company_id companyId,
 		serv_company_name companyName,customer_property	customerProperty,customer_illustrate customerIllustrate,office_address officeAddress, mome	mome,staff_id staff, 
-		creater creater,createdate 	createdate,reviser reviser,revisedate revisedate,verifier	verifydate
+		creater creater,createdate 	createDate,reviser reviser,revisedate reviseDate,verifier	verifyDate
 	</sql>
 
 	<resultMap id="linkManMap" class="linkMan">
@@ -39,11 +39,11 @@
 		<result column="mome" jdbcType="text" 	javaType="java.lang.String" property="memo" />
 		<result column="staff_id" jdbcType="char"	javaType="java.lang.String" property="staff" />
 		<result column="creater" jdbcType="char" javaType="java.lang.String" property="creater" />
-		<result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createdate" />
+		<result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createDate" />
 		<result column="reviser" jdbcType="char" javaType="java.lang.String" property="reviser" />
-		<result column="revisedate" jdbcType="datetime"	javaType="java.util.Date" property="revisedate" />
+		<result column="revisedate" jdbcType="datetime"	javaType="java.util.Date" property="reviseDate" />
 		<result column="verifier" jdbcType="char"	javaType="java.lang.String" property="verifier" />
-		<result column="verifydate" jdbcType="datetime" javaType="java.util.Date" property="verifydate" />
+		<result column="verifydate" jdbcType="datetime" javaType="java.util.Date" property="verifyDate" />
 	</resultMap>
 
 	<sql id="whereLike">
@@ -78,8 +78,7 @@
 	</sql>
 
 	<select id="getLinkManById" parameterClass="java.lang.Integer" resultMap="linkManMap">
-		SELECT
-		<include refid="linkManFileds" />
+		SELECT *
 		FROM RS_LINK_MAN WHERE link_man_id =#id#
 	</select>
 

@@ -5,7 +5,7 @@
   <typeAlias alias="categoryCode" type="com.radius.invoicing.ibatis.model.CategoryCode" />
   
   <sql id="categoryCodeFileds">
-  	 category_id id, category_name name,category_type parentId,creater creater,createdate createdate,reviser reviser,revisedate revisedate,verifier verifydate
+  	 category_id id, category_name name,category_type parentId,creater creater,createdate createDate,reviser reviser,reviseDate revisedate,verifier verifyDate
   </sql>
   
   <resultMap id="categoryCode" class="categoryCode">
@@ -13,11 +13,11 @@
     <result column="category_name" jdbcType="varchar" javaType="java.lang.String" property="name" />
     <result column="category_type" jdbcType="int" javaType="java.lang.Integer" property="parentId" />
     <result column="creater" jdbcType="char" javaType="java.lang.String" property="creater" />
-    <result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createdate" />
+    <result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createDate" />
     <result column="reviser" jdbcType="char" javaType="java.lang.String" property="reviser" />
-    <result column="revisedate" jdbcType="datetime" javaType="java.util.Date" property="revisedate" />
+    <result column="revisedate" jdbcType="datetime" javaType="java.util.Date" property="reviseDate" />
     <result column="verifier" jdbcType="char" javaType="java.lang.String" property="verifier" />    
-    <result column="verifydate" jdbcType="datetime" javaType="java.util.Date" property="verifydate"/>
+    <result column="verifydate" jdbcType="datetime" javaType="java.util.Date" property="verifyDate"/>
   </resultMap>
   
   <select id="getCategoryCodeById" parameterClass="int" resultClass="categoryCode">
