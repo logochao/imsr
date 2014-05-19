@@ -5,7 +5,7 @@
   <typeAlias alias="account" type="com.radius.invoicing.ibatis.model.Account" />
   
   <sql id="accountFileds">
-  	 ledger_id id,ledger_name name,belong_institution institution,father_ledger father,creater creater,createdate createdate,reviser reviser,revisedate revisedate,verifier verifydate
+  	 ledger_id id,ledger_name name,belong_institution institution,father_ledger father,creater creater,createdate createDate,reviser reviser,revisedate reviseDate,verifier verifyDate
   </sql>
   
   <resultMap id="account" class="account">
@@ -14,23 +14,23 @@
     <result column="belong_institution" jdbcType="char" javaType="java.lang.String" property="institution" />
     <result column="father_ledger" jdbcType="char" javaType="java.lang.String" property="father"/>
     <result column="creater" jdbcType="char" javaType="java.lang.String" property="creater" />
-    <result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createdate" />
+    <result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createDate" />
     <result column="reviser" jdbcType="char" javaType="java.lang.String" property="reviser" />
-    <result column="revisedate" jdbcType="datetime" javaType="java.util.Date" property="revisedate" />
+    <result column="revisedate" jdbcType="datetime" javaType="java.util.Date" property="reviseDate" />
     <result column="verifier" jdbcType="char" javaType="java.lang.String" property="verifier" />    
-    <result column="verifydate" jdbcType="datetime" javaType="java.util.Date" property="verifydate"/>
+    <result column="verifydate" jdbcType="datetime" javaType="java.util.Date" property="verifyDate"/>
   </resultMap>
   
   <!-- 根据帐套编号获取账套信息 -->
   <select id="getLedgerById" parameterClass="string" resultMap="account">
-  	SELECT <include refid="accountFileds"/>
+  	SELECT *
   	FROM RS_ACCOUNT
   	WHERE ledger_id =#id#
   </select>
   <!-- end -->
   
   <!-- 获取所有帐套信息 -->
-  <select id="getAccountAllList" resultMap="account">
+  <select id="getAccountAllList" resultClass="account">
   	SELECT <include refid="accountFileds"/>
   	FROM RS_ACCOUNT
   </select>

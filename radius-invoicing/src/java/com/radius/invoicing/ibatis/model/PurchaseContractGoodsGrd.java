@@ -10,20 +10,20 @@ package com.radius.invoicing.ibatis.model;
  */
 public class PurchaseContractGoodsGrd extends ExtInfo{
 
-	private String  	contractId;//合同编号
-	private String  	goodsId;//商品编号
-	private String  	goodsName;//商品名称
+	private String  	contractId="";//合同编号
+	private String  	goodsId="";//商品编号
+	private String  	goodsName="";//商品名称
 	private Integer     specId;//规格编码
-	private String  	unit;//包装单位(规格)
+	private String  	unit="";//包装单位(规格)
 	private Integer  	priceUnit;//折合单位
-	private String  	equivalentUnit;//折合单位
+	private String  	equivalentUnit="";//折合单位
 	private Integer  	priceEu;//折合单位单价
 	private Integer  	quantityEuPerUnit;//包装单位折合数量
 	private Integer  	quantityUnit;//数量
 	private Integer  	quantityEu;//折合数量
 	private Integer  	amount;//金额
-	private String  	memo;//商品备注
-	private String 		status;//状态
+	private String  	memo="";//商品备注
+	private String 		status="";//状态
 	
 	public PurchaseContractGoodsGrd() {
 	}

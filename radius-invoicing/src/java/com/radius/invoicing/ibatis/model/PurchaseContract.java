@@ -76,6 +76,7 @@ public class PurchaseContract extends ExtInfo{
 	public void setDeliveryPoint(String deliveryPoint) {
 		this.deliveryPoint = deliveryPoint;
 	}
+	@JsonSerialize(using=JsonDateSerializer.class)
 	public Date getEffectDate() {
 		return effectDate;
 	}
@@ -161,6 +162,7 @@ public class PurchaseContract extends ExtInfo{
 	public void setPurchaser(String purchaser) {
 		this.purchaser = purchaser;
 	}
+	@JsonSerialize(using=JsonDateSerializer.class)
 	public Date getSignTime() {
 		return signTime;
 	}

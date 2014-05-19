@@ -35,28 +35,28 @@
   
   <sql id="whereLike">
   	<dynamic prepend="where">
-  		1=1  AND
-  		<isNotNull prepend="and" property="id">money_list_id=#id#</isNotNull>
-  		<isNotEmpty prepend="and" property="name">money_list_nameLIKE CONCAT('%',#name#,'%')</isNotEmpty>
-  		<isNotEmpty prepend="and" property="contractId">contract_id=#contractId#</isNotEmpty>
-  		<isNotEmpty prepend="and" property="batch">money_list_batch=#batch#</isNotEmpty>
-  		<isNotNull prepend="and" property="amount">amount=#amount#</isNotNull>
-		<isNotEmpty prepend="and" property="upperAmount">amount_in_word=#upperAmount#</isNotEmpty>
-		<isNotEmpty prepend="and" property="receiveType">pay_receive_type=#receiveType#</isNotEmpty>
-		<isNotNull prepend="and" property="validityDate">validity_date=#validityDate#</isNotNull>
- 		<isNotEmpty prepend="and" property="ledgerId">ledger_id=#ledgerId#</isNotEmpty> 
- 		<isNotEmpty prepend="and" property="status">status=#status#</isNotEmpty> 
- 		<isNotEmpty prepend="and" property="memo">memo=#memo#</isNotEmpty> 
+  		1=1  
+  		<isNotNull  property="id"> AND money_list_id=#id#</isNotNull>
+  		<isNotEmpty  property="name"> AND money_list_nameLIKE CONCAT('%',#name#,'%')</isNotEmpty>
+  		<isNotEmpty  property="contractId"> AND contract_id=#contractId#</isNotEmpty>
+  		<isNotEmpty  property="batch"> AND money_list_batch=#batch#</isNotEmpty>
+  		<isNotNull  property="amount"> AND amount=#amount#</isNotNull>
+		<isNotEmpty  property="upperAmount"> AND amount_in_word=#upperAmount#</isNotEmpty>
+		<isNotEmpty  property="receiveType"> AND pay_receive_type=#receiveType#</isNotEmpty>
+		<isNotNull  property="validityDate"> AND validity_date=#validityDate#</isNotNull>
+ 		<isNotEmpty  property="ledgerId"> AND ledger_id=#ledgerId#</isNotEmpty> 
+ 		<isNotEmpty  property="status"> AND status=#status#</isNotEmpty> 
+ 		<isNotEmpty  property="memo"> AND memo=#memo#</isNotEmpty> 
   	</dynamic>
   </sql>
  
-	 <select id="getPurchaseContractPaymentGrdByPk" parameterClass="java.lang.Integer" resultMap="purchaseContractPaymentGrd">
+	 <select id="getPurchaseContractPaymentGrdByPk" parameterClass="java.lang.Integer" resultClass="purchaseContractPaymentGrd">
 	 	SELECT <include refid="purchaseContractPaymentGrdFileds"/>
 	 	FROM RS_PURCHASE_CONTRACT_PAYMENT_GRD
 	 	WHERE money_list_id =#id# 
 	 </select>
 	 
-	 <select id="getPurchaseContractPaymentGrd" parameterClass="purchaseContractPaymentGrd" resultMap="purchaseContractPaymentGrd">
+	 <select id="getPurchaseContractPaymentGrd" parameterClass="purchaseContractPaymentGrd" resultClass="purchaseContractPaymentGrd">
 	 	SELECT <include refid="purchaseContractPaymentGrdFileds"/>
 	 	FROM RS_PURCHASE_CONTRACT_PAYMENT_GRD
 	 	<include refid="whereLike"/>
@@ -130,9 +130,19 @@
    		DELETE FROM RS_PURCHASE_CONTRACT_PAYMENT_GRD
    		WHERE money_list_id =#id# 
    	</delete>
+   	<!-- 根据合同编号获取销售支付列表行数 -->
+   	<select id="getPurchaseContractPaymentGrdCountByContractId" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+   		SELECT COUNT(1)  FROM RS_PURCHASE_CONTRACT_PAYMENT_GRD WHERE contract_id=#contractId#
+   	</select>
+   	
    	<update id="updatePurchaseContractPaymentGrdStatusBycontractId" parameterClass="purchaseContractPaymentGrd">
    		UPDATE RS_PURCHASE_CONTRACT_PAYMENT_GRD
-   		SET STATUS=#stats# <isNotEmpty  property="reviser">,reviser = #reviser#,revisedate = now() </isNotEmpty>
+   		SET STATUS=#status# <isNotEmpty  property="reviser">,reviser = #reviser#,revisedate = now() </isNotEmpty>
    		WHERE contract_id=#contractId#
    	</update>
+   	
+   	<delete id="deletePurchaseContractPaymentGrdByContractId" parameterClass="java.lang.String">
+   		DELETE FROM RS_PURCHASE_CONTRACT_PAYMENT_GRD
+   		WHERE contract_id=#contractId#
+   	</delete>
 </sqlMap>

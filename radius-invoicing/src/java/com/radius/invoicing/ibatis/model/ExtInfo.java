@@ -18,14 +18,14 @@ import com.radius.base.BaseEntity;
 public class ExtInfo extends BaseEntity{
 
 	private String		backup="";//备用
-	private String  	ledgerId;//账套编号
-	private String 		operator;//创建员
+	private String  	ledgerId="";//账套编号
+	private String 		operator="";//创建员
 	private Date 		modifyDate;//修改日期
 	private String 		creater;//创建人
 	private Date		createDate;//创建时间
-	private String 		reviser;//审核人
+	private String 		reviser="";//审核人
 	private Date 		reviseDate;//审核时间
-	private String 		verifier;//复核人
+	private String 		verifier="";//复核人
 	private Date 		verifyDate;//复核时间
 	
 	@JsonIgnore

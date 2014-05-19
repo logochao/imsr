@@ -67,4 +67,9 @@ public interface PurchaseContractPaymentGrdDao {
 	 * @return
 	 */
 	public boolean updatePurchaseContractPaymentGrdStatusBycontractId(PurchaseContractPaymentGrd purchaseContractPaymentGrd);
+	
+	
+	Integer getPurchaseContractPaymentGrdCountByContractId(String contractId);
+	
+	public boolean deletePurchaseContractPaymentGrdByContractId(String contractId);
 }

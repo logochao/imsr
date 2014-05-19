@@ -6,7 +6,7 @@
   
   <sql id="supplierGoodsFileds">
     supplier_id supplierId,goods_id goodsId,ledger_id ledgerId,
-    creater creater,createdate createdate,reviser reviser,revisedate revisedate,verifier verifydate
+    creater creater,createdate createDate,reviser reviser,revisedate reviseDate,verifier verifyDate
   </sql>
   
   <resultMap id="supplierGoods" class="supplierGoods">
@@ -14,19 +14,19 @@
     <result column="goods_id" jdbcType="char" javaType="java.lang.String" property="goodsId" />
     <result column="ledger_id" jdbcType="char" javaType="java.lang.String" property="ledgerId" />
     <result column="creater" jdbcType="char" javaType="java.lang.String" property="creater" />
-    <result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createdate" />
+    <result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createDate" />
     <result column="reviser" jdbcType="char" javaType="java.lang.String" property="reviser" />
-    <result column="revisedate" jdbcType="datetime" javaType="java.util.Date" property="revisedate" />
+    <result column="revisedate" jdbcType="datetime" javaType="java.util.Date" property="reviseDate" />
     <result column="verifier" jdbcType="char" javaType="java.lang.String" property="verifier" />    
-    <result column="verifydate" jdbcType="datetime" javaType="java.util.Date" property="verifydate"/>
+    <result column="verifydate" jdbcType="datetime" javaType="java.util.Date" property="verifyDate"/>
   </resultMap>
   
   <sql id="whereLike">
   	<dynamic prepend="where">
-  		1=1  AND
-  		<isNotEmpty prepend="and" property="supplierId">supplier_id=#supplierId#</isNotEmpty>
-		<isNotEmpty prepend="and" property="linkType">goods_id=#goodsId#</isNotEmpty>
-		<isNotEmpty prepend="and" property="ledgerId">ledger_id=#ledgerId#</isNotEmpty>
+  		1=1 
+  		<isNotEmpty property="supplierId"> AND supplier_id=#supplierId#</isNotEmpty>
+		<isNotEmpty  property="linkType"> AND goods_id=#goodsId#</isNotEmpty>
+		<isNotEmpty property="ledgerId"> AND ledger_id=#ledgerId#</isNotEmpty>
   	</dynamic>
   </sql>
    
@@ -56,7 +56,7 @@
    		<include refid="whereLike"/>
    	</update>
    	<select id="getSupplierGoodsByCondition" parameterClass="supplierGoods" resultMap="supplierGoods">
-   		SELECT <include refid="supplierGoodsFileds"/>
+   		SELECT *
    		FROM RS_SUPPLIER_GOODS
    		<include refid="whereLike"/>
    	</select>

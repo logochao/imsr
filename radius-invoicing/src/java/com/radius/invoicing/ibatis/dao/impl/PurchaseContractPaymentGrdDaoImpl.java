@@ -85,4 +85,13 @@ public class PurchaseContractPaymentGrdDaoImpl extends BaseIbatisDaoImpl<Purchas
 	public boolean updatePurchaseContractPaymentGrdStatusBycontractId(PurchaseContractPaymentGrd purchaseContractPaymentGrd){
 		return this.updateObject(purchaseContractPaymentGrd, SQLMAPNAMESPACE+"updatePurchaseContractPaymentGrdStatusBycontractId")==1;
 	}
+	
+	
+	public Integer getPurchaseContractPaymentGrdCountByContractId(String contractId){
+		return (Integer)this.getSqlMapClientTemplate().queryForObject(SQLMAPNAMESPACE+"getPurchaseContractPaymentGrdCountByContractId", contractId);
+	}
+	
+	public boolean deletePurchaseContractPaymentGrdByContractId(String contractId){
+		return this.deleteObject(contractId, SQLMAPNAMESPACE+"deletePurchaseContractPaymentGrdByContractId")==1;
+	}
 }

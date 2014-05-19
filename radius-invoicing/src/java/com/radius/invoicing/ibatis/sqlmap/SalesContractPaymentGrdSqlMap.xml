@@ -33,7 +33,7 @@
   
   <sql id="whereLike">
   	<dynamic prepend="where">
-  		1=1  AND
+  		1=1  
   		<isNotNull  property="id"> AND money_list_id=#id#</isNotNull>
   		<isNotEmpty property="name"> AND money_list_name  LIKE CONCAT('%',#name#,'%')</isNotEmpty>
   		<isNotEmpty  property="contractId"> AND contract_id=#contractId#</isNotEmpty>

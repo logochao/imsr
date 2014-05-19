@@ -69,5 +69,10 @@ public interface PurchaseContractGoodsGrdDao {
 	 * @return
 	 */
 	public boolean updatePurchaseContractGoodsGrdStatusByContractId(PurchaseContractGoodsGrd purchaseContractGoodsGrd);
+	
+	Integer getPurchaseContractGoodsGrdCountByContractId(String contractId);
+	
+	
+	boolean deletePurchaseContractGoodsGrdByContractId(String contractId);
 
 }
