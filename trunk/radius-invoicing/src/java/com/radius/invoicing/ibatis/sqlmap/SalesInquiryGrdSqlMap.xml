@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="salesInquiryGrdSqlMap">
+
+  <typeAlias alias="salesInquiryGrd" type="com.radius.invoicing.ibatis.model.SalesInquiryGrd" />
+  
+  <sql id="salesInquiryGrdFileds">
+  	sales_inquiry_id salesInquiryId,goods_id goodsId,goods_name goodsName,spec_id specId,unit unit,quantity_of_unit quantityUnit,quantity_of_eu_per_unit quantityEuPerUnit,STATUS status,memo memo,
+  	ledger_id ledgerId,operator operator,motify_date modifyDate,creater creater,createdate createDate,reviser reviser,revisedate reviseDate,verifier verifier,verifydate verifyDate
+  </sql>
+  
+  <resultMap id="salesInquiryGrd" class="salesInquiryGrd">
+    <result column="sales_inquiry_id" jdbcType="char" javaType="java.lang.String" property="salesInquiryId" />
+	<result column="goods_id" jdbcType="char" javaType="java.lang.String" property="goodsId" />
+	<result column="goods_name" jdbcType="varchar" javaType="java.lang.String" property="goodsName" />
+	<result column="spec_id" jdbcType="int" javaType="java.lang.Integer" property="specId" />
+	<result column="unit" jdbcType="int" javaType="java.lang.Integer" property="unit" />
+	<result column="quantity_of_unit" jdbcType="int" javaType="java.lang.Integer" property="quantityUnit" />
+	<result column="quantity_of_eu_per_unit" jdbcType="int" javaType="java.lang.Integer" property="quantityEuPerUnit" />
+	<result column="STATUS" jdbcType="int" javaType="java.lang.Integer" property="status" />
+	<result column="memo" jdbcType="text" javaType="java.lang.String" property="memo" />
+    
+    <result column="ledger_id" jdbcType="char" javaType="java.lang.String" property="ledgerId" />
+    <result column="operator" jdbcType="char" javaType="java.lang.String" property="operator" />
+    <result column="motify_date" jdbcType="datetime" javaType="java.util.Date" property="modifyDate" />
+    <result column="creater" jdbcType="char" javaType="java.lang.String" property="creater" />
+    <result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createDate" />
+    <result column="reviser" jdbcType="char" javaType="java.lang.String" property="reviser" />
+    <result column="revisedate" jdbcType="datetime" javaType="java.util.Date" property="reviseDate" />
+    <result column="verifier" jdbcType="char" javaType="java.lang.String" property="verifier" />    
+    <result column="verifydate" jdbcType="datetime" javaType="java.util.Date" property="verifyDate"/>
+    
+    
+  </resultMap>
+  
+  <sql id="whereLike">
+  	<dynamic prepend="where">
+  		1=1   
+  		<isNotEmpty  property="salesInquiryId"> AND sales_inquiry_id =#salesInquiryId#</isNotEmpty>
+		<isNotEmpty  property="goodsId"> AND goods_id =#goodsId#</isNotEmpty>
+		<isNotEmpty  property="goodsName"> AND goods_name LIKE CONCAT('%',#goodsName#,'%')</isNotEmpty>
+		<isNotNull  property="specId"> AND spec_id =#specId#</isNotNull>
+		<isNotNull  property="unit"> AND unit =#unit#</isNotNull>
+		<isNotNull  property="quantityUnit"> AND quantity_of_unit =#quantityUnit#</isNotNull>
+		<isNotNull  property="quantityEuPerUnit"> AND quantity_of_eu_per_unit =#quantityEuPerUnit#</isNotNull>
+		<isNotNull  property="status"> AND STATUS =#status#</isNotNull>
+		<isNotEmpty  property="memo"> AND memo =#memo#</isNotEmpty>
+ 		<isNotEmpty  property="ledgerId">  AND ledger_id=#ledgerId#</isNotEmpty> 
+  	</dynamic>
+  </sql>
+ 
+	 <select id="getSalesInquiryGrdByPk" parameterClass="java.util.Map" resultClass="salesInquiryGrd">
+	 	SELECT <include refid="salesInquiryGrdFileds"/>
+	 	FROM RS_SALES_INQUIRY_GRD
+	 	WHERE sales_inquiry_id =#salesInquiryId# and goods_id = #goodsId#
+	 </select>
+	 
+	 <select id="getSalesInquiryGrd" parameterClass="salesInquiryGrd" resultClass="salesInquiryGrd">
+	 	SELECT <include refid="salesInquiryGrdFileds"/>
+	 	FROM RS_SALES_INQUIRY_GRD
+	 	<include refid="whereLike"/>
+	 </select>
+   
+   	<insert id="insert" parameterClass="salesInquiryGrd">
+   		INSERT INTO RS_SALES_INQUIRY_GRD (
+			sales_inquiry_id,
+			goods_id,
+			<isNotEmpty  property="goodsName">goods_name,</isNotEmpty>
+			<isNotNull  property="specId">spec_id,</isNotNull>
+			<isNotNull  property="unit">unit,</isNotNull>
+			<isNotNull  property="quantityUnit">quantity_of_unit,</isNotNull>
+			<isNotNull  property="quantityEuPerUnit">quantity_of_eu_per_unit,</isNotNull>
+			<isNotNull  property="status"> STATUS,</isNotNull>
+			<isNotEmpty  property="memo"> memo,</isNotEmpty>
+			<isNotEmpty  property="ledgerId">ledger_id,</isNotEmpty> 
+	 		<isNotEmpty  property="operator">operator,</isNotEmpty>
+	  	    creater,
+	  	    createdate
+   		)VALUES(
+			#salesInquiryId#,
+			#goodsId#,
+			<isNotEmpty  property="goodsName">#goodsName#,</isNotEmpty>
+			<isNotNull  property="specId">#specId#,</isNotNull>
+			<isNotNull  property="unit">#unit#,</isNotNull>
+			<isNotNull  property="quantityUnit">#quantityUnit#,</isNotNull>
+			<isNotNull  property="quantityEuPerUnit">#quantityEuPerUnit#,</isNotNull>
+			<isNotNull  property="status">#status#,</isNotNull>
+			<isNotEmpty  property="memo">#memo#,</isNotEmpty>
+			<isNotEmpty  property="ledgerId">#ledgerId#,</isNotEmpty> 
+	 		<isNotEmpty  property="operator">#operator#,</isNotEmpty>
+   			 #creater#,now()
+   		)
+   	</insert>
+   
+   	<update id="updateSalesInquiryGrd" parameterClass="salesInquiryGrd">
+   		UPDATE RS_SALES_INQUIRY_GRD
+   		<dynamic prepend="SET">
+			<isNotEmpty  prepend=","  property="goodsName"> goods_name LIKE CONCAT('%',#goodsName#,'%')</isNotEmpty>
+			<isNotNull  prepend=","   property="specId">  spec_id =#specId#</isNotNull>
+			<isNotNull  prepend=","   property="unit">  unit =#unit#</isNotNull>
+			<isNotNull  prepend=","   property="quantityUnit">  quantity_of_unit =#quantityUnit#</isNotNull>
+			<isNotNull  prepend=","   property="quantityEuPerUnit">  quantity_of_eu_per_unit =#quantityEuPerUnit#</isNotNull>
+			<isNotNull  prepend=","   property="status">  STATUS =#status#</isNotNull>
+			<isNotEmpty  prepend=","   property="memo">  memo =#memo#</isNotEmpty>
+			<isNotEmpty   prepend=","  property="ledgerId">ledger_id=#ledgerId#</isNotEmpty> 
+	 		<isNotEmpty   prepend=","  property="operator">operator=#operator#,modify_date= now()</isNotEmpty>
+  	 		<isNotEmpty   prepend=","  property="reviser">reviser = #reviser#,revisedate = now() </isNotEmpty>
+  			<isNotEmpty   prepend=","  property="verifier">verifier = #verifier#,verifydate = now() </isNotEmpty>
+   		</dynamic>
+   		WHERE sales_inquiry_id =#salesInquiryId# AND  goods_id =#goodsId#
+   	</update>
+   	
+   	<delete id="deleteSalesInquiryGrd" parameterClass="salesInquiryGrd">
+   		DELETE FROM RS_SALES_INQUIRY_GRD
+   		<include refid="whereLike"/>
+   	</delete>
+   	<delete id="deleteSalesInquiryGrdByPK" parameterClass="java.util.Map">
+   		DELETE FROM RS_SALES_INQUIRY_GRD
+   		WHERE sales_inquiry_id =#salesInquiryId# AND  goods_id =#goodsId# 
+   	</delete>
+   	
+   	<update id="updateStatusByPK" parameterClass="salesInquiryGrd">
+   		UPDATE RS_SALES_INQUIRY_GRD 
+		SET status=#status#
+		WHERE sales_inquiry_id =#salesInquiryId# AND  goods_id =#goodsId#
+   	</update>
+</sqlMap>

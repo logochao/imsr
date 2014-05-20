@@ -193,7 +193,7 @@
    		)
    	</insert>
    <select id="getCustomerMaxId" resultClass="java.lang.Integer">
-   		SELECT IFNULL((SELECT MAX(customer_id) FROM  RS_CUSTOMER),0) 
+   		SELECT IFNULL((SELECT	MAX(CAST(SUBSTRING(customer_id,2) AS SIGNED)) FROM RS_CUSTOMER ),0) 
    </select>
    	<update id="updateCustomerById" parameterClass="customer">
    		UPDATE RS_CUSTOMER
