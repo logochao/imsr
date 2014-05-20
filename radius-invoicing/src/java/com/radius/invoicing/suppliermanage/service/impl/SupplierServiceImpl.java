@@ -147,37 +147,32 @@ public class SupplierServiceImpl implements Constants, SupplierService {
 	public JsonUtils saveSupplierInfo(String key,Supplier supplier){
 		String message="操作失败";
 		boolean success =false;
-		try{
-			if(StringUtils.isNotBlank(supplier.getDeliveryNot())&&"1".equals(supplier.getDeliveryNot())){//是需要送货
-				supplier.setYesOrNo(YesOrNoEnums.YES);
-			}else{
-				supplier.setYesOrNo(YesOrNoEnums.NO);
-			}
-			
-			Object temp = supplierDao.getSupplierById(supplier.getSupplierId());
-			if(temp==null){
-				//insert
-				String id = supplierDao.getSupplierMaxId();
-				supplier.setSupplierId(SUPPLIER_PREFIX+id);//G0001
-				supplierDao.insertSupplier(supplier);
-				message="添加供应商信息操作成功...";
+		if(StringUtils.isNotBlank(supplier.getDeliveryNot())&&"1".equals(supplier.getDeliveryNot())){//是需要送货
+			supplier.setYesOrNo(YesOrNoEnums.YES);
+		}else{
+			supplier.setYesOrNo(YesOrNoEnums.NO);
+		}
+		
+		Object temp = supplierDao.getSupplierById(supplier.getSupplierId());
+		if(temp==null){
+			//insert
+			String id = supplierDao.getSupplierMaxId();
+			supplier.setSupplierId(SUPPLIER_PREFIX+id);//G0001
+			supplierDao.insertSupplier(supplier);
+			message="添加供应商信息操作成功...";
+			success=true;
+		}else{
+			success = supplierDao.updateSupplier(supplier);
+			message="更新供应商信息操作成功...";
+		}
+		if(success){
+			//3.构建联系人对象
+			List<LinkMan> list= SupplierCompent.getSupplierLinkManList(key, supplier);
+			if(!list.isEmpty()&&list.size()>0){
+				linkManDao.batchInsertLinkMan(list);
+				MemcacheClient.delete(key);//清除memcached
 				success=true;
-			}else{
-				success = supplierDao.updateSupplier(supplier);
-				message="更新供应商信息操作成功...";
 			}
-			if(success){
-				//3.构建联系人对象
-				List<LinkMan> list= SupplierCompent.getSupplierLinkManList(key, supplier);
-				if(!list.isEmpty()&&list.size()>0){
-					linkManDao.batchInsertLinkMan(list);
-					MemcacheClient.delete(key);//清除memcached
-					success=true;
-				}
-			}
-		}catch(Exception e){
-			logger.error(e);
-			e.printStackTrace();
 		}
 		//--------------------------返回操作结果 -----------------------------------
 		JsonUtils result = new  JsonUtils(success,message);
