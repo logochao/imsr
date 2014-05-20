@@ -217,7 +217,7 @@
    	</delete>
    	
    	<select id="getSupplierMaxId" resultClass="java.lang.Integer">
-   		SELECT IFNULL((SELECT MAX(supplier_id) FROM  RS_SUPPLIER),0) 
+   		SELECT IFNULL((SELECT	MAX(CAST(SUBSTRING(supplier_id,2) AS SIGNED)) FROM RS_SUPPLIER ),0) 
    </select>
    	
 </sqlMap>
