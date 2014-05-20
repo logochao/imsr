@@ -36,7 +36,7 @@ public class SupplierController extends BaseController {
 	private final String prefix="/jsp/business/supplier/";
 	
 	private String supplier_manager_view= null;//客户信息管理界面
-//	private Logger logger=Logger.getLogger(this.getClass());
+	private Logger logger=Logger.getLogger(this.getClass());
 	
 	@Autowired(required=false)
 	@Qualifier("supplierServiceImpl")
@@ -96,11 +96,18 @@ public class SupplierController extends BaseController {
 		
 		supplier.setLedgerId(ledgerId);
 		supplier.setCreater(creater);
-		
-		JsonUtils result = supplierService.saveSupplierInfo(key, supplier);
-		supplier =(Supplier)result.getChild();
-		supplier.setDeliveryNot(Long.toString(System.currentTimeMillis(), 36));//获取新的临时客户编号
-		result.setChild(supplier);
+		JsonUtils result = null;
+		try{
+		     result = supplierService.saveSupplierInfo(key, supplier);
+		     supplier =(Supplier)result.getChild();
+		     supplier.setDeliveryNot(Long.toString(System.currentTimeMillis(), 36));//获取新的临时客户编号
+		     result.setChild(supplier);
+		}catch(Exception e){
+			e.printStackTrace();
+			logger.error(e);
+			result = new JsonUtils();
+			result.setMessage("操作失败...");
+		}
 		return result;
 	}
 	
