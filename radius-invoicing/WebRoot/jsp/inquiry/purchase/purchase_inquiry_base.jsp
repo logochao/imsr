@@ -71,7 +71,6 @@ function clearPurchaseInquiryBaseInfo(){
  *@params{} row_data
  **/
 function setPurchaseInquiryBaseInfo(row_data){
-		console.info(row_data);
 		$('#purchase_inquiry_base_id').val(row_data.purchaseInquiryId);//销售询价单编号
 		$('#purchase_inquiry_base_supplier_id').val(row_data.supplierId);//客户编号
 		$('#purchase_inquiry_base_supplier_name').val(row_data.supplierName);//客户简称
