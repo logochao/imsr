@@ -70,9 +70,9 @@ $(function(){
 		editable:false
 	});
 	
-	$('#purchase_inquiry_goods_detail_product_goods_company_search_btn').on('click',function(){
-		contract_sales_goods_detail_compay_dialog.dialog('open');
-	});
+<%--	$('#purchase_inquiry_goods_detail_product_goods_company_search_btn').on('click',function(){--%>
+<%--		contract_sales_goods_detail_compay_dialog.dialog('open');--%>
+<%--	});--%>
 	
 	$('#purchase_inquiry_goods_detail_product_ok_btn').on('click',function(){
 		var	rows = purchase_inquiry_goods_detail_product_grd.datagrid('getSelections');//获取所有选择的行记录
@@ -81,7 +81,7 @@ $(function(){
  		}else if(rows&&rows.length==1){
  			//1将数据加载到指定的界面
  			var row=rows[0];
- 			resetCustomerInquiryGoodsDetail(row);//清空商品明细表单
+ 			resetPurchaseInquiryGoodsDetail(row);//清空商品明细表单
  			//2将显示界面关闭
  			purchase_inquiry_goods_detail_product_dialog.dialog('close');
  		} 
@@ -111,11 +111,11 @@ function goodsStatusFormatter(value,row,index){
 				<tr>
 					<th>商品状态</th>
 					<td><input  id="purchase_inquiry_goods_detail_product_goods_status" style="border:1px solid #95B8E7;"/></td>
-					<th>生产厂商</th>
+					<th>供应商</th>
 					<td>
 						<input  id="purchase_inquiry_goods_detail_product_goods_company_name" style="border:1px solid #95B8E7;float:left;"/>
 						<input type="hidden"  id="purchase_inquiry_goods_detail_product_goods_company_id"/>
-						<a id="purchase_inquiry_goods_detail_product_goods_company_search_btn" href="#" class="easyui-linkbutton" plain="true" from="0"><font style="font-size:3ex">...</font></a>	
+<%--						<a id="purchase_inquiry_goods_detail_product_goods_company_search_btn" href="#" class="easyui-linkbutton" plain="true" from="0"><font style="font-size:3ex">...</font></a>	--%>
 					</td>
 					<td colspan="2">
 						<div style="float: left;">
@@ -132,4 +132,4 @@ function goodsStatusFormatter(value,row,index){
 	<div id="purchase_inquiry_goods_detail_product_grd">
 	</div>
 </div>
-<jsp:include flush="true" page="purchase_inquiry_goods_detail_compay.jsp"></jsp:include>
+<%--<jsp:include flush="true" page="purchase_inquiry_goods_detail_compay.jsp"></jsp:include>--%>
