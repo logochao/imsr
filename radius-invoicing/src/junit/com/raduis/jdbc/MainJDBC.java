@@ -266,29 +266,29 @@ public class MainJDBC {
     
     public static void main(String[] args) throws InterruptedException {
         MainJDBC jdbc=new MainJDBC();
-        
+        String tableName="rs_supplier_quotation";
         System.err.println("-------------------生成查询列字段SQL语句----------------------");
-        String content=jdbc.buildSQLFileds("rs_purchase_contract");
+        String content=jdbc.buildSQLFileds(tableName);
         System.out.println(content);
         Thread.sleep(1000);
         System.err.println("-------------------生成insert SQL 语句----------------------");
-        content=jdbc.insertSQL("rs_purchase_contract");
+        content=jdbc.insertSQL(tableName);
         System.out.println(content);
         Thread.sleep(1000);
         System.err.println("-------------------生成update SQL 语句----------------------");
-        content=jdbc.updateSQL("rs_purchase_contract");
+        content=jdbc.updateSQL(tableName);
         System.out.println(content);
         Thread.sleep(1000);
         System.err.println("-------------------生成Where SQL 语句----------------------");
-        content=jdbc.buildWhereConditionSQL("rs_purchase_contract");
+        content=jdbc.buildWhereConditionSQL(tableName);
         System.out.println(content);
         Thread.sleep(1000);
         System.err.println("-------------------生成ibatis resultMap 结构----------------------");
-        content=jdbc.buildResultMap("rs_purchase_contract");
+        content=jdbc.buildResultMap(tableName);
         System.out.println(content);  
         Thread.sleep(1000);
         System.err.println("-------------------生成class 类属性----------------------");
-        content=jdbc.buildClassFileds("rs_purchase_contract");
+        content=jdbc.buildClassFileds(tableName);
         System.out.println(content); 
     }
 }
