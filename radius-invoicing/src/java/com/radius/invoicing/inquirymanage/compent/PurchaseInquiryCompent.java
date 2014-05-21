@@ -10,8 +10,8 @@ import org.apache.log4j.Logger;
 
 import com.radius.base.cache.memcache.MemcacheClient;
 import com.radius.invoicing.enums.GoodsInquiryTypeEnums;
-import com.radius.invoicing.ibatis.model.SalesInquiry;
-import com.radius.invoicing.ibatis.model.SalesInquiryGrd;
+import com.radius.invoicing.ibatis.model.PurchaseInquiry;
+import com.radius.invoicing.ibatis.model.PurchaseInquiryGrd;
 
 /**
  * @author <a href="mailto:goodluck.sunlight@gmail.com">陈波宁</a>
@@ -19,29 +19,29 @@ import com.radius.invoicing.ibatis.model.SalesInquiryGrd;
  * Copyright (c) 2013 by 陈波宁.<br/>
  * 类说明
  */
-@SuppressWarnings("unchecked")
-public class SalesInquiryCompent {
+public class PurchaseInquiryCompent {
 
-	private static Logger logger=Logger.getLogger(SalesInquiryCompent.class);
+	private static Logger logger=Logger.getLogger(PurchaseInquiryCompent.class);
 	
-	public static List<SalesInquiryGrd> getMemcachedSalesInquiryGrd(String cacheKey,SalesInquiry salesInquiry,String inquiryType){
-		List<SalesInquiryGrd> list=new ArrayList<SalesInquiryGrd>();
-		Map<String, SalesInquiryGrd> memcached=(Map<String, SalesInquiryGrd>)MemcacheClient.get(cacheKey);
+	@SuppressWarnings("unchecked")
+	public static List<PurchaseInquiryGrd> getMemcachedPurchaseInquiryGrd(String cacheKey,PurchaseInquiry purchaseInquiry,String inquiryType){
+		List<PurchaseInquiryGrd> list=new ArrayList<PurchaseInquiryGrd>();
+		Map<String, PurchaseInquiryGrd> memcached=(Map<String, PurchaseInquiryGrd>)MemcacheClient.get(cacheKey);
 		String key =null;
-		SalesInquiryGrd grd=null;
+		PurchaseInquiryGrd grd=null;
 		if(memcached!=null&&!memcached.isEmpty()&&memcached.size()>0){//表示缓存内容不为空
 			Iterator iter = memcached.entrySet().iterator();
-			String status=salesInquiry.getStatus();
-			String ledgerId=salesInquiry.getLedgerId();
-			String creater=salesInquiry.getCreater();
-			String operator=salesInquiry.getOperator();
-			String reviser=salesInquiry.getReviser();
-			String verifier=salesInquiry.getVerifier();
+			String status=purchaseInquiry.getStatus()+"";
+			String ledgerId=purchaseInquiry.getLedgerId();
+			String creater=purchaseInquiry.getCreater();
+			String operator=purchaseInquiry.getOperator();
+			String reviser=purchaseInquiry.getReviser();
+			String verifier=purchaseInquiry.getVerifier();
 			while (iter.hasNext()) { 
 				Map.Entry entry = (Map.Entry) iter.next();
 				key = (String) entry.getKey(); 
 				grd=memcached.get(key);
-				logger.info("销售询价商品列表 "+key +" ---> "+grd);
+				logger.info("采购询价商品列表 "+key +" ---> "+grd);
 				//设置状态 默认为询价中
 				if(StringUtils.isBlank(inquiryType)){//默认为空
 					grd.setStatus(GoodsInquiryTypeEnums.INQUIRYING.getId());
