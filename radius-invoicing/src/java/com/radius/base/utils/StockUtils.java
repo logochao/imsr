@@ -191,7 +191,7 @@ public class StockUtils implements Constants {
 		MemcacheClient.set(bf.toString(), new Integer(PURCHASE_INQUERY_SERI_NUM), CACHE_ONE_DAY_TIME);//将其缓存一天
 		//生成对象的销售合同编号
 		
-		bf.append(StringUtils.getSpecifyStringByLengthBefore(SALES_INQUERY_SERI_NUM+"", 2, "0"));//将其转换为2位字符 不够长度将其前面补0
+		bf.append(StringUtils.getSpecifyStringByLengthBefore(PURCHASE_INQUERY_SERI_NUM+"", 2, "0"));//将其转换为2位字符 不够长度将其前面补0
 		
 		return bf.toString();
 	}
