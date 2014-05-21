@@ -17,14 +17,14 @@ $(function(){
 			return ;
 		}
 		//1.验证必须内容
-		if(!validataCustomerInquiry()){
+		if(!validataPurchaseInquiry()){
 			return ;
 		}
 		
 		//2.提交表单数据通过ajax
-		var ajax_url = '${path}/inquiry/manager/salesInquiry/purchase_inquiry_infos_add.html';
-		var ajax_data=getCustomerInquiryFormAjaxDataFormatter(_status);
-		submitCustomerInquiryInfo(ajax_url,ajax_data);
+		var ajax_url = '${path}/inquiry/manager/purchaseInquiry/purchase_inquiry_infos_add.html';
+		var ajax_data=getPurchaseInquiryFormAjaxDataFormatter(_status);
+		submitPurchaseInquiryInfo(ajax_url,ajax_data);
 	});
 	//提交合同按钮
 	$('#purchase_inquiry_toolbar_ok_btn').on('click',function(){
@@ -33,12 +33,12 @@ $(function(){
 			return ;
 		}
 		//1.验证必须内容
-		if(!validataCustomerInquiry()){
+		if(!validataPurchaseInquiry()){
 			return ;
 		}
-		var ajax_url = '${path}/inquiry/manager/salesInquiry/purchase_inquiry_infos_add.html';
-		var ajax_data=getCustomerInquiryFormAjaxDataFormatter(_status);
-		submitCustomerInquiryInfo(ajax_url,ajax_data);
+		var ajax_url = '${path}/inquiry/manager/purchaseInquiry/purchase_inquiry_infos_add.html';
+		var ajax_data=getPurchaseInquiryFormAjaxDataFormatter(_status);
+		submitPurchaseInquiryInfo(ajax_url,ajax_data);
 	});
 	//打印按钮
 	$('#purchase_inquiry_toolbar_print_btn').on('click',function(){
@@ -59,7 +59,7 @@ $(function(){
 });
 
 
-function submitCustomerInquiryInfo(ajax_url,ajax_data){
+function submitPurchaseInquiryInfo(ajax_url,ajax_data){
 	$.ajax({
 		url:ajax_url,
 		method:'POST',
@@ -93,25 +93,25 @@ function submitCustomerInquiryInfo(ajax_url,ajax_data){
 /**
  * 验证客户询价
  **/
-function validataCustomerInquiry(){
+function validataPurchaseInquiry(){
 	var success=true;
 	if($('#purchase_inquiry_base_id').val().length==0){
-		$.messager.alert('提示','请点击新建按钮,新建客户询价信息....','error');
+		$.messager.alert('提示','请点击新建按钮,新建采购询价信息....','error');
 		return false;
 	}
-	if(!$('#purchase_inquiry_base_customer_id').val().length>0){
-		$.messager.alert('提示','请客户信息....','error');
+	if(!$('#purchase_inquiry_base_supplier_id').val().length>0){
+		$.messager.alert('提示','请供应商信息....','error');
 		return false;
 	}
 	//其他基本信息校验
 	return success;	
 }
 
-function getCustomerInquiryFormAjaxDataFormatter(_status){
+function getPurchaseInquiryFormAjaxDataFormatter(_status){
 	var json={
-			salesInquiryId		:$('#purchase_inquiry_base_id').val(),//销售询价单编号
-			customerId			:$('#purchase_inquiry_base_customer_id').val(),//客户编号
-			customerAb			:$('#purchase_inquiry_base_customer_name').val(),//客户简称
+			purchaseInquiryId	:$('#purchase_inquiry_base_id').val(),//销售询价单编号
+			supplierId			:$('#purchase_inquiry_base_supplier_id').val(),//客户编号
+			supplierName		:$('#purchase_inquiry_base_supplier_name').val(),//客户简称
 			cashType			:purchase_inquiry_base_cash_type.combobox("getValue"),//币种
 			address				:$('#purchase_inquiry_base_delivery_point').val(),//送货地址
 			man					:$('#purchase_inquiry_base_link_man').val(),//联系人

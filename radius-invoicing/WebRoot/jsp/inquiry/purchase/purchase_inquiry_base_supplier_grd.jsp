@@ -42,7 +42,7 @@ $(function(){
  *
  */
 function supplierPropetyFormatter(value,row,index){
-	return com.radius.datagrid.formatter(value,row,index,purchase_contract_base_supplier_dialog_supplier_property);
+	return com.radius.datagrid.formatter(value,row,index,purchase_inquiry_base_supplier_dialog_supplier_property);
 }
 </script>
 <div id="purchase_order_base_supplier_grd">

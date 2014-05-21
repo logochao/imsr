@@ -35,17 +35,17 @@ $(function(){
  	//客户查询对话框按钮
  	$('#purchase_inquiry_base_supplier_btn').on('click',function(){
  		if(validataSupplierInquiryBaseId()){
- 			purchase_inquiry_base_customer_dialog.dialog('open');
+ 			purchase_inquiry_base_supplier_dialog.dialog('open');
  		}
  	});
  	//联系人查询对话框按钮
  	$('#purchase_inquiry_base_supplier_link_man_btn').on('click',function(){
  		if(validataSupplierInquiryBaseId()){
-	 		if($('#purchase_inquiry_base_customer_id').val().length==0){
+	 		if($('#purchase_inquiry_base_supplier_id').val().length==0){
 				$.messager.alert('提示','请请选择客户信息...','error');
 				return;
 			}
-			purchase_inquiry_base_custmer_link_man_dialog.dialog('open');
+			purchase_inquiry_base_link_man_dialog.dialog('open');
  		}
  	});
 });
@@ -53,7 +53,7 @@ $(function(){
 /**
  *清空基本信息
  **/
-function clearCustomerInquiryBaseInfo(){
+function clearPurchaseInquiryBaseInfo(){
 	$("input[id^='purchase_inquiry_base_']").each(function(e){
 		$(this).val('');
 	})
@@ -70,11 +70,11 @@ function clearCustomerInquiryBaseInfo(){
  *设置客户询价基本信息
  *@params{} row_data
  **/
-function setCustomerInquiryBaseInfo(row_data){
-	console.info(row_data.salesman);
-		$('#purchase_inquiry_base_id').val(row_data.salesInquiryId);//销售询价单编号
-		$('#purchase_inquiry_base_customer_id').val(row_data.customerId);//客户编号
-		$('#purchase_inquiry_base_customer_name').val(row_data.customerAb);//客户简称
+function setPurchaseInquiryBaseInfo(row_data){
+		console.info(row_data);
+		$('#purchase_inquiry_base_id').val(row_data.purchaseInquiryId);//销售询价单编号
+		$('#purchase_inquiry_base_supplier_id').val(row_data.supplierId);//客户编号
+		$('#purchase_inquiry_base_supplier_name').val(row_data.supplierName);//客户简称
 		purchase_inquiry_base_cash_type.combobox("setValue",row_data.cashType);//币种
 		$('#purchase_inquiry_base_delivery_point').val(row_data.address);//送货地址
 		$('#purchase_inquiry_base_link_man').val(row_data.man);//联系人
@@ -145,5 +145,5 @@ function validataSupplierInquiryBaseId(){
 		</td>
 	</tr>
 </table>
-<jsp:include flush="true" page="purchase_inquiry_base_customer.jsp"></jsp:include>
-<jsp:include flush="true" page="purchase_inquiry_base_customer_link_man.jsp"></jsp:include>
+<jsp:include flush="true" page="purchase_inquiry_base_supplier.jsp"></jsp:include>
+<jsp:include flush="true" page="purchase_inquiry_base_supplier_link_man.jsp"></jsp:include>

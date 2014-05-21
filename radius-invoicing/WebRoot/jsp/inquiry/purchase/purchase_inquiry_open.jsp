@@ -11,9 +11,9 @@ $(function(){
    		rownumbers:true,
    		collapsible:true,
    		frozenColumns:[[
-			{field:'salesInquiryId',title:'询价单号',width:100},
-			{field:'customerId',title:'客户编号',width:100},
-			{field:'customerAb',title:'客户简称',width:100}
+			{field:'purchaseInquiryId',title:'询价单号',width:100},
+			{field:'supplierId',title:'客户编号',width:100},
+			{field:'supplierName',title:'客户简称',width:100}
    		]],
    		columns:[[
 			{field:'cashType',title:'币种',width:100},
@@ -41,13 +41,13 @@ $(function(){
  	});
 	//销售销售合同按钮
  	$('#purchase_inquiry_open_sales_inquiry_query_btn').on('click',function(){
- 		purchase_inquiry_open_purchase_inquiry_grd.datagrid('options').url='${path}/inquiry/manager/salesInquiry/purchase_inquiry_info_list.html';
+ 		purchase_inquiry_open_purchase_inquiry_grd.datagrid('options').url='${path}/inquiry/manager/purchaseInquiry/purchase_inquiry_info_list.html';
  		purchase_inquiry_open_purchase_inquiry_grd.datagrid('load',{
- 			salesInquiryId	:$('#purchase_inquiry_open_purchase_inquiry_id').val(),//客户询价编号
- 			customerAb		:$('#purchase_inquiry_open_purchase_inquiry_customer_ab').val(),//销售订单编号
- 			status			:purchase_inquiry_open_purchase_inquiry_status.combobox('getValue'),//状态
- 			mobile			:$('#purchase_inquiry_open_purchase_inquiry_link_mobile').val(),//手机号
- 			man				:$('#purchase_inquiry_open_purchase_inquiry_link_man').val()
+ 			purchaseInquiryId	:$('#purchase_inquiry_open_purchase_inquiry_id').val(),//客户询价编号
+ 			supplierName		:$('#purchase_inquiry_open_purchase_inquiry_supplier_name').val(),//销售订单编号
+ 			status				:purchase_inquiry_open_purchase_inquiry_status.combobox('getValue'),//状态
+ 			mobile				:$('#purchase_inquiry_open_purchase_inquiry_link_mobile').val(),//手机号
+ 			man					:$('#purchase_inquiry_open_purchase_inquiry_link_man').val()
  		});
  	});
  	
@@ -76,6 +76,8 @@ $(function(){
 			//禁用提交合同按钮
  			$("#purchase_inquiry_toolbar_ok_btn").attr("disabled",true);
 			$('#purchase_inquiry_toolbar_ok_btn').linkbutton('disable');
+	 		$('#purchase_inquiry_goods_grd_add_btn').linkbutton('disable');
+			$('#purchase_inquiry_goods_grd_delete_btn').linkbutton('disable');
  		}
  		//2.填充销售合同基本信息
  		setPurchaseInquiryBaseInfo(rows[0]);
@@ -83,8 +85,6 @@ $(function(){
  		setPurchaseInquiryGoodsDetail(rows[0]);//通过采购订单获
  		setPurchaseInquiryMemo(rows[0]);
  		//5.1将两按钮禁用
- 		$('#purchase_inquiry_goods_grd_add_btn').linkbutton('disable');
-		$('#purchase_inquiry_goods_grd_delete_btn').linkbutton('disable');
  		//清空查询列表
  		purchase_inquiry_open_purchase_inquiry_grd.datagrid('loadData',{ total: 0, rows: []});
  		purchase_inquiry_open_dialog.dialog('close');
@@ -96,12 +96,12 @@ $(function(){
 		<legend>筛选条件</legend>
 		<table class="table" width="99.5%">
 			<tr>
-				<th>客户询价号</th>
+				<th>采购询价号</th>
 				<td><input id="purchase_inquiry_open_purchase_inquiry_id" style="border:1px solid #95B8E7;"/></td>
 				<th>询价状态</th>
 				<td><input id="purchase_inquiry_open_purchase_inquiry_status" style="border:1px solid #95B8E7;"/></td>
-				<th>客户简称</th>
-				<td><input id="purchase_inquiry_open_purchase_inquiry_customer_ab" style="border:1px solid #95B8E7;"/></td>
+				<th>供应商简称</th>
+				<td><input id="purchase_inquiry_open_purchase_inquiry_supplier_name" style="border:1px solid #95B8E7;"/></td>
 			</tr>
 			<tr>
 				<th>联系人</th>

@@ -58,6 +58,12 @@ $(function(){
 	
 	//销售商品查询对话框按钮
 	$('#purchase_inquiry_goods_detail_btn').on('click',function(){
+		if($('#purchase_inquiry_base_supplier_id').val().length==0){
+			$.messager.alert('提示','请选择供应商信息...','error');
+			return ;
+		}
+		$('#purchase_inquiry_goods_detail_product_goods_company_name').val($('#purchase_inquiry_base_supplier_name').val());
+		$('#purchase_inquiry_goods_detail_product_goods_company_id').val($('#purchase_inquiry_base_supplier_id').val());
 		purchase_inquiry_goods_detail_product_dialog.dialog('open');
 	});
 	
@@ -81,7 +87,7 @@ $(function(){
 		if($(this).linkbutton('options').disabled){
 			return ;
 		}
-		var row_data=getCustomerInquiryGoodsGrdFormatter()//当前需要处理的数据
+		var row_data=getPurchaseInquiryGoodsGrdFormatter()//当前需要处理的数据
 		setPurchaseInquiryGoodsGrd(row_data);//该方法是判断是否是添加还是更新
 		purchase_inquiry_goods_detail_grd.datagrid('acceptChanges');//接受改变
 	});
@@ -133,7 +139,7 @@ function resetPurchaseInquiryGoodsDetail(row_data){
  **/
 function setPurchaseInquiryGoodsGrd(row_data){
 	var rows = purchase_inquiry_goods_detail_grd.datagrid('getRows');//获取当前页所有数据行
-	var url='${path}/inquiry/manager/salesInquiry/purchase_inquiry_product_info_memcached.html';//缓存地址
+	var url='${path}/inquiry/manager/purchaseInquiry/purchase_inquiry_product_info_memcached.html';//缓存地址
 	if(rows.length>0){//
 		//1.存在对应的数据则将其更新
 		var goodsId=row_data.goodsId;
@@ -161,12 +167,12 @@ function setPurchaseInquiryGoodsGrd(row_data){
 }
 
 /**
- * 获取销售询价商品列表需要的数据格式
+ * 获取采购询价商品列表需要的数据格式
  * @return json 
  **/
 function getPurchaseInquiryGoodsGrdFormatter(){
 	 var json={
-		salesInquiryId			:$('#purchase_inquiry_base_id').val(),//销售询价单编号
+		purchaseInquiryId		:$('#purchase_inquiry_base_id').val(),//销售询价单编号
 		goodsId					:$('#purchase_inquiry_goods_detail_id').val(),//商品编号
 		goodsName				:$('#purchase_inquiry_goods_detail_name').val(),//商品名称
 		specId					:purchase_inquiry_goods_detail_spec_type.combobox('getValue'),//规格编码
@@ -205,9 +211,9 @@ function updatePurchaseInquiryGoodsGrdRow(memcached_url,row_data,goodsId,row_ind
 	updateTargetDataGridRowData(purchase_inquiry_goods_detail_grd,row_data,row_index);
 	//2.更新memcached
 	var memcached_data={
-		purchaseOrderId:$('#purchase_inquiry_base_id').val(),//销售订单编号
-		goodsId:goodsId,//商品编号
-		quantityUnit:quantityUnit
+		purchaseInquiryId	:$('#purchase_inquiry_base_id').val(),//销售订单编号
+		goodsId				:goodsId,//商品编号
+		quantityUnit		:quantityUnit
 	};
 	addFormatterData2Memecached(memcached_url,memcached_data);
 }
@@ -216,8 +222,8 @@ function updatePurchaseInquiryGoodsGrdRow(memcached_url,row_data,goodsId,row_ind
  **/
 function setPurchaseInquiryGoodsDetail(row_data){
 	//1.获取商品列表
-	var ajax_url='${path}/inquiry/manager/salesInquiry/purchase_inquiry_goods_2_salesinquiryid.html';
-	var ajax_data={salesInquiryId:row_data.salesInquiryId};
+	var ajax_url='${path}/inquiry/manager/purchaseInquiry/purchase_inquiry_goods_2_purchaseinquiryid.html';
+	var ajax_data={purchaseInquiryId:row_data.purchaseInquiryId};
 	//移除缓存内容
 	purchase_inquiry_goods_detail_grd.datagrid('loadData', {total: 0,rows:[]});
 	removeFullPurchaseInquiryGoodsGrd();
@@ -233,7 +239,7 @@ function removeFullPurchaseInquiryGoodsGrd(){
 		url:'${path}/inquiry/manager/purchaseInquiry/purchase_inquiry_product_info_remove_memcached.html',//请求地址
 		method:'POST',
 		data:{
-			salesInquiryId:$('#purchase_inquiry_base_id').val(),//销售询价编号
+			purchaseInquiryId:$('#purchase_inquiry_base_id').val(),//销售询价编号
 			delete:true
 		},
 		success:function(r){
@@ -256,7 +262,7 @@ function removeProudctInfoMemcached(array){
 		url:'${path}/inquiry/manager/purchaseInquiry/purchase_inquiry_product_info_remove_memcached.html',
 		method:'POST',
 		data:{
-			salesInquiryId:$('#purchase_inquiry_base_id').val(),//销售询价单编号
+			purchaseInquiryId:$('#purchase_inquiry_base_id').val(),//销售询价单编号
 			memo:array.join(',')
 		},
 		success:function (data){//2.将dategrid的行数据进行删除操作
@@ -307,7 +313,7 @@ function getPurchaseInquiryGoodsDetail(ajax_url,ajax_data){
  **/
 function getPurchaseInquiryGoodsGrdRowFormatter(_data){
   var json={
-		salesInquiryId			:_data.salesInquiryId,//销售询价单编号
+		purchaseInquiryId		:_data.purchaseInquiryId,//销售询价单编号
 		goodsId					:_data.goodsId,//商品编号
 		goodsName				:_data.goodsName,//商品名称
 		specId					:_data.specId,//规格编码
