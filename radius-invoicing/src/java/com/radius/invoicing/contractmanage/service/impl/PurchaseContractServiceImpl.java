@@ -455,7 +455,7 @@ public class PurchaseContractServiceImpl implements Constants, PurchaseContractS
 	
 	public JsonUtils updatePurchaseContractInfo(PurchaseContract purchaseContract,List<PurchaseContractGoodsGrd>  productList,PurchaseContractPayment payment,List<PurchaseContractPaymentGrd> paymentList,List<ContractScanGrd> scanList){
 		boolean success=false;
-		String message="添加合同操作失败...";
+		String message="更新合同操作失败...";
 		String status 	=purchaseContract.getStatus();
 		String contractId =purchaseContract.getId();
 		//采购合同
