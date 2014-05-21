@@ -76,15 +76,15 @@ $(function(){
 			//禁用提交合同按钮
  			$("#customer_inquiry_toolbar_ok_btn").attr("disabled",true);
 			$('#customer_inquiry_toolbar_ok_btn').linkbutton('disable');
+	 		//将两按钮禁用
+	 		$('#customer_inquiry_goods_grd_add_btn').linkbutton('disable');
+			$('#customer_inquiry_goods_grd_delete_btn').linkbutton('disable');
  		}
  		//2.填充销售合同基本信息
  		setCustomerInquiryBaseInfo(rows[0]);
  		//5.订单明细、销售合同列表
  		setCustomerInquiryGoodsDetail(rows[0]);//通过采购订单获
  		setCustomerInquiryMemo(rows[0]);
- 		//5.1将两按钮禁用
- 		$('#customer_inquiry_goods_grd_add_btn').linkbutton('disable');
-		$('#customer_inquiry_goods_grd_delete_btn').linkbutton('disable');
  		//清空查询列表
  		customer_inquiry_open_customer_inquiry_grd.datagrid('loadData',{ total: 0, rows: []});
  		customer_inquiry_open_dialog.dialog('close');
