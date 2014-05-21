@@ -675,19 +675,94 @@ CREATE TABLE rs_instorage_order
 
 
 
+
+DROP TABLE IF EXISTS rs_sales_inquiry;
+
+/*==============================================================*/
+/* Table: rs_sales_inquiry   销售询价      */
+/*==============================================================*/
+create table rs_sales_inquiry
+(
+   sales_inquiry_id     CHAR(14) not null,
+   customer_id          CHAR(6),
+   customer_ab          VARCHAR(100),
+   cash_type            CHAR(4),
+   address              VARCHAR(100),
+   link_man             CHAR(4),
+   link_mobile          CHAR(11),
+   link_tel             VARCHAR(20),
+   link_fax             CHAR(20),
+   Inquiry_date         datetime,
+   latest_quotate_date  datetime,
+   salesman_id          CHAR(4),
+   status               CHAR(4),
+   memo                 text,
+   print_times          INTEGER,
+   newest_print_time    datetime,
+   newest_print_record  VARCHAR(100),
+   operator             CHAR(4),
+   motify_date          datetime,
+   ledger_id            CHAR(8),
+   creater              CHAR(4),
+   createdate           datetime,
+   reviser              CHAR(4),
+   revisedate           datetime,
+   verifier             CHAR(4),
+   verifydate           datetime,
+   primary key (sales_inquiry_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+状态：
+01：未确认
+00：已确认
+02：已报价，当全部商品均有供应商报价后，状态改变为已报价。
+
+DROP TABLE IF EXISTS rs_sales_inquiry_grd;
+
+/*==============================================================*/
+/* Table: rs_sales_Inquiry_grd   销售询价_明细      */
+/*==============================================================*/
+CREATE TABLE rs_sales_inquiry_grd
+(
+   sales_inquiry_id     CHAR(20) NOT NULL,
+   goods_id             CHAR(5) NOT NULL,
+   goods_name           VARCHAR(50),
+   spec_id              INT,
+   unit                 INT,
+   quantity_of_unit     INTEGER,
+   quantity_of_eu_per_unit INTEGER,
+   STATUS               CHAR(4),
+   memo                 TEXT,
+   ledger_id            CHAR(8),
+   operator             CHAR(4),
+   motify_date          DATETIME,
+   creater              CHAR(4),
+   createdate           DATETIME,
+   reviser              CHAR(4),
+   revisedate           DATETIME,
+   verifier             CHAR(4),
+   verifydate           DATETIME,
+   PRIMARY KEY (sales_inquiry_id,goods_id)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+ALTER TABLE rs_sales_inquiry_grd COMMENT '状态：
+00：已询价
+01：询价中
+生成询价单时，商品状态为01,当供应商报价后，商品状态为00';
+
 DROP TABLE IF EXISTS rs_purchase_inquiry;
 
 /*==============================================================*/
-/* Table: rs_purchase_inquiry       采购询价   */
+/* Table: rs_purchase_inquiry         采购询价       */
 /*==============================================================*/
 CREATE TABLE rs_purchase_inquiry
 (
    purchase_inquiry_id  CHAR(20) NOT NULL,
-   supplier_id          CHAR(6) NOT NULL,
+   supplier_id          CHAR(6),
    supplier_name        VARCHAR(50),
    cash_type            INT,
    address              TEXT,
-   link_man             VARCHAR(50),
+   link_man             INT,
    link_mobile          CHAR(11),
    link_tel             CHAR(20),
    link_fax             CHAR(20),
@@ -701,7 +776,7 @@ CREATE TABLE rs_purchase_inquiry
    newest_print_record  VARCHAR(100),
    operator             CHAR(4),
    motify_date          DATETIME,
-   ledger_id            CHAR(8) NOT NULL,
+   ledger_id            CHAR(8),
    creater              CHAR(4),
    createdate           DATETIME,
    reviser              CHAR(4),
@@ -710,11 +785,44 @@ CREATE TABLE rs_purchase_inquiry
    verifydate           DATETIME,
    PRIMARY KEY (purchase_inquiry_id)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
-
-ALTER TABLE rs_purchase_inquiry COMMENT '状态：
+alter table rs_purchase_inquiry comment '状态：
 01：未确认
 00：已确认
 02：已报价，当全部商品均有供应商报价后，状态改';
+
+DROP TABLE IF EXISTS rs_purchase_inquiry_grd;
+
+/*==============================================================*/
+/* Table: rs_purchase_inquiry_grd      采购询价列表            */
+/*==============================================================*/
+CREATE TABLE rs_purchase_inquiry_grd
+(
+   purchase_inquiry_id  CHAR(20) NOT NULL,
+   goods_id             CHAR(5) NOT NULL,
+   goods_name           VARCHAR(100),
+   spec_id              INT,
+   unit                 INT,
+   quantity_of_unit     INT,
+   STATUS               CHAR(4),
+   memo                 TEXT,
+   operator             CHAR(4),
+   motify_date          DATETIME,
+   ledger_id            CHAR(8),
+   creater              CHAR(4),
+   createdate           DATETIME,
+   reviser              CHAR(4),
+   revisedate           DATETIME,
+   verifier             CHAR(4),
+   verifydate           DATETIME,
+   PRIMARY KEY (purchase_inquiry_id, goods_id)
+)ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+状态：
+00：已询价
+01：询价中
+生成询价单时，商品状态为01,当供应商报价后，商品状态为00
+
+
 
 
 
