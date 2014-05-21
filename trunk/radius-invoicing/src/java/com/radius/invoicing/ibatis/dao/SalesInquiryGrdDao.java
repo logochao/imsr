@@ -74,5 +74,9 @@ public interface SalesInquiryGrdDao {
 	 * @param salesInquiryGrd
 	 */
 	public void deleteSalesInquiryGrd(SalesInquiryGrd salesInquiryGrd);
+	
+	public Integer getSalesInquiryGrdCountBySalesInquiryId(String salesInquiryId);
+	
+	public boolean deleteSalesInquiryGrdBySalesInquiryId(String salesInquiryId);
 
 }

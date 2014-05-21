@@ -2,6 +2,10 @@ package com.radius.invoicing.ibatis.model;
 
 import java.util.Date;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+import com.radius.base.utils.JsonDateSerializer;
+
 /**
  * @author <a href="mailto:goodluck.sunlight@gmail.com">陈波宁</a>
  * @version 创建时间：2013-12-8 下午12:53:04<br/>
@@ -57,12 +61,14 @@ public class SalesInquiry extends ExtInfo{
 	public void setFax(String fax) {
 		this.fax = fax;
 	}
+	@JsonSerialize(using=JsonDateSerializer.class)
 	public Date getInquiryDate() {
 		return inquiryDate;
 	}
 	public void setInquiryDate(Date inquiryDate) {
 		this.inquiryDate = inquiryDate;
 	}
+	@JsonSerialize(using=JsonDateSerializer.class)
 	public Date getLatestQuotateDate() {
 		return latestQuotateDate;
 	}

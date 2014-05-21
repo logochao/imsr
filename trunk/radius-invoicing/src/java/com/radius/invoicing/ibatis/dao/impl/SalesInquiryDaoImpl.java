@@ -2,6 +2,8 @@ package com.radius.invoicing.ibatis.dao.impl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.radius.base.dao.ibatis.BaseIbatisDaoImpl;
 import com.radius.invoicing.ibatis.dao.SalesInquiryDao;
 import com.radius.invoicing.ibatis.model.SalesInquiry;
@@ -12,6 +14,7 @@ import com.radius.invoicing.ibatis.model.SalesInquiry;
  * Copyright (c) 2013 by 陈波宁.<br/>
  * 类说明
  */
+@Repository
 public class SalesInquiryDaoImpl extends BaseIbatisDaoImpl<SalesInquiry> implements SalesInquiryDao{
 
 	private final String SQLMAPNAMESPACE="salesInquirySqlMap.";
@@ -33,7 +36,7 @@ public class SalesInquiryDaoImpl extends BaseIbatisDaoImpl<SalesInquiry> impleme
 	}
 	
 	public  boolean updateSalesInquiry(SalesInquiry salesInquiry){
-		return this.updateObject(salesInquiry, SQLMAPNAMESPACE+"updateSalesInquiry")==1;
+		return this.updateObject(salesInquiry, SQLMAPNAMESPACE+"updateSalesInquiryByPK")==1;
 	}
 	
 	public boolean updateStatusBySalesInquiryId(SalesInquiry salesInquiry){

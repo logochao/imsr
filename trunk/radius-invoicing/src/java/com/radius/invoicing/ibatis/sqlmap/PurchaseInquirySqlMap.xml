@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
-<sqlMap namespace="salesInquirySqlMap">
+<sqlMap namespace="purchaseInquirySqlMap">
 
-  <typeAlias alias="salesInquiry" type="com.radius.invoicing.ibatis.model.SalesInquiry" />
+  <typeAlias alias="purchaseInquiry" type="com.radius.invoicing.ibatis.model.PurchaseInquiry" />
   
-  <sql id="salesInquiryFileds">
-  	sales_inquiry_id salesInquiryId,customer_id customerId,customer_ab customerAb,cash_type cashType,address address,link_man man,link_mobile mobile,link_tel tel,link_fax fax,
+  <sql id="purchaseInquiryFileds">
+  	purchase_inquiry_id purchaseInquiryId,supplier_id supplierId,supplier_name supplierName,
+  	cash_type cashType,address address,link_man man,link_mobile mobile,link_tel tel,link_fax fax,
 	inquiry_date inquiryDate,latest_quotate_date latestQuotateDate,salesman_id salesman,STATUS STATUS,memo memo,print_times printTimes,newest_print_time printTime,newest_print_record printRecord,
   	ledger_id ledgerId,operator operator,motify_date modifyDate,creater creater,createdate createDate,reviser reviser,revisedate reviseDate,verifier verifier,verifydate verifyDate
   </sql>
   
-  <resultMap id="salesInquiry" class="salesInquiry">
-    <result column="sales_inquiry_id" jdbcType="char" javaType="java.lang.String" property="salesInquiryId" />
-    <result column="customer_id" jdbcType="char" javaType="java.lang.String" property="customerId" />
-    <result column="customer_ab" jdbcType="char" javaType="java.lang.String" property="customerAb" />
-    <result column="cash_type" jdbcType="char" javaType="java.lang.String" property="cashType" />
+  <resultMap id="purchaseInquiry" class="purchaseInquiry">
+    <result column="purchase_inquiry_id" jdbcType="char" javaType="java.lang.String" property="purchaseInquiryId" />
+    <result column="supplier_id" jdbcType="char" javaType="java.lang.String" property="supplierId" />
+    <result column="supplier_name" jdbcType="char" javaType="java.lang.String" property="supplierName" />
+    <result column="cash_type" jdbcType="int" javaType="java.lang.Integer" property="cashType" />
     <result column="address" jdbcType="char" javaType="java.lang.String" property="address" />
     <result column="link_man" jdbcType="char" javaType="java.lang.String" property="man" />
     <result column="link_mobile" jdbcType="char" javaType="java.lang.String" property="mobile" />
@@ -24,7 +25,7 @@
     <result column="latest_quotate_date" jdbcType="datetime" javaType="java.util.Date" property="latestQuotateDate"/>
     <result column="salesman_id" jdbcType="char" javaType="java.lang.String" property="salesman" />
   	<result column="memo" jdbcType="text" javaType="java.lang.String" property="memo" />
-    <result column="status" jdbcType="char" javaType="java.lang.String" property="status" />
+    <result column="status" jdbcType="int" javaType="java.lang.Integer" property="status" />
     <result column="print_times" jdbcType="int" javaType="java.lang.Integer" property="printTimes" />
     <result column="newest_print_time" jdbcType="datetime" javaType="java.util.Date" property="printTime"/>
     <result column="newest_print_record" jdbcType="char" javaType="java.lang.String" property="printRecord" />
@@ -45,10 +46,10 @@
   <sql id="whereLike">
   	<dynamic prepend="where">
   		1=1   
-  		<isNotEmpty  property="salesInquiryId"> AND sales_inquiry_id =#salesInquiryId#</isNotEmpty>
-		<isNotEmpty  property="customerId">  AND customer_id =#customerId#</isNotEmpty>
-		<isNotEmpty  property="customerAb">  AND customer_ab LIKE CONCAT('%',#customerAb#,'%')</isNotEmpty>
-		<isNotEmpty  property="cashType">  AND cash_type =#cashType#</isNotEmpty>
+  		<isNotEmpty  property="purchaseInquiryId"> AND purchase_inquiry_id =#purchaseInquiryId#</isNotEmpty>
+		<isNotEmpty  property="supplierId">  AND supplier_id =#supplierId#</isNotEmpty>
+		<isNotEmpty  property="supplierName">  AND supplier_name LIKE CONCAT('%',#supplierName#,'%')</isNotEmpty>
+		<isNotNull  property="cashType">  AND cash_type =#cashType#</isNotNull>
 		<isNotEmpty  property="address">  AND address =#address#</isNotEmpty>
 		<isNotEmpty  property="man">  AND link_man LIKE CONCAT('%',#man#,'%')</isNotEmpty>
 		<isNotEmpty  property="mobile">  AND link_mobile =#mobile#</isNotEmpty>
@@ -58,7 +59,7 @@
 		<isNotNull  property="inquiryDate">  AND Inquiry_date =#inquiryDate#</isNotNull>
 		<isNotNull  property="latestQuotateDate">  AND latest_quotate_date =#latestQuotateDate#</isNotNull>
 		<isNotEmpty  property="memo">  AND memo =#memo#</isNotEmpty>
-		<isNotEmpty  property="status">  AND status =#status#</isNotEmpty>
+		<isNotNull  property="status">  AND status =#status#</isNotNull>
 		<isNotNull  property="printTimes">  AND print_times =#printTimes#</isNotNull>
 		<isNotNull  property="printTime">  AND newest_print_time =#printTime#</isNotNull>
 		<isNotEmpty  property="printRecord">  AND newest_print_record =#printRecord#</isNotEmpty>
@@ -66,24 +67,24 @@
   	</dynamic>
   </sql>
  
-	 <select id="getSalesInquiryByPk" parameterClass="java.lang.String" resultClass="salesInquiry">
-	 	SELECT <include refid="salesInquiryFileds"/>
-	 	FROM RS_SALES_INQUIRY
-	 	WHERE sales_inquiry_id =#salesInquiryId#
+	 <select id="getPurchaseInquiryByPk" parameterClass="java.lang.String" resultClass="purchaseInquiry">
+	 	SELECT <include refid="purchaseInquiryFileds"/>
+	 	FROM RS_PURCHASE_INQUIRY
+	 	WHERE purchase_inquiry_id =#purchaseInquiryId#
 	 </select>
 	 
-	 <select id="getSalesInquiry" parameterClass="salesInquiry" resultClass="salesInquiry">
-	 	SELECT <include refid="salesInquiryFileds"/>
-	 	FROM RS_SALES_INQUIRY
+	 <select id="getPurchaseInquiry" parameterClass="purchaseInquiry" resultClass="purchaseInquiry">
+	 	SELECT <include refid="purchaseInquiryFileds"/>
+	 	FROM RS_PURCHASE_INQUIRY
 	 	<include refid="whereLike"/>
 	 </select>
    
-   	<insert id="insert" parameterClass="salesInquiry">
-   		INSERT INTO RS_SALES_INQUIRY (
-   			sales_inquiry_id,
-			<isNotEmpty  property="customerId">customer_id ,</isNotEmpty>
-			<isNotEmpty  property="customerAb">customer_ab,</isNotEmpty>
-			<isNotEmpty  property="cashType">cash_type,</isNotEmpty>
+   	<insert id="insert" parameterClass="purchaseInquiry">
+   		INSERT INTO RS_PURCHASE_INQUIRY (
+   			purchase_inquiry_id,
+			<isNotEmpty  property="supplierId">supplier_id ,</isNotEmpty>
+			<isNotEmpty  property="supplierName">supplier_name,</isNotEmpty>
+			<isNotNull  property="cashType">cash_type,</isNotNull>
 			<isNotEmpty  property="address">address,</isNotEmpty>
 			<isNotEmpty  property="man">link_man,</isNotEmpty>
 			<isNotEmpty  property="mobile">link_mobile,</isNotEmpty>
@@ -93,7 +94,7 @@
 			<isNotNull  property="latestQuotateDate">latest_quotate_date ,</isNotNull>
 			<isNotEmpty  property="salesman">salesman_id ,</isNotEmpty>
 			<isNotEmpty  property="memo">memo ,</isNotEmpty>
-			<isNotEmpty  property="status">status ,</isNotEmpty>
+			<isNotNull  property="status">status ,</isNotNull>
 			<isNotNull  property="printTimes">print_times ,</isNotNull>
 			<isNotNull  property="printTime">newest_print_time ,</isNotNull>
 			<isNotEmpty  property="printRecord">newest_print_record ,</isNotEmpty>
@@ -102,9 +103,9 @@
 	  	    creater,
 	  	    createdate
    		)VALUES(
-   			#salesInquiryId#,
-			<isNotEmpty  property="customerId">#customerId# ,</isNotEmpty>
-			<isNotEmpty  property="customerAb">#customerAb#,</isNotEmpty>
+   			#purchaseInquiryId#,
+			<isNotEmpty  property="supplierId">#supplierId# ,</isNotEmpty>
+			<isNotEmpty  property="supplierName">#supplierName#,</isNotEmpty>
 			<isNotEmpty  property="cashType">#cashType#,</isNotEmpty>
 			<isNotEmpty  property="address">#address#,</isNotEmpty>
 			<isNotEmpty  property="man">#man#,</isNotEmpty>
@@ -115,7 +116,7 @@
 			<isNotNull  property="latestQuotateDate">#latestQuotateDate# ,</isNotNull>
 			<isNotEmpty  property="salesman">#salesman# ,</isNotEmpty>
 			<isNotEmpty  property="memo">#memo# ,</isNotEmpty>
-			<isNotEmpty  property="status">#status# ,</isNotEmpty>
+			<isNotNull  property="status">#status# ,</isNotNull>
 			<isNotNull  property="printTimes">#printTimes# ,</isNotNull>
 			<isNotNull  property="printTime">#printTime# ,</isNotNull>
 			<isNotEmpty  property="printRecord">#printRecord# ,</isNotEmpty>
@@ -125,12 +126,12 @@
    		)
    	</insert>
    
-   	<update id="updateSalesInquiryByPK" parameterClass="salesInquiry">
-   		UPDATE RS_SALES_INQUIRY
+   	<update id="updatePurchaseInquiryByPK" parameterClass="purchaseInquiry">
+   		UPDATE RS_PURCHASE_INQUIRY
    		<dynamic prepend="SET">
-	  		<isNotEmpty   prepend=","  property="customerId">customer_id =#customerId#</isNotEmpty>
-			<isNotEmpty   prepend=","  property="customerAb">customer_ab =#customerAb#</isNotEmpty>
-			<isNotEmpty   prepend=","  property="cashType">cash_type =#cashType#</isNotEmpty>
+	  		<isNotEmpty   prepend=","  property="supplierId">supplier_id =#supplierId#</isNotEmpty>
+			<isNotEmpty   prepend=","  property="supplierName">supplier_name =#supplierName#</isNotEmpty>
+			<isNotNull   prepend=","  property="cashType">cash_type =#cashType#</isNotNull>
 			<isNotEmpty   prepend=","  property="address">address =#address#</isNotEmpty>
 			<isNotEmpty   prepend=","  property="man">link_man =#man#</isNotEmpty>
 			<isNotEmpty   prepend=","  property="mobile">link_mobile =#mobile#</isNotEmpty>
@@ -140,7 +141,7 @@
 			<isNotNull   prepend=","  property="latestQuotateDate">latest_quotate_date =#latestQuotateDate#</isNotNull>
 			<isNotEmpty   prepend=","  property="salesman">salesman_id =#salesman#</isNotEmpty>
 			<isNotEmpty   prepend=","  property="memo">memo =#memo#</isNotEmpty>
-			<isNotEmpty   prepend=","  property="status">status =#status#</isNotEmpty>
+			<isNotNull   prepend=","  property="status">status =#status#</isNotNull>
 			<isNotNull   prepend=","  property="printTimes">print_times =#printTimes#</isNotNull>
 			<isNotNull   prepend=","  property="printTime">newest_print_time =#printTime#</isNotNull>
 			<isNotEmpty   prepend=","  property="printRecord">newest_print_record =#printRecord#</isNotEmpty>
@@ -149,21 +150,21 @@
   	 		<isNotEmpty   prepend=","  property="reviser">reviser = #reviser#,revisedate = now() </isNotEmpty>
   			<isNotEmpty   prepend=","  property="verifier">verifier = #verifier#,verifydate = now() </isNotEmpty>
    		</dynamic>
-   		WHERE sales_inquiry_id =#salesInquiryId# 
+   		WHERE purchase_inquiry_id =#purchaseInquiryId# 
    	</update>
    	
-   	<delete id="deleteSalesInquiry" parameterClass="salesInquiry">
-   		DELETE FROM RS_SALES_INQUIRY
+   	<delete id="deletePurchaseInquiry" parameterClass="purchaseInquiry">
+   		DELETE FROM RS_PURCHASE_INQUIRY
    		<include refid="whereLike"/>
    	</delete>
-   	<delete id="deleteSalesInquiryByPK" parameterClass="java.lang.String">
-   		DELETE FROM RS_SALES_INQUIRY
-   		WHERE sales_inquiry_id =#salesInquiryId# 
+   	<delete id="deletePurchaseInquiryByPK" parameterClass="java.lang.String">
+   		DELETE FROM RS_PURCHASE_INQUIRY
+   		WHERE purchase_inquiry_id =#purchaseInquiryId# 
    	</delete>
    	
-   	<update id="updateStatusBySalesInquiryId" parameterClass="salesInquiry">
-   		UPDATE RS_SALES_INQUIRY 
+   	<update id="updateStatusByPurchaseInquiryId" parameterClass="purchaseInquiry">
+   		UPDATE RS_PURCHASE_INQUIRY 
 		SET status=#status#
-		WHERE sales_inquiry_id =#salesInquiryId# 
+		WHERE purchase_inquiry_id =#purchaseInquiryId# 
    	</update>
 </sqlMap>

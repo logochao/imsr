@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
-<sqlMap namespace="salesInquiryGrdSqlMap">
+<sqlMap namespace="purchaseInquiryGrdSqlMap">
 
-  <typeAlias alias="salesInquiryGrd" type="com.radius.invoicing.ibatis.model.SalesInquiryGrd" />
+  <typeAlias alias="purchaseInquiryGrd" type="com.radius.invoicing.ibatis.model.PurchaseInquiryGrd" />
   
-  <sql id="salesInquiryGrdFileds">
-  	sales_inquiry_id salesInquiryId,goods_id goodsId,goods_name goodsName,spec_id specId,unit unit,quantity_of_unit quantityUnit,quantity_of_eu_per_unit quantityEuPerUnit,STATUS status,memo memo,
+  <sql id="purchaseInquiryGrdFileds">
+  	purchase_inquiry_id purchaseInquiryId,goods_id goodsId,goods_name goodsName,spec_id specId,unit unit,quantity_of_unit quantityUnit,quantity_of_eu_per_unit quantityEuPerUnit,STATUS status,memo memo,
   	ledger_id ledgerId,operator operator,motify_date modifyDate,creater creater,createdate createDate,reviser reviser,revisedate reviseDate,verifier verifier,verifydate verifyDate
   </sql>
   
-  <resultMap id="salesInquiryGrd" class="salesInquiryGrd">
-    <result column="sales_inquiry_id" jdbcType="char" javaType="java.lang.String" property="salesInquiryId" />
+  <resultMap id="purchaseInquiryGrd" class="purchaseInquiryGrd">
+    <result column="purchase_inquiry_id" jdbcType="char" javaType="java.lang.String" property="purchaseInquiryId" />
 	<result column="goods_id" jdbcType="char" javaType="java.lang.String" property="goodsId" />
 	<result column="goods_name" jdbcType="varchar" javaType="java.lang.String" property="goodsName" />
 	<result column="spec_id" jdbcType="int" javaType="java.lang.Integer" property="specId" />
@@ -36,7 +36,7 @@
   <sql id="whereLike">
   	<dynamic prepend="where">
   		1=1   
-  		<isNotEmpty  property="salesInquiryId"> AND sales_inquiry_id =#salesInquiryId#</isNotEmpty>
+  		<isNotEmpty  property="purchaseInquiryId"> AND purchase_inquiry_id =#purchaseInquiryId#</isNotEmpty>
 		<isNotEmpty  property="goodsId"> AND goods_id =#goodsId#</isNotEmpty>
 		<isNotEmpty  property="goodsName"> AND goods_name LIKE CONCAT('%',#goodsName#,'%')</isNotEmpty>
 		<isNotNull  property="specId"> AND spec_id =#specId#</isNotNull>
@@ -48,22 +48,21 @@
  		<isNotEmpty  property="ledgerId">  AND ledger_id=#ledgerId#</isNotEmpty> 
   	</dynamic>
   </sql>
- 
-	 <select id="getSalesInquiryGrdByPk" parameterClass="java.util.Map" resultClass="salesInquiryGrd">
-	 	SELECT <include refid="salesInquiryGrdFileds"/>
-	 	FROM RS_SALES_INQUIRY_GRD
-	 	WHERE sales_inquiry_id =#salesInquiryId# and goods_id = #goodsId#
+	 <select id="getPurchaseInquiryGrdByPk" parameterClass="java.util.Map" resultClass="purchaseInquiryGrd">
+	 	SELECT <include refid="purchaseInquiryGrdFileds"/>
+	 	FROM RS_PURCHASE_INQUIRY_GRD
+	 	WHERE purchase_inquiry_id =#purchaseInquiryId# and goods_id = #goodsId#
 	 </select>
 	 
-	 <select id="getSalesInquiryGrd" parameterClass="salesInquiryGrd" resultClass="salesInquiryGrd">
-	 	SELECT <include refid="salesInquiryGrdFileds"/>
-	 	FROM RS_SALES_INQUIRY_GRD
+	 <select id="getPurchaseInquiryGrd" parameterClass="purchaseInquiryGrd" resultClass="purchaseInquiryGrd">
+	 	SELECT <include refid="purchaseInquiryGrdFileds"/>
+	 	FROM RS_PURCHASE_INQUIRY_GRD
 	 	<include refid="whereLike"/>
 	 </select>
    
-   	<insert id="insert" parameterClass="salesInquiryGrd">
-   		INSERT INTO RS_SALES_INQUIRY_GRD (
-			sales_inquiry_id,
+   	<insert id="insert" parameterClass="purchaseInquiryGrd">
+   		INSERT INTO RS_PURCHASE_INQUIRY_GRD (
+			purchase_inquiry_id,
 			goods_id,
 			<isNotEmpty  property="goodsName">goods_name,</isNotEmpty>
 			<isNotNull  property="specId">spec_id,</isNotNull>
@@ -77,7 +76,7 @@
 	  	    creater,
 	  	    createdate
    		)VALUES(
-			#salesInquiryId#,
+			#purchaseInquiryId#,
 			#goodsId#,
 			<isNotEmpty  property="goodsName">#goodsName#,</isNotEmpty>
 			<isNotNull  property="specId">#specId#,</isNotNull>
@@ -92,8 +91,8 @@
    		)
    	</insert>
    
-   	<update id="updateSalesInquiryGrd" parameterClass="salesInquiryGrd">
-   		UPDATE RS_SALES_INQUIRY_GRD
+   	<update id="updatePurchaseInquiryGrd" parameterClass="purchaseInquiryGrd">
+   		UPDATE RS_PURCHASE_INQUIRY_GRD
    		<dynamic prepend="SET">
 			<isNotEmpty  prepend=","  property="goodsName"> goods_name LIKE CONCAT('%',#goodsName#,'%')</isNotEmpty>
 			<isNotNull  prepend=","   property="specId">  spec_id =#specId#</isNotNull>
@@ -107,31 +106,31 @@
   	 		<isNotEmpty   prepend=","  property="reviser">reviser = #reviser#,revisedate = now() </isNotEmpty>
   			<isNotEmpty   prepend=","  property="verifier">verifier = #verifier#,verifydate = now() </isNotEmpty>
    		</dynamic>
-   		WHERE sales_inquiry_id =#salesInquiryId# AND  goods_id =#goodsId#
+   		WHERE purchase_inquiry_id =#purchaseInquiryId# AND  goods_id =#goodsId#
    	</update>
    	
-   	<delete id="deleteSalesInquiryGrd" parameterClass="salesInquiryGrd">
-   		DELETE FROM RS_SALES_INQUIRY_GRD
+   	<delete id="deletePurchaseInquiryGrd" parameterClass="purchaseInquiryGrd">
+   		DELETE FROM RS_PURCHASE_INQUIRY_GRD
    		<include refid="whereLike"/>
    	</delete>
-   	<delete id="deleteSalesInquiryGrdByPK" parameterClass="java.util.Map">
-   		DELETE FROM RS_SALES_INQUIRY_GRD
-   		WHERE sales_inquiry_id =#salesInquiryId# AND  goods_id =#goodsId# 
+   	<delete id="deletePurchaseInquiryGrdByPK" parameterClass="java.util.Map">
+   		DELETE FROM RS_PURCHASE_INQUIRY_GRD
+   		WHERE purchase_inquiry_id =#purchaseInquiryId# AND  goods_id =#goodsId# 
    	</delete>
    	
-   	<update id="updateStatusByPK" parameterClass="salesInquiryGrd">
-   		UPDATE RS_SALES_INQUIRY_GRD 
+   	<update id="updateStatusByPK" parameterClass="purchaseInquiryGrd">
+   		UPDATE RS_PURCHASE_INQUIRY_GRD 
 		SET status=#status#
-		WHERE sales_inquiry_id =#salesInquiryId# AND  goods_id =#goodsId#
+		WHERE purchase_inquiry_id =#purchaseInquiryId# AND  goods_id =#goodsId#
    	</update>
    	
    	 <!-- 获取当前询价的商品行数 -->
-   	<select id="getSalesInquiryGrdCountBySalesInquiryId" parameterClass="java.lang.String" resultClass="java.lang.Integer">
-   		SELECT COUNT(1) FROM RS_SALES_INQUIRY_GRD WHERE sales_inquiry_id =#salesInquiryId#
+   	<select id="getPurchaseInquiryGrdCountByPurchaseInquiryId" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+   		SELECT COUNT(1) FROM RS_PURCHASE_INQUIRY_GRD WHERE purchase_inquiry_id =#purchaseInquiryId#
    	</select>
    	
    	<!-- 根据询价单号删除询价商品信息 -->
-	<delete id="deleteSalesInquiryGrdBySalesInquiryId" parameterClass="java.lang.String">
-		DELETE FROM RS_SALES_INQUIRY_GRD WHERE sales_inquiry_id =#salesInquiryId#
+	<delete id="deletePurchaseInquiryGrdByPurchaseInquiryId" parameterClass="java.lang.String">
+		DELETE FROM RS_PURCHASE_INQUIRY_GRD WHERE purchase_inquiry_id =#purchaseInquiryId#
 	</delete>
 </sqlMap>

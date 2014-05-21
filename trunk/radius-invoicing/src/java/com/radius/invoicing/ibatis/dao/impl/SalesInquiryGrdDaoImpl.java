@@ -97,4 +97,20 @@ public class SalesInquiryGrdDaoImpl extends BaseIbatisDaoImpl<SalesInquiryGrd> i
 	public void deleteSalesInquiryGrd(SalesInquiryGrd salesInquiryGrd){
 		this.deleteObject(salesInquiryGrd, SQLMAPNAMESPACE+"deleteSalesInquiryGrd");
 	}
+	/**
+	 * 
+	 * @param salesInquiryId
+	 * @return
+	 */
+	public Integer getSalesInquiryGrdCountBySalesInquiryId(String salesInquiryId){
+		return (Integer)this.getSqlMapClientTemplate().queryForObject(SQLMAPNAMESPACE+"getSalesInquiryGrdCountBySalesInquiryId", salesInquiryId);
+	}
+	/**
+	 * 
+	 * @param salesInquiryId
+	 * @return
+	 */
+	public boolean deleteSalesInquiryGrdBySalesInquiryId(String salesInquiryId){
+		return this.deleteObject(salesInquiryId, SQLMAPNAMESPACE+"deleteSalesInquiryGrdBySalesInquiryId")>0;
+	}
 }
