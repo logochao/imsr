@@ -63,11 +63,11 @@ public interface Constants {
 	/**
 	 * 销售合同前缀
 	 */
-	String SALES_CONTRACT_PREFIX="H_S";//销售合同前缀
+	String SALES_CONTRACT_PREFIX=SALES_PREFIX+"_S";//销售合同前缀
 	/**
 	 * 采购合同前缀
 	 */
-	String PURCHASE_CONTRACT_PREFIX="H_C";//采购合同前缀
+	String PURCHASE_CONTRACT_PREFIX=PURCHASE_PREFIX+"_C";//采购合同前缀
 	/**
 	 * 销售订单前缀 XS_D
 	 */
@@ -76,6 +76,10 @@ public interface Constants {
 	 * 销售报价前缀 XS_B
 	 */
 	String SALES_QUOTATION_PREFIX=SALES_PREFIX+"_B";//销售报价前缀
+	/**
+	 * 销售询价前缀 XS_X
+	 */
+	String SALES_INQUIRY_PREFIX=SALES_PREFIX+"_X";//销售询价前缀
 	/**
 	 * 采购询价前缀 CG_X
 	 */
