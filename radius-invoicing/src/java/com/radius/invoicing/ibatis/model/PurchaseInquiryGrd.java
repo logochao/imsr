@@ -3,11 +3,10 @@ package com.radius.invoicing.ibatis.model;
  * @author <a href="mailto:goodluck.sunlight@gmail.com">陈波宁</a>
  * @version 创建时间：2013-12-8 下午12:53:04<br/>
  * Copyright (c) 2013 by 陈波宁.<br/>
- * 类说明 销售询价列表
+ * 类说明 采购询价商品列表
  */
-public class SalesInquiryGrd extends ExtInfo {
-
-	private String 	salesInquiryId="";//销售询价单编号
+public class PurchaseInquiryGrd extends ExtInfo {
+	private String  purchaseInquiryId="";//采购询价单号
 	private String	goodsId="";//商品编号
 	private String	goodsName="";//商品名称
 	private Integer	specId;//规格编码
@@ -17,17 +16,14 @@ public class SalesInquiryGrd extends ExtInfo {
 	private String	status;//状态
 	private String	memo="";//备注
 	
-	public SalesInquiryGrd() {
+	public PurchaseInquiryGrd() {
 	}
-	public SalesInquiryGrd(String salesInquiryId, String goodsId) {
+	
+	public PurchaseInquiryGrd(String purchaseInquiryId, String goodsId) {
 		super();
-		this.salesInquiryId = salesInquiryId;
+		this.purchaseInquiryId = purchaseInquiryId;
 		this.goodsId = goodsId;
 	}
-
-
-
-
 	public String getGoodsId() {
 		return goodsId;
 	}
@@ -46,6 +42,12 @@ public class SalesInquiryGrd extends ExtInfo {
 	public void setMemo(String memo) {
 		this.memo = memo;
 	}
+	public String getPurchaseInquiryId() {
+		return purchaseInquiryId;
+	}
+	public void setPurchaseInquiryId(String purchaseInquiryId) {
+		this.purchaseInquiryId = purchaseInquiryId;
+	}
 	public Integer getQuantityEuPerUnit() {
 		return quantityEuPerUnit;
 	}
@@ -57,12 +59,6 @@ public class SalesInquiryGrd extends ExtInfo {
 	}
 	public void setQuantityUnit(Integer quantityUnit) {
 		this.quantityUnit = quantityUnit;
-	}
-	public String getSalesInquiryId() {
-		return salesInquiryId;
-	}
-	public void setSalesInquiryId(String salesInquiryId) {
-		this.salesInquiryId = salesInquiryId;
 	}
 	public Integer getSpecId() {
 		return specId;
@@ -82,7 +78,4 @@ public class SalesInquiryGrd extends ExtInfo {
 	public void setUnit(Integer unit) {
 		this.unit = unit;
 	}
-	
-	
-	
 }

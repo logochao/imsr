@@ -7,7 +7,7 @@ public class PurchaseInquiry extends ExtInfo{
 	private String 		purchaseInquiryId="";//采购询价单编号
 	private String 		supplierId="";//供应商编号
 	private String 		supplierName="";//供应商名称
-	private String 		cashType="";//币种
+	private Integer 	cashType;//币种
 	private String 		address="";//送货地址'
 	private String 		man="";//联系人
 	private String 		mobile="";//联系人手机
@@ -16,7 +16,7 @@ public class PurchaseInquiry extends ExtInfo{
 	private Date 		inquiryDate;//询价日期
 	private Date 		latestQuotateDate;//最迟报价日期
 	private String 		salesman="";//业务员
-	private String 		status="";//状态
+	private Integer 	status;//状态
 	private String 		memo="";//备注
 	private Long 		printTimes;//打印次数
 	private Date 		printTime;//最新打印时间
@@ -29,10 +29,10 @@ public class PurchaseInquiry extends ExtInfo{
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public String getCashType() {
+	public Integer getCashType() {
 		return cashType;
 	}
-	public void setCashType(String cashType) {
+	public void setCashType(Integer cashType) {
 		this.cashType = cashType;
 	}
 	public String getFax() {
@@ -101,10 +101,10 @@ public class PurchaseInquiry extends ExtInfo{
 	public void setSalesman(String salesman) {
 		this.salesman = salesman;
 	}
-	public String getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 	public String getSupplierId() {
@@ -125,11 +125,5 @@ public class PurchaseInquiry extends ExtInfo{
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
-	
-	
-	
-	
-	
-	
 	
 }
