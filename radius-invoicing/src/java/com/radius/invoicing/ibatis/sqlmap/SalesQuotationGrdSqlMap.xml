@@ -111,7 +111,7 @@
 			<isNotNull  property="validityDate">#validityDate#,</isNotNull>
 	 		<isNotNull  property="ledgerId">#ledgerId#,</isNotNull> 
 	 		<isNotNull  property="operator">#operator#,</isNotNull>
-   			 creater,now()
+   			 #creater#,now()
    		)
    	</insert>
    

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="supplierQuotationSqlMap">
+
+  <typeAlias alias="supplierQuotation" type="com.radius.invoicing.ibatis.model.SupplierQuotation" />
+  
+  <sql id="supplierQuotationFileds">
+  	purchase_inquiry_id purchaseInquiryId,supplier_id supplierId,supplier_name supplierName,cash_type cashType,address address,
+  	link_man man,link_mobile mobile,link_tel tel,link_fax fax,inquiry_date inquiryDate,latest_quotate_date latestQuotateDate,salesman_id salesman,status status,memo memo,
+  	print_times printTimes,newest_print_time printTime,newest_print_record printRecord,
+  	ledger_id ledgerId,operator operator,modify_date modifyDate,creater creater,createdate createDate,reviser reviser,revisedate reviseDate,verifier verifier,verifydate verifyDate
+  </sql>
+  
+  <resultMap id="supplierQuotation" class="supplierQuotation">
+    <result column="purchase_inquiry_id" jdbcType="char" javaType="java.lang.String" property="purchaseInquiryId" />
+	<result column="supplier_id" jdbcType="char" javaType="java.lang.String" property="supplierId" />
+	<result column="supplier_name" jdbcType="varchar" javaType="java.lang.String" property="supplierName" />
+	<result column="cash_type" jdbcType="char" javaType="java.lang.String" property="cashType" />
+	<result column="address" jdbcType="varchar" javaType="java.lang.String" property="address" />
+	<result column="link_man" jdbcType="char" javaType="java.lang.String" property="man" />
+	<result column="link_mobile" jdbcType="char" javaType="java.lang.String" property="mobile" />
+	<result column="link_tel" jdbcType="varchar" javaType="java.lang.String" property="tel" />
+	<result column="link_fax" jdbcType="char" javaType="java.lang.String" property="fax" />
+	<result  column="Inquiry_date" jdbcType="date" javaType="java.util.Date" property="inquiryDate"/>
+	<result  column="latest_quotate_date" jdbcType="date" javaType="java.util.Date" property="latestQuotateDate"/>
+	<result column="salesman_id" jdbcType="char" javaType="java.lang.String" property="salesman" />
+	<result column="status" jdbcType="char" javaType="java.lang.String" property="status" />
+	<result column="memo" jdbcType="text" javaType="java.lang.String" property="memo" />
+	<result  column="print_times" jdbcType="int" javaType="java.lang.Integer" property="printTimes"/>
+	<result  column="newest_print_time" jdbcType="datetime" javaType="java.util.Date" property="printTime"/>
+	<result column="newest_print_record" jdbcType="varchar" javaType="java.lang.String" property="printRecord" />
+    
+    <result column="ledger_id" jdbcType="char" javaType="java.lang.String" property="ledgerId" />
+    <result column="operator" jdbcType="char" javaType="java.lang.String" property="operator" />
+    <result column="modify_date" jdbcType="datetime" javaType="java.util.Date" property="modifyDate" />
+    <result column="creater" jdbcType="char" javaType="java.lang.String" property="creater" />
+    <result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createDate" />
+    <result column="reviser" jdbcType="char" javaType="java.lang.String" property="reviser" />
+    <result column="revisedate" jdbcType="datetime" javaType="java.util.Date" property="reviseDate" />
+    <result column="verifier" jdbcType="char" javaType="java.lang.String" property="verifier" />    
+    <result column="verifydate" jdbcType="datetime" javaType="java.util.Date" property="verifyDate"/>
+    
+    
+  </resultMap>
+  
+  <sql id="whereLike">
+  	<dynamic prepend="WHERE">
+  		1=1   
+  		<isNotEmpty property="purchaseInquiryId"> AND purchase_inquiry_id=#purchaseInquiryId#</isNotEmpty>
+		<isNotEmpty property="supplierId"> AND supplier_id=#supplierId#</isNotEmpty>
+		<isNotEmpty property="supplierName"> AND supplier_name LIKE CONCAT('%',#supplierName#,'%')</isNotEmpty>
+		<isNotEmpty property="cashType"> AND cash_type=#cashType#</isNotEmpty>
+		<isNotEmpty property="address"> AND address=#address#</isNotEmpty>
+		<isNotEmpty property="man"> AND link_man=#man#</isNotEmpty>
+		<isNotEmpty property="mobile"> AND link_mobile=#mobile#</isNotEmpty>
+		<isNotEmpty property="tel"> AND link_tel=#tel#</isNotEmpty>
+		<isNotEmpty property="fax"> AND link_fax=#fax#</isNotEmpty>
+		<isNotNull  property="inquiryDate">  AND Inquiry_date=#inquiryDate#</isNotNull>
+		<isNotNull  property="latestQuotateDate">  AND latest_quotate_date=#latestQuotateDate#</isNotNull>
+		<isNotEmpty property="salesman"> AND salesman_id=#salesman#</isNotEmpty>
+		<isNotEmpty property="status"> AND status=#status#</isNotEmpty>
+		<isNotNull  property="printTimes">  AND print_times=#printTimes#</isNotNull>
+		<isNotNull  property="printTime">  AND newest_print_time=#printTime#</isNotNull>
+		<isNotEmpty property="printRecord"> AND newest_print_record=#printRecord#</isNotEmpty>
+		<isNotEmpty property="operator"> AND operator=#operator#</isNotEmpty>
+		<isNotEmpty  property="memo"> AND memo =#memo#</isNotEmpty>
+		<isNotEmpty property="ledgerId"> AND ledger_id=#ledgerId#</isNotEmpty>
+  	</dynamic>
+  </sql>
+	 <select id="getSupplierQuotationByPk" parameterClass="java.lang.String" resultClass="supplierQuotation">
+	 	SELECT <include refid="supplierQuotationFileds"/>
+	 	FROM RS_SUPPLIER_QUOTATION
+	 	WHERE purchase_inquiry_id=#purchaseInquiryId#
+	 </select>
+	 
+	 <select id="getSupplierQuotation" parameterClass="supplierQuotation" resultClass="supplierQuotation">
+	 	SELECT <include refid="supplierQuotationFileds"/>
+	 	FROM RS_SUPPLIER_QUOTATION
+	 	<include refid="whereLike"/>
+	 </select>
+   
+   	<insert id="insert" parameterClass="supplierQuotation">
+   		INSERT INTO RS_SUPPLIER_QUOTATION  (
+				purchase_inquiry_id,
+				<isNotEmpty property="supplierId">supplier_id,</isNotEmpty>
+				<isNotEmpty property="supplierName">supplier_name,</isNotEmpty>
+				<isNotEmpty property="cashType">cash_type,</isNotEmpty>
+				<isNotEmpty property="address">address,</isNotEmpty>
+				<isNotEmpty property="man">link_man,</isNotEmpty>
+				<isNotEmpty property="mobile">link_mobile,</isNotEmpty>
+				<isNotEmpty property="tel">link_tel,</isNotEmpty>
+				<isNotEmpty property="fax">link_fax,</isNotEmpty>
+				<isNotNull  property="inquiryDate">Inquiry_date,</isNotNull>
+				<isNotNull  property="latestQuotateDate">latest_quotate_date,</isNotNull>
+				<isNotEmpty property="salesman">salesman_id,</isNotEmpty>
+				<isNotEmpty property="status">status,</isNotEmpty>
+				<isNotEmpty property="memo">memo,</isNotEmpty>
+				<isNotEmpty property="ledgerId">ledger_id,</isNotEmpty>
+				<isNotEmpty property="operator">operator,</isNotEmpty>
+				creater,
+				createdate,
+			) VALUES  (
+				#purchaseInquiryId#,
+				<isNotEmpty property="supplierId">#supplierId#,</isNotEmpty>
+				<isNotEmpty property="supplierName">#supplierName#,</isNotEmpty>
+				<isNotEmpty property="cashType">#cashType#,</isNotEmpty>
+				<isNotEmpty property="address">#address#,</isNotEmpty>
+				<isNotEmpty property="man">#man#,</isNotEmpty>
+				<isNotEmpty property="mobile">#mobile#,</isNotEmpty>
+				<isNotEmpty property="tel">#tel#,</isNotEmpty>
+				<isNotEmpty property="fax">#fax#,</isNotEmpty>
+				<isNotNull  property="inquiryDate">#inquiryDate#</isNotNull>
+				<isNotNull  property="latestQuotateDate">#latestQuotateDate#</isNotNull>
+				<isNotEmpty property="salesman">#salesman#,</isNotEmpty>
+				<isNotEmpty property="status">#status#,</isNotEmpty>
+				<isNotEmpty property="memo">#memo#,</isNotEmpty>
+				<isNotEmpty property="ledgerId">#ledgerId#,</isNotEmpty>
+				<isNotEmpty property="operator">#operator#,</isNotEmpty>
+				<isNotNull  property="modifyDate">#modifyDate#</isNotNull>
+				#creater#,
+				now()
+		)
+   	</insert>
+   
+   	<update id="updateSupplierQuotation" parameterClass="supplierQuotation">
+   		UPDATE RS_SUPPLIER_QUOTATION
+			<dynamic prepend="SET">
+				<isNotEmpty  prepend=","   property="supplierId">  supplier_id=#supplierId#</isNotEmpty>
+				<isNotEmpty  prepend=","   property="supplierName">  supplier_name=#supplierName#</isNotEmpty>
+				<isNotEmpty  prepend=","   property="cashType">  cash_type=#cashType#</isNotEmpty>
+				<isNotEmpty  prepend=","   property="address">  address=#address#</isNotEmpty>
+				<isNotEmpty  prepend=","   property="man">  link_man=#man#</isNotEmpty>
+				<isNotEmpty  prepend=","   property="mobile">  link_mobile=#mobile#</isNotEmpty>
+				<isNotEmpty  prepend=","   property="tel">  link_tel=#tel#</isNotEmpty>
+				<isNotEmpty  prepend=","   property="fax">  link_fax=#fax#</isNotEmpty>
+				<isNotNull  prepend=","   property="inquiryDate">  Inquiry_date=#inquiryDate#</isNotNull>
+				<isNotNull  prepend=","   property="latestQuotateDate">  latest_quotate_date=#latestQuotateDate#</isNotNull>
+				<isNotEmpty  prepend=","   property="salesman">  salesman_id=#salesman#</isNotEmpty>
+				<isNotEmpty  prepend=","   property="status">  status=#status#</isNotEmpty>
+				<isNotEmpty  prepend=","   property="memo">  memo=#memo#</isNotEmpty>
+				<isNotNull  prepend=","   property="printTimes">  print_times=#printTimes#</isNotNull>
+				<isNotNull  prepend=","   property="printTime">  newest_print_time=#printTime#</isNotNull>
+				<isNotEmpty  prepend=","   property="printRecord">  newest_print_record=#printRecord#</isNotEmpty>
+				<isNotEmpty  prepend=","   property="ledgerId">  ledger_id=#ledgerId#</isNotEmpty>
+				<isNotEmpty  prepend=","   property="operator">  operator=#operator#</isNotEmpty>
+				<isNotNull  prepend=","   property="modifyDate">  modify_date=now()</isNotNull>
+				<isNotEmpty  prepend=","   property="reviser">  reviser=#reviser#,revisedate=now()</isNotEmpty>
+				<isNotEmpty  prepend=","   property="verifier">  verifier=#verifier#,verifydate=now()</isNotEmpty>
+			</dynamic>
+   		WHERE  purchase_inquiry_id=#purchaseInquiryId#
+   	</update>
+   	
+   	<delete id="deleteSupplierQuotation" parameterClass="supplierQuotation">
+   		DELETE FROM RS_SUPPLIER_QUOTATION
+   		<include refid="whereLike"/>
+   	</delete>
+   	<delete id="deleteSupplierQuotationByPK" parameterClass="java.lang.String">
+   		DELETE FROM RS_SUPPLIER_QUOTATION
+   		WHERE purchase_inquiry_id=#purchaseInquiryId#
+   	</delete>
+   	
+   	<update id="updateStatusByPurchaseInquiryId" parameterClass="supplierQuotation">
+   		UPDATE RS_SUPPLIER_QUOTATION 
+		SET status=#status#
+		WHERE purchase_inquiry_id=#purchaseInquiryId#
+   	</update>
+</sqlMap>

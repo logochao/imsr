@@ -6,32 +6,32 @@
   
   <sql id="salesQuotationFileds">
   	 sales_quotation_id salesQuotationId,customer_id customerId,customer_ab customerAb,cash_type cashType,address address,
-  	 link_man man,link_mobile mobile,link_tel tel,link_fax fax,inquiry_date inquiryDate,latest_quotate_date latestQuotateDate,salesman_id salesman,
-  	 status status,audited_status auditedStatus,memo memo,
-  	 print_times printTimes,newest_print_time printTime,newest_print_record printRecord,
+  	 link_man linkMan,link_mobile linkMobile,link_tel linkTel,link_fax linkFax,inquiry_date inquiryDate,latest_quotate_date latestQuotateDate,
+  	 salesman_id salesmanId,status status,audited_status auditedStatus,memo memo,
+  	 print_times printTimes,newest_print_time newestPrintTime,newest_print_record newestPrintRecord,
   	 ledger_id ledgerId,operator operator,motify_date modifyDate,creater creater,createdate createDate,reviser reviser,revisedate reviseDate,verifier verifier,verifydate verifyDate
   </sql>
   
   <resultMap id="salesQuotation" class="salesQuotation">
     <result column="sales_quotation_id" jdbcType="char" javaType="java.lang.String" property="salesQuotationId" />
-    <result column="customer_id" jdbcType="char" javaType="java.lang.String" property="customerId" />
-    <result column="customer_ab" jdbcType="varchar" javaType="java.lang.String" property="customerAb" />
-    <result column="cash_type" jdbcType="char" javaType="java.lang.String" property="cashType" />
-    <result column="address" jdbcType="varchar" javaType="java.lang.String" property="address" />
-    <result column="link_man" jdbcType="varchar" javaType="java.lang.String" property="man" />
-    <result column="link_mobile" jdbcType="char" javaType="java.lang.String" property="mobile" />
-    <result column="link_tel" jdbcType="varchar" javaType="java.lang.String" property="tel" />
-    <result column="link_fax" jdbcType="char" javaType="java.lang.String" property="fax" />
-    <result column="inquiry_date" jdbcType="datetime" javaType="java.util.Date" property="inquiryDate" />
-    <result column="latest_quotate_date" jdbcType="datetime" javaType="java.util.Date" property="latestQuotateDate" />
-    <result column="salesman_id" jdbcType="char" javaType="java.lang.String" property="salesman" />
-    <result column="status" jdbcType="char" javaType="java.lang.String" property="status" />
-    <result column="audited_status" jdbcType="char" javaType="java.lang.String" property="auditedStatus" />
-  	 <result column="memo" jdbcType="text" javaType="java.lang.String" property="memo" />
-    <result column="print_times" jdbcType="smallint" javaType="java.lang.Integer" property="printTimes" />
-    <result column="newest_print_time" jdbcType="datetime" javaType="java.util.Date" property="printTimes" />
-    <result column="newest_print_acc" jdbcType="char" javaType="java.lang.String" property="printAcc" />
-    <result column="newest_print_record" jdbcType="varchar" javaType="java.lang.String" property="printRecord" />
+	<result column="customer_id" jdbcType="char" javaType="java.lang.String" property="customerId" />
+	<result column="customer_ab" jdbcType="varchar" javaType="java.lang.String" property="customerAb" />
+	<result column="cash_type" jdbcType="char" javaType="java.lang.String" property="cashType" />
+	<result column="address" jdbcType="varchar" javaType="java.lang.String" property="address" />
+	<result column="link_man" jdbcType="varchar" javaType="java.lang.String" property="linkMan" />
+	<result column="link_mobile" jdbcType="char" javaType="java.lang.String" property="linkMobile" />
+	<result column="link_tel" jdbcType="char" javaType="java.lang.String" property="linkTel" />
+	<result column="link_fax" jdbcType="char" javaType="java.lang.String" property="linkFax" />
+	<result  column="inquiry_date" jdbcType="date" javaType="java.util.Date" property="inquiryDate"/>
+	<result  column="latest_quotate_date" jdbcType="date" javaType="java.util.Date" property="latestQuotateDate"/>
+	<result column="salesman_id" jdbcType="char" javaType="java.lang.String" property="salesmanId" />
+	<result column="status" jdbcType="char" javaType="java.lang.String" property="status" />
+	<result column="audited_status" jdbcType="char" javaType="java.lang.String" property="auditedStatus" />
+	<result column="memo" jdbcType="text" javaType="java.lang.String" property="memo" />
+	<result  column="print_times" jdbcType="int" javaType="java.lang.Integer" property="printTimes"/>
+	<result  column="newest_print_time" jdbcType="datetime" javaType="java.util.Date" property="newestPrintTime"/>
+	<result column="newest_print_record" jdbcType="varchar" javaType="java.lang.String" property="newestPrintRecord" />
+
     <result column="ledger_id" jdbcType="char" javaType="java.lang.String" property="ledgerId" />
   	<result column="operator" jdbcType="char" javaType="java.lang.String" property="operator" />
     <result column="motify_date" jdbcType="datetime" javaType="java.util.Date" property="modifyDate" />
@@ -46,128 +46,136 @@
   <sql id="whereLike">
   	<dynamic prepend="where">
   		1=1 AND 
-  		<isNotNull prepend="and" property="salesQuotationId">sales_quotation_id =#salesQuotationId#</isNotNull> 
-		<isNotNull prepend="and" property="customerId">customer_id =#customerId#</isNotNull> 
-		<isNotNull prepend="and" property="customerAb">customer_ab =#customerAb#</isNotNull> 
-		<isNotNull prepend="and" property="cashType">cash_type =#cashType#</isNotNull> 
-		<isNotNull prepend="and" property="address">address =#address#</isNotNull> 
-		<isNotNull prepend="and" property="man">link_man =#man#</isNotNull> 
-		<isNotNull prepend="and" property="mobile">link_mobile =#mobile#</isNotNull> 
-		<isNotNull prepend="and" property="tel">link_tel =#tel#</isNotNull> 
-		<isNotNull prepend="and" property="fax">link_fax =#fax#</isNotNull> 
-		<isNotNull prepend="and" property="inquiryDate">inquiry_date =#inquiryDate#</isNotNull> 
-		<isNotNull prepend="and" property="latestQuotateDate">latest_quotate_date =#latestQuotateDate#</isNotNull> 
-		<isNotNull prepend="and" property="salesman">salesman_id =#salesman#</isNotNull> 
-		<isNotNull prepend="and" property="status">status =#status#</isNotNull> 
-		<isNotNull prepend="and" property="auditedStatus">audited_status =#auditedStatus#</isNotNull> 
-		<isNotNull prepend="and" property="memo">memo =#memo#</isNotNull> 
-		<isNotNull prepend="and" property="printTimes">print_times =#printTimes#</isNotNull> 
-		<isNotNull prepend="and" property="printTime">newest_print_time =#printTime#</isNotNull> 
-		<isNotNull prepend="and" property="printRecord">newest_print_record=#printRecord#</isNotNull> 
+  		<isNotEmpty property="salesQuotationId"> AND sales_quotation_id=#salesQuotationId#</isNotEmpty>
+		<isNotEmpty property="customerId"> AND customer_id=#customerId#</isNotEmpty>
+		<isNotEmpty property="customerAb"> AND customer_ab LIKE CONCAT('%',#customerAb#,'%')</isNotEmpty>
+		<isNotEmpty property="cashType"> AND cash_type=#cashType#</isNotEmpty>
+		<isNotEmpty property="address"> AND address=#address#</isNotEmpty>
+		<isNotEmpty property="linkMan"> AND link_man=#linkMan#</isNotEmpty>
+		<isNotEmpty property="linkMobile"> AND link_mobile=#linkMobile#</isNotEmpty>
+		<isNotEmpty property="linkTel"> AND link_tel=#linkTel#</isNotEmpty>
+		<isNotEmpty property="linkFax"> AND link_fax=#linkFax#</isNotEmpty>
+		<isNotNull  property="inquiryDate">  AND inquiry_date=#inquiryDate#</isNotNull>
+		<isNotNull  property="latestQuotateDate">  AND latest_quotate_date=#latestQuotateDate#</isNotNull>
+		<isNotEmpty property="salesmanId"> AND salesman_id=#salesmanId#</isNotEmpty>
+		<isNotEmpty property="status"> AND status=#status#</isNotEmpty>
+		<isNotEmpty property="auditedStatus"> AND audited_status=#auditedStatus#</isNotEmpty>
+		<isNotEmpty property="memo"> AND memo=#memo#</isNotEmpty>
+		<isNotNull  property="printTimes">  AND print_times=#printTimes#</isNotNull>
+		<isNotNull  property="newestPrintTime">  AND newest_print_time=#newestPrintTime#</isNotNull>
+		<isNotEmpty property="newestPrintRecord"> AND newest_print_record=#newestPrintRecord#</isNotEmpty>
  		<isNotNull prepend="and" property="ledgerId">ledger_id=#ledgerId#</isNotNull> 
   	</dynamic>
   </sql>
  
-	 <select id="getsalesQuotationById" parameterClass="string" resultMap="salesQuotation">
+	 <select id="getSalesQuotationByPk" parameterClass="java.lang.String" resultClass="salesQuotation">
 	 	SELECT <include refid="salesQuotationFileds"/>
 	 	FROM RS_SALE_QUOTATION
-	 	WHERE quotation_id=#id#
+	 	WHERE purchase_inquiry_id=#purchaseInquiryId#
+	 </select>
+	 
+	 <select id="getSalesQuotation" parameterClass="salesQuotation" resultClass="salesQuotation">
+	 	SELECT <include refid="salesQuotationFileds"/>
+	 	FROM RS_SALE_QUOTATION
+	 	<include refid="whereLike"/>
 	 </select>
    
    	<insert id="insert" parameterClass="salesQuotation">
-   		INSERT INTO RS_SALE_QUOTATION (
-   			sales_quotation_id,
-			<isNotNull  property="customerId">customer_id ,</isNotNull> 
-			<isNotNull  property="customerAb">customer_ab ,</isNotNull> 
-			<isNotNull  property="cashType">cash_type ,</isNotNull> 
-			<isNotNull  property="address"> address,</isNotNull> 
-			<isNotNull  property="man">link_man ,</isNotNull> 
-			<isNotNull  property="mobile">link_mobile ,</isNotNull> 
-			<isNotNull  property="tel">link_tel ,</isNotNull> 
-			<isNotNull  property="fax">link_fax ,</isNotNull> 
-			<isNotNull  property="inquiryDate">inquiry_date ,</isNotNull> 
-			<isNotNull  property="latestQuotateDate">latest_quotate_date ,</isNotNull> 
-			<isNotNull  property="salesman">salesman_id ,</isNotNull> 
-			<isNotNull  property="status"> status,</isNotNull> 
-			<isNotNull  property="auditedStatus">audited_status ,</isNotNull> 
-			<isNotNull  property="memo"> memo,</isNotNull> 
-			<isNotNull  property="printTimes">print_times ,</isNotNull> 
-			<isNotNull  property="printTime">newest_print_time ,</isNotNull> 
-			<isNotNull  property="printRecord">newest_print_record</isNotNull> 
-	 		<isNotNull  property="ledgerId">ledger_id,</isNotNull> 
-	 		<isNotNull  property="operator">operator,</isNotNull> 
-	  	    creater,
-	  	    createdate
-   		)VALUES(
-   			#salesQuotationId#,
-			<isNotNull  property="customerId">#customerId#,</isNotNull> 
-			<isNotNull  property="customerAb">#customerAb#,</isNotNull> 
-			<isNotNull  property="cashType">#cashType#,</isNotNull> 
-			<isNotNull  property="address">#address#,</isNotNull> 
-			<isNotNull  property="man">#man#,</isNotNull> 
-			<isNotNull  property="mobile">#mobile#,</isNotNull> 
-			<isNotNull  property="tel">#tel#,</isNotNull> 
-			<isNotNull  property="fax">#fax#,</isNotNull> 
-			<isNotNull  property="inquiryDate">#inquiryDate#,</isNotNull> 
-			<isNotNull  property="latestQuotateDate">#latestQuotateDate#,</isNotNull> 
-			<isNotNull  property="salesman">#salesman#,</isNotNull> 
-			<isNotNull  property="status">#status#,</isNotNull> 
-			<isNotNull  property="auditedStatus">#auditedStatus#,</isNotNull> 
-			<isNotNull  property="memo">#memo#,</isNotNull> 
-			<isNotNull  property="printTimes">#printTimes#,</isNotNull> 
-			<isNotNull  property="printTime">#printTime#,</isNotNull> 
-			<isNotNull  property="printRecord">#printRecord#,</isNotNull> 
-	 		<isNotNull  property="ledgerId">#ledgerId#,</isNotNull> 
-	 		<isNotNull  property="operator">#operator#,</isNotNull> 
-   			 creater,now()
-   		)
+   		INSERT INTO RS_SALES_QUOTATION  (
+			sales_quotation_id,
+			<isNotEmpty property="customerId">customer_id,</isNotEmpty>
+			<isNotEmpty property="customerAb">customer_ab,</isNotEmpty>
+			<isNotEmpty property="cashType">cash_type,</isNotEmpty>
+			<isNotEmpty property="address">address,</isNotEmpty>
+			<isNotEmpty property="linkMan">link_man,</isNotEmpty>
+			<isNotEmpty property="linkMobile">link_mobile,</isNotEmpty>
+			<isNotEmpty property="linkTel">link_tel,</isNotEmpty>
+			<isNotEmpty property="linkFax">link_fax,</isNotEmpty>
+			<isNotNull  property="inquiryDate">inquiry_date,</isNotNull>
+			<isNotNull  property="latestQuotateDate">latest_quotate_date,</isNotNull>
+			<isNotEmpty property="salesmanId">salesman_id,</isNotEmpty>
+			<isNotEmpty property="status">status,</isNotEmpty>
+			<isNotEmpty property="auditedStatus">audited_status,</isNotEmpty>
+			<isNotEmpty property="memo">memo,</isNotEmpty>
+			<isNotEmpty property="operator">operator,</isNotEmpty>
+			<isNotEmpty property="ledgerId">ledger_id,</isNotEmpty>
+			creater,
+			createdate,
+		)VALUES  (
+			#salesQuotationId#,
+			<isNotEmpty property="customerId">#customerId#,</isNotEmpty>
+			<isNotEmpty property="customerAb">#customerAb#,</isNotEmpty>
+			<isNotEmpty property="cashType">#cashType#,</isNotEmpty>
+			<isNotEmpty property="address">#address#,</isNotEmpty>
+			<isNotEmpty property="linkMan">#linkMan#,</isNotEmpty>
+			<isNotEmpty property="linkMobile">#linkMobile#,</isNotEmpty>
+			<isNotEmpty property="linkTel">#linkTel#,</isNotEmpty>
+			<isNotEmpty property="linkFax">#linkFax#,</isNotEmpty>
+			<isNotNull  property="inquiryDate">#inquiryDate#</isNotNull>
+			<isNotNull  property="latestQuotateDate">#latestQuotateDate#</isNotNull>
+			<isNotEmpty property="salesmanId">#salesmanId#,</isNotEmpty>
+			<isNotEmpty property="status">#status#,</isNotEmpty>
+			<isNotEmpty property="auditedStatus">#auditedStatus#,</isNotEmpty>
+			<isNotEmpty property="memo">#memo#,</isNotEmpty>
+			<isNotEmpty property="operator">#operator#,</isNotEmpty>
+			<isNotEmpty property="ledgerId">#ledgerId#,</isNotEmpty>
+			#creater#,
+			now()
+		)
    	</insert>
    
-   	<update id="updatesalesQuotationById" parameterClass="salesQuotation">
+   	<update id="updateSalesQuotationById" parameterClass="salesQuotation">
    		UPDATE RS_SALE_QUOTATION
    		<dynamic prepend="SET">
-			<isNotNull prepend="," property="customerId">customer_id =#customerId#</isNotNull> 
-			<isNotNull prepend="," property="customerAb">customer_ab =#customerAb#</isNotNull> 
-			<isNotNull prepend="," property="cashType">cash_type =#cashType#</isNotNull> 
-			<isNotNull prepend="," property="address">address =#address#</isNotNull> 
-			<isNotNull prepend="," property="man">link_man =#man#</isNotNull> 
-			<isNotNull prepend="," property="mobile">link_mobile =#mobile#</isNotNull> 
-			<isNotNull prepend="," property="tel">link_tel =#tel#</isNotNull> 
-			<isNotNull prepend="," property="fax">link_fax =#fax#</isNotNull> 
-			<isNotNull prepend="," property="inquiryDate">inquiry_date =#inquiryDate#</isNotNull> 
-			<isNotNull prepend="," property="latestQuotateDate">latest_quotate_date =#latestQuotateDate#</isNotNull> 
-			<isNotNull prepend="," property="salesman">salesman_id =#salesman#</isNotNull> 
-			<isNotNull prepend="," property="status">status =#status#</isNotNull> 
-			<isNotNull prepend="," property="auditedStatus">audited_status =#auditedStatus#</isNotNull> 
-			<isNotNull prepend="," property="printTimes">print_times =#printTimes#</isNotNull> 
-			<isNotNull prepend="," property="printTime">newest_print_time =#printTime#</isNotNull> 
-			<isNotNull prepend="," property="printRecord">newest_print_record =#printRecord#</isNotNull> 
+			<isNotEmpty  prepend=","   property="customerId">  customer_id=#customerId#</isNotEmpty>
+			<isNotEmpty  prepend=","   property="customerAb">  customer_ab=#customerAb#</isNotEmpty>
+			<isNotEmpty  prepend=","   property="cashType">  cash_type=#cashType#</isNotEmpty>
+			<isNotEmpty  prepend=","   property="address">  address=#address#</isNotEmpty>
+			<isNotEmpty  prepend=","   property="linkMan">  link_man=#linkMan#</isNotEmpty>
+			<isNotEmpty  prepend=","   property="linkMobile">  link_mobile=#linkMobile#</isNotEmpty>
+			<isNotEmpty  prepend=","   property="linkTel">  link_tel=#linkTel#</isNotEmpty>
+			<isNotEmpty  prepend=","   property="linkFax">  link_fax=#linkFax#</isNotEmpty>
+			<isNotNull  prepend=","   property="inquiryDate">  inquiry_date=#inquiryDate#</isNotNull>
+			<isNotNull  prepend=","   property="latestQuotateDate">  latest_quotate_date=#latestQuotateDate#</isNotNull>
+			<isNotEmpty  prepend=","   property="salesmanId">  salesman_id=#salesmanId#</isNotEmpty>
+			<isNotEmpty  prepend=","   property="status">  status=#status#</isNotEmpty>
+			<isNotEmpty  prepend=","   property="auditedStatus">  audited_status=#auditedStatus#</isNotEmpty>
+			<isNotEmpty  prepend=","   property="memo">  memo=#memo#</isNotEmpty>
+			<isNotNull  prepend=","   property="printTimes">  print_times=#printTimes#</isNotNull>
+			<isNotNull  prepend=","   property="newestPrintTime">  newest_print_time=#newestPrintTime#</isNotNull>
+			<isNotEmpty  prepend=","   property="newestPrintRecord">  newest_print_record=#newestPrintRecord#</isNotEmpty>
 	 		<isNotNull prepend="," property="ledgerId">ledger_id=#ledgerId#</isNotNull> 
-	 		<isNotNull prepend="," property="memo">memo=#memo#</isNotNull> 
 	 		<isNotNull prepend="," property="operator">operator=#operator#,modify_date= now()</isNotNull>
   	 		<isNotNull  prepend="," property="reviser">reviser = #reviser#,revisedate = now() </isNotNull>
   			<isNotNull  prepend="," property="verifier">verifier = #verifier#,verifydate = now() </isNotNull>
-  			<isNotNull prepend="," property="yesOrNo">delivery_or_not=#yesOrNo#</isNotNull> 
    		</dynamic>
-   		WHERE quotation_id=#id#
+   		WHERE sales_quotation_id=#salesQuotationId#
    	</update>
-   	<select id="getsalesQuotationByCondition" parameterClass="salesQuotation" resultMap="salesQuotation">
-   		SELECT <include refid="salesQuotationFileds"/>
-   		FROM RS_SALE_QUOTATION
-   		<include refid="whereLike"/>
-   	</select>
-   	<!-- 分页查询语句 -->
-   	<select id="getsalesQuotationSplitPageBySQL" remapResults="true" parameterClass="java.lang.String" resultMap="salesQuotation">
-   		$splitPageSQL$
-   	</select>
-   	<!-- end -->
-   	
-   	<select id="getsalesQuotationSplitPageCountSQL" remapResults="true" parameterClass="java.lang.String" resultClass="java.lang.Integer">
-   		$countSQL$
-   	</select>
-   	
-   	<delete id="deletesalesQuotation" parameterClass="salesQuotation">
-   		DELETE FROM RS_SALES_QUOTATION
+<!--   	<select id="getsalesQuotationSplitPageBySQL" remapResults="true" parameterClass="java.lang.String" resultMap="salesQuotation">-->
+<!--   		$splitPageSQL$-->
+<!--   	</select>-->
+<!--   	-->
+<!--   	<select id="getsalesQuotationSplitPageCountSQL" remapResults="true" parameterClass="java.lang.String" resultClass="java.lang.Integer">-->
+<!--   		$countSQL$-->
+<!--   	</select>-->
+<!--   	-->
+<!--   	<delete id="deletesalesQuotation" parameterClass="salesQuotation">-->
+<!--   		DELETE FROM RS_SALES_QUOTATION-->
+<!--   		<include refid="whereLike"/>-->
+<!--   	</delete>-->
+   	<delete id="deleteSalesQuotation" parameterClass="salesQuotation">
+   		DELETE FROM RS_SALE_QUOTATION
    		<include refid="whereLike"/>
    	</delete>
+   	<delete id="deleteSalesQuotationByPK" parameterClass="java.lang.String">
+   		DELETE FROM RS_SALE_QUOTATION
+   		WHERE sales_quotation_id=#salesQuotationId#
+   	</delete>
+   	
+   	<update id="updateStatusBySalesQuotationId" parameterClass="salesQuotation">
+   		UPDATE RS_SALE_QUOTATION 
+		SET status=#status#
+		WHERE sales_quotation_id=#salesQuotationId#
+   	</update>
+   	
 </sqlMap>
