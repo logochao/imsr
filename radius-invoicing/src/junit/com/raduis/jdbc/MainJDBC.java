@@ -3,8 +3,9 @@ package com.raduis.jdbc;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
+
+import org.apache.commons.lang.StringUtils;
 
 
 public class MainJDBC {
@@ -13,6 +14,7 @@ public class MainJDBC {
     
     private Map<String,String> dataTypeMap=new HashMap<String, String>();
     private DBHelper  dbHelper = null;
+    private String[] fileds=new String[30];
     public MainJDBC() {
         dbHelper =new DBHelper();
         dataTypeMap.put("char", "String");
@@ -84,10 +86,13 @@ public class MainJDBC {
             bf=new StringBuffer();
             String columName="";
             String dataType="";
+            int i=0;
             while(rs.next()){
                columName= rs.getString("COLUMN_NAME");
                dataType= rs.getString("DATA_TYPE");
                schema.put(columName, dataType);
+               fileds[i]=columName;
+               i++;
             }
             bf.append("INSERT INTO ").append(tableName.toUpperCase()).append(" ");
             buildInsertColums(bf, schema);
@@ -181,12 +186,13 @@ public class MainJDBC {
             while(rs.next()){
                columName= rs.getString("COLUMN_NAME");
                dataType= rs.getString("DATA_TYPE");
+               
                if(dataTypeMap.containsKey(dataType.toLowerCase())){
                    if(dataTypeMap.get(dataType.toLowerCase()).equalsIgnoreCase("String")){
                        bf.append("<result column=\""+columName+"\" jdbcType=\""+dataType+"\" javaType=\"java.lang.String\" property=\""+rebuildString(columName.toLowerCase())+"\" />\n");
-                    }else if(dataTypeMap.get(dataType.toLowerCase()).equalsIgnoreCase("int")){
+                    }else if(dataTypeMap.get(dataType.toLowerCase()).equalsIgnoreCase("Integer")){
                         bf.append("<result  column=\""+columName+"\" jdbcType=\""+dataType+"\" javaType=\"java.lang.Integer\" property=\""+rebuildString(columName.toLowerCase())+"\"/>\n");
-                    }else if(dataTypeMap.get(dataType.toLowerCase()).equalsIgnoreCase("date")){
+                    }else if(dataTypeMap.get(dataType.toLowerCase()).equalsIgnoreCase("Date")){
                         bf.append("<result  column=\""+columName+"\" jdbcType=\""+dataType+"\" javaType=\"java.util.Date\" property=\""+rebuildString(columName.toLowerCase())+"\"/>\n");
                     }
                }
@@ -205,9 +211,23 @@ public class MainJDBC {
      */
     private void buildInsertColums(StringBuffer bf,Map<String,String> schema){
         String dataType="";
-        String columName="";
-        Iterator<String> iter = schema.keySet().iterator();
+//        String columName="";
         bf.append(" (\n");
+        for(String col:fileds){
+        	if(StringUtils.isNotBlank(col)){
+        		 dataType = schema.get(col);
+        		 if(dataTypeMap.containsKey(dataType.toLowerCase())){
+                     dataType=dataTypeMap.get(dataType.toLowerCase());//数据类型
+                     if(dataType.equalsIgnoreCase("String")){
+                        bf.append("<isNotEmpty property=\""+rebuildString(col.toLowerCase())+"\">"+col+",</isNotEmpty>\n");
+                     }else {
+                         bf.append("<isNotNull  property=\""+rebuildString(col.toLowerCase())+"\">"+col+",</isNotNull>\n");
+                     }
+                 }
+        	}
+        }
+        /**
+        Iterator<String> iter = schema.keySet().iterator();
         while (iter.hasNext()) {
             columName = iter.next();
             dataType = schema.get(columName);
@@ -219,7 +239,7 @@ public class MainJDBC {
                     bf.append("<isNotNull  property=\""+rebuildString(columName.toLowerCase())+"\">"+columName+",</isNotNull>\n");
                 }
             }
-        }
+        }**/
         bf.append(")\n");
     }
     
@@ -230,9 +250,24 @@ public class MainJDBC {
      */
     private void buildInsertValueColums(StringBuffer bf,Map<String,String> schema){
         String dataType="";
-        String columName="";
-        Iterator<String> iter = schema.keySet().iterator();
+//        String columName="";
         bf.append(" (\n");
+        
+        for(String col:fileds){
+        	if(StringUtils.isNotBlank(col)){
+        		dataType= schema.get(col);
+                if(dataTypeMap.containsKey(dataType.toLowerCase())){
+                    dataType=dataTypeMap.get(dataType.toLowerCase());//数据类型
+                    if(dataType.equalsIgnoreCase("String")){
+                       bf.append("<isNotEmpty property=\""+rebuildString(col.toLowerCase())+"\">#"+rebuildString(col.toLowerCase())+"#,</isNotEmpty>\n");
+                    }else {
+                        bf.append("<isNotNull  property=\""+rebuildString(col.toLowerCase())+"\">#"+rebuildString(col.toLowerCase())+"#</isNotNull>\n");
+                    }
+                }
+        	}
+        }
+        /**
+        Iterator<String> iter = schema.keySet().iterator();
         while (iter.hasNext()) {
             columName= iter.next();
              dataType= schema.get(columName);
@@ -244,7 +279,7 @@ public class MainJDBC {
                     bf.append("<isNotNull  property=\""+rebuildString(columName.toLowerCase())+"\">#"+rebuildString(columName.toLowerCase())+"#</isNotNull>\n");
                 }
             }
-        }
+        }**/
         bf.append(")");
     }
     private String rebuildString(String filed){
@@ -266,7 +301,7 @@ public class MainJDBC {
     
     public static void main(String[] args) throws InterruptedException {
         MainJDBC jdbc=new MainJDBC();
-        String tableName="rs_supplier_quotation";
+        String tableName="rs_sales_quotation";
         System.err.println("-------------------生成查询列字段SQL语句----------------------");
         String content=jdbc.buildSQLFileds(tableName);
         System.out.println(content);
