@@ -6,7 +6,7 @@ var customer_inquiry_base_cash_type = null;//货币单位
 $(function(){
 	//合同状态
 	customer_inquiry_base_status=$('#customer_inquiry_base_status').combobox({
- 		url:'${path}/common/system/category_code_list.html?parentId=2400',
+ 		url:'${path}/common/system/category_code_list.html?parentId=6000',
  		valueField: 'id',
 		textField: 'name',
 		onLoadSuccess:function(){
@@ -104,7 +104,7 @@ function validataCustomerInquiryBaseId(){
 		<th>客户询价号</th>
 		<td><input class="easyui-validatebox" style="background:#eee;width: 150px;border:1px solid #95B8E7;" id="customer_inquiry_base_id" readonly="readonly"/></td>
 		<th>状态</th>
-		<td colspan="3"><input id="customer_inquiry_base_status" style="border:1px solid #95B8E7;"  class="easyui-validatebox" class="easyui-combobox" value="2401"/></td>
+		<td colspan="3"><input id="customer_inquiry_base_status" style="border:1px solid #95B8E7;"  class="easyui-validatebox" class="easyui-combobox" value="6001"/></td>
 		<th>询价日期</th>
 		<td><input class="easyui-validatebox Wdate"  onClick="WdatePicker()" style="border:1px solid #95B8E7;" id="customer_inquiry_base_order_time"/></td>
 	</tr>
