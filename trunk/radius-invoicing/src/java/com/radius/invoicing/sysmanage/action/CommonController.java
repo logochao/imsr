@@ -36,6 +36,7 @@ import com.radius.base.page.EasyuiSplitPager;
 import com.radius.base.utils.JsonUtils;
 import com.radius.invoicing.cache.impl.CategoryCacheImpl;
 import com.radius.invoicing.cache.impl.SpecTypeCacheImpl;
+import com.radius.invoicing.enums.GoodsInquiryTypeEnums;
 import com.radius.invoicing.enums.SexEnums;
 import com.radius.invoicing.enums.UseStatusEnums;
 import com.radius.invoicing.enums.YesOrNoEnums;
@@ -243,7 +244,10 @@ public class CommonController extends BaseController{
 		super.ajaxMethod(response, json, "获取性别信息发生异常");
 	}
 	
-	
+	@RequestMapping("/common/system/goods_inquiry_status_list.html")
+	public void getGoodsInquiryStatus(HttpServletRequest request,HttpServletResponse response){
+		super.ajaxMethod(response, GoodsInquiryTypeEnums.getInquiryTypeEnumsJson(), "获取性别信息发生异常");
+	}
 	
 	
 	/**
