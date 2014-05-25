@@ -29,7 +29,7 @@
 
 	 <result column="ledger_id" jdbcType="char" javaType="java.lang.String" property="ledgerId" />
     <result column="operator" jdbcType="char" javaType="java.lang.String" property="operator" />
-    <result column="modify_date" jdbcType="datetime" javaType="java.util.Date" property="modifyDate" />
+    <result column="motify_date" jdbcType="datetime" javaType="java.util.Date" property="modifyDate" />
     <result column="creater" jdbcType="char" javaType="java.lang.String" property="creater" />
     <result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createDate" />
     <result column="reviser" jdbcType="char" javaType="java.lang.String" property="reviser" />
@@ -161,7 +161,7 @@
    	
    	<update id="updateSalesOrderGoodsGrdStatusByPK" parameterClass="salesOrderGoodsGrd">
    		UPDATE RS_SALES_ORDER_GOODS_GRD
-   		SET status=#status# <isNotNull property="operator">,operator=#operator#,modify_date= now()</isNotNull>
+   		SET status=#status# <isNotNull property="operator">,operator=#operator#,motify_date= now()</isNotNull>
    		WHERE sales_order_id=#orderId# AND goods_id=#goodsId#
    	</update>
 </sqlMap>
