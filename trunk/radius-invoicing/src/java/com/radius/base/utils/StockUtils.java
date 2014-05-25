@@ -19,6 +19,7 @@ public class StockUtils implements Constants {
 	private static int SUPPLIER_SERI_NUM=1;//供应商编号初始化
 	private static int SALES_INQUERY_SERI_NUM=1;//销售询价编号初始化
 	private static int PURCHASE_INQUERY_SERI_NUM=1;//采购询价编号初始化
+	private static int PURCHASE_QUOTATION_SERI_NUM=1;//供应商报价编号初始化
 	
 	/**
 	 * 获取销售合同编号 H_S+yyyymmdd+01  
@@ -192,6 +193,32 @@ public class StockUtils implements Constants {
 		//生成对象的销售合同编号
 		
 		bf.append(StringUtils.getSpecifyStringByLengthBefore(PURCHASE_INQUERY_SERI_NUM+"", 2, "0"));//将其转换为2位字符 不够长度将其前面补0
+		
+		return bf.toString();
+	}
+	/**
+	 * 获取采购报价编号
+	 * @return CG_B2014052000
+	 */
+	public static String getSupplierQuotationId(){
+		
+		StringBuffer bf=new  StringBuffer();
+		bf.append(PURCHASE_QUOTATION_PREFIX);
+		bf.append(DateConvertUtils.format(new Date(), DATE_FORMAT_YEAR_MONTH_DAY));
+		
+		Integer cache =null;
+		if(isTheSameDay(bf.toString())){//是否是同一天
+			cache=(Integer)MemcacheClient.get(bf.toString());
+		}
+		if(cache!=null){
+			PURCHASE_QUOTATION_SERI_NUM=cache.intValue();//当缓存中存在则将其获取
+			PURCHASE_QUOTATION_SERI_NUM++;//将其+1
+		}
+		//并将新值缓存到内存中
+		MemcacheClient.set(bf.toString(), new Integer(PURCHASE_QUOTATION_SERI_NUM), CACHE_ONE_DAY_TIME);//将其缓存一天
+		//生成对象的销售合同编号
+		
+		bf.append(StringUtils.getSpecifyStringByLengthBefore(PURCHASE_QUOTATION_SERI_NUM+"", 2, "0"));//将其转换为2位字符 不够长度将其前面补0
 		
 		return bf.toString();
 	}

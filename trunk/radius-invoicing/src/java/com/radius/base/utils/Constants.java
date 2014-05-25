@@ -84,6 +84,10 @@ public interface Constants {
 	 * 采购询价前缀 CG_X
 	 */
 	String PURCHASE_INQUIRY_PREFIX=PURCHASE_PREFIX+"_X";//采购询价前缀
+	/**
+	 * 供应商报价前缀 CG_B
+	 */
+	String PURCHASE_QUOTATION_PREFIX=PURCHASE_PREFIX+"_B";//供应商报价前缀
 	
 	/**
 	 * 采购订单前缀 CG_D
