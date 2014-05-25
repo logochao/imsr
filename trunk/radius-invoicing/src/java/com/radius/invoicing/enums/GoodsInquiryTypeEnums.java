@@ -10,8 +10,8 @@ import org.apache.commons.lang.StringUtils;
  */
 public enum GoodsInquiryTypeEnums {
 
-	INQUIRYED("00","已询价"),
-	INQUIRYING("01","询价中");
+	INQUIRYED("6021","已询价"),
+	INQUIRYING("6022","询价中");
 	
 	private String id;
 	private String name;
@@ -68,7 +68,7 @@ public enum GoodsInquiryTypeEnums {
 	public static String getInquiryTypeEnumsJson(){
 		StringBuffer bf=new StringBuffer("[");
 		for(GoodsInquiryTypeEnums enums:GoodsInquiryTypeEnums.values()){
-			bf.append("{\"id\":").append(enums.getId()).append(",");
+			bf.append("{\"id\":\"").append(enums.getId()).append("\",");
 			bf.append("\"name\":\"").append(enums.getName()).append("\"},");
 		}
 		bf.substring(0, bf.length()-1);
