@@ -89,7 +89,6 @@ function setPurchaseContractBaseInfo(row_data){
 	$('#purchase_contract_base_link_tel').val(row_data.tel);
 	$('#purchase_contract_base_link_mobile').val(row_data.mobile);
 	$('#purchase_contract_base_link_fax').val(row_data.fax);
-	$('#purchase_contract_base_delivery_point').val(row_data.deliveryPoint);
 	$('#purchase_contract_base_clerk').val(row_data.purchaser);
 	
 	resetSupplierDialog();
@@ -100,6 +99,7 @@ function setPurchaseContractBaseInfo(row_data){
 	com.radius.datagrid.clear(purchase_contract_base_purchase_order_grd);
 	purchase_contract_base_status.combobox('setValue',row_data.status);
 	$('#purchase_contract_base_purchase_order_id').val(row_data.orderId);
+	$('#purchase_contract_base_delivery_point').val(row_data.deliveryPoint);
 }
 //-->
 </script>
