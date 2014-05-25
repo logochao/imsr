@@ -2,6 +2,10 @@ package com.radius.invoicing.ibatis.model;
 
 import java.util.Date;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+import com.radius.base.utils.JsonDateSerializer;
+
 public class PurchaseInquiry extends ExtInfo{
 
 	private String 		purchaseInquiryId="";//采购询价单编号
@@ -41,9 +45,11 @@ public class PurchaseInquiry extends ExtInfo{
 	public void setFax(String fax) {
 		this.fax = fax;
 	}
+	@JsonSerialize(using=JsonDateSerializer.class) 
 	public Date getInquiryDate() {
 		return inquiryDate;
 	}
+	@JsonSerialize(using=JsonDateSerializer.class) 
 	public void setInquiryDate(Date inquiryDate) {
 		this.inquiryDate = inquiryDate;
 	}
