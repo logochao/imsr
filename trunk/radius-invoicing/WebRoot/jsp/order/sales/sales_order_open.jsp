@@ -29,7 +29,7 @@ $(function(){
 			}
    		]],
    		columns:[[
-			{field:'upperAmount',title:'大写金额',width:120},
+			//{field:'upperAmount',title:'大写金额',width:120},
 			{field:'linkMan',title:'联系人',width:120},
 			{field:'mobile',title:'联系人手机',width:120},
 			{field:'tel',title:'电话',width:120},
