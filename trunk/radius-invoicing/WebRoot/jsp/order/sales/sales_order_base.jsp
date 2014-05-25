@@ -282,7 +282,7 @@ function setSalesOrderBaseInfo(row_data){
 	setInputElementValue($('#sales_order_base_link_tel'),row_data.tel);//联系电话
 	setInputElementValue($('#sales_order_base_link_mobile'),row_data.mobile);//联系人手机
 	setInputElementValue($('#sales_order_base_link_fax'),row_data.fax);//传真
-	setInputElementValue($('#sales_order_base_delivery_point'),row_data.deliveryPoint);//送货地点
+	setInputElementValue($('#sales_order_base_delivery_point'),row_data.deliveryAddress);//送货地点
 	setInputElementValue($('#sales_order_base_trade_assistant'),row_data.salesManId);//业务员
 	setInputElementValue($('#sales_order_base_sales_contract_id'),row_data.contractId);//销售合同编号
 	setInputElementValue($('#sales_order_base_total_amount'),parseFloat(row_data.totalAmount)/100);//合同总金额
