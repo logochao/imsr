@@ -14,7 +14,7 @@ import com.radius.base.utils.JsonDateSerializer;
  */
 public class SupplierQuotation extends ExtInfo {
 
-	private   String     purchaseInquiryId="";//采购报价单编号
+	private   String     supplierQuotationId="";//采购报价单编号
 	private   String     supplierId="";//供应商编号
 	private   String     supplierName="";//供应商名称
 	private   String     cashType="";//币种
@@ -31,6 +31,7 @@ public class SupplierQuotation extends ExtInfo {
 	private   Integer    printTimes;//打印次数
 	private   Date       printTime;//最新打印时间
 	private   String     printRecord="";//最新打印记录
+	private   String     purchaseInquiryId="";//采购询价单号
 	
 	
 	public String getAddress() {
@@ -102,11 +103,11 @@ public class SupplierQuotation extends ExtInfo {
 	public void setPrintTimes(Integer printTimes) {
 		this.printTimes = printTimes;
 	}
-	public String getPurchaseInquiryId() {
-		return purchaseInquiryId;
+	public String getSupplierQuotationId() {
+		return supplierQuotationId;
 	}
-	public void setPurchaseInquiryId(String purchaseInquiryId) {
-		this.purchaseInquiryId = purchaseInquiryId;
+	public void setSupplierQuotationId(String supplierQuotationId) {
+		this.supplierQuotationId = supplierQuotationId;
 	}
 	public String getSalesman() {
 		return salesman;
@@ -137,6 +138,12 @@ public class SupplierQuotation extends ExtInfo {
 	}
 	public void setTel(String tel) {
 		this.tel = tel;
+	}
+	public String getPurchaseInquiryId() {
+		return purchaseInquiryId;
+	}
+	public void setPurchaseInquiryId(String purchaseInquiryId) {
+		this.purchaseInquiryId = purchaseInquiryId;
 	}
 	
 	

@@ -70,14 +70,14 @@ public class SupplierQuotationGrdDaoImpl extends BaseIbatisDaoImpl<SupplierQuota
 	public void batchUpdataSupplierQuotationGrd(List<SupplierQuotationGrd> list){
 		this.batchInsertListObject(list,SQLMAPNAMESPACE+"updateSupplierQuotationGrd");
 	}
-	/**
-	 * 通过组合主键只更新状态
-	 * @param SupplierQuotationGrd
-	 * @return
-	 */
-	public boolean updateStatus(SupplierQuotationGrd supplierQuotationGrd){
-		return this.updateObject(supplierQuotationGrd, SQLMAPNAMESPACE+"updateStatusByPK")==1;
-	}
+//	/**
+//	 * 通过组合主键只更新状态
+//	 * @param SupplierQuotationGrd
+//	 * @return
+//	 */
+//	public boolean updateStatus(SupplierQuotationGrd supplierQuotationGrd){
+//		return this.updateObject(supplierQuotationGrd, SQLMAPNAMESPACE+"updateStatusByPK")==1;
+//	}
 	/**
 	 * 通过组合组件删除销售询价列表
 	 * @param quotationId

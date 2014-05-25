@@ -40,7 +40,7 @@ public class SupplierQuotationDaoImpl extends BaseIbatisDaoImpl<SupplierQuotatio
 	}
 	
 	public boolean updateStatusBySupplierQuotationId(SupplierQuotation supplierQuotation){
-		return this.updateObject(supplierQuotation, SQLMAPNAMESPACE+"updateStatusByPurchaseInquiryId")==1;
+		return this.updateObject(supplierQuotation, SQLMAPNAMESPACE+"updateStatusBySupplierQuotationId")==1;
 	}
 	
 	public void batchUpdateSupplierQuotation(List<SupplierQuotation> list){

@@ -5,13 +5,27 @@
   <typeAlias alias="supplierGoods" type="com.radius.invoicing.ibatis.model.SupplierGoods" />
   
   <sql id="supplierGoodsFileds">
-    supplier_id supplierId,goods_id goodsId,ledger_id ledgerId,
-    creater creater,createdate createDate,reviser reviser,revisedate reviseDate,verifier verifyDate
+    supplier_id supplierId,goods_id goodsId,goods_name goodsName,spec_id specId,unit unit,equivalent_unit equivalentUnit
+    ,quantity_of_eu_per_unit quantityEuPerUnit,supply_cash_type supplyCashType,price_of_unit_of_supply priceUnitSupply,
+    price_of_eu_of_supply priceEuSupply,validity_date validityDate,memo memo,modity_date modifyDate,
+    ledger_id ledgerId,creater creater,createdate createDate,reviser reviser,revisedate reviseDate,verifier verifyDate
   </sql>
   
   <resultMap id="supplierGoods" class="supplierGoods">
-    <result column="supplier_id" jdbcType="char" javaType="java.lang.String" property="supplierId" />
-    <result column="goods_id" jdbcType="char" javaType="java.lang.String" property="goodsId" />
+   <result column="supplier_id" jdbcType="char" javaType="java.lang.String" property="supplierId" />
+	<result column="goods_id" jdbcType="char" javaType="java.lang.String" property="goodsId" />
+	<result column="goods_name" jdbcType="varchar" javaType="java.lang.String" property="goodsName" />
+	<result  column="spec_id" jdbcType="int" javaType="java.lang.Integer" property="specId"/>
+	<result  column="unit" jdbcType="int" javaType="java.lang.Integer" property="unit"/>
+	<result  column="equivalent_unit" jdbcType="int" javaType="java.lang.Integer" property="equivalentUnit"/>
+	<result  column="quantity_of_eu_per_unit" jdbcType="int" javaType="java.lang.Integer" property="quantityEuPerUnit"/>
+	<result  column="supply_cash_type" jdbcType="int" javaType="java.lang.Integer" property="supplyCashType"/>
+	<result  column="price_of_unit_of_supply" jdbcType="int" javaType="java.lang.Integer" property="priceUnitSupply"/>
+	<result  column="price_of_eu_of_supply" jdbcType="int" javaType="java.lang.Integer" property="priceEuSupply"/>
+	<result  column="validity_date" jdbcType="datetime" javaType="java.util.Date" property="validityDate"/>
+	<result column="memo" jdbcType="text" javaType="java.lang.String" property="memo" />
+	<result  column="modity_date" jdbcType="datetime" javaType="java.util.Date" property="modifyDate"/>
+	<result column="operator" jdbcType="char" javaType="java.lang.String" property="operator" />
     <result column="ledger_id" jdbcType="char" javaType="java.lang.String" property="ledgerId" />
     <result column="creater" jdbcType="char" javaType="java.lang.String" property="creater" />
     <result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createDate" />
@@ -25,55 +39,91 @@
   	<dynamic prepend="where">
   		1=1 
   		<isNotEmpty property="supplierId"> AND supplier_id=#supplierId#</isNotEmpty>
-		<isNotEmpty  property="linkType"> AND goods_id=#goodsId#</isNotEmpty>
+		<isNotEmpty property="goodsId"> AND goods_id=#goodsId#</isNotEmpty>
+		<isNotEmpty property="goodsName"> AND goods_name LIKE CONCAT('%',#goodsName#,'%')</isNotEmpty>
+		<isNotNull  property="specId">  AND spec_id=#specId#</isNotNull>
+		<isNotNull  property="unit">  AND unit=#unit#</isNotNull>
+		<isNotNull  property="equivalentUnit">  AND equivalent_unit=#equivalentUnit#</isNotNull>
+		<isNotNull  property="quantityEuPerUnit">  AND quantity_of_eu_per_unit=#quantityEuPerUnit#</isNotNull>
+		<isNotNull  property="supplyCashType">  AND supply_cash_type=#supplyCashType#</isNotNull>
+		<isNotNull  property="priceUnitSupply">  AND price_of_unit_of_supply=#priceUnitSupply#</isNotNull>
+		<isNotNull  property="priceEuSupply">  AND price_of_eu_of_supply=#priceEuSupply#</isNotNull>
+		<isNotNull  property="validityDate">  AND validity_date=#validityDate#</isNotNull>
+		<isNotEmpty property="memo"> AND memo=#memo#</isNotEmpty>
+		<isNotNull  property="modifyDate">  AND modity_date=#modifyDate#</isNotNull>
 		<isNotEmpty property="ledgerId"> AND ledger_id=#ledgerId#</isNotEmpty>
   	</dynamic>
   </sql>
    
    	<insert id="insert" parameterClass="supplierGoods">
-   		INSERT INTO RS_SUPPLIER_GOODS (
-   			supplier_id,
-   			goods_id,
-   			<isNotEmpty  property="ledgerId">ledger_id,</isNotEmpty>
-	  	    creater,
-	  	    createdate
-   		)VALUES(
-   			#supplierId#,
-   			#goodsId#,
-   			<isNotEmpty  property="ledgerId">#ledgerId#,</isNotEmpty>
-   			#creater#,
-   			now()
-   		)
+   		INSERT INTO RS_SUPPLIER_GOODS  (
+			supplier_id,
+			goods_id,
+			<isNotEmpty property="goodsName">goods_name,</isNotEmpty>
+			<isNotNull  property="specId">spec_id,</isNotNull>
+			<isNotNull  property="unit">unit,</isNotNull>
+			<isNotNull  property="equivalentUnit">equivalent_unit,</isNotNull>
+			<isNotNull  property="quantityEuPerUnit">quantity_of_eu_per_unit,</isNotNull>
+			<isNotNull  property="supplyCashType">supply_cash_type,</isNotNull>
+			<isNotNull  property="priceUnitSupply">price_of_unit_of_supply,</isNotNull>
+			<isNotNull  property="priceEuSupply">price_of_eu_of_supply,</isNotNull>
+			<isNotNull  property="validityDate">validity_date,</isNotNull>
+			<isNotEmpty property="memo">memo,</isNotEmpty>
+			<isNotEmpty property="operator">operator,</isNotEmpty>
+			<isNotEmpty property="ledgerId">ledger_id,</isNotEmpty>
+			creater,
+			createrdate
+		)VALUES  (
+			#supplierId#,
+			#goodsId#,
+			<isNotEmpty property="goodsName">#goodsName#,</isNotEmpty>
+			<isNotNull  property="specId">#specId#,</isNotNull>
+			<isNotNull  property="unit">#unit#,</isNotNull>
+			<isNotNull  property="equivalentUnit">#equivalentUnit#,</isNotNull>
+			<isNotNull  property="quantityEuPerUnit">#quantityEuPerUnit#,</isNotNull>
+			<isNotNull  property="supplyCashType">#supplyCashType#,</isNotNull>
+			<isNotNull  property="priceUnitSupply">#priceUnitSupply#,</isNotNull>
+			<isNotNull  property="priceEuSupply">#priceEuSupply#,</isNotNull>
+			<isNotNull  property="validityDate">#validityDate#,</isNotNull>
+			<isNotEmpty property="memo">#memo#,</isNotEmpty>
+			<isNotEmpty property="operator">#operator#,</isNotEmpty>
+			<isNotEmpty property="ledgerId">#ledgerId#,</isNotEmpty>
+			#creater#,
+			now()
+		)
    	</insert>
    
    	<update id="updateSupplierGoods" parameterClass="supplierGoods">
    		UPDATE RS_SUPPLIER_GOODS
    		<dynamic prepend="SET">
-	 		<isNotEmpty prepend="," property="ledgerId">ledger_id=#ledgerId#</isNotEmpty> 
+			<isNotEmpty  prepend=","   property="goodsName">  goods_name=#goodsName#</isNotEmpty>
+			<isNotNull  prepend=","   property="specId">  spec_id=#specId#</isNotNull>
+			<isNotNull  prepend=","   property="unit">  unit=#unit#</isNotNull>
+			<isNotNull  prepend=","   property="equivalentUnit">  equivalent_unit=#equivalentUnit#</isNotNull>
+			<isNotNull  prepend=","   property="quantityEuPerUnit">  quantity_of_eu_per_unit=#quantityEuPerUnit#</isNotNull>
+			<isNotNull  prepend=","   property="supplyCashType">  supply_cash_type=#supplyCashType#</isNotNull>
+			<isNotNull  prepend=","   property="priceUnitSupply">  price_of_unit_of_supply=#priceUnitSupply#</isNotNull>
+			<isNotNull  prepend=","   property="priceEuSupply">  price_of_eu_of_supply=#priceEuSupply#</isNotNull>
+			<isNotNull  prepend=","   property="validityDate">  validity_date=#validityDate#</isNotNull>
+			<isNotEmpty  prepend=","   property="memo">  memo=#memo#</isNotEmpty>
+			<isNotEmpty  prepend=","   property="ledgerId">  ledger_id=#ledgerId#</isNotEmpty>
+			<isNotEmpty  prepend=","   property="operator">  operator=#operator#,modity_date=NOW()</isNotEmpty>
   	 		<isNotEmpty  prepend="," property="reviser">reviser = #reviser#,revisedate = now() </isNotEmpty>
   			<isNotEmpty  prepend="," property="verifier">verifier = #verifier#,verifydate = now() </isNotEmpty>
    		</dynamic>
-   		<include refid="whereLike"/>
+   		WHERE supplier_id=#supplierId# AND goods_id=#goodsId#
    	</update>
    	<select id="getSupplierGoodsByCondition" parameterClass="supplierGoods" resultMap="supplierGoods">
    		SELECT *
    		FROM RS_SUPPLIER_GOODS
    		<include refid="whereLike"/>
    	</select>
-   	<!-- 分页查询语句 -->
-   	<select id="getSupplierGoodsSplitPageBySQL" remapResults="true" parameterClass="java.lang.String" resultMap="supplierGoods">
-   		$splitPageSQL$
-   	</select>
-   	<!-- end -->
-   	
-   	<select id="getSupplierGoodsSplitPageCountSQL" remapResults="true" parameterClass="java.lang.String" resultClass="java.lang.Integer">
-   		$countSQL$
-   	</select>
-   	
    	
    	<delete id="deleteSupplierGoods" parameterClass="supplierGoods">
    		DELETE FROM RS_SUPPLIER_GOODS
    		<include refid="whereLike"/>
    	</delete>
-   	
+   	<select id="getSupplierGoodsCount" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+   		SELECT COUNT(1) FROM RS_SUPPLIER_GOODS  WHERE supplier_id=#supplierId# AND goods_id=#goodsId#
+   	</select>
 </sqlMap>

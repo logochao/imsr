@@ -7,8 +7,8 @@
   <sql id="supplierQuotationGrdFileds">
   	quotation_id quotationId,goods_id goodsId,goods_name goodsName,spec_id specId,unit unit,
   	equivalent_unit equivalentUnit,quantity_of_eu_per_unit quantityEuPerUnit,supply_cash_type cashType,
-  	price_of_unit_of_supply priceUnitSupply,price_of_eu_of_supply priceEuSupply,validity_date validityDate,memo memo
-  	ledger_id ledgerId,operator operator,motify_date modifyDate,creater creater,createdate createDate,reviser reviser,revisedate reviseDate,verifier verifier,verifydate verifyDate
+  	price_of_unit_of_supply priceUnitSupply,price_of_eu_of_supply priceEuSupply,validity_date validityDate,memo memo,
+  	ledger_id ledgerId,operator operator,modify_date modifyDate,creater creater,createdate createDate,reviser reviser,revisedate reviseDate,verifier verifier,verifydate verifyDate
   </sql>
   
   <resultMap id="supplierQuotationGrd" class="supplierQuotationGrd">
@@ -92,14 +92,14 @@
 				#quotationId#,
 				#goodsId#,
 				<isNotEmpty property="goodsName">#goodsName#,</isNotEmpty>
-				<isNotNull  property="specId">#specId#</isNotNull>
+				<isNotNull  property="specId">#specId#,</isNotNull>
 				<isNotEmpty property="unit">#unit#,</isNotEmpty>
 				<isNotEmpty property="equivalentUnit">#equivalentUnit#,</isNotEmpty>
-				<isNotNull  property="quantityEuPerUnit">#quantityEuPerUnit#</isNotNull>
+				<isNotNull  property="quantityEuPerUnit">#quantityEuPerUnit#,</isNotNull>
 				<isNotEmpty property="cashType">#cashType#,</isNotEmpty>
-				<isNotNull  property="priceUnitSupply">#priceUnitSupply#</isNotNull>
-				<isNotNull  property="priceEuSupply">#priceEuSupply#</isNotNull>
-				<isNotNull  property="validityDate">#validityDate#</isNotNull>
+				<isNotNull  property="priceUnitSupply">#priceUnitSupply#,</isNotNull>
+				<isNotNull  property="priceEuSupply">#priceEuSupply#,</isNotNull>
+				<isNotNull  property="validityDate">#validityDate#,</isNotNull>
 				<isNotEmpty property="memo">#memo#,</isNotEmpty>
 				<isNotEmpty property="operator">#operator#,</isNotEmpty>
 				<isNotEmpty property="ledgerId">#ledgerId#,</isNotEmpty>
@@ -138,11 +138,11 @@
    		WHERE quotation_id=#quotationId# AND  goods_id=#goodsId#
    	</delete>
    	
-   	<update id="updateStatusByPK" parameterClass="SupplierQuotationGrd">
-   		UPDATE RS_SUPPLIER_QUOTATION_GRD 
-		SET status=#status#
-		WHERE quotation_id=#quotationId# AND  goods_id=#goodsId#
-   	</update>
+<!--   	<update id="updateStatusByPK" parameterClass="SupplierQuotationGrd">-->
+<!--   		UPDATE RS_SUPPLIER_QUOTATION_GRD -->
+<!--		SET status=#status#-->
+<!--		WHERE quotation_id=#quotationId# AND  goods_id=#goodsId#-->
+<!--   	</update>-->
    	
    	 <!-- 获取当前询价的商品行数 -->
    	<select id="getSupplierQuotationGrdCountByQuotationId" parameterClass="java.lang.String" resultClass="java.lang.Integer">

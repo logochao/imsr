@@ -7,8 +7,8 @@
   <sql id="purchaseInquiryFileds">
   	purchase_inquiry_id purchaseInquiryId,supplier_id supplierId,supplier_name supplierName,
   	cash_type cashType,address address,link_man man,link_mobile mobile,link_tel tel,link_fax fax,
-	inquiry_date inquiryDate,latest_quotate_date latestQuotateDate,salesman_id salesman,STATUS STATUS,memo memo,print_times printTimes,newest_print_time printTime,newest_print_record printRecord,
-  	ledger_id ledgerId,operator operator,motify_date modifyDate,creater creater,createdate createDate,reviser reviser,revisedate reviseDate,verifier verifier,verifydate verifyDate
+	inquiry_date inquiryDate,latest_quotate_date latestQuotateDate,salesman_id salesman,STATUS status,memo memo,print_times printtimes,newest_print_time printtime,newest_print_record printrecord,
+  	ledger_id ledgerid,operator operator,motify_date modifydate,creater creater,createdate createdate,reviser reviser,revisedate reviseDate,verifier verifier,verifydate verifyDate
   </sql>
   
   <resultMap id="purchaseInquiry" class="purchaseInquiry">
@@ -25,7 +25,7 @@
     <result column="latest_quotate_date" jdbcType="datetime" javaType="java.util.Date" property="latestQuotateDate"/>
     <result column="salesman_id" jdbcType="char" javaType="java.lang.String" property="salesman" />
   	<result column="memo" jdbcType="text" javaType="java.lang.String" property="memo" />
-    <result column="status" jdbcType="int" javaType="java.lang.Integer" property="status" />
+    <result column="status" jdbcType="char" javaType="java.lang.String" property="status" />
     <result column="print_times" jdbcType="int" javaType="java.lang.Integer" property="printTimes" />
     <result column="newest_print_time" jdbcType="datetime" javaType="java.util.Date" property="printTime"/>
     <result column="newest_print_record" jdbcType="char" javaType="java.lang.String" property="printRecord" />
@@ -59,7 +59,7 @@
 		<isNotNull  property="inquiryDate">  AND Inquiry_date =#inquiryDate#</isNotNull>
 		<isNotNull  property="latestQuotateDate">  AND latest_quotate_date =#latestQuotateDate#</isNotNull>
 		<isNotEmpty  property="memo">  AND memo =#memo#</isNotEmpty>
-		<isNotNull  property="status">  AND status =#status#</isNotNull>
+		<isNotEmpty  property="status">  AND status =#status#</isNotEmpty>
 		<isNotNull  property="printTimes">  AND print_times =#printTimes#</isNotNull>
 		<isNotNull  property="printTime">  AND newest_print_time =#printTime#</isNotNull>
 		<isNotEmpty  property="printRecord">  AND newest_print_record =#printRecord#</isNotEmpty>
@@ -94,7 +94,7 @@
 			<isNotNull  property="latestQuotateDate">latest_quotate_date ,</isNotNull>
 			<isNotEmpty  property="salesman">salesman_id ,</isNotEmpty>
 			<isNotEmpty  property="memo">memo ,</isNotEmpty>
-			<isNotNull  property="status">status ,</isNotNull>
+			<isNotEmpty  property="status">status ,</isNotEmpty>
 			<isNotNull  property="printTimes">print_times ,</isNotNull>
 			<isNotNull  property="printTime">newest_print_time ,</isNotNull>
 			<isNotEmpty  property="printRecord">newest_print_record ,</isNotEmpty>
@@ -116,7 +116,7 @@
 			<isNotNull  property="latestQuotateDate">#latestQuotateDate# ,</isNotNull>
 			<isNotEmpty  property="salesman">#salesman# ,</isNotEmpty>
 			<isNotEmpty  property="memo">#memo# ,</isNotEmpty>
-			<isNotNull  property="status">#status# ,</isNotNull>
+			<isNotEmpty  property="status">#status# ,</isNotEmpty>
 			<isNotNull  property="printTimes">#printTimes# ,</isNotNull>
 			<isNotNull  property="printTime">#printTime# ,</isNotNull>
 			<isNotEmpty  property="printRecord">#printRecord# ,</isNotEmpty>
@@ -141,7 +141,7 @@
 			<isNotNull   prepend=","  property="latestQuotateDate">latest_quotate_date =#latestQuotateDate#</isNotNull>
 			<isNotEmpty   prepend=","  property="salesman">salesman_id =#salesman#</isNotEmpty>
 			<isNotEmpty   prepend=","  property="memo">memo =#memo#</isNotEmpty>
-			<isNotNull   prepend=","  property="status">status =#status#</isNotNull>
+			<isNotEmpty   prepend=","  property="status">status =#status#</isNotEmpty>
 			<isNotNull   prepend=","  property="printTimes">print_times =#printTimes#</isNotNull>
 			<isNotNull   prepend=","  property="printTime">newest_print_time =#printTime#</isNotNull>
 			<isNotEmpty   prepend=","  property="printRecord">newest_print_record =#printRecord#</isNotEmpty>
