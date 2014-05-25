@@ -142,7 +142,7 @@ function commitSalesOrder(save_url,save_data){
 					//禁用提交合同按钮
 		 			$("#sales_order_toolbar_ok_btn").attr("disabled",true);
 					$('#sales_order_toolbar_ok_btn').linkbutton('disable');
-					resetSalesContract();//重置整个管理界面
+					//resetSalesContract();//重置整个管理界面
 		 		}
 				$('#sales_order_base_status').combobox('setValue',r.child);//设置合同状态
 			}
