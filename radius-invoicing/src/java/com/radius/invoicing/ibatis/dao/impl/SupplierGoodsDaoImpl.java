@@ -3,12 +3,13 @@
  */
 package com.radius.invoicing.ibatis.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
 import com.radius.base.dao.ibatis.BaseIbatisDaoImpl;
-import com.radius.base.page.Pager;
 import com.radius.invoicing.ibatis.dao.SupplierGoodsDao;
 import com.radius.invoicing.ibatis.model.SupplierGoods;
 
@@ -56,18 +57,16 @@ public class SupplierGoodsDaoImpl extends BaseIbatisDaoImpl<SupplierGoods> imple
 		this.deleteObject(sg, "supplierGoodsSqlMap.deleteSupplierGoods");
 	}
 	
-	
 	/**
-	 * 通过分页SQL获取分页对象
-	 * @param pageNo
-	 * @param countSQL
-	 * @param splitPageSQL
+	 * 通过主键查询供应商商品行
+	 * @param supplierId
+	 * @param goodsId
 	 * @return
 	 */
-	public Pager<SupplierGoods> getSupplierGoodsSplitPageBySQL(int pageNo,String countSQL,String splitPageSQL){
-		List<SupplierGoods> list=this.getSqlMapClientTemplate().queryForList("supplierGoodsSqlMap.getSupplierGoodsSplitPageBySQL",splitPageSQL);
-		Integer rowCount=(Integer)this.getSqlMapClientTemplate().queryForObject("supplierGoodsSqlMap.getSupplierGoodsSplitPageCountSQL", countSQL);
-		Pager<SupplierGoods> page=new Pager<SupplierGoods>(pageNo, rowCount, list);
-		return page;
+	public Integer getSupplierGoodsCount(String supplierId,String goodsId){
+		Map<String, String> params=new HashMap<String, String>();
+		params.put("supplierId", supplierId);
+		params.put("goodsId", goodsId);
+		return this.getCountByCondition(params, "supplierGoodsSqlMap.getSupplierGoodsCount");
 	}
 }

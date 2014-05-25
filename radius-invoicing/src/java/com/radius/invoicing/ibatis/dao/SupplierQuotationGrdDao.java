@@ -55,12 +55,12 @@ public interface SupplierQuotationGrdDao {
 	 */
 	public void batchUpdataSupplierQuotationGrd(List<SupplierQuotationGrd> list);
 
-	/**
+/*	*//**
 	 * 通过组合主键只更新状态
 	 * @param SupplierQuotationGrd
 	 * @return
-	 */
-	public boolean updateStatus(SupplierQuotationGrd supplierQuotationGrd);
+	 *//*
+	public boolean updateStatus(SupplierQuotationGrd supplierQuotationGrd);*/
 
 	/**
 	 * 通过组合组件删除销售询价列表

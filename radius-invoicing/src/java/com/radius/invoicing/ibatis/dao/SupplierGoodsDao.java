@@ -38,15 +38,14 @@ public interface SupplierGoodsDao {
 	 * @param sg
 	 */
 	public void deleteSupplierGoods(SupplierGoods sg);
-
+	
+	
 	/**
-	 * 通过分页SQL获取分页对象
-	 * @param pageNo
-	 * @param countSQL
-	 * @param splitPageSQL
+	 * 通过主键查询供应商商品行
+	 * @param supplierId
+	 * @param goodsId
 	 * @return
 	 */
-	public Pager<SupplierGoods> getSupplierGoodsSplitPageBySQL(int pageNo,
-			String countSQL, String splitPageSQL);
+	public Integer getSupplierGoodsCount(String supplierId,String goodsId);
 
 }

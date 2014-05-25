@@ -5,13 +5,14 @@
   <typeAlias alias="supplierQuotation" type="com.radius.invoicing.ibatis.model.SupplierQuotation" />
   
   <sql id="supplierQuotationFileds">
-  	purchase_inquiry_id purchaseInquiryId,supplier_id supplierId,supplier_name supplierName,cash_type cashType,address address,
+  	supplier_quotation_id supplierQuotationId,supplier_id supplierId,supplier_name supplierName,cash_type cashType,address address,
   	link_man man,link_mobile mobile,link_tel tel,link_fax fax,inquiry_date inquiryDate,latest_quotate_date latestQuotateDate,salesman_id salesman,status status,memo memo,
-  	print_times printTimes,newest_print_time printTime,newest_print_record printRecord,
+  	print_times printTimes,newest_print_time printTime,newest_print_record printRecord,purchase_inquiry_id purchaseInquiryId,
   	ledger_id ledgerId,operator operator,modify_date modifyDate,creater creater,createdate createDate,reviser reviser,revisedate reviseDate,verifier verifier,verifydate verifyDate
   </sql>
   
   <resultMap id="supplierQuotation" class="supplierQuotation">
+    <result column="supplier_quotation_id" jdbcType="char" javaType="java.lang.String" property="supplierQuotationId" />
     <result column="purchase_inquiry_id" jdbcType="char" javaType="java.lang.String" property="purchaseInquiryId" />
 	<result column="supplier_id" jdbcType="char" javaType="java.lang.String" property="supplierId" />
 	<result column="supplier_name" jdbcType="varchar" javaType="java.lang.String" property="supplierName" />
@@ -46,7 +47,8 @@
   <sql id="whereLike">
   	<dynamic prepend="WHERE">
   		1=1   
-  		<isNotEmpty property="purchaseInquiryId"> AND purchase_inquiry_id=#purchaseInquiryId#</isNotEmpty>
+  		<isNotEmpty property="supplierQuotationId"> AND supplier_quotation_id=#supplierQuotationId#</isNotEmpty>
+  		<isNotEmpty property="supplierQuotationId"> AND purchase_inquiry_id=#purchaseInquiryId#</isNotEmpty> 
 		<isNotEmpty property="supplierId"> AND supplier_id=#supplierId#</isNotEmpty>
 		<isNotEmpty property="supplierName"> AND supplier_name LIKE CONCAT('%',#supplierName#,'%')</isNotEmpty>
 		<isNotEmpty property="cashType"> AND cash_type=#cashType#</isNotEmpty>
@@ -70,7 +72,7 @@
 	 <select id="getSupplierQuotationByPk" parameterClass="java.lang.String" resultClass="supplierQuotation">
 	 	SELECT <include refid="supplierQuotationFileds"/>
 	 	FROM RS_SUPPLIER_QUOTATION
-	 	WHERE purchase_inquiry_id=#purchaseInquiryId#
+	 	WHERE supplier_quotation_id=#supplierQuotationId#
 	 </select>
 	 
 	 <select id="getSupplierQuotation" parameterClass="supplierQuotation" resultClass="supplierQuotation">
@@ -81,7 +83,8 @@
    
    	<insert id="insert" parameterClass="supplierQuotation">
    		INSERT INTO RS_SUPPLIER_QUOTATION  (
-				purchase_inquiry_id,
+				supplier_quotation_id,
+				<isNotEmpty property="purchaseInquiryId">purchase_inquiry_id,</isNotEmpty>
 				<isNotEmpty property="supplierId">supplier_id,</isNotEmpty>
 				<isNotEmpty property="supplierName">supplier_name,</isNotEmpty>
 				<isNotEmpty property="cashType">cash_type,</isNotEmpty>
@@ -90,7 +93,7 @@
 				<isNotEmpty property="mobile">link_mobile,</isNotEmpty>
 				<isNotEmpty property="tel">link_tel,</isNotEmpty>
 				<isNotEmpty property="fax">link_fax,</isNotEmpty>
-				<isNotNull  property="inquiryDate">Inquiry_date,</isNotNull>
+				<isNotNull  property="inquiryDate">inquiry_date,</isNotNull>
 				<isNotNull  property="latestQuotateDate">latest_quotate_date,</isNotNull>
 				<isNotEmpty property="salesman">salesman_id,</isNotEmpty>
 				<isNotEmpty property="status">status,</isNotEmpty>
@@ -98,9 +101,10 @@
 				<isNotEmpty property="ledgerId">ledger_id,</isNotEmpty>
 				<isNotEmpty property="operator">operator,</isNotEmpty>
 				creater,
-				createdate,
+				createdate
 			) VALUES  (
-				#purchaseInquiryId#,
+				#supplierQuotationId#,
+				<isNotEmpty property="purchaseInquiryId">#purchaseInquiryId#,</isNotEmpty>
 				<isNotEmpty property="supplierId">#supplierId#,</isNotEmpty>
 				<isNotEmpty property="supplierName">#supplierName#,</isNotEmpty>
 				<isNotEmpty property="cashType">#cashType#,</isNotEmpty>
@@ -109,8 +113,8 @@
 				<isNotEmpty property="mobile">#mobile#,</isNotEmpty>
 				<isNotEmpty property="tel">#tel#,</isNotEmpty>
 				<isNotEmpty property="fax">#fax#,</isNotEmpty>
-				<isNotNull  property="inquiryDate">#inquiryDate#</isNotNull>
-				<isNotNull  property="latestQuotateDate">#latestQuotateDate#</isNotNull>
+				<isNotNull  property="inquiryDate">#inquiryDate#,</isNotNull>
+				<isNotNull  property="latestQuotateDate">#latestQuotateDate#,</isNotNull>
 				<isNotEmpty property="salesman">#salesman#,</isNotEmpty>
 				<isNotEmpty property="status">#status#,</isNotEmpty>
 				<isNotEmpty property="memo">#memo#,</isNotEmpty>
@@ -125,6 +129,7 @@
    	<update id="updateSupplierQuotation" parameterClass="supplierQuotation">
    		UPDATE RS_SUPPLIER_QUOTATION
 			<dynamic prepend="SET">
+				<isNotEmpty  prepend=","   property="purchaseInquiryId">purchase_inquiry_id=#purchaseInquiryId#,</isNotEmpty>
 				<isNotEmpty  prepend=","   property="supplierId">  supplier_id=#supplierId#</isNotEmpty>
 				<isNotEmpty  prepend=","   property="supplierName">  supplier_name=#supplierName#</isNotEmpty>
 				<isNotEmpty  prepend=","   property="cashType">  cash_type=#cashType#</isNotEmpty>
@@ -147,7 +152,7 @@
 				<isNotEmpty  prepend=","   property="reviser">  reviser=#reviser#,revisedate=now()</isNotEmpty>
 				<isNotEmpty  prepend=","   property="verifier">  verifier=#verifier#,verifydate=now()</isNotEmpty>
 			</dynamic>
-   		WHERE  purchase_inquiry_id=#purchaseInquiryId#
+   		WHERE  supplier_quotation_id=#supplierQuotationId#
    	</update>
    	
    	<delete id="deleteSupplierQuotation" parameterClass="supplierQuotation">
@@ -156,12 +161,12 @@
    	</delete>
    	<delete id="deleteSupplierQuotationByPK" parameterClass="java.lang.String">
    		DELETE FROM RS_SUPPLIER_QUOTATION
-   		WHERE purchase_inquiry_id=#purchaseInquiryId#
+   		WHERE supplier_quotation_id=#supplierQuotationId#
    	</delete>
    	
-   	<update id="updateStatusByPurchaseInquiryId" parameterClass="supplierQuotation">
+   	<update id="updateStatusBySupplierQuotationId" parameterClass="supplierQuotation">
    		UPDATE RS_SUPPLIER_QUOTATION 
 		SET status=#status#
-		WHERE purchase_inquiry_id=#purchaseInquiryId#
+		WHERE supplier_quotation_id=#supplierQuotationId#
    	</update>
 </sqlMap>
