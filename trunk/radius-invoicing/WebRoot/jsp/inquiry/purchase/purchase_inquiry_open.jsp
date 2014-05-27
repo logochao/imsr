@@ -16,7 +16,7 @@ $(function(){
 			{field:'supplierName',title:'客户简称',width:100}
    		]],
    		columns:[[
-			{field:'cashType',title:'币种',width:100},
+			{field:'cashType',title:'币种',width:100,formatter:cashTypeFormatter},
 			{field:'man',title:'联系人',width:100},
 			{field:'mobile',title:'手机号',width:100},
 			{field:'tel',title:'电话号码',width:100},
@@ -90,6 +90,9 @@ $(function(){
  		purchase_inquiry_open_dialog.dialog('close');
  	});
 });
+function cashTypeFormatter(value,row,index){
+	return com.radius.datagrid.formatter(value,row,index,purchase_inquiry_base_status);
+}
 </script>
 <div id="purchase_inquiry_open_dialog">
 	<fieldset>
