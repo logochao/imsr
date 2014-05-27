@@ -6,7 +6,7 @@
   
   <sql id="salesQuotationFileds">
   	 sales_quotation_id salesQuotationId,customer_id customerId,customer_ab customerAb,cash_type cashType,address address,
-  	 link_man linkMan,link_mobile linkMobile,link_tel linkTel,link_fax linkFax,inquiry_date inquiryDate,latest_quotate_date latestQuotateDate,
+  	 link_man man,link_mobile mobile,link_tel tel,link_fax fax,inquiry_date inquiryDate,latest_quotate_date latestQuotateDate,
   	 salesman_id salesmanId,status status,audited_status auditedStatus,memo memo,
   	 print_times printTimes,newest_print_time newestPrintTime,newest_print_record newestPrintRecord,
   	 ledger_id ledgerId,operator operator,motify_date modifyDate,creater creater,createdate createDate,reviser reviser,revisedate reviseDate,verifier verifier,verifydate verifyDate
@@ -18,10 +18,10 @@
 	<result column="customer_ab" jdbcType="varchar" javaType="java.lang.String" property="customerAb" />
 	<result column="cash_type" jdbcType="char" javaType="java.lang.String" property="cashType" />
 	<result column="address" jdbcType="varchar" javaType="java.lang.String" property="address" />
-	<result column="link_man" jdbcType="varchar" javaType="java.lang.String" property="linkMan" />
-	<result column="link_mobile" jdbcType="char" javaType="java.lang.String" property="linkMobile" />
-	<result column="link_tel" jdbcType="char" javaType="java.lang.String" property="linkTel" />
-	<result column="link_fax" jdbcType="char" javaType="java.lang.String" property="linkFax" />
+	<result column="link_man" jdbcType="varchar" javaType="java.lang.String" property="man" />
+	<result column="link_mobile" jdbcType="char" javaType="java.lang.String" property="mobile" />
+	<result column="link_tel" jdbcType="char" javaType="java.lang.String" property="tel" />
+	<result column="link_fax" jdbcType="char" javaType="java.lang.String" property="fax" />
 	<result  column="inquiry_date" jdbcType="date" javaType="java.util.Date" property="inquiryDate"/>
 	<result  column="latest_quotate_date" jdbcType="date" javaType="java.util.Date" property="latestQuotateDate"/>
 	<result column="salesman_id" jdbcType="char" javaType="java.lang.String" property="salesmanId" />
@@ -51,10 +51,10 @@
 		<isNotEmpty property="customerAb"> AND customer_ab LIKE CONCAT('%',#customerAb#,'%')</isNotEmpty>
 		<isNotEmpty property="cashType"> AND cash_type=#cashType#</isNotEmpty>
 		<isNotEmpty property="address"> AND address=#address#</isNotEmpty>
-		<isNotEmpty property="linkMan"> AND link_man=#linkMan#</isNotEmpty>
-		<isNotEmpty property="linkMobile"> AND link_mobile=#linkMobile#</isNotEmpty>
-		<isNotEmpty property="linkTel"> AND link_tel=#linkTel#</isNotEmpty>
-		<isNotEmpty property="linkFax"> AND link_fax=#linkFax#</isNotEmpty>
+		<isNotEmpty property="man"> AND link_man=#man#</isNotEmpty>
+		<isNotEmpty property="mobile"> AND link_mobile=#mobile#</isNotEmpty>
+		<isNotEmpty property="tel"> AND link_tel=#tel#</isNotEmpty>
+		<isNotEmpty property="fax"> AND link_fax=#fax#</isNotEmpty>
 		<isNotNull  property="inquiryDate">  AND inquiry_date=#inquiryDate#</isNotNull>
 		<isNotNull  property="latestQuotateDate">  AND latest_quotate_date=#latestQuotateDate#</isNotNull>
 		<isNotEmpty property="salesmanId"> AND salesman_id=#salesmanId#</isNotEmpty>
@@ -87,10 +87,10 @@
 			<isNotEmpty property="customerAb">customer_ab,</isNotEmpty>
 			<isNotEmpty property="cashType">cash_type,</isNotEmpty>
 			<isNotEmpty property="address">address,</isNotEmpty>
-			<isNotEmpty property="linkMan">link_man,</isNotEmpty>
-			<isNotEmpty property="linkMobile">link_mobile,</isNotEmpty>
-			<isNotEmpty property="linkTel">link_tel,</isNotEmpty>
-			<isNotEmpty property="linkFax">link_fax,</isNotEmpty>
+			<isNotEmpty property="man">link_man,</isNotEmpty>
+			<isNotEmpty property="mobile">link_mobile,</isNotEmpty>
+			<isNotEmpty property="tel">link_tel,</isNotEmpty>
+			<isNotEmpty property="fax">link_fax,</isNotEmpty>
 			<isNotNull  property="inquiryDate">inquiry_date,</isNotNull>
 			<isNotNull  property="latestQuotateDate">latest_quotate_date,</isNotNull>
 			<isNotEmpty property="salesmanId">salesman_id,</isNotEmpty>
@@ -107,12 +107,12 @@
 			<isNotEmpty property="customerAb">#customerAb#,</isNotEmpty>
 			<isNotEmpty property="cashType">#cashType#,</isNotEmpty>
 			<isNotEmpty property="address">#address#,</isNotEmpty>
-			<isNotEmpty property="linkMan">#linkMan#,</isNotEmpty>
-			<isNotEmpty property="linkMobile">#linkMobile#,</isNotEmpty>
-			<isNotEmpty property="linkTel">#linkTel#,</isNotEmpty>
-			<isNotEmpty property="linkFax">#linkFax#,</isNotEmpty>
-			<isNotNull  property="inquiryDate">#inquiryDate#</isNotNull>
-			<isNotNull  property="latestQuotateDate">#latestQuotateDate#</isNotNull>
+			<isNotEmpty property="man">#man#,</isNotEmpty>
+			<isNotEmpty property="mobile">#mobile#,</isNotEmpty>
+			<isNotEmpty property="tel">#tel#,</isNotEmpty>
+			<isNotEmpty property="fax">#fax#,</isNotEmpty>
+			<isNotNull  property="inquiryDate">#inquiryDate#,</isNotNull>
+			<isNotNull  property="latestQuotateDate">#latestQuotateDate#,</isNotNull>
 			<isNotEmpty property="salesmanId">#salesmanId#,</isNotEmpty>
 			<isNotEmpty property="status">#status#,</isNotEmpty>
 			<isNotEmpty property="auditedStatus">#auditedStatus#,</isNotEmpty>
@@ -131,10 +131,10 @@
 			<isNotEmpty  prepend=","   property="customerAb">  customer_ab=#customerAb#</isNotEmpty>
 			<isNotEmpty  prepend=","   property="cashType">  cash_type=#cashType#</isNotEmpty>
 			<isNotEmpty  prepend=","   property="address">  address=#address#</isNotEmpty>
-			<isNotEmpty  prepend=","   property="linkMan">  link_man=#linkMan#</isNotEmpty>
-			<isNotEmpty  prepend=","   property="linkMobile">  link_mobile=#linkMobile#</isNotEmpty>
-			<isNotEmpty  prepend=","   property="linkTel">  link_tel=#linkTel#</isNotEmpty>
-			<isNotEmpty  prepend=","   property="linkFax">  link_fax=#linkFax#</isNotEmpty>
+			<isNotEmpty  prepend=","   property="man">  link_man=#man#</isNotEmpty>
+			<isNotEmpty  prepend=","   property="mobile">  link_mobile=#mobile#</isNotEmpty>
+			<isNotEmpty  prepend=","   property="tel">  link_tel=#tel#</isNotEmpty>
+			<isNotEmpty  prepend=","   property="fax">  link_fax=#fax#</isNotEmpty>
 			<isNotNull  prepend=","   property="inquiryDate">  inquiry_date=#inquiryDate#</isNotNull>
 			<isNotNull  prepend=","   property="latestQuotateDate">  latest_quotate_date=#latestQuotateDate#</isNotNull>
 			<isNotEmpty  prepend=","   property="salesmanId">  salesman_id=#salesmanId#</isNotEmpty>

@@ -5,6 +5,10 @@ package com.radius.invoicing.ibatis.model;
 
 import java.util.Date;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+import com.radius.base.utils.JsonDateSerializer;
+
 /**
  * @author <a href="mailto:goodluck.sunlight@gmail.com">陈波宁</a>
  * @version 创建时间：2013-12-8 下午12:53:04<br/>
@@ -13,21 +17,21 @@ import java.util.Date;
  */
 public class SalesQuotationGrd extends ExtInfo{
 
-	private String		salesQuotationId;//销售报价单编号
-	private String		goodsId;//商品编号
-	private String		goodsName;//商品名称
+	private String		salesQuotationId="";//销售报价单编号
+	private String		goodsId="";//商品编号
+	private String		goodsName="";//商品名称
 	private Integer		specId;//规格编码
-	private String		unit;//包装单位(规格)
-	private String		equivalentUnit;//折合单位
+	private String		unit="";//包装单位(规格)
+	private String		equivalentUnit="";//折合单位
 	private Integer		quantityEuPerUnit;//包装单位折合数量
-	private String		supplyCashType;//供应币种
+	private String		supplyCashType="";//供应币种
 	private Integer		priceUnitSupply;//包装单位供应单价
 	private Integer		priceEuSupply;//折合单位供应单价
-	private String		salesCashType;//销售币种
+	private String		salesCashType="";//销售币种
 	private Integer		exchRate;//折算汇率
 	private Integer		priceEuCustomer;//销售报价
 	private Integer		markUpRate;//综合加价率
-	private String		memo;//备注
+	private String		memo="";//备注
 	private Date		madeDate;//生产日期
 	private Date		validityDate;//有效期至
 	
@@ -56,6 +60,7 @@ public class SalesQuotationGrd extends ExtInfo{
 	public void setGoodsName(String goodsName) {
 		this.goodsName = goodsName;
 	}
+	@JsonSerialize(using=JsonDateSerializer.class)
 	public Date getMadeDate() {
 		return madeDate;
 	}
@@ -128,6 +133,7 @@ public class SalesQuotationGrd extends ExtInfo{
 	public void setUnit(String unit) {
 		this.unit = unit;
 	}
+	@JsonSerialize(using=JsonDateSerializer.class)
 	public Date getValidityDate() {
 		return validityDate;
 	}

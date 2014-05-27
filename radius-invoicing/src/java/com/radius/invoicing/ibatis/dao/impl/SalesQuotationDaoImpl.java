@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.radius.base.dao.ibatis.BaseIbatisDaoImpl;
+import com.radius.invoicing.ibatis.dao.SalesQuotationDao;
 import com.radius.invoicing.ibatis.model.SalesQuotation;
 
 /**
@@ -17,7 +18,7 @@ import com.radius.invoicing.ibatis.model.SalesQuotation;
  * 类说明 销售报价Dao
  */
 @Repository
-public class SaleQuotationDaoImpl extends BaseIbatisDaoImpl<SalesQuotation>{
+public class SalesQuotationDaoImpl extends BaseIbatisDaoImpl<SalesQuotation> implements SalesQuotationDao{
 
 private final String SQLMAPNAMESPACE="salesQuotationSqlMap.";
 	

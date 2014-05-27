@@ -113,8 +113,8 @@
    		</dynamic>
    		WHERE supplier_id=#supplierId# AND goods_id=#goodsId#
    	</update>
-   	<select id="getSupplierGoodsByCondition" parameterClass="supplierGoods" resultMap="supplierGoods">
-   		SELECT *
+   	<select id="getSupplierGoodsByCondition" parameterClass="supplierGoods" resultClass="supplierGoods">
+   		SELECT <include refid="supplierGoodsFileds"/>
    		FROM RS_SUPPLIER_GOODS
    		<include refid="whereLike"/>
    	</select>
