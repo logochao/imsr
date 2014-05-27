@@ -37,8 +37,25 @@ th,td{padding:6px 0;margin:0;border:none;}
 		index_login_form.submit();
 		**/
 		
-		$('#index_account').combobox({});
+		index_account = $('#index_account').combobox({
+			url:'${path}/system/manage/common/index_account_list.html',
+	 		valueField: 'id',
+			textField: 'name',
+			onLoadSuccess:function(){
+				var target = $(this);
+				var data = target.combobox("getData");
+				var options = target.combobox("options");
+				if(data && data.length>0){
+					var fs = data[0];
+					target.combobox("setValue",fs[options.valueField]);
+				}
+			},
+			editable:false
+		});
 	});
+	
+	
+	
 </script>
 </head>
 <body>
@@ -47,7 +64,8 @@ th,td{padding:6px 0;margin:0;border:none;}
 	<form id="index_login_form" action="${path}/system/manage/sys/login_sys.html" method="POST">
 		<table>
 			<tr>
-				<td><input id="index_account"></td>
+				<td><input id="index_account">
+				</td>
 			</tr>
 			<tr>
 				<td><input type="text" class="put" style="margin-top: 10px;"></td>
