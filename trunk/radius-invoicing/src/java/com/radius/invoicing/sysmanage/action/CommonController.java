@@ -34,12 +34,14 @@ import com.radius.base.controller.BaseController;
 import com.radius.base.helper.PropertyConfigHelper;
 import com.radius.base.page.EasyuiSplitPager;
 import com.radius.base.utils.JsonUtils;
+import com.radius.invoicing.cache.impl.AccountCacheImpl;
 import com.radius.invoicing.cache.impl.CategoryCacheImpl;
 import com.radius.invoicing.cache.impl.SpecTypeCacheImpl;
 import com.radius.invoicing.enums.GoodsInquiryTypeEnums;
 import com.radius.invoicing.enums.SexEnums;
 import com.radius.invoicing.enums.UseStatusEnums;
 import com.radius.invoicing.enums.YesOrNoEnums;
+import com.radius.invoicing.ibatis.model.Account;
 import com.radius.invoicing.ibatis.model.CategoryCode;
 import com.radius.invoicing.ibatis.model.SpecType;
 import com.radius.invoicing.sysmanage.service.SpecTypeService;
@@ -70,6 +72,10 @@ public class CommonController extends BaseController{
 	@Autowired(required=false)
 	@Qualifier("specTypeServiceImpl")
 	private SpecTypeService specTypeService;
+	
+	@Autowired(required=false)
+	@Qualifier("accountCacheImpl")
+	private AccountCacheImpl accountCache;
 	
 	private final String prefix="/jsp/business/spectype/";
 	
@@ -276,7 +282,11 @@ public class CommonController extends BaseController{
 	
 	
 	
-	
+	@RequestMapping("/system/manage/common/index_account_list.html")
+	@ResponseBody
+	public List<Account> getAccountInfoList(HttpServletRequest request,HttpServletResponse response)throws Exception{
+		return accountCache.getAccountInfoList();
+	}
 	
 	
 	@PreDestroy
