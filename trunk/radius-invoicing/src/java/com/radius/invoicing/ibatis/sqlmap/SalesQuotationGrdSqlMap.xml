@@ -62,7 +62,7 @@
   	</dynamic>
   </sql>
  
-	 <select id="getsalesQuotationGrdByPk" parameterClass="salesQuotationGrd" resultMap="salesQuotationGrd">
+	 <select id="getSalesQuotationGrdByPk" parameterClass="salesQuotationGrd" resultMap="salesQuotationGrd">
 	 	SELECT <include refid="salesQuotationGrdFileds"/>
 	 	FROM RS_SALES_QUOTATION_GRD
 	 	WHERE quotation_id =#salesQuotationId# AND goods_id=#goodsId#
@@ -115,7 +115,7 @@
    		)
    	</insert>
    
-   	<update id="updatesalesQuotationGrdById" parameterClass="salesQuotationGrd">
+   	<update id="updateSalesQuotationGrdById" parameterClass="salesQuotationGrd">
    		UPDATE RS_SALES_QUOTATION_GRD
    		<dynamic prepend="SET">
 			<isNotNull prepend="," property="goodsName">goods_name=#goodsName#</isNotNull>
@@ -141,23 +141,33 @@
    		</dynamic>
    		WHERE quotation_id=#salesQuotationId# AND goods_id=#goodsId#
    	</update>
-   	<select id="getsalesQuotationGrdByCondition" parameterClass="salesQuotationGrd" resultMap="salesQuotationGrd">
+   	<select id="getSalesQuotationGrdByCondition" parameterClass="salesQuotationGrd" resultMap="salesQuotationGrd">
    		SELECT <include refid="salesQuotationGrdFileds"/>
    		FROM RS_SALES_QUOTATION_GRD
    		<include refid="whereLike"/>
    	</select>
    	<!-- 分页查询语句 -->
-   	<select id="getsalesQuotationGrdSplitPageBySQL" remapResults="true" parameterClass="java.lang.String" resultMap="salesQuotationGrd">
+   	<select id="getSalesQuotationGrdSplitPageBySQL" remapResults="true" parameterClass="java.lang.String" resultMap="salesQuotationGrd">
    		$splitPageSQL$
    	</select>
    	<!-- end -->
    	
-   	<select id="getsalesQuotationGrdSplitPageCountSQL" remapResults="true" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+   	<select id="getSalesQuotationGrdSplitPageCountSQL" remapResults="true" parameterClass="java.lang.String" resultClass="java.lang.Integer">
    		$countSQL$
    	</select>
    	
-   	<delete id="deletesalesQuotationGrd" parameterClass="salesQuotationGrd">
+   	<delete id="deleteSalesQuotationGrd" parameterClass="salesQuotationGrd">
    		DELETE FROM RS_SALES_QUOTATION_GRD
    		<include refid="whereLike"/>
    	</delete>
+   	
+   	 <!-- 获取当前询价的商品行数 -->
+   	<select id="getSalesQuotationGrdCountByQuotationId" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+   		SELECT COUNT(1) FROM RS_SALES_QUOTATION_GRD WHERE quotation_id=#salesQuotationId#
+   	</select>
+   	
+   	<!-- 根据询价单号删除询价商品信息 -->
+	<delete id="deleteSalesQuotationGrdByQuotationId" parameterClass="java.lang.String">
+		DELETE FROM RS_SALES_QUOTATION_GRD WHERE quotation_id=#salesQuotationId#
+	</delete>
 </sqlMap>

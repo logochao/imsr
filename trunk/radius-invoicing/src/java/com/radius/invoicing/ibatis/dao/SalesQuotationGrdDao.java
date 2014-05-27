@@ -10,7 +10,7 @@ import com.radius.invoicing.ibatis.model.SalesQuotationGrd;
  * Copyright (c) 2013 by 陈波宁.<br/>
  * 类说明
  */
-public interface SaleQuotationGrdDao {
+public interface SalesQuotationGrdDao {
 
 	/**
 	 * 根据商品编号+销售报价单编号 获取销售报价商品明细
@@ -51,5 +51,6 @@ public interface SaleQuotationGrdDao {
 	 * @param grd
 	 */
 	public void deleteSaleQuotationGrd(SalesQuotationGrd grd);
-
+	public Integer getSalesQuotationGrdCountByQuotationId(String quotationId);
+	public void deleteSalesQuotationGrdByQuotationId(String quotationId);
 }

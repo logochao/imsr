@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="institutionSqlMap">
+
+  <typeAlias alias="institution" type="com.radius.invoicing.ibatis.model.Institution" />
+  
+  <sql id="institutionFileds">
+  	institution_id instId,institution_name instName,institution_tel instTel,institution_head instHead,approval_reviewer approRev,
+  	amount_limit amountLmt,father_institution fatherInst,institution_address instAddr,post_code postCode,institution_URL instUrl,
+  	link_man linkMan,institution_fax instFax,institution_mail instMail,
+  	creater creater,createdate createDate,reviser reviser,revisedate reviseDate,verifier verifier,verifydate verifyDate
+  </sql>
+  
+  <resultMap id="institution" class="institution">
+    <result column="institution_id" jdbcType="char" javaType="java.lang.String" property="instId" />
+	<result column="institution_name" jdbcType="varchar" javaType="java.lang.String" property="instName" />
+	<result column="institution_tel" jdbcType="char" javaType="java.lang.String" property="instTel" />
+	<result column="institution_head" jdbcType="char" javaType="java.lang.String" property="instHead" />
+	<result column="approval_reviewer" jdbcType="char" javaType="java.lang.String" property="approRev" />
+	<result column="amount_limit" jdbcType="char" javaType="java.lang.Integer" property="amountLmt" />
+	<result column="father_institution" jdbcType="char" javaType="java.lang.String" property="fatherInst" />
+	<result column="institution_address" jdbcType="varchar" javaType="java.lang.String" property="instAddr" />
+	<result column="post_code" jdbcType="char" javaType="java.lang.String" property="postCode" />
+	<result column="institution_URL" jdbcType="varchar" javaType="java.lang.String" property="instUrl" />
+	<result column="link_man" jdbcType="char" javaType="java.lang.String" property="linkMan" />
+	<result column="institution_fax" jdbcType="char" javaType="java.lang.String" property="instFax" />
+	<result column="institution_mail" jdbcType="varchar" javaType="java.lang.String" property="instMail" />
+  	
+  	<result column="creater" jdbcType="char" javaType="java.lang.String" property="creater" />
+    <result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createDate" />
+    <result column="reviser" jdbcType="char" javaType="java.lang.String" property="reviser" />
+    <result column="revisedate" jdbcType="datetime" javaType="java.util.Date" property="reviseDate" />
+    <result column="verifier" jdbcType="char" javaType="java.lang.String" property="verifier" />    
+    <result column="verifydate" jdbcType="datetime" javaType="java.util.Date" property="verifyDate"/>
+  </resultMap>
+  
+  <sql id="whereLike">
+  	<dynamic prepend="where" >
+  		1=1  
+  		<isNotEmpty  property="instId">	AND institution_id=#instId# </isNotEmpty>
+		<isNotEmpty  property="instName">	AND institution_name LIKE CONCAT('%',#instName#,'%') </isNotEmpty>
+		<isNotEmpty  property="instTel"> AND institution_tel=#instTel# </isNotEmpty>
+		<isNotEmpty  property="instHead"> AND institution_head=#instHead# </isNotEmpty>
+		<isNotEmpty  property="approRev"> AND	approval_reviewer=#approRev# </isNotEmpty>
+		<isNotEmpty  property="amountLmt"> AND amount_limit=#amountLmt# </isNotEmpty>
+		<isNotEmpty  property="fatherInst">	AND father_institution=#fatherInst# </isNotEmpty>
+		<isNotEmpty  property="instAddr">	AND	institution_address=#instAddr# </isNotEmpty>
+		<isNotEmpty  property="postCode">	AND	post_code=#postCode# </isNotEmpty>
+		<isNotEmpty  property="instUrl"> AND institution_URL=#instUrl# </isNotEmpty>
+		<isNotEmpty  property="linkMan"> AND link_man=#linkMan# </isNotEmpty>
+		<isNotEmpty  property="instFax"> AND institution_fax=#instFax# </isNotEmpty>
+		<isNotEmpty  property="instMail">	AND institution_mail=#instMail# </isNotEmpty>
+  	</dynamic>
+  </sql>
+ 
+	 <select id="getInstitution" parameterClass="java.lang.String" resultClass="institution">
+	 	SELECT <include refid="institutionFileds"/>
+	 	FROM RS_INSTITUTION
+	 	WHERE institution_id=#instId#
+	 </select>
+   
+   	<insert id="insert" parameterClass="institution">
+   		INSERT INTO RS_INSTITUTION (
+			institution_id, 
+			<isNotEmpty property="instName">institution_name,</isNotEmpty>   
+			<isNotEmpty property="instTel">institution_tel,</isNotEmpty>     
+			<isNotEmpty property="instHead">institution_head,</isNotEmpty>    
+			<isNotEmpty property="approRev">approval_reviewer,</isNotEmpty>  
+			<isNotNull property="amountLmt">amount_limit,</isNotNull>      
+			<isNotEmpty property="fatherInst">father_institution,</isNotEmpty> 
+			<isNotEmpty property="instAddr">institution_address,</isNotEmpty>  
+			<isNotEmpty property="postCode">post_code,</isNotEmpty>            
+			<isNotEmpty property="instUrl">institution_URL,</isNotEmpty>      
+			<isNotEmpty property="linkMan">link_man,</isNotEmpty>             
+			<isNotEmpty property="instFax">institution_fax,</isNotEmpty>     
+			<isNotEmpty property="instMail">institution_mail,</isNotEmpty> 
+	  	    creater,
+	  	    createdate
+   		)VALUES(
+   			#instId#,   
+			<isNotEmpty property="instName">#instName#,</isNotEmpty>   
+			<isNotEmpty property="instTel">#instTel#,</isNotEmpty>     
+			<isNotEmpty property="instHead">#instHead#,</isNotEmpty>    
+			<isNotEmpty property="approRev">#approRev#,</isNotEmpty>  
+			<isNotNull property="amountLmt">#amountLmt#,</isNotNull>      
+			<isNotEmpty property="fatherInst">#fatherInst#,</isNotEmpty> 
+			<isNotEmpty property="instAddr">#instAddr#,</isNotEmpty>  
+			<isNotEmpty property="postCode">#postCode#,</isNotEmpty>            
+			<isNotEmpty property="instUrl">#instUrl#,</isNotEmpty>      
+			<isNotEmpty property="linkMan">#linkMan#,</isNotEmpty>             
+			<isNotEmpty property="instFax">#instFax#,</isNotEmpty>     
+			<isNotEmpty property="instMail">#instMail#,</isNotEmpty>  
+   			 #creater#,now()
+   		)
+   	</insert>
+   
+   	<update id="updateInstitution" parameterClass="institution">
+   		UPDATE RS_INSTITUTION
+   		<dynamic prepend="SET">
+			<isNotEmpty  prepend=","   property="instName">institution_name=#instName#</isNotEmpty>
+			<isNotEmpty  prepend=","   property="instTel">institution_tel=#instTel#</isNotEmpty>
+			<isNotEmpty  prepend=","   property="instHead">institution_head=#instHead#</isNotEmpty>
+			<isNotEmpty  prepend=","   property="approRev">approval_reviewer=#approRev#</isNotEmpty>
+			<isNotNull  prepend=","   property="amountLmt">amount_limit=#amountLmt#</isNotNull>
+			<isNotEmpty  prepend=","   property="fatherInst">father_institution=#fatherInst#</isNotEmpty>
+			<isNotEmpty  prepend=","   property="instAddr">institution_address=#instAddr#</isNotEmpty>
+			<isNotEmpty  prepend=","   property="postCode">post_code=#postCode#</isNotEmpty>
+			<isNotEmpty  prepend=","   property="instUrl">institution_URL=#instUrl#</isNotEmpty>
+			<isNotEmpty  prepend=","   property="linkMan">link_man=#linkMan#</isNotEmpty>
+			<isNotEmpty  prepend=","   property="instFax">institution_fax=#instFax#</isNotEmpty>
+			<isNotEmpty  prepend=","   property="instMail">institution_mail=#instMail#</isNotEmpty>
+	  		
+  	 		<isNotEmpty  prepend=","   property="reviser">reviser = #reviser#,revisedate = now() </isNotEmpty>
+  			<isNotEmpty  prepend=","   property="verifier">verifier = #verifier#,verifydate = now() </isNotEmpty>
+   		</dynamic>
+   	  WHERE institution_id=#instId#
+   	</update>
+   	<select id="getInstitutionByCondition" parameterClass="institution" resultClass="institution">
+   		SELECT <include refid="institutionFileds"/>
+   		FROM RS_INSTITUTION
+   		<include refid="whereLike"/>
+   	</select>
+   	<!-- 分页查询语句 -->
+   	<select id="getInstitutionSplitPageBySQL" remapResults="true" parameterClass="java.lang.String" resultMap="institution">
+   		$splitPageSQL$
+   	</select>
+   	<!-- end -->
+   	
+   	<select id="getInstitutionSplitPageCountSQL" remapResults="true" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+   		$countSQL$
+   	</select>
+   	
+   	
+   	<delete id="deleteInstitution" parameterClass="institution">
+   		DELETE FROM RS_INSTITUTION
+   		<include refid="whereLike"/>
+   	</delete>
+   	
+   	<select id="getInstitutionInfoBySupplierAndInstitution" parameterClass="institution" resultClass="java.lang.String">
+   		SELECT institution_id instId 
+   		FROM RS_INSTITUTION
+   		<include refid="whereLike"/>
+   </select>
+   
+   <select id="getInstitutionMaxId" resultClass="java.lang.Integer">
+   		SELECT IFNULL((SELECT MAX(institution_id) FROM  RS_INSTITUTION),0) 
+   </select>
+   
+</sqlMap>

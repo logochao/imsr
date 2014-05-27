@@ -8,7 +8,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.radius.base.dao.ibatis.BaseIbatisDaoImpl;
-import com.radius.invoicing.ibatis.dao.SaleQuotationGrdDao;
+import com.radius.invoicing.ibatis.dao.SalesQuotationGrdDao;
 import com.radius.invoicing.ibatis.model.SalesQuotationGrd;
 
 /**
@@ -18,9 +18,9 @@ import com.radius.invoicing.ibatis.model.SalesQuotationGrd;
  * 类说明 销售报价商品明细Dao
  */
 @Repository
-public class SaleQuotationGrdDaoImpl extends BaseIbatisDaoImpl<SalesQuotationGrd> implements SaleQuotationGrdDao{
+public class SalesQuotationGrdDaoImpl extends BaseIbatisDaoImpl<SalesQuotationGrd> implements SalesQuotationGrdDao{
 
-	private final  String SQLMAPNAMESPACE="saleQuotationGrdSqlMap";
+	private final  String SQLMAPNAMESPACE="salesQuotationGrdSqlMap";
 	
 	/**
 	 * 根据商品编号+销售报价单编号 获取销售报价商品明细
@@ -70,5 +70,13 @@ public class SaleQuotationGrdDaoImpl extends BaseIbatisDaoImpl<SalesQuotationGrd
 	 */
 	public void deleteSaleQuotationGrd(SalesQuotationGrd grd){
 		this.deleteObject(grd, SQLMAPNAMESPACE+".deleteSaleQuotationGrd");
+	}
+	
+	public Integer getSalesQuotationGrdCountByQuotationId(String quotationId){
+		return (Integer)this.getSqlMapClientTemplate().queryForObject(SQLMAPNAMESPACE+"getSalesQuotationGrdCountByQuotationId", quotationId);
+	}
+	
+	public void deleteSalesQuotationGrdByQuotationId(String quotationId){
+		this.deleteObject(quotationId, SQLMAPNAMESPACE+"deleteSalesQuotationGrdByQuotationId");
 	}
 }

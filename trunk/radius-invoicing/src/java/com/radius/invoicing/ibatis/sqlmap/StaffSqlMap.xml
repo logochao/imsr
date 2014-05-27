@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="staffSqlMap">
+
+  <typeAlias alias="staff" type="com.radius.invoicing.ibatis.model.Staff" />
+  
+  <sql id="staffFileds">
+  	 staff_id id, staff_name name, sex sex, id_number idNum, birthday birth, married married, education education, 
+  	 belong_institution belongInstitution, institution_name institutionName, job_duty jobDuty, office_tel officeTel, 
+  	 mobile_num mobNum, mobile_num2 mobNum2, QQ QQ, email email, address address, post_code postCode, 
+  	 home_tel homeTel, resume resume, status status, memo memo, modify_date modifyDate, operator operator,
+  	 creater creater,createdate createDate,reviser reviser,revisedate reviseDate,verifier verifyDate
+  </sql>
+  
+  <resultMap id="staff" class="staff">
+	<result column="staff_id" jdbcType="char" javaType="java.lang.String" property="id" />
+	<result column="staff_name" jdbcType="varchar" javaType="java.lang.String" property="name" />
+	<result column="sex" jdbcType="int" javaType="java.lang.Integer" property="sex" />
+	<result column="id_number" jdbcType="varchar" javaType="java.lang.String" property="idNum" />
+	<result column="birthday" jdbcType="datetime" javaType="java.util.Date" property="birth" />
+	<result column="married" jdbcType="char" javaType="java.lang.Integer" property="married" />
+	<result column="education" jdbcType="char" javaType="java.lang.Integer" property="education" />
+	<result column="belong_institution" jdbcType="char" javaType="java.lang.String" property="belongInstitution" />
+	<result column="institution_name" jdbcType="varchar" javaType="java.lang.String" property="institutionName" />
+	<result column="job_duty" jdbcType="varchar" javaType="java.lang.String" property="jobDuty" />
+	<result column="office_tel" jdbcType="char" javaType="java.lang.String" property="officeTel" />
+	<result column="mobile_num" jdbcType="char" javaType="java.lang.String" property="mobNum" />
+	<result column="mobile_num2" jdbcType="char" javaType="java.lang.String" property="mobNum2" />
+	<result column="QQ" jdbcType="char" javaType="java.lang.String" property="QQ" />
+	<result column="email" jdbcType="varchar" javaType="java.lang.String" property="email" />
+	<result column="address" jdbcType="varchar" javaType="java.lang.String" property="address" />
+	<result column="post_code" jdbcType="char" javaType="java.lang.String" property="postCode" />
+	<result column="home_tel" jdbcType="varchar" javaType="java.lang.String" property="homeTel" />
+	<result column="resume" jdbcType="text" javaType="java.lang.String" property="resume" />
+	<result column="status" jdbcType="int" javaType="java.lang.Integer" property="status" />
+	<result column="memo" jdbcType="text" javaType="java.lang.String" property="memo" />
+	<result column="modify_date" jdbcType="datetime" javaType="java.util.Date" property="modifyDate" />
+	<result column="operator" jdbcType="char" javaType="java.lang.String" property="operator" />
+
+	<result column="creater" jdbcType="char" javaType="java.lang.String" property="creater" />
+	<result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createdate" />
+	<result column="reviser" jdbcType="char" javaType="java.lang.String" property="reviser" />
+	<result column="revisedate" jdbcType="datetime" javaType="java.util.Date" property="revisedate" />
+	<result column="verifier" jdbcType="char" javaType="java.lang.String" property="verifier" />    
+	<result column="verifydate" jdbcType="datetime" javaType="java.util.Date" property="verifydate"/>       
+
+  </resultMap>
+  
+  <sql id="whereLike">
+  		1=1  
+  		<isNotEmpty prepend="AND" property="id">
+			staff_id=#id#
+		</isNotEmpty>
+  		<isNotEmpty prepend="AND" property="name">	           
+			staff_name LIKE CONCAT('%',#name#,'%')
+		</isNotEmpty>
+  		<isNotEmpty prepend="AND" property="sex">	  			       
+			sex=#sex#
+		</isNotEmpty>
+  		<isNotEmpty prepend="AND" property="idNum">	     
+			id_number=#idNum#
+		</isNotEmpty>
+  		<isNotEmpty prepend="AND" property="birth">	     
+			birthday=#birth#
+		</isNotEmpty>
+  		<isNotEmpty prepend="AND" property="married">	     
+			married=#married#
+		</isNotEmpty>
+  		<isNotEmpty prepend="AND" property="education">	     
+			education=#education#
+		</isNotEmpty>
+  		<isNotEmpty prepend="AND" property="belongInstitution">	     
+			belong_institution=#belongInstitution#
+		</isNotEmpty>
+  		<isNotEmpty prepend="AND" property="institutionName">	     
+			institution_name LIKE CONCAT('%',#institutionName#,'%')
+		</isNotEmpty>
+  		<isNotEmpty prepend="AND" property="jobDuty">	     
+			job_duty LIKE CONCAT('%',#jobDuty#,'%')
+		</isNotEmpty>
+  		<isNotEmpty prepend="AND" property="officeTel">	     
+			office_tel=#officeTel#
+		</isNotEmpty>
+  		<isNotEmpty prepend="AND" property="officeTel">	     
+			mobile_num=#mobNum#
+		</isNotEmpty>
+  		<isNotEmpty prepend="AND" property="mobNum2">	     
+			mobile_num2=#mobNum2#
+		</isNotEmpty>
+  		<isNotEmpty prepend="AND" property="QQ">	     
+			QQ=#QQ#
+		</isNotEmpty>
+  		<isNotEmpty prepend="AND" property="email">	     
+			email=#email#
+		</isNotEmpty>
+  		<isNotEmpty prepend="AND" property="address">	     
+			address LIKE CONCAT('%',#address#,'%')
+		</isNotEmpty>
+  		<isNotEmpty prepend="AND" property="postCode">	     
+			post_code=#postCode#
+		</isNotEmpty>
+  		<isNotEmpty prepend="AND" property="homeTel">	     
+			home_tel=#homeTel#
+		</isNotEmpty>
+  		<isNotEmpty prepend="AND" property="resume">	     
+			resume LIKE CONCAT('%',#resume#,'%')
+		</isNotEmpty>
+  		<isNotEmpty prepend="AND" property="status">	     
+			status=#status#
+		</isNotEmpty>
+  		<isNotEmpty prepend="AND" property="memo">	     
+			memo LIKE CONCAT('%',#memo#,'%')
+		</isNotEmpty>
+  		<isNotEmpty prepend="AND" property="modifyDate">	     
+			modify_date=#modifyDate#
+		</isNotEmpty>
+  		<isNotEmpty prepend="AND" property="operator">	     
+			operator=#operator#
+ 		</isNotEmpty>
+  </sql>
+ 
+	 <select id="getStaff" parameterClass="string" resultClass="staff">
+	 	SELECT <include refid="staffFileds"/>
+	 	FROM RS_STAFF
+	 	WHERE staff_id =#id#
+	 </select>
+   
+   	<insert id="insertStaff" parameterClass="staff">
+   		INSERT INTO RS_STAFF (
+   			<isNotEmpty property="id">staff_id,</isNotEmpty> 							
+			<isNotEmpty property="name">staff_name,</isNotEmpty> 						
+			<isNotNull property="sex">sex,</isNotNull>   
+			<isNotEmpty property="idNum">id_number,</isNotEmpty> 						    
+			<isNotNull property="birth">birthday,</isNotNull>							
+			<isNotNull property="married">married,</isNotNull>        
+			<isNotNull property="education">education,</isNotNull>
+			<isNotEmpty property="belongInstitution">belong_institution,</isNotEmpty> 		
+			<isNotEmpty property="institutionName">institution_name,</isNotEmpty>  		
+			<isNotEmpty property="jobDuty">job_duty,</isNotEmpty>           		
+			<isNotEmpty property="officeTel">office_tel,</isNotEmpty>         		
+			<isNotEmpty property="mobNum">mobile_num,</isNotEmpty>          		
+			<isNotEmpty property="mobNum2">mobile_num2,</isNotEmpty>         		
+			<isNotEmpty property="QQ">QQ,</isNotEmpty> 
+			<isNotEmpty property="email">email,</isNotEmpty> 
+			<isNotEmpty property="address">address,</isNotEmpty> 
+			<isNotEmpty property="postCode">post_code,</isNotEmpty>           		
+			<isNotEmpty property="homeTel">home_tel,</isNotEmpty>            		
+			<isNotEmpty property="resume">resume,</isNotEmpty> 
+			<isNotNull property="status">status,</isNotNull> 
+			<isNotEmpty property="memo">memo,</isNotEmpty> 
+			<isNotEmpty property="modifyDate">modify_date,</isNotEmpty>         		
+			<isNotEmpty property="operator">operator,</isNotEmpty> 
+			creater,
+			createdate
+   		)VALUES(
+   			<isNotEmpty property="id">#id#,</isNotEmpty>							
+			<isNotEmpty property="name">#name#,</isNotEmpty>						
+			<isNotNull property="sex">#sex#,</isNotNull> 
+			<isNotEmpty property="idNum">#idNum#,</isNotEmpty> 						    
+			<isNotNull property="birth">#birth#,</isNotNull>					
+			<isNotNull property="married">#married#,</isNotNull>
+			<isNotNull property="education">#education#,</isNotNull>
+			<isNotEmpty property="belongInstitution">#belongInstitution#,</isNotEmpty>		
+			<isNotEmpty property="institutionName">#institutionName#,</isNotEmpty> 		
+			<isNotEmpty property="jobDuty">#jobDuty#,</isNotEmpty>        		
+			<isNotEmpty property="officeTel">#officeTel#,</isNotEmpty>       		
+			<isNotEmpty property="mobNum">#mobNum#,</isNotEmpty>         		
+			<isNotEmpty property="mobNum2">#mobNum2#,</isNotEmpty>       		
+			<isNotEmpty property="QQ">#QQ#,</isNotEmpty>
+			<isNotEmpty property="email">#email#,</isNotEmpty>
+			<isNotEmpty property="address">#address#,</isNotEmpty>
+			<isNotEmpty property="postCode">#postCode#,</isNotEmpty>          		
+			<isNotEmpty property="homeTel">#homeTel#,</isNotEmpty>        		
+			<isNotEmpty property="resume">#resume#,</isNotEmpty>
+			<isNotNull property="status">#status#,</isNotNull>
+			<isNotEmpty property="memo">#memo#,</isNotEmpty>
+			<isNotEmpty property="modifyDate">#modifyDate#,</isNotEmpty>      		
+			<isNotEmpty property="operator">#operator#,</isNotEmpty>
+   			 creater,now()
+   		)
+   	</insert>
+   	
+   <select id="getStaffMaxId" resultClass="java.lang.Integer">
+   		SELECT IFNULL((SELECT convert(MAX(staff_id),SIGNED) FROM  RS_STAFF),1000) 
+   </select>
+   	<update id="updateStaffById" parameterClass="staff">
+   		UPDATE RS_STAFF
+   		<dynamic prepend="SET">							
+			<isNotEmpty  prepend="," property="name">#name#,</isNotEmpty>						
+			<isNotNull  prepend="," property="sex">#sex#,</isNotNull> 
+			<isNotEmpty  prepend="," property="idNum">#idNum#,</isNotEmpty> 						    
+			<isNotNull  prepend="," property="birth">#birth#,</isNotNull>					
+			<isNotNull  prepend="," property="married">#married#,</isNotNull>
+			<isNotNull  prepend="," property="education">#education#,</isNotNull>
+			<isNotEmpty  prepend="," property="belongInstitution">#belongInstitution#,</isNotEmpty>		
+			<isNotEmpty  prepend="," property="institutionName">#institutionName#,</isNotEmpty> 		
+			<isNotEmpty  prepend="," property="jobDuty">#jobDuty#,</isNotEmpty>        		
+			<isNotEmpty  prepend="," property="officeTel">#officeTel#,</isNotEmpty>       		
+			<isNotEmpty  prepend="," property="mobNum">#mobNum#,</isNotEmpty>         		
+			<isNotEmpty  prepend="," property="mobNum2">#mobNum2#,</isNotEmpty>       		
+			<isNotEmpty  prepend="," property="QQ">#QQ#,</isNotEmpty>
+			<isNotEmpty  prepend="," property="email">#email#,</isNotEmpty>
+			<isNotEmpty  prepend="," property="address">#address#,</isNotEmpty>
+			<isNotEmpty  prepend="," property="postCode">#postCode#,</isNotEmpty>          		
+			<isNotEmpty  prepend="," property="homeTel">#homeTel#,</isNotEmpty>        		
+			<isNotEmpty  prepend="," property="resume">#resume#,</isNotEmpty>
+			<isNotNull  prepend="," property="status">#status#,</isNotNull>
+			<isNotEmpty  prepend="," property="memo">#memo#,</isNotEmpty>
+			<isNotEmpty  prepend="," property="modifyDate">#modifyDate#,</isNotEmpty>      		
+			<isNotEmpty  prepend="," property="operator">#operator#,</isNotEmpty>  	 		
+  	 		<isNotEmpty  prepend="," property="reviser">reviser = #reviser#,revisedate = now() </isNotEmpty>
+  			<isNotEmpty  prepend="," property="verifier">verifier = #verifier#,verifydate = now() </isNotEmpty>
+  			
+   		</dynamic>
+   		WHERE stuff_id =#id#
+   	</update>
+   	<select id="getStaffByCondition" parameterClass="staff" resultClass="staff">
+   		SELECT <include refid="staffFileds"/>
+   		FROM RS_STAFF
+   		WHERE <include refid="whereLike"/>
+   	</select>
+   	<!-- 分页查询语句 -->
+   	<select id="getStaffSplitPageBySQL" remapResults="true" parameterClass="java.lang.String" resultMap="staff">
+   		$splitPageSQL$
+   	</select>
+   	<!-- end -->
+   	
+   	<select id="getStaffSplitPageCountSQL" remapResults="true" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+   		$countSQL$
+   	</select>
+   	
+</sqlMap>
