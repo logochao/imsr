@@ -28,13 +28,25 @@ $(function(){
 				{field:'goodsName',title:'商品名称',width:120},
       		]],
       		columns:[[
-				{field:'specId',title:'规则编码',width:120},
-				{field:'unit',title:'包装单位(规格)',width:120},
-				{field:'equivalentUnit',title:'折合单位',width:120},
+				{field:'specId',title:'规则编码',width:120,formatter:specTypeFormatter},
+				{field:'unit',title:'包装单位(规格)',width:120,formatter:equivalentUnitFormatter},
+				{field:'equivalentUnit',title:'折合单位',width:120,formatter:equivalentUnitFormatter},
 				{field:'quantityEuPerUnit',title:'包装单位折合数量',width:120},
-				{field:'supplyCashType',title:'供应币种',width:120},
-				{field:'priceUnitSupply',title:'包装单位供应单位',width:120},
-				{field:'priceEuSupply',title:'折合单位供应单位',width:120},
+				{field:'supplyCashType',title:'供应币种',width:120,formatter:cashTypeFormatter},
+				{field:'priceUnitSupply',title:'包装单位供应单位',width:120,formatter: function(value,row,index){
+						if(value!=undefined&&value!=null&&(value+"").indexOf(".")<=0){
+							value=(value/100).toFixed(2);
+						}
+						return value;
+					}	
+				},
+				{field:'priceEuSupply',title:'折合单位供应单位',width:120,formatter: function(value,row,index){
+						if(value!=undefined&&value!=null&&(value+"").indexOf(".")<=0){
+							value=(value/100).toFixed(2);
+						}
+						return value;
+					}	
+				},
 				{field:'validityDate',title:'有效期至',width:120},
 				{field:'memo',title:'备注',width:220}
 		]]
@@ -43,28 +55,12 @@ $(function(){
  	$('#quotation_sales_goods_detail_product_search_btn').on('click',function(){
  		quotation_sales_goods_detail_product_grd.datagrid('options').url='${path}/quotation/manager/salesQuotation/supplier_goods_list.html';
  		quotation_sales_goods_detail_product_grd.datagrid('load',{
- 			name			:$('#quotation_sales_goods_detail_product_goods_name').val(),
- 			realName		:$('#quotation_sales_goods_detail_product_goods_real_name').val(),
- 			goodsType		:quotation_sales_goods_detail_product_goods_type.combobox('getValue'),
- 			goodStatus		:quotation_sales_goods_detail_product_goods_status.combobox('getValue'),
+ 			goodsName		:$('#quotation_sales_goods_detail_product_goods_name').val(),//商品名称
+ 			specId			:$('#quotation_sales_goods_detail_product_goods_spec_type').combobox('getValue'),
  			supplierId		:$('#quotation_sales_goods_detail_product_goods_company_id').val()
  		});
  	});
  	
- 	//商品类型
-	quotation_sales_goods_detail_product_goods_type=$('#quotation_sales_goods_detail_product_goods_type').combobox({
- 		url:'${path}/common/system/category_code_list.html?parentId=2600',
- 		valueField: 'id',
-		textField: 'name',
-		editable:false
-	});
-	//商品状态
-	quotation_sales_goods_detail_product_goods_status=$('#quotation_sales_goods_detail_product_goods_status').combobox({
- 		url:'${path}/common/system/category_code_list.html?parentId=3700',
- 		valueField: 'id',
-		textField: 'name',
-		editable:false
-	});
 	
 	$('#quotation_sales_goods_detail_product_goods_company_search_btn').on('click',function(){
 		contract_sales_goods_detail_compay_dialog.dialog('open');
@@ -77,19 +73,42 @@ $(function(){
  		}else if(rows&&rows.length==1){
  			//1将数据加载到指定的界面
  			var row=rows[0];
- 			resetCustomerInquiryGoodsDetail(row);//清空商品明细表单
+ 			resetGoodsDetail(row);//清空商品明细表单
  			//2将显示界面关闭
  			quotation_sales_goods_detail_product_dialog.dialog('close');
  		} 
 	});
 });
-function goodsTypeFormatter(value,row,index){
-	return com.radius.datagrid.formatter(value,row,index,quotation_sales_goods_detail_product_goods_type);
+/**
+ * 格式化规格
+ **/
+function specTypeFormatter(value,row,index){
+	var combobox_data =$('#quotation_sales_goods_detail_spec_type').combobox('getData');
+	for(var i=0,length=combobox_data.length;i<length;i++){
+		if(combobox_data[i].specId==value){
+			value=combobox_data[i].specName;
+			break;
+		}
+	}
+	return value;
+}
+/**
+ * 格式化容量单位
+ **/
+function equivalentUnitFormatter(value,row,index){
+	for(var i=0,length=spec_unit_data.length;i<length;i++){
+		if(spec_unit_data[i].id==value){
+			value=spec_unit_data[i].name;
+			break;
+		}
+	}
+	return value;
 }
 
-function goodsStatusFormatter(value,row,index){
-	return com.radius.datagrid.formatter(value,row,index,quotation_sales_goods_detail_product_goods_status);
+function cashTypeFormatter(value,row,index){
+	return com.radius.datagrid.formatter(value,row,index,quotation_sales_base_cash_type);
 }
+
 //-->
 </script>
 <div id="quotation_sales_goods_detail_product_dialog" style="display: none;width: 99.5">

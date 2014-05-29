@@ -11,11 +11,11 @@ function salesQuotationInit(){
 	$('#quotation_sales_goods_grd_add_btn').linkbutton('enable');
 	$('#quotation_sales_goods_grd_delete_btn').linkbutton('enable');
 	//1.清空客户询价基本信息
-	//clearSalesQuotationBaseInfo();
+	clearSalesQuotationBaseInfo();
 	//2.清空客户询价商品信息
-	//clearSalesQuotationGoodsDetail();
+	clearSalesQuotationGoodsDetail();
 	//3.清空询价单描述
-	//clearSalesQuotationMemoTab();
+	clearQuotationSalesMemoTab();
 	//3.获取客户询价编号
 	$.ajax({
 		url:'${path}/quotation/manager/salesQuotation/sales_quotation_info.html',
