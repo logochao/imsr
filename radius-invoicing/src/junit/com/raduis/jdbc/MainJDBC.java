@@ -221,7 +221,7 @@ public class MainJDBC {
                      if(dataType.equalsIgnoreCase("String")){
                         bf.append("<isNotEmpty property=\""+rebuildString(col.toLowerCase())+"\">"+col+",</isNotEmpty>\n");
                      }else {
-                         bf.append("<isNotNull  property=\""+rebuildString(col.toLowerCase())+"\">"+col+",</isNotNull>,\n");
+                         bf.append("<isNotNull  property=\""+rebuildString(col.toLowerCase())+"\">"+col+",</isNotNull>\n");
                      }
                  }
         	}
@@ -261,7 +261,7 @@ public class MainJDBC {
                     if(dataType.equalsIgnoreCase("String")){
                        bf.append("<isNotEmpty property=\""+rebuildString(col.toLowerCase())+"\">#"+rebuildString(col.toLowerCase())+"#,</isNotEmpty>\n");
                     }else {
-                        bf.append("<isNotNull  property=\""+rebuildString(col.toLowerCase())+"\">#"+rebuildString(col.toLowerCase())+"#</isNotNull>,\n");
+                        bf.append("<isNotNull  property=\""+rebuildString(col.toLowerCase())+"\">#"+rebuildString(col.toLowerCase())+"#,</isNotNull>\n");
                     }
                 }
         	}
@@ -301,7 +301,7 @@ public class MainJDBC {
     
     public static void main(String[] args) throws InterruptedException {
         MainJDBC jdbc=new MainJDBC();
-        String tableName="rs_supplier_goods";
+        String tableName="rs_user";
         System.err.println("-------------------生成查询列字段SQL语句----------------------");
         String content=jdbc.buildSQLFileds(tableName);
         System.out.println(content);
