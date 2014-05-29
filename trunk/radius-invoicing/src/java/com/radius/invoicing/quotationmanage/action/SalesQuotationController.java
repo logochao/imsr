@@ -137,14 +137,14 @@ public class SalesQuotationController {
 	
 	@RequestMapping("/quotation/manager/salesQuotation/sales_quotation_info_list.html")
 	@ResponseBody
-	public EasyuiSplitPager<SalesQuotation> getPurchaseInquiryList(HttpServletRequest request,HttpServletResponse response,SalesQuotation salesQuotation)throws Exception{
+	public EasyuiSplitPager<SalesQuotation> getSalesQuotationList(HttpServletRequest request,HttpServletResponse response,SalesQuotation salesQuotation)throws Exception{
 		return salesQuotationService.getSalesQuotationList(salesQuotation);
 	}
 	
 	
 	@RequestMapping("/quotation/manager/salesQuotation/sales_quotation_goods_2_salesquotationid.html")
 	@ResponseBody
-	public EasyuiSplitPager<SalesQuotationGrd> getPurchaseInquiryGrdList(HttpServletRequest request,HttpServletResponse response){
+	public EasyuiSplitPager<SalesQuotationGrd> getSalesQuotationGrdList(HttpServletRequest request,HttpServletResponse response){
 		String salesQuotationId=ServletRequestUtils.getStringParameter(request, "salesQuotationId","");
 		return salesQuotationService.getSalesQuotationGrd(salesQuotationId);
 	}
