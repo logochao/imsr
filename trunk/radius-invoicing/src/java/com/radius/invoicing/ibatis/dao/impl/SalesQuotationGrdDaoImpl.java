@@ -28,7 +28,7 @@ public class SalesQuotationGrdDaoImpl extends BaseIbatisDaoImpl<SalesQuotationGr
 	 * @return
 	 */
 	public SalesQuotationGrd getSaleQuotationGrdByPk(SalesQuotationGrd grd){
-		return this.getObjectByCondition(grd, SQLMAPNAMESPACE+".getSaleQuotationGrdByPk");
+		return this.getObjectByCondition(grd, SQLMAPNAMESPACE+".getSalesQuotationGrdByPk");
 	}
 	
 	/**
@@ -37,7 +37,7 @@ public class SalesQuotationGrdDaoImpl extends BaseIbatisDaoImpl<SalesQuotationGr
 	 * @return
 	 */
 	public List<SalesQuotationGrd> getSaleQuotationGrdByCondition( SalesQuotationGrd grd){
-		return this.getListObject(grd, SQLMAPNAMESPACE+".getSaleQuotationGrdByCondition");
+		return this.getListObject(grd, SQLMAPNAMESPACE+".getSalesQuotationGrdByCondition");
 	}
 	/**
 	 * 保存销售报价订单
@@ -61,7 +61,7 @@ public class SalesQuotationGrdDaoImpl extends BaseIbatisDaoImpl<SalesQuotationGr
 	 * @return
 	 */
 	public boolean updateSaleQuotationGrdByPk(SalesQuotationGrd grd){
-		return this.updateObject(grd, SQLMAPNAMESPACE+".updateSaleQuotationGrdById")==1;
+		return this.updateObject(grd, SQLMAPNAMESPACE+".updateSalesQuotationGrdById")==1;
 	}
 	
 	/**
@@ -69,14 +69,14 @@ public class SalesQuotationGrdDaoImpl extends BaseIbatisDaoImpl<SalesQuotationGr
 	 * @param grd
 	 */
 	public void deleteSaleQuotationGrd(SalesQuotationGrd grd){
-		this.deleteObject(grd, SQLMAPNAMESPACE+".deleteSaleQuotationGrd");
+		this.deleteObject(grd, SQLMAPNAMESPACE+".deleteSalesQuotationGrd");
 	}
 	
 	public Integer getSalesQuotationGrdCountByQuotationId(String quotationId){
-		return (Integer)this.getSqlMapClientTemplate().queryForObject(SQLMAPNAMESPACE+"getSalesQuotationGrdCountByQuotationId", quotationId);
+		return (Integer)this.getSqlMapClientTemplate().queryForObject(SQLMAPNAMESPACE+".getSalesQuotationGrdCountByQuotationId", quotationId);
 	}
 	
 	public void deleteSalesQuotationGrdByQuotationId(String quotationId){
-		this.deleteObject(quotationId, SQLMAPNAMESPACE+"deleteSalesQuotationGrdByQuotationId");
+		this.deleteObject(quotationId, SQLMAPNAMESPACE+".deleteSalesQuotationGrdByQuotationId");
 	}
 }
