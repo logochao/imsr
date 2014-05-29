@@ -7,7 +7,7 @@
   <sql id="supplierGoodsFileds">
     supplier_id supplierId,goods_id goodsId,goods_name goodsName,spec_id specId,unit unit,equivalent_unit equivalentUnit
     ,quantity_of_eu_per_unit quantityEuPerUnit,supply_cash_type supplyCashType,price_of_unit_of_supply priceUnitSupply,
-    price_of_eu_of_supply priceEuSupply,validity_date validityDate,memo memo,modity_date modifyDate,
+    price_of_eu_of_supply priceEuSupply,validity_date validityDate,memo memo,motify_date modifyDate,
     ledger_id ledgerId,creater creater,createdate createDate,reviser reviser,revisedate reviseDate,verifier verifyDate
   </sql>
   
@@ -24,7 +24,7 @@
 	<result  column="price_of_eu_of_supply" jdbcType="int" javaType="java.lang.Integer" property="priceEuSupply"/>
 	<result  column="validity_date" jdbcType="datetime" javaType="java.util.Date" property="validityDate"/>
 	<result column="memo" jdbcType="text" javaType="java.lang.String" property="memo" />
-	<result  column="modity_date" jdbcType="datetime" javaType="java.util.Date" property="modifyDate"/>
+	<result  column="motify_date" jdbcType="datetime" javaType="java.util.Date" property="modifyDate"/>
 	<result column="operator" jdbcType="char" javaType="java.lang.String" property="operator" />
     <result column="ledger_id" jdbcType="char" javaType="java.lang.String" property="ledgerId" />
     <result column="creater" jdbcType="char" javaType="java.lang.String" property="creater" />
@@ -50,7 +50,7 @@
 		<isNotNull  property="priceEuSupply">  AND price_of_eu_of_supply=#priceEuSupply#</isNotNull>
 		<isNotNull  property="validityDate">  AND validity_date=#validityDate#</isNotNull>
 		<isNotEmpty property="memo"> AND memo=#memo#</isNotEmpty>
-		<isNotNull  property="modifyDate">  AND modity_date=#modifyDate#</isNotNull>
+		<isNotNull  property="modifyDate">  AND motify_date=#modifyDate#</isNotNull>
 		<isNotEmpty property="ledgerId"> AND ledger_id=#ledgerId#</isNotEmpty>
   	</dynamic>
   </sql>
@@ -72,7 +72,7 @@
 			<isNotEmpty property="operator">operator,</isNotEmpty>
 			<isNotEmpty property="ledgerId">ledger_id,</isNotEmpty>
 			creater,
-			createrdate
+			createdate
 		)VALUES  (
 			#supplierId#,
 			#goodsId#,
@@ -107,7 +107,7 @@
 			<isNotNull  prepend=","   property="validityDate">  validity_date=#validityDate#</isNotNull>
 			<isNotEmpty  prepend=","   property="memo">  memo=#memo#</isNotEmpty>
 			<isNotEmpty  prepend=","   property="ledgerId">  ledger_id=#ledgerId#</isNotEmpty>
-			<isNotEmpty  prepend=","   property="operator">  operator=#operator#,modity_date=NOW()</isNotEmpty>
+			<isNotEmpty  prepend=","   property="operator">  operator=#operator#,motify_date=NOW()</isNotEmpty>
   	 		<isNotEmpty  prepend="," property="reviser">reviser = #reviser#,revisedate = now() </isNotEmpty>
   			<isNotEmpty  prepend="," property="verifier">verifier = #verifier#,verifydate = now() </isNotEmpty>
    		</dynamic>

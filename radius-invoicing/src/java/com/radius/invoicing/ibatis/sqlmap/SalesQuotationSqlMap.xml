@@ -7,8 +7,8 @@
   <sql id="salesQuotationFileds">
   	 sales_quotation_id salesQuotationId,customer_id customerId,customer_ab customerAb,cash_type cashType,address address,
   	 link_man man,link_mobile mobile,link_tel tel,link_fax fax,inquiry_date inquiryDate,latest_quotate_date latestQuotateDate,
-  	 salesman_id salesmanId,status status,audited_status auditedStatus,memo memo,
-  	 print_times printTimes,newest_print_time newestPrintTime,newest_print_record newestPrintRecord,
+  	 salesman_id salesman,status status,audited_status auditedStatus,memo memo,
+  	 print_times printTimes,newest_print_time printTime,newest_print_record printRecord,
   	 ledger_id ledgerId,operator operator,motify_date modifyDate,creater creater,createdate createDate,reviser reviser,revisedate reviseDate,verifier verifier,verifydate verifyDate
   </sql>
   
@@ -24,13 +24,13 @@
 	<result column="link_fax" jdbcType="char" javaType="java.lang.String" property="fax" />
 	<result  column="inquiry_date" jdbcType="date" javaType="java.util.Date" property="inquiryDate"/>
 	<result  column="latest_quotate_date" jdbcType="date" javaType="java.util.Date" property="latestQuotateDate"/>
-	<result column="salesman_id" jdbcType="char" javaType="java.lang.String" property="salesmanId" />
+	<result column="salesman_id" jdbcType="char" javaType="java.lang.String" property="salesman" />
 	<result column="status" jdbcType="char" javaType="java.lang.String" property="status" />
 	<result column="audited_status" jdbcType="char" javaType="java.lang.String" property="auditedStatus" />
 	<result column="memo" jdbcType="text" javaType="java.lang.String" property="memo" />
 	<result  column="print_times" jdbcType="int" javaType="java.lang.Integer" property="printTimes"/>
-	<result  column="newest_print_time" jdbcType="datetime" javaType="java.util.Date" property="newestPrintTime"/>
-	<result column="newest_print_record" jdbcType="varchar" javaType="java.lang.String" property="newestPrintRecord" />
+	<result  column="newest_print_time" jdbcType="datetime" javaType="java.util.Date" property="printTime"/>
+	<result column="newest_print_record" jdbcType="varchar" javaType="java.lang.String" property="printRecord" />
 
     <result column="ledger_id" jdbcType="char" javaType="java.lang.String" property="ledgerId" />
   	<result column="operator" jdbcType="char" javaType="java.lang.String" property="operator" />
@@ -45,7 +45,7 @@
   
   <sql id="whereLike">
   	<dynamic prepend="where">
-  		1=1 AND 
+  		1=1 
   		<isNotEmpty property="salesQuotationId"> AND sales_quotation_id=#salesQuotationId#</isNotEmpty>
 		<isNotEmpty property="customerId"> AND customer_id=#customerId#</isNotEmpty>
 		<isNotEmpty property="customerAb"> AND customer_ab LIKE CONCAT('%',#customerAb#,'%')</isNotEmpty>
@@ -57,26 +57,26 @@
 		<isNotEmpty property="fax"> AND link_fax=#fax#</isNotEmpty>
 		<isNotNull  property="inquiryDate">  AND inquiry_date=#inquiryDate#</isNotNull>
 		<isNotNull  property="latestQuotateDate">  AND latest_quotate_date=#latestQuotateDate#</isNotNull>
-		<isNotEmpty property="salesmanId"> AND salesman_id=#salesmanId#</isNotEmpty>
+		<isNotEmpty property="salesman"> AND salesman_id=#salesman#</isNotEmpty>
 		<isNotEmpty property="status"> AND status=#status#</isNotEmpty>
 		<isNotEmpty property="auditedStatus"> AND audited_status=#auditedStatus#</isNotEmpty>
 		<isNotEmpty property="memo"> AND memo=#memo#</isNotEmpty>
 		<isNotNull  property="printTimes">  AND print_times=#printTimes#</isNotNull>
-		<isNotNull  property="newestPrintTime">  AND newest_print_time=#newestPrintTime#</isNotNull>
-		<isNotEmpty property="newestPrintRecord"> AND newest_print_record=#newestPrintRecord#</isNotEmpty>
- 		<isNotNull prepend="and" property="ledgerId">ledger_id=#ledgerId#</isNotNull> 
+		<isNotNull  property="printTime">  AND newest_print_time=#printTime#</isNotNull>
+		<isNotEmpty property="printRecord"> AND newest_print_record=#printRecord#</isNotEmpty>
+ 		<isNotEmpty property="ledgerId"> AND ledger_id=#ledgerId#</isNotEmpty> 
   	</dynamic>
   </sql>
  
 	 <select id="getSalesQuotationByPk" parameterClass="java.lang.String" resultClass="salesQuotation">
 	 	SELECT <include refid="salesQuotationFileds"/>
-	 	FROM RS_SALE_QUOTATION
-	 	WHERE purchase_inquiry_id=#purchaseInquiryId#
+	 	FROM RS_SALES_QUOTATION
+	 	WHERE sales_quotation_id=#salesQuotationId#
 	 </select>
 	 
 	 <select id="getSalesQuotation" parameterClass="salesQuotation" resultClass="salesQuotation">
 	 	SELECT <include refid="salesQuotationFileds"/>
-	 	FROM RS_SALE_QUOTATION
+	 	FROM RS_SALES_QUOTATION
 	 	<include refid="whereLike"/>
 	 </select>
    
@@ -93,14 +93,14 @@
 			<isNotEmpty property="fax">link_fax,</isNotEmpty>
 			<isNotNull  property="inquiryDate">inquiry_date,</isNotNull>
 			<isNotNull  property="latestQuotateDate">latest_quotate_date,</isNotNull>
-			<isNotEmpty property="salesmanId">salesman_id,</isNotEmpty>
+			<isNotEmpty property="salesman">salesman_id,</isNotEmpty>
 			<isNotEmpty property="status">status,</isNotEmpty>
 			<isNotEmpty property="auditedStatus">audited_status,</isNotEmpty>
 			<isNotEmpty property="memo">memo,</isNotEmpty>
 			<isNotEmpty property="operator">operator,</isNotEmpty>
 			<isNotEmpty property="ledgerId">ledger_id,</isNotEmpty>
 			creater,
-			createdate,
+			createdate
 		)VALUES  (
 			#salesQuotationId#,
 			<isNotEmpty property="customerId">#customerId#,</isNotEmpty>
@@ -113,7 +113,7 @@
 			<isNotEmpty property="fax">#fax#,</isNotEmpty>
 			<isNotNull  property="inquiryDate">#inquiryDate#,</isNotNull>
 			<isNotNull  property="latestQuotateDate">#latestQuotateDate#,</isNotNull>
-			<isNotEmpty property="salesmanId">#salesmanId#,</isNotEmpty>
+			<isNotEmpty property="salesman">#salesman#,</isNotEmpty>
 			<isNotEmpty property="status">#status#,</isNotEmpty>
 			<isNotEmpty property="auditedStatus">#auditedStatus#,</isNotEmpty>
 			<isNotEmpty property="memo">#memo#,</isNotEmpty>
@@ -125,7 +125,7 @@
    	</insert>
    
    	<update id="updateSalesQuotationById" parameterClass="salesQuotation">
-   		UPDATE RS_SALE_QUOTATION
+   		UPDATE RS_SALES_QUOTATION
    		<dynamic prepend="SET">
 			<isNotEmpty  prepend=","   property="customerId">  customer_id=#customerId#</isNotEmpty>
 			<isNotEmpty  prepend=","   property="customerAb">  customer_ab=#customerAb#</isNotEmpty>
@@ -137,13 +137,13 @@
 			<isNotEmpty  prepend=","   property="fax">  link_fax=#fax#</isNotEmpty>
 			<isNotNull  prepend=","   property="inquiryDate">  inquiry_date=#inquiryDate#</isNotNull>
 			<isNotNull  prepend=","   property="latestQuotateDate">  latest_quotate_date=#latestQuotateDate#</isNotNull>
-			<isNotEmpty  prepend=","   property="salesmanId">  salesman_id=#salesmanId#</isNotEmpty>
+			<isNotEmpty  prepend=","   property="salesman">  salesman_id=#salesman#</isNotEmpty>
 			<isNotEmpty  prepend=","   property="status">  status=#status#</isNotEmpty>
 			<isNotEmpty  prepend=","   property="auditedStatus">  audited_status=#auditedStatus#</isNotEmpty>
 			<isNotEmpty  prepend=","   property="memo">  memo=#memo#</isNotEmpty>
 			<isNotNull  prepend=","   property="printTimes">  print_times=#printTimes#</isNotNull>
-			<isNotNull  prepend=","   property="newestPrintTime">  newest_print_time=#newestPrintTime#</isNotNull>
-			<isNotEmpty  prepend=","   property="newestPrintRecord">  newest_print_record=#newestPrintRecord#</isNotEmpty>
+			<isNotNull  prepend=","   property="printTime">  newest_print_time=#printTime#</isNotNull>
+			<isNotEmpty  prepend=","   property="printRecord">  newest_print_record=#printRecord#</isNotEmpty>
 	 		<isNotNull prepend="," property="ledgerId">ledger_id=#ledgerId#</isNotNull> 
 	 		<isNotNull prepend="," property="operator">operator=#operator#,modify_date= now()</isNotNull>
   	 		<isNotNull  prepend="," property="reviser">reviser = #reviser#,revisedate = now() </isNotNull>
@@ -164,16 +164,16 @@
 <!--   		<include refid="whereLike"/>-->
 <!--   	</delete>-->
    	<delete id="deleteSalesQuotation" parameterClass="salesQuotation">
-   		DELETE FROM RS_SALE_QUOTATION
+   		DELETE FROM RS_SALES_QUOTATION
    		<include refid="whereLike"/>
    	</delete>
    	<delete id="deleteSalesQuotationByPK" parameterClass="java.lang.String">
-   		DELETE FROM RS_SALE_QUOTATION
+   		DELETE FROM RS_SALES_QUOTATION
    		WHERE sales_quotation_id=#salesQuotationId#
    	</delete>
    	
    	<update id="updateStatusBySalesQuotationId" parameterClass="salesQuotation">
-   		UPDATE RS_SALE_QUOTATION 
+   		UPDATE RS_SALES_QUOTATION 
 		SET status=#status#
 		WHERE sales_quotation_id=#salesQuotationId#
    	</update>
