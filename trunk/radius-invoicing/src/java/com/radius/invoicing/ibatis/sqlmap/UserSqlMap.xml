@@ -5,6 +5,122 @@
   <typeAlias alias="user" type="com.radius.invoicing.ibatis.model.User" />
   
   <sql id="userFileds">
-  	 u_id id,u_name name u_real_name realName,u_pass_word passWord,u_phone phone,u_email email,u_address address,u_remark remark,u_post_code postCode,u_login_ip loginIp,u_last_login_time lastLoginTime,u_create_time createTime,u_creater creater
+  	 id id,user_id userId,login_acc loginAcc,password password,staff_id staffId,user_description userDescription,account_status accountStatus,login_ip loginIp,last_login_time lastLoginTime,
+  	 memo memo,ledger_id ledgerId,operator operator,motify_date modifyDate,creater creater,createdate createDate,reviser reviser,revisedate reviseDate,verifier verifier,verifydate verifyDate
   </sql>
+  <resultMap class="user" id="user">
+		<result  column="id" jdbcType="int" javaType="java.lang.Integer" property="id"/>
+		<result column="user_id" jdbcType="char" javaType="java.lang.String" property="userId" />
+		<result column="login_acc" jdbcType="varchar" javaType="java.lang.String" property="loginAcc" />
+		<result column="password" jdbcType="char" javaType="java.lang.String" property="password" />
+		<result column="staff_id" jdbcType="char" javaType="java.lang.String" property="staffId" />
+		<result column="user_description" jdbcType="text" javaType="java.lang.String" property="userDescription" />
+		<result  column="account_status" jdbcType="int" javaType="java.lang.Integer" property="accountStatus"/>
+		<result column="login_ip" jdbcType="char" javaType="java.lang.String" property="loginIp" />
+		<result  column="last_login_time" jdbcType="datetime" javaType="java.util.Date" property="lastLoginTime"/>
+		<result column="memo" jdbcType="text" javaType="java.lang.String" property="memo" />
+		
+		<result column="ledger_id" jdbcType="char" javaType="java.lang.String" property="ledgerId" />
+	    <result column="operator" jdbcType="char" javaType="java.lang.String" property="operator" />
+	    <result column="motify_date" jdbcType="datetime" javaType="java.util.Date" property="modifyDate" />
+	    <result column="creater" jdbcType="char" javaType="java.lang.String" property="creater" />
+	    <result column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createDate" />
+	    <result column="reviser" jdbcType="char" javaType="java.lang.String" property="reviser" />
+	    <result column="revisedate" jdbcType="datetime" javaType="java.util.Date" property="reviseDate" />
+	    <result column="verifier" jdbcType="char" javaType="java.lang.String" property="verifier" />    
+	    <result column="verifydate" jdbcType="datetime" javaType="java.util.Date" property="verifyDate"/>
+  </resultMap>
+  <sql id="whereLike">
+  	<dynamic prepend="WHERE">
+  		1=1
+  		<isNotNull  property="id">  AND id=#id#</isNotNull>
+		<isNotEmpty property="userId"> AND user_id=#userId#</isNotEmpty>
+		<isNotEmpty property="loginAcc"> AND login_acc LIKE CONCAT('%',#loginAcc#,'%')</isNotEmpty>
+		<isNotEmpty property="password"> AND password=#password#</isNotEmpty>
+		<isNotEmpty property="staffId"> AND staff_id=#staffId#</isNotEmpty>
+		<isNotEmpty property="userDescription"> AND user_description=#userDescription#</isNotEmpty>
+		<isNotNull  property="accountStatus">  AND account_status=#accountStatus#</isNotNull>
+		<isNotEmpty property="memo"> AND memo=#memo#</isNotEmpty>
+		<isNotEmpty property="loginIp"> AND login_ip=#loginIp#</isNotEmpty>
+		<isNotNull  property="lastLoginTime">  AND last_login_time=#lastLoginTime#</isNotNull>
+		<isNotEmpty property="ledgerId"> AND ledger_id=#ledgerId#</isNotEmpty>
+  	</dynamic>
+  </sql>
+  <select id="getUserByUid" parameterClass="string" resultClass="user">
+  	SELECT <include refid="userFileds"/>
+  	FROM RS_USER
+  	WHERE user_id=#userId#
+  </select>
+  
+  <select id="getUserByCondition" resultClass="user" resultMap="user">
+  	SELECT <include refid="userFileds"/>
+  	FROM RS_USER
+  	<include refid="whereLike"/>
+  </select>
+  
+  <insert id="insert">
+	INSERT INTO RS_USER  (
+		<isNotEmpty property="userId">user_id,</isNotEmpty>
+		<isNotEmpty property="loginAcc">login_acc,</isNotEmpty>
+		<isNotEmpty property="password">password,</isNotEmpty>
+		<isNotEmpty property="staffId">staff_id,</isNotEmpty>
+		<isNotEmpty property="userDescription">user_description,</isNotEmpty>
+		<isNotNull  property="accountStatus">account_status,</isNotNull>
+		<isNotEmpty property="operator">operator,</isNotEmpty>
+		<isNotNull  property="motifyDate">motify_date,</isNotNull>
+		<isNotEmpty property="loginIp">login_ip,</isNotEmpty>
+		<isNotNull  property="loginIp">last_login_time,</isNotNull>
+		<isNotEmpty property="memo">memo,</isNotEmpty>
+		<isNotEmpty property="ledgerId">ledger_id,</isNotEmpty>
+		creater,
+		createdate,
+	) VALUES  (
+		<isNotEmpty property="userId">#userId#,</isNotEmpty>
+		<isNotEmpty property="loginAcc">#loginAcc#,</isNotEmpty>
+		<isNotEmpty property="password">#password#,</isNotEmpty>
+		<isNotEmpty property="staffId">#staffId#,</isNotEmpty>
+		<isNotEmpty property="userDescription">#userDescription#,</isNotEmpty>
+		<isNotNull  property="accountStatus">#accountStatus#,</isNotNull>
+		<isNotEmpty property="operator">#operator#,</isNotEmpty>
+		<isNotNull  property="motifyDate">#motifyDate#,</isNotNull>
+		<isNotEmpty property="loginIp">#loginIp#,</isNotEmpty>
+		<isNotNull  property="loginIp">NOW(),</isNotNull>
+		<isNotEmpty property="memo">#memo#,</isNotEmpty>
+		<isNotEmpty property="ledgerId">#ledgerId#,</isNotEmpty>
+		#creater#,now()
+	)
+	<selectKey resultClass="java.lang.Integer" keyProperty="id">
+      select LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+  
+  
+  
+  
+  <update id="updateUser" parameterClass="user">
+  	UPDATE RS_USER
+	<dynamic prepend="SET">
+		<isNotEmpty  prepend=","   property="userId">  user_id=#userId#</isNotEmpty>
+		<isNotEmpty  prepend=","   property="loginAcc">  login_acc=#loginAcc#</isNotEmpty>
+		<isNotEmpty  prepend=","   property="password">  password=#password#</isNotEmpty>
+		<isNotEmpty  prepend=","   property="staffId">  staff_id=#staffId#</isNotEmpty>
+		<isNotEmpty  prepend=","   property="userDescription">  user_description=#userDescription#</isNotEmpty>
+		<isNotNull  prepend=","   property="accountStatus">  account_status=#accountStatus#</isNotNull>
+		<isNotEmpty  prepend=","   property="memo">  memo=#memo#</isNotEmpty>
+		<isNotEmpty  prepend=","   property="loginIp">  login_ip=#loginIp#,last_login_time=NOW()</isNotEmpty>
+		<isNotEmpty prepend="," property="operator">operator=#operator#,modify_date= now()</isNotEmpty>
+  	    <isNotEmpty  prepend="," property="reviser">reviser = #reviser#,revisedate = now() </isNotEmpty>
+  	   <isNotEmpty  prepend="," property="verifier">verifier = #verifier#,verifydate = now() </isNotEmpty>
+	</dynamic>
+	WHERE  user_id=#userId#
+  </update>
+   
+  <delete id="deleteUserById" parameterClass="int">
+  	DELETE FROM RS_USER
+   	WHERE id=#id#
+  </delete>
+  <delete id="deleteUserByUid" parameterClass="string">
+  	DELETE FROM RS_USER
+   	WHERE  user_id=#userId#
+  </delete>
 </sqlMap>

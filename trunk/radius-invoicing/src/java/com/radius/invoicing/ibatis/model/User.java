@@ -3,7 +3,12 @@
  */
 package com.radius.invoicing.ibatis.model;
 
+import java.util.Date;
+
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
 import com.radius.base.BaseEntity;
+import com.radius.base.utils.JsonDateSerializer;
 
 /**
  * 系统用户表
@@ -12,113 +17,43 @@ import com.radius.base.BaseEntity;
  */
 public class User extends BaseEntity{
 
-	/**
-	 * 用户编号
-	 */
-	private String id;
-	/**
-	 * 用户名
-	 */
-	private String name;
-	/**
-	 * 真实名
-	 */
-	private String realName;
-	/**
-	 * 密码
-	 */
-	private String password;
-	/**
-	 * 手机号
-	 */
-	private String phone;
-	/**
-	 * 邮箱
-	 */
-	private String email;
-	/**
-	 * 地址
-	 */
-	private String address;
-	/**
-	 * 备注
-	 */
-	private String remark;
-	/**
-	 * 邮编
-	 */
-	private String postCode;
-	/**
-	 * 登录IP
-	 */
-	private String loginIp;
-	/**
-	 * 登录时间
-	 */
-	private String lastLoginTime;
+	private   Integer    id;//编号(自增列主键)
+	private   String     userId;//用户编号 不能出现重复类似主键的功能，必须检查是否存在相关
+	private   String     loginAcc;//登陆名
+	private   String     password;//密码
+	private   String     staffId;//员工编号
+	private   String     userDescription;//用户说明
+	private   Integer    accountStatus;//帐号状态
+	private   String     memo;//描述
+	private   String     loginIp;//登录IP
 	
-	/**
-	 * 创建时间
-	 */
-	private String createTime;
-	/**
-	 * 创建人
-	 */
-	private String creater;
+	private   Date     	 lastLoginTime;//最近登录时间
 	
 	
-	
-	
-	public User(String id, String name, String realName, String password, String phone, String email, String address, String remark, String postCode, String loginIp, String lastLoginTime, String createTime, String creater) {
-		this.id = id;
-		this.name = name;
-		this.realName = realName;
-		this.password = password;
-		this.phone = phone;
-		this.email = email;
-		this.address = address;
-		this.remark = remark;
-		this.postCode = postCode;
-		this.loginIp = loginIp;
-		this.lastLoginTime = lastLoginTime;
-		this.createTime = createTime;
-		this.creater = creater;
+	public Integer getAccountStatus() {
+		return accountStatus;
 	}
-	public String getAddress() {
-		return address;
+	public void setAccountStatus(Integer accountStatus) {
+		this.accountStatus = accountStatus;
 	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
-	public String getCreater() {
-		return creater;
-	}
-	public void setCreater(String creater) {
-		this.creater = creater;
-	}
-	public String getCreateTime() {
-		return createTime;
-	}
-	public void setCreateTime(String createTime) {
-		this.createTime = createTime;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getLastLoginTime() {
+	@JsonSerialize(using=JsonDateSerializer.class)
+	public Date getLastLoginTime() {
 		return lastLoginTime;
 	}
-	public void setLastLoginTime(String lastLoginTime) {
+	public void setLastLoginTime(Date lastLoginTime) {
 		this.lastLoginTime = lastLoginTime;
+	}
+	public String getLoginAcc() {
+		return loginAcc;
+	}
+	public void setLoginAcc(String loginAcc) {
+		this.loginAcc = loginAcc;
 	}
 	public String getLoginIp() {
 		return loginIp;
@@ -126,11 +61,11 @@ public class User extends BaseEntity{
 	public void setLoginIp(String loginIp) {
 		this.loginIp = loginIp;
 	}
-	public String getName() {
-		return name;
+	public String getMemo() {
+		return memo;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setMemo(String memo) {
+		this.memo = memo;
 	}
 	public String getPassword() {
 		return password;
@@ -138,31 +73,24 @@ public class User extends BaseEntity{
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getPhone() {
-		return phone;
+	public String getStaffId() {
+		return staffId;
 	}
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setStaffId(String staffId) {
+		this.staffId = staffId;
 	}
-	public String getPostCode() {
-		return postCode;
+	public String getUserDescription() {
+		return userDescription;
 	}
-	public void setPostCode(String postCode) {
-		this.postCode = postCode;
+	public void setUserDescription(String userDescription) {
+		this.userDescription = userDescription;
 	}
-	public String getRealName() {
-		return realName;
+	public String getUserId() {
+		return userId;
 	}
-	public void setRealName(String realName) {
-		this.realName = realName;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
-	public String getRemark() {
-		return remark;
-	}
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
-	
 	
 	
 }
