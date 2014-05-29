@@ -8,7 +8,7 @@ function clearQuotationSalesMemoTab(){
  * 设置采购合同描述
  *@params{} row_data
  **/
-function setQuotationSalesMemo(row_data){
+function setSalesQuotationMemo(row_data){
 	$('#quotation_sales_memo').val(row_data.memo);
 }
 //-->

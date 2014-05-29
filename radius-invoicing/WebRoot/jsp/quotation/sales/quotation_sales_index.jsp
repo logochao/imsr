@@ -6,14 +6,47 @@
   <jsp:include flush="true" page="/common/includ.jsp"></jsp:include>
   <title>销售报价</title>
   <script type="text/javascript">
-  	var quotation_sales_index_panel_tools=null; //工具栏列界面
-  	$(document).ready(function(){
-  		quotation_sales_index_panel_tools=$('#quotation_sales_index_panel_tools').panel({
-			border:false,
-			href:'${path}/jsp/quotation/sales/quotation_sales_toolbar.jsp'
-		});
-  	});
-  </script>
+ var quotation_sales_index_panel_tools=null; //工具栏列界面
+ var spec_unit_data={};//容量单位数据
+ var cash_type_data={};//货币数据
+ $(document).ready(function(){
+ 	getLoadSpecUnitData();
+	quotation_sales_index_panel_tools=$('#quotation_sales_index_panel_tools').panel({
+		border:false,
+		href:'${path}/jsp/quotation/sales/quotation_sales_toolbar.jsp'
+	});
+});
+/**
+ *加载容量数据
+ **/
+function getLoadSpecUnitData(){
+	$.ajax({
+		url:'${path}/common/system/category_code_list.html?parentId=1400',
+		method:'POST',
+		data:{},
+		success:function(r){
+			spec_unit_data=r;
+		},error:function(r){
+			$.messager.alert('提示','与后台通讯失败...','error');
+		}
+	});
+}
+/**
+ *加载货币数据
+ **/
+function getLoadCashTypeData(){
+	$.ajax({
+		url:'${path}/common/system/category_code_list.html?parentId=800',
+		method:'POST',
+		data:{},
+		success:function(r){
+			cash_type_data=r;
+		},error:function(r){
+			$.messager.alert('提示','与后台通讯失败...','error');
+		}
+	});
+}
+</script>
 </head>
 <body>
 <div id="quotation_sales_layout" class="easyui-layout" style="width:100%;height:100%;" fit="true">

@@ -17,14 +17,14 @@ $(function(){
 			return ;
 		}
 		//1.验证必须内容
-		if(!validataSupplierQuotation()){
+		if(!validataSalesQuotation()){
 			return ;
 		}
 		
 		//2.提交表单数据通过ajax
-		var ajax_url = '${path}/quotation/manager/supplierQuotation/supplier_quotation_infos_add.html';
-		var ajax_data=getSupplierQuotationInfoFormatter(_status);
-		submitSupplierQuotationInfo(ajax_url,ajax_data);
+		var ajax_url = '${path}/quotation/manager/salesQuotation/sales_quotation_infos_add.html';
+		var ajax_data=getSalesQuotationInfoFormatter(_status);
+		submitSalesQuotationInfo(ajax_url,ajax_data);
 	});
 	//提交合同按钮
 	$('#quotation_sales_toolbar_ok_btn').on('click',function(){
@@ -33,14 +33,14 @@ $(function(){
 			return ;
 		}
 		//1.验证必须内容
-		if(!validataSupplierQuotation()){
+		if(!validataSalesQuotation()){
 			return ;
 		}
 		
 		//2.提交表单数据通过ajax
-		var ajax_url = '${path}/quotation/manager/supplierQuotation/supplier_quotation_infos_add.html';
-		var ajax_data=getSupplierQuotationInfoFormatter(_status);
-		submitSupplierQuotationInfo(ajax_url,ajax_data);
+		var ajax_url = '${path}/quotation/manager/salesQuotation/sales_quotation_infos_add.html';
+		var ajax_data=getSalesQuotationInfoFormatter(_status);
+		submitSalesQuotationInfo(ajax_url,ajax_data);
 	});
 	//打印按钮
 	$('#quotation_sales_toolbar_print_btn').on('click',function(){
@@ -58,9 +58,12 @@ $(function(){
 		 closed:true
 	});	
 });
-function validataSupplierQuotation(){
+function validataSalesQuotation(){
 	var success=true;
-	success=validataSupplierInquiryBaseId();//检查报价单号
+	success=validataSalesQuotationBaseId();//检查报价单号
+	if(success){
+		success=validataCustomerId();
+	}
 	//其他基本信息校验
 	return success;	
 }
@@ -68,7 +71,7 @@ function validataSupplierQuotation(){
 /**
  *提交供应商报价信息
  **/
-function submitSupplierQuotationInfo(ajax_url,ajax_data){
+function submitSalesQuotationInfo(ajax_url,ajax_data){
 	$.ajax({
 		url:ajax_url,
 		method:'POST',
@@ -100,11 +103,11 @@ function submitSupplierQuotationInfo(ajax_url,ajax_data){
 	});
 }
 
-function getSupplierQuotationInfoFormatter(_status){
+function getSalesQuotationInfoFormatter(_status){
 	var json={
-		supplierQuotationId			:$('#quotation_sales_base_id').val(),//采购报价单
-		customerId					:$('#quotation_sales_base_customer_id').val(),//供应商编号
-		customerName				:$('#quotation_sales_base_customer_name').val(),//供应商名称
+		salesQuotationId			:$('#quotation_sales_base_id').val(),//销售询价单编号
+		customerId					:$('#quotation_sales_base_customer_id').val(),//客户编号
+		customerAb					:$('#quotation_sales_base_customer_name').val(),//客户简称
 		cashType					:quotation_sales_base_cash_type.combobox('getValue'),//币种
 		address						:$('#quotation_sales_base_delivery_point').val(),//送货地址
 		man							:$('#quotation_sales_base_link_man').val(),//联系人
@@ -115,11 +118,11 @@ function getSupplierQuotationInfoFormatter(_status){
 		latestQuotateDate			:parseDate($('#quotation_sales_base_order_end_time').val()),//最迟报价日期
 		salesman					:$('#quotation_sales_base_sales_man').val(),//业务员
 		status						:_status,//状态
-		//printTimes				:$('#').val(),//打印次数
-		//printTime					:$('#').val(),//最新打印时间
-		//printRecord				:$('#').val(),//最新打印记录
-		purchaseInquiryId			:$('#quotation_sales_base_purchase_inquiry_id').val(),//采购询价单号
-		memo						:$('#quotation_sales_memo').val(),//备注
+		//auditedStatus				:$('#quotation_sales_base_id').val(),//审批状态
+		//printTimes					:$('#quotation_sales_base_id').val(),//打印次数
+		//printTime					:$('#quotation_sales_base_id').val(),//最新打印时间
+		//printRecord					:$('#quotation_sales_base_id').val(),//最新打印记录
+		memo						:$('#quotation_sales_memo').val()//备注
 	};
 	
 	return json;

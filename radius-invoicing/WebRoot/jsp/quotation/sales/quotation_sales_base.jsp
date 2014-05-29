@@ -34,18 +34,16 @@ $(function(){
  	
  	//客户查询对话框按钮
  	$('#quotation_sales_base_sales_btn').on('click',function(){
- 		if(validataSupplierInquiryBaseId()){
+ 		if(validataSalesQuotationBaseId()){
  			quotation_sales_base_customer_dialog.dialog('open');
  		}
  	});
  	//联系人查询对话框按钮
  	$('#quotation_sales_base_customer_link_man_btn').on('click',function(){
- 		if(validataSupplierInquiryBaseId()){
-	 		if($('#quotation_sales_base_customer_id').val().length==0){
-				$.messager.alert('提示','请请选择客户信息...','error');
-				return;
+ 		if(validataSalesQuotationBaseId()){
+ 			if(validataCustomerId()){
+				quotation_sales_base_custmer_link_man_dialog.dialog('open');
 			}
-			quotation_sales_base_custmer_link_man_dialog.dialog('open');
  		}
  	});
 });
@@ -53,7 +51,7 @@ $(function(){
 /**
  *清空基本信息
  **/
-function clearSalesQuotationGoodsDetail(){
+function clearSalesQuotationBaseInfo(){
 	$("input[id^='quotation_sales_base_']").each(function(e){
 		$(this).val('');
 	})
@@ -70,10 +68,10 @@ function clearSalesQuotationGoodsDetail(){
  *设置客户询价基本信息
  *@params{} row_data
  **/
-function setSupplierInquiryBaseInfo(row_data){
-		$('#quotation_sales_base_id').val(row_data.supplierQuotationId);//销售询价单编号
-		$('#quotation_sales_base_customer_id').val(row_data.supplierId);//客户编号
-		$('#quotation_sales_base_customer_name').val(row_data.supplierName);//客户简称
+function setSalesQuotationBaseInfo(row_data){
+		$('#quotation_sales_base_id').val(row_data.salesQuotationId);//销售询价单编号
+		$('#quotation_sales_base_customer_id').val(row_data.customerId);//客户编号
+		$('#quotation_sales_base_customer_name').val(row_data.customerAb);//客户简称
 		quotation_sales_base_cash_type.combobox("setValue",row_data.cashType);//币种
 		$('#quotation_sales_base_delivery_point').val(row_data.address);//送货地址
 		$('#quotation_sales_base_link_man').val(row_data.man);//联系人
@@ -84,12 +82,11 @@ function setSupplierInquiryBaseInfo(row_data){
 		$('#quotation_sales_base_order_end_time').val(row_data.latestQuotateDate);//最迟报价日期
 		$('#quotation_sales_base_sales_man').val(row_data.salesman);//业务员
 		quotation_sales_base_status.combobox('setValue',row_data.status);//状态
-		
 }
 /**
  *检查客户询价单号
  **/
-function validataSupplierInquiryBaseId(){
+function validataSalesQuotationBaseId(){
 	if($('#quotation_sales_base_id').val().length==0){
 		$.messager.alert('提示','请点击新建按钮,构建新的销售报价单...','error');
 		return false;
@@ -97,11 +94,11 @@ function validataSupplierInquiryBaseId(){
 	return true;
 }
 /**
- *检查供应商编号
+ *检查客户编号
  **/
-function validataSupplierId(){
+function validataCustomerId(){
 	if($('#quotation_sales_base_customer_id').val().length==0){
-		$.messager.alert('提示','请供应商信息...','error');
+		$.messager.alert('提示','请客户信息...','error');
 		return false;
 	}
 	return true;
