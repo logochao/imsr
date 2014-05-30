@@ -634,6 +634,38 @@ CREATE TABLE rs_sales_quotation_grd
    PRIMARY KEY (sales_quotation_id, goods_id)
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS rs_supplier_quotation_grd;
+
+/*==============================================================*/
+/* Table: rs_supplier_quotation_grd   _供应商_报价_明细     */
+/*==============================================================*/
+CREATE TABLE rs_supplier_quotation_grd
+(
+   quotation_id         CHAR(14) NOT NULL,
+   goods_id             CHAR(5) NOT NULL,
+   goods_name           VARCHAR(50),
+   spec_id              INT,
+   unit                 CHAR(4),
+   equivalent_unit      CHAR(4),
+   quantity_of_eu_per_unit INT,
+   supply_cash_type     CHAR(4),
+   price_of_unit_of_supply INTEGER,
+   price_of_eu_of_supply INTEGER,
+   validity_date        DATE,
+   memo                 TEXT,
+   operator             CHAR(4),
+   modify_date          DATETIME,
+   ledger_id            CHAR(8),
+   creater              CHAR(4),
+   createdate           DATETIME,
+   reviser              CHAR(4),
+   revisedate           DATETIME,
+   verifier             CHAR(4),
+   verifydate           DATETIME,
+   PRIMARY KEY (quotation_id, goods_id)
+)ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+
 DROP TABLE IF EXISTS rs_instorage_order;
 
 /*==============================================================*/
@@ -791,9 +823,8 @@ alter table rs_purchase_inquiry comment '状态：
 02：已报价，当全部商品均有供应商报价后，状态改';
 
 DROP TABLE IF EXISTS rs_purchase_inquiry_grd;
-
 /*==============================================================*/
-/* Table: rs_purchase_inquiry_grd      采购询价列表            */
+/* Table: rs_purchase_inquiry_grd         采购询价明细          */
 /*==============================================================*/
 CREATE TABLE rs_purchase_inquiry_grd
 (
@@ -803,6 +834,7 @@ CREATE TABLE rs_purchase_inquiry_grd
    spec_id              INT,
    unit                 INT,
    quantity_of_unit     INT,
+   quantity_of_eu_per_unit INTEGER,
    STATUS               CHAR(4),
    memo                 TEXT,
    operator             CHAR(4),
@@ -815,14 +847,188 @@ CREATE TABLE rs_purchase_inquiry_grd
    verifier             CHAR(4),
    verifydate           DATETIME,
    PRIMARY KEY (purchase_inquiry_id, goods_id)
-)ENGINE=INNODB DEFAULT CHARSET=utf8;
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 状态：
 00：已询价
 01：询价中
 生成询价单时，商品状态为01,当供应商报价后，商品状态为00
 
+DROP TABLE IF EXISTS rs_supplier_quotation;
 
+/*==============================================================*/
+/* Table: rs_supplier_quotation    供应商_报价            */
+/*==============================================================*/
+CREATE TABLE rs_supplier_quotation
+(
+   supplier_quotation_id CHAR(14) NOT NULL,
+   supplier_id          CHAR(6),
+   supplier_name        VARCHAR(50),
+   cash_type            CHAR(4),
+   address              VARCHAR(100),
+   link_man             CHAR(4),
+   link_mobile          CHAR(11),
+   link_tel             VARCHAR(20),
+   link_fax             CHAR(20),
+   Inquiry_date         DATE,
+   latest_quotate_date  DATE,
+   salesman_id          CHAR(4),
+   STATUS               CHAR(4),
+   memo                 TEXT,
+   print_times          INTEGER,
+   newest_print_time    DATETIME,
+   newest_print_record  VARCHAR(100),
+   ledger_id            CHAR(8),
+   operator             CHAR(4),
+   modify_date          DATETIME,
+   creater              CHAR(4),
+   createdate           DATETIME,
+   reviser              CHAR(4),
+   revisedate           DATETIME,
+   verifier             CHAR(4),
+   verifydate           DATETIME,
+   PRIMARY KEY (supplier_quotation_id)
+)ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS rs_supplier_quotation_grd;
+
+/*==============================================================*/
+/* Table: rs_supplier_quotation_grd   供应商_报价_明细        */
+/*==============================================================*/
+CREATE TABLE rs_supplier_quotation_grd
+(
+   quotation_id         CHAR(14) NOT NULL,
+   goods_id             CHAR(5) NOT NULL,
+   goods_name           VARCHAR(50),
+   spec_id              INT,
+   unit                 CHAR(4),
+   equivalent_unit      CHAR(4),
+   quantity_of_eu_per_unit INT,
+   supply_cash_type     CHAR(4),
+   price_of_unit_of_supply INTEGER,
+   price_of_eu_of_supply INTEGER,
+   validity_date        DATE,
+   memo                 TEXT,
+   operator             CHAR(4),
+   modify_date          DATETIME,
+   ledger_id            CHAR(8),
+   creater              CHAR(4),
+   createdate           DATETIME,
+   reviser              CHAR(4),
+   revisedate           DATETIME,
+   verifier             CHAR(4),
+   verifydate           DATETIME,
+   PRIMARY KEY (quotation_id, goods_id)
+)ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS rs_sales_quotation;
+
+/*==============================================================*/
+/* Table: rs_sales_quotation              销售_报价     */
+/*==============================================================*/
+CREATE TABLE rs_sales_quotation
+(
+   sales_quotation_id   CHAR(14) NOT NULL,
+   customer_id          CHAR(6),
+   customer_ab          VARCHAR(100),
+   cash_type            CHAR(4),
+   address              VARCHAR(100),
+   link_man             VARCHAR(100),
+   link_mobile          CHAR(11),
+   link_tel             CHAR(20),
+   link_fax             CHAR(20),
+   inquiry_date         DATE,
+   latest_quotate_date  DATE,
+   salesman_id          CHAR(4),
+   STATUS               CHAR(4),
+   audited_status       CHAR(4),
+   memo                 TEXT,
+   print_times          INTEGER,
+   newest_print_time    DATETIME,
+   newest_print_record  VARCHAR(100),
+   operator             CHAR(4),
+   motify_date          DATETIME,
+   ledger_id            CHAR(8),
+   creater              CHAR(4),
+   createdate           DATETIME,
+   reviser              CHAR(4),
+   revisedate           DATETIME,
+   verifier             CHAR(4),
+   verifydate           DATETIME,
+   PRIMARY KEY (sales_quotation_id)
+)ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+01：未确认
+00：已确认（审批中）
+
+DROP TABLE IF EXISTS rs_sales_quotation_grd;
+
+/*==============================================================*/
+/* Table: rs_sales_quotation_grd      销售_报价_明细      */
+/*==============================================================*/
+CREATE TABLE rs_sales_quotation_grd
+(
+   sales_quotation_id   CHAR(14) NOT NULL,
+   goods_id             CHAR(6) NOT NULL,
+   goods_name           VARCHAR(100),
+   spec_id              INT,
+   unit                 CHAR(4),
+   equivalent_unit      CHAR(4),
+   quantity_of_eu_per_unit INTEGER,
+   supply_cash_type     CHAR(4),
+   price_of_unit_of_supply INTEGER,
+   price_of_eu_of_supply INTEGER,
+   sale_cash_type       CHAR(4),
+   exch_rate            INTEGER,
+   price_of_eu_to_customer INTEGER,
+   mark_up_rate         INTEGER,
+   memo                 TEXT,
+   made_date            DATETIME,
+   validity_date        DATETIME,
+   operator             CHAR(4),
+   motify_date          DATETIME,
+   ledger_id            CHAR(8),
+   creater              CHAR(4),
+   createdate           DATETIME,
+   reviser              CHAR(4),
+   revisedate           DATETIME,
+   verifier             CHAR(4),
+   verifydate           DATETIME,
+   PRIMARY KEY (sales_quotation_id, goods_id)
+)ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS rs_supplier_goods;
+
+/*==============================================================*/
+/* Table: rs_supplier_goods      供应商_报价_商品      */
+/*==============================================================*/
+CREATE TABLE rs_supplier_goods
+(
+   supplier_id		CHAR(14) NOT NULL,
+   goods_id             CHAR(6) NOT NULL,
+   goods_name           VARCHAR(100),
+   spec_id              INT,
+   unit                 int,
+   equivalent_unit      int,
+   quantity_of_eu_per_unit INTEGER,
+   supply_cash_type     int,
+   price_of_unit_of_supply INTEGER,
+   price_of_eu_of_supply INTEGER,
+   memo                 TEXT,
+   validity_date        DATETIME,
+   operator             CHAR(4),
+   motify_date          DATETIME,
+   ledger_id            CHAR(8),
+   creater              CHAR(4),
+   createdate           DATETIME,
+   reviser              CHAR(4),
+   revisedate           DATETIME,
+   verifier             CHAR(4),
+   verifydate           DATETIME,
+   PRIMARY KEY (supplier_id, goods_id)
+)ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 
 
@@ -867,30 +1073,34 @@ CREATE TABLE rs_staff
    verifydate           DATETIME,
    PRIMARY KEY (staff_id)
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
-DROP TABLE IF EXISTS rs_user_password;
+
+DROP TABLE IF EXISTS rs_user;
 
 /*==============================================================*/
-/* Table: rs_user_password           用户_密码    */
+/* Table: rs_user        系统用户信息        */
 /*==============================================================*/
-CREATE TABLE rs_user_password
+CREATE TABLE rs_user
 (
-   user_id              INT NOT NULL,
+   id                   INT NOT NULL AUTO_INCREMENT,
+   user_id              CHAR(4),
    login_acc            VARCHAR(20),
    PASSWORD             CHAR(50),
    staff_id             CHAR(4),
    user_description     TEXT,
-   account_status       CHAR(2),
-   create_date          DATETIME,
+   account_status       INT,
    ledger_id            CHAR(8),
+   memo                 TEXT,
    operator             CHAR(4),
    motify_date          DATETIME,
+   login_ip             CHAR(15),
+   last_login_time      DATETIME,
    creater              CHAR(4),
    createdate           DATETIME,
    reviser              CHAR(4),
    revisedate           DATETIME,
    verifier             CHAR(4),
    verifydate           DATETIME,
-   PRIMARY KEY (user_id)
+   PRIMARY KEY (id)
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS rs_role_auth;
@@ -920,19 +1130,20 @@ DROP TABLE IF EXISTS rs_role;
 /*==============================================================*/
 /* Table: rs_role                      角色信息表         */
 /*==============================================================*/
-CREATE TABLE rs_role
+create table rs_role
 (
-   role_id              INT NOT NULL,
+   role_id              int not null,
    role_name            CHAR(20),
-   role_description     VARCHAR(100),
+   memo                 VARCHAR(100),
    operator             CHAR(4),
-   motify_date          DATETIME,
+   motify_date          datetime,
    creater              CHAR(4),
-   createdate           DATETIME,
+   createdate           datetime,
    reviser              CHAR(4),
-   revisedate           DATETIME,
+   revisedate           datetime,
    verifier             CHAR(4),
-   verifydate           DATETIME
+   verifydate           datetime,
+   primary key (role_id)
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 
