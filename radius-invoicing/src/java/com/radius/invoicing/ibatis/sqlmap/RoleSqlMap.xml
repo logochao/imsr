@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="roleSqlMap">
+
+  <typeAlias alias="role" type="com.radius.invoicing.ibatis.model.Role" />
+  
+  <sql id="roleFileds">
+  	 role_id roleId,role_name roleName,memo memo,operator operator,motify_date modifyDate,creater creater,createdate createdate,reviser reviser,revisedate revisedate,verifier verifier,verifydate verifydate
+  </sql>
+  
+  <resultMap id="role" class="role">
+	<result  column="role_id" jdbcType="int" javaType="java.lang.Integer" property="roleId"/>
+	<result column="role_name" jdbcType="char" javaType="java.lang.String" property="roleName" />
+	<result column="memo" jdbcType="varchar" javaType="java.lang.String" property="memo" />
+	<result column="operator" jdbcType="char" javaType="java.lang.String" property="operator" />
+	<result  column="motify_date" jdbcType="datetime" javaType="java.util.Date" property="modifyDate"/>
+	<result column="creater" jdbcType="char" javaType="java.lang.String" property="creater" />
+	<result  column="createdate" jdbcType="datetime" javaType="java.util.Date" property="createdate"/>
+	<result column="reviser" jdbcType="char" javaType="java.lang.String" property="reviser" />
+	<result  column="revisedate" jdbcType="datetime" javaType="java.util.Date" property="revisedate"/>
+	<result column="verifier" jdbcType="char" javaType="java.lang.String" property="verifier" />
+	<result  column="verifydate" jdbcType="datetime" javaType="java.util.Date" property="verifydate"/>
+  </resultMap>
+  
+  <sql id="whereLike">
+  	<dynamic prepend="WHERE">
+  		1=1
+  		<isNotNull  property="roleId">  AND role_id=#roleId#</isNotNull>
+		<isNotEmpty property="roleName"> AND role_name  LIKE CONCAT('%',#roleName#,'%')</isNotEmpty>
+		<isNotEmpty property="memo"> AND memo=#memo#</isNotEmpty>
+  	</dynamic>
+  </sql>
+  
+  <select id="getRoleById" parameterClass="int" resultClass="role">
+  	SELECT <include refid="roleFileds"/>
+  	FROM RS_ROLE
+  	WHERE role_id=#roleId#
+  </select>
+  
+  <select id="getRole" parameterClass="role" resultClass="role">
+  	SELECT <include refid="roleFileds"/>
+  	FROM RS_ROLE
+  	<include refid="whereLike"/>
+  </select>
+  
+  <select id="getRoleAllList" resultClass="role">
+  	SELECT <include refid="roleFileds"/>
+  	FROM RS_ROLE
+  </select>
+  
+  <insert id="insert" parameterClass="role">
+  	INSERT INTO RS_ROLE  (
+		<isNotEmpty property="roleName">role_name,</isNotEmpty>
+		<isNotEmpty property="memo">memo,</isNotEmpty>
+		<isNotEmpty property="operator">operator,</isNotEmpty>
+		creater,
+		createdate,
+	)VALUES  (
+		<isNotEmpty property="roleName">#roleName#,</isNotEmpty>
+		<isNotEmpty property="memo">#memo#,</isNotEmpty>
+		<isNotEmpty property="operator">#operator#,</isNotEmpty>
+		#creater#,
+		NOW()
+	)
+	<selectKey resultClass="java.lang.Integer" keyProperty="roleId">
+		select LAST_INSERT_ID()
+	</selectKey>
+  </insert>
+  
+  <update id="updateRoleById" parameterClass="role">
+  	UPDATE RS_ROLE
+  	<dynamic prepend="SET">
+		<isNotNull  prepend=","   property="roleId">  role_id=#roleId#</isNotNull>
+		<isNotEmpty  prepend=","   property="roleName">  role_name=#roleName#</isNotEmpty>
+		<isNotEmpty  prepend=","   property="memo">  memo=#memo#</isNotEmpty>
+		<isNotEmpty prepend="," property="operator">operator=#operator#,motify_date= NOW()</isNotEmpty>
+ 		<isNotEmpty prepend="," property="reviser">reviser = #reviser#,revisedate = NOW() </isNotEmpty>
+		<isNotEmpty prepend="," property="verifier">verifier = #verifier#,verifydate = NOW() </isNotEmpty>
+	</dynamic>
+  	WHERE role_id=#roleId#
+  </update>
+  
+  <delete id="deleteRoleById" parameterClass="int">
+  	DELETE FROM RS_ROLE
+  	WHERE category_id = #id#
+  </delete>
+</sqlMap>
