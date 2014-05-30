@@ -301,7 +301,7 @@ public class MainJDBC {
     
     public static void main(String[] args) throws InterruptedException {
         MainJDBC jdbc=new MainJDBC();
-        String tableName="rs_user";
+        String tableName="rs_role";
         System.err.println("-------------------生成查询列字段SQL语句----------------------");
         String content=jdbc.buildSQLFileds(tableName);
         System.out.println(content);
